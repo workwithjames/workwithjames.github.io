@@ -1,0 +1,114 @@
+/* Right-aligned frozen About Me flow */
+@media (min-width:841px){
+  :root{
+    --about-flow-height:50px;
+    --about-flow-gap:10px;
+  }
+
+  .about-flow{
+    left:auto!important;
+    right:max(24px,calc((100vw - var(--layout-width,1120px))/2))!important;
+    transform:none!important;
+    width:max-content!important;
+    max-width:calc(100vw - 48px)!important;
+    justify-content:flex-end!important;
+    gap:3px!important;
+    padding:5px!important;
+    border-radius:999px!important;
+    background:
+      linear-gradient(110deg,rgba(129,140,248,.10),transparent 45%,rgba(167,139,250,.08)),
+      rgba(15,15,38,.94)!important;
+    box-shadow:0 16px 40px rgba(0,0,0,.34),0 1px 0 rgba(255,255,255,.035) inset!important;
+  }
+
+  .about-flow:after{
+    inset:auto 26px -1px!important;
+  }
+
+  .about-flow strong{
+    position:static!important;
+    left:auto!important;
+    min-height:38px!important;
+    margin:0 7px 0 0!important;
+    padding:0 16px!important;
+    border-radius:999px!important;
+    white-space:nowrap;
+    background:linear-gradient(135deg,rgba(129,140,248,.34),rgba(167,139,250,.20)),#171735!important;
+  }
+
+  .about-flow a{
+    flex:0 0 auto!important;
+    min-width:auto!important;
+    min-height:38px!important;
+    padding:0 14px!important;
+    border-radius:999px!important;
+    white-space:nowrap;
+  }
+
+  .about-flow a[aria-current="location"]{
+    box-shadow:0 8px 20px rgba(0,0,0,.23),0 0 0 1px rgba(255,255,255,.035) inset!important;
+  }
+}
+
+@media (min-width:841px) and (max-width:1100px){
+  .about-flow{
+    right:18px!important;
+    max-width:calc(100vw - 36px)!important;
+  }
+
+  .about-flow strong{
+    padding-inline:13px!important;
+    margin-right:4px!important;
+  }
+
+  .about-flow a{
+    padding-inline:11px!important;
+    font-size:.68rem!important;
+  }
+}
+
+@media (max-width:840px){
+  .about-flow{
+    left:auto!important;
+    right:8px!important;
+    transform:none!important;
+    width:calc(100% - 16px)!important;
+    justify-content:flex-end!important;
+    border-radius:999px!important;
+    padding:5px!important;
+  }
+
+  .about-flow strong{
+    border-radius:999px!important;
+    margin-right:4px!important;
+    box-shadow:0 6px 16px rgba(0,0,0,.20)!important;
+  }
+
+  .about-flow a{
+    flex:0 0 auto!important;
+    border-radius:999px!important;
+  }
+}
+
+@media (max-width:480px){
+  .about-flow{
+    right:6px!important;
+    width:calc(100% - 12px)!important;
+  }
+
+  .about-flow strong{
+    padding-inline:9px!important;
+    font-size:.64rem!important;
+  }
+
+  .about-flow a{
+    padding-inline:9px!important;
+    font-size:.64rem!important;
+  }
+}
+
+@media (prefers-reduced-transparency:reduce){
+  .about-flow{
+    background:#101027!important;
+  }
+}
