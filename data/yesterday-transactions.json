@@ -1,14 +1,328 @@
 {
-  "status": "no_records",
-  "target_date": "2026-07-31",
-  "generated_at": "2026-08-01T18:39:49+04:00",
+  "status": "success",
+  "requested_date": "2026-07-31",
+  "target_date": "2025-12-31",
+  "is_fallback": true,
+  "generated_at": "2026-08-01T18:59:25+04:00",
   "source_endpoint": "https://www.dxbdata.xyz/api/transactions",
-  "total_transactions": 0,
-  "total_value_aed": 0,
-  "median_sale_price_aed": 0,
-  "areas_count": 0,
-  "top_areas": [],
-  "latest_transactions": [],
+  "total_transactions": 534,
+  "total_value_aed": 2155712280.0,
+  "median_sale_price_aed": 1535906.0,
+  "areas_count": 61,
+  "top_areas": [
+    {
+      "area": "Wadi Al Safa 3",
+      "count": 37,
+      "value_aed": 462619886.0
+    },
+    {
+      "area": "Jabal Ali First",
+      "count": 36,
+      "value_aed": 49454141.0
+    },
+    {
+      "area": "Madinat Dubai Almelaheyah",
+      "count": 35,
+      "value_aed": 79397686.0
+    },
+    {
+      "area": "Madinat Al Mataar",
+      "count": 30,
+      "value_aed": 42011531.0
+    },
+    {
+      "area": "Al Hebiah Fourth",
+      "count": 30,
+      "value_aed": 39765408.0
+    },
+    {
+      "area": "Al Barsha South Fourth",
+      "count": 29,
+      "value_aed": 47332990.0
+    },
+    {
+      "area": "Al Barshaa South Second",
+      "count": 24,
+      "value_aed": 45179233.0
+    },
+    {
+      "area": "Saih Shuaib 2",
+      "count": 19,
+      "value_aed": 12808861.0
+    },
+    {
+      "area": "Dubai Investment Park Second",
+      "count": 18,
+      "value_aed": 72893405.0
+    },
+    {
+      "area": "Wadi Al Safa 4",
+      "count": 17,
+      "value_aed": 25866170.0
+    },
+    {
+      "area": "Al Thanyah Fifth",
+      "count": 15,
+      "value_aed": 39554557.0
+    },
+    {
+      "area": "Burj Khalifa",
+      "count": 15,
+      "value_aed": 33152700.0
+    }
+  ],
+  "latest_transactions": [
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Dubai Investment Park First",
+      "property_type_en": "Building",
+      "property_sub_type_en": "",
+      "procedure_area": 0.0,
+      "actual_worth": 40818641.0,
+      "reg_type_en": "Existing Properties",
+      "project_name_en": ""
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Al Barshaa South Second",
+      "property_type_en": "Unit",
+      "property_sub_type_en": "Flat",
+      "procedure_area": 0.0,
+      "actual_worth": 1350000.0,
+      "reg_type_en": "Off-Plan Properties",
+      "project_name_en": "Empire Livings"
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Al Hebiah Fourth",
+      "property_type_en": "Unit",
+      "property_sub_type_en": "Office",
+      "procedure_area": 0.0,
+      "actual_worth": 892584.0,
+      "reg_type_en": "Off-Plan Properties",
+      "project_name_en": "ASPIRZ By Danube"
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Wadi Al Safa 5",
+      "property_type_en": "Unit",
+      "property_sub_type_en": "Flat",
+      "procedure_area": 0.0,
+      "actual_worth": 672000.0,
+      "reg_type_en": "Off-Plan Properties",
+      "project_name_en": "FLOAREA OASIS"
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Al Thanyah Fifth",
+      "property_type_en": "Unit",
+      "property_sub_type_en": "Flat",
+      "procedure_area": 0.0,
+      "actual_worth": 3361000.0,
+      "reg_type_en": "Off-Plan Properties",
+      "project_name_en": "Saba 4"
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Dubai Investment Park Second",
+      "property_type_en": "Villa",
+      "property_sub_type_en": "Villa",
+      "procedure_area": 0.0,
+      "actual_worth": 4723888.0,
+      "reg_type_en": "Off-Plan Properties",
+      "project_name_en": "Grand Polo - Equiterra 2"
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Palm Deira",
+      "property_type_en": "Unit",
+      "property_sub_type_en": "Flat",
+      "procedure_area": 0.0,
+      "actual_worth": 2846777.0,
+      "reg_type_en": "Off-Plan Properties",
+      "project_name_en": "ELLE RESIDENCES"
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Madinat Dubai Almelaheyah",
+      "property_type_en": "Unit",
+      "property_sub_type_en": "Flat",
+      "procedure_area": 0.0,
+      "actual_worth": 1525000.0,
+      "reg_type_en": "Off-Plan Properties",
+      "project_name_en": "Franck Muller Yachting"
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Al Wasl",
+      "property_type_en": "Unit",
+      "property_sub_type_en": "Flat",
+      "procedure_area": 0.0,
+      "actual_worth": 2550000.0,
+      "reg_type_en": "Existing Properties",
+      "project_name_en": "Central Park at City Walk -Building 1"
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Me'Aisem Second",
+      "property_type_en": "Land",
+      "property_sub_type_en": "",
+      "procedure_area": 0.0,
+      "actual_worth": 21343888.0,
+      "reg_type_en": "Existing Properties",
+      "project_name_en": "Mareva 2 The Oasis"
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Wadi Al Safa 5",
+      "property_type_en": "Villa",
+      "property_sub_type_en": "Villa",
+      "procedure_area": 0.0,
+      "actual_worth": 930000.0,
+      "reg_type_en": "Existing Properties",
+      "project_name_en": "Arabian Ranches lll - June"
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Wadi Al Safa 3",
+      "property_type_en": "Unit",
+      "property_sub_type_en": "Flat",
+      "procedure_area": 0.0,
+      "actual_worth": 694999.0,
+      "reg_type_en": "Off-Plan Properties",
+      "project_name_en": "Binghatti Vintage"
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Jabal Ali First",
+      "property_type_en": "Unit",
+      "property_sub_type_en": "Flat",
+      "procedure_area": 0.0,
+      "actual_worth": 1438038.0,
+      "reg_type_en": "Off-Plan Properties",
+      "project_name_en": "Taiyo Residences"
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Al Barshaa South Second",
+      "property_type_en": "Unit",
+      "property_sub_type_en": "Flat",
+      "procedure_area": 0.0,
+      "actual_worth": 944500.0,
+      "reg_type_en": "Off-Plan Properties",
+      "project_name_en": "Skyhills Astra"
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Madinat Hind 4",
+      "property_type_en": "Land",
+      "property_sub_type_en": "",
+      "procedure_area": 0.0,
+      "actual_worth": 1800000.0,
+      "reg_type_en": "Existing Properties",
+      "project_name_en": " DAMAC HILLS (2)  - SANCTNARY"
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Madinat Dubai Almelaheyah",
+      "property_type_en": "Unit",
+      "property_sub_type_en": "Flat",
+      "procedure_area": 0.0,
+      "actual_worth": 2195914.0,
+      "reg_type_en": "Off-Plan Properties",
+      "project_name_en": "Breez by Danube"
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Jabal Ali First",
+      "property_type_en": "Unit",
+      "property_sub_type_en": "Flat",
+      "procedure_area": 0.0,
+      "actual_worth": 1362401.0,
+      "reg_type_en": "Off-Plan Properties",
+      "project_name_en": "Taiyo Residences"
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Me'Aisem First",
+      "property_type_en": "Unit",
+      "property_sub_type_en": "Flat",
+      "procedure_area": 0.0,
+      "actual_worth": 1483732.0,
+      "reg_type_en": "Off-Plan Properties",
+      "project_name_en": "JANNAT"
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Jabal Ali Industrial Second",
+      "property_type_en": "Unit",
+      "property_sub_type_en": "Shop",
+      "procedure_area": 0.0,
+      "actual_worth": 1488500.0,
+      "reg_type_en": "Existing Properties",
+      "project_name_en": "Azizi Aura Residences"
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Al Barsha South Fourth",
+      "property_type_en": "Unit",
+      "property_sub_type_en": "Flat",
+      "procedure_area": 0.0,
+      "actual_worth": 769457.0,
+      "reg_type_en": "Off-Plan Properties",
+      "project_name_en": "Skyhills Residences 2"
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Al Barsha South Fourth",
+      "property_type_en": "Unit",
+      "property_sub_type_en": "Hotel Rooms",
+      "procedure_area": 0.0,
+      "actual_worth": 1019463.0,
+      "reg_type_en": "Existing Properties",
+      "project_name_en": "Five at Jumeirah Village Circle Dubai"
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Burj Khalifa",
+      "property_type_en": "Unit",
+      "property_sub_type_en": "Flat",
+      "procedure_area": 0.0,
+      "actual_worth": 3627800.0,
+      "reg_type_en": "Off-Plan Properties",
+      "project_name_en": "One Residence"
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Jabal Ali First",
+      "property_type_en": "Unit",
+      "property_sub_type_en": "Flat",
+      "procedure_area": 0.0,
+      "actual_worth": 675000.0,
+      "reg_type_en": "Off-Plan Properties",
+      "project_name_en": "Hills View at Wasl Gate"
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Me'Aisem Second",
+      "property_type_en": "Land",
+      "property_sub_type_en": "",
+      "procedure_area": 0.0,
+      "actual_worth": 15652888.0,
+      "reg_type_en": "Existing Properties",
+      "project_name_en": "Mareva 2 The Oasis"
+    },
+    {
+      "instance_date": "2025-12-31",
+      "area_name_en": "Saih Shuaib 2",
+      "property_type_en": "Unit",
+      "property_sub_type_en": "Flat",
+      "procedure_area": 0.0,
+      "actual_worth": 539644.0,
+      "reg_type_en": "Off-Plan Properties",
+      "project_name_en": "Al Haseen Residence 4"
+    }
+  ],
   "capped": true,
-  "message": "The public source returned no transactions dated 2026-07-31."
+  "message": "No records dated 2026-07-31 were available; showing the latest completed day, 2025-12-31."
 }
