@@ -28,6 +28,12 @@
   window.jamesAttribution=function(){var data=saved();var parts=[];Object.keys(data).forEach(function(key){parts.push(key+': '+data[key]);});return parts.length?parts.join(' | '):'Direct';};
   function event(name,data){if(typeof window.gtag==='function'){window.gtag('event',name,data||{});}}
 
+  function removeVisibleBlogDates(){
+    document.querySelectorAll('.article-meta time,.article-byline time').forEach(function(date){
+      date.remove();
+    });
+  }
+
   function ensureDataNavigation(){
     document.querySelectorAll('.global-links,.mobile-page-tabs,.footer-links').forEach(function(nav){
       if(nav.querySelector('a[href="/abu-dhabi-data/"]')){return;}
@@ -110,6 +116,7 @@
   }
 
   function ensureNavigation(){
+    removeVisibleBlogDates();
     ensureDataNavigation();
     ensureCitationNavigation();
     prepareAboutFlow();
