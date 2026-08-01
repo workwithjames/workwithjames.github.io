@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import re
 import statistics
 import sys
 import time
@@ -17,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "data" / "yesterday-transactions.json"
 DUBAI = ZoneInfo("Asia/Dubai")
 PAGE_SIZE = 500
-MAX_PAGES = 40
+MAX_PAGES = 20
 ENDPOINTS = [
     "https://www.dxbdata.xyz/api/transactions",
     "https://dxbdata.xyz/api/transactions",
@@ -29,8 +30,18 @@ def transaction_date(value: object) -> str:
     if value is None:
         return ""
     raw = str(value).strip()
-    if len(raw) >= 10 and raw[4] == "-" and raw[7] == "-":
-        return raw[:10]
+    match = re.search(r"\b(20\d{2})[-/](\d{1,2})[-/](\d{1,2})\b", raw)
+    if match:
+        try:
+            return datetime(int(match.group(1)), int(match.group(2)), int(match.group(3))).date().isoformat()
+        except ValueError:
+            pass
+    match = re.search(r"\b(\d{1,2})[-/](\d{1,2})[-/](20\d{2})\b", raw)
+    if match:
+        try:
+            return datetime(int(match.group(3)), int(match.group(2)), int(match.group(1))).date().isoformat()
+        except ValueError:
+            pass
     try:
         parsed = datetime.fromisoformat(raw.replace("Z", "+00:00"))
         if parsed.tzinfo is None:
@@ -40,15 +51,19 @@ def transaction_date(value: object) -> str:
         return ""
 
 
-def fetch_page(session: requests.Session, endpoint: str, target: str, offset: int) -> list[dict]:
-    params = {
-        "from_date": target,
-        "to_date": target,
-        "limit": PAGE_SIZE,
-        "offset": offset,
-        "sort": "instance_date",
-        "order": "DESC",
-    }
+def row_key(row: dict) -> str:
+    for key in ("id", "transaction_id", "procedure_id"):
+        if row.get(key) not in (None, ""):
+            return f"{key}:{row[key]}"
+    fields = (
+        row.get("instance_date"), row.get("area_name_en"), row.get("building_name_en"),
+        row.get("property_sub_type_en"), row.get("procedure_area"), row.get("actual_worth"),
+        row.get("project_name_en"), row.get("reg_type_en"),
+    )
+    return json.dumps(fields, ensure_ascii=False, default=str)
+
+
+def fetch_page(session: requests.Session, endpoint: str, params: dict[str, object]) -> list[dict]:
     url = f"{endpoint}?{urlencode(params)}"
     last_error: Exception | None = None
     for attempt in range(4):
@@ -60,33 +75,88 @@ def fetch_page(session: requests.Session, endpoint: str, target: str, offset: in
             if not isinstance(rows, list):
                 raise RuntimeError("Unexpected transaction response")
             return [row for row in rows if isinstance(row, dict)]
-        except Exception as exc:  # network and malformed response retries
+        except Exception as exc:
             last_error = exc
             if attempt < 3:
                 time.sleep(2 ** attempt)
     raise RuntimeError(f"Failed to fetch {url}: {last_error}")
 
 
-def fetch_all(target: str) -> tuple[list[dict], str, bool]:
+def fetch_pages(session: requests.Session, endpoint: str, base_params: dict[str, object]) -> tuple[list[dict], bool]:
+    collected: list[dict] = []
+    seen_rows: set[str] = set()
+    seen_pages: set[str] = set()
+    reached_limit = True
+    for page in range(MAX_PAGES):
+        params = dict(base_params)
+        params.update({"limit": PAGE_SIZE, "offset": page * PAGE_SIZE, "sort": "instance_date", "order": "DESC"})
+        batch = fetch_page(session, endpoint, params)
+        signature = json.dumps([
+            len(batch),
+            row_key(batch[0]) if batch else "",
+            row_key(batch[-1]) if batch else "",
+        ])
+        if signature in seen_pages:
+            reached_limit = False
+            break
+        seen_pages.add(signature)
+        for row in batch:
+            key = row_key(row)
+            if key not in seen_rows:
+                seen_rows.add(key)
+                collected.append(row)
+        if len(batch) < PAGE_SIZE:
+            reached_limit = False
+            break
+    return collected, reached_limit
+
+
+def candidate_for_endpoint(session: requests.Session, endpoint: str, requested: str) -> tuple[list[dict], str, bool] | None:
+    exact_rows, exact_capped = fetch_pages(session, endpoint, {"from_date": requested, "to_date": requested})
+    exact = [row for row in exact_rows if transaction_date(row.get("instance_date")) == requested]
+    if exact:
+        return exact, requested, exact_capped
+
+    source_rows = exact_rows
+    source_capped = exact_capped
+    if not source_rows:
+        source_rows, source_capped = fetch_pages(session, endpoint, {})
+
+    available_dates = sorted({
+        transaction_date(row.get("instance_date"))
+        for row in source_rows
+        if transaction_date(row.get("instance_date")) and transaction_date(row.get("instance_date")) <= requested
+    })
+    if not available_dates:
+        return None
+    selected = available_dates[-1]
+    selected_rows = [row for row in source_rows if transaction_date(row.get("instance_date")) == selected]
+    return selected_rows, selected, source_capped
+
+
+def fetch_best(requested: str) -> tuple[list[dict], str, str, bool]:
     session = requests.Session()
     session.headers.update({
         "Accept": "application/json",
-        "User-Agent": "JamesRaviYesterdayTransactions/1.0 (+https://workwithjames.github.io/)",
+        "User-Agent": "JamesRaviPreviousDayTransactions/1.1 (+https://workwithjames.github.io/)",
     })
     errors: list[str] = []
+    best: tuple[list[dict], str, str, bool] | None = None
     for endpoint in ENDPOINTS:
         try:
-            rows: list[dict] = []
-            for page in range(MAX_PAGES):
-                batch = fetch_page(session, endpoint, target, page * PAGE_SIZE)
-                rows.extend(batch)
-                if len(batch) < PAGE_SIZE:
-                    break
-            filtered = [row for row in rows if transaction_date(row.get("instance_date")) == target]
-            return filtered, endpoint, len(rows) >= PAGE_SIZE * MAX_PAGES
+            candidate = candidate_for_endpoint(session, endpoint, requested)
+            if not candidate:
+                continue
+            rows, selected, capped = candidate
+            if selected == requested:
+                return rows, selected, endpoint, capped
+            if best is None or selected > best[1]:
+                best = (rows, selected, endpoint, capped)
         except Exception as exc:
             errors.append(f"{endpoint}: {exc}")
-    raise RuntimeError(" | ".join(errors))
+    if best:
+        return best
+    raise RuntimeError(" | ".join(errors) or "No dated transaction records were returned")
 
 
 def as_number(value: object) -> float:
@@ -109,7 +179,7 @@ def compact_row(row: dict) -> dict:
     }
 
 
-def build_snapshot(rows: list[dict], target: str, endpoint: str, capped: bool) -> dict:
+def build_snapshot(rows: list[dict], requested: str, selected: str, endpoint: str, capped: bool) -> dict:
     values = [as_number(row.get("actual_worth")) for row in rows]
     positive_values = [value for value in values if value > 0]
     by_area: dict[str, dict[str, float]] = defaultdict(lambda: {"count": 0, "value": 0.0})
@@ -120,15 +190,13 @@ def build_snapshot(rows: list[dict], target: str, endpoint: str, capped: bool) -
 
     top_areas = [
         {"area": area, "count": int(stats["count"]), "value_aed": round(stats["value"], 2)}
-        for area, stats in sorted(
-            by_area.items(),
-            key=lambda item: (-item[1]["count"], -item[1]["value"], item[0]),
-        )[:12]
+        for area, stats in sorted(by_area.items(), key=lambda item: (-item[1]["count"], -item[1]["value"], item[0]))[:12]
     ]
-    latest = [compact_row(row) for row in rows[:25]]
     return {
         "status": "success" if rows else "no_records",
-        "target_date": target,
+        "requested_date": requested,
+        "target_date": selected,
+        "is_fallback": selected != requested,
         "generated_at": datetime.now(DUBAI).isoformat(timespec="seconds"),
         "source_endpoint": endpoint,
         "total_transactions": len(rows),
@@ -136,28 +204,28 @@ def build_snapshot(rows: list[dict], target: str, endpoint: str, capped: bool) -
         "median_sale_price_aed": round(statistics.median(positive_values), 2) if positive_values else 0,
         "areas_count": len(by_area),
         "top_areas": top_areas,
-        "latest_transactions": latest,
+        "latest_transactions": [compact_row(row) for row in rows[:25]],
         "capped": capped,
         "message": (
-            f"Completed snapshot for {target}."
-            if rows
-            else f"The public source returned no transactions dated {target}."
+            f"Completed exact previous-day snapshot for {selected}."
+            if selected == requested
+            else f"No records dated {requested} were available; showing the latest completed day, {selected}."
         ),
     }
 
 
 def main() -> int:
-    target = (datetime.now(DUBAI).date() - timedelta(days=1)).isoformat()
+    requested = (datetime.now(DUBAI).date() - timedelta(days=1)).isoformat()
     try:
-        rows, endpoint, capped = fetch_all(target)
-        snapshot = build_snapshot(rows, target, endpoint, capped)
+        rows, selected, endpoint, capped = fetch_best(requested)
+        snapshot = build_snapshot(rows, requested, selected, endpoint, capped)
         OUTPUT.parent.mkdir(parents=True, exist_ok=True)
         OUTPUT.write_text(json.dumps(snapshot, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        print(f"Saved {snapshot['total_transactions']} transactions for {target} from {endpoint}")
+        print(f"Saved {snapshot['total_transactions']} transactions for {selected}; requested {requested}; source {endpoint}")
         return 0
     except Exception as exc:
-        print(f"Yesterday snapshot refresh failed for {target}: {exc}", file=sys.stderr)
-        print("Existing snapshot was preserved.", file=sys.stderr)
+        print(f"Previous-day snapshot refresh failed for {requested}: {exc}", file=sys.stderr)
+        print("Existing successful snapshot was preserved.", file=sys.stderr)
         return 1
 
 
