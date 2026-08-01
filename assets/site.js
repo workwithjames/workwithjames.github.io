@@ -31,7 +31,7 @@
   function loadTodayTransactions(){
     if(!document.querySelector('.market-page')||document.querySelector('script[data-today-transactions]')){return;}
     var script=document.createElement('script');
-    script.src='/assets/today-transactions.js?v=1';
+    script.src='/assets/today-transactions.js?v=2';
     script.defer=true;
     script.dataset.todayTransactions='true';
     document.head.appendChild(script);
