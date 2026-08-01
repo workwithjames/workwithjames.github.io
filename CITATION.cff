@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "Please cite the most relevant page when using James Ravi's UAE property data or reporting."
+title: "James Ravi UAE Property Data and Insights"
+type: dataset
+authors:
+  - family-names: Ravi
+    given-names: James
+url: "https://workwithjames.github.io/"
+date-released: 2026-08-01
+abstract: "Public UAE property dashboards and source-led guides covering Dubai and Abu Dhabi market activity, prices, rental yields, tenancy, regulation, ownership and real estate marketing."
+keywords:
+  - Dubai property data
+  - Abu Dhabi property data
+  - UAE real estate
+  - rental yields
+  - property transactions
+  - real estate marketing
+preferred-citation:
+  type: dataset
+  authors:
+    - family-names: Ravi
+      given-names: James
+  title: "James Ravi UAE Property Data and Insights"
+  year: 2026
+  url: "https://workwithjames.github.io/"
