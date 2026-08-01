@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://workwithjames.github.io/sitemap.xml
