@@ -1,0 +1,25 @@
+(function(){
+  var keys=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid','msclkid'];
+  var params=new URLSearchParams(window.location.search);
+  var attribution={};
+  keys.forEach(function(key){var value=params.get(key);if(value){attribution[key]=value;}});
+  if(document.referrer){attribution.referrer=document.referrer;}
+  if(Object.keys(attribution).length){try{sessionStorage.setItem('james_attribution',JSON.stringify(attribution));}catch(e){}}
+  function saved(){try{return JSON.parse(sessionStorage.getItem('james_attribution')||'{}');}catch(e){return {};}}
+  window.jamesAttribution=function(){var data=saved();var parts=[];Object.keys(data).forEach(function(key){parts.push(key+': '+data[key]);});return parts.length?parts.join(' | '):'Direct';};
+  function event(name,data){if(typeof window.gtag==='function'){window.gtag('event',name,data||{});}}
+  document.addEventListener('click',function(e){
+    var link=e.target.closest('a');
+    if(!link){return;}
+    var href=link.getAttribute('href')||'';
+    if(href.indexOf('wa.me/')>-1){event('generate_lead',{method:'whatsapp',link_url:href,page_path:location.pathname});}
+    if(href==='/contact/'||href.indexOf('/contact/')===0){event('contact_intent',{link_text:(link.textContent||'').trim(),page_path:location.pathname});}
+    if(link.closest('.article-sources')){event('source_click',{link_url:href,page_path:location.pathname});}
+  });
+  var form=document.getElementById('contact-form');
+  if(form){form.addEventListener('submit',function(){event('generate_lead',{method:'contact_form_to_whatsapp',service:(document.getElementById('contact-service')||{}).value||'',page_path:location.pathname});});}
+  document.querySelectorAll('.article-faq details').forEach(function(item){item.addEventListener('toggle',function(){if(item.open){event('faq_open',{question:(item.querySelector('summary')||{}).textContent||'',page_path:location.pathname});}});});
+  var bar=document.getElementById('reading-progress-bar');
+  var milestones={50:false,90:false};
+  if(bar){window.addEventListener('scroll',function(){var root=document.documentElement;var total=root.scrollHeight-root.clientHeight;var pct=total?Math.min(100,Math.round((root.scrollTop/total)*100)):0;bar.style.width=pct+'%';[50,90].forEach(function(mark){if(pct>=mark&&!milestones[mark]){milestones[mark]=true;event('article_scroll',{percent_scrolled:mark,page_path:location.pathname});}});},{passive:true});}
+})();

@@ -9,6 +9,10 @@
 - [Blog](https://workwithjames.github.io/blog/): Source-led Dubai property and real estate marketing insights.
 - [Contact James Ravi](https://workwithjames.github.io/contact/): Enquiry form for launches, performance marketing, investor campaigns, CRM, and advisory work.
 
+## Geographic and service context
+
+James Ravi is based in Dubai, United Arab Emirates, and works across UAE, MENA, and international real estate markets. Services include property launch strategy, performance acquisition, international investor marketing, CRM, and conversion.
+
 ## Latest article
 
 - [Dubai apartment sharing and subletting laws](https://workwithjames.github.io/blog/dubai-apartment-sharing-subletting-laws/): A guide to landlord consent, roommate arrangements, shared-housing permits, occupancy standards, and penalties under Dubai tenancy rules and Dubai Law No. 4 of 2026.
@@ -16,3 +20,7 @@
 ## Author
 
 James Ravi, Dubai, UAE. Professional profile: https://ae.linkedin.com/in/james-ravi-dubai
+
+## Citation policy
+
+Articles identify publication dates, distinguish current rules from incoming frameworks, and link to primary government sources alongside relevant reporting.

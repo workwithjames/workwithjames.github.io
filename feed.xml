@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>James Ravi Blog</title>
+<link>https://workwithjames.github.io/blog/</link>
+<description>Source-led Dubai property, real estate marketing, launch, acquisition, and CRM insights from James Ravi.</description>
+<language>en-AE</language>
+<lastBuildDate>Sat, 01 Aug 2026 12:00:00 +0400</lastBuildDate>
+<atom:link href="https://workwithjames.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+<item>
+<title>Dubai apartment sharing and subletting laws: What tenants and owners need to know</title>
+<link>https://workwithjames.github.io/blog/dubai-apartment-sharing-subletting-laws/</link>
+<guid isPermaLink="true">https://workwithjames.github.io/blog/dubai-apartment-sharing-subletting-laws/</guid>
+<pubDate>Sat, 01 Aug 2026 12:00:00 +0400</pubDate>
+<description>A practical guide to landlord consent, roommate arrangements, shared-housing permits, occupancy standards, and penalties in Dubai.</description>
+</item>
+</channel>
+</rss>
