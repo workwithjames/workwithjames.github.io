@@ -1,4 +1,14 @@
 (function(){
+  function loadLayoutPolish(){
+    if(document.querySelector('link[data-layout-polish]')){return;}
+    var link=document.createElement('link');
+    link.rel='stylesheet';
+    link.href='/assets/layout-polish.css?v=1';
+    link.dataset.layoutPolish='true';
+    document.head.appendChild(link);
+  }
+  loadLayoutPolish();
+
   var keys=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid','msclkid'];
   var params=new URLSearchParams(window.location.search);
   var attribution={};
