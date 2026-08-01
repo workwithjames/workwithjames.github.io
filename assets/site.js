@@ -1,13 +1,19 @@
 (function(){
-  function loadLayoutPolish(){
-    if(document.querySelector('link[data-layout-polish]')){return;}
-    var link=document.createElement('link');
-    link.rel='stylesheet';
-    link.href='/assets/layout-polish.css?v=1';
-    link.dataset.layoutPolish='true';
-    document.head.appendChild(link);
+  function loadLayoutStyles(){
+    var styles=[
+      {key:'layout-polish',href:'/assets/layout-polish.css?v=2'},
+      {key:'layout-spacing',href:'/assets/layout-spacing.css?v=1'}
+    ];
+    styles.forEach(function(item){
+      if(document.querySelector('link[data-'+item.key+']')){return;}
+      var link=document.createElement('link');
+      link.rel='stylesheet';
+      link.href=item.href;
+      link.setAttribute('data-'+item.key,'true');
+      document.head.appendChild(link);
+    });
   }
-  loadLayoutPolish();
+  loadLayoutStyles();
 
   var keys=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid','msclkid'];
   var params=new URLSearchParams(window.location.search);
