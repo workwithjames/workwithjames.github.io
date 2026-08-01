@@ -1,0 +1,13 @@
+{
+  "status": "pending",
+  "target_date": "2026-07-31",
+  "generated_at": null,
+  "source_endpoint": null,
+  "total_transactions": 0,
+  "total_value_aed": 0,
+  "median_sale_price_aed": 0,
+  "areas_count": 0,
+  "top_areas": [],
+  "latest_transactions": [],
+  "message": "The first server-side snapshot is being prepared."
+}
