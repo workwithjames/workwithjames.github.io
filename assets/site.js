@@ -1,11 +1,4 @@
 (function(){
-  var legacyHost='workwithjames.github.io';
-  var primaryOrigin='https://jamesrealty.uk';
-  if(window.location.hostname.toLowerCase()===legacyHost){
-    window.location.replace(primaryOrigin+window.location.pathname+window.location.search+window.location.hash);
-    return;
-  }
-
   function loadLayoutStyles(){
     var styles=[
       {key:'layout-polish',href:'/assets/layout-polish.css?v=2'},
@@ -38,6 +31,13 @@
   function removeVisibleBlogDates(){
     document.querySelectorAll('.article-meta time,.article-byline time').forEach(function(date){
       date.remove();
+    });
+  }
+
+  function updateHeaderBrand(){
+    document.querySelectorAll('.site-header .brand').forEach(function(brand){
+      brand.textContent='James Realty';
+      brand.setAttribute('aria-label','James Realty');
     });
   }
 
@@ -124,6 +124,7 @@
 
   function ensureNavigation(){
     removeVisibleBlogDates();
+    updateHeaderBrand();
     ensureDataNavigation();
     ensureCitationNavigation();
     prepareAboutFlow();
