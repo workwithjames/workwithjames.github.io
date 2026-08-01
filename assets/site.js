@@ -1,4 +1,11 @@
 (function(){
+  var legacyHost='workwithjames.github.io';
+  var primaryOrigin='https://jamesrealty.uk';
+  if(window.location.hostname.toLowerCase()===legacyHost){
+    window.location.replace(primaryOrigin+window.location.pathname+window.location.search+window.location.hash);
+    return;
+  }
+
   function loadLayoutStyles(){
     var styles=[
       {key:'layout-polish',href:'/assets/layout-polish.css?v=2'},
