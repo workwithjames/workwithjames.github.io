@@ -31,7 +31,7 @@ import requests
 from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
-SITE = "https://workwithjames.github.io"
+SITE = "https://jamesrealty.uk"
 DUBAI_TZ = ZoneInfo("Asia/Dubai")
 NOW = datetime.now(DUBAI_TZ)
 STATE_PATH = ROOT / "data" / "property-news-state.json"
@@ -67,7 +67,7 @@ CSS = r"""/* Property news hub, source briefs and internal-link modules */
 @media(max-width:380px){.news-fact-grid,.article-body .news-related,.property-news-link-grid{grid-template-columns:1fr}}
 """
 
-NAV_HEADER = """<header class=\"site-header\"><nav class=\"nav-shell\" aria-label=\"Main navigation\"><a class=\"brand\" href=\"/\" aria-label=\"James Ravi, Dubai Data\">James Ravi</a><div class=\"nav-links global-links\"><a href=\"/\">Dubai Data</a><a href=\"/abu-dhabi-data/\">Abu Dhabi Data</a><a href=\"/about-me/\">About Me</a><a href=\"/blog/\" aria-current=\"page\">Blog</a><a href=\"/contact/\">Contact Me</a></div><a class=\"button nav-cta nav-whatsapp\" href=\"https://wa.me/971528420933\" target=\"_blank\" rel=\"noreferrer\">Work with James <span aria-hidden=\"true\">↗</span></a></nav></header><nav class=\"mobile-page-tabs section-shell\" aria-label=\"Page navigation\"><a href=\"/\">Dubai Data</a><a href=\"/abu-dhabi-data/\">Abu Dhabi Data</a><a href=\"/about-me/\">About Me</a><a href=\"/blog/\" aria-current=\"page\">Blog</a><a href=\"/contact/\">Contact Me</a></nav>"""
+NAV_HEADER = """<header class=\"site-header\"><nav class=\"nav-shell\" aria-label=\"Main navigation\"><a class=\"brand\" href=\"/\" aria-label=\"James Realty, Dubai Data\">James Realty</a><div class=\"nav-links global-links\"><a href=\"/\">Dubai Data</a><a href=\"/abu-dhabi-data/\">Abu Dhabi Data</a><a href=\"/about-me/\">About Me</a><a href=\"/blog/\" aria-current=\"page\">Blog</a><a href=\"/contact/\">Contact Me</a></div><a class=\"button nav-cta nav-whatsapp\" href=\"https://wa.me/971528420933\" target=\"_blank\" rel=\"noreferrer\">Work with James <span aria-hidden=\"true\">↗</span></a></nav></header><nav class=\"mobile-page-tabs section-shell\" aria-label=\"Page navigation\"><a href=\"/\">Dubai Data</a><a href=\"/abu-dhabi-data/\">Abu Dhabi Data</a><a href=\"/about-me/\">About Me</a><a href=\"/blog/\" aria-current=\"page\">Blog</a><a href=\"/contact/\">Contact Me</a></nav>"""
 
 FOOTER = """<a class=\"mobile-conversion nav-whatsapp\" href=\"/contact/\">Contact James</a><footer><div class=\"section-shell footer-shell footer-shell-rich\"><div class=\"footer-identity\"><a class=\"brand\" href=\"/\">James Ravi</a><p>© 2026 James Ravi. Built in Dubai.</p></div><nav class=\"footer-links\" aria-label=\"Footer navigation\"><a href=\"/\">Dubai Data</a><a href=\"/abu-dhabi-data/\">Abu Dhabi Data</a><a href=\"/about-me/\">About Me</a><a href=\"/blog/\">Blog</a><a href=\"/blog/property-news/\">Property News</a><a href=\"/contact/\">Contact</a></nav><a class=\"footer-linkedin\" href=\"https://ae.linkedin.com/in/james-ravi-dubai\" target=\"_blank\" rel=\"me noreferrer\">LinkedIn <span aria-hidden=\"true\">↗</span></a></div></footer>"""
 
