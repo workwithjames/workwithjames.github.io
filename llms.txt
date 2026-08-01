@@ -4,10 +4,9 @@
 
 ## Primary pages
 
-- [Home](https://workwithjames.github.io/): Services, typical assignments, working approach, and latest insight.
 - [About James Ravi](https://workwithjames.github.io/about-me/): Expertise, career work, results, experience, and brands.
 - [UAE Property Blog](https://workwithjames.github.io/blog/): Source-led Dubai and Abu Dhabi property guides.
-- [Dubai Property Transactions Dashboard](https://workwithjames.github.io/dubai-transactions/): Daily DLD-derived market totals, area prices, gross rental yields, comparisons, and affordability indicators.
+- [Dubai Property Transactions Dashboard](https://workwithjames.github.io/): Daily DLD-derived market totals, area prices, gross rental yields, comparisons, and affordability indicators.
 - [Contact James Ravi](https://workwithjames.github.io/contact/): Enquiry form for launches, performance marketing, investor campaigns, CRM, and advisory work.
 
 ## Property guides

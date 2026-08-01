@@ -2,6 +2,8 @@
   var endpoint='https://dxbdata.io/mcp';
   var requestId=100;
   var areaCache=[];
+  var cachePrefix='dxb-market-v2:';
+  var cacheTtl=15*60*1000;
   var fallbackOverview={"total_transactions":20645,"areas":151,"period":{"from":"2026-06-23","to":"2026-07-30"},"median_sale_price_aed":1157804,"top_areas_by_volume":[{"area":"Madinat Al Mataar","n":2692},{"area":"Al Barsha South Fourth","n":1420},{"area":"Jabal Ali First","n":1208},{"area":"Jabal Ali Industrial Second","n":1008},{"area":"Wadi Al Safa 4","n":787}]};
   var fallbackYield={"property_type":"Flat","ranking":[{"area":"Al Hebiah Second","gross_rental_yield_pct":11.99,"median_price_per_sqm_aed":16236,"rent_sample":28,"sale_sample":182},{"area":"Dubai Investment Park First","gross_rental_yield_pct":7.92,"median_price_per_sqm_aed":9743,"rent_sample":7,"sale_sample":156},{"area":"Al Merkadh","gross_rental_yield_pct":6.83,"median_price_per_sqm_aed":22277,"rent_sample":27,"sale_sample":282},{"area":"Al Yelayiss 2","gross_rental_yield_pct":6.58,"median_price_per_sqm_aed":14696,"rent_sample":20,"sale_sample":121},{"area":"Al Thanyah Third","gross_rental_yield_pct":6.52,"median_price_per_sqm_aed":18737,"rent_sample":24,"sale_sample":39},{"area":"Al Barsha South Fourth","gross_rental_yield_pct":6.39,"median_price_per_sqm_aed":15101,"rent_sample":105,"sale_sample":935},{"area":"Me'Aisem First","gross_rental_yield_pct":6.28,"median_price_per_sqm_aed":14335,"rent_sample":17,"sale_sample":291},{"area":"Al Barsha South Fifth","gross_rental_yield_pct":6.23,"median_price_per_sqm_aed":17532,"rent_sample":15,"sale_sample":158},{"area":"Nadd Hessa","gross_rental_yield_pct":5.94,"median_price_per_sqm_aed":12917,"rent_sample":77,"sale_sample":135},{"area":"Hadaeq Sheikh Mohammed Bin Rashid","gross_rental_yield_pct":5.82,"median_price_per_sqm_aed":24324,"rent_sample":18,"sale_sample":149}]};
   function text(value){return String(value==null?'':value);}
@@ -12,6 +14,9 @@
   function track(action,label){if(typeof window.gtag==='function'){window.gtag('event','market_data_interaction',{action:action,item_name:label||'',page_path:location.pathname});}}
   function setStatus(message,state){var el=document.getElementById('market-live-status');if(!el){return;}el.textContent=message;el.dataset.state=state||'';}
   async function callTool(name,args){
+    args=args||{};
+    var cacheKey=cachePrefix+name+':'+JSON.stringify(args);
+    try{var saved=JSON.parse(sessionStorage.getItem(cacheKey)||'null');if(saved&&Date.now()-saved.time<cacheTtl){return saved.data;}}catch(e){}
     var controller=new AbortController();
     var timer=setTimeout(function(){controller.abort();},15000);
     try{
@@ -21,7 +26,9 @@
       if(payload.error){throw new Error(payload.error.message||'Data service error');}
       var block=payload.result&&payload.result.content&&payload.result.content[0];
       if(!block||!block.text){throw new Error('No data returned');}
-      return JSON.parse(block.text);
+      var data=JSON.parse(block.text);
+      try{sessionStorage.setItem(cacheKey,JSON.stringify({time:Date.now(),data:data}));}catch(e){}
+      return data;
     }finally{clearTimeout(timer);}
   }
   function renderOverview(data){
@@ -30,6 +37,7 @@
     document.getElementById('market-median').textContent=money(data.median_sale_price_aed);
     document.getElementById('market-period').textContent=date(data.period.from)+' to '+date(data.period.to);
     document.getElementById('market-updated').textContent='Data through '+date(data.period.to);
+    var answer=document.getElementById('market-answer');if(answer){answer.textContent='The latest snapshot covers '+number(data.total_transactions)+' recent transactions across '+number(data.areas)+' Dubai areas, with a citywide median sale price of '+money(data.median_sale_price_aed)+'. The feed refreshes daily.';}
     var rows=data.top_areas_by_volume||[];
     var max=Math.max.apply(null,rows.map(function(row){return Number(row.n)||0;}));
     document.getElementById('market-volume-bars').innerHTML=rows.map(function(row,index){
@@ -133,6 +141,7 @@
     document.getElementById('area-lookup-button').addEventListener('click',lookupArea);
     document.getElementById('compare-areas-button').addEventListener('click',compareAreas);
     document.getElementById('affordability-button').addEventListener('click',findAffordable);
+    var copyButton=document.getElementById('copy-market-link');if(copyButton){copyButton.addEventListener('click',async function(){var status=document.getElementById('copy-market-status');try{await navigator.clipboard.writeText('https://workwithjames.github.io/');status.textContent='Dashboard link copied.';track('share_dashboard','copy_link');}catch(error){status.textContent='Copy this address: https://workwithjames.github.io/';}});}
     document.getElementById('market-area-input').addEventListener('keydown',function(e){if(e.key==='Enter'){lookupArea();}});
     document.querySelectorAll('[data-yield-type]').forEach(function(button){
       button.addEventListener('click',function(){
