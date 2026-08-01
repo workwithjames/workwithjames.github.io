@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+# This job always calculates the previous calendar day in Asia/Dubai at runtime.
 import json
 import re
 import statistics
