@@ -19,13 +19,24 @@
       dubai.insertAdjacentElement('afterend',link);
     });
   }
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',ensureDataNavigation);}else{ensureDataNavigation();}
+  function ensureCitationNavigation(){
+    document.querySelectorAll('.footer-links').forEach(function(nav){
+      if(nav.querySelector('a[href="/cite/"]')){return;}
+      var link=document.createElement('a');
+      link.href='/cite/';
+      link.textContent='Cite this site';
+      nav.appendChild(link);
+    });
+  }
+  function ensureNavigation(){ensureDataNavigation();ensureCitationNavigation();}
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',ensureNavigation);}else{ensureNavigation();}
   document.addEventListener('click',function(e){
     var link=e.target.closest('a');
     if(!link){return;}
     var href=link.getAttribute('href')||'';
     if(href.indexOf('wa.me/')>-1){event('generate_lead',{method:'whatsapp',link_url:href,page_path:location.pathname});}
     if(href==='/contact/'||href.indexOf('/contact/')===0){event('contact_intent',{link_text:(link.textContent||'').trim(),page_path:location.pathname});}
+    if(href==='/cite/'||href.indexOf('/cite/')===0){event('citation_intent',{link_text:(link.textContent||'').trim(),page_path:location.pathname});}
     if(link.closest('.article-sources')){event('source_click',{link_url:href,page_path:location.pathname});}
     if(href.indexOf('dari.ae')>-1||href.indexOf('adrec.gov.ae')>-1){event('data_source_click',{data_source:'ADREC_DARI',link_url:href,page_path:location.pathname});}
     if(link.closest('.article-share')){event('share_click',{channel:href.indexOf('linkedin.com')>-1?'linkedin':'whatsapp',page_path:location.pathname});}
