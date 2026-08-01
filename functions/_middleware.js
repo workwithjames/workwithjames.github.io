@@ -1,4 +1,5 @@
 const PRIMARY_ORIGIN = 'https://jamesrealty.uk';
+const GA4_MEASUREMENT_ID = 'G-2MPZL26C6D';
 const LEGACY_ORIGINS = [
   'https://workwithjames.github.io',
   'http://workwithjames.github.io'
@@ -25,6 +26,26 @@ function applySecurityHeaders(headers) {
   headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
   headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
   headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+}
+
+function removeDirectGa4Configuration(body, contentType) {
+  if (!contentType.includes('text/html')) {
+    return body;
+  }
+
+  const escapedMeasurementId = GA4_MEASUREMENT_ID.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const directLoaderPattern = new RegExp(
+    `<script\\b[^>]*\\bsrc=["']https:\\/\\/www\\.googletagmanager\\.com\\/gtag\\/js\\?id=${escapedMeasurementId}["'][^>]*><\\/script>`,
+    'gi'
+  );
+  const directConfigPattern = new RegExp(
+    `gtag\\(\\s*["']config["']\\s*,\\s*["']${escapedMeasurementId}["'](?:\\s*,\\s*\\{[\\s\\S]*?\\})?\\s*\\)\\s*;?`,
+    'g'
+  );
+
+  return body
+    .replace(directLoaderPattern, '')
+    .replace(directConfigPattern, '');
 }
 
 export async function onRequest(context) {
@@ -55,6 +76,7 @@ export async function onRequest(context) {
   for (const legacyOrigin of LEGACY_ORIGINS) {
     body = body.split(legacyOrigin).join(PRIMARY_ORIGIN);
   }
+  body = removeDirectGa4Configuration(body, contentType);
 
   headers.delete('content-length');
 
