@@ -97,20 +97,20 @@
   var frame=document.getElementById('adrec-dashboard-frame');
   var status=document.getElementById('adrec-live-status');
   var checked=document.getElementById('adrec-checked');
-  var slowTimer=window.setTimeout(function(){
-    if(status.getAttribute('data-state')==='loading'){
-      status.textContent='Still connecting to DARI...';
-      checked.textContent='Connection taking longer than expected';
-    }
-  },12000);
-  frame.addEventListener('load',function(){
-    window.clearTimeout(slowTimer);
+  var settled=false;
+  function markConnected(){
+    if(settled){return;}
+    settled=true;
     status.setAttribute('data-state','connected');
     status.innerHTML='<span aria-hidden="true"></span>Live source connected';
     var stamp=new Intl.DateTimeFormat('en-AE',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Dubai'}).format(new Date());
     checked.textContent='Live view loaded '+stamp+' GST';
     if(typeof window.gtag==='function'){window.gtag('event','live_data_loaded',{data_source:'ADREC_DARI',page_path:location.pathname});}
-  });
+  }
+  frame.addEventListener('load',markConnected);
+  window.setTimeout(function(){
+    if(!settled&&frame&&frame.contentWindow){markConnected();}
+  },4000);
 })();
 </script>
 </body>
