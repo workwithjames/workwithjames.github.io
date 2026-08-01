@@ -4,18 +4,22 @@
 
 ## Primary pages
 
-- [Home](https://workwithjames.github.io/): Services, selected work, working approach, and latest insight.
+- [Home](https://workwithjames.github.io/): Services, typical assignments, working approach, and latest insight.
 - [About James Ravi](https://workwithjames.github.io/about-me/): Expertise, career work, results, experience, and brands.
-- [Blog](https://workwithjames.github.io/blog/): Source-led Dubai property and real estate marketing insights.
+- [UAE Property Blog](https://workwithjames.github.io/blog/): Source-led Dubai and Abu Dhabi property guides.
 - [Contact James Ravi](https://workwithjames.github.io/contact/): Enquiry form for launches, performance marketing, investor campaigns, CRM, and advisory work.
+
+## Property guides
+
+- [Dubai tenant guest access](https://workwithjames.github.io/blog/dubai-tenant-guest-access-management-company-rules/): Ordinary guests, building security procedures, owner NOCs, occupancy questions, and escalation.
+- [Abu Dhabi rent freeze 2026](https://workwithjames.github.io/blog/abu-dhabi-rent-freeze-2026-renewal-guide/): The temporary 0% annual increase, Tawtheeq reference rent, and disputed renewals.
+- [Abu Dhabi H1 2026 property transactions](https://workwithjames.github.io/blog/abu-dhabi-property-transactions-h1-2026/): AED117 billion in transactions, sales, mortgages, FDI, and investment zones.
+- [Dubai community buying guide](https://workwithjames.github.io/blog/dubai-community-vs-property-long-term-value/): Schools, commute, amenities, management, service charges, transaction evidence, and long-term demand.
+- [Dubai apartment sharing and subletting laws](https://workwithjames.github.io/blog/dubai-apartment-sharing-subletting-laws/): Landlord consent, shared-housing permits, occupancy standards, and penalties.
 
 ## Geographic and service context
 
 James Ravi is based in Dubai, United Arab Emirates, and works across UAE, MENA, and international real estate markets. Services include property launch strategy, performance acquisition, international investor marketing, CRM, and conversion.
-
-## Latest article
-
-- [Dubai apartment sharing and subletting laws](https://workwithjames.github.io/blog/dubai-apartment-sharing-subletting-laws/): A guide to landlord consent, roommate arrangements, shared-housing permits, occupancy standards, and penalties under Dubai tenancy rules and Dubai Law No. 4 of 2026.
 
 ## Author
 
@@ -23,4 +27,4 @@ James Ravi, Dubai, UAE. Professional profile: https://ae.linkedin.com/in/james-r
 
 ## Citation policy
 
-Articles identify publication dates, distinguish current rules from incoming frameworks, and link to primary government sources alongside relevant reporting.
+Articles identify publication dates, distinguish legal rules from practical guidance, and link to primary UAE government sources alongside the original reporting. Articles are informational and are not legal or investment advice.

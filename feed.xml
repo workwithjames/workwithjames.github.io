@@ -1,18 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-<channel>
-<title>James Ravi Blog</title>
-<link>https://workwithjames.github.io/blog/</link>
-<description>Source-led Dubai property, real estate marketing, launch, acquisition, and CRM insights from James Ravi.</description>
-<language>en-AE</language>
-<lastBuildDate>Sat, 01 Aug 2026 12:00:00 +0400</lastBuildDate>
-<atom:link href="https://workwithjames.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-<item>
-<title>Dubai apartment sharing and subletting laws: What tenants and owners need to know</title>
-<link>https://workwithjames.github.io/blog/dubai-apartment-sharing-subletting-laws/</link>
-<guid isPermaLink="true">https://workwithjames.github.io/blog/dubai-apartment-sharing-subletting-laws/</guid>
-<pubDate>Sat, 01 Aug 2026 12:00:00 +0400</pubDate>
-<description>A practical guide to landlord consent, roommate arrangements, shared-housing permits, occupancy standards, and penalties in Dubai.</description>
-</item>
-</channel>
-</rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>James Ravi Blog</title><link>https://workwithjames.github.io/blog/</link><description>Source-led UAE property, real estate marketing, launch, acquisition, and CRM insights from James Ravi.</description><language>en-AE</language><lastBuildDate>Sat, 01 Aug 2026 16:10:00 +0400</lastBuildDate><atom:link href="https://workwithjames.github.io/feed.xml" rel="self" type="application/rss+xml"/><item><title>Can a Dubai building management company block a tenant's guests?</title><link>https://workwithjames.github.io/blog/dubai-tenant-guest-access-management-company-rules/</link><guid isPermaLink="true">https://workwithjames.github.io/blog/dubai-tenant-guest-access-management-company-rules/</guid><pubDate>Sat, 01 Aug 2026 16:10:00 +0400</pubDate><description>Guest access, building security, owner NOCs and escalation steps for Dubai tenants.</description></item><item><title>Abu Dhabi rent freeze 2026: Can a landlord still increase the rent?</title><link>https://workwithjames.github.io/blog/abu-dhabi-rent-freeze-2026-renewal-guide/</link><guid isPermaLink="true">https://workwithjames.github.io/blog/abu-dhabi-rent-freeze-2026-renewal-guide/</guid><pubDate>Sat, 01 Aug 2026 16:00:00 +0400</pubDate><description>How Abu Dhabi's temporary 0% annual increase affects renewals and Tawtheeq.</description></item><item><title>Dubai home buying: Why the community matters as much as the property</title><link>https://workwithjames.github.io/blog/dubai-community-vs-property-long-term-value/</link><guid isPermaLink="true">https://workwithjames.github.io/blog/dubai-community-vs-property-long-term-value/</guid><pubDate>Sat, 01 Aug 2026 15:50:00 +0400</pubDate><description>A framework for schools, commute, management, service charges and long-term demand.</description></item><item><title>Abu Dhabi property transactions reached AED117bn in H1 2026</title><link>https://workwithjames.github.io/blog/abu-dhabi-property-transactions-h1-2026/</link><guid isPermaLink="true">https://workwithjames.github.io/blog/abu-dhabi-property-transactions-h1-2026/</guid><pubDate>Sat, 01 Aug 2026 15:40:00 +0400</pubDate><description>Sales, mortgages, FDI, investment zones and how to read the 112% market increase.</description></item><item><title>Dubai apartment sharing and subletting laws</title><link>https://workwithjames.github.io/blog/dubai-apartment-sharing-subletting-laws/</link><guid isPermaLink="true">https://workwithjames.github.io/blog/dubai-apartment-sharing-subletting-laws/</guid><pubDate>Sat, 01 Aug 2026 12:00:00 +0400</pubDate><description>Landlord consent, shared-housing permits, occupancy standards and penalties in Dubai.</description></item></channel></rss>

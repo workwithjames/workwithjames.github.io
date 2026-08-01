@@ -15,6 +15,8 @@
     if(href.indexOf('wa.me/')>-1){event('generate_lead',{method:'whatsapp',link_url:href,page_path:location.pathname});}
     if(href==='/contact/'||href.indexOf('/contact/')===0){event('contact_intent',{link_text:(link.textContent||'').trim(),page_path:location.pathname});}
     if(link.closest('.article-sources')){event('source_click',{link_url:href,page_path:location.pathname});}
+    if(link.closest('.article-share')){event('share_click',{channel:href.indexOf('linkedin.com')>-1?'linkedin':'whatsapp',page_path:location.pathname});}
+    if(link.closest('.related-reading')||link.closest('.blog-index-grid')){event('related_article_click',{link_url:href,link_text:(link.textContent||'').trim(),page_path:location.pathname});}
   });
   var form=document.getElementById('contact-form');
   if(form){form.addEventListener('submit',function(){event('generate_lead',{method:'contact_form_to_whatsapp',service:(document.getElementById('contact-service')||{}).value||'',page_path:location.pathname});});}
