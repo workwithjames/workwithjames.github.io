@@ -48,6 +48,21 @@ function removeDirectGa4Configuration(body, contentType) {
     .replace(directConfigPattern, '');
 }
 
+function renameBlogPageLabels(body, contentType) {
+  if (!contentType.includes('text/html')) {
+    return body;
+  }
+
+  return body
+    .replace(
+      /(<a\b[^>]*\bhref=["']\/blog\/["'][^>]*>)\s*Blog\s*(<\/a>)/gi,
+      '$1News$2'
+    )
+    .replace(/UAE property blog/gi, 'UAE property news')
+    .replace(/James Ravi UAE Property Blog/g, 'James Realty UAE Property News')
+    .replace(/James Ravi Blog/g, 'James Realty News');
+}
+
 export async function onRequest(context) {
   const requestUrl = new URL(context.request.url);
 
@@ -77,6 +92,7 @@ export async function onRequest(context) {
     body = body.split(legacyOrigin).join(PRIMARY_ORIGIN);
   }
   body = removeDirectGa4Configuration(body, contentType);
+  body = renameBlogPageLabels(body, contentType);
 
   headers.delete('content-length');
 
