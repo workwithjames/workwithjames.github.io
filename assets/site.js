@@ -2,7 +2,8 @@
   function loadLayoutStyles(){
     var styles=[
       {key:'layout-polish',href:'/assets/layout-polish.css?v=2'},
-      {key:'layout-spacing',href:'/assets/layout-spacing.css?v=1'}
+      {key:'layout-spacing',href:'/assets/layout-spacing.css?v=1'},
+      {key:'mobile-columns',href:'/assets/mobile-columns.css?v=1'}
     ];
     styles.forEach(function(item){
       if(document.querySelector('link[data-'+item.key+']')){return;}
