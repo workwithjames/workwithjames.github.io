@@ -1,7 +1,7 @@
 const PRIMARY_ORIGIN = 'https://jamesrealty.uk';
 const GA4_MEASUREMENT_ID = 'G-2MPZL26C6D';
 const LEGACY_ORIGINS = [
-  'https://jamesrealty.uk',
+  'https://workwithjames.github.io',
   'http://workwithjames.github.io'
 ];
 
