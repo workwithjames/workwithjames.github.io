@@ -4,7 +4,7 @@
       {key:'layout-polish',href:'/assets/layout-polish.css?v=2'},
       {key:'layout-spacing',href:'/assets/layout-spacing.css?v=1'},
       {key:'mobile-columns',href:'/assets/mobile-columns.css?v=2'},
-      {key:'fixed-header',href:'/assets/fixed-header.css?v=1'}
+      {key:'fixed-header',href:'/assets/fixed-header.css?v=2'}
     ];
     styles.forEach(function(item){
       if(document.querySelector('link[data-'+item.key+']')){return;}
@@ -26,6 +26,7 @@
   function saved(){try{return JSON.parse(sessionStorage.getItem('james_attribution')||'{}');}catch(e){return {};}}
   window.jamesAttribution=function(){var data=saved();var parts=[];Object.keys(data).forEach(function(key){parts.push(key+': '+data[key]);});return parts.length?parts.join(' | '):'Direct';};
   function event(name,data){if(typeof window.gtag==='function'){window.gtag('event',name,data||{});}}
+
   function ensureDataNavigation(){
     document.querySelectorAll('.global-links,.mobile-page-tabs,.footer-links').forEach(function(nav){
       if(nav.querySelector('a[href="/abu-dhabi-data/"]')){return;}
@@ -37,6 +38,7 @@
       dubai.insertAdjacentElement('afterend',link);
     });
   }
+
   function ensureCitationNavigation(){
     document.querySelectorAll('.footer-links').forEach(function(nav){
       if(nav.querySelector('a[href="/cite/"]')){return;}
@@ -46,8 +48,78 @@
       nav.appendChild(link);
     });
   }
-  function ensureNavigation(){ensureDataNavigation();ensureCitationNavigation();}
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',ensureNavigation);}else{ensureNavigation();}
+
+  function prepareAboutFlow(){
+    var flow=document.querySelector('.about-flow');
+    if(!flow){return;}
+
+    document.documentElement.classList.add('has-about-flow');
+    document.body.classList.add('has-about-flow');
+
+    var links=Array.prototype.slice.call(flow.querySelectorAll('a[href^="#"]'));
+    var entries=links.map(function(link){
+      var id=link.getAttribute('href').slice(1);
+      return {link:link,section:document.getElementById(id)};
+    }).filter(function(item){return item.section;});
+
+    if(!entries.length){return;}
+
+    function setActive(activeLink){
+      links.forEach(function(link){
+        if(link===activeLink){
+          link.setAttribute('aria-current','location');
+          if(link.scrollIntoView){
+            var flowRect=flow.getBoundingClientRect();
+            var linkRect=link.getBoundingClientRect();
+            if(linkRect.left<flowRect.left||linkRect.right>flowRect.right){
+              link.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+            }
+          }
+        }else{
+          link.removeAttribute('aria-current');
+        }
+      });
+    }
+
+    var ticking=false;
+    function updateActive(){
+      ticking=false;
+      var rootStyle=getComputedStyle(document.documentElement);
+      var headerOffset=parseFloat(rootStyle.getPropertyValue('--fixed-header-offset'))||0;
+      var targetLine=headerOffset+flow.offsetHeight+44;
+      var current=entries[0];
+      entries.forEach(function(item){
+        if(item.section.getBoundingClientRect().top<=targetLine){current=item;}
+      });
+      setActive(current.link);
+    }
+
+    function requestUpdate(){
+      if(ticking){return;}
+      ticking=true;
+      window.requestAnimationFrame(updateActive);
+    }
+
+    links.forEach(function(link){
+      link.addEventListener('click',function(){setActive(link);});
+    });
+    window.addEventListener('scroll',requestUpdate,{passive:true});
+    window.addEventListener('resize',requestUpdate);
+    updateActive();
+  }
+
+  function ensureNavigation(){
+    ensureDataNavigation();
+    ensureCitationNavigation();
+    prepareAboutFlow();
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',ensureNavigation);
+  }else{
+    ensureNavigation();
+  }
+
   document.addEventListener('click',function(e){
     var link=e.target.closest('a');
     if(!link){return;}
@@ -60,10 +132,34 @@
     if(link.closest('.article-share')){event('share_click',{channel:href.indexOf('linkedin.com')>-1?'linkedin':'whatsapp',page_path:location.pathname});}
     if(link.closest('.related-reading')||link.closest('.blog-index-grid')){event('related_article_click',{link_url:href,link_text:(link.textContent||'').trim(),page_path:location.pathname});}
   });
+
   var form=document.getElementById('contact-form');
-  if(form){form.addEventListener('submit',function(){event('generate_lead',{method:'contact_form_to_whatsapp',service:(document.getElementById('contact-service')||{}).value||'',page_path:location.pathname});});}
-  document.querySelectorAll('.article-faq details').forEach(function(item){item.addEventListener('toggle',function(){if(item.open){event('faq_open',{question:(item.querySelector('summary')||{}).textContent||'',page_path:location.pathname});}});});
+  if(form){
+    form.addEventListener('submit',function(){
+      event('generate_lead',{method:'contact_form_to_whatsapp',service:(document.getElementById('contact-service')||{}).value||'',page_path:location.pathname});
+    });
+  }
+
+  document.querySelectorAll('.article-faq details').forEach(function(item){
+    item.addEventListener('toggle',function(){
+      if(item.open){event('faq_open',{question:(item.querySelector('summary')||{}).textContent||'',page_path:location.pathname});}
+    });
+  });
+
   var bar=document.getElementById('reading-progress-bar');
   var milestones={50:false,90:false};
-  if(bar){window.addEventListener('scroll',function(){var root=document.documentElement;var total=root.scrollHeight-root.clientHeight;var pct=total?Math.min(100,Math.round((root.scrollTop/total)*100)):0;bar.style.width=pct+'%';[50,90].forEach(function(mark){if(pct>=mark&&!milestones[mark]){milestones[mark]=true;event('article_scroll',{percent_scrolled:mark,page_path:location.pathname});}});},{passive:true});}
+  if(bar){
+    window.addEventListener('scroll',function(){
+      var root=document.documentElement;
+      var total=root.scrollHeight-root.clientHeight;
+      var pct=total?Math.min(100,Math.round((root.scrollTop/total)*100)):0;
+      bar.style.width=pct+'%';
+      [50,90].forEach(function(mark){
+        if(pct>=mark&&!milestones[mark]){
+          milestones[mark]=true;
+          event('article_scroll',{percent_scrolled:mark,page_path:location.pathname});
+        }
+      });
+    },{passive:true});
+  }
 })();
