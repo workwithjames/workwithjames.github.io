@@ -41,6 +41,19 @@
     });
   }
 
+  function renameBlogPageLabels(){
+    document.querySelectorAll('a[href="/blog/"]').forEach(function(link){
+      if((link.textContent||'').trim().toLowerCase()==='blog'){
+        link.textContent='News';
+      }
+    });
+    document.querySelectorAll('.section-kicker').forEach(function(label){
+      if((label.textContent||'').trim().toLowerCase()==='uae property blog'){
+        label.textContent='UAE property news';
+      }
+    });
+  }
+
   function ensureDataNavigation(){
     document.querySelectorAll('.global-links,.mobile-page-tabs,.footer-links').forEach(function(nav){
       if(nav.querySelector('a[href="/abu-dhabi-data/"]')){return;}
@@ -125,6 +138,7 @@
   function ensureNavigation(){
     removeVisibleBlogDates();
     updateHeaderBrand();
+    renameBlogPageLabels();
     ensureDataNavigation();
     ensureCitationNavigation();
     prepareAboutFlow();
