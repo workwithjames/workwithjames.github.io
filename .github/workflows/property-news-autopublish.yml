@@ -24,7 +24,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Restore publisher script
+      - name: Restore and configure publisher script
         shell: bash
         run: |
           mkdir -p scripts
@@ -33,6 +33,22 @@ jobs:
             | base64 -d \
             | gzip -d \
             > scripts/property_news_autopublish.py
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('scripts/property_news_autopublish.py')
+          text = path.read_text(encoding='utf-8')
+          text = text.replace(
+              'SITE = "https://workwithjames.github.io"',
+              'SITE = "https://jamesrealty.uk"',
+          )
+          start = text.find('NAV_HEADER =')
+          end = text.find('FOOTER =', start)
+          if start != -1 and end != -1:
+              header = text[start:end].replace('James Ravi', 'James Realty')
+              text = text[:start] + header + text[end:]
+          path.write_text(text, encoding='utf-8')
+          PY
           chmod +x scripts/property_news_autopublish.py
           python -m py_compile scripts/property_news_autopublish.py
 
