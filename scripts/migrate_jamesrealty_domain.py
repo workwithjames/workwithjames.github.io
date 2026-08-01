@@ -5,7 +5,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-OLD_ORIGIN = "https://workwithjames.github.io"
+OLD_ORIGIN = "https://jamesrealty.uk"
 NEW_ORIGIN = "https://jamesrealty.uk"
 TEXT_SUFFIXES = {
     ".html", ".xml", ".json", ".js", ".py", ".md", ".txt",

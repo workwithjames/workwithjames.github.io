@@ -11,10 +11,10 @@ import feedparser, requests
 from bs4 import BeautifulSoup
 from dateutil import parser as dtparse
 
-ROOT=Path(__file__).resolve().parents[1]; SITE="https://workwithjames.github.io"
+ROOT=Path(__file__).resolve().parents[1]; SITE="https://jamesrealty.uk"
 STATE=ROOT/'data/official-news-state.json'; BLOG=ROOT/'blog/index.html'; POSTS=ROOT/'blog/official-updates'; FEED=ROOT/'feed.xml'; MAP=ROOT/'sitemap.xml'
 START='<!-- AUTO_OFFICIAL_UPDATES_START -->'; END='<!-- AUTO_OFFICIAL_UPDATES_END -->'; TZ=timezone(timedelta(hours=4))
-UA='JamesRaviOfficialNewsMonitor/1.0 (+https://workwithjames.github.io/blog/)'
+UA='JamesRaviOfficialNewsMonitor/1.0 (+https://jamesrealty.uk/blog/)'
 S=requests.Session(); S.headers.update({'User-Agent':UA,'Accept-Language':'en-AE,en;q=0.9'})
 SOURCES=[
  {'id':'adrec','name':'Abu Dhabi Real Estate Centre (ADREC)','topic':'Abu Dhabi real estate','context':'ADREC announcements can affect Abu Dhabi property regulation, tenancy, market transparency, brokers, developers, owners, tenants and investors.','list':['https://adrec.gov.ae/en/News','https://adrec.gov.ae/en/news-center'],'feeds':[],'maps':['https://adrec.gov.ae/sitemap.xml','https://adrec.gov.ae/sitemap_index.xml'],'allow':r'^https://(?:www\.)?adrec\.gov\.ae/en/news/.+'},
