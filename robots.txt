@@ -13,4 +13,4 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-Sitemap: https://workwithjames.github.io/sitemap.xml
+Sitemap: https://jamesrealty.uk/sitemap.xml
