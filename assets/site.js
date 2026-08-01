@@ -28,7 +28,15 @@
       nav.appendChild(link);
     });
   }
-  function ensureNavigation(){ensureDataNavigation();ensureCitationNavigation();}
+  function loadTodayTransactions(){
+    if(!document.querySelector('.market-page')||document.querySelector('script[data-today-transactions]')){return;}
+    var script=document.createElement('script');
+    script.src='/assets/today-transactions.js?v=1';
+    script.defer=true;
+    script.dataset.todayTransactions='true';
+    document.head.appendChild(script);
+  }
+  function ensureNavigation(){ensureDataNavigation();ensureCitationNavigation();loadTodayTransactions();}
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',ensureNavigation);}else{ensureNavigation();}
   document.addEventListener('click',function(e){
     var link=e.target.closest('a');
