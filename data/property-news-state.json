@@ -1,0 +1,88 @@
+{
+  "seen_urls": [
+    "https://gulfnews.com/business/property/adgm-launches-broker-rankings-for-property-buyers-and-tenants-1.500626469",
+    "https://gulfnews.com/business/property/arif-developments-honoured-at-9th-golden-excellence-awards-1.500622447",
+    "https://gulfnews.com/business/property/dubai-homebuyers-get-more-choice-as-24800-new-units-enter-the-market-1.500625443",
+    "https://gulfnews.com/business/property/dubai-rents-ease-62-while-home-prices-stay-above-2025-levels-1.500623468",
+    "https://gulfnews.com/business/property/emaar-homebuyers-can-secure-up-to-50-financing-before-handover-1.500623531",
+    "https://gulfnews.com/business/property/imtiaz-records-another-launch-day-sell-out-with-dh15-billion-raw-district-2-1.500621203",
+    "https://gulfnews.com/business/property/is-jeddah-tower-on-course-to-become-the-worlds-tallest-building-1.500623570",
+    "https://gulfnews.com/business/property/modon-h1-net-profit-reaches-dh22-billion-after-property-sales-hit-dh26-billion-1.500625097",
+    "https://gulfnews.com/business/property/rockhill-bets-dh250-million-on-affordable-premium-living-with-its-first-ajman-tower-1.500617833",
+    "https://gulfnews.com/business/property/top-10-tallest-under-construction-skyscrapers-in-the-uae-2026-1.500623030",
+    "https://gulfnews.com/business/property/uae-investors-account-for-half-of-sharjah-property-market-during-h1-2026-1.500621868",
+    "https://www.khaleejtimes.com/business/dubai-delivers-record-24800-new-homes-in-h1-2026-as-market-matures",
+    "https://www.khaleejtimes.com/business/property/aldar-h1-profit-rises-to-dh49b-as-backlog-drives-earnings",
+    "https://www.khaleejtimes.com/business/property/arif-developments-proudly-receives-award-from-hh-sheikh-nahayan-mabarak-al-nahayan-at-9th-golden-excellence-awards",
+    "https://www.khaleejtimes.com/business/property/buying-emaar-home-dubai-adcb-flexible-financing",
+    "https://www.khaleejtimes.com/business/property/dubai-residential-real-estate-shows-resilience-amid-quieter-market",
+    "https://www.khaleejtimes.com/business/property/dubai-short-term-rentals-show-resilience-as-longer-stays-support-market",
+    "https://www.khaleejtimes.com/business/property/janu-al-marjan-island-ras-al-khaimah-construction-starts",
+    "https://www.khaleejtimes.com/business/property/jumeirah-golf-estates-villa-sale-hits-record-dh110m-amid-luxury-boom",
+    "https://www.khaleejtimes.com/business/property/more-dubai-residents-buy-homes-to-live-in-for-long-term-developers-say",
+    "https://www.khaleejtimes.com/business/property/ras-al-khaimah-rents-rise-villas-gain-popularity"
+  ],
+  "posts": [
+    {
+      "slug": "adgm-broker-rankings-buyers-tenants-guide",
+      "title": "ADGM broker rankings: What property buyers and tenants should check",
+      "description": "ADGM's broker classification framework adds transaction activity, professional development and customer feedback to the way brokers are assessed.",
+      "category": "Abu Dhabi regulation",
+      "date": "2026-08-01",
+      "read_time": "5 min read",
+      "source_name": "Gulf News",
+      "source_url": "https://gulfnews.com/business/property/adgm-launches-broker-rankings-for-property-buyers-and-tenants-1.500626469",
+      "image": "/images/property-news/adgm-broker-rankings-buyers-tenants-guide.svg",
+      "auto": false
+    },
+    {
+      "slug": "dubai-24800-new-homes-buyer-choice-2026",
+      "title": "Dubai added 24,800 homes in H1 2026: What greater choice means for buyers",
+      "description": "New housing supply increased buyer and tenant choice as quarterly prices and rents eased, while annual values remained above the previous year.",
+      "category": "Dubai market supply",
+      "date": "2026-08-01",
+      "read_time": "7 min read",
+      "source_name": "Gulf News",
+      "source_url": "https://gulfnews.com/business/property/dubai-homebuyers-get-more-choice-as-24800-new-units-enter-the-market-1.500625443",
+      "image": "/images/property-news/dubai-24800-new-homes-buyer-choice-2026.svg",
+      "auto": false
+    },
+    {
+      "slug": "dubai-h1-2026-delivery-led-property-cycle",
+      "title": "Dubai's H1 2026 handovers signal a more delivery-led property cycle",
+      "description": "Record completions, slower launch activity, strong off-plan demand and a substantial future pipeline point to a more mature phase of Dubai's housing cycle.",
+      "category": "Dubai market analysis",
+      "date": "2026-08-01",
+      "read_time": "8 min read",
+      "source_name": "Khaleej Times",
+      "source_url": "https://www.khaleejtimes.com/business/dubai-delivers-record-24800-new-homes-in-h1-2026-as-market-matures",
+      "image": "/images/property-news/dubai-h1-2026-delivery-led-property-cycle.svg",
+      "auto": false
+    },
+    {
+      "slug": "dubai-residents-buying-long-term-homes",
+      "title": "Dubai residents are buying for long-term living, not only short-term returns",
+      "description": "Developers report a broader owner-occupier profile as residents prioritise community, schools, connectivity and quality of life.",
+      "category": "Dubai home buying",
+      "date": "2026-08-01",
+      "read_time": "6 min read",
+      "source_name": "Khaleej Times",
+      "source_url": "https://www.khaleejtimes.com/business/property/more-dubai-residents-buy-homes-to-live-in-for-long-term-developers-say",
+      "image": "/images/property-news/dubai-residents-buying-long-term-homes.svg",
+      "auto": false
+    },
+    {
+      "slug": "jumeirah-golf-estates-dh110m-villa-sale-analysis",
+      "title": "Jumeirah Golf Estates records an AED 110m villa sale: How to read the record",
+      "description": "The off-market six-bedroom transaction more than doubled the community's previous ready-home benchmark, highlighting scarcity and bespoke quality at the top end.",
+      "category": "Dubai luxury property",
+      "date": "2026-08-01",
+      "read_time": "6 min read",
+      "source_name": "Khaleej Times",
+      "source_url": "https://www.khaleejtimes.com/business/property/jumeirah-golf-estates-villa-sale-hits-record-dh110m-amid-luxury-boom",
+      "image": "/images/property-news/jumeirah-golf-estates-dh110m-villa-sale-analysis.svg",
+      "auto": false
+    }
+  ],
+  "updated_at": "2026-08-01T20:39:00+04:00"
+}
