@@ -8,6 +8,18 @@
   function saved(){try{return JSON.parse(sessionStorage.getItem('james_attribution')||'{}');}catch(e){return {};}}
   window.jamesAttribution=function(){var data=saved();var parts=[];Object.keys(data).forEach(function(key){parts.push(key+': '+data[key]);});return parts.length?parts.join(' | '):'Direct';};
   function event(name,data){if(typeof window.gtag==='function'){window.gtag('event',name,data||{});}}
+  function ensureDataNavigation(){
+    document.querySelectorAll('.global-links,.mobile-page-tabs,.footer-links').forEach(function(nav){
+      if(nav.querySelector('a[href="/abu-dhabi-data/"]')){return;}
+      var dubai=nav.querySelector('a[href="/"]');
+      if(!dubai){return;}
+      var link=document.createElement('a');
+      link.href='/abu-dhabi-data/';
+      link.textContent='Abu Dhabi Data';
+      dubai.insertAdjacentElement('afterend',link);
+    });
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',ensureDataNavigation);}else{ensureDataNavigation();}
   document.addEventListener('click',function(e){
     var link=e.target.closest('a');
     if(!link){return;}
@@ -15,6 +27,7 @@
     if(href.indexOf('wa.me/')>-1){event('generate_lead',{method:'whatsapp',link_url:href,page_path:location.pathname});}
     if(href==='/contact/'||href.indexOf('/contact/')===0){event('contact_intent',{link_text:(link.textContent||'').trim(),page_path:location.pathname});}
     if(link.closest('.article-sources')){event('source_click',{link_url:href,page_path:location.pathname});}
+    if(href.indexOf('dari.ae')>-1||href.indexOf('adrec.gov.ae')>-1){event('data_source_click',{data_source:'ADREC_DARI',link_url:href,page_path:location.pathname});}
     if(link.closest('.article-share')){event('share_click',{channel:href.indexOf('linkedin.com')>-1?'linkedin':'whatsapp',page_path:location.pathname});}
     if(link.closest('.related-reading')||link.closest('.blog-index-grid')){event('related_article_click',{link_url:href,link_text:(link.textContent||'').trim(),page_path:location.pathname});}
   });
