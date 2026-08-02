@@ -786,16 +786,16 @@ def auto_title(article: dict, theme: str) -> str:
         if needle in text:
             location = label
             break
-    topics = {
-        "regulation": "property regulation update",
-        "luxury": "luxury property update",
-        "supply": "housing supply update",
-        "rental": "rental market update",
-        "buyer": "homebuyer market update",
-        "market": "property market update",
+    titles = {
+        "regulation": f"What the latest {location} property rules mean in practice",
+        "luxury": f"Reading the latest {location} luxury-property signal",
+        "supply": f"{location} housing supply: what buyers and owners should check next",
+        "rental": f"{location} rental update: what tenants and landlords should verify",
+        "buyer": f"{location} homebuyer update: a practical decision checklist",
+        "market": f"How to read the latest {location} property-market signal",
     }
     suffix = hashlib.sha1(article["url"].encode()).hexdigest()[:5]
-    return f"{location} {topics[theme]}: decision checks from {article['source_name']}", suffix
+    return titles[theme], suffix
 
 
 def extract_facts(paragraphs: list[str]) -> list[list[str]]:
@@ -1167,7 +1167,14 @@ def create_auto_posts(state: dict, current_posts: list[Post]) -> list[Post]:
         post = Post(
             slug=slug,
             title=title,
-            description=f"Independent analysis of a new {source_name} property report, with factual signals, limitations and practical checks for property decisions.",
+            description={
+                "regulation": f"A practical reading of a new {source_name} report, with the rule change separated from the checks buyers, tenants and owners still need to make.",
+                "luxury": f"An independent reading of a new {source_name} luxury-property report, separating an exceptional headline from comparable evidence.",
+                "supply": f"A source-linked reading of new {source_name} reporting on housing supply, buyer choice and the checks that matter at community level.",
+                "rental": f"A practical reading of a new {source_name} rental report for tenants and landlords, with registered evidence and costs kept in view.",
+                "buyer": f"An independent reading of a new {source_name} homebuyer report, with affordability and property-level checks added.",
+                "market": f"A source-linked reading of a new {source_name} property report, with the headline separated from the evidence needed for a decision.",
+            }[theme],
             category=category_label,
             date=(published or NOW).date().isoformat(),
             read_time="4 min read",
