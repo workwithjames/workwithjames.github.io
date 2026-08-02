@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-02T10:38:56.921Z",
+  "generatedAt": "2026-08-02T10:42:23.896Z",
   "baseUrl": "http://127.0.0.1:8788",
   "scanned": {
     "htmlFiles": 26,
@@ -9,23 +9,8 @@
   },
   "summary": {
     "errors": 0,
-    "warnings": 2,
-    "total": 2
+    "warnings": 0,
+    "total": 0
   },
-  "issues": [
-    {
-      "severity": "warning",
-      "category": "html",
-      "location": "ajman-data/index.html",
-      "message": "Label contains a block-level div; use phrasing markup such as span",
-      "detail": "<label>Year<select id=\"ajman-year\" data-filter=\"year\"><option>Loading</option></select></label><label>Quarter<select id=\"ajman-quarter\" data-filter=\"quarter\"><option>Loading</optio"
-    },
-    {
-      "severity": "warning",
-      "category": "html",
-      "location": "dubai-rental-yield-calculator/index.html",
-      "message": "Label contains a block-level div; use phrasing markup such as span",
-      "detail": "<label class=\"full\" for=\"a-price\"><span class=\"calculator-field-label\">Purchase price</span><span class=\"calculator-input-wrap\"><span aria-hidden=\"true\">AED</span><input id=\"a-pric"
-    }
-  ]
+  "issues": []
 }
