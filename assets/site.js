@@ -5,7 +5,8 @@
       {key:'layout-spacing',href:'/assets/layout-spacing.css?v=1'},
       {key:'mobile-columns',href:'/assets/mobile-columns.css?v=2'},
       {key:'fixed-header',href:'/assets/fixed-header.css?v=2'},
-      {key:'about-flow-right',href:'/assets/about-flow-right.css?v=1'}
+      {key:'about-flow-right',href:'/assets/about-flow-right.css?v=1'},
+      {key:'scroll-navigation',href:'/assets/scroll-navigation.css?v=1'}
     ];
     styles.forEach(function(item){
       if(document.querySelector('link[data-'+item.key+']')){return;}
@@ -135,6 +136,48 @@
     updateActive();
   }
 
+  function preparePageScrollControls(){
+    if(document.querySelector('.page-scroll-controls')){return;}
+    var root=document.documentElement;
+    var controls=document.createElement('nav');
+    controls.className='page-scroll-controls';
+    controls.setAttribute('aria-label','Page scroll controls');
+
+    var up=document.createElement('button');
+    up.type='button';
+    up.className='page-scroll-control page-scroll-up';
+    up.setAttribute('aria-label','Go to the top of the page');
+    up.title='Go to top';
+    up.textContent='↑';
+
+    var down=document.createElement('button');
+    down.type='button';
+    down.className='page-scroll-control page-scroll-down';
+    down.setAttribute('aria-label','Go to the bottom of the page');
+    down.title='Go to bottom';
+    down.textContent='↓';
+
+    controls.appendChild(up);
+    controls.appendChild(down);
+    document.body.appendChild(controls);
+
+    function scrollMode(){
+      return window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
+    }
+    function update(){
+      var max=Math.max(0,root.scrollHeight-root.clientHeight);
+      var current=window.scrollY||root.scrollTop||0;
+      var scrollable=max>160;
+      up.classList.toggle('is-visible',scrollable&&current>120);
+      down.classList.toggle('is-visible',scrollable&&current<max-120);
+    }
+    up.addEventListener('click',function(){window.scrollTo({top:0,behavior:scrollMode()});event('page_scroll_control',{direction:'top',page_path:location.pathname});});
+    down.addEventListener('click',function(){window.scrollTo({top:root.scrollHeight,behavior:scrollMode()});event('page_scroll_control',{direction:'bottom',page_path:location.pathname});});
+    window.addEventListener('scroll',update,{passive:true});
+    window.addEventListener('resize',update);
+    update();
+  }
+
   function ensureNavigation(){
     removeVisibleBlogDates();
     updateHeaderBrand();
@@ -142,6 +185,7 @@
     ensureDataNavigation();
     ensureCitationNavigation();
     prepareAboutFlow();
+    preparePageScrollControls();
   }
 
   if(document.readyState==='loading'){

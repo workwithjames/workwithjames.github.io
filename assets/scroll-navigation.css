@@ -1,0 +1,8 @@
+.page-scroll-controls{position:fixed;right:22px;bottom:22px;z-index:120;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.page-scroll-control{width:44px;height:44px;border:1px solid rgba(129,140,248,.48);border-radius:14px;background:rgba(10,10,26,.9);box-shadow:0 12px 34px rgba(0,0,0,.32);color:#eef0ff;display:grid;place-items:center;font:800 1.15rem/1 system-ui,sans-serif;opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .18s ease,transform .18s ease,border-color .18s ease,background .18s ease;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.page-scroll-control.is-visible{opacity:1;transform:none;pointer-events:auto}
+.page-scroll-control:hover,.page-scroll-control:focus-visible{border-color:#a5b4fc;background:#181833;outline:none}
+.page-scroll-control:focus-visible{box-shadow:0 0 0 3px rgba(129,140,248,.28),0 12px 34px rgba(0,0,0,.32)}
+@media(max-width:700px){.page-scroll-controls{right:14px;bottom:82px}.page-scroll-control{width:42px;height:42px;border-radius:13px}}
+@media(prefers-reduced-motion:reduce){.page-scroll-control{transition:none}}
+.market-source-date{display:block;color:var(--muted);font-size:.68rem;line-height:1.5;margin-top:10px}

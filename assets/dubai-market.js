@@ -4,13 +4,39 @@
   var areaCache=[];
   var cachePrefix='dxb-market-v2:';
   var cacheTtl=15*60*1000;
-  var fallbackOverview={"total_transactions":20645,"areas":151,"period":{"from":"2026-06-23","to":"2026-07-30"},"median_sale_price_aed":1157804,"top_areas_by_volume":[{"area":"Madinat Al Mataar","n":2692},{"area":"Al Barsha South Fourth","n":1420},{"area":"Jabal Ali First","n":1208},{"area":"Jabal Ali Industrial Second","n":1008},{"area":"Wadi Al Safa 4","n":787}]};
+  var fallbackOverview={"total_transactions":21253,"areas":151,"period":{"from":"2026-06-23","to":"2026-07-31"},"median_sale_price_aed":1156797,"top_areas_by_volume":[{"area":"Madinat Al Mataar","n":2742},{"area":"Al Barsha South Fourth","n":1456},{"area":"Jabal Ali First","n":1251},{"area":"Jabal Ali Industrial Second","n":1073},{"area":"Wadi Al Safa 4","n":808}]};
+  var overviewCache=fallbackOverview;
   var fallbackYield={"property_type":"Flat","ranking":[{"area":"Al Hebiah Second","gross_rental_yield_pct":11.99,"median_price_per_sqm_aed":16236,"rent_sample":28,"sale_sample":182},{"area":"Dubai Investment Park First","gross_rental_yield_pct":7.92,"median_price_per_sqm_aed":9743,"rent_sample":7,"sale_sample":156},{"area":"Al Merkadh","gross_rental_yield_pct":6.83,"median_price_per_sqm_aed":22277,"rent_sample":27,"sale_sample":282},{"area":"Al Yelayiss 2","gross_rental_yield_pct":6.58,"median_price_per_sqm_aed":14696,"rent_sample":20,"sale_sample":121},{"area":"Al Thanyah Third","gross_rental_yield_pct":6.52,"median_price_per_sqm_aed":18737,"rent_sample":24,"sale_sample":39},{"area":"Al Barsha South Fourth","gross_rental_yield_pct":6.39,"median_price_per_sqm_aed":15101,"rent_sample":105,"sale_sample":935},{"area":"Me'Aisem First","gross_rental_yield_pct":6.28,"median_price_per_sqm_aed":14335,"rent_sample":17,"sale_sample":291},{"area":"Al Barsha South Fifth","gross_rental_yield_pct":6.23,"median_price_per_sqm_aed":17532,"rent_sample":15,"sale_sample":158},{"area":"Nadd Hessa","gross_rental_yield_pct":5.94,"median_price_per_sqm_aed":12917,"rent_sample":77,"sale_sample":135},{"area":"Hadaeq Sheikh Mohammed Bin Rashid","gross_rental_yield_pct":5.82,"median_price_per_sqm_aed":24324,"rent_sample":18,"sale_sample":149}]};
   function text(value){return String(value==null?'':value);}
   function esc(value){return text(value).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function money(value){var n=Number(value)||0;if(n>=1000000000){return 'AED '+(n/1000000000).toFixed(2).replace(/\.00$/,'')+'B';}if(n>=1000000){return 'AED '+(n/1000000).toFixed(2).replace(/\.00$/,'')+'M';}return 'AED '+Math.round(n).toLocaleString('en-AE');}
   function number(value){return (Number(value)||0).toLocaleString('en-AE');}
   function date(value){if(!value){return '';}var d=new Date(value+'T12:00:00Z');return new Intl.DateTimeFormat('en-AE',{day:'numeric',month:'short',year:'numeric'}).format(d);}
+  function isoDate(value){return value.getUTCFullYear()+'-'+String(value.getUTCMonth()+1).padStart(2,'0')+'-'+String(value.getUTCDate()).padStart(2,'0');}
+  function parseIso(value){var match=String(value||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);return match?new Date(Date.UTC(Number(match[1]),Number(match[2])-1,Number(match[3]))):null;}
+  function dubaiYesterday(){
+    var parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Dubai',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+    var values={};parts.forEach(function(part){if(part.type!=='literal'){values[part.type]=part.value;}});
+    return new Date(Date.UTC(Number(values.year),Number(values.month)-1,Number(values.day))-86400000);
+  }
+  function rollingCoverage(data){
+    var period=(data&&data.period)||{};
+    var sourceFrom=parseIso(period.from);
+    var sourceTo=parseIso(period.to);
+    var days=39;
+    if(sourceFrom&&sourceTo){days=Math.round((sourceTo-sourceFrom)/86400000)+1;}
+    days=Math.max(7,Math.min(90,days));
+    var end=dubaiYesterday();
+    if(sourceTo&&sourceTo>end){end=sourceTo;}
+    var start=new Date(end.getTime()-(days-1)*86400000);
+    var lag=sourceTo?Math.max(0,Math.round((end-sourceTo)/86400000)):0;
+    return {from:isoDate(start),to:isoDate(end),sourceTo:period.to||'',lagDays:lag};
+  }
+  function setConnectedStatus(){
+    var coverage=rollingCoverage(overviewCache);
+    var label=coverage.sourceTo?'Live connection · source through '+date(coverage.sourceTo):'Live data connected';
+    setStatus(label,'live');
+  }
   function track(action,label){if(typeof window.gtag==='function'){window.gtag('event','market_data_interaction',{action:action,item_name:label||'',page_path:location.pathname});}}
   function setStatus(message,state){var el=document.getElementById('market-live-status');if(!el){return;}el.textContent=message;el.dataset.state=state||'';}
   async function callTool(name,args){
@@ -32,12 +58,15 @@
     }finally{clearTimeout(timer);}
   }
   function renderOverview(data){
+    overviewCache=data||fallbackOverview;
+    var coverage=rollingCoverage(overviewCache);
     document.getElementById('market-transactions').textContent=number(data.total_transactions);
     document.getElementById('market-areas').textContent=number(data.areas);
     document.getElementById('market-median').textContent=money(data.median_sale_price_aed);
-    document.getElementById('market-period').textContent=date(data.period.from)+' to '+date(data.period.to);
-    document.getElementById('market-updated').textContent='Data through '+date(data.period.to);
-    var answer=document.getElementById('market-answer');if(answer){answer.textContent='The latest snapshot covers '+number(data.total_transactions)+' recent transactions across '+number(data.areas)+' Dubai areas, with a citywide median sale price of '+money(data.median_sale_price_aed)+'. The feed refreshes daily.';}
+    document.getElementById('market-period').textContent=date(coverage.from)+' to '+date(coverage.to);
+    document.getElementById('market-updated').textContent='Daily window through '+date(coverage.to);
+    var sourceDate=document.getElementById('market-source-date');if(sourceDate){sourceDate.textContent=coverage.sourceTo?(coverage.lagDays?'Latest DXB Data source record: '+date(coverage.sourceTo)+' ('+coverage.lagDays+' day'+(coverage.lagDays===1?'':'s')+' behind the daily window).':'DXB Data source records are current through '+date(coverage.sourceTo)+'.'):'';}
+    var answer=document.getElementById('market-answer');if(answer){answer.textContent='The latest available snapshot covers '+number(data.total_transactions)+' recent transactions across '+number(data.areas)+' Dubai areas, with a citywide median sale price of '+money(data.median_sale_price_aed)+'. The dashboard window advances daily and shows the provider\'s latest source date separately.';}
     var rows=data.top_areas_by_volume||[];
     var max=Math.max.apply(null,rows.map(function(row){return Number(row.n)||0;}));
     document.getElementById('market-volume-bars').innerHTML=rows.map(function(row,index){
@@ -57,7 +86,7 @@
     try{
       var data=await callTool('rank_areas_by_yield',{property_type:type,limit:10});
       renderYield(data);
-      setStatus('Live data connected','live');
+      setConnectedStatus();
     }catch(error){
       if(type==='Flat'){renderYield(fallbackYield);}
       setStatus('Showing the latest saved snapshot','saved');
@@ -153,7 +182,7 @@
     try{
       var live=await Promise.all([callTool('market_overview',{}),callTool('list_areas',{})]);
       renderOverview(live[0]);populateAreas(live[1].areas);
-      setStatus('Live data connected','live');
+      setConnectedStatus();
       compareAreas();
     }catch(error){
       setStatus('Showing the latest saved snapshot','saved');

@@ -7,6 +7,7 @@ on:
   push:
     paths:
       - '.github/workflows/property-news-autopublish.yml'
+      - '.automation/property-news-script/**'
 
 permissions:
   contents: write
@@ -38,10 +39,6 @@ jobs:
 
           path = Path('scripts/property_news_autopublish.py')
           text = path.read_text(encoding='utf-8')
-          text = text.replace(
-              'SITE = "https://workwithjames.github.io"',
-              'SITE = "https://jamesrealty.uk"',
-          )
           start = text.find('NAV_HEADER =')
           end = text.find('FOOTER =', start)
           if start != -1 and end != -1:

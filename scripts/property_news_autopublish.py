@@ -3,7 +3,7 @@
 
 The script is designed for GitHub Actions and requires no API keys. It:
 - creates five initial source-led articles requested by the site owner;
-- checks Khaleej Times and Gulf News property category pages;
+- checks five UAE property news and blog sources;
 - publishes concise original analytical briefs for newly detected articles;
 - updates the blog index, a property-news hub, RSS, sitemap and internal links.
 
@@ -46,19 +46,55 @@ CATEGORY_PAGES = [
         "name": "Khaleej Times",
         "url": "https://www.khaleejtimes.com/business/property",
         "host": "www.khaleejtimes.com",
+        "article_prefixes": ["/business/"],
     },
     {
         "name": "Gulf News",
         "url": "https://gulfnews.com/business/property",
         "host": "gulfnews.com",
+        "article_prefixes": ["/business/property/"],
+    },
+    {
+        "name": "The National",
+        "url": "https://www.thenationalnews.com/business/property/",
+        "host": "www.thenationalnews.com",
+        "article_prefixes": ["/business/property/"],
+    },
+    {
+        "name": "Arabian Business",
+        "url": "https://www.arabianbusiness.com/real-estate/",
+        "host": "www.arabianbusiness.com",
+        "article_prefixes": ["/real-estate/", "/industries/real-estate/"],
+        "feed_urls": ["https://www.arabianbusiness.com/real-estate/feed/"],
+    },
+    {
+        "name": "Property Finder",
+        "url": "https://www.propertyfinder.ae/blog/",
+        "host": "www.propertyfinder.ae",
+        "article_prefixes": ["/blog/"],
     },
 ]
+
+MONITORED_SOURCE_NAMES = ", ".join(category["name"] for category in CATEGORY_PAGES)
 
 USER_AGENT = (
     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/124.0 Safari/537.36 "
     "JamesRaviPropertyNewsMonitor/1.0"
 )
+
+GTM_HEAD = """<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M74SL57L');</script>
+<!-- End Google Tag Manager -->"""
+
+GTM_BODY = """<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M74SL57L"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->"""
 
 CSS = r"""/* Property news hub, source briefs and internal-link modules */
 .property-news-divider{grid-column:1/-1;border-top:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,.6fr);align-items:end;gap:28px;margin-top:18px;padding-top:30px}.property-news-divider h2{font-size:clamp(1.65rem,3vw,2.35rem);letter-spacing:-.04em;margin:6px 0 0}.property-news-divider p:last-child{color:var(--muted);font-size:.78rem;line-height:1.6;margin:0}.news-source-badge{display:inline-flex;align-items:center;width:max-content;border:1px solid #818cf840;border-radius:999px;background:#818cf811;color:#bfc3ff;padding:6px 10px;font-size:.63rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase}.news-fact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:18px 0}.news-fact{border:1px solid var(--line);border-radius:14px;background:#111124;padding:17px}.news-fact strong{display:block;color:var(--accent);font-size:1.05rem;margin-bottom:6px}.news-fact span{color:var(--muted);font-size:.7rem;line-height:1.5}.source-credit{border:1px solid #818cf840;border-radius:16px;background:linear-gradient(135deg,#818cf813,#111124);display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:20px;margin:28px 0;padding:20px}.source-credit p{color:var(--muted);font-size:.76rem;line-height:1.6;margin:7px 0 0}.source-credit .button{white-space:nowrap}.news-automation-note{border-left:3px solid var(--accent);background:#818cf80c;color:#b9b9ca;border-radius:0 12px 12px 0;padding:13px 15px;font-size:.72rem;line-height:1.6}.property-news-links{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:minmax(220px,.32fr) minmax(0,.68fr);gap:30px;margin-top:48px;margin-bottom:48px;padding-top:34px;padding-bottom:34px}.property-news-links h2{font-size:1.45rem;letter-spacing:-.04em;margin:7px 0 9px}.property-news-links>div>p:last-child{color:var(--muted);font-size:.74rem;line-height:1.6;margin:0}.property-news-link-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.property-news-link-grid a{border:1px solid var(--line);border-radius:14px;background:var(--surface);display:grid;gap:6px;min-width:0;padding:16px}.property-news-link-grid a:hover{border-color:#818cf86b;transform:translateY(-2px)}.property-news-link-grid span{color:var(--accent);font-size:.61rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em}.property-news-link-grid strong{font-size:.76rem;line-height:1.4}.news-hub-hero{padding-top:66px;padding-bottom:42px}.news-hub-hero h1{font-size:clamp(2.8rem,6vw,5.4rem);line-height:.96;letter-spacing:-.065em;margin:18px 0}.news-hub-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;padding-bottom:72px}.news-hub-grid .blog-tile{height:100%}.news-brief-visual{aspect-ratio:16/9;border:1px solid var(--line);border-radius:20px;overflow:hidden}.news-brief-visual img{width:100%;height:100%;object-fit:cover}.article-body .news-related{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}.article-body .news-related a{border:1px solid var(--line);border-radius:14px;background:#111124;padding:16px;font-size:.76rem;font-weight:750;line-height:1.45}.article-body .news-related a:hover{border-color:#818cf86b}.footer-links a[href='/blog/property-news/']{color:#c7c9ff}
@@ -335,7 +371,7 @@ def esc(value: str) -> str:
 
 
 def image_alt(post: Post) -> str:
-    return SEED_IMAGE_ALTS.get(post.slug, "UAE property market analysis illustration")
+    return SEED_IMAGE_ALTS.get(post.slug, f"{post.category} analysis illustration for UAE property readers")
 
 
 def slugify(value: str, max_len: int = 76) -> str:
@@ -396,6 +432,7 @@ def load_state() -> dict:
         if not isinstance(data, dict):
             raise ValueError("state is not an object")
         data.setdefault("seen_urls", [])
+        data.setdefault("seen_title_signatures", [])
         data.setdefault("posts", [])
         return data
     except Exception as exc:  # noqa: BLE001
@@ -448,7 +485,7 @@ def build_head(post: Post, structured: dict) -> str:
     published = f"{post.date}T20:00:00+04:00"
     canonical = post.url
     image_url = SITE + post.image
-    return f'''<!DOCTYPE html><html lang="en-AE"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/css/5576f66c8ff02a6a.css?v=12"/><link rel="stylesheet" href="/assets/property-news.css?v=1"/><title>{esc(post.title)} | James Ravi</title><meta name="description" content="{esc(post.description)}"/><meta name="author" content="James Ravi"/><meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1"/><link rel="canonical" href="{canonical}"/><meta property="og:type" content="article"/><meta property="og:title" content="{esc(post.title)}"/><meta property="og:description" content="{esc(post.description)}"/><meta property="og:url" content="{canonical}"/><meta property="og:image" content="{image_url}"/><meta property="og:image:alt" content="{esc(image_alt(post))}"/><meta property="article:published_time" content="{published}"/><meta property="article:modified_time" content="{published}"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="{esc(post.title)}"/><meta name="twitter:description" content="{esc(post.description)}"/><meta name="twitter:image" content="{image_url}"/><script type="application/ld+json">{json.dumps(structured, ensure_ascii=False, separators=(',', ':'))}</script><link rel="alternate" type="application/rss+xml" title="James Ravi Blog" href="{SITE}/feed.xml"/><link rel="manifest" href="/site.webmanifest"/><meta name="theme-color" content="#0a0a1a"/><meta property="og:locale" content="en_AE"/><script defer src="/assets/site.js?v=3"></script></head>'''
+    return f'''<!DOCTYPE html><html lang="en-AE"><head>{GTM_HEAD}<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/css/5576f66c8ff02a6a.css?v=12"/><link rel="stylesheet" href="/assets/property-news.css?v=1"/><link rel="shortcut icon" href="/favicon.svg"/><link rel="icon" href="/favicon.svg"/><link rel="apple-touch-icon" href="/favicon-192.png"/><title>{esc(post.title)} | James Ravi</title><meta name="description" content="{esc(post.description)}"/><meta name="author" content="James Ravi"/><meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1"/><link rel="canonical" href="{canonical}"/><meta property="og:type" content="article"/><meta property="og:title" content="{esc(post.title)}"/><meta property="og:description" content="{esc(post.description)}"/><meta property="og:url" content="{canonical}"/><meta property="og:image" content="{image_url}"/><meta property="og:image:alt" content="{esc(image_alt(post))}"/><meta property="article:published_time" content="{published}"/><meta property="article:modified_time" content="{published}"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="{esc(post.title)}"/><meta name="twitter:description" content="{esc(post.description)}"/><meta name="twitter:image" content="{image_url}"/><script type="application/ld+json">{json.dumps(structured, ensure_ascii=False, separators=(',', ':'))}</script><link rel="alternate" type="application/rss+xml" title="James Ravi Blog" href="{SITE}/feed.xml"/><link rel="manifest" href="/site.webmanifest"/><meta name="theme-color" content="#0a0a1a"/><meta property="og:locale" content="en_AE"/><script defer src="/assets/site.js?v=5"></script></head>'''
 
 
 def fact_grid(facts: list[list[str]]) -> str:
@@ -541,30 +578,55 @@ def render_seed(seed: dict, all_posts: list[Post]) -> str:
             },
         ],
     }
-    page = build_head(post, structured) + f'''<body><a class="skip-link" href="#main-content">Skip to main content</a><div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>{NAV_HEADER}<main id="main-content"><article class="article-page"><header class="article-header section-shell"><nav class="breadcrumbs"><a href="/">Home</a><span>›</span><a href="/blog/">Blog</a><span>›</span><a href="/blog/property-news/">Property News</a></nav><p class="section-kicker">{esc(post.category)}</p><h1>{esc(post.title)}</h1><p class="article-deck">{esc(seed["deck"])}</p><div class="article-byline"><span>Analysis by <a href="/about-me/">James Ravi</a></span><time datetime="{post.date}">Published {datetime.fromisoformat(post.date).strftime('%-d %B %Y')}</time><span>{esc(post.read_time)}</span></div><figure class="article-hero-image news-brief-visual"><img src="{post.image}" alt="{esc(image_alt(post))}" width="1600" height="900" fetchpriority="high"/></figure></header><div class="article-layout section-shell"><aside class="article-toc"><strong>In this brief</strong>{toc}</aside><div class="article-body"><p class="news-automation-note"><strong>Editorial note:</strong> This is original analysis based on the attributed source report. Figures should be checked against official records before a transaction or valuation decision.</p>{body}{source_card(post)}{related_links(post.slug, all_posts)}{faq_html(faqs)}</div></div><section class="section-shell article-share"><p>Share this source-led property analysis.</p><div><a class="button button-outline" href="https://www.linkedin.com/sharing/share-offsite/?url={post.url}" target="_blank" rel="noopener noreferrer">LinkedIn</a><a class="button nav-whatsapp" href="https://wa.me/?text={esc(post.title)}%20{post.url}" target="_blank" rel="noopener noreferrer">WhatsApp</a></div></section></article><section class="section-shell contact-card"><div><p class="section-kicker">Need a clearer market decision?</p><h2>Connect the headline to the property, community and buyer objective.</h2><p>For property launch strategy, investor acquisition, content or CRM conversion, share the project and target market.</p></div><a class="button nav-whatsapp" href="/contact/">Contact James <span aria-hidden="true">→</span></a></section></main>{FOOTER}</body></html>'''
+    page = build_head(post, structured) + f'''<body>{GTM_BODY}<a class="skip-link" href="#main-content">Skip to main content</a><div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>{NAV_HEADER}<main id="main-content"><article class="article-page"><header class="article-header section-shell"><nav class="breadcrumbs"><a href="/">Home</a><span>›</span><a href="/blog/">Blog</a><span>›</span><a href="/blog/property-news/">Property News</a></nav><p class="section-kicker">{esc(post.category)}</p><h1>{esc(post.title)}</h1><p class="article-deck">{esc(seed["deck"])}</p><div class="article-byline"><span>Analysis by <a href="/about-me/">James Ravi</a></span><time datetime="{post.date}">Published {datetime.fromisoformat(post.date).strftime('%-d %B %Y')}</time><span>{esc(post.read_time)}</span></div><figure class="article-hero-image news-brief-visual"><img src="{post.image}" alt="{esc(image_alt(post))}" width="1600" height="900" fetchpriority="high"/></figure></header><div class="article-layout section-shell"><aside class="article-toc"><strong>In this brief</strong>{toc}</aside><div class="article-body"><p class="news-automation-note"><strong>Editorial note:</strong> This is original analysis based on the attributed source report. Figures should be checked against official records before a transaction or valuation decision.</p>{body}{source_card(post)}{related_links(post.slug, all_posts)}{faq_html(faqs)}</div></div><section class="section-shell article-share"><p>Share this source-led property analysis.</p><div><a class="button button-outline" href="https://www.linkedin.com/sharing/share-offsite/?url={post.url}" target="_blank" rel="noopener noreferrer">LinkedIn</a><a class="button nav-whatsapp" href="https://wa.me/?text={esc(post.title)}%20{post.url}" target="_blank" rel="noopener noreferrer">WhatsApp</a></div></section></article><section class="section-shell contact-card"><div><p class="section-kicker">Need a clearer market decision?</p><h2>Connect the headline to the property, community and buyer objective.</h2><p>For property launch strategy, investor acquisition, content or CRM conversion, share the project and target market.</p></div><a class="button nav-whatsapp" href="/contact/">Contact James <span aria-hidden="true">→</span></a></section></main>{FOOTER}</body></html>'''
     return page
 
 
 def discover_links(category: dict) -> list[str]:
+    links: list[str] = []
+
+    def add(candidate: str) -> None:
+        url = canonical_url(urljoin(category["url"], candidate))
+        parsed = urlparse(url)
+        if parsed.netloc != category["host"]:
+            return
+        prefixes = category.get("article_prefixes", [])
+        if prefixes and not any(parsed.path.startswith(prefix) for prefix in prefixes):
+            return
+        base_path = urlparse(category["url"]).path.rstrip("/")
+        path = parsed.path.rstrip("/")
+        if not path or path == base_path:
+            return
+        if any(marker in parsed.path for marker in ("/feed", "/tag/", "/category/", "/author/", "/wp-content/", "/ar/")):
+            return
+        if path.endswith(("/xmlrpc.php", "/wp-json")):
+            return
+        if url not in links:
+            links.append(url)
+
     try:
         response = request(category["url"])
     except Exception as exc:  # noqa: BLE001
         print(f"Category fetch failed for {category['name']}: {exc}", file=sys.stderr)
-        return []
-    soup = BeautifulSoup(response.text, "html.parser")
-    links: list[str] = []
-    for anchor in soup.find_all("a", href=True):
-        url = canonical_url(urljoin(category["url"], anchor.get("href")))
-        parsed = urlparse(url)
-        if parsed.netloc != category["host"]:
-            continue
-        if "/business/property/" not in parsed.path:
-            continue
-        if parsed.path.rstrip("/") == "/business/property":
-            continue
-        if url not in links:
-            links.append(url)
-    return links[:40]
+    else:
+        soup = BeautifulSoup(response.text, "html.parser")
+        for anchor in soup.find_all("a", href=True):
+            add(anchor.get("href"))
+
+    for feed_url in category.get("feed_urls", []):
+        try:
+            response = request(feed_url)
+            import xml.etree.ElementTree as ET
+
+            root = ET.fromstring(response.text)
+            for item in root.findall(".//item"):
+                link = item.findtext("link")
+                if link:
+                    add(link)
+        except Exception as exc:  # noqa: BLE001
+            print(f"Feed fetch failed for {category['name']}: {exc}", file=sys.stderr)
+
+    return links[:60]
 
 
 def first_meta(soup: BeautifulSoup, pairs: Iterable[tuple[str, str]]) -> str:
@@ -581,6 +643,20 @@ def parse_date(soup: BeautifulSoup, text: str) -> datetime | None:
     time_tag = soup.find("time", datetime=True)
     if time_tag:
         candidates.append(time_tag.get("datetime", ""))
+    for script in soup.find_all("script", attrs={"type": "application/ld+json"}):
+        try:
+            payload = json.loads(script.string or script.get_text())
+        except Exception:
+            continue
+        pending = payload if isinstance(payload, list) else [payload]
+        while pending:
+            item = pending.pop()
+            if isinstance(item, list):
+                pending.extend(item)
+            elif isinstance(item, dict):
+                if item.get("datePublished"):
+                    candidates.append(str(item["datePublished"]))
+                pending.extend(item.values())
     for candidate in candidates:
         if not candidate:
             continue
@@ -615,6 +691,7 @@ def extract_article(url: str, source_name: str) -> dict | None:
         print(f"Article fetch failed {url}: {exc}", file=sys.stderr)
         return None
     soup = BeautifulSoup(response.text, "html.parser")
+    page_type = first_meta(soup, [("property", "og:type")]).lower()
     title_tag = soup.find("h1")
     title = re.sub(r"\s+", " ", title_tag.get_text(" ", strip=True)).strip() if title_tag else ""
     if not title:
@@ -626,6 +703,8 @@ def extract_article(url: str, source_name: str) -> dict | None:
             description = re.sub(r"\s+", " ", next_h2.get_text(" ", strip=True)).strip()
     page_text = soup.get_text(" ", strip=True)
     published = parse_date(soup, page_text)
+    canonical_tag = soup.find("link", rel=lambda value: value and "canonical" in value)
+    final_url = canonical_url(canonical_tag.get("href") if canonical_tag and canonical_tag.get("href") else response.url)
     paragraphs: list[str] = []
     main = soup.find("article") or soup.find("main") or soup
     for paragraph in main.find_all("p"):
@@ -637,13 +716,49 @@ def extract_article(url: str, source_name: str) -> dict | None:
             continue
         paragraphs.append(text)
     return {
-        "url": canonical_url(url),
+        "url": final_url,
         "source_name": source_name,
         "title": title[:180],
         "description": description[:320],
         "published": published,
+        "page_type": page_type,
         "paragraphs": paragraphs[:24],
     }
+
+
+def is_property_relevant(article: dict) -> bool:
+    text = f"{article.get('title', '')} {article.get('description', '')}".lower()
+    signals = (
+        "property", "real estate", "home", "housing", "apartment", "villa", "townhouse",
+        "rent", "rental", "tenant", "landlord", "mortgage", "broker", "developer",
+        "off-plan", "construction", "community", "residential", "commercial real estate",
+        "land sale", "yield", "service charge", "handover", "building",
+    )
+    return any(signal in text for signal in signals)
+
+
+def title_signature(value: str) -> str:
+    stop = {
+        "the", "and", "for", "from", "with", "that", "this", "what", "why", "how",
+        "new", "latest", "says", "report", "reports", "uae", "arabian", "business",
+        "khaleej", "times", "gulf", "news", "national", "property", "finder",
+    }
+    words = re.findall(r"[a-z0-9]+", value.lower())
+    return " ".join(sorted({word for word in words if len(word) > 2 and word not in stop}))
+
+
+def duplicate_signature(signature: str, existing: set[str]) -> bool:
+    current = set(signature.split())
+    if not current:
+        return False
+    for saved in existing:
+        other = set(saved.split())
+        if not other:
+            continue
+        similarity = len(current & other) / len(current | other)
+        if similarity >= 0.82:
+            return True
+    return False
 
 
 def theme_for(title: str, description: str) -> str:
@@ -662,19 +777,25 @@ def theme_for(title: str, description: str) -> str:
 
 
 def auto_title(article: dict, theme: str) -> str:
-    source_title = re.sub(r"\s+", " ", article["title"]).strip().rstrip(".?!")
-    if len(source_title) > 88:
-        source_title = source_title[:85].rsplit(" ", 1)[0] + "..."
-    endings = {
-        "regulation": "what buyers and tenants should verify",
-        "luxury": "how to read the record",
-        "supply": "what the supply signal may mean",
-        "rental": "what tenants and owners should check",
-        "buyer": "what homebuyers should test",
-        "market": "what it may mean for property decisions",
+    text = f"{article.get('title', '')} {article.get('description', '')}".lower()
+    location = "UAE"
+    for needle, label in (
+        ("abu dhabi", "Abu Dhabi"), ("dubai", "Dubai"), ("sharjah", "Sharjah"),
+        ("ras al khaimah", "Ras Al Khaimah"), ("ajman", "Ajman"),
+    ):
+        if needle in text:
+            location = label
+            break
+    topics = {
+        "regulation": "property regulation update",
+        "luxury": "luxury property update",
+        "supply": "housing supply update",
+        "rental": "rental market update",
+        "buyer": "homebuyer market update",
+        "market": "property market update",
     }
     suffix = hashlib.sha1(article["url"].encode()).hexdigest()[:5]
-    return f"{source_title}: {endings[theme]}", suffix
+    return f"{location} {topics[theme]}: decision checks from {article['source_name']}", suffix
 
 
 def extract_facts(paragraphs: list[str]) -> list[list[str]]:
@@ -753,10 +874,9 @@ def auto_analysis(theme: str) -> list[tuple[str, list[str]]]:
 
 def render_auto(article: dict, post: Post, all_posts: list[Post], facts: list[list[str]], theme: str) -> str:
     published_iso = (article["published"] or NOW).date().isoformat()
-    source_summary = article["description"] or article["title"]
     quick = (
-        f"{post.source_name} published a property report focused on {source_summary.rstrip('.').lower()}. "
-        "This brief separates the reported signal from the checks needed before using it in a purchase, rental or valuation decision."
+        f"{post.source_name} has published a new property report. This independent brief identifies the reported figures "
+        "and separates them from the checks needed before using the update in a purchase, rental, sale or valuation decision."
     )
     if not facts:
         facts = [
@@ -765,7 +885,7 @@ def render_auto(article: dict, post: Post, all_posts: list[Post], facts: list[li
         ]
     sections = auto_analysis(theme)
     toc = '<a href="#quick-answer">Quick answer</a><a href="#reported">Reported signal</a>'
-    body = f'''<section class="answer-box" id="quick-answer"><p class="card-kicker">Quick answer</p><h2>What should readers take from this update?</h2><p><strong>{esc(quick)}</strong></p></section>{fact_grid(facts)}<section id="reported"><h2>What the source report is about</h2><p>{esc(article["description"] or article["title"])}</p><p>The original report is linked below so readers can review the full context, named sources and any supporting methodology.</p></section>'''
+    body = f'''<section class="answer-box" id="quick-answer"><p class="card-kicker">Quick answer</p><h2>What should readers take from this update?</h2><p><strong>{esc(quick)}</strong></p></section>{fact_grid(facts)}<section id="reported"><h2>How this source update is used</h2><p>The monitor classified this as a {esc(theme.replace('-', ' '))} property update. Only limited factual signals are used here; the analysis, decision framework and wording are original.</p><p>The complete report remains on {esc(post.source_name)} and is linked below for its full context, named sources and methodology.</p></section>'''
     for i, (heading, paragraphs) in enumerate(sections, start=1):
         sid = f"analysis-{i}"
         toc += f'<a href="#{sid}">{esc(heading)}</a>'
@@ -791,7 +911,7 @@ def render_auto(article: dict, post: Post, all_posts: list[Post], facts: list[li
         "inLanguage": "en-AE",
         "citation": [post.source_url, SITE + "/", SITE + "/blog/property-news/"],
     }
-    return build_head(post, structured) + f'''<body><a class="skip-link" href="#main-content">Skip to main content</a><div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>{NAV_HEADER}<main id="main-content"><article class="article-page"><header class="article-header section-shell"><nav class="breadcrumbs"><a href="/">Home</a><span>›</span><a href="/blog/">Blog</a><span>›</span><a href="/blog/property-news/">Property News</a></nav><p class="section-kicker">Automated source brief</p><h1>{esc(post.title)}</h1><p class="article-deck">{esc(post.description)}</p><div class="article-byline"><span>Analysis by <a href="/about-me/">James Ravi</a></span><time datetime="{post.date}">Published {datetime.fromisoformat(post.date).strftime('%-d %B %Y')}</time><span>{esc(post.read_time)}</span></div><figure class="article-hero-image news-brief-visual"><img src="{post.image}" alt="Abstract UAE property market news illustration" width="1600" height="900"/></figure></header><div class="article-layout section-shell"><aside class="article-toc"><strong>In this brief</strong>{toc}</aside><div class="article-body"><p class="news-automation-note"><strong>Automated monitoring:</strong> This original brief was generated after a new property article appeared on a monitored publisher page. It uses the title, summary and factual figures as signals, then adds an independent due-diligence framework.</p>{body}<section><h2>Useful internal resources</h2><div class="news-related"><a href="/">Dubai property data and yields</a><a href="/abu-dhabi-data/">Abu Dhabi property data</a><a href="/blog/dubai-community-vs-property-long-term-value/">Dubai community buying framework</a><a href="/blog/property-news/">All property news briefs</a></div></section>{source_card(post)}{related_links(post.slug, all_posts)}</div></div></article><section class="section-shell contact-card"><div><p class="section-kicker">Need a property-market narrative?</p><h2>Turn source reporting into a clear buyer or investor journey.</h2><p>For launch strategy, performance acquisition, content or CRM conversion, share the project and target market.</p></div><a class="button nav-whatsapp" href="/contact/">Contact James <span aria-hidden="true">→</span></a></section></main>{FOOTER}</body></html>'''
+    return build_head(post, structured) + f'''<body>{GTM_BODY}<a class="skip-link" href="#main-content">Skip to main content</a><div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>{NAV_HEADER}<main id="main-content"><article class="article-page"><header class="article-header section-shell"><nav class="breadcrumbs"><a href="/">Home</a><span>›</span><a href="/blog/">Blog</a><span>›</span><a href="/blog/property-news/">Property News</a></nav><p class="section-kicker">Automated source brief</p><h1>{esc(post.title)}</h1><p class="article-deck">{esc(post.description)}</p><div class="article-byline"><span>Analysis by <a href="/about-me/">James Ravi</a></span><time datetime="{post.date}">Published {datetime.fromisoformat(post.date).strftime('%-d %B %Y')}</time><span>{esc(post.read_time)}</span></div><figure class="article-hero-image news-brief-visual"><img src="{post.image}" alt="{esc(image_alt(post))}" width="1600" height="900"/></figure></header><div class="article-layout section-shell"><aside class="article-toc"><strong>In this brief</strong>{toc}</aside><div class="article-body"><p class="news-automation-note"><strong>Automated monitoring:</strong> This original brief was generated after a new property article appeared on a monitored publisher page. It uses the title, summary and factual figures as signals, then adds an independent due-diligence framework.</p>{body}<section><h2>Useful internal resources</h2><div class="news-related"><a href="/">Dubai property data and yields</a><a href="/abu-dhabi-data/">Abu Dhabi property data</a><a href="/blog/dubai-community-vs-property-long-term-value/">Dubai community buying framework</a><a href="/blog/property-news/">All property news briefs</a></div></section>{source_card(post)}{related_links(post.slug, all_posts)}</div></div></article><section class="section-shell contact-card"><div><p class="section-kicker">Need a property-market narrative?</p><h2>Turn source reporting into a clear buyer or investor journey.</h2><p>For launch strategy, performance acquisition, content or CRM conversion, share the project and target market.</p></div><a class="button nav-whatsapp" href="/contact/">Contact James <span aria-hidden="true">→</span></a></section></main>{FOOTER}</body></html>'''
 
 
 def post_from_seed(seed: dict) -> Post:
@@ -814,7 +934,7 @@ def update_blog_index(posts: list[Post]) -> None:
     start = "<!-- PROPERTY_NEWS_AUTOMATION_START -->"
     end = "<!-- PROPERTY_NEWS_AUTOMATION_END -->"
     content = re.sub(re.escape(start) + r".*?" + re.escape(end), "", content, flags=re.S)
-    block = start + '<div class="property-news-divider"><div><p class="section-kicker">Property news analysis</p><h2>Latest UAE property reports, explained.</h2></div><p>Original briefs based on reporting from Gulf News and Khaleej Times, with source links, limitations and practical checks.</p></div>' + "".join(tile(p) for p in posts) + end
+    block = start + '<div class="property-news-divider"><div><p class="section-kicker">Property news analysis</p><h2>Latest UAE property reports, explained.</h2></div><p>Original briefs based on monitored reporting from Khaleej Times, Gulf News, The National, Arabian Business and Property Finder, with source links, limitations and practical checks.</p></div>' + "".join(tile(p) for p in posts) + end
     marker = '</div><aside class="market-promo"'
     if marker in content:
         content = content.replace(marker, block + marker, 1)
@@ -859,7 +979,7 @@ def render_hub(posts: list[Post]) -> str:
         "@type": "CollectionPage",
         "name": "UAE Property News Analysis",
         "url": SITE + "/blog/property-news/",
-        "description": "Original source-led analysis of UAE property reporting from Gulf News and Khaleej Times.",
+        "description": "Original source-led analysis of UAE property reporting from five monitored publishers.",
         "mainEntity": {
             "@type": "ItemList",
             "numberOfItems": len(posts),
@@ -869,7 +989,7 @@ def render_hub(posts: list[Post]) -> str:
             ],
         },
     }
-    return f'''<!DOCTYPE html><html lang="en-AE"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/css/5576f66c8ff02a6a.css?v=12"/><link rel="stylesheet" href="/assets/property-news.css?v=1"/><title>UAE Property News Analysis | James Ravi</title><meta name="description" content="Original source-led analysis of UAE property reporting from Gulf News and Khaleej Times, with practical buyer, tenant and investor checks."/><link rel="canonical" href="{SITE}/blog/property-news/"/><meta property="og:type" content="website"/><meta property="og:title" content="UAE Property News Analysis"/><meta property="og:description" content="Property headlines explained with source links, market context and due-diligence checks."/><meta property="og:url" content="{SITE}/blog/property-news/"/><meta property="og:image" content="{SITE + posts[0].image}"/><meta property="og:image:alt" content="{esc(image_alt(posts[0]))}"/><script type="application/ld+json">{json.dumps(item_list, ensure_ascii=False, separators=(',', ':'))}</script><link rel="alternate" type="application/rss+xml" href="/feed.xml"/><script defer src="/assets/site.js?v=3"></script></head><body><a class="skip-link" href="#main-content">Skip to main content</a>{NAV_HEADER}<main id="main-content"><section class="section-shell news-hub-hero"><p class="section-kicker">Monitored UAE property news</p><h1>Property headlines, with the decision context added.</h1><p class="hero-description">This page tracks new property reporting from Gulf News and Khaleej Times. Each entry is an original brief with a direct source link, important limitations and practical checks for buyers, tenants, owners and investors.</p><div class="hero-actions"><a class="button button-primary" href="/blog/">All property guides</a><a class="button button-outline" href="/">Dubai Data</a><a class="button button-outline" href="/abu-dhabi-data/">Abu Dhabi Data</a></div></section><section class="section-shell"><div class="news-automation-note"><strong>Publishing schedule:</strong> The monitor checks both property pages hourly. A new article is normally converted into a source brief within the next successful GitHub Actions run.</div><div class="news-hub-grid">{cards}</div></section><section class="section-shell contact-card"><div><p class="section-kicker">Need deeper analysis?</p><h2>Connect market reporting to a project, audience or acquisition plan.</h2><p>Share the property, target market and commercial objective.</p></div><a class="button nav-whatsapp" href="/contact/">Contact James <span aria-hidden="true">→</span></a></section></main>{FOOTER}</body></html>'''
+    return f'''<!DOCTYPE html><html lang="en-AE"><head>{GTM_HEAD}<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/css/5576f66c8ff02a6a.css?v=12"/><link rel="stylesheet" href="/assets/property-news.css?v=1"/><link rel="shortcut icon" href="/favicon.svg"/><link rel="icon" href="/favicon.svg"/><link rel="apple-touch-icon" href="/favicon-192.png"/><title>UAE Property News Analysis | James Ravi</title><meta name="description" content="Original source-led analysis of UAE property reporting from Khaleej Times, Gulf News, The National, Arabian Business and Property Finder."/><link rel="canonical" href="{SITE}/blog/property-news/"/><meta property="og:type" content="website"/><meta property="og:title" content="UAE Property News Analysis"/><meta property="og:description" content="Property headlines explained with source links, market context and due-diligence checks."/><meta property="og:url" content="{SITE}/blog/property-news/"/><meta property="og:image" content="{SITE + posts[0].image}"/><meta property="og:image:alt" content="{esc(image_alt(posts[0]))}"/><script type="application/ld+json">{json.dumps(item_list, ensure_ascii=False, separators=(',', ':'))}</script><link rel="alternate" type="application/rss+xml" href="/feed.xml"/><script defer src="/assets/site.js?v=5"></script></head><body>{GTM_BODY}<a class="skip-link" href="#main-content">Skip to main content</a>{NAV_HEADER}<main id="main-content"><section class="section-shell news-hub-hero"><p class="section-kicker">Monitored UAE property news</p><h1>Property headlines, with the decision context added.</h1><p class="hero-description">This page tracks new property reporting from Khaleej Times, Gulf News, The National, Arabian Business and Property Finder. Each entry is an original brief with a direct source link, important limitations and practical checks for buyers, tenants, owners and investors.</p><div class="hero-actions"><a class="button button-primary" href="/blog/">All property guides</a><a class="button button-outline" href="/">Dubai Data</a><a class="button button-outline" href="/abu-dhabi-data/">Abu Dhabi Data</a></div></section><section class="section-shell"><div class="news-automation-note"><strong>Publishing schedule:</strong> The monitor checks all five publisher pages hourly. A new article is normally converted into a source brief within the next successful GitHub Actions run.</div><div class="news-hub-grid">{cards}</div></section><section class="section-shell contact-card"><div><p class="section-kicker">Need deeper analysis?</p><h2>Connect market reporting to a project, audience or acquisition plan.</h2><p>Share the property, target market and commercial objective.</p></div><a class="button nav-whatsapp" href="/contact/">Contact James <span aria-hidden="true">→</span></a></section></main>{FOOTER}</body></html>'''
 
 
 def update_feed(posts: list[Post]) -> None:
@@ -993,6 +1113,8 @@ def initialize_seed_posts(state: dict) -> list[Post]:
 
 def create_auto_posts(state: dict, current_posts: list[Post]) -> list[Post]:
     seen = set(canonical_url(url) for url in state.get("seen_urls", []))
+    signatures = set(state.get("seen_title_signatures", []))
+    signatures.update(signature for signature in (title_signature(post.title) for post in current_posts) if signature)
     new_posts: list[Post] = []
     discovered: list[tuple[str, str]] = []
     for category in CATEGORY_PAGES:
@@ -1006,16 +1128,30 @@ def create_auto_posts(state: dict, current_posts: list[Post]) -> list[Post]:
         article = extract_article(url, source_name)
         if not article:
             continue
+        final_url = canonical_url(article["url"])
+        if final_url in seen:
+            seen.add(url)
+            continue
+        page_type = article.get("page_type", "")
+        if page_type and page_type not in {"article", "newsarticle", "blogposting"}:
+            seen.update({url, final_url})
+            continue
+        if not article["title"] or not is_property_relevant(article):
+            seen.update({url, final_url})
+            continue
+        signature = title_signature(article["title"])
+        if duplicate_signature(signature, signatures):
+            seen.update({url, final_url})
+            continue
         published = article["published"]
         if published is None:
             # Do not publish undated pages, this prevents archive links from flooding the blog.
-            seen.add(url)
+            seen.update({url, final_url})
             continue
         if published < cutoff:
-            seen.add(url)
-            continue
-        if not article["title"]:
-            seen.add(url)
+            seen.update({url, final_url})
+            if signature:
+                signatures.add(signature)
             continue
         theme = theme_for(article["title"], article["description"])
         title, suffix = auto_title(article, theme)
@@ -1031,12 +1167,12 @@ def create_auto_posts(state: dict, current_posts: list[Post]) -> list[Post]:
         post = Post(
             slug=slug,
             title=title,
-            description=(article["description"] or f"Independent analysis of a new {source_name} property report.")[:250],
+            description=f"Independent analysis of a new {source_name} property report, with factual signals, limitations and practical checks for property decisions.",
             category=category_label,
             date=(published or NOW).date().isoformat(),
             read_time="4 min read",
             source_name=source_name,
-            source_url=url,
+            source_url=final_url,
             image=f"/images/property-news/{slug}.svg",
             auto=True,
         )
@@ -1045,9 +1181,12 @@ def create_auto_posts(state: dict, current_posts: list[Post]) -> list[Post]:
         write_if_changed(ROOT / post.image.lstrip("/"), make_svg(post))
         write_if_changed(ROOT / "blog" / post.slug / "index.html", render_auto(article, post, all_for_links, facts, theme))
         new_posts.append(post)
-        seen.add(url)
+        seen.update({url, final_url})
+        if signature:
+            signatures.add(signature)
         print(f"Created automated property brief: {post.title}")
     state["seen_urls"] = sorted(seen)
+    state["seen_title_signatures"] = sorted(signatures)
     if new_posts:
         existing = {item.get("slug"): item for item in state.get("posts", []) if item.get("slug")}
         for post in new_posts:
