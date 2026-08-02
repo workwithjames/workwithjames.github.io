@@ -176,6 +176,35 @@ function injectNavigationAssets(body, contentType) {
   return assets.length ? body.replace('</head>', `${assets.join('')}</head>`) : body;
 }
 
+function shouldInjectIntentPopup(pathname) {
+  if (pathname === '/contact/' || pathname === '/about-me/' || pathname === '/cite/') return false;
+  if (pathname === '/blog/' || pathname === '/blog/property-news/') return false;
+  if (pathname === '/') return true;
+  if (pathname.startsWith('/buy-invest-dubai/')) return true;
+  if (pathname.startsWith('/sell-dubai-property/')) return true;
+  if (pathname.startsWith('/real-estate-marketing/')) return true;
+  if (pathname.startsWith('/dubai-data/')) return true;
+  if (pathname.startsWith('/abu-dhabi-data/')) return true;
+  if (pathname.startsWith('/ajman-data/')) return true;
+  if (pathname.startsWith('/dubai-rental-yield-calculator/')) return true;
+  if (pathname.startsWith('/blog/')) return true;
+  return false;
+}
+
+function injectIntentPopupAssets(body, contentType, pathname) {
+  if (!contentType.includes('text/html') || !shouldInjectIntentPopup(pathname)) return body;
+
+  const assets = [];
+  if (!body.includes('/assets/intent-popup.css')) {
+    assets.push('<link rel="stylesheet" href="/assets/intent-popup.css?v=1"/>');
+  }
+  if (!body.includes('/assets/intent-popup.js')) {
+    assets.push('<script defer src="/assets/intent-popup.js?v=1"></script>');
+  }
+
+  return assets.length ? body.replace('</head>', `${assets.join('')}</head>`) : body;
+}
+
 function replaceMissingSocialPreview(body, contentType) {
   if (!contentType.includes('text/html')) return body;
 
@@ -235,6 +264,7 @@ export async function onRequest(context) {
   body = standardizeHeaderNavigation(body, contentType, requestUrl.pathname);
   body = addConversionFooterLinks(body, contentType);
   body = injectNavigationAssets(body, contentType);
+  body = injectIntentPopupAssets(body, contentType, requestUrl.pathname);
   body = replaceMissingSocialPreview(body, contentType);
   body = updateDubaiDashboardScript(body, contentType, requestUrl.pathname);
 
