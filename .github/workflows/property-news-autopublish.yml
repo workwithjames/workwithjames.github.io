@@ -8,6 +8,7 @@ on:
     paths:
       - '.github/workflows/property-news-autopublish.yml'
       - '.automation/property-news-script/**'
+      - '.automation/adrec-debug-request'
 
 permissions:
   contents: write
@@ -51,6 +52,98 @@ jobs:
 
       - name: Install parser dependencies
         run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+
+      - name: Inspect ADREC public data calls
+        if: hashFiles('.automation/adrec-debug-request') != ''
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import re
+          from pathlib import Path
+          from urllib.parse import urljoin
+
+          import requests
+          from bs4 import BeautifulSoup
+
+          page_url = 'https://adrec.gov.ae/en/market-data'
+          headers = {
+              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150 Safari/537.36',
+              'Accept-Language': 'en-AE,en;q=0.9',
+          }
+          session = requests.Session()
+          response = session.get(page_url, headers=headers, timeout=45)
+          response.raise_for_status()
+          html = response.text
+          soup = BeautifulSoup(html, 'html.parser')
+
+          labels = [
+              'Total Transactional Value',
+              'Total Transactional Volume',
+              'Apartment Sale Price Index',
+              'Rented Residential Units',
+              'Apartment Rent Price Index',
+              'Villa Rent Price Index',
+          ]
+          snippets = {}
+          for label in labels:
+              positions = [m.start() for m in re.finditer(re.escape(label), html, flags=re.I)]
+              snippets[label] = [html[max(0, p - 500):p + 1500] for p in positions[:4]]
+
+          scripts = []
+          candidates = set()
+          for node in soup.find_all('script', src=True):
+              script_url = urljoin(page_url, node.get('src'))
+              item = {'url': script_url}
+              try:
+                  script_response = session.get(script_url, headers=headers, timeout=45)
+                  item['status'] = script_response.status_code
+                  item['length'] = len(script_response.content)
+                  if script_response.ok and len(script_response.content) < 8_000_000:
+                      text = script_response.text
+                      patterns = [
+                          r'https?://[^"\'\\\s)]+',
+                          r'/(?:api|Api|API)/[^"\'\\\s)]+',
+                          r'[^"\'\\\s)]*(?:transaction|market|dashboard|lease|price-index)[^"\'\\\s)]*',
+                      ]
+                      for pattern in patterns:
+                          for match in re.findall(pattern, text, flags=re.I):
+                              cleaned = match.strip(' ,;:()[]{}')
+                              if 5 < len(cleaned) < 500:
+                                  candidates.add(cleaned)
+                      item['label_snippets'] = {}
+                      for label in ['Total Transactional Value', 'transactionalValue', 'recentSales', 'marketData']:
+                          found = text.lower().find(label.lower())
+                          if found >= 0:
+                              item['label_snippets'][label] = text[max(0, found - 400):found + 1200]
+                  scripts.append(item)
+              except Exception as exc:
+                  item['error'] = str(exc)
+                  scripts.append(item)
+
+          inline = '\n'.join(node.get_text('\n') for node in soup.find_all('script') if not node.get('src'))
+          for pattern in [r'https?://[^"\'\\\s)]+', r'/(?:api|Api|API)/[^"\'\\\s)]+']:
+              for match in re.findall(pattern, inline, flags=re.I):
+                  cleaned = match.strip(' ,;:()[]{}')
+                  if 5 < len(cleaned) < 500:
+                      candidates.add(cleaned)
+
+          output = {
+              'page_url': page_url,
+              'status': response.status_code,
+              'length': len(response.content),
+              'headers': dict(response.headers),
+              'visible_text_start': soup.get_text(' ', strip=True)[:5000],
+              'snippets': snippets,
+              'script_count': len(scripts),
+              'scripts': scripts,
+              'candidates': sorted(candidates),
+          }
+          Path('.automation/adrec-debug-result.json').write_text(
+              json.dumps(output, ensure_ascii=False, indent=2), encoding='utf-8'
+          )
+          Path('.automation/adrec-debug-request').unlink(missing_ok=True)
+          PY
 
       - name: Check sources and publish briefs
         run: python scripts/property_news_autopublish.py
