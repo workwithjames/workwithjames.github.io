@@ -48,6 +48,10 @@ function removeDirectGa4Configuration(body, contentType) {
   return body.replace(directLoaderPattern, '').replace(directConfigPattern, '');
 }
 
+function replacePersonalName(body) {
+  return body.split('James' + ' Ravi').join('James');
+}
+
 function renameBlogPageLabels(body, contentType) {
   if (!contentType.includes('text/html')) return body;
 
@@ -59,42 +63,66 @@ function renameBlogPageLabels(body, contentType) {
     .replace(/UAE property blog/gi, 'UAE property news');
 }
 
-function replacePersonalName(body) {
-  const previousName = 'James' + ' Ravi';
-  return body.split(previousName).join('James');
-}
-
-function ensureDataNavigation(body, contentType) {
+function rewriteDubaiDataLinks(body, contentType) {
   if (!contentType.includes('text/html')) return body;
 
-  const hasAbuDhabi = body.includes('href="/abu-dhabi-data/"') || body.includes("href='/abu-dhabi-data/'");
-  const hasAjman = body.includes('href="/ajman-data/"') || body.includes("href='/ajman-data/'");
+  body = body
+    .replace(
+      /(<a\b[^>]*\bhref=)["']\/["']([^>]*>\s*Dubai Data\s*<\/a>)/gi,
+      '$1"/dubai-data/"$2'
+    )
+    .replace(/href=["']\/#area-lookup["']/gi, 'href="/dubai-data/#area-lookup"')
+    .replace(/href=["']\/#affordability["']/gi, 'href="/dubai-data/#affordability"');
 
-  if (!hasAbuDhabi) {
-    return body.replace(
-      /(<a\b[^>]*\bhref=["']\/["'][^>]*>\s*Dubai Data\s*<\/a>)/gi,
-      '$1<a href="/abu-dhabi-data/">Abu Dhabi Data</a><a href="/ajman-data/">Ajman Data</a>'
-    );
-  }
+  return body.replace(
+    /(<nav\b[^>]*class=["'][^"']*(?:global-links|mobile-page-tabs|footer-links)[^"']*["'][^>]*>)([\s\S]*?)(<\/nav>)/gi,
+    (match, open, links, close) => {
+      let updated = links;
 
-  if (!hasAjman) {
-    return body.replace(
-      /(<a\b[^>]*\bhref=["']\/abu-dhabi-data\/["'][^>]*>\s*Abu Dhabi Data\s*<\/a>)/gi,
-      '$1<a href="/ajman-data/">Ajman Data</a>'
-    );
-  }
+      if (!updated.includes('href="/"') && !updated.includes("href='/'")) {
+        updated = '<a href="/">Home</a>' + updated;
+      } else if (!/>\s*Home\s*<\/a>/i.test(updated)) {
+        updated = updated.replace(
+          /(<a\b[^>]*\bhref=["']\/dubai-data\/["'][^>]*>\s*Dubai Data\s*<\/a>)/i,
+          '<a href="/">Home</a>$1'
+        );
+      }
 
-  return body;
+      if (!updated.includes('/dubai-data/')) {
+        updated += '<a href="/dubai-data/">Dubai Data</a>';
+      }
+      if (!updated.includes('/abu-dhabi-data/')) {
+        updated += '<a href="/abu-dhabi-data/">Abu Dhabi Data</a>';
+      }
+      if (!updated.includes('/ajman-data/')) {
+        updated += '<a href="/ajman-data/">Ajman Data</a>';
+      }
+
+      return open + updated + close;
+    }
+  );
 }
 
 function addConversionFooterLinks(body, contentType) {
   if (!contentType.includes('text/html')) return body;
 
-  return body.replace(/(<nav\b[^>]*class=["'][^"']*footer-links[^"']*["'][^>]*>)([\s\S]*?)(<\/nav>)/gi, (match, open, links, close) => {
-    if (links.includes('/buy-invest-dubai/')) return match;
-    const conversionLinks = '<a href="/buy-invest-dubai/">Buy / Invest</a><a href="/sell-dubai-property/">Sell</a><a href="/real-estate-marketing/">Marketing</a>';
-    return open + conversionLinks + links + close;
-  });
+  return body.replace(
+    /(<nav\b[^>]*class=["'][^"']*footer-links[^"']*["'][^>]*>)([\s\S]*?)(<\/nav>)/gi,
+    (match, open, links, close) => {
+      let updated = links;
+      const additions = [
+        ['/buy-invest-dubai/', 'Buy / Invest'],
+        ['/sell-dubai-property/', 'Sell'],
+        ['/real-estate-marketing/', 'Marketing']
+      ];
+
+      additions.reverse().forEach(([href, label]) => {
+        if (!updated.includes(href)) updated = `<a href="${href}">${label}</a>` + updated;
+      });
+
+      return open + updated + close;
+    }
+  );
 }
 
 function replaceMissingSocialPreview(body, contentType) {
@@ -106,88 +134,28 @@ function replaceMissingSocialPreview(body, contentType) {
   );
 }
 
-function upgradeHomepage(body, contentType, pathname) {
-  if (!contentType.includes('text/html') || pathname !== '/' || body.includes('id="conversion-home-hero"')) return body;
+function updateDubaiDashboardScript(body, contentType, pathname) {
+  if (!pathname.endsWith('/assets/dubai-market.js') || !contentType.includes('javascript')) return body;
 
-  body = body
-    .replace(/<title>[\s\S]*?<\/title>/i, '<title>Dubai Property Intelligence &amp; Real Estate Marketing | James Realty</title>')
-    .replace(/<meta name="description" content="[^"]*"\s*\/>/i, '<meta name="description" content="For buyers, investors and sellers, explore Dubai property data or start a focused property or real estate marketing enquiry with James Realty."/>')
-    .replace(/<meta property="og:title" content="[^"]*"\s*\/>/i, '<meta property="og:title" content="Dubai Property Intelligence &amp; Real Estate Marketing | James Realty"/>')
-    .replace(/<meta property="og:description" content="[^"]*"\s*\/>/i, '<meta property="og:description" content="Choose a buyer, investor, seller or real estate marketing journey, supported by practical Dubai property data."/>')
-    .replace(/<meta name="twitter:title" content="[^"]*"\s*\/>/i, '<meta name="twitter:title" content="Dubai Property Intelligence &amp; Real Estate Marketing | James Realty"/>')
-    .replace(/<meta name="twitter:description" content="[^"]*"\s*\/>/i, '<meta name="twitter:description" content="Dubai property data and focused enquiry paths for buyers, investors, sellers and property businesses."/>');
-
-  if (!body.includes('/assets/conversion.css')) {
-    body = body.replace('</head>', '<link rel="stylesheet" href="/assets/conversion.css?v=1"/></head>');
-  }
-
-  body = body
-    .replace('<main id="main-content" class="market-page">', '<main id="main-content" class="market-page conversion-home">')
-    .replace(/<h1 id="market-title">([\s\S]*?)<\/h1>/i, '<h2 id="market-title">$1</h2>')
-    .replace('["#market-title","#market-answer"', '["#conversion-title","#market-title","#market-answer"');
-
-  const conversionContent = `
-<section id="conversion-home-hero" class="section-shell conversion-hero" aria-labelledby="conversion-title">
-  <div class="conversion-hero-copy">
-    <span class="eyebrow">Dubai property intelligence and growth</span>
-    <h1 id="conversion-title">Choose the right path for your Dubai property goal.</h1>
-    <p>Use market data to understand the context, then start a focused journey for buying, investing, selling or building a stronger real estate marketing system.</p>
-    <div class="conversion-hero-actions">
-      <a class="button button-primary" href="/buy-invest-dubai/">Buy or invest <span aria-hidden="true">→</span></a>
-      <a class="button button-outline" href="/sell-dubai-property/">Sell a property</a>
-      <a class="button button-outline" href="/real-estate-marketing/">Marketing partnership</a>
-    </div>
-  </div>
-  <aside class="conversion-hero-note">
-    <p class="section-kicker">A clearer starting point</p>
-    <strong>Data first, then a structured next step.</strong>
-    <p>The website separates market research from the action you need to take, so the enquiry starts with useful information rather than a generic contact message.</p>
-  </aside>
-</section>
-<section class="section-shell conversion-paths" aria-labelledby="conversion-paths-title">
-  <div class="conversion-paths-heading">
-    <div><p class="section-kicker">Choose your journey</p><h2 id="conversion-paths-title">What are you trying to achieve?</h2></div>
-    <p>Each path includes a focused page and a structured WhatsApp brief. No account, external form provider or registration is required.</p>
-  </div>
-  <div class="conversion-path-grid">
-    <a class="conversion-path-card" href="/buy-invest-dubai/">
-      <span>Buy or invest</span><h3>Find the right Dubai property direction.</h3>
-      <p>Clarify budget, purpose, timeline, payment route and property preferences before comparing options.</p>
-      <ul><li>Ready and off-plan</li><li>Personal use and investment</li><li>Area and project screening</li></ul>
-      <strong>Build a buyer brief →</strong>
-    </a>
-    <a class="conversion-path-card" href="/sell-dubai-property/">
-      <span>Sell a property</span><h3>Prepare the property before marketing it.</h3>
-      <p>Organise the property facts, occupancy, expected timeline and selling priorities before going to market.</p>
-      <ul><li>Comparable context</li><li>Buyer positioning</li><li>Launch readiness</li></ul>
-      <strong>Build a seller brief →</strong>
-    </a>
-    <a class="conversion-path-card" href="/real-estate-marketing/">
-      <span>Property business</span><h3>Connect campaigns with lead conversion.</h3>
-      <p>Discuss project launches, investor acquisition, performance marketing, CRM follow-up and reporting.</p>
-      <ul><li>Lead generation</li><li>International campaigns</li><li>CRM and automation</li></ul>
-      <strong>Build a marketing brief →</strong>
-    </a>
-  </div>
-</section>
-<section class="section-shell conversion-proof" aria-label="James Realty approach">
-  <article><strong>Market context</strong><p>Dubai, Abu Dhabi and Ajman data pages support research before a decision.</p></article>
-  <article><strong>Focused enquiries</strong><p>Each journey collects the details needed for a more useful first conversation.</p></article>
-  <article><strong>No external form account</strong><p>The qualification tools prepare private WhatsApp messages in the visitor's browser.</p></article>
-  <article><strong>Property and marketing</strong><p>The website serves buyers, owners and real estate businesses without mixing their goals.</p></article>
-</section>`;
-
-  return body.replace(
-    '<section class="section-shell market-hero" aria-labelledby="market-title">',
-    conversionContent + '<section class="section-shell market-hero market-entry" aria-labelledby="market-title">'
-  );
+  return body
+    .replace(
+      "navigator.clipboard.writeText('https://jamesrealty.uk/')",
+      "navigator.clipboard.writeText('https://jamesrealty.uk/dubai-data/')"
+    )
+    .replace(
+      'Copy this address: https://jamesrealty.uk/',
+      'Copy this address: https://jamesrealty.uk/dubai-data/'
+    );
 }
 
 export async function onRequest(context) {
   const requestUrl = new URL(context.request.url);
 
   if (requestUrl.hostname.toLowerCase() === 'www.jamesrealty.uk') {
-    return Response.redirect(`${PRIMARY_ORIGIN}${requestUrl.pathname}${requestUrl.search}${requestUrl.hash}`, 301);
+    return Response.redirect(
+      `${PRIMARY_ORIGIN}${requestUrl.pathname}${requestUrl.search}${requestUrl.hash}`,
+      301
+    );
   }
 
   const response = await context.next();
@@ -205,14 +173,17 @@ export async function onRequest(context) {
   }
 
   let body = await response.text();
-  for (const legacyOrigin of LEGACY_ORIGINS) body = body.split(legacyOrigin).join(PRIMARY_ORIGIN);
+  for (const legacyOrigin of LEGACY_ORIGINS) {
+    body = body.split(legacyOrigin).join(PRIMARY_ORIGIN);
+  }
+
   body = removeDirectGa4Configuration(body, contentType);
-  body = renameBlogPageLabels(body, contentType);
   body = replacePersonalName(body);
-  body = ensureDataNavigation(body, contentType);
+  body = renameBlogPageLabels(body, contentType);
+  body = rewriteDubaiDataLinks(body, contentType);
   body = addConversionFooterLinks(body, contentType);
   body = replaceMissingSocialPreview(body, contentType);
-  body = upgradeHomepage(body, contentType, requestUrl.pathname);
+  body = updateDubaiDashboardScript(body, contentType, requestUrl.pathname);
 
   headers.delete('content-length');
 
