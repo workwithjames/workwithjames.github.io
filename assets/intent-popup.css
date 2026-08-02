@@ -1,0 +1,28 @@
+.intent-popup-root[hidden]{display:none!important}
+.intent-popup-root{position:fixed;inset:0;z-index:620;pointer-events:none}
+.intent-popup-backdrop{position:absolute;inset:0;border:0;background:rgba(3,4,14,.42);opacity:0;transition:opacity .22s ease;pointer-events:auto}
+.intent-popup-panel{position:absolute;right:22px;bottom:22px;width:min(420px,calc(100% - 44px));max-height:min(720px,calc(100vh - 44px));overflow:auto;padding:24px;border:1px solid #435483;border-radius:22px;background:linear-gradient(145deg,rgba(95,139,255,.14),transparent 54%),#101024;box-shadow:0 30px 90px rgba(0,0,0,.52);opacity:0;transform:translateY(18px) scale(.985);transition:opacity .22s ease,transform .22s ease;pointer-events:auto}
+.intent-popup-root.is-visible .intent-popup-backdrop{opacity:1}
+.intent-popup-root.is-visible .intent-popup-panel{opacity:1;transform:none}
+.intent-popup-close{position:absolute;top:13px;right:13px;display:grid;place-items:center;width:34px;height:34px;padding:0;border:1px solid #39466a;border-radius:50%;background:#17172f;color:#cbd3e8;font:inherit;font-size:1.15rem;cursor:pointer}
+.intent-popup-close:hover,.intent-popup-close:focus-visible{border-color:#6f94ff;color:#fff}
+.intent-popup-kicker{margin:0 42px 8px 0;color:#8ea9ff;font-size:.66rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.intent-popup-panel h2{margin:0 38px 10px 0;color:#f4f6ff;font-size:1.65rem;line-height:1.08;letter-spacing:-.038em}
+.intent-popup-copy{margin:0 0 18px;color:#aeb5ca;font-size:.8rem;line-height:1.62}
+.intent-popup-form{display:grid;gap:12px}
+.intent-popup-form label{display:grid;gap:7px;color:#bac2d9;font-size:.67rem;font-weight:780;letter-spacing:.045em;text-transform:uppercase}
+.intent-popup-form input,.intent-popup-form select,.intent-popup-form textarea{width:100%;min-height:45px;padding:0 12px;border:1px solid #3b4668;border-radius:10px;background:#0d0d1f;color:#f3f5ff;font:inherit;font-size:.79rem;text-transform:none;letter-spacing:0;outline:none}
+.intent-popup-form textarea{min-height:78px;padding-top:11px;resize:vertical}
+.intent-popup-form input:focus,.intent-popup-form select:focus,.intent-popup-form textarea:focus{border-color:#6f94ff;box-shadow:0 0 0 3px rgba(95,139,255,.14)}
+.intent-popup-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.intent-popup-fields .full{grid-column:1/-1}
+.intent-popup-actions{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;margin-top:3px}
+.intent-popup-actions .button{min-height:45px}
+.intent-popup-full-link{color:#aebfff;font-size:.7rem;text-align:center}
+.intent-popup-note{margin:0;color:#82899e;font-size:.65rem;line-height:1.5}
+.intent-popup-status{min-height:1.2em;margin:0;color:#9be8ce;font-size:.69rem}
+body.intent-popup-open{overflow:hidden}
+@media(min-width:841px){body.intent-popup-open{overflow:auto}.intent-popup-backdrop{background:rgba(3,4,14,.18)}}
+@media(max-width:840px){.intent-popup-panel{right:12px;bottom:12px;left:12px;width:auto;max-height:calc(100vh - 24px);padding:22px;border-radius:20px}.intent-popup-actions{grid-template-columns:1fr}.intent-popup-full-link{text-align:left}}
+@media(max-width:480px){.intent-popup-panel{inset:auto 0 0 0;max-height:88vh;border-right:0;border-bottom:0;border-left:0;border-radius:22px 22px 0 0;padding:21px 18px calc(21px + env(safe-area-inset-bottom))}.intent-popup-fields{grid-template-columns:1fr}.intent-popup-fields .full{grid-column:auto}.intent-popup-panel h2{font-size:1.48rem}}
+@media(prefers-reduced-motion:reduce){.intent-popup-backdrop,.intent-popup-panel{transition:none}}
