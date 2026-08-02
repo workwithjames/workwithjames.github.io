@@ -1,5 +1,6 @@
 name: Publish property news briefs
 
+# One-time ADREC endpoint probe requested on 2026-08-02.
 on:
   schedule:
     - cron: '23 * * * *'
