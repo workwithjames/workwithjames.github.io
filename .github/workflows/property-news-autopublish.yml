@@ -25,13 +25,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Remove Property Finder automation and legacy articles
-        shell: bash
-        run: |
-          if [ -f scripts/remove_propertyfinder_automation.py ]; then
-            python scripts/remove_propertyfinder_automation.py
-          fi
-
       - name: Restore and configure publisher script
         shell: bash
         run: |
