@@ -1,5 +1,5 @@
 (function(){
-  var endpoint='/api/abu-dhabi-data';
+  var endpoint='/api/abu-dhabi-data-safe';
   var state={payload:null,active:'transactions'};
   var defaultCoverage={
     transactions:['Sales','Mortgages','Other transactions','Residential','Commercial','Monthly','Quarterly','Yearly'],
