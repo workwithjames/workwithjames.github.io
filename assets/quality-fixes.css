@@ -166,6 +166,46 @@
     0 1px 0 rgba(255,255,255,.4) inset!important;
 }
 
+/* Three-column desktop footer */
+@media(min-width:841px){
+  footer .footer-shell-rich{
+    display:grid!important;
+    grid-template-columns:minmax(210px,.9fr) minmax(440px,1.7fr) minmax(110px,.55fr)!important;
+    align-items:start!important;
+    gap:44px!important;
+    min-height:0!important;
+    padding-top:36px!important;
+    padding-bottom:36px!important;
+  }
+
+  footer .footer-identity{
+    align-self:start;
+    justify-self:start;
+  }
+
+  footer .footer-links{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    align-items:start;
+    justify-content:stretch!important;
+    gap:12px 26px!important;
+    width:100%;
+    padding-inline:32px;
+    border-inline:1px solid rgba(129,140,248,.16);
+  }
+
+  footer .footer-links a{
+    line-height:1.45;
+    text-align:left;
+  }
+
+  footer .footer-linkedin{
+    align-self:start;
+    justify-self:end;
+    white-space:nowrap;
+  }
+}
+
 body.intent-popup-open{
   overflow:hidden!important;
 }
