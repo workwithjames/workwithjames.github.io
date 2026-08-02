@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-08-02T10:42:23.896Z",
+  "generatedAt": "2026-08-02T12:52:08.841Z",
   "baseUrl": "http://127.0.0.1:8788",
   "scanned": {
     "htmlFiles": 26,
-    "javascriptFiles": 12,
+    "javascriptFiles": 13,
     "routes": 23,
     "viewports": 3
   },
