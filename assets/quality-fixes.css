@@ -17,6 +17,11 @@
   outline-offset:4px;
 }
 
+.calculator-field-label,
+.calculator-input-wrap{
+  display:block;
+}
+
 body.intent-popup-open{
   overflow:hidden!important;
 }
