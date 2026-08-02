@@ -102,20 +102,33 @@
     });
   }
 
-  function ensureCitationNavigation(){
+  function organiseFooterNavigation(){
+    var footerOrder=[
+      {href:'/',label:'Home'},
+      {href:'/buy-invest-dubai/',label:'Buy / Invest'},
+      {href:'/sell-dubai-property/',label:'Sell'},
+      {href:'/real-estate-marketing/',label:'Marketing'},
+      {href:'/dubai-data/',label:'Dubai Data'},
+      {href:'/abu-dhabi-data/',label:'Abu Dhabi Data'},
+      {href:'/ajman-data/',label:'Ajman Data'},
+      {href:'/blog/',label:'News'},
+      {href:'/about-me/',label:'About Me'},
+      {href:'/contact/',label:'Contact Me'},
+      {href:'/cite/',label:'Cite this site'}
+    ];
+
     document.querySelectorAll('.footer-links').forEach(function(nav){
-      if(!nav.querySelector('a[href="/contact/"]')){
-        var contactLink=document.createElement('a');
-        contactLink.href='/contact/';
-        contactLink.textContent='Contact Me';
-        var existingCitation=nav.querySelector('a[href="/cite/"]');
-        if(existingCitation){nav.insertBefore(contactLink,existingCitation);}else{nav.appendChild(contactLink);}
-      }
-      if(nav.querySelector('a[href="/cite/"]')){return;}
-      var link=document.createElement('a');
-      link.href='/cite/';
-      link.textContent='Cite this site';
-      nav.appendChild(link);
+      var existing={};
+      nav.querySelectorAll('a').forEach(function(link){existing[link.getAttribute('href')]=link;});
+
+      footerOrder.forEach(function(item){
+        var link=existing[item.href]||document.createElement('a');
+        link.href=item.href;
+        link.textContent=item.label;
+        if(location.pathname===item.href){link.setAttribute('aria-current','page');}
+        else{link.removeAttribute('aria-current');}
+        nav.appendChild(link);
+      });
     });
   }
 
@@ -219,7 +232,7 @@
     updateHeaderBrand();
     renameBlogPageLabels();
     prepareGoalMenus();
-    ensureCitationNavigation();
+    organiseFooterNavigation();
     prepareAboutFlow();
     preparePageScrollControls();
   }
