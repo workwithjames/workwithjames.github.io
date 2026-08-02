@@ -63,6 +63,17 @@ function renameBlogPageLabels(body, contentType) {
     .replace(/James Ravi Blog/g, 'James Realty News');
 }
 
+function addAjmanNavigation(body, contentType) {
+  if (!contentType.includes('text/html') || body.includes('href="/ajman-data/"') || body.includes("href='/ajman-data/'")) {
+    return body;
+  }
+
+  return body.replace(
+    /(<a\b[^>]*\bhref=["']\/abu-dhabi-data\/["'][^>]*>\s*Abu Dhabi Data\s*<\/a>)/gi,
+    '$1<a href="/ajman-data/">Ajman Data</a>'
+  );
+}
+
 export async function onRequest(context) {
   const requestUrl = new URL(context.request.url);
 
@@ -93,6 +104,7 @@ export async function onRequest(context) {
   }
   body = removeDirectGa4Configuration(body, contentType);
   body = renameBlogPageLabels(body, contentType);
+  body = addAjmanNavigation(body, contentType);
 
   headers.delete('content-length');
 
