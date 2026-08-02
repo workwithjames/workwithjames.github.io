@@ -1,0 +1,49 @@
+.contact-goal-page{background:radial-gradient(circle at 88% 8%,rgba(37,217,120,.11),transparent 30rem),radial-gradient(circle at 8% 24%,rgba(95,139,255,.13),transparent 32rem)}
+.contact-goal-hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(300px,.7fr);gap:60px;align-items:center;padding-top:76px;padding-bottom:62px}
+.contact-goal-hero h1{max-width:850px;margin:15px 0 20px;font-size:clamp(3rem,6.2vw,5.35rem);line-height:.97;letter-spacing:-.062em}
+.contact-goal-hero-copy>p{max-width:720px;margin:0;color:var(--muted);font-size:1rem;line-height:1.74}
+.contact-goal-direct{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}
+.contact-goal-direct a{display:grid;gap:4px;min-width:175px;padding:15px 17px;border:1px solid var(--line);border-radius:14px;background:rgba(17,17,36,.78)}
+.contact-goal-direct span{color:#8ea9ff;font-size:.66rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+.contact-goal-direct strong{color:#edf1ff;font-size:.82rem}
+.contact-goal-aside{padding:27px;border:1px solid #3b4a73;border-radius:22px;background:linear-gradient(145deg,rgba(95,139,255,.16),transparent 64%),var(--surface);box-shadow:0 24px 70px rgba(0,0,0,.25)}
+.contact-goal-aside strong{display:block;color:#f1f4ff;font-size:1.35rem;line-height:1.25;letter-spacing:-.025em}
+.contact-goal-aside p:not(.section-kicker){margin:12px 0 0;color:var(--muted);font-size:.82rem;line-height:1.65}
+.contact-goal-aside ul{display:grid;gap:9px;margin:18px 0 0;padding:0;list-style:none}
+.contact-goal-aside li{position:relative;padding-left:18px;color:#d3d9ea;font-size:.75rem;line-height:1.45}
+.contact-goal-aside li:before{content:"";position:absolute;left:0;top:.48em;width:7px;height:7px;border-radius:50%;background:#25d978}
+.contact-goal-section{padding-top:82px;padding-bottom:94px;border-top:1px solid var(--line)}
+.contact-goal-heading{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.7fr);gap:54px;align-items:end;margin-bottom:28px}
+.contact-goal-heading h2{margin:5px 0 0;font-size:clamp(2rem,4vw,3.25rem);line-height:1.04;letter-spacing:-.048em}
+.contact-goal-heading>p{margin:0;color:var(--muted);line-height:1.72}
+.contact-goal-layout{display:grid;grid-template-columns:minmax(250px,.64fr) minmax(0,1.36fr);gap:28px;align-items:start}
+.contact-goal-picker{position:sticky;top:112px;display:grid;gap:10px}
+.contact-goal-option{position:relative;display:grid;grid-template-columns:auto 1fr;gap:13px;align-items:start;padding:18px;border:1px solid var(--line);border-radius:16px;background:#111124;cursor:pointer;transition:transform .18s ease,border-color .18s ease,background .18s ease}
+.contact-goal-option:hover{transform:translateY(-2px);border-color:#53699e}
+.contact-goal-option:has(input:checked){border-color:#6f94ff;background:linear-gradient(145deg,rgba(95,139,255,.17),transparent 70%),#121329;box-shadow:0 15px 35px rgba(0,0,0,.2)}
+.contact-goal-option input{width:18px;height:18px;margin-top:2px;accent-color:#6f94ff}
+.contact-goal-option strong{display:block;color:#eef2ff;font-size:.92rem}
+.contact-goal-option span{display:block;margin-top:5px;color:var(--muted);font-size:.72rem;line-height:1.5}
+.contact-goal-form{padding:25px;border:1px solid #39486f;border-radius:21px;background:linear-gradient(145deg,rgba(95,139,255,.09),transparent 66%),var(--surface)}
+.contact-goal-form-header{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.contact-goal-form-header h3{margin:4px 0 0;color:#f3f5ff;font-size:1.45rem;letter-spacing:-.03em}
+.contact-goal-step{flex:0 0 auto;padding:7px 10px;border:1px solid #39466a;border-radius:999px;color:#aab9e8;font-size:.67rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.contact-common-grid,.contact-dynamic-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.contact-dynamic-grid{margin-top:14px}
+.contact-goal-form label{display:grid;gap:8px;color:#b9c0d8;font-size:.7rem;font-weight:780;letter-spacing:.045em;text-transform:uppercase}
+.contact-goal-form label.full{grid-column:1/-1}
+.contact-goal-form input,.contact-goal-form select,.contact-goal-form textarea{width:100%;min-height:49px;padding:0 13px;border:1px solid #3b4668;border-radius:11px;background:#101024;color:#f4f6ff;font:inherit;font-size:.82rem;text-transform:none;letter-spacing:0;outline:none}
+.contact-goal-form textarea{min-height:122px;padding-top:13px;resize:vertical}
+.contact-goal-form input:focus,.contact-goal-form select:focus,.contact-goal-form textarea:focus{border-color:#6f94ff;box-shadow:0 0 0 3px rgba(95,139,255,.14)}
+.contact-goal-panel[hidden]{display:none}
+.contact-goal-submit{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:20px;padding-top:19px;border-top:1px solid var(--line)}
+.contact-goal-submit-copy{max-width:430px;color:var(--muted);font-size:.7rem;line-height:1.55}
+.contact-goal-submit .button{flex:0 0 auto;min-width:220px}
+.contact-goal-status{min-height:1.3em;margin:13px 0 0;color:#9be8ce;font-size:.74rem}
+.contact-goal-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-top:28px}
+.contact-goal-links a{display:grid;gap:8px;padding:19px;border:1px solid var(--line);border-radius:15px;background:#111124}
+.contact-goal-links span{color:#8ea9ff;font-size:.65rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.contact-goal-links strong{font-size:.82rem;line-height:1.42}
+@media(max-width:920px){.contact-goal-hero{grid-template-columns:1fr 290px;gap:38px}.contact-goal-layout{grid-template-columns:1fr}.contact-goal-picker{position:static;grid-template-columns:repeat(3,minmax(0,1fr))}.contact-goal-option{grid-template-columns:auto 1fr;padding:15px}}
+@media(max-width:760px){.contact-goal-hero,.contact-goal-heading{grid-template-columns:1fr;gap:28px}.contact-goal-hero{padding-top:48px}.contact-goal-picker{grid-template-columns:1fr}.contact-goal-links{grid-template-columns:1fr}}
+@media(max-width:560px){.contact-goal-hero h1{font-size:2.75rem}.contact-common-grid,.contact-dynamic-grid{grid-template-columns:1fr}.contact-goal-form label.full{grid-column:auto}.contact-goal-form{padding:19px}.contact-goal-form-header,.contact-goal-submit{align-items:stretch;flex-direction:column}.contact-goal-submit .button{width:100%;min-width:0}.contact-goal-direct{display:grid;grid-template-columns:1fr 1fr}.contact-goal-direct a{min-width:0}.contact-goal-section{padding-top:67px;padding-bottom:74px}}
