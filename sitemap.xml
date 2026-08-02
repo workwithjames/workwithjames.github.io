@@ -2,7 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://jamesrealty.uk/</loc>
-    <lastmod>2026-08-02T11:32:00+04:00</lastmod>
+    <lastmod>2026-08-02T11:52:00+04:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://jamesrealty.uk/dubai-data/</loc>
+    <lastmod>2026-08-02T11:52:00+04:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
