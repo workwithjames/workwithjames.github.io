@@ -99,7 +99,8 @@
 
     if(current==='/'){
       split='#home-title';
-      markSelector('.home-hero-copy .eyebrow,.home-hero-copy>p,.conversion-hero-actions,.home-hero-card',{immediate:true,stagger:85,variant:'up'});
+      markSelector('.home-hero-copy .eyebrow,.home-hero-copy>p,.conversion-hero-actions',{immediate:true,stagger:85,variant:'up'});
+      markSelector('.home-hero .editorial-hero-media',{immediate:true,delay:145,variant:'right'});
       markSelector('.home-section-heading,.home-final',{variant:'up'});
       markSelector('.home-journeys .home-journey',{stagger:78,variant:'up'});
       markSelector('.home-data-grid .home-data-card',{stagger:68,variant:'scale'});
@@ -114,7 +115,8 @@
       markSelector('.timeline-item,.experience-card,.result-card,.results-grid article,.brands-grid>*',{stagger:60,variant:'up'});
     }else if(['/buy-invest-dubai/','/sell-dubai-property/','/real-estate-marketing/'].indexOf(current)>-1){
       split='#journey-title';
-      markSelector('.journey-hero-copy .eyebrow,.journey-hero-copy>p,.journey-hero-copy .conversion-hero-actions,.journey-hero-card',{immediate:true,stagger:82,variant:'up'});
+      markSelector('.journey-hero-copy .eyebrow,.journey-hero-copy>p,.journey-hero-copy .conversion-hero-actions',{immediate:true,stagger:82,variant:'up'});
+      markSelector('.journey-hero .editorial-hero-media',{immediate:true,delay:140,variant:'right'});
       markSelector('.journey-answer-card,.journey-heading,.qualifier-layout,.article-faq',{variant:'up'});
       markSelector('.journey-question-grid article,.journey-process article',{stagger:68,variant:'up'});
       markSelector('.journey-links a,.journey-keywords span',{stagger:46,variant:'up'});

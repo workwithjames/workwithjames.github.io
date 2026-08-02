@@ -1,6 +1,6 @@
 const PRIMARY_ORIGIN = 'https://jamesrealty.uk';
 const GA4_MEASUREMENT_ID = 'G-2MPZL26C6D';
-const ASSET_VERSION = '20260802-4';
+const ASSET_VERSION = '20260802-5';
 const LEGACY_ORIGINS = [
   'https://workwithjames.github.io',
   'http://workwithjames.github.io'
@@ -31,7 +31,8 @@ const VERSIONED_ASSETS = [
   'contact-goals.css',
   'contact-goals.js',
   'quality-fixes.css',
-  'quality-fixes.js'
+  'quality-fixes.js',
+  'editorial-visuals.css'
 ];
 
 function isTextResponse(contentType) {
@@ -212,6 +213,9 @@ function injectNavigationAssets(body, contentType) {
   }
   if (!body.includes('/assets/mobile-header.js')) {
     assets.push(`<script defer src="/assets/mobile-header.js?v=${ASSET_VERSION}"></script>`);
+  }
+  if (body.includes('editorial-hero-media') && !body.includes('/assets/editorial-visuals.css')) {
+    assets.push(`<link rel="stylesheet" href="/assets/editorial-visuals.css?v=${ASSET_VERSION}"/>`);
   }
 
   return assets.length ? body.replace('</head>', `${assets.join('')}</head>`) : body;

@@ -5,6 +5,21 @@
     <image:image>
       <image:loc>https://jamesrealty.uk/images/james-realty-social-preview.webp</image:loc>
     </image:image>
+    <image:image>
+      <image:loc>https://jamesrealty.uk/images/visuals/home-property-intelligence-1200.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://jamesrealty.uk/buy-invest-dubai/</loc>
+    <image:image>
+      <image:loc>https://jamesrealty.uk/images/visuals/buyer-consultation-1200.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://jamesrealty.uk/sell-dubai-property/</loc>
+    <image:image>
+      <image:loc>https://jamesrealty.uk/images/visuals/seller-preparation-1200.webp</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://jamesrealty.uk/about-me/</loc>
@@ -20,6 +35,9 @@
   </url>
   <url>
     <loc>https://jamesrealty.uk/real-estate-marketing/</loc>
+    <image:image>
+      <image:loc>https://jamesrealty.uk/images/visuals/marketing-strategy-1200.webp</image:loc>
+    </image:image>
     <image:image>
       <image:loc>https://jamesrealty.uk/images/real-estate-marketing-workshop.webp</image:loc>
     </image:image>
