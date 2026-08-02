@@ -145,6 +145,7 @@ function addConversionFooterLinks(body, contentType) {
         ['/sell-dubai-property/', 'Sell'],
         ['/real-estate-marketing/', 'Marketing'],
         ['/dubai-data/', 'Dubai Data'],
+        ['/dubai-rental-yield-calculator/', 'Yield Calculator'],
         ['/abu-dhabi-data/', 'Abu Dhabi Data'],
         ['/ajman-data/', 'Ajman Data']
       ];

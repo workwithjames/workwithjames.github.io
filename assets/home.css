@@ -23,7 +23,7 @@
 .home-journey li:before{content:"";position:absolute;left:0;top:.5em;width:7px;height:7px;border-radius:50%;background:#25d978}
 .home-journey strong{margin-top:auto;color:#e0e7ff;font-size:.82rem}
 .home-data{background:#0d0d21}
-.home-data-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.home-data-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
 .home-data-card{display:flex;min-height:255px;flex-direction:column;padding:25px;border:1px solid #34466f;border-radius:19px;background:linear-gradient(145deg,rgba(95,139,255,.12),transparent 65%),var(--surface)}
 .home-data-card h3{margin:18px 0 11px;color:#fff;font-size:1.46rem;letter-spacing:-.034em}
 .home-data-card p{margin:0;color:var(--muted);font-size:.81rem;line-height:1.65}
@@ -40,6 +40,6 @@
 .home-process strong{display:block;color:#eef2ff}.home-process p{margin:9px 0 0;color:var(--muted);font-size:.76rem;line-height:1.58}
 .home-final{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:center;margin-top:0;margin-bottom:96px;padding:36px;border:1px solid #3c4d7e;border-radius:22px;background:linear-gradient(135deg,rgba(95,139,255,.17),rgba(37,217,120,.08)),var(--surface)}
 .home-final h2{margin:6px 0 12px;font-size:clamp(2rem,4vw,3.3rem);line-height:1.04;letter-spacing:-.047em}.home-final p{max-width:720px;margin:0;color:var(--muted);line-height:1.7}
-@media(max-width:1000px){.home-hero{grid-template-columns:minmax(0,1fr) 280px;gap:42px}.home-proof-grid,.home-process{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:1000px){.home-hero{grid-template-columns:minmax(0,1fr) 280px;gap:42px}.home-data-grid,.home-proof-grid,.home-process{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:820px){.home-hero,.home-section-heading{grid-template-columns:1fr;gap:28px}.home-journeys,.home-data-grid{grid-template-columns:1fr}.home-hero{padding-top:56px}.home-journey{min-height:auto}.home-final{grid-template-columns:1fr}}
 @media(max-width:560px){.home-hero{padding-top:42px;padding-bottom:54px}.home-hero h1{font-size:2.85rem}.home-proof-grid,.home-process{grid-template-columns:1fr}.home-final{margin-bottom:72px;padding:25px}.home-final .button{width:100%}}

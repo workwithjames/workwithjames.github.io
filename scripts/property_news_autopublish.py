@@ -38,6 +38,7 @@ STATE_PATH = ROOT / "data" / "property-news-state.json"
 BLOG_INDEX = ROOT / "blog" / "index.html"
 FEED_PATH = ROOT / "feed.xml"
 SITEMAP_PATH = ROOT / "sitemap.xml"
+IMAGE_SITEMAP_PATH = ROOT / "image-sitemap.xml"
 CSS_PATH = ROOT / "assets" / "property-news.css"
 HUB_PATH = ROOT / "blog" / "property-news" / "index.html"
 
@@ -99,7 +100,7 @@ CSS = r"""/* Property news hub, source briefs and internal-link modules */
 
 NAV_HEADER = """<header class=\"site-header\"><nav class=\"nav-shell\" aria-label=\"Main navigation\"><a class=\"brand\" href=\"/\" aria-label=\"James Realty, Dubai Data\">James Realty</a><div class=\"nav-links global-links\"><a href=\"/\">Dubai Data</a><a href=\"/abu-dhabi-data/\">Abu Dhabi Data</a><a href=\"/about-me/\">About Me</a><a href=\"/blog/\" aria-current=\"page\">Blog</a><a href=\"/contact/\">Contact Me</a></div><a class=\"button nav-cta nav-whatsapp\" href=\"https://wa.me/971528420933\" target=\"_blank\" rel=\"noreferrer\">Work with James <span aria-hidden=\"true\">↗</span></a></nav></header><nav class=\"mobile-page-tabs section-shell\" aria-label=\"Page navigation\"><a href=\"/\">Dubai Data</a><a href=\"/abu-dhabi-data/\">Abu Dhabi Data</a><a href=\"/about-me/\">About Me</a><a href=\"/blog/\" aria-current=\"page\">Blog</a><a href=\"/contact/\">Contact Me</a></nav>"""
 
-FOOTER = """<a class=\"mobile-conversion nav-whatsapp\" href=\"/contact/\">Contact James</a><footer><div class=\"section-shell footer-shell footer-shell-rich\"><div class=\"footer-identity\"><a class=\"brand\" href=\"/\">James</a><p>© 2026 James. Built in Dubai.</p></div><nav class=\"footer-links\" aria-label=\"Footer navigation\"><a href=\"/\">Dubai Data</a><a href=\"/abu-dhabi-data/\">Abu Dhabi Data</a><a href=\"/about-me/\">About Me</a><a href=\"/blog/\">Blog</a><a href=\"/blog/property-news/\">Property News</a><a href=\"/contact/\">Contact</a></nav><a class=\"footer-linkedin\" href=\"https://ae.linkedin.com/in/james-ravi-dubai\" target=\"_blank\" rel=\"me noreferrer\">LinkedIn <span aria-hidden=\"true\">↗</span></a></div></footer>"""
+FOOTER = """<a class=\"mobile-conversion nav-whatsapp\" href=\"/contact/\">Contact James</a><footer><div class=\"section-shell footer-shell footer-shell-rich\"><div class=\"footer-identity\"><a class=\"brand\" href=\"/\">James</a><p>© 2026 James. Built in Dubai.</p></div><nav class=\"footer-links\" aria-label=\"Footer navigation\"><a href=\"/\">Home</a><a href=\"/buy-invest-dubai/\">Buy / Invest</a><a href=\"/dubai-data/\">Dubai Data</a><a href=\"/dubai-rental-yield-calculator/\">Yield Calculator</a><a href=\"/blog/\">News</a><a href=\"/blog/property-news/\">Property News</a><a href=\"/contact/\">Contact</a></nav><a class=\"footer-linkedin\" href=\"https://ae.linkedin.com/in/james-ravi-dubai\" target=\"_blank\" rel=\"me noreferrer\">LinkedIn <span aria-hidden=\"true\">↗</span></a></div></footer>"""
 
 
 @dataclass
@@ -1057,13 +1058,46 @@ def update_sitemap(posts: list[Post]) -> None:
     write_if_changed(SITEMAP_PATH, xml)
 
 
+def update_image_sitemap(posts: list[Post]) -> None:
+    import xml.etree.ElementTree as ET
+    sitemap_ns = "http://www.sitemaps.org/schemas/sitemap/0.9"
+    image_ns = "http://www.google.com/schemas/sitemap-image/1.1"
+    ET.register_namespace("", sitemap_ns)
+    ET.register_namespace("image", image_ns)
+    if IMAGE_SITEMAP_PATH.exists():
+        root = ET.fromstring(read_text(IMAGE_SITEMAP_PATH))
+    else:
+        root = ET.Element(f"{{{sitemap_ns}}}urlset")
+    entries = {
+        node.findtext(f"{{{sitemap_ns}}}loc"): node
+        for node in root.findall(f"{{{sitemap_ns}}}url")
+    }
+    for post in posts:
+        node = entries.get(post.url)
+        if node is None:
+            node = ET.SubElement(root, f"{{{sitemap_ns}}}url")
+            ET.SubElement(node, f"{{{sitemap_ns}}}loc").text = post.url
+            entries[post.url] = node
+        image_url = SITE + post.image
+        existing = {
+            image.findtext(f"{{{image_ns}}}loc")
+            for image in node.findall(f"{{{image_ns}}}image")
+        }
+        if image_url not in existing:
+            image = ET.SubElement(node, f"{{{image_ns}}}image")
+            ET.SubElement(image, f"{{{image_ns}}}loc").text = image_url
+    ET.indent(root, space="  ")
+    xml = '<?xml version="1.0" encoding="UTF-8"?>\n' + ET.tostring(root, encoding="unicode") + "\n"
+    write_if_changed(IMAGE_SITEMAP_PATH, xml)
+
+
 def internal_links_block(posts: list[Post], context: str = "Latest property news") -> str:
     latest = posts[:3]
     cards = ''.join(
         f'<a href="/blog/{p.slug}/"><span>{esc(p.category)}</span><strong>{esc(p.title)}</strong></a>'
         for p in latest
     )
-    return f'''<!-- PROPERTY_NEWS_LINKS_START --><section class="section-shell property-news-links" aria-label="Related property news"><div><p class="section-kicker">{esc(context)}</p><h2>Read the source, then test the decision.</h2><p>Original reporting summaries with practical checks, market context and direct links to the publishers.</p></div><nav class="property-news-link-grid">{cards}<a href="/blog/property-news/"><span>News hub</span><strong>View all monitored UAE property briefs</strong></a></nav></section><!-- PROPERTY_NEWS_LINKS_END -->'''
+    return f'''<!-- PROPERTY_NEWS_LINKS_START --><section class="section-shell property-news-links" aria-label="Related property news"><div><p class="section-kicker">{esc(context)}</p><h2>Read the source, then test the decision.</h2><p>Original reporting summaries with practical checks, market context and direct links to the publishers.</p></div><nav class="property-news-link-grid">{cards}<a href="/blog/property-news/"><span>News hub</span><strong>View all monitored UAE property briefs</strong></a><a href="/dubai-rental-yield-calculator/"><span>Investor tool</span><strong>Compare gross and net rental yield for two Dubai properties</strong></a></nav></section><!-- PROPERTY_NEWS_LINKS_END -->'''
 
 
 def add_internal_links(posts: list[Post]) -> None:
@@ -1219,6 +1253,7 @@ def main() -> int:
     write_if_changed(HUB_PATH, render_hub(posts))
     update_feed(posts)
     update_sitemap(posts)
+    update_image_sitemap(posts)
     add_internal_links(posts)
     save_state(state)
     print(f"Property news publishing complete, {len(posts)} briefs indexed.")

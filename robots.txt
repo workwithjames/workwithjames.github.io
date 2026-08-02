@@ -14,3 +14,4 @@ User-agent: PerplexityBot
 Allow: /
 
 Sitemap: https://jamesrealty.uk/sitemap.xml
+Sitemap: https://jamesrealty.uk/image-sitemap.xml

@@ -6,7 +6,11 @@
 
 - [About James Ravi](https://jamesrealty.uk/about-me/): Expertise, career work, results, experience, and brands.
 - [UAE Property Blog](https://jamesrealty.uk/blog/): Source-led Dubai and Abu Dhabi property guides.
-- [Dubai Property Transactions Dashboard](https://jamesrealty.uk/): Daily DLD-derived market totals, area prices, gross rental yields, comparisons, and affordability indicators.
+- [Dubai Property Transactions Dashboard](https://jamesrealty.uk/dubai-data/): Daily DLD-derived market totals, area prices, gross rental yields, comparisons, and affordability indicators.
+- [Dubai Rental Yield Calculator](https://jamesrealty.uk/dubai-rental-yield-calculator/): Free side-by-side calculator for gross yield, net yield, vacancy, service charges, management costs, and total acquisition cost.
+- [Dubai Buyer and Investor Brief](https://jamesrealty.uk/buy-invest-dubai/): Structured route from buyer objectives and budget to market screening and property-level checks.
+- [Dubai Property Seller Brief](https://jamesrealty.uk/sell-dubai-property/): Positioning, demand evidence, enquiry qualification, and launch planning for property owners.
+- [Real Estate Marketing](https://jamesrealty.uk/real-estate-marketing/): Property launch, performance acquisition, CRM, and conversion strategy for businesses.
 - [Contact James Ravi](https://jamesrealty.uk/contact/): Enquiry form for launches, performance marketing, investor campaigns, CRM, and advisory work.
 
 ## Property guides

@@ -1,0 +1,24 @@
+name: Notify search engines with IndexNow
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: indexnow-notification
+  cancel-in-progress: true
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Submit changed public URLs
+        run: python scripts/submit_indexnow.py --diff "${{ github.event.before }}" "${{ github.sha }}"
