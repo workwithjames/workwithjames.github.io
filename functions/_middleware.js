@@ -105,6 +105,10 @@ function headerFlow(pathname) {
   ].join('');
 }
 
+function mobileMenuButton() {
+  return '<button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-site-menu" aria-label="Open site menu"><span class="mobile-menu-label">Menu</span><span class="mobile-menu-icon" aria-hidden="true"><span></span><span></span></span></button>';
+}
+
 function standardizeHeaderNavigation(body, contentType, pathname) {
   if (!contentType.includes('text/html')) return body;
 
@@ -113,10 +117,19 @@ function standardizeHeaderNavigation(body, contentType, pathname) {
     /(<div\b[^>]*class=["'][^"']*\bglobal-links\b[^"']*["'][^>]*>)[\s\S]*?(<\/div>\s*<a\b[^>]*class=["'][^"']*\bnav-cta\b)/i,
     `$1${flow}$2`
   );
+
   body = body.replace(
-    /(<nav\b[^>]*class=["'][^"']*\bmobile-page-tabs\b[^"']*["'][^>]*>)[\s\S]*?(<\/nav>)/i,
-    `$1${flow}$2`
+    /<nav\b[^>]*class=["'][^"']*\bmobile-page-tabs\b[^"']*["'][^>]*>[\s\S]*?<\/nav>/i,
+    `<nav id="mobile-site-menu" class="mobile-page-tabs mobile-site-menu" aria-label="Site navigation">${flow}</nav>`
   );
+
+  if (!body.includes('class="mobile-menu-toggle"')) {
+    body = body.replace(
+      /(<a\b[^>]*class=["'][^"']*\bnav-cta\b)/i,
+      `${mobileMenuButton()}$1`
+    );
+  }
+
   return body;
 }
 
@@ -145,9 +158,21 @@ function addConversionFooterLinks(body, contentType) {
   );
 }
 
-function injectGoalNavigationAssets(body, contentType) {
-  if (!contentType.includes('text/html') || body.includes('/assets/header-goal-nav.css')) return body;
-  return body.replace('</head>', '<link rel="stylesheet" href="/assets/header-goal-nav.css?v=1"/></head>');
+function injectNavigationAssets(body, contentType) {
+  if (!contentType.includes('text/html')) return body;
+
+  const assets = [];
+  if (!body.includes('/assets/header-goal-nav.css')) {
+    assets.push('<link rel="stylesheet" href="/assets/header-goal-nav.css?v=2"/>');
+  }
+  if (!body.includes('/assets/mobile-header.css')) {
+    assets.push('<link rel="stylesheet" href="/assets/mobile-header.css?v=1"/>');
+  }
+  if (!body.includes('/assets/mobile-header.js')) {
+    assets.push('<script defer src="/assets/mobile-header.js?v=1"></script>');
+  }
+
+  return assets.length ? body.replace('</head>', `${assets.join('')}</head>`) : body;
 }
 
 function replaceMissingSocialPreview(body, contentType) {
@@ -208,7 +233,7 @@ export async function onRequest(context) {
   body = rewriteDubaiDataContentLinks(body, contentType);
   body = standardizeHeaderNavigation(body, contentType, requestUrl.pathname);
   body = addConversionFooterLinks(body, contentType);
-  body = injectGoalNavigationAssets(body, contentType);
+  body = injectNavigationAssets(body, contentType);
   body = replaceMissingSocialPreview(body, contentType);
   body = updateDubaiDashboardScript(body, contentType, requestUrl.pathname);
 
