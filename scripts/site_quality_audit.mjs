@@ -123,6 +123,45 @@ function sitemapRoutes() {
   return [...routes].sort();
 }
 
+async function runFunctionalChecks(page, route, location, issues) {
+  if (route === '/') {
+    const journeys = await page.locator('.home-journey').count();
+    const dataCards = await page.locator('.home-data-card').count();
+    if (journeys !== 3) pushIssue(issues, 'error', 'functional', location, `Homepage should show 3 goal cards, found ${journeys}`);
+    if (dataCards < 4) pushIssue(issues, 'error', 'functional', location, `Homepage should show at least 4 data and tool cards, found ${dataCards}`);
+  }
+
+  if (route === '/contact/') {
+    const sellPicker = page.locator('input[name="goal-picker"][value="sell"]');
+    if (await sellPicker.count()) {
+      await sellPicker.check();
+      await page.waitForTimeout(50);
+      const sellVisible = await page.locator('[data-goal-panel="sell"]').isVisible();
+      const buyVisible = await page.locator('[data-goal-panel="buy"]').isVisible();
+      const title = (await page.locator('#contact-form-title').textContent()) || '';
+      if (!sellVisible || buyVisible || !/sell/i.test(title)) pushIssue(issues, 'error', 'functional', location, 'Contact form does not switch correctly to the Sell goal');
+    } else {
+      pushIssue(issues, 'error', 'functional', location, 'Contact goal selector is missing');
+    }
+  }
+
+  if (route === '/dubai-rental-yield-calculator/') {
+    const initial = (await page.locator('#gross-a').textContent()) || '';
+    if (!initial || initial === '0.00%') pushIssue(issues, 'error', 'functional', location, 'Rental yield calculator did not calculate its initial scenario');
+    await page.locator('#a-rent').fill('120000');
+    await page.waitForTimeout(40);
+    const updated = (await page.locator('#gross-a').textContent()) || '';
+    if (updated === initial || updated === '0.00%') pushIssue(issues, 'error', 'functional', location, 'Rental yield calculator did not react to input changes');
+  }
+
+  if (route === '/dubai-data/') {
+    const transactions = ((await page.locator('#market-transactions').textContent()) || '').trim();
+    const yieldRows = await page.locator('#yield-table-body tr').count();
+    if (!transactions || /loading/i.test(transactions)) pushIssue(issues, 'error', 'functional', location, 'Dubai Data fallback snapshot did not render');
+    if (!yieldRows) pushIssue(issues, 'error', 'functional', location, 'Dubai Data yield table did not render');
+  }
+}
+
 async function runtimeAudit() {
   const issues = [];
   const routes = sitemapRoutes();
@@ -227,8 +266,11 @@ async function runtimeAudit() {
               const normalized = options.map((value) => value.trim());
               if (JSON.stringify(normalized) !== JSON.stringify(['Buy / Invest', 'Sell', 'Marketing'])) pushIssue(issues, 'error', 'navigation', location, 'Your Goal options are incorrect', normalized);
             }
+            await toggle.click();
           }
         }
+
+        await runFunctionalChecks(page, route, location, issues);
 
         await page.addScriptTag({ content: axeSource });
         const axe = await page.evaluate(async () => window.axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa'] } }));
