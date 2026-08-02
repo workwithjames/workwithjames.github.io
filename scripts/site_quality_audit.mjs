@@ -84,8 +84,10 @@ function staticAudit() {
       if (!relMatch || !hasSafeBlankTargetRel(relMatch[1])) pushIssue(issues, 'warning', 'security', location, 'target="_blank" link missing opener protection', match[0].slice(0, 180));
     }
 
-    for (const match of source.matchAll(/<label\b[^>]*>[\s\S]*?<div\b[^>]*class=["'][^"']*(?:input|field|wrap)[^"']*["'][^>]*>/gi)) {
-      pushIssue(issues, 'warning', 'html', location, 'Label contains a block-level div; use phrasing markup such as span', match[0].slice(0, 180));
+    for (const match of source.matchAll(/<label\b[^>]*>([\s\S]*?)<\/label>/gi)) {
+      if (/<div\b[^>]*class=["'][^"']*(?:input|field|wrap)[^"']*["']/i.test(match[1])) {
+        pushIssue(issues, 'warning', 'html', location, 'Label contains a block-level div; use phrasing markup such as span', match[0].slice(0, 180));
+      }
     }
   }
 
