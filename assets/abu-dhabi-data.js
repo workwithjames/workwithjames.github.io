@@ -1,6 +1,13 @@
 (function(){
   var endpoint='/api/abu-dhabi-data';
   var state={payload:null,active:'transactions'};
+  var defaultCoverage={
+    transactions:['Sales','Mortgages','Other transactions','Residential','Commercial','Monthly','Quarterly','Yearly'],
+    residentialSales:['Apartments','Villas','Townhouses','Penthouses','Plots','Ready','Off-plan','Court-mandated'],
+    leases:['Rented residential units','Residential lease values','Average annual rents','Apartment rent index','Villa rent index'],
+    geography:['Abu Dhabi City','Al Ain City','Al Dhafra Region','District','Community','Project'],
+    recentSales:['Asset type','Property type','Sale type','District','Community','Project','Layout']
+  };
 
   function byId(id){return document.getElementById(id);}
   function metricValue(metric){return metric&&typeof metric.value==='number'?metric.value:null;}
@@ -19,10 +26,7 @@
     return sign+metric.yoy.toFixed(2).replace(/\.00$/,'')+'% year on year';
   }
   function setText(id,value){var node=byId(id);if(node){node.textContent=value;}}
-  function setStatus(mode,text){
-    var status=byId('adrec-live-status');
-    if(status){status.dataset.state=mode;status.textContent=text;}
-  }
+  function setStatus(mode,text){var status=byId('adrec-live-status');if(status){status.dataset.state=mode;status.textContent=text;}}
   function sourceTime(value){
     if(!value){return 'Checked just now';}
     var date=new Date(value);
@@ -33,7 +37,8 @@
   function updateKpis(payload){
     var metrics=payload.metrics||{};
     var performance=payload.marketPerformance||{};
-    var transactionValue=metricValue(metrics.transactionValue)||metricValue(performance.ytdTransactionValue);
+    var transactionValue=metricValue(metrics.transactionValue);
+    if(transactionValue===null){transactionValue=metricValue(performance.ytdTransactionValue);}
     setText('adrec-transaction-value',money(transactionValue));
     setText('adrec-transaction-value-note',metrics.transactionValue?yoy(metrics.transactionValue):'Current year to date market performance');
     setText('adrec-transaction-volume',integer(metricValue(metrics.transactionVolume)));
@@ -47,9 +52,13 @@
     setText('adrec-villa-sale-note',yoy(metrics.villaSaleIndex));
     setText('adrec-rented-units',integer(metricValue(metrics.rentedUnits)));
     setText('adrec-rented-units-note',yoy(metrics.rentedUnits));
-    setText('adrec-apartment-rent-index',indexValue(metricValue(metrics.apartmentRentIndex)));
+    var apartmentRent=indexValue(metricValue(metrics.apartmentRentIndex));
+    var villaRent=indexValue(metricValue(metrics.villaRentIndex));
+    setText('adrec-apartment-rent-index',apartmentRent);
+    setText('adrec-apartment-rent-index-copy',apartmentRent);
     setText('adrec-apartment-rent-note',yoy(metrics.apartmentRentIndex));
-    setText('adrec-villa-rent-index',indexValue(metricValue(metrics.villaRentIndex)));
+    setText('adrec-villa-rent-index',villaRent);
+    setText('adrec-villa-rent-index-copy',villaRent);
     setText('adrec-villa-rent-note',yoy(metrics.villaRentIndex));
   }
 
@@ -76,16 +85,10 @@
   function coverage(payload){
     var container=byId('adrec-coverage');
     if(!container){return;}
-    var coverage=payload.coverage||{};
-    var groups={
-      transactions:'Transactions',
-      residentialSales:'Residential sales',
-      leases:'Residential leases',
-      geography:'Geography',
-      recentSales:'Recent sales filters'
-    };
+    var source=payload.coverage||defaultCoverage;
+    var groups={transactions:'Transactions',residentialSales:'Residential sales',leases:'Residential leases',geography:'Geography',recentSales:'Recent sales filters'};
     container.innerHTML=Object.keys(groups).map(function(key){
-      var items=coverage[key]||[];
+      var items=source[key]||[];
       return '<article><p class="section-kicker">'+groups[key]+'</p><div class="adrec-chip-row">'+items.map(function(item){return '<span>'+item+'</span>';}).join('')+'</div></article>';
     }).join('');
   }
@@ -97,48 +100,40 @@
       button.classList.toggle('is-active',active);
       button.setAttribute('aria-selected',active?'true':'false');
     });
-    document.querySelectorAll('[data-adrec-panel]').forEach(function(panel){
-      panel.hidden=panel.dataset.adrecPanel!==name;
-    });
+    document.querySelectorAll('[data-adrec-panel]').forEach(function(panel){panel.hidden=panel.dataset.adrecPanel!==name;});
   }
 
   function prepareTabs(){
-    document.querySelectorAll('[data-adrec-tab]').forEach(function(button){
-      button.addEventListener('click',function(){setPanel(button.dataset.adrecTab);});
-    });
+    document.querySelectorAll('[data-adrec-tab]').forEach(function(button){button.addEventListener('click',function(){setPanel(button.dataset.adrecTab);});});
     setPanel('transactions');
   }
 
   function revealFallback(message){
     var warning=byId('adrec-warning');
-    if(warning){
-      warning.hidden=false;
-      setText('adrec-warning-message',message||'Some official figures were not readable during this check. The official ADREC dashboard remains available below.');
-    }
+    if(warning){warning.hidden=false;setText('adrec-warning-message',message||'Some official figures were not readable during this check. The official ADREC dashboard remains available below.');}
   }
 
   async function load(force){
     setStatus('loading','Connecting to ADREC');
-    var checked=byId('adrec-checked');
-    if(checked){checked.textContent='Checking the newest public market data';}
+    setText('adrec-checked','Checking the newest public market data');
     try{
       var url=endpoint+(force?'?refresh='+Date.now():'');
       var response=await fetch(url,{headers:{Accept:'application/json'}});
       var payload=await response.json();
       state.payload=payload;
-      if(!response.ok||!payload.ok){
-        throw new Error(payload.error||payload.warning||'The public source did not return readable metrics.');
-      }
+      coverage(payload);
+      if(!response.ok||!payload.ok){throw new Error(payload.error||payload.warning||'The public source did not return readable metrics.');}
       updateKpis(payload);
       composition(payload);
-      coverage(payload);
       setStatus('ready','Live source connected');
       setText('adrec-checked',sourceTime(payload.fetchedAt)+' · Source updates daily');
       setText('adrec-source-line','Live fetch from ADREC, cached for performance. '+sourceTime(payload.fetchedAt)+'.');
       if(payload.warning){revealFallback(payload.warning);}
     }catch(error){
+      coverage({coverage:defaultCoverage});
       setStatus('error','Official source available');
       setText('adrec-checked','Custom data cards are temporarily unavailable');
+      setText('adrec-source-line','Use the official dashboard while the custom source connection refreshes.');
       revealFallback(error&&error.message?error.message:'The live data cards could not be refreshed.');
       composition({marketPerformance:{}});
     }
@@ -147,11 +142,7 @@
   function prepareRefresh(){
     var button=byId('adrec-refresh');
     if(!button){return;}
-    button.addEventListener('click',function(){
-      button.disabled=true;
-      button.textContent='Refreshing';
-      load(true).finally(function(){button.disabled=false;button.textContent='Refresh data';});
-    });
+    button.addEventListener('click',function(){button.disabled=true;button.textContent='Refreshing';load(true).finally(function(){button.disabled=false;button.textContent='Refresh data';});});
   }
 
   function prepareOfficialToggle(){
@@ -168,12 +159,6 @@
     });
   }
 
-  function init(){
-    prepareTabs();
-    prepareRefresh();
-    prepareOfficialToggle();
-    load(false);
-  }
-
+  function init(){prepareTabs();prepareRefresh();prepareOfficialToggle();coverage({coverage:defaultCoverage});load(false);}
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
 })();
