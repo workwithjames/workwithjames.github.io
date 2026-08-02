@@ -63,48 +63,61 @@ function renameBlogPageLabels(body, contentType) {
     .replace(/UAE property blog/gi, 'UAE property news');
 }
 
-function rewriteDubaiDataLinks(body, contentType) {
+function rewriteDubaiDataContentLinks(body, contentType) {
   if (!contentType.includes('text/html')) return body;
 
-  body = body
+  return body
     .replace(
       /(<a\b[^>]*\bhref=)["']\/["']([^>]*>\s*Dubai Data\s*<\/a>)/gi,
       '$1"/dubai-data/"$2'
     )
     .replace(/href=["']\/#area-lookup["']/gi, 'href="/dubai-data/#area-lookup"')
     .replace(/href=["']\/#affordability["']/gi, 'href="/dubai-data/#affordability"');
+}
 
-  return body.replace(
-    /(<nav\b[^>]*class=["'][^"']*(?:global-links|mobile-page-tabs|footer-links)[^"']*["'][^>]*>)([\s\S]*?)(<\/nav>)/gi,
-    (match, open, links, close) => {
-      let updated = links;
-      const isGlobalHeader = open.includes('global-links');
+function isCurrentPath(pathname, href) {
+  if (href === '/') return pathname === '/';
+  if (href === '/blog/') return pathname === '/blog/' || pathname.startsWith('/blog/');
+  return pathname === href || pathname.startsWith(href);
+}
 
-      if (!updated.includes('href="/"') && !updated.includes("href='/'")) {
-        updated = '<a href="/">Home</a>' + updated;
-      } else if (!/>\s*Home\s*<\/a>/i.test(updated)) {
-        updated = updated.replace(
-          /(<a\b[^>]*\bhref=["']\/dubai-data\/["'][^>]*>\s*Dubai Data\s*<\/a>)/i,
-          '<a href="/">Home</a>$1'
-        );
-      }
+function navLink(pathname, href, label) {
+  const current = isCurrentPath(pathname, href) ? ' aria-current="page"' : '';
+  return `<a href="${href}"${current}>${label}</a>`;
+}
 
-      if (!updated.includes('/dubai-data/')) {
-        updated += '<a href="/dubai-data/">Dubai Data</a>';
-      }
+function goalDropdown(pathname) {
+  const goalPaths = ['/buy-invest-dubai/', '/sell-dubai-property/', '/real-estate-marketing/'];
+  const goalCurrent = goalPaths.some((path) => isCurrentPath(pathname, path));
+  return `<details class="goal-nav${goalCurrent ? ' is-current' : ''}"><summary aria-label="Your Goal menu">Your Goal <span class="goal-nav-caret" aria-hidden="true">⌄</span></summary><div class="goal-nav-menu" role="group" aria-label="Your Goal options">${navLink(pathname, '/buy-invest-dubai/', 'Buy / Invest')}${navLink(pathname, '/sell-dubai-property/', 'Sell')}${navLink(pathname, '/real-estate-marketing/', 'Marketing')}</div></details>`;
+}
 
-      if (!isGlobalHeader) {
-        if (!updated.includes('/abu-dhabi-data/')) {
-          updated += '<a href="/abu-dhabi-data/">Abu Dhabi Data</a>';
-        }
-        if (!updated.includes('/ajman-data/')) {
-          updated += '<a href="/ajman-data/">Ajman Data</a>';
-        }
-      }
+function headerFlow(pathname) {
+  return [
+    navLink(pathname, '/', 'Home'),
+    goalDropdown(pathname),
+    navLink(pathname, '/dubai-data/', 'Dubai Data'),
+    navLink(pathname, '/abu-dhabi-data/', 'Abu Dhabi Data'),
+    navLink(pathname, '/ajman-data/', 'Ajman Data'),
+    navLink(pathname, '/about-me/', 'About Me'),
+    navLink(pathname, '/blog/', 'News'),
+    navLink(pathname, '/contact/', 'Contact Me')
+  ].join('');
+}
 
-      return open + updated + close;
-    }
+function standardizeHeaderNavigation(body, contentType, pathname) {
+  if (!contentType.includes('text/html')) return body;
+
+  const flow = headerFlow(pathname);
+  body = body.replace(
+    /(<div\b[^>]*class=["'][^"']*\bglobal-links\b[^"']*["'][^>]*>)[\s\S]*?(<\/div>)/i,
+    `$1${flow}$2`
   );
+  body = body.replace(
+    /(<nav\b[^>]*class=["'][^"']*\bmobile-page-tabs\b[^"']*["'][^>]*>)[\s\S]*?(<\/nav>)/i,
+    `$1${flow}$2`
+  );
+  return body;
 }
 
 function addConversionFooterLinks(body, contentType) {
@@ -117,7 +130,10 @@ function addConversionFooterLinks(body, contentType) {
       const additions = [
         ['/buy-invest-dubai/', 'Buy / Invest'],
         ['/sell-dubai-property/', 'Sell'],
-        ['/real-estate-marketing/', 'Marketing']
+        ['/real-estate-marketing/', 'Marketing'],
+        ['/dubai-data/', 'Dubai Data'],
+        ['/abu-dhabi-data/', 'Abu Dhabi Data'],
+        ['/ajman-data/', 'Ajman Data']
       ];
 
       additions.reverse().forEach(([href, label]) => {
@@ -127,6 +143,11 @@ function addConversionFooterLinks(body, contentType) {
       return open + updated + close;
     }
   );
+}
+
+function injectGoalNavigationAssets(body, contentType) {
+  if (!contentType.includes('text/html') || body.includes('/assets/header-goal-nav.css')) return body;
+  return body.replace('</head>', '<link rel="stylesheet" href="/assets/header-goal-nav.css?v=1"/></head>');
 }
 
 function replaceMissingSocialPreview(body, contentType) {
@@ -184,8 +205,10 @@ export async function onRequest(context) {
   body = removeDirectGa4Configuration(body, contentType);
   body = replacePersonalName(body);
   body = renameBlogPageLabels(body, contentType);
-  body = rewriteDubaiDataLinks(body, contentType);
+  body = rewriteDubaiDataContentLinks(body, contentType);
+  body = standardizeHeaderNavigation(body, contentType, requestUrl.pathname);
   body = addConversionFooterLinks(body, contentType);
+  body = injectGoalNavigationAssets(body, contentType);
   body = replaceMissingSocialPreview(body, contentType);
   body = updateDubaiDashboardScript(body, contentType, requestUrl.pathname);
 
