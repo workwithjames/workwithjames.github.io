@@ -1,6 +1,6 @@
 .mobile-menu-toggle{display:none}
 
-@media(max-width:840px){
+@media(max-width:1080px){
   :root{
     --fixed-header-height:64px!important;
     --fixed-tabs-height:0px!important;
