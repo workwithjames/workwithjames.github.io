@@ -92,6 +92,12 @@ jobs:
 
           scripts = []
           candidates = set()
+          patterns = [
+              r"https?://[^\"'\\\s)]+",
+              r"/(?:api|Api|API)/[^\"'\\\s)]+",
+              r"[^\"'\\\s)]*(?:transaction|market|dashboard|lease|price-index)[^\"'\\\s)]*",
+          ]
+
           for node in soup.find_all('script', src=True):
               script_url = urljoin(page_url, node.get('src'))
               item = {'url': script_url}
@@ -101,11 +107,6 @@ jobs:
                   item['length'] = len(script_response.content)
                   if script_response.ok and len(script_response.content) < 8_000_000:
                       text = script_response.text
-                      patterns = [
-                          r'https?://[^"\'\\\s)]+',
-                          r'/(?:api|Api|API)/[^"\'\\\s)]+',
-                          r'[^"\'\\\s)]*(?:transaction|market|dashboard|lease|price-index)[^"\'\\\s)]*',
-                      ]
                       for pattern in patterns:
                           for match in re.findall(pattern, text, flags=re.I):
                               cleaned = match.strip(' ,;:()[]{}')
@@ -122,7 +123,7 @@ jobs:
                   scripts.append(item)
 
           inline = '\n'.join(node.get_text('\n') for node in soup.find_all('script') if not node.get('src'))
-          for pattern in [r'https?://[^"\'\\\s)]+', r'/(?:api|Api|API)/[^"\'\\\s)]+']:
+          for pattern in patterns[:2]:
               for match in re.findall(pattern, inline, flags=re.I):
                   cleaned = match.strip(' ,;:()[]{}')
                   if 5 < len(cleaned) < 500:
@@ -137,7 +138,7 @@ jobs:
               'snippets': snippets,
               'script_count': len(scripts),
               'scripts': scripts,
-              'candidates': sorted(candidates),
+              'candidates': sorted(candidates)[:1200],
           }
           Path('.automation/adrec-debug-result.json').write_text(
               json.dumps(output, ensure_ascii=False, indent=2), encoding='utf-8'
