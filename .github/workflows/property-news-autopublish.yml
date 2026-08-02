@@ -1,6 +1,6 @@
 name: Publish property news briefs
 
-# One-time ADREC endpoint probe requested on 2026-08-02.
+# Temporary ADREC request-module capture for dashboard verification.
 on:
   schedule:
     - cron: '23 * * * *'
@@ -9,7 +9,6 @@ on:
     paths:
       - '.github/workflows/property-news-autopublish.yml'
       - '.automation/property-news-script/**'
-      - '.automation/adrec-debug-request'
 
 permissions:
   contents: write
@@ -54,9 +53,25 @@ jobs:
       - name: Install parser dependencies
         run: python -m pip install --disable-pip-version-check requests beautifulsoup4
 
-      - name: Probe ADREC public JSON endpoints
-        if: hashFiles('.automation/adrec-debug-request') != ''
-        run: python .automation/adrec_probe.py
+      - name: Capture ADREC public request modules
+        shell: bash
+        run: |
+          mkdir -p .automation/adrec-modules
+          curl --fail --location --silent --show-error \
+            'https://adrec.gov.ae/adrec-assets/js/market-data/MarketDataGlobal.js' \
+            -o .automation/adrec-modules/MarketDataGlobal.js
+          curl --fail --location --silent --show-error \
+            'https://adrec.gov.ae/adrec-assets/js/market-data/market-cards.js' \
+            -o .automation/adrec-modules/market-cards.js
+          curl --fail --location --silent --show-error \
+            'https://adrec.gov.ae/adrec-assets/js/market-data/lease-cards.js' \
+            -o .automation/adrec-modules/lease-cards.js
+          curl --fail --location --silent --show-error \
+            'https://adrec.gov.ae/adrec-assets/js/market-data/MarketDataTransactionScriptAPI.js' \
+            -o .automation/adrec-modules/transactions.js
+          curl --fail --location --silent --show-error \
+            'https://adrec.gov.ae/adrec-assets/js/market-data/RecentSalesTable.js' \
+            -o .automation/adrec-modules/recent-sales.js
 
       - name: Check sources and publish briefs
         run: python scripts/property_news_autopublish.py
