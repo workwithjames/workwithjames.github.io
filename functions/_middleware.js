@@ -1,5 +1,6 @@
 const PRIMARY_ORIGIN = 'https://jamesrealty.uk';
 const GA4_MEASUREMENT_ID = 'G-2MPZL26C6D';
+const ASSET_VERSION = '20260802-3';
 const LEGACY_ORIGINS = [
   'https://workwithjames.github.io',
   'http://workwithjames.github.io'
@@ -18,6 +19,19 @@ const TEXT_CONTENT_TYPES = [
   'application/json',
   'application/ld+json',
   'application/manifest+json'
+];
+
+const VERSIONED_ASSETS = [
+  'site.js',
+  'header-goal-nav.css',
+  'mobile-header.css',
+  'mobile-header.js',
+  'intent-popup.css',
+  'intent-popup.js',
+  'contact-goals.css',
+  'contact-goals.js',
+  'quality-fixes.css',
+  'quality-fixes.js'
 ];
 
 function isTextResponse(contentType) {
@@ -110,7 +124,7 @@ function mobileMenuButton() {
 }
 
 function standardizeHeaderNavigation(body, contentType, pathname) {
-  if (!contentType.includes('text/html')) return body;
+  if (!contentType.includes('text/html') || !body.includes('site-header')) return body;
 
   const flow = headerFlow(pathname);
   body = body.replace(
@@ -159,18 +173,59 @@ function addConversionFooterLinks(body, contentType) {
   );
 }
 
-function injectNavigationAssets(body, contentType) {
+function hardenBlankTargets(body, contentType) {
   if (!contentType.includes('text/html')) return body;
+
+  return body.replace(/<a\b[^>]*\btarget=["']_blank["'][^>]*>/gi, (tag) => {
+    const rel = tag.match(/\brel=(["'])([^"']*)\1/i);
+    if (!rel) return tag.slice(0, -1) + ' rel="noopener noreferrer">';
+
+    const tokens = rel[2].split(/\s+/).filter(Boolean);
+    if (!tokens.some((token) => token.toLowerCase() === 'noopener')) tokens.push('noopener');
+    if (!tokens.some((token) => token.toLowerCase() === 'noreferrer')) tokens.push('noreferrer');
+    return tag.replace(rel[0], `rel="${tokens.join(' ')}"`);
+  });
+}
+
+function normalizeAssetVersions(body, contentType) {
+  if (!contentType.includes('text/html')) return body;
+
+  for (const asset of VERSIONED_ASSETS) {
+    const escaped = asset.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    body = body.replace(
+      new RegExp(`/assets/${escaped}(?:\\?v=[^"'\\s>]*)?`, 'g'),
+      `/assets/${asset}?v=${ASSET_VERSION}`
+    );
+  }
+  return body;
+}
+
+function injectNavigationAssets(body, contentType) {
+  if (!contentType.includes('text/html') || !body.includes('site-header')) return body;
 
   const assets = [];
   if (!body.includes('/assets/header-goal-nav.css')) {
-    assets.push('<link rel="stylesheet" href="/assets/header-goal-nav.css?v=2"/>');
+    assets.push(`<link rel="stylesheet" href="/assets/header-goal-nav.css?v=${ASSET_VERSION}"/>`);
   }
   if (!body.includes('/assets/mobile-header.css')) {
-    assets.push('<link rel="stylesheet" href="/assets/mobile-header.css?v=1"/>');
+    assets.push(`<link rel="stylesheet" href="/assets/mobile-header.css?v=${ASSET_VERSION}"/>`);
   }
   if (!body.includes('/assets/mobile-header.js')) {
-    assets.push('<script defer src="/assets/mobile-header.js?v=1"></script>');
+    assets.push(`<script defer src="/assets/mobile-header.js?v=${ASSET_VERSION}"></script>`);
+  }
+
+  return assets.length ? body.replace('</head>', `${assets.join('')}</head>`) : body;
+}
+
+function injectQualityAssets(body, contentType) {
+  if (!contentType.includes('text/html')) return body;
+
+  const assets = [];
+  if (!body.includes('/assets/quality-fixes.css')) {
+    assets.push(`<link rel="stylesheet" href="/assets/quality-fixes.css?v=${ASSET_VERSION}"/>`);
+  }
+  if (!body.includes('/assets/quality-fixes.js')) {
+    assets.push(`<script defer src="/assets/quality-fixes.js?v=${ASSET_VERSION}"></script>`);
   }
 
   return assets.length ? body.replace('</head>', `${assets.join('')}</head>`) : body;
@@ -196,10 +251,10 @@ function injectIntentPopupAssets(body, contentType, pathname) {
 
   const assets = [];
   if (!body.includes('/assets/intent-popup.css')) {
-    assets.push('<link rel="stylesheet" href="/assets/intent-popup.css?v=1"/>');
+    assets.push(`<link rel="stylesheet" href="/assets/intent-popup.css?v=${ASSET_VERSION}"/>`);
   }
   if (!body.includes('/assets/intent-popup.js')) {
-    assets.push('<script defer src="/assets/intent-popup.js?v=1"></script>');
+    assets.push(`<script defer src="/assets/intent-popup.js?v=${ASSET_VERSION}"></script>`);
   }
 
   return assets.length ? body.replace('</head>', `${assets.join('')}</head>`) : body;
@@ -210,7 +265,7 @@ function replaceMissingSocialPreview(body, contentType) {
 
   return body.replace(
     /https:\/\/jamesrealty\.uk\/james-realty-social-preview\.jpg/g,
-    'https://jamesrealty.uk/images/dubai-residential-portfolio.webp'
+    'https://jamesrealty.uk/images/james-realty-social-preview.webp'
   );
 }
 
@@ -230,12 +285,19 @@ function updateDubaiDashboardScript(body, contentType, pathname) {
 
 export async function onRequest(context) {
   const requestUrl = new URL(context.request.url);
+  const hostname = requestUrl.hostname.toLowerCase();
+  const pathname = requestUrl.pathname;
 
-  if (requestUrl.hostname.toLowerCase() === 'www.jamesrealty.uk') {
-    return Response.redirect(
-      `${PRIMARY_ORIGIN}${requestUrl.pathname}${requestUrl.search}${requestUrl.hash}`,
-      301
-    );
+  if (hostname === 'www.jamesrealty.uk') {
+    return Response.redirect(`${PRIMARY_ORIGIN}${pathname}${requestUrl.search}`, 301);
+  }
+
+  if (pathname === '/home' || pathname === '/home/') {
+    return Response.redirect(`${PRIMARY_ORIGIN}/${requestUrl.search}`, 301);
+  }
+
+  if (pathname === '/dubai-transactions' || pathname === '/dubai-transactions/') {
+    return Response.redirect(`${PRIMARY_ORIGIN}/dubai-data/${requestUrl.search}`, 301);
   }
 
   const response = await context.next();
@@ -261,12 +323,15 @@ export async function onRequest(context) {
   body = replacePersonalName(body);
   body = renameBlogPageLabels(body, contentType);
   body = rewriteDubaiDataContentLinks(body, contentType);
-  body = standardizeHeaderNavigation(body, contentType, requestUrl.pathname);
+  body = standardizeHeaderNavigation(body, contentType, pathname);
   body = addConversionFooterLinks(body, contentType);
   body = injectNavigationAssets(body, contentType);
-  body = injectIntentPopupAssets(body, contentType, requestUrl.pathname);
+  body = injectIntentPopupAssets(body, contentType, pathname);
+  body = injectQualityAssets(body, contentType);
+  body = hardenBlankTargets(body, contentType);
   body = replaceMissingSocialPreview(body, contentType);
-  body = updateDubaiDashboardScript(body, contentType, requestUrl.pathname);
+  body = normalizeAssetVersions(body, contentType);
+  body = updateDubaiDashboardScript(body, contentType, pathname);
 
   headers.delete('content-length');
 
