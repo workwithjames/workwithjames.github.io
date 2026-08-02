@@ -7,7 +7,7 @@
       {key:'fixed-header',href:'/assets/fixed-header.css?v=2'},
       {key:'about-flow-right',href:'/assets/about-flow-right.css?v=1'},
       {key:'scroll-navigation',href:'/assets/scroll-navigation.css?v=1'},
-      {key:'header-goal-nav',href:'/assets/header-goal-nav.css?v=1'}
+      {key:'header-goal-nav',href:'/assets/header-goal-nav.css?v=2'}
     ];
     styles.forEach(function(item){
       if(document.querySelector('link[data-'+item.key+']')||document.querySelector('link[href^="'+item.href.split('?')[0]+'"]')){return;}
@@ -21,13 +21,33 @@
   loadLayoutStyles();
 
   var keys=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid','msclkid'];
-  var params=new URLSearchParams(window.location.search);
-  var attribution={};
-  keys.forEach(function(key){var value=params.get(key);if(value){attribution[key]=value;}});
-  if(document.referrer){attribution.referrer=document.referrer;}
-  if(Object.keys(attribution).length){try{sessionStorage.setItem('james_attribution',JSON.stringify(attribution));}catch(e){}}
-  function saved(){try{return JSON.parse(sessionStorage.getItem('james_attribution')||'{}');}catch(e){return {};}}
-  window.jamesAttribution=function(){var data=saved();var parts=[];Object.keys(data).forEach(function(key){parts.push(key+': '+data[key]);});return parts.length?parts.join(' | '):'Direct';};
+  function readAttribution(){try{return JSON.parse(sessionStorage.getItem('james_attribution')||'{}');}catch(error){return {};}}
+  function saveAttribution(data){try{sessionStorage.setItem('james_attribution',JSON.stringify(data));}catch(error){}}
+
+  var existingAttribution=readAttribution();
+  if(!Object.keys(existingAttribution).length){
+    var params=new URLSearchParams(window.location.search);
+    var incoming={};
+    keys.forEach(function(key){var value=params.get(key);if(value){incoming[key]=value;}});
+    if(document.referrer){
+      try{
+        var referrerUrl=new URL(document.referrer);
+        if(referrerUrl.origin!==location.origin){incoming.referrer=document.referrer;}
+      }catch(error){}
+    }
+    if(Object.keys(incoming).length){
+      incoming.landing_page=location.pathname;
+      saveAttribution(incoming);
+    }
+  }
+
+  window.jamesAttribution=function(){
+    var data=readAttribution();
+    var parts=[];
+    Object.keys(data).forEach(function(key){parts.push(key+': '+data[key]);});
+    return parts.length?parts.join(' | '):'Direct';
+  };
+
   function event(name,data){if(typeof window.gtag==='function'){window.gtag('event',name,data||{});}}
 
   function removeVisibleBlogDates(){
