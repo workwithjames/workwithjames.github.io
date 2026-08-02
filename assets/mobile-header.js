@@ -7,6 +7,7 @@
     menu.id='mobile-site-menu';
     menu.classList.add('mobile-site-menu');
     menu.setAttribute('aria-hidden','true');
+    menu.setAttribute('inert','');
 
     var toggle=header.querySelector('.mobile-menu-toggle');
     if(!toggle){
@@ -38,6 +39,8 @@
     }
 
     function setOpen(open,restoreFocus){
+      if(open){menu.removeAttribute('inert');}
+      else{menu.setAttribute('inert','');}
       menu.classList.toggle('is-open',open);
       document.body.classList.toggle('mobile-menu-open',open);
       toggle.setAttribute('aria-expanded',open?'true':'false');
