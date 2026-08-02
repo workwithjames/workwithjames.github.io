@@ -1,201 +1,57 @@
+const BASE = 'https://adrec.gov.ae';
+const SOURCE_URL = `${BASE}/en/market-data`;
 const CACHE_SECONDS = 3600;
 
-const SOURCES = {
-  dashboardEn: 'https://adrec.gov.ae/en/property_and_index/adrec-dashboards',
-  dashboardAr: 'https://adrec.gov.ae/ar-ae/property_and_index/adrec-dashboards',
-  homeEn: 'https://adrec.gov.ae/en',
-  homeAr: 'https://adrec.gov.ae/'
-};
-
-function decodeEntities(value) {
-  return String(value || '')
-    .replace(/&nbsp;/gi, ' ')
-    .replace(/&amp;/gi, '&')
-    .replace(/&quot;/gi, '"')
-    .replace(/&#39;|&apos;/gi, "'")
-    .replace(/&lt;/gi, '<')
-    .replace(/&gt;/gi, '>')
-    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
-    .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(parseInt(code, 16)));
+function number(value) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : null;
 }
 
-function normalizeDigits(value) {
-  const arabic = '٠١٢٣٤٥٦٧٨٩';
-  const persian = '۰۱۲۳۴۵۶۷۸۹';
-  return String(value || '')
-    .replace(/[٠-٩]/g, (digit) => String(arabic.indexOf(digit)))
-    .replace(/[۰-۹]/g, (digit) => String(persian.indexOf(digit)))
-    .replace(/[٬،]/g, ',')
-    .replace(/٫/g, '.');
+function metric(value, yoy) {
+  const parsed = number(value);
+  if (parsed === null) return null;
+  return { value: parsed, yoy: number(yoy) };
 }
 
-function visibleText(html) {
-  return normalizeDigits(
-    decodeEntities(
-      String(html || '')
-        .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, ' ')
-        .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, ' ')
-        .replace(/<svg\b[^>]*>[\s\S]*?<\/svg>/gi, ' ')
-        .replace(/<[^>]+>/g, ' ')
-    )
-  )
-    .replace(/\s+/g, ' ')
-    .trim();
-}
+async function fetchJson(path, params = {}) {
+  const url = new URL(path, BASE);
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== '') url.searchParams.set(key, String(value));
+  });
 
-function rawText(html) {
-  return normalizeDigits(decodeEntities(String(html || ''))).replace(/\\u0026/g, '&');
-}
-
-function compactNumber(value) {
-  const match = String(value || '')
-    .trim()
-    .match(/-?\d[\d,]*(?:\.\d+)?\s*(?:trillion|billion|million|bn|mn|tn|b|m|k)?/i);
-  return match ? match[0].replace(/\s+/g, '') : null;
-}
-
-function parseNumber(value) {
-  if (!value) return null;
-  const cleaned = String(value).toLowerCase().replace(/,/g, '').trim();
-  const match = cleaned.match(/(-?\d+(?:\.\d+)?)(trillion|billion|million|bn|mn|tn|b|m|k)?/i);
-  if (!match) return null;
-  const amount = Number(match[1]);
-  if (!Number.isFinite(amount)) return null;
-  const suffix = match[2] || '';
-  const multiplier = {
-    trillion: 1e12,
-    tn: 1e12,
-    billion: 1e9,
-    bn: 1e9,
-    b: 1e9,
-    million: 1e6,
-    mn: 1e6,
-    m: 1e6,
-    k: 1e3
-  }[suffix] || 1;
-  return amount * multiplier;
-}
-
-function findOccurrences(text, label) {
-  const positions = [];
-  let offset = 0;
-  const source = text.toLowerCase();
-  const needle = label.toLowerCase();
-  while (offset < source.length) {
-    const index = source.indexOf(needle, offset);
-    if (index === -1) break;
-    positions.push(index);
-    offset = index + needle.length;
-  }
-  return positions;
-}
-
-function extractMetricFromText(text, labels, occurrence = 0) {
-  for (const label of labels) {
-    const positions = findOccurrences(text, label);
-    if (!positions.length) continue;
-    const position = positions[Math.min(occurrence, positions.length - 1)];
-    const window = text.slice(position + label.length, position + label.length + 280);
-    const value = compactNumber(window);
-    if (!value) continue;
-
-    const valueIndex = window.indexOf(value);
-    const afterValue = valueIndex >= 0 ? window.slice(valueIndex + value.length, valueIndex + value.length + 180) : window;
-    const percentMatch = afterValue.match(/(?:up|down|increase|decrease|ارتفاع|انخفاض)?\s*[:：]?\s*(-?\d+(?:\.\d+)?)\s*%/i);
-    const directionMatch = afterValue.match(/\b(down|decrease)\b|انخفاض/i);
-
-    return {
-      display: value,
-      value: parseNumber(value),
-      yoy: percentMatch ? Number(percentMatch[1]) * (directionMatch ? -1 : 1) : null
-    };
-  }
-  return null;
-}
-
-function extractMetric(html, labels, occurrence = 0) {
-  return (
-    extractMetricFromText(visibleText(html), labels, occurrence) ||
-    extractMetricFromText(rawText(html), labels, occurrence)
-  );
-}
-
-function mergeMetric(...metrics) {
-  return metrics.find((metric) => metric && metric.value !== null) || null;
-}
-
-function parseDashboard(htmlEn, htmlAr) {
-  return {
-    transactionValue: mergeMetric(
-      extractMetric(htmlEn, ['Total Transactional Value', 'Total Transaction Value']),
-      extractMetric(htmlAr, ['إجمالي قيمة المعاملات', 'إجمالي قيمة التصرفات'])
-    ),
-    transactionVolume: mergeMetric(
-      extractMetric(htmlEn, ['Total Transactional Volume', 'Total Transaction Volume']),
-      extractMetric(htmlAr, ['إجمالي حجم المعاملات', 'إجمالي عدد المعاملات'])
-    ),
-    apartmentSaleIndex: mergeMetric(
-      extractMetric(htmlEn, ['Apartment Sale Price Index']),
-      extractMetric(htmlAr, ['مؤشر أسعار بيع الشقق'])
-    ),
-    villaSaleIndex: mergeMetric(
-      extractMetric(htmlEn, ['Villa Sale Price Index']),
-      extractMetric(htmlAr, ['مؤشر أسعار بيع الفلل']),
-      extractMetric(htmlEn, ['Apartment Sale Price Index'], 1)
-    ),
-    rentedUnits: mergeMetric(
-      extractMetric(htmlEn, ['Rented Residential Units']),
-      extractMetric(htmlAr, ['الوحدات السكنية المؤجرة'])
-    ),
-    apartmentRentIndex: mergeMetric(
-      extractMetric(htmlEn, ['Apartment Rent Price Index']),
-      extractMetric(htmlAr, ['مؤشر أسعار إيجار الشقق'])
-    ),
-    villaRentIndex: mergeMetric(
-      extractMetric(htmlEn, ['Villa Rent Price Index']),
-      extractMetric(htmlAr, ['مؤشر أسعار إيجار الفلل'])
-    )
-  };
-}
-
-function parseHome(htmlEn, htmlAr) {
-  return {
-    ytdTransactionValue: mergeMetric(
-      extractMetric(htmlEn, ['Transaction Value']),
-      extractMetric(htmlAr, ['قيمة التصرفات العقارية', 'قيمة المعاملات العقارية'])
-    ),
-    ytdSalesValue: mergeMetric(
-      extractMetric(htmlEn, ['Sales Value']),
-      extractMetric(htmlAr, ['قيمة المبيعات'])
-    ),
-    ytdMortgageValue: mergeMetric(
-      extractMetric(htmlEn, ['Mortgage Value']),
-      extractMetric(htmlAr, ['قيمة الرهن', 'قيمة الرهون'])
-    ),
-    ytdFdiValue: mergeMetric(
-      extractMetric(htmlEn, ['Foreign Direct Investment Transaction', 'Foreign Direct Investment']),
-      extractMetric(htmlAr, ['قيمة الاستثمار الأجنبي المباشر', 'الاستثمار الأجنبي المباشر'])
-    )
-  };
-}
-
-async function fetchHtml(url) {
-  const response = await fetch(url, {
+  const response = await fetch(url.toString(), {
     headers: {
-      Accept: 'text/html,application/xhtml+xml',
-      'Accept-Language': 'en-AE,en;q=0.9,ar;q=0.6',
-      'User-Agent': 'JamesRealty-AbuDhabiData/1.0'
+      Accept: 'application/json',
+      'Accept-Language': 'en-AE,en;q=0.9',
+      Referer: SOURCE_URL,
+      'User-Agent': 'JamesRealty-AbuDhabiData/2.0'
     },
-    redirect: 'follow',
     cf: { cacheTtl: CACHE_SECONDS, cacheEverything: true }
   });
 
-  if (!response.ok) throw new Error(`${url} returned ${response.status}`);
+  if (!response.ok) throw new Error(`${url.pathname} returned ${response.status}`);
+  return response.json();
+}
+
+function unwrap(value) {
+  return value && typeof value === 'object' && !Array.isArray(value) && value.Data ? value.Data : value;
+}
+
+function compactSale(row) {
   return {
-    html: await response.text(),
-    lastModified: response.headers.get('last-modified') || null,
-    etag: response.headers.get('etag') || null,
-    finalUrl: response.url
+    assetClass: row.asset_class || row.assetClass || '',
+    propertyType: row.property_type || row.propertyType || '',
+    registration: row.sale_application_datetime || row.registration_date || row.date || '',
+    soldAreaSqm: number(row.property_sold_area_sqm),
+    plotAreaSqm: number(row.land_plot_ground_area_sqm),
+    rateAedSqm: number(row.rate_aed_per_sqm),
+    layout: row.property_layout || row.layout || '',
+    district: row.district || '',
+    community: row.community || '',
+    project: row.project_name || row.project || '',
+    priceAed: number(row.property_sale_price_aed || row.price_aed),
+    saleType: row.sale_type || '',
+    sequence: row.sequence || row.id || ''
   };
 }
 
@@ -210,73 +66,122 @@ function responseJson(payload, status = 200) {
   });
 }
 
-function metricCount(metrics) {
-  return Object.values(metrics).filter((metric) => metric && metric.value !== null).length;
-}
-
 export async function onRequestGet(context) {
   const requestUrl = new URL(context.request.url);
-  const cacheKey = new Request(`${requestUrl.origin}/api/abu-dhabi-data?v=3`, context.request);
+  const force = requestUrl.searchParams.has('refresh');
   const cache = caches.default;
-  const cached = await cache.match(cacheKey);
-  if (cached) return cached;
+  const cacheKey = new Request(`${requestUrl.origin}/api/abu-dhabi-data?v=6`, context.request);
+  if (!force) {
+    const cached = await cache.match(cacheKey);
+    if (cached) return cached;
+  }
+
+  const now = new Date();
+  const from = new Date(now);
+  from.setDate(from.getDate() - 120);
+  const iso = (date) => date.toISOString().slice(0, 10);
+
+  const requests = {
+    transactionValue: fetchJson('/api/feature/MarketData/TotalTransactionalValue', { language: 'en' }),
+    transactionVolume: fetchJson('/api/feature/MarketData/TotalTransactionalVolume', { language: 'en' }),
+    apartmentSale: fetchJson('/api/feature/MarketData/GetSalePriceIndex', { propertyType: 'apartment', language: 'en' }),
+    villaSale: fetchJson('/api/feature/MarketData/GetSalePriceIndex', { propertyType: 'villa', language: 'en' }),
+    rentedUnits: fetchJson('/api/feature/MarketData/GetRentedResiUnits', { language: 'en' }),
+    apartmentRent: fetchJson('/api/feature/MarketData/GetRentPriceIndex', { propertyType: 'apartment', language: 'en' }),
+    villaRent: fetchJson('/api/feature/MarketData/GetRentPriceIndex', { propertyType: 'villa', language: 'en' }),
+    recentSales: fetchJson('/api/feature/MarketData/RecentSales', {
+      page: 0,
+      size: 100,
+      fromDate: iso(from),
+      toDate: iso(now),
+      language: 'en'
+    }),
+    transactionSeries: fetchJson('/api/feature/MarketData/TotalTransactionsByType', {
+      txnType: 'all',
+      assetClass: 'all',
+      statisticTimeAggregation: 'monthly',
+      statisticDescription: 'value',
+      language: 'en'
+    }),
+    salesByAsset: fetchJson('/api/feature/MarketData/GetTotalSalesByAsset', {
+      assetClass: 'all',
+      area: 'all',
+      statisticTimeAggregation: 'monthly',
+      statisticDescription: 'value',
+      language: 'en'
+    })
+  };
+
+  const names = Object.keys(requests);
+  const settled = await Promise.allSettled(Object.values(requests));
+  const data = {};
+  const errors = {};
+  settled.forEach((result, index) => {
+    if (result.status === 'fulfilled') data[names[index]] = unwrap(result.value);
+    else errors[names[index]] = result.reason instanceof Error ? result.reason.message : String(result.reason);
+  });
 
   try {
-    const settled = await Promise.allSettled([
-      fetchHtml(SOURCES.dashboardEn),
-      fetchHtml(SOURCES.dashboardAr),
-      fetchHtml(SOURCES.homeEn),
-      fetchHtml(SOURCES.homeAr)
-    ]);
+    const tv = data.transactionValue || {};
+    const volume = data.transactionVolume || {};
+    const apartmentSale = data.apartmentSale || {};
+    const villaSale = data.villaSale || {};
+    const rented = data.rentedUnits || {};
+    const apartmentRent = data.apartmentRent || {};
+    const villaRent = data.villaRent || {};
 
-    const [dashboardEn, dashboardAr, homeEn, homeAr] = settled.map((result) =>
-      result.status === 'fulfilled' ? result.value : null
-    );
-
-    if (!dashboardEn && !dashboardAr) {
-      throw new Error('The public ADREC dashboard pages could not be retrieved');
-    }
-
-    const dashboard = parseDashboard(dashboardEn?.html || '', dashboardAr?.html || '');
-    const marketPerformance = parseHome(homeEn?.html || '', homeAr?.html || '');
-    const availableMetrics = metricCount(dashboard) + metricCount(marketPerformance);
-
-    const payload = {
-      ok: availableMetrics > 0,
-      source: 'Abu Dhabi Real Estate Centre and DARI',
-      sourceUrl: SOURCES.dashboardEn,
-      officialDashboardUrl: SOURCES.dashboardEn,
-      dariDashboardUrl: 'https://www.dari.ae/adrec/MarketDetails.html',
-      updateFrequency: 'Daily and automatic according to DARI',
-      fetchedAt: new Date().toISOString(),
-      sourceLastModified: dashboardEn?.lastModified || dashboardAr?.lastModified || null,
-      metrics: dashboard,
-      marketPerformance,
-      coverage: {
-        transactions: ['Sales', 'Mortgages', 'Other transactions', 'Residential', 'Commercial', 'Monthly', 'Quarterly', 'Yearly'],
-        residentialSales: ['Apartments', 'Villas', 'Townhouses', 'Penthouses', 'Plots', 'Ready', 'Off-plan', 'Court-mandated'],
-        leases: ['Rented residential units', 'Residential lease values', 'Average annual rents', 'Apartment rent index', 'Villa rent index'],
-        geography: ['Abu Dhabi City', 'Al Ain City', 'Al Dhafra Region', 'District', 'Community', 'Project'],
-        recentSales: ['Asset type', 'Property type', 'Sale type', 'District', 'Community', 'Project', 'Layout']
-      },
-      warning: availableMetrics > 0
-        ? null
-        : 'The official pages loaded, but their current figures were not exposed in readable public page markup.'
+    const metrics = {
+      transactionValue: metric(tv.txn_value_aed, tv.value_yoy_change),
+      transactionVolume: metric(volume.txn_volume, volume.volume_yoy_change),
+      apartmentSaleIndex: metric(apartmentSale.sale_index_value, apartmentSale.index_yoy_change),
+      villaSaleIndex: metric(villaSale.sale_index_value, villaSale.index_yoy_change),
+      rentedUnits: metric(rented.rented_units, rented.rented_units_yoy_change),
+      apartmentRentIndex: metric(apartmentRent.rent_index_value, apartmentRent.index_yoy_change),
+      villaRentIndex: metric(villaRent.rent_index_value, villaRent.index_yoy_change)
     };
 
-    const response = responseJson(payload, payload.ok ? 200 : 206);
+    const recent = data.recentSales || {};
+    const recentRows = Array.isArray(recent.content)
+      ? recent.content.map(compactSale)
+      : Array.isArray(recent)
+        ? recent.map(compactSale)
+        : [];
+
+    const availableMetrics = Object.values(metrics).filter(Boolean).length;
+    if (!availableMetrics) throw new Error('ADREC public JSON endpoints returned no usable headline metrics');
+
+    const payload = {
+      ok: true,
+      source: 'Abu Dhabi Real Estate Centre',
+      sourceUrl: SOURCE_URL,
+      officialDashboardUrl: SOURCE_URL,
+      fetchedAt: new Date().toISOString(),
+      updateFrequency: 'Daily and automatic according to ADREC',
+      period: 'Headline cards cover the last 12 months',
+      metrics,
+      recentSales: {
+        from: iso(from),
+        to: iso(now),
+        total: number(recent.totalElements) || recentRows.length,
+        rows: recentRows
+      },
+      transactionSeries: Array.isArray(data.transactionSeries) ? data.transactionSeries : [],
+      salesByAsset: Array.isArray(data.salesByAsset) ? data.salesByAsset : [],
+      partialErrors: errors
+    };
+
+    const response = responseJson(payload);
     context.waitUntil(cache.put(cacheKey, response.clone()));
     return response;
   } catch (error) {
     return responseJson({
       ok: false,
-      source: 'Abu Dhabi Real Estate Centre and DARI',
-      sourceUrl: SOURCES.dashboardEn,
-      officialDashboardUrl: SOURCES.dashboardEn,
-      dariDashboardUrl: 'https://www.dari.ae/adrec/MarketDetails.html',
+      source: 'Abu Dhabi Real Estate Centre',
+      sourceUrl: SOURCE_URL,
       fetchedAt: new Date().toISOString(),
-      error: 'The public Abu Dhabi market data could not be retrieved at this moment.',
-      detail: error instanceof Error ? error.message : String(error)
+      error: 'The official Abu Dhabi public JSON data could not be retrieved at this moment.',
+      detail: error instanceof Error ? error.message : String(error),
+      partialErrors: errors
     }, 502);
   }
 }
