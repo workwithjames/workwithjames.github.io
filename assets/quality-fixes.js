@@ -1,4 +1,22 @@
 (function(){
+  function loadMotionSystem(){
+    if(!document.querySelector('link[href^="/assets/motion-system.css"]')){
+      var style=document.createElement('link');
+      style.rel='stylesheet';
+      style.href='/assets/motion-system.css?v=20260802-1';
+      style.setAttribute('data-motion-system','true');
+      document.head.appendChild(style);
+    }
+
+    if(!document.querySelector('script[src^="/assets/motion-system.js"]')){
+      var script=document.createElement('script');
+      script.src='/assets/motion-system.js?v=20260802-1';
+      script.async=false;
+      script.setAttribute('data-motion-system','true');
+      document.head.appendChild(script);
+    }
+  }
+
   function init(){
     document.querySelectorAll('.market-table-wrap,.ajman-table-wrap').forEach(function(region,index){
       if(!region.hasAttribute('tabindex')){region.setAttribute('tabindex','0');}
@@ -16,6 +34,7 @@
     });
   }
 
+  loadMotionSystem();
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}
   else{init();}
 })();
