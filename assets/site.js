@@ -104,6 +104,13 @@
 
   function ensureCitationNavigation(){
     document.querySelectorAll('.footer-links').forEach(function(nav){
+      if(!nav.querySelector('a[href="/contact/"]')){
+        var contactLink=document.createElement('a');
+        contactLink.href='/contact/';
+        contactLink.textContent='Contact Me';
+        var existingCitation=nav.querySelector('a[href="/cite/"]');
+        if(existingCitation){nav.insertBefore(contactLink,existingCitation);}else{nav.appendChild(contactLink);}
+      }
       if(nav.querySelector('a[href="/cite/"]')){return;}
       var link=document.createElement('a');
       link.href='/cite/';
