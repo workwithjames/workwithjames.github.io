@@ -110,7 +110,7 @@ function standardizeHeaderNavigation(body, contentType, pathname) {
 
   const flow = headerFlow(pathname);
   body = body.replace(
-    /(<div\b[^>]*class=["'][^"']*\bglobal-links\b[^"']*["'][^>]*>)[\s\S]*?(<\/div>)/i,
+    /(<div\b[^>]*class=["'][^"']*\bglobal-links\b[^"']*["'][^>]*>)[\s\S]*?(<\/div>\s*<a\b[^>]*class=["'][^"']*\bnav-cta\b)/i,
     `$1${flow}$2`
   );
   body = body.replace(
