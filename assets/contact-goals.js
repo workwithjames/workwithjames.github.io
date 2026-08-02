@@ -10,6 +10,7 @@
     if(!form){return;}
 
     var goalInputs=Array.prototype.slice.call(form.querySelectorAll('input[name="goal"]'));
+    var pickerInputs=Array.prototype.slice.call(document.querySelectorAll('input[name="goal-picker"][form="contact-goal-form"]'));
     var panels=Array.prototype.slice.call(form.querySelectorAll('[data-goal-panel]'));
     var title=document.getElementById('contact-form-title');
     var status=document.getElementById('contact-goal-status');
@@ -23,6 +24,7 @@
     function selectGoal(goal,source){
       if(!GOAL_LABELS[goal]){goal='buy';}
       goalInputs.forEach(function(input){input.checked=input.value===goal;});
+      pickerInputs.forEach(function(input){input.checked=input.value===goal;});
       panels.forEach(function(panel){
         var active=panel.dataset.goalPanel===goal;
         panel.hidden=!active;
@@ -48,7 +50,7 @@
       return 'buy';
     }
 
-    goalInputs.forEach(function(input){
+    pickerInputs.forEach(function(input){
       input.addEventListener('change',function(){if(input.checked){selectGoal(input.value,'contact_page');}});
     });
 
