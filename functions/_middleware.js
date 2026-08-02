@@ -74,6 +74,17 @@ function addAjmanNavigation(body, contentType) {
   );
 }
 
+function replaceMissingSocialPreview(body, contentType) {
+  if (!contentType.includes('text/html')) {
+    return body;
+  }
+
+  return body.replace(
+    /https:\/\/jamesrealty\.uk\/james-realty-social-preview\.jpg/g,
+    'https://jamesrealty.uk/images/dubai-residential-portfolio.webp'
+  );
+}
+
 export async function onRequest(context) {
   const requestUrl = new URL(context.request.url);
 
@@ -105,6 +116,7 @@ export async function onRequest(context) {
   body = removeDirectGa4Configuration(body, contentType);
   body = renameBlogPageLabels(body, contentType);
   body = addAjmanNavigation(body, contentType);
+  body = replaceMissingSocialPreview(body, contentType);
 
   headers.delete('content-length');
 
