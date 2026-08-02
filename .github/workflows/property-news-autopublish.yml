@@ -1,6 +1,5 @@
 name: Publish property news briefs
 
-# One-time ADREC endpoint probe requested on 2026-08-02.
 on:
   schedule:
     - cron: '23 * * * *'
@@ -9,7 +8,6 @@ on:
     paths:
       - '.github/workflows/property-news-autopublish.yml'
       - '.automation/property-news-script/**'
-      - '.automation/adrec-debug-request'
 
 permissions:
   contents: write
@@ -53,9 +51,6 @@ jobs:
 
       - name: Install parser dependencies
         run: python -m pip install --disable-pip-version-check requests beautifulsoup4
-
-      - name: Probe ADREC public JSON endpoints
-        run: python .automation/adrec_probe.py
 
       - name: Check sources and publish briefs
         run: python scripts/property_news_autopublish.py
