@@ -1,0 +1,485 @@
+{
+  "page_url": "https://adrec.gov.ae/en/market-data",
+  "status": 200,
+  "length": 228484,
+  "headers": {
+    "Cache-Control": "private",
+    "Content-Type": "text/html; charset=utf-8",
+    "Server": "Microsoft-IIS/10.0",
+    "Set-Cookie": "adrec#lang=en; path=/; secure; SameSite=None, shell#lang=en; path=/; secure; SameSite=None, ASP.NET_SessionId=wuzcexwyyj3m31hzlgf0li1l; path=/; secure; HttpOnly; SameSite=None, SC_ANALYTICS_GLOBAL_COOKIE=c5efdf0a35b441b298c8baf08158594a|False; expires=Wed, 30-Jul-2036 06:42:12 GMT; path=/; secure; HttpOnly; SameSite=None",
+    "Accept-CH": "Sec-CH-UA-Full-Version-List,Sec-CH-UA-Platform-Version,Sec-CH-UA-Arch,Sec-CH-UA-Model,Sec-CH-UA-Bitness",
+    "Date": "Sun, 02 Aug 2026 06:42:12 GMT",
+    "Content-Length": "228484"
+  },
+  "visible_text_start": "market-data Home Services Sectors Community Affairs Market Data Interactive Map ADREC Dashboards Quanta Advanced Reports Market Reports Mortgage Calculator Rules and Regulations Media Centre Directory Contact Us Verify Document Close Text size A A Home Services Sectors Back Community Affairs Market Data Back Interactive Map ADREC Dashboards Quanta Advanced Reports Market Reports Mortgage Calculator Rules and Regulations Media Centre Directory Contact Us Font Size Dark Mode Back Font Size Main text will look like this: “Hello ADREC” A A Transaction Residential Leases Price Indices Total Transactional Value Last 12 Months 0% YoY Total Transactional Volume Last 12 Months 0% YoY Apartment Sale Price Index 0% YoY Apartment Sale Price Index 0% YoY Total Transaction by Type Export All Filters Export All Filters × Transaction Select Asset Type Select Metric Select Time Select Clear All Show Results Transaction Asset Type Metric Monthly Total Sales by Asset Class Export All Filters Export All Filters × Asset Type Select Area Select Metric Select Time Select Clear All Show Results All Area Metric Monthly Total Residential Sales by Period Export All Filters Export All Filters × Property Type Select Area Select Layout Select Metric Select Time Select Clear All Show Results All Area Layout Metric Monthly Residential Unit Sales Financing Export All Filters Export All Filters × Property Type Select Area Select Sale Type Select Time Select Clear All Show Results All Area Sale Type Monthly Recent Sales Export All Filters Export All Filters × Asset Type Select Asset Subtype Select Sale Type Select District Select Community Select Project Name Select Layout Select Clear All Show Results Asset Type Asset Type Sale Type District Community Project Name Layout Rented Residential Units 0%  YoY Apartment Rent Price Index 0% YoY Villa Rent Price Index 0% YoY Total Residential Lease Units by Period Export All Filters Export All Filters × Property Type Select Layout Select Area Select Clear All Show Results Property Type Layout Area Residential Lease Values by Period Export All Filters Export All Filters × Property Type Select Layout Select Area Select Clear All Show Results Property Type Layout Area Average Annual Rents over Time Export All Filters Export All Filters × Property Type Select Layout Select Area Select Clear All Show Results Property Type Layout Area Sale Price Indices over Time Export All Filters Export All Filters × Property Type Select Area Select Clear All Show Results Property Type Area Rent Price Indices over Time Export All Filters Export All Filters × Property Type Select Area Select Clear All Show Results Property Type Area Average Sale and Rent Prices by Product and Area Export All Filters Export All Filters × Property Type Select Property Layout Select Area Select Clear All Show Results Property Type Property Layout Area Home Services Market Data Rules & Regulations Media Centre Directory ADREC APIs Contact Us About Us FAQs © 2026 Abu Dhabi Real Estate Centre. Privacy Policy Terms and Conditions",
+  "snippets": {
+    "Total Transactional Value": [
+      "ce-nowrap px-4 3xl:px-6 py-3.5 lg:py-4\">\r\n\r\n                    Price Indices\r\n                </li>\r\n            </ul>\r\n\r\n\r\n\r\n\r\n            <div x-show=\"activeTab === 'tab0'\">\r\n                <!-- Row 1 -->\r\n                <!-- Responsive Cards Row -->\r\n                <!-- Cards Wrapper -->\r\n                <div class=\"flex gap-4 overflow-x-auto md:grid md:grid-cols-2 xl:grid-cols-4 md:overflow-visible pb-2\r\n         snap-x snap-mandatory scrollbar-hide\">\r\n\r\n                    <!-- Card 1: Total Transactional Value -->\r\n                    <div class=\"bg-[#EDF3EB] dark:bg-[#1A222C] p-4 text-black dark:text-white text-center rounded-lg shadow-sm\r\n           min-w-[260px] md:min-w-0 snap-start flex flex-col justify-between\">\r\n\r\n                        <div>\r\n                            <h3 class=\"text-base font-normal mb-2\">\r\n                                Total Transactional Value\r\n                                <span><img src=\"/adrec-assets/images/svg/AED.svg\" class=\"w-4 h-4 dark:brightness-0 dark:invert inline-block\"></span>\r\n                            </h3>\r\n                            <div id=\"txnValue\" class=\"text-[32px] font-bold\">&nbsp;</div>\r\n                            <p class=\"text-sm text-black dark:text-white my-2\">Last 12 Months</p>\r\n                        </div>\r\n\r\n                        <div class=\"mt-2 rounded inline-flex items-center gap-1 text-base text-white bg-successGreen px-2 py-1 mx-auto\">\r\n                            <img src=\"/adrec-assets/images/market-data/up-arrow.svg\" alt=\"Up\" class=\"w-4 h-4 dark:brightness-0 dark:invert\" />\r\n                            <span id=\"txnValueYoY\">0% YoY </span>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <!-- Card 2: Total Transactional Volume -->\r\n                    <div class=\"bg-[#EDF3EB] dark:bg-[#1A222C] p-4 text-black dark:text-white text-center rounded-lg shadow-sm\r\n           min-w-[260px] md:min-w-0 snap-start flex flex-col justify-between\">\r\n\r\n     ",
+      "2 xl:grid-cols-4 md:overflow-visible pb-2\r\n         snap-x snap-mandatory scrollbar-hide\">\r\n\r\n                    <!-- Card 1: Total Transactional Value -->\r\n                    <div class=\"bg-[#EDF3EB] dark:bg-[#1A222C] p-4 text-black dark:text-white text-center rounded-lg shadow-sm\r\n           min-w-[260px] md:min-w-0 snap-start flex flex-col justify-between\">\r\n\r\n                        <div>\r\n                            <h3 class=\"text-base font-normal mb-2\">\r\n                                Total Transactional Value\r\n                                <span><img src=\"/adrec-assets/images/svg/AED.svg\" class=\"w-4 h-4 dark:brightness-0 dark:invert inline-block\"></span>\r\n                            </h3>\r\n                            <div id=\"txnValue\" class=\"text-[32px] font-bold\">&nbsp;</div>\r\n                            <p class=\"text-sm text-black dark:text-white my-2\">Last 12 Months</p>\r\n                        </div>\r\n\r\n                        <div class=\"mt-2 rounded inline-flex items-center gap-1 text-base text-white bg-successGreen px-2 py-1 mx-auto\">\r\n                            <img src=\"/adrec-assets/images/market-data/up-arrow.svg\" alt=\"Up\" class=\"w-4 h-4 dark:brightness-0 dark:invert\" />\r\n                            <span id=\"txnValueYoY\">0% YoY </span>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <!-- Card 2: Total Transactional Volume -->\r\n                    <div class=\"bg-[#EDF3EB] dark:bg-[#1A222C] p-4 text-black dark:text-white text-center rounded-lg shadow-sm\r\n           min-w-[260px] md:min-w-0 snap-start flex flex-col justify-between\">\r\n\r\n                        <div>\r\n                            <h3 class=\"text-base font-normal mb-2\">\r\n                                Total Transactional Volume\r\n                            </h3>\r\n                            <div id=\"txnVolume\" class=\"text-[32px] font-bold\">&nbsp;</div>\r\n                            <p class=\"text-sm text-black dark:text-white my-2\">Last 12 Mont"
+    ],
+    "Total Transactional Volume": [
+      "\">Last 12 Months</p>\r\n                        </div>\r\n\r\n                        <div class=\"mt-2 rounded inline-flex items-center gap-1 text-base text-white bg-successGreen px-2 py-1 mx-auto\">\r\n                            <img src=\"/adrec-assets/images/market-data/up-arrow.svg\" alt=\"Up\" class=\"w-4 h-4 dark:brightness-0 dark:invert\" />\r\n                            <span id=\"txnValueYoY\">0% YoY </span>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <!-- Card 2: Total Transactional Volume -->\r\n                    <div class=\"bg-[#EDF3EB] dark:bg-[#1A222C] p-4 text-black dark:text-white text-center rounded-lg shadow-sm\r\n           min-w-[260px] md:min-w-0 snap-start flex flex-col justify-between\">\r\n\r\n                        <div>\r\n                            <h3 class=\"text-base font-normal mb-2\">\r\n                                Total Transactional Volume\r\n                            </h3>\r\n                            <div id=\"txnVolume\" class=\"text-[32px] font-bold\">&nbsp;</div>\r\n                            <p class=\"text-sm text-black dark:text-white my-2\">Last 12 Months</p>\r\n                        </div>\r\n\r\n                        <div class=\"mt-2 rounded inline-flex items-center gap-1 text-base text-white bg-successGreen px-2 py-1 mx-auto\">\r\n                            <img src=\"/adrec-assets/images/market-data/up-arrow.svg\" alt=\"Up\" class=\"w-4 h-4 dark:brightness-0 dark:invert\" />\r\n                            <span id=\"txnVolumeYoY\">0% YoY</span>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <!-- Card 3: Apartment Sale Price Index -->\r\n                    <div class=\"bg-[#EDF3EB] dark:bg-[#1A222C] p-4 text-black dark:text-white text-center rounded-lg shadow-sm\r\n           min-w-[260px] md:min-w-0 snap-start flex flex-col justify-between\">\r\n\r\n                        <div>\r\n                            <h3 class=\"text-base font-normal mb-2\">\r\n                                Apartment Sale Price",
+      "=\"txnValueYoY\">0% YoY </span>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <!-- Card 2: Total Transactional Volume -->\r\n                    <div class=\"bg-[#EDF3EB] dark:bg-[#1A222C] p-4 text-black dark:text-white text-center rounded-lg shadow-sm\r\n           min-w-[260px] md:min-w-0 snap-start flex flex-col justify-between\">\r\n\r\n                        <div>\r\n                            <h3 class=\"text-base font-normal mb-2\">\r\n                                Total Transactional Volume\r\n                            </h3>\r\n                            <div id=\"txnVolume\" class=\"text-[32px] font-bold\">&nbsp;</div>\r\n                            <p class=\"text-sm text-black dark:text-white my-2\">Last 12 Months</p>\r\n                        </div>\r\n\r\n                        <div class=\"mt-2 rounded inline-flex items-center gap-1 text-base text-white bg-successGreen px-2 py-1 mx-auto\">\r\n                            <img src=\"/adrec-assets/images/market-data/up-arrow.svg\" alt=\"Up\" class=\"w-4 h-4 dark:brightness-0 dark:invert\" />\r\n                            <span id=\"txnVolumeYoY\">0% YoY</span>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <!-- Card 3: Apartment Sale Price Index -->\r\n                    <div class=\"bg-[#EDF3EB] dark:bg-[#1A222C] p-4 text-black dark:text-white text-center rounded-lg shadow-sm\r\n           min-w-[260px] md:min-w-0 snap-start flex flex-col justify-between\">\r\n\r\n                        <div>\r\n                            <h3 class=\"text-base font-normal mb-2\">\r\n                                Apartment Sale Price Index\r\n                            </h3>\r\n                            <div id=\"aptSaleIndex\" class=\"text-[32px] font-bold\">&nbsp;</div>\r\n                        </div>\r\n\r\n                        <div class=\"mt-2 rounded inline-flex items-center gap-1 text-base text-white bg-successGreen px-2 py-1 mx-auto\">\r\n                            <img src=\"/adrec-assets/images/marke"
+    ],
+    "Apartment Sale Price Index": [
+      "\">Last 12 Months</p>\r\n                        </div>\r\n\r\n                        <div class=\"mt-2 rounded inline-flex items-center gap-1 text-base text-white bg-successGreen px-2 py-1 mx-auto\">\r\n                            <img src=\"/adrec-assets/images/market-data/up-arrow.svg\" alt=\"Up\" class=\"w-4 h-4 dark:brightness-0 dark:invert\" />\r\n                            <span id=\"txnVolumeYoY\">0% YoY</span>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <!-- Card 3: Apartment Sale Price Index -->\r\n                    <div class=\"bg-[#EDF3EB] dark:bg-[#1A222C] p-4 text-black dark:text-white text-center rounded-lg shadow-sm\r\n           min-w-[260px] md:min-w-0 snap-start flex flex-col justify-between\">\r\n\r\n                        <div>\r\n                            <h3 class=\"text-base font-normal mb-2\">\r\n                                Apartment Sale Price Index\r\n                            </h3>\r\n                            <div id=\"aptSaleIndex\" class=\"text-[32px] font-bold\">&nbsp;</div>\r\n                        </div>\r\n\r\n                        <div class=\"mt-2 rounded inline-flex items-center gap-1 text-base text-white bg-successGreen px-2 py-1 mx-auto\">\r\n                            <img src=\"/adrec-assets/images/market-data/up-arrow.svg\" alt=\"Up\" class=\"w-4 h-4 dark:brightness-0 dark:invert\" />\r\n                            <span id=\"aptSaleIndexYoY\">0% YoY</span>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <!-- Card 4: Villa Sale Price Index -->\r\n                    <div class=\"bg-[#EDF3EB] dark:bg-[#1A222C] p-4 text-black dark:text-white text-center rounded-lg shadow-sm\r\n           min-w-[260px] md:min-w-0 snap-start flex flex-col justify-between\">\r\n\r\n                        <div>\r\n                            <h3 class=\"text-base font-normal mb-2\">\r\n                                Apartment Sale Price Index\r\n                            </h3>\r\n                            <div id=\"villaSaleIndex\" c",
+      "=\"txnVolumeYoY\">0% YoY</span>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <!-- Card 3: Apartment Sale Price Index -->\r\n                    <div class=\"bg-[#EDF3EB] dark:bg-[#1A222C] p-4 text-black dark:text-white text-center rounded-lg shadow-sm\r\n           min-w-[260px] md:min-w-0 snap-start flex flex-col justify-between\">\r\n\r\n                        <div>\r\n                            <h3 class=\"text-base font-normal mb-2\">\r\n                                Apartment Sale Price Index\r\n                            </h3>\r\n                            <div id=\"aptSaleIndex\" class=\"text-[32px] font-bold\">&nbsp;</div>\r\n                        </div>\r\n\r\n                        <div class=\"mt-2 rounded inline-flex items-center gap-1 text-base text-white bg-successGreen px-2 py-1 mx-auto\">\r\n                            <img src=\"/adrec-assets/images/market-data/up-arrow.svg\" alt=\"Up\" class=\"w-4 h-4 dark:brightness-0 dark:invert\" />\r\n                            <span id=\"aptSaleIndexYoY\">0% YoY</span>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <!-- Card 4: Villa Sale Price Index -->\r\n                    <div class=\"bg-[#EDF3EB] dark:bg-[#1A222C] p-4 text-black dark:text-white text-center rounded-lg shadow-sm\r\n           min-w-[260px] md:min-w-0 snap-start flex flex-col justify-between\">\r\n\r\n                        <div>\r\n                            <h3 class=\"text-base font-normal mb-2\">\r\n                                Apartment Sale Price Index\r\n                            </h3>\r\n                            <div id=\"villaSaleIndex\" class=\"text-[32px] font-bold\">&nbsp;</div>\r\n                        </div>\r\n\r\n                        <div class=\"mt-2 rounded inline-flex items-center gap-1 text-base text-white bg-successGreen px-2 py-1 mx-auto\">\r\n                            <img src=\"/adrec-assets/images/market-data/up-arrow.svg\" alt=\"Up\" class=\"w-4 h-4 dark:brightness-0 dark:invert\" />\r\n               ",
+      "d=\"aptSaleIndexYoY\">0% YoY</span>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <!-- Card 4: Villa Sale Price Index -->\r\n                    <div class=\"bg-[#EDF3EB] dark:bg-[#1A222C] p-4 text-black dark:text-white text-center rounded-lg shadow-sm\r\n           min-w-[260px] md:min-w-0 snap-start flex flex-col justify-between\">\r\n\r\n                        <div>\r\n                            <h3 class=\"text-base font-normal mb-2\">\r\n                                Apartment Sale Price Index\r\n                            </h3>\r\n                            <div id=\"villaSaleIndex\" class=\"text-[32px] font-bold\">&nbsp;</div>\r\n                        </div>\r\n\r\n                        <div class=\"mt-2 rounded inline-flex items-center gap-1 text-base text-white bg-successGreen px-2 py-1 mx-auto\">\r\n                            <img src=\"/adrec-assets/images/market-data/up-arrow.svg\" alt=\"Up\" class=\"w-4 h-4 dark:brightness-0 dark:invert\" />\r\n                            <span id=\"villaSaleIndexYoY\">0% YoY</span>\r\n                        </div>\r\n                    </div>\r\n\r\n                </div>\r\n\r\n\r\n\r\n\r\n                <!-- Row 2 -->\r\n                <div class=\"flex flex-col lg:flex-row gap-4 md:gap-6 mt-8\">\r\n\r\n                    <!-- /********* Average Annual Rents over Time (AED) - New Contracts  graph 1************* -->\r\n\r\n                    <div class=\"w-full h-fit lg:w-1/2 border dark:border-[rgba(255,255,255,0.1)] border-coolGray rounded-[8px] p-4 md:p-6\">\r\n                        <div class=\"flex w-full gap-4 justify-between mb-5\">\r\n                            <h2 class=\"md:text-2xl text-lg font-bold text-black dark:text-white\">Total Transaction by Type</h2>\r\n                            <button id=\"exportBtnTransactionDesktop\"\r\n                                    class=\"px-3 py-3 text-black dark:text-white text-sm font-bold whitespace-nowrap hidden sm:flex items-center\">\r\n                                <img src=\"/adrec-assets/images/m"
+    ],
+    "Rented Residential Units": [
+      "-show=\"activeTab === 'tab1'\">\r\n\r\n            <!-- Row 1: Cards -->\r\n            <div class=\"flex gap-4 overflow-x-auto md:grid md:grid-cols-2 xl:grid-cols-3 md:overflow-visible pb-2\r\n         snap-x snap-mandatory scrollbar-hide\">\r\n\r\n                <!-- Card 1 -->\r\n                <div class=\"bg-[#EDF3EB] dark:bg-[#1A222C] p-4 text-black dark:text-white text-center rounded-xl shadow-sm\r\n           min-w-[260px] md:min-w-0 snap-start\">\r\n                    <h3 class=\"text-base font-normal mb-2\">Rented Residential Units</h3>\r\n                    <div class=\"text-[32px] font-bold\" id=\"rentedUnits\">&nbsp;</div>\r\n                    <div class=\"mt-2 rounded inline-flex items-center gap-1 text-base text-white bg-successGreen px-2 py-1\">\r\n                        <img src=\"/adrec-assets/images/market-data/up-arrow.svg\" alt=\"Up\" class=\"w-4 h-4 dark:brightness-0 dark:invert\" />\r\n                        <span id=\"rentedUnitsYoY\">0%  YoY</span>\r\n                    </div>\r\n                </div>\r\n\r\n                <!-- Card 2 -->\r\n                <div class=\"bg-[#EDF3EB] dark:bg-[#1A222C] p-4 text-black dark:text-white text-center rounded-xl shadow-sm\r\n           min-w-[260px] md:min-w-0 snap-start\">\r\n                    <h3 class=\"text-base font-normal mb-2\">Apartment Rent Price Index</h3>\r\n                    <div class=\"text-[32px] font-bold\" id=\"apartmentRPI\">&nbsp;</div>\r\n                    <div class=\"mt-2 rounded inline-flex items-center gap-1 text-base text-white bg-successGreen px-2 py-1\">\r\n                        <img src=\"/adrec-assets/images/market-data/up-arrow.svg\" alt=\"Up\" class=\"w-4 h-4 dark:brightness-0 dark:invert\" />\r\n                        <span id=\"apartmentRPIYoY\">0% YoY</span>\r\n                    </div>\r\n                </div>\r\n\r\n                <!-- Card 3 -->\r\n                <div class=\"bg-[#EDF3EB] dark:bg-[#1A222C] p-4 text-black dark:text-white text-center rounded-xl shadow-sm\r\n           min-w-[260px] md:min-w-0 snap-start\">\r\n                  "
+    ],
+    "Apartment Rent Price Index": [
+      "mg src=\"/adrec-assets/images/market-data/up-arrow.svg\" alt=\"Up\" class=\"w-4 h-4 dark:brightness-0 dark:invert\" />\r\n                        <span id=\"rentedUnitsYoY\">0%  YoY</span>\r\n                    </div>\r\n                </div>\r\n\r\n                <!-- Card 2 -->\r\n                <div class=\"bg-[#EDF3EB] dark:bg-[#1A222C] p-4 text-black dark:text-white text-center rounded-xl shadow-sm\r\n           min-w-[260px] md:min-w-0 snap-start\">\r\n                    <h3 class=\"text-base font-normal mb-2\">Apartment Rent Price Index</h3>\r\n                    <div class=\"text-[32px] font-bold\" id=\"apartmentRPI\">&nbsp;</div>\r\n                    <div class=\"mt-2 rounded inline-flex items-center gap-1 text-base text-white bg-successGreen px-2 py-1\">\r\n                        <img src=\"/adrec-assets/images/market-data/up-arrow.svg\" alt=\"Up\" class=\"w-4 h-4 dark:brightness-0 dark:invert\" />\r\n                        <span id=\"apartmentRPIYoY\">0% YoY</span>\r\n                    </div>\r\n                </div>\r\n\r\n                <!-- Card 3 -->\r\n                <div class=\"bg-[#EDF3EB] dark:bg-[#1A222C] p-4 text-black dark:text-white text-center rounded-xl shadow-sm\r\n           min-w-[260px] md:min-w-0 snap-start\">\r\n                    <h3 class=\"text-base font-normal mb-2\">Villa Rent Price Index</h3>\r\n                    <div class=\"text-[32px] font-bold\" id=\"villaRPI\">&nbsp;</div>\r\n                    <div class=\"mt-2 rounded inline-flex items-center gap-1 text-base text-white bg-successGreen px-2 py-1\">\r\n                        <img src=\"/adrec-assets/images/market-data/up-arrow.svg\" alt=\"Up\" class=\"w-4 h-4 dark:brightness-0 dark:invert\" />\r\n                        <span id=\"villaRPIYoY\">0% YoY</span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <!-- Row 2 : Two Graphs -->\r\n            <div class=\"flex flex-col lg:flex-row gap-4 md:gap-6 mt-8\">\r\n\r\n                <!-- ******** GRAPH 1 (Lease Units) ******** -->\r\n\r\n                <div class=\"w-"
+    ],
+    "Villa Rent Price Index": [
+      "mg src=\"/adrec-assets/images/market-data/up-arrow.svg\" alt=\"Up\" class=\"w-4 h-4 dark:brightness-0 dark:invert\" />\r\n                        <span id=\"apartmentRPIYoY\">0% YoY</span>\r\n                    </div>\r\n                </div>\r\n\r\n                <!-- Card 3 -->\r\n                <div class=\"bg-[#EDF3EB] dark:bg-[#1A222C] p-4 text-black dark:text-white text-center rounded-xl shadow-sm\r\n           min-w-[260px] md:min-w-0 snap-start\">\r\n                    <h3 class=\"text-base font-normal mb-2\">Villa Rent Price Index</h3>\r\n                    <div class=\"text-[32px] font-bold\" id=\"villaRPI\">&nbsp;</div>\r\n                    <div class=\"mt-2 rounded inline-flex items-center gap-1 text-base text-white bg-successGreen px-2 py-1\">\r\n                        <img src=\"/adrec-assets/images/market-data/up-arrow.svg\" alt=\"Up\" class=\"w-4 h-4 dark:brightness-0 dark:invert\" />\r\n                        <span id=\"villaRPIYoY\">0% YoY</span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <!-- Row 2 : Two Graphs -->\r\n            <div class=\"flex flex-col lg:flex-row gap-4 md:gap-6 mt-8\">\r\n\r\n                <!-- ******** GRAPH 1 (Lease Units) ******** -->\r\n\r\n                <div class=\"w-full h-fit lg:w-1/2 border dark:border-[rgba(255,255,255,0.1)] border-coolGray rounded-[8px] p-4 md:p-6\">\r\n                    <div class=\"flex w-full gap-4 justify-between mb-5\">\r\n                        <h2 class=\"md:text-2xl text-lg font-bold text-black dark:text-white\">Total Residential Lease Units by Period</h2>\r\n                        <button id=\"exportBtnLeaseDesktop\"\r\n                                class=\"px-3 py-3 text-black dark:text-white text-sm font-bold whitespace-nowrap hidden sm:flex items-center\">\r\n                            <img src=\"/adrec-assets/images/market-data/top-arrow.svg\" alt=\"export\" class=\"inline-block ltr:pl-2 rtl:pr-2 dark:brightness-0 dark:invert\" /> Export\r\n                        </button>\r\n                    </div>\r\n\r\n     "
+    ]
+  },
+  "script_count": 27,
+  "scripts": [
+    {
+      "url": "https://adrec.gov.ae/adrec-assets/js/tailwind-3.4.16.js",
+      "status": 200,
+      "length": 407279,
+      "label_snippets": {}
+    },
+    {
+      "url": "https://adrec.gov.ae/adrec-assets/js/tailwind-config.js",
+      "status": 200,
+      "length": 602,
+      "label_snippets": {}
+    },
+    {
+      "url": "https://adrec.gov.ae/adrec-assets/js/font-accessibility.js",
+      "status": 200,
+      "length": 7705,
+      "label_snippets": {}
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/chart.js",
+      "status": 200,
+      "length": 208522,
+      "label_snippets": {}
+    },
+    {
+      "url": "https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js",
+      "status": 200,
+      "length": 2749,
+      "label_snippets": {}
+    },
+    {
+      "url": "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js",
+      "status": 200,
+      "length": 881727,
+      "label_snippets": {}
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels",
+      "status": 200,
+      "length": 12937,
+      "label_snippets": {}
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js",
+      "status": 200,
+      "length": 46346,
+      "label_snippets": {}
+    },
+    {
+      "url": "https://adrec.gov.ae/adrec-assets/js/market-data/MarketDataGlobal.js",
+      "status": 200,
+      "length": 49729,
+      "label_snippets": {
+        "recentSales": "riceChartId', filename: 'rent_price_index.csv' },\r\n    rentExportBtnMobile: { canvasId: 'RentPriceChartId', filename: 'rent_price_index.csv' },\r\n    rentSaleExportBtn: { canvasId: 'RentSalePriceChartId', filename: 'rent_sale_price.csv' },\r\n    rentSaleExportBtnMobile: { canvasId: 'RentSalePriceChartId', filename: 'rent_sale_price.csv' },\r\n    exportTableBtn: { isTable: true, handler: () => window.recentSalesTable?.exportTableData?.(), filename: 'recent_sales.csv' },\r\n    exportTableBtnMobile: { isTable: true, handler: () => window.recentSalesTable?.exportTableData?.(), filename: 'recent_sales.csv' }\r\n};\r\n\r\n  // ============= DARK MODE LISTENER =============\r\n  // Detects theme changes and triggers chart redraws\r\n  window.MD.setupDarkModeListener = function() {\r\n    // Debounce redraw to avoid multiple calls in quick succession\r\n    let themeChangeTimeout = null;\r\n    \r\n    // Create a MutationObserver to watch for dark class changes on documentElement\r\n    const observer = new MutationObserver((mutations) => {\r\n      mutations.forEach((mutation) => {\r\n        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {\r\n          // Dark mode class changed, redraw all charts (with debounce)\r\n          if (themeChangeTimeout) clearTimeout(themeChangeTimeout);\r\n          themeChangeTimeout = setTimeout(() => {\r\n            window.MD.redrawAllCharts();\r\n            themeChangeTimeout = null;\r\n          }, 50);\r\n        }\r\n      });\r\n    });\r\n\r\n    observer.observe(document.documentElement, {\r\n      attributes: true,\r\n      attributeFilter: ['class']\r\n    });\r\n\r\n",
+        "marketData": "params);\r\n    if (window.MD.lookupsCache[cacheKey]) return window.MD.lookupsCache[cacheKey];\r\n    try {\r\n      // For StatisticTimeAggregations and StatisticDescriptions, use 'value' field\r\n      const actualFieldName = (lookupName === 'StatisticTimeAggregations' || lookupName === 'StatisticDescriptions') ? 'value' : fieldName;\r\n      \r\n      // New lookup endpoints are exposed under /api/feature/MarketData/{LookupName}\r\n      const endpoint = `/api/feature/MarketData/${lookupName}`;\r\n      // Add language parameter\r\n      const enrichedParams = { ...params, language: this.getLanguage() };\r\n      // Use fetchOnce so identical lookup requests are cached at network level\r\n      const data = await this.fetchOnce(endpoint, enrichedParams);\r\n      const values = this.extractLookupValues(data, actualFieldName);\r\n      if (values && values.length > 0) {\r\n        window.MD.lookupsCache[cacheKey] = values;\r\n        return values;\r\n      }\r\n      return [];\r\n    } catch (err) {\r\n      console.error(`Lookup fetch error for ${lookupName}:`, err);\r\n      return [];\r\n    }\r\n  };\r\n\r\n  // Fetch multiple lookups in parallel\r\n  window.MD.fetchMultipleLookups = async function(lookupNames) {\r\n    const promises = lookupNames.map(name => {\r\n      if (Array.isArray(name)) {\r\n        // [name, params] or [name, params, fieldName]\r\n        return this.fetchLookup(name[0], name[1] || {}, name[2] || 'name');\r\n      }\r\n      // just name\r\n      return this.fetchLookup(name);\r\n    });\r\n    \r\n    const results = await Promise.all(promises);\r\n    const lookupMap = {};\r\n    \r\n    lookupNames.forEach((nam"
+      }
+    },
+    {
+      "url": "https://adrec.gov.ae/adrec-assets/js/market-data/SkeletonLoader.js",
+      "status": 200,
+      "length": 17135,
+      "label_snippets": {}
+    },
+    {
+      "url": "https://adrec.gov.ae/adrec-assets/js/market-data/market-cards.js",
+      "status": 200,
+      "length": 6367,
+      "label_snippets": {
+        "transactionalValue": "-red-600\");\r\n}\r\n\r\n/* -------------------- API CALLS -------------------- */\r\n\r\nasync function fetchJSON(url) {\r\n  const u = new URL(url, window.location.origin);\r\n  return MD.fetchAPI(u.pathname, Object.fromEntries(u.searchParams));\r\n}\r\n\r\nasync function loadCards() {\r\n  try {\r\n    /* Card 1 – Transactional Value */\r\n    try {\r\n      const response = await MD.fetchAPI('/api/feature/MarketData/TotalTransactionalValue', { language: MD.getLanguage() });\r\n      const valueData = response;\r\n      const txnEl = document.getElementById(\"txnValue\");\r\n      if (txnEl && valueData) txnEl.textContent = formatValue(valueData.txn_value_aed);\r\n      const yoYEl = document.getElementById(\"txnValueYoY\");\r\n      if (yoYEl && valueData) {\r\n        const yoYFormatted = formatYoY(valueData.value_yoy_change);\r\n        yoYEl.textContent = yoYFormatted.text;\r\n      }\r\n    } catch (e) {\r\n      console.error('Error loading TotalTransactionalValue:', e);\r\n      const txnEl = document.getElementById(\"txnValue\");\r\n      if (txnEl) txnEl.textContent = 'N/A';\r\n    }\r\n\r\n    /* Card 2 – Transactional Volume */\r\n    try {\r\n      const response = await MD.fetchAPI('/api/feature/MarketData/TotalTransactionalVolume', { language: MD.getLanguage() });\r\n      const volumeData = response?.Data || response;\r\n      const volEl = document.getElementById(\"txnVolume\");\r\n      if (volEl && volumeData) volEl.textContent = formatValue(volumeData.txn_volume);\r\n      const volYoYEl = document.getElementById(\"txnVolumeYoY\");\r\n      if (volYoYEl && volumeData) {\r\n        const volYoYFormatted = formatYoY(volumeData.volume_yoy",
+        "marketData": "cessGreen\" : \"bg-red-600\");\r\n}\r\n\r\n/* -------------------- API CALLS -------------------- */\r\n\r\nasync function fetchJSON(url) {\r\n  const u = new URL(url, window.location.origin);\r\n  return MD.fetchAPI(u.pathname, Object.fromEntries(u.searchParams));\r\n}\r\n\r\nasync function loadCards() {\r\n  try {\r\n    /* Card 1 – Transactional Value */\r\n    try {\r\n      const response = await MD.fetchAPI('/api/feature/MarketData/TotalTransactionalValue', { language: MD.getLanguage() });\r\n      const valueData = response;\r\n      const txnEl = document.getElementById(\"txnValue\");\r\n      if (txnEl && valueData) txnEl.textContent = formatValue(valueData.txn_value_aed);\r\n      const yoYEl = document.getElementById(\"txnValueYoY\");\r\n      if (yoYEl && valueData) {\r\n        const yoYFormatted = formatYoY(valueData.value_yoy_change);\r\n        yoYEl.textContent = yoYFormatted.text;\r\n      }\r\n    } catch (e) {\r\n      console.error('Error loading TotalTransactionalValue:', e);\r\n      const txnEl = document.getElementById(\"txnValue\");\r\n      if (txnEl) txnEl.textContent = 'N/A';\r\n    }\r\n\r\n    /* Card 2 – Transactional Volume */\r\n    try {\r\n      const response = await MD.fetchAPI('/api/feature/MarketData/TotalTransactionalVolume', { language: MD.getLanguage() });\r\n      const volumeData = response?.Data || response;\r\n      const volEl = document.getElementById(\"txnVolume\");\r\n      if (volEl && volumeData) volEl.textContent = formatValue(volumeData.txn_volume);\r\n      const volYoYEl = document.getElementById(\"txnVolumeYoY\");\r\n      if (volYoYEl && volumeData) {\r\n        const volYoYFormatted = formatYoY(volum"
+      }
+    },
+    {
+      "url": "https://adrec.gov.ae/adrec-assets/js/market-data/MarketDataTransactionScriptAPI.js",
+      "status": 200,
+      "length": 15307,
+      "label_snippets": {
+        "marketData": "r all time periods and metrics combinations\r\n    for (const period of timePeriods) {\r\n      for (const metric of metrics) {\r\n        const params = {\r\n          txnType: 'all',\r\n          assetClass: 'all',\r\n          statisticTimeAggregation: period,\r\n          statisticDescription: metric,\r\n          language: MD.getLanguage()\r\n        };\r\n\r\n        const data = await MD.fetchOnce('/api/feature/MarketData/TotalTransactionsByType', params);\r\n        if (Array.isArray(data)) {\r\n          allData = allData.concat(data);\r\n        }\r\n      }\r\n    }\r\n\r\n    if (allData.length > 0) {\r\n      window.allData = allData;\r\n      console.log(`✓ API loaded ${allData.length} records`);\r\n      // Load filters from API lookups instead of extracting from data\r\n      await transactionByTypeFilters();\r\n      setupDropdownListeners();\r\n      setupPeriodListener();\r\n      drawChart();\r\n      SkeletonLoader.hideSkeleton('totalTransactionChart');\r\n      // Enable controls after data is loaded and rendered\r\n      MD.toggleControls(transactionControlsConfig, false);\r\n      console.log('✓ Chart rendered successfully');\r\n    } else {\r\n      console.error('No data returned from API');\r\n      SkeletonLoader.hideSkeleton('totalTransactionChart');\r\n      // Re-enable controls even if no data (so user can try again)\r\n      MD.toggleControls(transactionControlsConfig, false);\r\n    }\r\n  }\r\n\r\n  // ============ INIT ============\r\n\r\n  document.addEventListener('DOMContentLoaded', () => {\r\n    MD.TabManager.registerTabLoader('tab0', loadGraph1);\r\n    if (MD.TabManager.currentActiveTab === 'tab0') {\r\n      MD.Tab"
+      }
+    },
+    {
+      "url": "https://adrec.gov.ae/adrec-assets/js/market-data/MarketDataSalesByAssetScriptAPI.js",
+      "status": 200,
+      "length": 15049,
+      "label_snippets": {
+        "marketData": "// ============================================================================\r\n// API LOADER FOR GRAPH 2: TOTAL SALES BY ASSET CLASS\r\n// Uses window.MD global helpers from MarketDataGlobal.js\r\n// ============================================================================\r\n\r\n(function () {\r\n  // ============ GLOBALS FOR GRAPH 2 ============\r\n  window.graph2 = window.graph2 || {};\r\n  window.graph2.allData = [];\r\n  window.graph2.currentPeriod = null; // Will be set from API lookups to support Arabic mode\r\n  window.graph2.chart = null;\r\n     let areaMap = {};\r\n\r\nlet graph2Loaded = false;\r\n\r\n  // Configuration for sales by asset controls\r\n  const salesByAssetControlsConfig = {\r\n    filterIds: ['assetTypeDropdown_txn', 'regionDropdown_txn', 'metricDropdown_txn', 'monthlyDropdown_txn2', 'assetTypeDropdown_txn_m', 'regionDropdown_txn_m', 'metricDropdown_txn_m', 'monthlyDropdown_txn2_m'],\r\n    buttonIds: ['exportBtnAssetsDesktop', 'exportBtnAssetsMobile', 'allFiltersBtnAsset']\r\n  };\r\n  // ============ HELPER FOR DRAWING CHART ============\r\n\r\n  function isDarkMode() {\r\n    return document.documentElement.classList.contains('dark') || \r\n           window.matchMedia('(prefers-color-scheme: dark)').matches;\r\n  }\r\n\r\n  function drawChart() {\r\n    // Show skeleton loader while chart is rendering\r\n    MD.showSkeletonLoader('salesAssetsChart');\r\n    \r\n    const isMob"
+      }
+    },
+    {
+      "url": "https://adrec.gov.ae/adrec-assets/js/market-data/MarketDataResiSalesScriptAPI.js",
+      "status": 200,
+      "length": 15695,
+      "label_snippets": {
+        "marketData": "// ============================================================================\r\n// API LOADER FOR GRAPH 3: RESIDENTIAL SALE TRANSACTIONS BY PERIOD\r\n// Uses window.MD global helpers from MarketDataGlobal.js\r\n// ============================================================================\r\n\r\n(function () {\r\n  // ============ GLOBALS FOR GRAPH 3 ============\r\n  window.graph3 = window.graph3 || {};\r\n  window.graph3.allData = [];\r\n  window.graph3.currentPeriod = null; // Will be set from API lookups to support Arabic mode\r\n  window.graph3.chart = null;\r\n  let areaMap = {};\r\nlet graph3Loaded = false;\r\n\r\n  // Configuration for residential sales controls\r\n  const resiSalesControlsConfig = {\r\n    filterIds: ['ResiUnitDropdown', 'ResiUnitregionDropdown', 'ResiUnitLayoutDropdown', 'unitMetricDropdown', 'resiMonthlyDropdown', 'ResiUnitDropdown_m', 'ResiUnitregionDropdown_m', 'ResiUnitLayoutDropdown_m', 'unitMetricDropdown_m', 'resiMonthlyDropdown_m'],\r\n    buttonIds: ['exportBtnResiSalesDesktop', 'exportBtnResiSalesMobile', 'allFiltersBtnResiSales']\r\n  };\r\n\r\n  // ============ HELPER FOR DRAWING CHART ============\r\n\r\n  function isDarkMode() {\r\n    return document.documentElement.classList.contains('dark') || \r\n           window.matchMedia('(prefers-color-scheme: dark)').matches;\r\n  }\r\n\r\n  function drawChart() {\r\n    // Show skeleton loader while chart is rendering\r\n    MD.showS"
+      }
+    },
+    {
+      "url": "https://adrec.gov.ae/adrec-assets/js/market-data/MarketDataResiFinanceScriptAPI.js",
+      "status": 200,
+      "length": 15606,
+      "label_snippets": {
+        "marketData": "// ============================================================================\r\n// API LOADER FOR GRAPH 4: RESIDENTIAL FINANCING BY PERIOD (PERCENTAGE BASED)\r\n// Uses window.MD global helpers from MarketDataGlobal.js\r\n// UI / FILTER LOGIC: UNCHANGED\r\n// ============================================================================\r\n\r\n(function () {\r\n\r\n  window.graph4 = window.graph4 || {};\r\n  window.graph4.allData = [];\r\n  window.graph4.currentPeriod = null; // Will be set from API lookups to support Arabic mode\r\n  window.graph4.chart = null;\r\n  let graph4Loaded = false; // Flag to prevent re-loading\r\n  let areaMap = {};\r\n\r\n  // Configuration for residential finance controls\r\n  const resiFinanceControlsConfig = {\r\n    filterIds: ['ResiFinanceDropdown', 'ResiFinanceregionDropdown', 'ResiFinanceLayoutDropdown', 'resiFinanceMonthlyDropdown', 'ResiFinanceDropdown_m', 'ResiFinanceregionDropdown_m', 'ResiFinanceLayoutDropdown_m', 'resiFinanceMonthlyDropdown_m'],\r\n    buttonIds: ['exportBtnResiFinanceDesktop', 'exportBtnResiFinanceMobile', 'allFiltersBtnResiFinance']\r\n  };\r\n\r\n  function isDarkMode() {\r\n    return document.documentElement.classList.contains('dark') || \r\n           window.matchMedia('(prefers-color-scheme: dark)').matches;\r\n  }\r\n\r\n  function drawChart() {\r\n    // Show skeleton loader while chart is rendering\r\n    MD.showSkeletonLoader('resiFinanceAssetsChart');\r\n\r\n    "
+      }
+    },
+    {
+      "url": "https://adrec.gov.ae/adrec-assets/js/market-data/RecentSalesTable.js",
+      "status": 200,
+      "length": 25287,
+      "label_snippets": {
+        "recentSales": "t totalElements = 0;\r\n  let rawData = [];\r\n  let sortState = { key: null, dir: null };\r\n\r\n  let fromDate = \"2019-01-01\";\r\n  let toDate = new Date().toISOString().split('T')[0];\r\n\r\n  const container = document.getElementById(\"salesTableContainer\");\r\n  const paginationEl = document.getElementById(\"tablePagination\");\r\n\r\n  // Controls config for disabling/enabling filters during data loading\r\n  const recentSalesTableControlsConfig = {\r\n    filterIds: [\r\n      'filterAssetType', 'filterAssetTypeMobile',\r\n      'filterPropertyType', 'filterPropertyTypeMobile',\r\n      'filterSaleType', 'filterSaleTypeMobile',\r\n      'filterDistrict', 'filterDistrictMobile',\r\n      'filterCommunity', 'filterCommunityMobile',\r\n      'filterProject', 'filterProjectMobile',\r\n      'filterLayout', 'filterLayoutMobile'\r\n    ],\r\n    buttonIds: ['allFiltersBtnRecentSales', 'exportTableBtn', 'exportTableBtnMobile']\r\n  };\r\n\r\n  /* ===================== TRANSLATION SYSTEM ===================== */\r\n  \r\n  const translations = {\r\n    en: {\r\n      \"Asset Type\": \"Asset Type\",\r\n      \"Property Type\": \"Property Type\",\r\n      \"Registration\": \"Registration\",\r\n      \"Sold Area (sqm)\": \"Sold Area (sqm)\",\r\n      \"Plot Area (sqm)\": \"Plot Area (sqm)\",\r\n      \"Rate (AED/sqm)\": \"Rate (AED/sqm)\",\r\n      \"Layout\": \"Layout\",\r\n      \"District\": \"District\",\r\n      \"Community\": \"Community\",\r\n      \"Project\": \"Project\",\r\n      \"Price (AED)\": \"Price (AED)\",\r\n      \"Share\": \"Share\",\r\n      \"Sale Type\": \"Sale Type\",\r\n      \"Sequence\": \"Sequence\",\r\n      \"No data available\": \"No data available\",\r\n      \"out of\": \"out of\"\r\n    },\r\n    a",
+        "marketData": "tate.dir}`;\r\n    } \r\n    // else {\r\n    //   params.sort = \"property_sold_area_sqm,desc\";\r\n    // }\r\n    \r\n    params.propertyLayout = Array.isArray(selected.property_layout) \r\n      ? selected.property_layout.join(',') \r\n      : selected.property_layout;\r\n    \r\n    // Add language parameter\r\n    params.language = window.MD.getLanguage();\r\n\r\n    const data = await window.MD.fetchAPI(\"/api/feature/MarketData/RecentSales\", params);\r\n    if (!data) return;\r\n\r\n    rawData = data.content || [];\r\n    totalElements = data.totalElements || 0;\r\n\r\n    renderTable();\r\n    renderPagination();\r\n    \r\n    // Hide skeleton loader after data is rendered\r\n    if (window.SkeletonLoader) {\r\n      window.SkeletonLoader.hideTableSkeleton(\"salesTableContainer\");\r\n    }\r\n    MD.toggleControls(recentSalesTableControlsConfig, false);\r\n  }\r\n\r\n  /* ===================== TABLE ===================== */\r\n\r\n  const COLUMNS_KEYS = [\r\n    { key: \"asset_class\", label: \"Asset Type\", fmt: cap },\r\n    { key: \"property_type\", label: \"Property Type\", fmt: cap },\r\n    { key: \"sale_application_datetime\", label: \"Registration\", fmt: fmtDate },\r\n    { key: \"property_sold_area_sqm\", label: \"Sold Area (sqm)\", fmt: fmtArea },\r\n    { key: \"land_plot_ground_area_sqm\", label: \"Plot Area (sqm)\", fmt: fmtArea },\r\n    { key: \"rate_aed_per_sqm\", label: \"Rate (AED/sqm)\", fmt: fmtAED },\r\n    { key: \"property_layout\", label: \"Layout\" },\r\n    { key: \"district\", label: \"District\" },\r\n    { key: \"community\", label: \"Community\" },\r\n    { key: \"project_name\", label: \"Project\" },\r\n    { key: \"property_sale_price_aed\", label: \"Price (A"
+      }
+    },
+    {
+      "url": "https://adrec.gov.ae/adrec-assets/js/market-data/lease-cards.js",
+      "status": 200,
+      "length": 5001,
+      "label_snippets": {
+        "marketData": "sitive ? \"bg-successGreen\" : \"bg-red-600\");\r\n  }\r\n\r\n  /* -------------------- DATA LOAD -------------------- */\r\n\r\n  async function loadLeaseCards() {\r\n    try {\r\n      // âœ… Ensure token is ready\r\n      await window.MD.waitForTokenReady();\r\n\r\n      /* ---------------- Card 1: Rented Residential Units ---------------- */\r\n\r\n      const unitsData = await window.MD.fetchAPI(\r\n        \"/api/feature/MarketData/GetRentedResiUnits\",\r\n        { language: LANGUAGE }\r\n      );\r\n\r\n      if (unitsData) {\r\n        document.getElementById(\"rentedUnits\").textContent =\r\n          formatValue(unitsData.rented_units);\r\n\r\n        applyYoY(\r\n          document.getElementById(\"rentedUnitsYoY\"),\r\n          formatYoY(unitsData.rented_units_yoy_change)\r\n        );\r\n      }\r\n\r\n      /* ---------------- Card 2: Apartment Rent Price Index ---------------- */\r\n\r\n      const apartmentData = await window.MD.fetchAPI(\r\n        \"/api/feature/MarketData/GetRentPriceIndex\",\r\n        {\r\n          propertyType: \"apartment\",\r\n          language: LANGUAGE\r\n        }\r\n      );\r\n\r\n      if (apartmentData) {\r\n        document.getElementById(\"apartmentRPI\").textContent =\r\n          apartmentData.rent_index_value?.toFixed(2) ?? \"N/A\";\r\n\r\n        applyYoY(\r\n          document.getElementById(\"apartmentRPIYoY\"),\r\n          formatIndexYoY(apartmentData.index_yoy_change)\r\n        );\r\n      }\r\n\r\n      /* ---------------- Card 3: Villa Rent Price Index ---------------- */\r\n\r\n      const villaData = await window.MD.fetchAPI(\r\n        \"/api/feature/MarketData/GetRentPriceIndex\",\r\n        {\r\n          propertyType: \"villa\","
+      }
+    },
+    {
+      "url": "https://adrec.gov.ae/adrec-assets/js/market-data/LeaseResidentialUnit.js",
+      "status": 200,
+      "length": 14346,
+      "label_snippets": {
+        "marketData": "// ============================================================================\r\n// TAB 1 GRAPH 1: RESIDENTIAL LEASE UNITS BY PERIOD\r\n// Uses window.MD global helpers from MarketDataGlobal.js\r\n// ============================================================================\r\n\r\n(function () {\r\n  // ============ GLOBALS FOR TAB1 GRAPH 1 ============\r\n  window.leaseGraph1 = window.leaseGraph1 || {};\r\n  window.leaseGraph1.allData = [];\r\n  window.leaseGraph1.currentPeriod = null; // Will be set from API lookups to support Arabic mode\r\n  window.leaseGraph1.chart = null;\r\n  let leaseGraph1Loaded = false; // Flag to prevent re-loading\r\n\r\n  // Configuration for lease unit controls\r\n  const leaseUnitControlsConfig = {\r\n    filterIds: ['leasePropertyTypeDropdown', 'leasePropertyLayoutDropdown', 'leaseRegionFilterDropdown', 'leasePropertyTypeDropdown_m', 'leasePropertyLayoutDropdown_m', 'leaseRegionFilterDropdown_m'],\r\n    buttonIds: ['exportBtnLeaseDesktop', 'exportBtnLeaseMobile', 'allFiltersBtnLeaseUnit']\r\n  };\r\n\r\n  // ============ HELPER FOR DRAWING CHART ============\r\n    const isMobile = window.innerWidth < 768;\r\n\r\n  function isDarkMode() {\r\n    return document.documentElement.classList.contains('dark') || \r\n           window.matchMedia('(prefers-color-scheme: dark)').matches;\r\n  }\r\n\r\n  function drawChart() {\r\n    // Show skeleton loader while chart is rende"
+      }
+    },
+    {
+      "url": "https://adrec.gov.ae/adrec-assets/js/market-data/LeaseResidentialPrice.js",
+      "status": 200,
+      "length": 14794,
+      "label_snippets": {
+        "marketData": "// ============================================================================\r\n// TAB 1 GRAPH 2: RESIDENTIAL LEASE PRICES BY PERIOD\r\n// Uses window.MD global helpers from MarketDataGlobal.js\r\n// ============================================================================\r\n\r\n(function () {\r\n  // ============ GLOBALS FOR TAB1 GRAPH 2 ============\r\n  window.leaseGraph2 = window.leaseGraph2 || {};\r\n  window.leaseGraph2.allData = [];\r\n  window.leaseGraph2.currentPeriod = null; // Will be set from API lookups to support Arabic mode\r\n  window.leaseGraph2.chart = null;\r\n  let leaseGraph2Loaded = false; // Flag to prevent re-loading\r\n\r\n  // Configuration for lease price controls\r\n  const leasePriceControlsConfig = {\r\n    filterIds: ['leasePricePropertyTypeDropdown', 'leasePricePropertyLayoutDropdown', 'leasePriceRegionFilterDropdown', 'leasePricePropertyTypeDropdown_m', 'leasePricePropertyLayoutDropdown_m', 'leasePriceRegionFilterDropdown_m'],\r\n    buttonIds: ['exportBtnLeasePriceDesktop', 'exportBtnLeasePriceMobile', 'allFiltersBtnLeasePrice']\r\n  };\r\n\r\n  // ============ HELPER FOR DRAWING CHART ============\r\n\r\n  function isDarkMode() {\r\n    return document.documentElement.classList.contains('dark') || \r\n           window.matchMedia('(prefers-color-scheme: dark)').matches;\r\n  }\r\n\r\n  function drawChart() {\r\n    // Show skeleton loader while chart is rendering"
+      }
+    },
+    {
+      "url": "https://adrec.gov.ae/adrec-assets/js/market-data/AverageAnnualRentsAPI.js",
+      "status": 200,
+      "length": 14606,
+      "label_snippets": {
+        "marketData": "// ============================================================================\r\n// AVERAGE ANNUAL RENTS CHART (LINE GRAPH) - LOOKUP BASED (FIXED)\r\n// Uses window.MD global helpers from MarketDataGlobal.js\r\n// ============================================================================\r\n\r\n(function () {\r\n\r\n  // ================= GLOBALS =================\r\n  window.avgChart = {\r\n    allData: [],\r\n    chart: null,\r\n    propertyOrder: []\r\n  };\r\n\r\n  let avgChartLoaded = false; // Flag to prevent re-loading\r\n\r\n  let areaMap = {};\r\n\r\n  // Configuration for average annual rents controls\r\n  const averageAnnualRentsControlsConfig = {\r\n    filterIds: ['avgPropertyTypeDropdown', 'AverageAnnualRentLayoutDropdown', 'AverageAnnualRentRegionDropdown', 'AverageAnnualRentPropertyDropdown_m', 'AverageAnnualRentLayoutDropdown_m', 'AverageAnnualRentRegionFilterDropdown_m'],\r\n    buttonIds: ['avgExportBtn', 'avgExportBtnMobile', 'allFiltersBtnAvgRent']\r\n  };\r\n\r\n  // ================= HELPERS =================\r\n\r\n  function formatValuePrice(n) {\r\n    if (!n || isNaN(n)) return '0';\r\n    const abs = Math.abs(n);\r\n    if (abs >= 1e9) return (n / 1e9).toFixed(1) + 'B';\r\n    if (abs >= 1e6) return (n / 1e6).toFixed(1) + 'M';\r\n    if (abs >= 1e3) return (n / 1e3).toFixed(1) + 'k';\r\n    return Math.round(n);\r\n  }\r\n\r\n  function halfYearLabel(dateStr) {\r\n    const d = new Date(dateStr);\r\n    i"
+      }
+    },
+    {
+      "url": "https://adrec.gov.ae/adrec-assets/js/market-data/SalePriceIndices.js",
+      "status": 200,
+      "length": 14334,
+      "label_snippets": {
+        "marketData": "// ============================================================================\r\n// TAB 2 GRAPH 1: SALE PRICE INDICES BY AREA (LINE CHART)\r\n// Uses window.MD global helpers from MarketDataGlobal.js\r\n// ============================================================================\r\n\r\n(function () {\r\n  // ============ GLOBALS ============\r\n  window.salePriceIndices = window.salePriceIndices || {};\r\n  window.salePriceIndices.saleData = [];\r\n  window.salePriceIndices.saleChart = null;\r\n  window.salePriceIndices.propertyOrder = [];\r\n  let salePriceIndicesLoaded = false; // Flag to prevent re-loading\r\n  let areaMap = {};\r\n\r\n  // Configuration for sale price indices controls\r\n  const salePriceIndicesControlsConfig = {\r\n    filterIds: ['salePropertyTypeDropdown', 'SalePriceRegionDropdown', 'salePropertyTypeDropdown_m', 'SalePriceRegionDropdown_m'],\r\n    buttonIds: ['saleExportBtn', 'saleExportBtnMobile', 'allFiltersBtnSalePriceIdx']\r\n  };\r\n  // ============ HELPERS ============\r\n\r\n  function isDarkMode() {\r\n    return document.documentElement.classList.contains('dark') || \r\n           window.matchMedia('(prefers-color-scheme: dark)').matches;\r\n  }\r\n\r\n  function formatValuePrice(n) {\r\n    if (n === null || n === undefined || isNaN(n)) return '';\r\n    const num = Number(n);\r\n    const abs = Math.abs(num);\r\n    if (abs >= 1e9) return (num / 1e9).toFixed(2).replace(/\\.?"
+      }
+    },
+    {
+      "url": "https://adrec.gov.ae/adrec-assets/js/market-data/RentPriceIndices.js",
+      "status": 200,
+      "length": 14760,
+      "label_snippets": {
+        "marketData": "// ============================================================================\r\n// TAB 2 GRAPH 2: RENT PRICE INDICES BY AREA (LINE CHART)\r\n// Uses window.MD global helpers from MarketDataGlobal.js\r\n// ============================================================================\r\n\r\n(function () {\r\n  // ============ GLOBALS ============\r\n  window.rentPriceIndices = window.rentPriceIndices || {};\r\n  window.rentPriceIndices.rentData = [];\r\n  window.rentPriceIndices.rentChart = null;\r\nwindow.rentPriceIndices.propertyOrder = [];\r\n  let rentPriceIndicesLoaded = false; // Flag to prevent re-loading\r\n  let areaMap = {};\r\n\r\n  // Configuration for rent price indices controls\r\n  const rentPriceIndicesControlsConfig = {\r\n    filterIds: ['rentPropertyTypeDropdown', 'rentRegionFilterDropdown', 'rentPropertyTypeDropdown_m', 'rentRegionFilterDropdown_m'],\r\n    buttonIds: ['rentExportBtn', 'rentExportBtnMobile', 'allFiltersBtnRentPriceIdx']\r\n  };\r\n  // ============ HELPERS ============\r\n\r\n  function isDarkMode() {\r\n    return document.documentElement.classList.contains('dark') || \r\n           window.matchMedia('(prefers-color-scheme: dark)').matches;\r\n  }\r\n\r\n  function formatValuePrice(n) {\r\n    if (n === null || n === undefined || isNaN(n)) return '';\r\n    const num = Number(n);\r\n    const abs = Math.abs(num);\r\n    if (abs >= 1e9) return (num / 1e9).toFixed(2).replace(/\\.?"
+      }
+    },
+    {
+      "url": "https://adrec.gov.ae/adrec-assets/js/market-data/SalePricesOverTimeAPI.js",
+      "status": 200,
+      "length": 15368,
+      "label_snippets": {
+        "marketData": "// ============================================================================\r\n// SALE PRICES OVER TIME (LINE CHART)\r\n// Uses window.MD global helpers from MarketDataGlobal.js\r\n// ============================================================================\r\n\r\n(function () {\r\n  // ============ GLOBALS ============\r\n  window.salePricesOverTime = window.salePricesOverTime || {};\r\n  window.salePricesOverTime.allData = [];\r\n  window.salePricesOverTime.chart = null;\r\nwindow.salePricesOverTime.propertyOrder = [];\r\n\r\n  let salePricesOverTimeLoaded = false; // Flag to prevent re-loading\r\n  let areaMap = {};\r\n\r\n  // Configuration for sale prices over time controls\r\n  const salePricesOverTimeControlsConfig = {\r\n    filterIds: ['rentSalePropertyTypeDropdown', 'rentSalePropertyLayoutDropdown', 'rentSaleRegionFilterDropdown', 'rentSalePropertyTypeDropdown_m', 'rentSalePropertyLayoutDropdown_m', 'rentSaleRegionFilterDropdown_m'],\r\n    buttonIds: ['rentSaleExportBtn', 'rentSaleExportBtnMobile', 'allFiltersBtnRentSalePrice']\r\n  };\r\n\r\n  // ============ HELPER FOR DRAWING CHART ============\r\n\r\n  function isDarkMode() {\r\n    return document.documentElement.classList.contains('dark') || \r\n           window.matchMedia('(prefers-color-scheme: dark)').matches;\r\n  }\r\n\r\n  function getRadioValue(containerId) {\r\n    const radio = document.querySelector(`#${conta"
+      }
+    },
+    {
+      "url": "https://adrec.gov.ae/adrec-assets/js/adrec-chatbot.js",
+      "status": 200,
+      "length": 10174,
+      "label_snippets": {}
+    },
+    {
+      "url": "https://adrec.gov.ae/adrec-assets/js/jquery-3.7.1.min.js",
+      "status": 200,
+      "length": 87533,
+      "label_snippets": {}
+    },
+    {
+      "url": "https://adrec.gov.ae/adrec-assets/js/app.js?v=0.1",
+      "status": 200,
+      "length": 727956,
+      "label_snippets": {}
+    },
+    {
+      "url": "https://adrec.gov.ae/adrec-assets/js/dark-light-mode-switcher.js",
+      "status": 200,
+      "length": 6188,
+      "label_snippets": {}
+    }
+  ],
+  "candidates": [
+    "!options.releaseWheel",
+    "#leasePriceStatTimeDropdown",
+    "#leasePriceStatTimeDropdown_m",
+    "#leaseStatTimeDropdown",
+    "#leaseStatTimeDropdown_m",
+    "/adrec-assets/images/market-data/dropdown-arrow.svg",
+    "/adrec-assets/images/market-data/filter-icon.svg",
+    "/adrec-assets/images/market-data/left-double-icon.svg",
+    "/adrec-assets/images/market-data/left-icon.svg",
+    "/adrec-assets/images/market-data/right-double-icon.svg",
+    "/adrec-assets/images/market-data/right-icon.svg",
+    "/api/feature/...",
+    "/api/feature/MarketData/${lookupName}`",
+    "/api/feature/MarketData/GetRentPriceIndex",
+    "/api/feature/MarketData/GetRentedResiUnits",
+    "/api/feature/MarketData/GetSalePriceIndex",
+    "/api/feature/MarketData/GetTotalSalesByAsset",
+    "/api/feature/MarketData/RecentSales",
+    "/api/feature/MarketData/ResiFinancingByPeriod",
+    "/api/feature/MarketData/ResiRentPriceIndexByArea",
+    "/api/feature/MarketData/ResiRentPricesByPeriod",
+    "/api/feature/MarketData/ResiRentSalePricesByArea",
+    "/api/feature/MarketData/ResiRentedUnitsByPeriod",
+    "/api/feature/MarketData/ResiRentedValueByPeriod",
+    "/api/feature/MarketData/ResiSalePriceIndexByArea",
+    "/api/feature/MarketData/ResiSaleTransactionsByPeriod",
+    "/api/feature/MarketData/TotalTransactionalValue",
+    "/api/feature/MarketData/TotalTransactionalVolume",
+    "/api/feature/MarketData/TotalTransactionsByType",
+    "/api/feature/MarketData/{LookupName",
+    "B.setReactivityEngine({reactive:Xt,effect:fn,release:dn,raw:h",
+    "C=t.reactive,j=t.release,R=e=>t.effect(e,{scheduler:r=>{oe?Ve(r",
+    "LEASES",
+    "MD.toggleControls(leasePriceControlsConfig",
+    "MD.toggleControls(leaseUnitControlsConfig",
+    "MD.toggleControls(transactionControlsConfig",
+    "Market",
+    "MarketDataGlobal.js",
+    "Please",
+    "Released",
+    "TRANSACTIONS",
+    "TotalTransactionalValue",
+    "TotalTransactionalVolume",
+    "Transaction",
+    "TransactionByType.js",
+    "TransactionTypes",
+    "Transactional",
+    "`/api/feature/MarketData/${lookupName}`",
+    "allFiltersBtnLeasePrice",
+    "allFiltersBtnLeaseUnit",
+    "allFiltersBtnTransaction",
+    "e.release",
+    "exportBtnLeaseDesktop",
+    "exportBtnLeaseMobile",
+    "exportBtnLeasePriceDesktop",
+    "exportBtnLeasePriceMobile",
+    "exportBtnTransactionDesktop",
+    "exportBtnTransactionMobile",
+    "http://docs.oasis-open.org/ns/office/1.2/meta/",
+    "http://docs.oasis-open.org/ns/office/1.2/meta/pkg#",
+    "http://macVmlSchemaUri",
+    "http://openoffice.org/2004/calc",
+    "http://openoffice.org/2004/office",
+    "http://openoffice.org/2004/writer",
+    "http://openoffice.org/2005/report",
+    "http://openoffice.org/2009/table",
+    "http://openoffice.org/2010/draw",
+    "http://purl.oclc.org/ooxml/officeDocument/relationships/worksheet",
+    "http://purl.oclc.org/ooxml/spreadsheetml/main",
+    "http://purl.org/dc/dcmitype/",
+    "http://purl.org/dc/elements/1.1/",
+    "http://purl.org/dc/terms/",
+    "http://schemas.microsoft.com/office/2006/relationships/vbaProject",
+    "http://schemas.microsoft.com/office/2006/relationships/xlExternalLinkPath/xlPathMissing",
+    "http://schemas.microsoft.com/office/2006/relationships/xlMacrosheet",
+    "http://schemas.microsoft.com/office/2014/relationships/chartEx",
+    "http://schemas.microsoft.com/office/2017/10/relationships/person",
+    "http://schemas.microsoft.com/office/2017/10/relationships/threadedComment",
+    "http://schemas.microsoft.com/office/excel/2006/2",
+    "http://schemas.microsoft.com/office/excel/2006/main",
+    "http://schemas.microsoft.com/office/mac/excel/2008/main",
+    "http://schemas.microsoft.com/office/spreadsheetml/2017/dynamicarray",
+    "http://schemas.microsoft.com/office/spreadsheetml/2017/richdata",
+    "http://schemas.microsoft.com/office/spreadsheetml/2018/threadedcomments",
+    "http://schemas.openxmlformats.org/drawingml/2006/main",
+    "http://schemas.openxmlformats.org/officeDocument/2006/custom-properties",
+    "http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes",
+    "http://schemas.openxmlformats.org/officeDocument/2006/extended-properties",
+    "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+    "http://schemas.openxmlformats.org/officeDocument/2006/relationships/chart",
+    "http://schemas.openxmlformats.org/officeDocument/2006/relationships/chartsheet",
+    "http://schemas.openxmlformats.org/officeDocument/2006/relationships/comments",
+    "http://schemas.openxmlformats.org/officeDocument/2006/relationships/custom-properties",
+    "http://schemas.openxmlformats.org/officeDocument/2006/relationships/customXml",
+    "http://schemas.openxmlformats.org/officeDocument/2006/relationships/customXmlProps",
+    "http://schemas.openxmlformats.org/officeDocument/2006/relationships/dialogsheet",
+    "http://schemas.openxmlformats.org/officeDocument/2006/relationships/drawing",
+    "http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties",
+    "http://schemas.openxmlformats.org/officeDocument/2006/relationships/externalLink",
+    "http://schemas.openxmlformats.org/officeDocument/2006/relationships/externalLinkPath",
+    "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+    "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image",
+    "http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument",
+    "http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings",
+    "http://schemas.openxmlformats.org/officeDocument/2006/relationships/sheetMetadata",
+    "http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles",
+    "http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme",
+    "http://schemas.openxmlformats.org/officeDocument/2006/relationships/vmlDrawing",
+    "http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet",
+    "http://schemas.openxmlformats.org/package/2006/content-types",
+    "http://schemas.openxmlformats.org/package/2006/metadata/core-properties",
+    "http://schemas.openxmlformats.org/package/2006/relationships",
+    "http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties",
+    "http://schemas.openxmlformats.org/package/2006/sheetjs/core-properties",
+    "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
+    "http://sheetjs.com",
+    "http://sheetjs.openxmlformats.org/officeDocument/2006/relationships/officeDocument",
+    "http://www.w3.org/1998/Math/MathML",
+    "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "http://www.w3.org/1999/xhtml",
+    "http://www.w3.org/1999/xlink",
+    "http://www.w3.org/2000/svg",
+    "http://www.w3.org/2001/XMLSchema",
+    "http://www.w3.org/2001/XMLSchema-instance",
+    "http://www.w3.org/2001/xml-events",
+    "http://www.w3.org/2002/xforms",
+    "http://www.w3.org/2003/g/data-view#",
+    "http://www.w3.org/TR/REC-html40",
+    "http://www.w3.org/TR/css3-text/",
+    "https://alpinejs.dev/plugins/${r}`",
+    "https://alpinejs.dev/plugins/${r}`,n",
+    "https://bot.dari.ae/",
+    "https://chartjs-plugin-datalabels.netlify.app",
+    "https://evilmartians.com/chronicles/postcss-8-plugin-migration`",
+    "https://github.com/browserslist/browserslist#readme",
+    "https://github.com/jonschlinkert/fill-range>",
+    "https://github.com/jonschlinkert/is-number>",
+    "https://github.com/kurkle/color#readme",
+    "https://github.com/micromatch/to-regex-range>",
+    "https://github.com/postcss/autoprefixer#readme",
+    "https://mths.be/cssesc",
+    "https://npms.io/search?q=ponyfill.",
+    "https://tailwindcss.com/docs/content-configuration",
+    "https://tailwindcss.com/docs/content-configuration#discarding-classes",
+    "https://tailwindcss.com/docs/content-configuration#pattern-recommendations",
+    "https://tailwindcss.com/docs/content-configuration#safelisting-classes",
+    "https://tailwindcss.com/docs/installation",
+    "https://tailwindcss.com/docs/upgrade-guide#configure-content-sources",
+    "https://tailwindcss.com/docs/upgrade-guide#prefix-cannot-be-a-function",
+    "https://tailwindcss.com/docs/upgrade-guide#remove-dark-mode-configuration",
+    "https://tailwindcss.com/docs/upgrade-guide#replace-variants-with-layer",
+    "https://tailwindcss.com/docs/using-with-preprocessors#nesting",
+    "https://tailwindcss.com`",
+    "https://twitter.com/browserslist",
+    "https://www.chartjs.org",
+    "https://www.googletagmanager.com/gtm.js?id=",
+    "https://www.w3ctech.com/topic/2226`",
+    "initLeaseGraph1",
+    "initLeaseGraph2",
+    "leaseGraph1Loaded",
+    "leaseGraph2Loaded",
+    "leasePriceControlsConfig",
+    "leasePricePeriodChart",
+    "leasePricePropertyLayoutDropdown",
+    "leasePricePropertyLayoutDropdown_m",
+    "leasePricePropertyLayoutFilter",
+    "leasePricePropertyLayoutFilter_m",
+    "leasePricePropertyTypeDropdown",
+    "leasePricePropertyTypeDropdown_m",
+    "leasePricePropertyTypeFilter",
+    "leasePricePropertyTypeFilter_m",
+    "leasePriceRegionFilter",
+    "leasePriceRegionFilterDropdown",
+    "leasePriceRegionFilterDropdown_m",
+    "leasePriceRegionFilter_m",
+    "leasePriceStatTimeFilter",
+    "leasePriceStatTimeFilter_m",
+    "leasePropertyLayoutDropdown",
+    "leasePropertyLayoutDropdown_m",
+    "leasePropertyLayoutFilter",
+    "leasePropertyLayoutFilter_m",
+    "leasePropertyTypeDropdown",
+    "leasePropertyTypeDropdown_m",
+    "leasePropertyTypeFilter",
+    "leasePropertyTypeFilter_m",
+    "leaseRegionFilter",
+    "leaseRegionFilterDropdown",
+    "leaseRegionFilterDropdown_m",
+    "leaseRegionFilter_m",
+    "leaseResidentialChart",
+    "leaseResidentialPriceChart",
+    "leaseStatTimeFilter",
+    "leaseStatTimeFilter_m",
+    "leaseUnitControlsConfig",
+    "leaseUnitsPriceChart",
+    "lease_price_by_period.csv",
+    "lease_residential.csv",
+    "loadLeaseCards",
+    "loadLeaseGraph1",
+    "loadLeaseGraph2",
+    "null}releaseContext(t",
+    "redrawLeaseGraph1",
+    "redrawLeaseGraph2",
+    "release",
+    "releaseContext(t",
+    "setupLeasePeriodListener",
+    "setupLeasePricePeriodListener",
+    "this.platform.releaseContext(e",
+    "totalTransactionChart",
+    "total_transactions.csv",
+    "transaction",
+    "transactionByTypeFilters",
+    "transactionControlsConfig",
+    "window.MD.clearLeasePricePeriodMobileFilters",
+    "window.MD.clearLeaseUnitsPeriodMobileFilters",
+    "window.MD.clearMobileTransactionFilters",
+    "window.leaseGraph1",
+    "window.leaseGraph1.allData",
+    "window.leaseGraph1.allData.filter(item",
+    "window.leaseGraph1.apiLayouts",
+    "window.leaseGraph1.apiLayouts.includes(l",
+    "window.leaseGraph1.apiPropertyTypes",
+    "window.leaseGraph1.apiPropertyTypes.includes(v",
+    "window.leaseGraph1.chart",
+    "window.leaseGraph1.chart.destroy",
+    "window.leaseGraph1.currentPeriod",
+    "window.leaseGraph1?.chart",
+    "window.leaseGraph1Chart",
+    "window.leaseGraph2",
+    "window.leaseGraph2.allData",
+    "window.leaseGraph2.allData.filter(item",
+    "window.leaseGraph2.apiLayouts",
+    "window.leaseGraph2.apiLayouts.includes(l",
+    "window.leaseGraph2.apiPropertyTypes",
+    "window.leaseGraph2.apiPropertyTypes.includes(v",
+    "window.leaseGraph2.chart",
+    "window.leaseGraph2.chart.destroy",
+    "window.leaseGraph2.currentPeriod",
+    "window.leaseGraph2.dateLabels",
+    "window.leaseGraph2.dateLabels?.[i",
+    "window.leaseGraph2?.chart",
+    "window.leaseGraph2Chart",
+    "window.redrawLeaseGraph1",
+    "window.redrawLeaseGraph1(true",
+    "window.redrawLeaseGraph1?.",
+    "window.redrawLeaseGraph2",
+    "window.redrawLeaseGraph2(true",
+    "window.redrawLeaseGraph2?."
+  ]
+}
