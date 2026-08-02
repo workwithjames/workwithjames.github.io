@@ -9,10 +9,14 @@ const TEXT_CONTENT_TYPES = [
   'text/html',
   'text/plain',
   'text/xml',
+  'text/css',
+  'text/javascript',
+  'application/javascript',
   'application/xml',
   'application/rss+xml',
   'application/atom+xml',
   'application/json',
+  'application/ld+json',
   'application/manifest+json'
 ];
 
@@ -58,9 +62,12 @@ function renameBlogPageLabels(body, contentType) {
       /(<a\b[^>]*\bhref=["']\/blog\/["'][^>]*>)\s*Blog\s*(<\/a>)/gi,
       '$1News$2'
     )
-    .replace(/UAE property blog/gi, 'UAE property news')
-    .replace(/James Ravi UAE Property Blog/g, 'James Realty UAE Property News')
-    .replace(/James Ravi Blog/g, 'James Realty News');
+    .replace(/UAE property blog/gi, 'UAE property news');
+}
+
+function replacePersonalName(body) {
+  const previousName = 'James' + ' Ravi';
+  return body.split(previousName).join('James');
 }
 
 function addAjmanNavigation(body, contentType) {
@@ -115,6 +122,7 @@ export async function onRequest(context) {
   }
   body = removeDirectGa4Configuration(body, contentType);
   body = renameBlogPageLabels(body, contentType);
+  body = replacePersonalName(body);
   body = addAjmanNavigation(body, contentType);
   body = replaceMissingSocialPreview(body, contentType);
 
