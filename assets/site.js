@@ -6,10 +6,11 @@
       {key:'mobile-columns',href:'/assets/mobile-columns.css?v=2'},
       {key:'fixed-header',href:'/assets/fixed-header.css?v=2'},
       {key:'about-flow-right',href:'/assets/about-flow-right.css?v=1'},
-      {key:'scroll-navigation',href:'/assets/scroll-navigation.css?v=1'}
+      {key:'scroll-navigation',href:'/assets/scroll-navigation.css?v=1'},
+      {key:'header-goal-nav',href:'/assets/header-goal-nav.css?v=1'}
     ];
     styles.forEach(function(item){
-      if(document.querySelector('link[data-'+item.key+']')){return;}
+      if(document.querySelector('link[data-'+item.key+']')||document.querySelector('link[href^="'+item.href.split('?')[0]+'"]')){return;}
       var link=document.createElement('link');
       link.rel='stylesheet';
       link.href=item.href;
@@ -30,9 +31,7 @@
   function event(name,data){if(typeof window.gtag==='function'){window.gtag('event',name,data||{});}}
 
   function removeVisibleBlogDates(){
-    document.querySelectorAll('.article-meta time,.article-byline time').forEach(function(date){
-      date.remove();
-    });
+    document.querySelectorAll('.article-meta time,.article-byline time').forEach(function(date){date.remove();});
   }
 
   function updateHeaderBrand(){
@@ -44,26 +43,42 @@
 
   function renameBlogPageLabels(){
     document.querySelectorAll('a[href="/blog/"]').forEach(function(link){
-      if((link.textContent||'').trim().toLowerCase()==='blog'){
-        link.textContent='News';
-      }
+      if((link.textContent||'').trim().toLowerCase()==='blog'){link.textContent='News';}
     });
     document.querySelectorAll('.section-kicker').forEach(function(label){
-      if((label.textContent||'').trim().toLowerCase()==='uae property blog'){
-        label.textContent='UAE property news';
-      }
+      if((label.textContent||'').trim().toLowerCase()==='uae property blog'){label.textContent='UAE property news';}
     });
   }
 
-  function ensureDataNavigation(){
-    document.querySelectorAll('.global-links,.mobile-page-tabs,.footer-links').forEach(function(nav){
-      if(nav.querySelector('a[href="/abu-dhabi-data/"]')){return;}
-      var dubai=nav.querySelector('a[href="/"]');
-      if(!dubai){return;}
-      var link=document.createElement('a');
-      link.href='/abu-dhabi-data/';
-      link.textContent='Abu Dhabi Data';
-      dubai.insertAdjacentElement('afterend',link);
+  function prepareGoalMenus(){
+    var menus=Array.prototype.slice.call(document.querySelectorAll('.goal-nav'));
+    if(!menus.length){return;}
+
+    menus.forEach(function(menu){
+      menu.addEventListener('toggle',function(){
+        if(!menu.open){return;}
+        menus.forEach(function(other){if(other!==menu){other.open=false;}});
+        event('navigation_menu_open',{menu_name:'Your Goal',page_path:location.pathname});
+      });
+      menu.querySelectorAll('a').forEach(function(link){
+        link.addEventListener('click',function(){menu.open=false;});
+      });
+    });
+
+    document.addEventListener('click',function(clickEvent){
+      if(clickEvent.target.closest('.goal-nav')){return;}
+      menus.forEach(function(menu){menu.open=false;});
+    });
+
+    document.addEventListener('keydown',function(keyEvent){
+      if(keyEvent.key!=='Escape'){return;}
+      menus.forEach(function(menu){
+        if(menu.open){
+          menu.open=false;
+          var summary=menu.querySelector('summary');
+          if(summary){summary.focus();}
+        }
+      });
     });
   }
 
@@ -116,9 +131,7 @@
       var headerOffset=parseFloat(rootStyle.getPropertyValue('--fixed-header-offset'))||0;
       var targetLine=headerOffset+flow.offsetHeight+44;
       var current=entries[0];
-      entries.forEach(function(item){
-        if(item.section.getBoundingClientRect().top<=targetLine){current=item;}
-      });
+      entries.forEach(function(item){if(item.section.getBoundingClientRect().top<=targetLine){current=item;}});
       setActive(current.link);
     }
 
@@ -128,9 +141,7 @@
       window.requestAnimationFrame(updateActive);
     }
 
-    links.forEach(function(link){
-      link.addEventListener('click',function(){setActive(link);});
-    });
+    links.forEach(function(link){link.addEventListener('click',function(){setActive(link);});});
     window.addEventListener('scroll',requestUpdate,{passive:true});
     window.addEventListener('resize',requestUpdate);
     updateActive();
@@ -161,9 +172,7 @@
     controls.appendChild(down);
     document.body.appendChild(controls);
 
-    function scrollMode(){
-      return window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
-    }
+    function scrollMode(){return window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';}
     function update(){
       var max=Math.max(0,root.scrollHeight-root.clientHeight);
       var current=window.scrollY||root.scrollTop||0;
@@ -182,7 +191,7 @@
     removeVisibleBlogDates();
     updateHeaderBrand();
     renameBlogPageLabels();
-    ensureDataNavigation();
+    prepareGoalMenus();
     ensureCitationNavigation();
     prepareAboutFlow();
     preparePageScrollControls();
