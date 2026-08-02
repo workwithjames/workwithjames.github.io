@@ -102,16 +102,4 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://jamesrealty.uk/blog/property-news-2026-08-01-uae-property-market-update-decision-checks-from-property-f-0ea9f/</loc>
-    <lastmod>2026-08-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://jamesrealty.uk/blog/property-news-2026-08-01-dubai-property-market-update-decision-checks-from-property-64546/</loc>
-    <lastmod>2026-08-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
 </urlset>

@@ -3,7 +3,7 @@
 
 The script is designed for GitHub Actions and requires no API keys. It:
 - creates five initial source-led articles requested by the site owner;
-- checks five UAE property news and blog sources;
+- checks four UAE property news sources;
 - publishes concise original analytical briefs for newly detected articles;
 - updates the blog index, a property-news hub, RSS, sitemap and internal links.
 
@@ -66,12 +66,6 @@ CATEGORY_PAGES = [
         "host": "www.arabianbusiness.com",
         "article_prefixes": ["/real-estate/", "/industries/real-estate/"],
         "feed_urls": ["https://www.arabianbusiness.com/real-estate/feed/"],
-    },
-    {
-        "name": "Property Finder",
-        "url": "https://www.propertyfinder.ae/blog/",
-        "host": "www.propertyfinder.ae",
-        "article_prefixes": ["/blog/"],
     },
 ]
 
@@ -934,7 +928,7 @@ def update_blog_index(posts: list[Post]) -> None:
     start = "<!-- PROPERTY_NEWS_AUTOMATION_START -->"
     end = "<!-- PROPERTY_NEWS_AUTOMATION_END -->"
     content = re.sub(re.escape(start) + r".*?" + re.escape(end), "", content, flags=re.S)
-    block = start + '<div class="property-news-divider"><div><p class="section-kicker">Property news analysis</p><h2>Latest UAE property reports, explained.</h2></div><p>Original briefs based on monitored reporting from Khaleej Times, Gulf News, The National, Arabian Business and Property Finder, with source links, limitations and practical checks.</p></div>' + "".join(tile(p) for p in posts) + end
+    block = start + '<div class="property-news-divider"><div><p class="section-kicker">Property news analysis</p><h2>Latest UAE property reports, explained.</h2></div><p>Original briefs based on monitored reporting from Khaleej Times, Gulf News, The National and Arabian Business, with source links, limitations and practical checks.</p></div>' + "".join(tile(p) for p in posts) + end
     marker = '</div><aside class="market-promo"'
     if marker in content:
         content = content.replace(marker, block + marker, 1)
@@ -979,7 +973,7 @@ def render_hub(posts: list[Post]) -> str:
         "@type": "CollectionPage",
         "name": "UAE Property News Analysis",
         "url": SITE + "/blog/property-news/",
-        "description": "Original source-led analysis of UAE property reporting from five monitored publishers.",
+        "description": "Original source-led analysis of UAE property reporting from four monitored publishers.",
         "mainEntity": {
             "@type": "ItemList",
             "numberOfItems": len(posts),
@@ -989,7 +983,7 @@ def render_hub(posts: list[Post]) -> str:
             ],
         },
     }
-    return f'''<!DOCTYPE html><html lang="en-AE"><head>{GTM_HEAD}<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/css/5576f66c8ff02a6a.css?v=12"/><link rel="stylesheet" href="/assets/property-news.css?v=1"/><link rel="shortcut icon" href="/favicon.svg"/><link rel="icon" href="/favicon.svg"/><link rel="apple-touch-icon" href="/favicon-192.png"/><title>UAE Property News Analysis | James Ravi</title><meta name="description" content="Original source-led analysis of UAE property reporting from Khaleej Times, Gulf News, The National, Arabian Business and Property Finder."/><link rel="canonical" href="{SITE}/blog/property-news/"/><meta property="og:type" content="website"/><meta property="og:title" content="UAE Property News Analysis"/><meta property="og:description" content="Property headlines explained with source links, market context and due-diligence checks."/><meta property="og:url" content="{SITE}/blog/property-news/"/><meta property="og:image" content="{SITE + posts[0].image}"/><meta property="og:image:alt" content="{esc(image_alt(posts[0]))}"/><script type="application/ld+json">{json.dumps(item_list, ensure_ascii=False, separators=(',', ':'))}</script><link rel="alternate" type="application/rss+xml" href="/feed.xml"/><script defer src="/assets/site.js?v=5"></script></head><body>{GTM_BODY}<a class="skip-link" href="#main-content">Skip to main content</a>{NAV_HEADER}<main id="main-content"><section class="section-shell news-hub-hero"><p class="section-kicker">Monitored UAE property news</p><h1>Property headlines, with the decision context added.</h1><p class="hero-description">This page tracks new property reporting from Khaleej Times, Gulf News, The National, Arabian Business and Property Finder. Each entry is an original brief with a direct source link, important limitations and practical checks for buyers, tenants, owners and investors.</p><div class="hero-actions"><a class="button button-primary" href="/blog/">All property guides</a><a class="button button-outline" href="/">Dubai Data</a><a class="button button-outline" href="/abu-dhabi-data/">Abu Dhabi Data</a></div></section><section class="section-shell"><div class="news-automation-note"><strong>Publishing schedule:</strong> The monitor checks all five publisher pages hourly. A new article is normally converted into a source brief within the next successful GitHub Actions run.</div><div class="news-hub-grid">{cards}</div></section><section class="section-shell contact-card"><div><p class="section-kicker">Need deeper analysis?</p><h2>Connect market reporting to a project, audience or acquisition plan.</h2><p>Share the property, target market and commercial objective.</p></div><a class="button nav-whatsapp" href="/contact/">Contact James <span aria-hidden="true">→</span></a></section></main>{FOOTER}</body></html>'''
+    return f'''<!DOCTYPE html><html lang="en-AE"><head>{GTM_HEAD}<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/css/5576f66c8ff02a6a.css?v=12"/><link rel="stylesheet" href="/assets/property-news.css?v=1"/><link rel="shortcut icon" href="/favicon.svg"/><link rel="icon" href="/favicon.svg"/><link rel="apple-touch-icon" href="/favicon-192.png"/><title>UAE Property News Analysis | James Ravi</title><meta name="description" content="Original source-led analysis of UAE property reporting from Khaleej Times, Gulf News, The National and Arabian Business."/><link rel="canonical" href="{SITE}/blog/property-news/"/><meta property="og:type" content="website"/><meta property="og:title" content="UAE Property News Analysis"/><meta property="og:description" content="Property headlines explained with source links, market context and due-diligence checks."/><meta property="og:url" content="{SITE}/blog/property-news/"/><meta property="og:image" content="{SITE + posts[0].image}"/><meta property="og:image:alt" content="{esc(image_alt(posts[0]))}"/><script type="application/ld+json">{json.dumps(item_list, ensure_ascii=False, separators=(',', ':'))}</script><link rel="alternate" type="application/rss+xml" href="/feed.xml"/><script defer src="/assets/site.js?v=5"></script></head><body>{GTM_BODY}<a class="skip-link" href="#main-content">Skip to main content</a>{NAV_HEADER}<main id="main-content"><section class="section-shell news-hub-hero"><p class="section-kicker">Monitored UAE property news</p><h1>Property headlines, with the decision context added.</h1><p class="hero-description">This page tracks new property reporting from Khaleej Times, Gulf News, The National and Arabian Business. Each entry is an original brief with a direct source link, important limitations and practical checks for buyers, tenants, owners and investors.</p><div class="hero-actions"><a class="button button-primary" href="/blog/">All property guides</a><a class="button button-outline" href="/">Dubai Data</a><a class="button button-outline" href="/abu-dhabi-data/">Abu Dhabi Data</a></div></section><section class="section-shell"><div class="news-automation-note"><strong>Publishing schedule:</strong> The monitor checks all four publisher pages hourly. A new article is normally converted into a source brief within the next successful GitHub Actions run.</div><div class="news-hub-grid">{cards}</div></section><section class="section-shell contact-card"><div><p class="section-kicker">Need deeper analysis?</p><h2>Connect market reporting to a project, audience or acquisition plan.</h2><p>Share the property, target market and commercial objective.</p></div><a class="button nav-whatsapp" href="/contact/">Contact James <span aria-hidden="true">→</span></a></section></main>{FOOTER}</body></html>'''
 
 
 def update_feed(posts: list[Post]) -> None:
