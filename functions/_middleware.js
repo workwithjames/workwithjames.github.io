@@ -78,6 +78,7 @@ function rewriteDubaiDataLinks(body, contentType) {
     /(<nav\b[^>]*class=["'][^"']*(?:global-links|mobile-page-tabs|footer-links)[^"']*["'][^>]*>)([\s\S]*?)(<\/nav>)/gi,
     (match, open, links, close) => {
       let updated = links;
+      const isGlobalHeader = open.includes('global-links');
 
       if (!updated.includes('href="/"') && !updated.includes("href='/'")) {
         updated = '<a href="/">Home</a>' + updated;
@@ -91,11 +92,14 @@ function rewriteDubaiDataLinks(body, contentType) {
       if (!updated.includes('/dubai-data/')) {
         updated += '<a href="/dubai-data/">Dubai Data</a>';
       }
-      if (!updated.includes('/abu-dhabi-data/')) {
-        updated += '<a href="/abu-dhabi-data/">Abu Dhabi Data</a>';
-      }
-      if (!updated.includes('/ajman-data/')) {
-        updated += '<a href="/ajman-data/">Ajman Data</a>';
+
+      if (!isGlobalHeader) {
+        if (!updated.includes('/abu-dhabi-data/')) {
+          updated += '<a href="/abu-dhabi-data/">Abu Dhabi Data</a>';
+        }
+        if (!updated.includes('/ajman-data/')) {
+          updated += '<a href="/ajman-data/">Ajman Data</a>';
+        }
       }
 
       return open + updated + close;
