@@ -64,13 +64,27 @@ function replacePersonalName(body) {
   return body.split(previousName).join('James');
 }
 
-function addAjmanNavigation(body, contentType) {
-  if (!contentType.includes('text/html') || body.includes('href="/ajman-data/"') || body.includes("href='/ajman-data/'")) return body;
+function ensureDataNavigation(body, contentType) {
+  if (!contentType.includes('text/html')) return body;
 
-  return body.replace(
-    /(<a\b[^>]*\bhref=["']\/abu-dhabi-data\/["'][^>]*>\s*Abu Dhabi Data\s*<\/a>)/gi,
-    '$1<a href="/ajman-data/">Ajman Data</a>'
-  );
+  const hasAbuDhabi = body.includes('href="/abu-dhabi-data/"') || body.includes("href='/abu-dhabi-data/'");
+  const hasAjman = body.includes('href="/ajman-data/"') || body.includes("href='/ajman-data/'");
+
+  if (!hasAbuDhabi) {
+    return body.replace(
+      /(<a\b[^>]*\bhref=["']\/["'][^>]*>\s*Dubai Data\s*<\/a>)/gi,
+      '$1<a href="/abu-dhabi-data/">Abu Dhabi Data</a><a href="/ajman-data/">Ajman Data</a>'
+    );
+  }
+
+  if (!hasAjman) {
+    return body.replace(
+      /(<a\b[^>]*\bhref=["']\/abu-dhabi-data\/["'][^>]*>\s*Abu Dhabi Data\s*<\/a>)/gi,
+      '$1<a href="/ajman-data/">Ajman Data</a>'
+    );
+  }
+
+  return body;
 }
 
 function addConversionFooterLinks(body, contentType) {
@@ -195,7 +209,7 @@ export async function onRequest(context) {
   body = removeDirectGa4Configuration(body, contentType);
   body = renameBlogPageLabels(body, contentType);
   body = replacePersonalName(body);
-  body = addAjmanNavigation(body, contentType);
+  body = ensureDataNavigation(body, contentType);
   body = addConversionFooterLinks(body, contentType);
   body = replaceMissingSocialPreview(body, contentType);
   body = upgradeHomepage(body, contentType, requestUrl.pathname);
