@@ -9,12 +9,13 @@ on:
       - '**/*.html'
       - 'assets/**'
       - 'functions/**'
+      - 'scripts/**'
+      - 'data/**'
       - 'sitemap.xml'
       - 'feed.xml'
       - 'image-sitemap.xml'
       - 'robots.txt'
       - 'site.webmanifest'
-      - 'scripts/site_quality_audit.mjs'
       - '.github/workflows/site-quality-audit.yml'
 
 permissions:
@@ -39,6 +40,11 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
       - name: Install audit tools
         run: npm install --no-save --no-package-lock playwright@1.54.2 axe-core@4.10.3 wrangler@4.27.0
 
@@ -53,6 +59,30 @@ jobs:
             node --check "$file"
           done < <(find assets functions scripts -type f \( -name '*.js' -o -name '*.mjs' \) -print0)
 
+      - name: Validate backend scripts and structured files
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m compileall -q scripts
+          python - <<'PY'
+          import json
+          import pathlib
+          import xml.etree.ElementTree as ET
+
+          root = pathlib.Path('.')
+          for file in list((root / 'data').glob('*.json')) + [root / 'site.webmanifest']:
+              if file.exists():
+                  with file.open(encoding='utf-8') as handle:
+                      json.load(handle)
+                  print(f'Valid JSON: {file}')
+
+          for name in ('sitemap.xml', 'feed.xml', 'image-sitemap.xml'):
+              file = root / name
+              if file.exists():
+                  ET.parse(file)
+                  print(f'Valid XML: {file}')
+          PY
+
       - name: Start Cloudflare Pages locally
         shell: bash
         run: |
@@ -66,6 +96,14 @@ jobs:
           done
           cat /tmp/wrangler.log
           exit 1
+
+      - name: Verify permanent redirects
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(curl -sS -o /dev/null -w '%{http_code}' http://127.0.0.1:8788/home/)" = "301"
+          test "$(curl -sS -o /dev/null -w '%{http_code}' http://127.0.0.1:8788/dubai-transactions/)" = "301"
+          test "$(curl -sS -o /dev/null -w '%{redirect_url}' http://127.0.0.1:8788/dubai-transactions/)" = "https://jamesrealty.uk/dubai-data/"
 
       - name: Run rendered site audit
         env:
