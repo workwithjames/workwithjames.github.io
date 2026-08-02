@@ -1,0 +1,89 @@
+name: Site Quality Audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '**/*.html'
+      - 'assets/**'
+      - 'functions/**'
+      - 'sitemap.xml'
+      - 'feed.xml'
+      - 'image-sitemap.xml'
+      - 'robots.txt'
+      - 'scripts/site_quality_audit.mjs'
+      - '.github/workflows/site-quality-audit.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site-quality-audit
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install audit tools
+        run: npm install --no-save --no-package-lock playwright@1.54.2 axe-core@4.10.3 wrangler@4.27.0
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Check JavaScript syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' file; do
+            node --check "$file"
+          done < <(find assets functions scripts -type f \( -name '*.js' -o -name '*.mjs' \) -print0)
+
+      - name: Start Cloudflare Pages locally
+        shell: bash
+        run: |
+          npx wrangler pages dev . --port 8788 --compatibility-date=2026-08-01 > /tmp/wrangler.log 2>&1 &
+          echo $! > /tmp/wrangler.pid
+          for attempt in {1..45}; do
+            if curl --silent --fail http://127.0.0.1:8788/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/wrangler.log
+          exit 1
+
+      - name: Run rendered site audit
+        env:
+          AUDIT_BASE_URL: http://127.0.0.1:8788
+        run: node scripts/site_quality_audit.mjs
+
+      - name: Show Wrangler log on failure
+        if: failure()
+        run: cat /tmp/wrangler.log || true
+
+      - name: Commit audit report
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add audit/site-audit-report.json
+          if git diff --cached --quiet; then
+            echo 'Audit report unchanged.'
+            exit 0
+          fi
+          git commit -m 'Update automated site quality report'
+          git push
