@@ -1,164 +1,132 @@
 (function(){
-  var endpoint='/api/abu-dhabi-data-safe';
-  var state={payload:null,active:'transactions'};
-  var defaultCoverage={
-    transactions:['Sales','Mortgages','Other transactions','Residential','Commercial','Monthly','Quarterly','Yearly'],
-    residentialSales:['Apartments','Villas','Townhouses','Penthouses','Plots','Ready','Off-plan','Court-mandated'],
-    leases:['Rented residential units','Residential lease values','Average annual rents','Apartment rent index','Villa rent index'],
-    geography:['Abu Dhabi City','Al Ain City','Al Dhafra Region','District','Community','Project'],
-    recentSales:['Asset type','Property type','Sale type','District','Community','Project','Layout']
-  };
+  var endpoint='/api/abu-dhabi-data';
+  var state={payload:null,rows:[],filters:{search:'',type:'all',sale:'all'}};
 
   function byId(id){return document.getElementById(id);}
-  function metricValue(metric){return metric&&typeof metric.value==='number'?metric.value:null;}
-  function compact(value){
-    if(value===null||value===undefined||!Number.isFinite(value)){return 'Not available';}
-    var abs=Math.abs(value);
-    var maximum=abs>=1e9?1:abs>=1e6?1:0;
-    return new Intl.NumberFormat('en-AE',{notation:'compact',maximumFractionDigits:maximum}).format(value);
-  }
-  function money(value){return value===null||value===undefined||!Number.isFinite(value)?'Not available':'AED '+compact(value);}
-  function integer(value){return value===null||value===undefined||!Number.isFinite(value)?'Not available':new Intl.NumberFormat('en-AE',{maximumFractionDigits:0}).format(value);}
-  function indexValue(value){return value===null||value===undefined||!Number.isFinite(value)?'Not available':new Intl.NumberFormat('en-AE',{maximumFractionDigits:2}).format(value);}
+  function setText(id,value){var node=byId(id);if(node)node.textContent=value;}
+  function value(metric){return metric&&Number.isFinite(metric.value)?metric.value:null;}
+  function compact(n){return n===null?'Not available':new Intl.NumberFormat('en-AE',{notation:'compact',maximumFractionDigits:2}).format(n);}
+  function money(n){return n===null?'Not available':'AED '+compact(n);}
+  function integer(n){return n===null?'Not available':new Intl.NumberFormat('en-AE',{maximumFractionDigits:0}).format(n);}
+  function index(n){return n===null?'Not available':new Intl.NumberFormat('en-AE',{maximumFractionDigits:2}).format(n);}
   function yoy(metric){
-    if(!metric||typeof metric.yoy!=='number'||!Number.isFinite(metric.yoy)){return 'Official current reading';}
-    var sign=metric.yoy>0?'+':'';
-    return sign+metric.yoy.toFixed(2).replace(/\.00$/,'')+'% year on year';
+    return metric&&Number.isFinite(metric.yoy)?((metric.yoy>0?'+':'')+metric.yoy.toFixed(2).replace(/\.00$/,'')+'% YoY'):'Current official reading';
   }
-  function setText(id,value){var node=byId(id);if(node){node.textContent=value;}}
-  function setStatus(mode,text){var status=byId('adrec-live-status');if(status){status.dataset.state=mode;status.textContent=text;}}
-  function sourceTime(value){
-    if(!value){return 'Checked just now';}
+  function setStatus(mode,text){var node=byId('adrec-live-status');if(node){node.dataset.state=mode;node.textContent=text;}}
+  function checked(value){
     var date=new Date(value);
-    if(Number.isNaN(date.getTime())){return 'Checked just now';}
-    return 'Checked '+new Intl.DateTimeFormat('en-AE',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Dubai'}).format(date);
+    return Number.isNaN(date.getTime())?'Checked now':'Checked '+new Intl.DateTimeFormat('en-AE',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Dubai'}).format(date);
+  }
+  function relabel(id,label){var node=byId(id);var card=node&&node.closest('.adrec-kpi');var title=card&&card.querySelector('span');if(title)title.textContent=label;}
+
+  function updateCards(payload){
+    var m=payload.metrics||{};
+    setText('adrec-transaction-value',money(value(m.transactionValue)));
+    setText('adrec-transaction-value-note','Last 12 months · '+yoy(m.transactionValue));
+    setText('adrec-transaction-volume',integer(value(m.transactionVolume)));
+    setText('adrec-transaction-volume-note','Last 12 months · '+yoy(m.transactionVolume));
+
+    relabel('adrec-sales-value','Apartment sale index');
+    setText('adrec-sales-value',index(value(m.apartmentSaleIndex)));
+    relabel('adrec-mortgage-value','Villa sale index');
+    setText('adrec-mortgage-value',index(value(m.villaSaleIndex)));
+    relabel('adrec-fdi-value','Recent sales loaded');
+    setText('adrec-fdi-value',integer(payload.recentSales&&payload.recentSales.rows?payload.recentSales.rows.length:0));
+
+    setText('adrec-apartment-sale-index',index(value(m.apartmentSaleIndex)));
+    setText('adrec-apartment-sale-note',yoy(m.apartmentSaleIndex));
+    setText('adrec-villa-sale-index',index(value(m.villaSaleIndex)));
+    setText('adrec-villa-sale-note',yoy(m.villaSaleIndex));
+    setText('adrec-rented-units',integer(value(m.rentedUnits)));
+    setText('adrec-rented-units-note',yoy(m.rentedUnits));
+    setText('adrec-apartment-rent-index',index(value(m.apartmentRentIndex)));
+    setText('adrec-apartment-rent-index-copy',index(value(m.apartmentRentIndex)));
+    setText('adrec-apartment-rent-note',yoy(m.apartmentRentIndex));
+    setText('adrec-villa-rent-index',index(value(m.villaRentIndex)));
+    setText('adrec-villa-rent-index-copy',index(value(m.villaRentIndex)));
+    setText('adrec-villa-rent-note',yoy(m.villaRentIndex));
   }
 
-  function updateKpis(payload){
-    var metrics=payload.metrics||{};
-    var performance=payload.marketPerformance||{};
-    var transactionValue=metricValue(metrics.transactionValue);
-    if(transactionValue===null){transactionValue=metricValue(performance.ytdTransactionValue);}
-    setText('adrec-transaction-value',money(transactionValue));
-    setText('adrec-transaction-value-note',metrics.transactionValue?yoy(metrics.transactionValue):'Current year to date market performance');
-    setText('adrec-transaction-volume',integer(metricValue(metrics.transactionVolume)));
-    setText('adrec-transaction-volume-note',yoy(metrics.transactionVolume));
-    setText('adrec-sales-value',money(metricValue(performance.ytdSalesValue)));
-    setText('adrec-mortgage-value',money(metricValue(performance.ytdMortgageValue)));
-    setText('adrec-fdi-value',money(metricValue(performance.ytdFdiValue)));
-    setText('adrec-apartment-sale-index',indexValue(metricValue(metrics.apartmentSaleIndex)));
-    setText('adrec-apartment-sale-note',yoy(metrics.apartmentSaleIndex));
-    setText('adrec-villa-sale-index',indexValue(metricValue(metrics.villaSaleIndex)));
-    setText('adrec-villa-sale-note',yoy(metrics.villaSaleIndex));
-    setText('adrec-rented-units',integer(metricValue(metrics.rentedUnits)));
-    setText('adrec-rented-units-note',yoy(metrics.rentedUnits));
-    var apartmentRent=indexValue(metricValue(metrics.apartmentRentIndex));
-    var villaRent=indexValue(metricValue(metrics.villaRentIndex));
-    setText('adrec-apartment-rent-index',apartmentRent);
-    setText('adrec-apartment-rent-index-copy',apartmentRent);
-    setText('adrec-apartment-rent-note',yoy(metrics.apartmentRentIndex));
-    setText('adrec-villa-rent-index',villaRent);
-    setText('adrec-villa-rent-index-copy',villaRent);
-    setText('adrec-villa-rent-note',yoy(metrics.villaRentIndex));
-  }
-
-  function composition(payload){
-    var holder=byId('adrec-composition');
-    if(!holder){return;}
-    var performance=payload.marketPerformance||{};
-    var values=[
-      {label:'Sales',value:metricValue(performance.ytdSalesValue)},
-      {label:'Mortgages',value:metricValue(performance.ytdMortgageValue)},
-      {label:'Foreign direct investment',value:metricValue(performance.ytdFdiValue)}
-    ].filter(function(item){return item.value!==null&&item.value>0;});
-    if(!values.length){
-      holder.innerHTML='<p class="adrec-empty">The official source did not expose the market-composition values in readable page markup during this check. Use the official dashboard below for the complete live view.</p>';
-      return;
-    }
-    var max=Math.max.apply(null,values.map(function(item){return item.value;}));
-    holder.innerHTML=values.map(function(item){
-      var width=Math.max(8,Math.round((item.value/max)*100));
-      return '<div class="adrec-bar-row"><div><strong>'+item.label+'</strong><span>'+money(item.value)+'</span></div><div class="adrec-bar-track"><span style="width:'+width+'%"></span></div></div>';
+  function projectSummary(rows){
+    var holder=byId('adrec-composition');if(!holder)return;
+    var groups={};
+    rows.forEach(function(row){
+      var key=row.project||row.community||row.district||'Not stated';
+      if(!groups[key])groups[key]={count:0,value:0};
+      groups[key].count+=1;groups[key].value+=Number(row.priceAed)||0;
+    });
+    var top=Object.keys(groups).map(function(key){return {name:key,count:groups[key].count,value:groups[key].value};})
+      .sort(function(a,b){return b.value-a.value;}).slice(0,6);
+    if(!top.length){holder.innerHTML='<p class="adrec-empty">No recent sales rows were returned by ADREC during this check.</p>';return;}
+    var max=Math.max.apply(null,top.map(function(x){return x.value||x.count;}));
+    holder.innerHTML=top.map(function(item){
+      var width=Math.max(7,Math.round(((item.value||item.count)/max)*100));
+      return '<div class="adrec-bar-row"><div><strong>'+escapeHtml(item.name)+'</strong><span>'+item.count+' sales · '+money(item.value)+'</span></div><div class="adrec-bar-track"><span style="width:'+width+'%"></span></div></div>';
     }).join('');
   }
 
-  function coverage(payload){
-    var container=byId('adrec-coverage');
-    if(!container){return;}
-    var source=payload.coverage||defaultCoverage;
-    var groups={transactions:'Transactions',residentialSales:'Residential sales',leases:'Residential leases',geography:'Geography',recentSales:'Recent sales filters'};
-    container.innerHTML=Object.keys(groups).map(function(key){
-      var items=source[key]||[];
-      return '<article><p class="section-kicker">'+groups[key]+'</p><div class="adrec-chip-row">'+items.map(function(item){return '<span>'+item+'</span>';}).join('')+'</div></article>';
-    }).join('');
+  function escapeHtml(value){return String(value||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function unique(rows,key){return Array.from(new Set(rows.map(function(r){return r[key];}).filter(Boolean))).sort();}
+  function options(items,label){return '<option value="all">'+label+'</option>'+items.map(function(x){return '<option value="'+escapeHtml(x)+'">'+escapeHtml(x)+'</option>';}).join('');}
+
+  function renderExplorer(payload){
+    var container=byId('adrec-coverage');if(!container)return;
+    state.rows=(payload.recentSales&&payload.recentSales.rows)||[];
+    container.innerHTML='<article class="adrec-sales-explorer"><div class="adrec-explorer-head"><div><p class="section-kicker">Recent registered sales</p><h3>Filter the latest public ADREC records</h3></div><span id="adrec-result-count"></span></div><div class="adrec-filter-grid"><label>Search<input id="adrec-search" type="search" placeholder="Project, community or district"></label><label>Property type<select id="adrec-type">'+options(unique(state.rows,'propertyType'),'All property types')+'</select></label><label>Sale type<select id="adrec-sale">'+options(unique(state.rows,'saleType'),'All sale types')+'</select></label></div><div class="adrec-table-wrap"><table class="adrec-sales-table"><thead><tr><th>Registration</th><th>Property</th><th>Location</th><th>Layout</th><th>Area</th><th>Price</th><th>Rate</th></tr></thead><tbody id="adrec-sales-body"></tbody></table></div><p class="adrec-table-note">Showing up to 100 recent records returned by the official public endpoint. Dates and classifications follow ADREC.</p></article>';
+    byId('adrec-search').addEventListener('input',function(e){state.filters.search=e.target.value.toLowerCase();renderRows();});
+    byId('adrec-type').addEventListener('change',function(e){state.filters.type=e.target.value;renderRows();});
+    byId('adrec-sale').addEventListener('change',function(e){state.filters.sale=e.target.value;renderRows();});
+    renderRows();
+  }
+
+  function renderRows(){
+    var search=state.filters.search;
+    var rows=state.rows.filter(function(row){
+      var hay=[row.project,row.community,row.district,row.propertyType,row.assetClass].join(' ').toLowerCase();
+      return (!search||hay.indexOf(search)>=0)&&(state.filters.type==='all'||row.propertyType===state.filters.type)&&(state.filters.sale==='all'||row.saleType===state.filters.sale);
+    });
+    setText('adrec-result-count',rows.length+' records');
+    var body=byId('adrec-sales-body');if(!body)return;
+    body.innerHTML=rows.slice(0,100).map(function(row){
+      var location=[row.project,row.community,row.district].filter(Boolean).join(', ')||'Not stated';
+      var area=Number.isFinite(row.soldAreaSqm)?new Intl.NumberFormat('en-AE',{maximumFractionDigits:1}).format(row.soldAreaSqm)+' sqm':'Not stated';
+      var rate=Number.isFinite(row.rateAedSqm)?money(row.rateAedSqm)+'/sqm':'Not stated';
+      var date=row.registration?new Date(row.registration):null;
+      var dateText=date&&!Number.isNaN(date.getTime())?new Intl.DateTimeFormat('en-AE',{dateStyle:'medium'}).format(date):String(row.registration||'Not stated');
+      return '<tr><td>'+escapeHtml(dateText)+'</td><td><strong>'+escapeHtml(row.propertyType||row.assetClass||'Not stated')+'</strong><small>'+escapeHtml(row.saleType||'')+'</small></td><td>'+escapeHtml(location)+'</td><td>'+escapeHtml(row.layout||'Not stated')+'</td><td>'+escapeHtml(area)+'</td><td>'+escapeHtml(money(row.priceAed))+'</td><td>'+escapeHtml(rate)+'</td></tr>';
+    }).join('')||'<tr><td colspan="7">No records match the selected filters.</td></tr>';
   }
 
   function setPanel(name){
-    state.active=name;
-    document.querySelectorAll('[data-adrec-tab]').forEach(function(button){
-      var active=button.dataset.adrecTab===name;
-      button.classList.toggle('is-active',active);
-      button.setAttribute('aria-selected',active?'true':'false');
-    });
+    document.querySelectorAll('[data-adrec-tab]').forEach(function(button){var active=button.dataset.adrecTab===name;button.classList.toggle('is-active',active);button.setAttribute('aria-selected',active?'true':'false');});
     document.querySelectorAll('[data-adrec-panel]').forEach(function(panel){panel.hidden=panel.dataset.adrecPanel!==name;});
   }
-
-  function prepareTabs(){
-    document.querySelectorAll('[data-adrec-tab]').forEach(function(button){button.addEventListener('click',function(){setPanel(button.dataset.adrecTab);});});
-    setPanel('transactions');
-  }
-
-  function revealFallback(message){
-    var warning=byId('adrec-warning');
-    if(warning){warning.hidden=false;setText('adrec-warning-message',message||'Some official figures were not readable during this check. The official ADREC dashboard remains available below.');}
-  }
+  function prepareTabs(){document.querySelectorAll('[data-adrec-tab]').forEach(function(button){button.addEventListener('click',function(){setPanel(button.dataset.adrecTab);});});setPanel('transactions');}
+  function reveal(message){var box=byId('adrec-warning');if(box){box.hidden=false;setText('adrec-warning-message',message);}}
 
   async function load(force){
-    setStatus('loading','Connecting to ADREC');
-    setText('adrec-checked','Checking the newest public market data');
+    setStatus('loading','Connecting to ADREC');setText('adrec-checked','Fetching official JSON data');
     try{
-      var url=endpoint+(force?'?refresh='+Date.now():'');
-      var response=await fetch(url,{headers:{Accept:'application/json'}});
+      var response=await fetch(endpoint+(force?'?refresh='+Date.now():''),{headers:{Accept:'application/json'}});
       var payload=await response.json();
-      state.payload=payload;
-      coverage(payload);
-      if(!response.ok||!payload.ok){throw new Error(payload.error||payload.warning||'The public source did not return readable metrics.');}
-      updateKpis(payload);
-      composition(payload);
+      if(!response.ok||!payload.ok)throw new Error(payload.error||payload.detail||'ADREC data unavailable');
+      state.payload=payload;updateCards(payload);projectSummary((payload.recentSales&&payload.recentSales.rows)||[]);renderExplorer(payload);
       setStatus('ready','Live source connected');
-      setText('adrec-checked',sourceTime(payload.fetchedAt)+' · Source updates daily');
-      setText('adrec-source-line','Live fetch from ADREC, cached for performance. '+sourceTime(payload.fetchedAt)+'.');
-      if(payload.warning){revealFallback(payload.warning);}
+      setText('adrec-checked',checked(payload.fetchedAt)+' · Direct public JSON');
+      setText('adrec-source-line','Direct ADREC JSON endpoints, cached for one hour. '+checked(payload.fetchedAt)+'.');
+      if(payload.partialErrors&&Object.keys(payload.partialErrors).length)reveal('Headline data is live. Some optional chart endpoints were unavailable during this refresh.');
     }catch(error){
-      coverage({coverage:defaultCoverage});
-      setStatus('error','Official source available');
-      setText('adrec-checked','Custom data cards are temporarily unavailable');
-      setText('adrec-source-line','Use the official dashboard while the custom source connection refreshes.');
-      revealFallback(error&&error.message?error.message:'The live data cards could not be refreshed.');
-      composition({marketPerformance:{}});
+      setStatus('error','Official source available');setText('adrec-checked','Direct data connection needs another refresh');
+      reveal(error.message||'The official data could not be retrieved.');
     }
   }
 
-  function prepareRefresh(){
-    var button=byId('adrec-refresh');
-    if(!button){return;}
-    button.addEventListener('click',function(){button.disabled=true;button.textContent='Refreshing';load(true).finally(function(){button.disabled=false;button.textContent='Refresh data';});});
+  function init(){
+    prepareTabs();
+    var refresh=byId('adrec-refresh');if(refresh)refresh.addEventListener('click',function(){refresh.disabled=true;refresh.textContent='Refreshing';load(true).finally(function(){refresh.disabled=false;refresh.textContent='Refresh data';});});
+    var toggle=byId('adrec-toggle-official'),shell=byId('adrec-official-shell'),frame=byId('adrec-dashboard-frame');
+    if(toggle&&shell)toggle.addEventListener('click',function(){var open=!shell.hidden;shell.hidden=open;toggle.textContent=open?'Open official dashboard':'Hide official dashboard';toggle.setAttribute('aria-expanded',open?'false':'true');if(!open&&frame&&!frame.src)frame.src=frame.dataset.src;});
+    load(false);
   }
-
-  function prepareOfficialToggle(){
-    var button=byId('adrec-toggle-official');
-    var shell=byId('adrec-official-shell');
-    var frame=byId('adrec-dashboard-frame');
-    if(!button||!shell){return;}
-    button.addEventListener('click',function(){
-      var open=!shell.hidden;
-      shell.hidden=open;
-      button.setAttribute('aria-expanded',open?'false':'true');
-      button.textContent=open?'Open official dashboard':'Hide official dashboard';
-      if(!open&&frame&&!frame.getAttribute('src')){frame.setAttribute('src',frame.dataset.src);}
-    });
-  }
-
-  function init(){prepareTabs();prepareRefresh();prepareOfficialToggle();coverage({coverage:defaultCoverage});load(false);}
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
