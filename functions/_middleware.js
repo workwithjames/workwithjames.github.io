@@ -1,6 +1,6 @@
 const PRIMARY_ORIGIN = 'https://jamesrealty.uk';
 const GA4_MEASUREMENT_ID = 'G-2MPZL26C6D';
-const ASSET_VERSION = '20260803-2';
+const ASSET_VERSION = '20260803-3';
 const LEGACY_ORIGINS = [
   'https://workwithjames.github.io',
   'http://workwithjames.github.io'
