@@ -1,9 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
-import { chromium } from 'playwright';
 
 const require = createRequire(import.meta.url);
+const { chromium } = require('playwright');
 const axeSource = fs.readFileSync(require.resolve('axe-core/axe.min.js'), 'utf8');
 const root = process.cwd();
 const baseUrl = process.env.AUDIT_BASE_URL || 'http://127.0.0.1:8788';

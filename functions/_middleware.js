@@ -1,6 +1,6 @@
 const PRIMARY_ORIGIN = 'https://jamesrealty.uk';
 const GA4_MEASUREMENT_ID = 'G-2MPZL26C6D';
-const ASSET_VERSION = '20260802-6';
+const ASSET_VERSION = '20260803-1';
 const LEGACY_ORIGINS = [
   'https://workwithjames.github.io',
   'http://workwithjames.github.io'
@@ -32,7 +32,10 @@ const VERSIONED_ASSETS = [
   'contact-goals.js',
   'quality-fixes.css',
   'quality-fixes.js',
-  'editorial-visuals.css'
+  'editorial-visuals.css',
+  'cta-system.css',
+  'buyer-cluster.css',
+  'buying-cost-calculator.js'
 ];
 
 function isTextResponse(contentType) {

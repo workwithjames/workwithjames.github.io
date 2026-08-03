@@ -7,7 +7,8 @@
       {key:'fixed-header',href:'/assets/fixed-header.css?v=2'},
       {key:'about-flow-right',href:'/assets/about-flow-right.css?v=1'},
       {key:'scroll-navigation',href:'/assets/scroll-navigation.css?v=1'},
-      {key:'header-goal-nav',href:'/assets/header-goal-nav.css?v=2'}
+      {key:'header-goal-nav',href:'/assets/header-goal-nav.css?v=2'},
+      {key:'cta-system',href:'/assets/cta-system.css?v=1'}
     ];
     styles.forEach(function(item){
       if(document.querySelector('link[data-'+item.key+']')||document.querySelector('link[href^="'+item.href.split('?')[0]+'"]')){return;}
@@ -48,7 +49,12 @@
     return parts.length?parts.join(' | '):'Direct';
   };
 
-  function event(name,data){if(typeof window.gtag==='function'){window.gtag('event',name,data||{});}}
+  function event(name,data){
+    data=data||{};
+    if(typeof window.gtag==='function'){window.gtag('event',name,data);return;}
+    window.dataLayer=window.dataLayer||[];
+    window.dataLayer.push(Object.assign({event:name},data));
+  }
 
   function removeVisibleBlogDates(){
     document.querySelectorAll('.article-meta time,.article-byline time').forEach(function(date){date.remove();});
@@ -247,6 +253,15 @@
     var link=e.target.closest('a');
     if(!link){return;}
     var href=link.getAttribute('href')||'';
+    var isCta=link.matches('.button,.mobile-conversion')||Boolean(link.closest('.home-journey,.home-data-card,.journey-links,.market-related,.property-news-link-grid,.related-reading,.buyer-cluster-card,.cluster-cta'));
+    if(isCta){
+      event('cta_click',{
+        link_text:(link.textContent||'').replace(/\s+/g,' ').trim(),
+        link_url:href,
+        cta_location:(link.closest('header')?'header':link.closest('footer')?'footer':link.closest('.mobile-conversion')?'mobile_sticky':'page'),
+        page_path:location.pathname
+      });
+    }
     if(href.indexOf('wa.me/')>-1){event('generate_lead',{method:'whatsapp',link_url:href,page_path:location.pathname});}
     if(href==='/contact/'||href.indexOf('/contact/')===0){event('contact_intent',{link_text:(link.textContent||'').trim(),page_path:location.pathname});}
     if(href==='/cite/'||href.indexOf('/cite/')===0){event('citation_intent',{link_text:(link.textContent||'').trim(),page_path:location.pathname});}

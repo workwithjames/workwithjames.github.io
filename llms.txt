@@ -9,6 +9,13 @@
 - [Dubai Property Transactions Dashboard](https://jamesrealty.uk/dubai-data/): Daily DLD-derived market totals, area prices, gross rental yields, comparisons, and affordability indicators.
 - [Dubai Rental Yield Calculator](https://jamesrealty.uk/dubai-rental-yield-calculator/): Free side-by-side calculator for gross yield, net yield, vacancy, service charges, management costs, and total acquisition cost.
 - [Dubai Buyer and Investor Brief](https://jamesrealty.uk/buy-invest-dubai/): Structured route from buyer objectives and budget to market screening and property-level checks.
+- [Dubai Property Buying Costs](https://jamesrealty.uk/dubai-property-buying-costs/): Official DLD, trustee, title, agency and mortgage cost assumptions with worked examples.
+- [Off-Plan vs Ready Property](https://jamesrealty.uk/off-plan-vs-ready-property-dubai/): Comparison of inspection, payment timing, rental income, finance, construction and exit risk.
+- [Dubai Communities by Budget](https://jamesrealty.uk/best-dubai-communities-by-budget/): Practical research bands from below AED 1 million to AED 6 million+, linked to current market data.
+- [Mortgage vs Cash](https://jamesrealty.uk/mortgage-vs-cash-dubai-property/): CBUAE LTV limits, liquidity, finance costs and downside tests.
+- [Dubai Property for Indian Buyers](https://jamesrealty.uk/dubai-property-investment-indian-buyers/): Ownership, RBI LRS, TCS and Indian foreign-asset reporting considerations.
+- [Dubai Property for UK Buyers](https://jamesrealty.uk/dubai-property-investment-uk-buyers/): Ownership, GBP/AED funding, UK foreign-income and overseas-gain considerations.
+- [Dubai Property Buying Cost Calculator](https://jamesrealty.uk/dubai-property-buying-cost-calculator/): Free editable estimate of DLD, trustee, agency, mortgage and upfront cash requirements.
 - [Dubai Property Seller Brief](https://jamesrealty.uk/sell-dubai-property/): Positioning, demand evidence, enquiry qualification, and launch planning for property owners.
 - [Real Estate Marketing](https://jamesrealty.uk/real-estate-marketing/): Property launch, performance acquisition, CRM, and conversion strategy for businesses.
 - [Contact James Ravi](https://jamesrealty.uk/contact/): Enquiry form for launches, performance marketing, investor campaigns, CRM, and advisory work.

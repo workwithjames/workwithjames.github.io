@@ -3,7 +3,12 @@
   var GOAL_LABELS={buy:'Buy or invest in Dubai property',sell:'Sell a Dubai property',marketing:'Real estate marketing'};
 
   function clean(value){return String(value||'').replace(/\s+/g,' ').trim();}
-  function track(name,data){if(typeof window.gtag==='function'){window.gtag('event',name,data||{});}}
+  function track(name,data){
+    data=data||{};
+    if(typeof window.gtag==='function'){window.gtag('event',name,data);return;}
+    window.dataLayer=window.dataLayer||[];
+    window.dataLayer.push(Object.assign({event:name},data));
+  }
 
   function init(){
     var form=document.getElementById('contact-goal-form');

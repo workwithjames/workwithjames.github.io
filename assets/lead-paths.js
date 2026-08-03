@@ -4,7 +4,10 @@
   function analytics(name,data){
     if(typeof window.gtag==='function'){
       window.gtag('event',name,data||{});
+      return;
     }
+    window.dataLayer=window.dataLayer||[];
+    window.dataLayer.push(Object.assign({event:name},data||{}));
   }
 
   function clean(value){

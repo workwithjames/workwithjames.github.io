@@ -3,7 +3,7 @@
   <url>
     <loc>https://jamesrealty.uk/</loc>
     <image:image>
-      <image:loc>https://jamesrealty.uk/images/james-realty-social-preview.webp</image:loc>
+      <image:loc>https://jamesrealty.uk/images/james-realty-dubai-advisory-social-v2.jpg</image:loc>
     </image:image>
     <image:image>
       <image:loc>https://jamesrealty.uk/images/visuals/home-property-intelligence-1200.webp</image:loc>
@@ -11,6 +11,9 @@
   </url>
   <url>
     <loc>https://jamesrealty.uk/buy-invest-dubai/</loc>
+    <image:image>
+      <image:loc>https://jamesrealty.uk/images/james-realty-dubai-advisory-social-v2.jpg</image:loc>
+    </image:image>
     <image:image>
       <image:loc>https://jamesrealty.uk/images/visuals/buyer-consultation-1200.webp</image:loc>
     </image:image>
