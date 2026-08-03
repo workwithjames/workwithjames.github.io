@@ -1,6 +1,6 @@
 const PRIMARY_ORIGIN = 'https://jamesrealty.uk';
 const GA4_MEASUREMENT_ID = 'G-2MPZL26C6D';
-const ASSET_VERSION = '20260803-3';
+const ASSET_VERSION = '20260803-4';
 const LEGACY_ORIGINS = [
   'https://workwithjames.github.io',
   'http://workwithjames.github.io'
@@ -32,6 +32,7 @@ const VERSIONED_ASSETS = [
   'contact-goals.js',
   'quality-fixes.css',
   'quality-fixes.js',
+  'section-navigation.css',
   'editorial-visuals.css',
   'cta-system.css',
   'buyer-cluster.css',
@@ -230,6 +231,9 @@ function injectQualityAssets(body, contentType) {
   const assets = [];
   if (!body.includes('/assets/quality-fixes.css')) {
     assets.push(`<link rel="stylesheet" href="/assets/quality-fixes.css?v=${ASSET_VERSION}"/>`);
+  }
+  if (!body.includes('/assets/section-navigation.css')) {
+    assets.push(`<link rel="stylesheet" href="/assets/section-navigation.css?v=${ASSET_VERSION}"/>`);
   }
   if (!body.includes('/assets/quality-fixes.js')) {
     assets.push(`<script defer src="/assets/quality-fixes.js?v=${ASSET_VERSION}"></script>`);
