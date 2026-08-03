@@ -4,6 +4,7 @@
     "https://gulfnews.com/business/property/arif-developments-honoured-at-9th-golden-excellence-awards-1.500622447",
     "https://gulfnews.com/business/property/dubai-homebuyers-get-more-choice-as-24800-new-units-enter-the-market-1.500625443",
     "https://gulfnews.com/business/property/dubai-rents-ease-62-while-home-prices-stay-above-2025-levels-1.500623468",
+    "https://gulfnews.com/business/property/dubai-villa-sells-for-dh110m-nearly-doubling-jumeirah-golf-estates-record-1.500628980",
     "https://gulfnews.com/business/property/emaar-homebuyers-can-secure-up-to-50-financing-before-handover-1.500623531",
     "https://gulfnews.com/business/property/imtiaz-records-another-launch-day-sell-out-with-dh15-billion-raw-district-2-1.500621203",
     "https://gulfnews.com/business/property/is-jeddah-tower-on-course-to-become-the-worlds-tallest-building-1.500623570",
@@ -28,6 +29,7 @@
     "https://www.khaleejtimes.com/business/property/jumeirah-golf-estates-villa-sale-hits-record-dh110m-amid-luxury-boom",
     "https://www.khaleejtimes.com/business/property/more-dubai-residents-buy-homes-to-live-in-for-long-term-developers-say",
     "https://www.khaleejtimes.com/business/property/ras-al-khaimah-rents-rise-villas-gain-popularity",
+    "https://www.khaleejtimes.com/business/property/record-transactions-and-global-brands-fuel-abu-dhabis-next-phase-of-real-estate-growth",
     "https://www.khaleejtimes.com/business/tech",
     "https://www.thenationalnews.com/business/property/2026/06/05/french-riviera-hotel-provencal-john-caudwell-villas-for-sale",
     "https://www.thenationalnews.com/business/property/2026/06/09/mystery-billionaire-flips-195m-london-mansion-for-56m-profit",
@@ -97,6 +99,7 @@
     "developer fate monthly rise source spotlight",
     "developer group monthly reportage rise spotlight",
     "developer monthly rise spotlight townx",
+    "dh110m doubling dubai estates golf jumeirah nearly record sells villa",
     "dubai",
     "dubai flexi launches month pay per rent scheme support tenants",
     "guide renter",
@@ -173,7 +176,19 @@
       "source_url": "https://www.khaleejtimes.com/business/property/jumeirah-golf-estates-villa-sale-hits-record-dh110m-amid-luxury-boom",
       "image": "/images/property-news/jumeirah-golf-estates-dh110m-villa-sale-analysis.webp",
       "auto": false
+    },
+    {
+      "slug": "property-news-2026-08-03-reading-the-latest-dubai-luxury-property-signal-c8cec",
+      "title": "Reading the latest Dubai luxury-property signal",
+      "description": "An independent reading of a new Gulf News luxury-property report, separating an exceptional headline from comparable evidence.",
+      "category": "UAE luxury property",
+      "date": "2026-08-03",
+      "read_time": "4 min read",
+      "source_name": "Gulf News",
+      "source_url": "https://gulfnews.com/business/property/dubai-villa-sells-for-dh110m-nearly-doubling-jumeirah-golf-estates-record-1.500628980",
+      "image": "/images/property-news/property-news-2026-08-03-reading-the-latest-dubai-luxury-property-signal-c8cec.svg",
+      "auto": true
     }
   ],
-  "updated_at": "2026-08-03T03:44:37+04:00"
+  "updated_at": "2026-08-03T16:43:27+04:00"
 }
