@@ -122,10 +122,15 @@
       {href:'/contact/',label:'Contact Me'},
       {href:'/cite/',label:'Cite this site'}
     ];
+    var allowed=footerOrder.map(function(item){return item.href;});
 
     document.querySelectorAll('.footer-links').forEach(function(nav){
       var existing={};
-      nav.querySelectorAll('a').forEach(function(link){existing[link.getAttribute('href')]=link;});
+      nav.querySelectorAll('a').forEach(function(link){
+        var href=link.getAttribute('href');
+        if(allowed.indexOf(href)===-1){link.remove();return;}
+        existing[href]=link;
+      });
 
       footerOrder.forEach(function(item){
         var link=existing[item.href]||document.createElement('a');
