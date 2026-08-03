@@ -1,16 +1,104 @@
 {
-  "generatedAt": "2026-08-02T16:19:47.807Z",
+  "generatedAt": "2026-08-03T06:50:48.313Z",
   "baseUrl": "http://127.0.0.1:8788",
   "scanned": {
-    "htmlFiles": 26,
-    "javascriptFiles": 13,
-    "routes": 23,
+    "htmlFiles": 33,
+    "javascriptFiles": 15,
+    "routes": 30,
     "viewports": 3
   },
   "summary": {
     "errors": 0,
-    "warnings": 0,
-    "total": 0
+    "warnings": 6,
+    "total": 6
   },
-  "issues": []
+  "issues": [
+    {
+      "severity": "warning",
+      "category": "axe",
+      "location": "/best-dubai-communities-by-budget/ [mobile]",
+      "message": "Scrollable region must have keyboard access",
+      "detail": {
+        "id": "scrollable-region-focusable",
+        "nodes": [
+          [
+            ".guide-table-wrap"
+          ]
+        ]
+      }
+    },
+    {
+      "severity": "warning",
+      "category": "axe",
+      "location": "/dubai-property-buying-cost-calculator/ [mobile]",
+      "message": "Scrollable region must have keyboard access",
+      "detail": {
+        "id": "scrollable-region-focusable",
+        "nodes": [
+          [
+            ".guide-table-wrap"
+          ]
+        ]
+      }
+    },
+    {
+      "severity": "warning",
+      "category": "axe",
+      "location": "/dubai-property-buying-costs/ [mobile]",
+      "message": "Scrollable region must have keyboard access",
+      "detail": {
+        "id": "scrollable-region-focusable",
+        "nodes": [
+          [
+            ".guide-table-wrap"
+          ]
+        ]
+      }
+    },
+    {
+      "severity": "warning",
+      "category": "axe",
+      "location": "/dubai-property-investment-indian-buyers/ [mobile]",
+      "message": "Scrollable region must have keyboard access",
+      "detail": {
+        "id": "scrollable-region-focusable",
+        "nodes": [
+          [
+            ".guide-table-wrap"
+          ]
+        ]
+      }
+    },
+    {
+      "severity": "warning",
+      "category": "axe",
+      "location": "/mortgage-vs-cash-dubai-property/ [mobile]",
+      "message": "Scrollable region must have keyboard access",
+      "detail": {
+        "id": "scrollable-region-focusable",
+        "nodes": [
+          [
+            "#rules > .guide-table-wrap"
+          ],
+          [
+            "#comparison > .guide-table-wrap"
+          ]
+        ]
+      }
+    },
+    {
+      "severity": "warning",
+      "category": "axe",
+      "location": "/off-plan-vs-ready-property-dubai/ [mobile]",
+      "message": "Scrollable region must have keyboard access",
+      "detail": {
+        "id": "scrollable-region-focusable",
+        "nodes": [
+          [
+            ".guide-table-wrap"
+          ]
+        ]
+      }
+    }
+  ]
 }
