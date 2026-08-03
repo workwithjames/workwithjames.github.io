@@ -31,9 +31,13 @@
   }
 
   function setActiveSection(nav,link){
+    var existing=nav.querySelector('a[aria-current="location"]');
+    if(existing===link){return;}
+
     nav.querySelectorAll('a[aria-current="location"]').forEach(function(item){
-      if(item!==link){item.removeAttribute('aria-current');}
+      item.removeAttribute('aria-current');
     });
+
     if(link){
       link.setAttribute('aria-current','location');
       if(window.matchMedia('(max-width:840px)').matches){
@@ -75,13 +79,23 @@
       setActiveSection(nav,current&&current.link);
     };
 
+    var ticking=false;
+    var requestUpdate=function(){
+      if(ticking){return;}
+      ticking=true;
+      window.requestAnimationFrame(function(){
+        update();
+        ticking=false;
+      });
+    };
+
     entries.forEach(function(entry){
       entry.link.addEventListener('click',function(){setActiveSection(nav,entry.link);});
     });
 
     update();
-    window.addEventListener('scroll',update,{passive:true});
-    window.addEventListener('resize',update,{passive:true});
+    window.addEventListener('scroll',requestUpdate,{passive:true});
+    window.addEventListener('resize',requestUpdate,{passive:true});
   }
 
   function markSectionNavigations(){
