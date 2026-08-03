@@ -4,6 +4,7 @@
   --cta-green:#25d978;
   --cta-ink:#080b18;
   --cta-ring:rgba(142,169,255,.72);
+  --section-nav-height:54px;
 }
 
 .market-toggle button.is-active{
@@ -166,6 +167,30 @@
     0 1px 0 rgba(255,255,255,.4) inset!important;
 }
 
+/* Sticky section navigation for guides and articles */
+.guide-toc,
+.article-toc,
+nav[aria-label="On this page"],
+nav[aria-label="Article contents"]{
+  position:sticky!important;
+  top:calc(var(--fixed-header-offset,72px) + 18px)!important;
+  align-self:start;
+  max-height:calc(100vh - var(--fixed-header-offset,72px) - 36px);
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+  z-index:120;
+}
+
+.guide-toc a:focus-visible,
+.article-toc a:focus-visible,
+nav[aria-label="On this page"] a:focus-visible,
+nav[aria-label="Article contents"] a:focus-visible{
+  outline:3px solid var(--cta-ring);
+  outline-offset:3px;
+  border-radius:8px;
+}
+
 /* Three-column desktop footer */
 @media(min-width:841px){
   footer .footer-shell-rich{
@@ -217,6 +242,102 @@ body.mobile-menu-open .mobile-conversion{
   pointer-events:none!important;
 }
 
+@media(max-width:840px){
+  .guide-toc,
+  .article-toc,
+  nav[aria-label="On this page"],
+  nav[aria-label="Article contents"]{
+    position:sticky!important;
+    top:calc(var(--fixed-header-offset,114px) + 7px)!important;
+    z-index:240!important;
+    display:flex!important;
+    align-items:center;
+    gap:7px!important;
+    width:100%;
+    max-width:100%;
+    max-height:var(--section-nav-height);
+    min-height:var(--section-nav-height);
+    margin:0 0 24px!important;
+    padding:7px!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    overscroll-behavior-x:contain;
+    scrollbar-width:none;
+    border:1px solid rgba(129,140,248,.24)!important;
+    border-radius:15px!important;
+    background:
+      linear-gradient(110deg,rgba(129,140,248,.10),transparent 42%,rgba(167,139,250,.07)),
+      rgba(13,13,34,.95)!important;
+    -webkit-backdrop-filter:blur(20px) saturate(145%);
+    backdrop-filter:blur(20px) saturate(145%);
+    box-shadow:0 14px 34px rgba(0,0,0,.30),0 1px 0 rgba(255,255,255,.035) inset!important;
+  }
+
+  .guide-toc::-webkit-scrollbar,
+  .article-toc::-webkit-scrollbar,
+  nav[aria-label="On this page"]::-webkit-scrollbar,
+  nav[aria-label="Article contents"]::-webkit-scrollbar{
+    display:none;
+  }
+
+  .guide-toc strong,
+  .article-toc strong,
+  nav[aria-label="On this page"] strong,
+  nav[aria-label="Article contents"] strong{
+    position:sticky;
+    left:0;
+    z-index:3;
+    flex:0 0 auto;
+    display:inline-flex!important;
+    align-items:center;
+    min-height:38px;
+    margin:0 2px 0 0!important;
+    padding:0 12px!important;
+    border:1px solid rgba(129,140,248,.30);
+    border-radius:10px;
+    background:linear-gradient(135deg,rgba(129,140,248,.32),rgba(167,139,250,.18)),#171735;
+    color:#f4f5ff!important;
+    font-size:.68rem!important;
+    line-height:1;
+    white-space:nowrap;
+    box-shadow:7px 0 14px rgba(13,13,34,.92),0 7px 18px rgba(0,0,0,.20);
+  }
+
+  .guide-toc a,
+  .article-toc a,
+  nav[aria-label="On this page"] a,
+  nav[aria-label="Article contents"] a{
+    flex:0 0 auto!important;
+    display:inline-flex!important;
+    align-items:center;
+    min-height:38px;
+    padding:0 12px!important;
+    border:1px solid rgba(129,140,248,.18)!important;
+    border-radius:10px!important;
+    background:rgba(129,140,248,.07);
+    color:#c4c6d9!important;
+    font-size:.68rem!important;
+    line-height:1!important;
+    white-space:nowrap;
+  }
+
+  .guide-toc a:hover,
+  .article-toc a:hover,
+  nav[aria-label="On this page"] a:hover,
+  nav[aria-label="Article contents"] a:hover{
+    border-color:rgba(129,140,248,.42)!important;
+    background:rgba(129,140,248,.15)!important;
+    color:#fff!important;
+  }
+
+  .guide-section[id],
+  .article-body section[id],
+  .article-body div[id],
+  .article-page section[id]{
+    scroll-margin-top:calc(var(--fixed-header-offset,114px) + var(--section-nav-height) + 24px)!important;
+  }
+}
+
 @media(max-width:760px){
   .button-primary,
   .nav-cta,
@@ -254,6 +375,17 @@ body.mobile-menu-open .mobile-conversion{
   .nav-cta::before,
   .mobile-conversion::before{
     display:none!important;
+  }
+}
+
+@media(prefers-reduced-transparency:reduce){
+  .guide-toc,
+  .article-toc,
+  nav[aria-label="On this page"],
+  nav[aria-label="Article contents"]{
+    background:#0d0d22!important;
+    -webkit-backdrop-filter:none;
+    backdrop-filter:none;
   }
 }
 
