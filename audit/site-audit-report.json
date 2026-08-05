@@ -1,104 +1,2993 @@
 {
-  "generatedAt": "2026-08-03T08:53:44.180Z",
+  "generatedAt": "2026-08-05T06:38:56.336Z",
   "baseUrl": "http://127.0.0.1:8788",
   "scanned": {
-    "htmlFiles": 33,
+    "htmlFiles": 36,
     "javascriptFiles": 15,
-    "routes": 30,
+    "routes": 33,
     "viewports": 3
   },
   "summary": {
-    "errors": 0,
-    "warnings": 6,
-    "total": 6
+    "errors": 166,
+    "warnings": 0,
+    "total": 166
   },
   "issues": [
     {
-      "severity": "warning",
-      "category": "axe",
+      "severity": "error",
+      "category": "navigation",
+      "location": "/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "functional",
+      "location": "/ [desktop]",
+      "message": "Homepage should show at least 4 data and tool cards, found 0"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/about-me/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/abu-dhabi-data/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/ajman-data/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/best-dubai-communities-by-budget/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/abu-dhabi-property-transactions-h1-2026/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/abu-dhabi-rent-freeze-2026-renewal-guide/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/adgm-broker-rankings-buyers-tenants-guide/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/dubai-24800-new-homes-buyer-choice-2026/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/dubai-apartment-sharing-subletting-laws/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/dubai-community-vs-property-long-term-value/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/dubai-h1-2026-delivery-led-property-cycle/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/dubai-residents-buying-long-term-homes/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/dubai-tenant-guest-access-management-company-rules/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/jumeirah-golf-estates-dh110m-villa-sale-analysis/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/property-news-2026-08-03-reading-the-latest-dubai-luxury-property-signal-c8cec/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/property-news-2026-08-04-abu-dhabi-housing-supply-what-buyers-and-owners-should-che-1ddff/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/property-news-2026-08-04-uae-housing-supply-what-buyers-and-owners-should-check-nex-32dea/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/property-news/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/buy-invest-dubai/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/cite/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/contact/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/dubai-data/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/dubai-property-buying-cost-calculator/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/dubai-property-buying-costs/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/dubai-property-investment-indian-buyers/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/dubai-property-investment-uk-buyers/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/dubai-rental-yield-calculator/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/mortgage-vs-cash-dubai-property/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/off-plan-vs-ready-property-dubai/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/real-estate-marketing/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/sell-dubai-property/ [desktop]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/about-me/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/about-me/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/abu-dhabi-data/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/abu-dhabi-data/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/ajman-data/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/ajman-data/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/best-dubai-communities-by-budget/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/best-dubai-communities-by-budget/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/abu-dhabi-property-transactions-h1-2026/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/abu-dhabi-property-transactions-h1-2026/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/abu-dhabi-rent-freeze-2026-renewal-guide/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/abu-dhabi-rent-freeze-2026-renewal-guide/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/adgm-broker-rankings-buyers-tenants-guide/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/adgm-broker-rankings-buyers-tenants-guide/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/dubai-24800-new-homes-buyer-choice-2026/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/dubai-24800-new-homes-buyer-choice-2026/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/dubai-apartment-sharing-subletting-laws/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/dubai-apartment-sharing-subletting-laws/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/dubai-community-vs-property-long-term-value/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/dubai-community-vs-property-long-term-value/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/dubai-h1-2026-delivery-led-property-cycle/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/dubai-h1-2026-delivery-led-property-cycle/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/dubai-residents-buying-long-term-homes/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/dubai-residents-buying-long-term-homes/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/dubai-tenant-guest-access-management-company-rules/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/dubai-tenant-guest-access-management-company-rules/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/jumeirah-golf-estates-dh110m-villa-sale-analysis/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/jumeirah-golf-estates-dh110m-villa-sale-analysis/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/property-news-2026-08-03-reading-the-latest-dubai-luxury-property-signal-c8cec/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/property-news-2026-08-03-reading-the-latest-dubai-luxury-property-signal-c8cec/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/property-news-2026-08-04-abu-dhabi-housing-supply-what-buyers-and-owners-should-che-1ddff/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/property-news-2026-08-04-abu-dhabi-housing-supply-what-buyers-and-owners-should-che-1ddff/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/property-news-2026-08-04-uae-housing-supply-what-buyers-and-owners-should-check-nex-32dea/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/property-news-2026-08-04-uae-housing-supply-what-buyers-and-owners-should-check-nex-32dea/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/property-news/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/property-news/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/buy-invest-dubai/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/buy-invest-dubai/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/cite/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/cite/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/contact/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/contact/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/dubai-data/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/dubai-data/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/dubai-property-buying-cost-calculator/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/dubai-property-buying-cost-calculator/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/dubai-property-buying-costs/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/dubai-property-buying-costs/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/dubai-property-investment-indian-buyers/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/dubai-property-investment-indian-buyers/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/dubai-property-investment-uk-buyers/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/dubai-property-investment-uk-buyers/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/dubai-rental-yield-calculator/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/dubai-rental-yield-calculator/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/mortgage-vs-cash-dubai-property/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/mortgage-vs-cash-dubai-property/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/off-plan-vs-ready-property-dubai/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/off-plan-vs-ready-property-dubai/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/real-estate-marketing/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/real-estate-marketing/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/sell-dubai-property/ [tablet]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/sell-dubai-property/ [tablet]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/about-me/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/about-me/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/abu-dhabi-data/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/abu-dhabi-data/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/ajman-data/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/ajman-data/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
       "location": "/best-dubai-communities-by-budget/ [mobile]",
-      "message": "Scrollable region must have keyboard access",
+      "message": "Header order does not match the required flow",
       "detail": {
-        "id": "scrollable-region-focusable",
-        "nodes": [
-          [
-            ".guide-table-wrap"
-          ]
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
         ]
       }
     },
     {
-      "severity": "warning",
-      "category": "axe",
+      "severity": "error",
+      "category": "runtime",
+      "location": "/best-dubai-communities-by-budget/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/abu-dhabi-property-transactions-h1-2026/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/abu-dhabi-property-transactions-h1-2026/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/abu-dhabi-rent-freeze-2026-renewal-guide/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/abu-dhabi-rent-freeze-2026-renewal-guide/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/adgm-broker-rankings-buyers-tenants-guide/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/adgm-broker-rankings-buyers-tenants-guide/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/dubai-24800-new-homes-buyer-choice-2026/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/dubai-24800-new-homes-buyer-choice-2026/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/dubai-apartment-sharing-subletting-laws/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/dubai-apartment-sharing-subletting-laws/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/dubai-community-vs-property-long-term-value/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/dubai-community-vs-property-long-term-value/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/dubai-h1-2026-delivery-led-property-cycle/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/dubai-h1-2026-delivery-led-property-cycle/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/dubai-residents-buying-long-term-homes/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/dubai-residents-buying-long-term-homes/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/dubai-tenant-guest-access-management-company-rules/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/dubai-tenant-guest-access-management-company-rules/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/jumeirah-golf-estates-dh110m-villa-sale-analysis/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/jumeirah-golf-estates-dh110m-villa-sale-analysis/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/property-news-2026-08-03-reading-the-latest-dubai-luxury-property-signal-c8cec/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/property-news-2026-08-03-reading-the-latest-dubai-luxury-property-signal-c8cec/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/property-news-2026-08-04-abu-dhabi-housing-supply-what-buyers-and-owners-should-che-1ddff/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/property-news-2026-08-04-abu-dhabi-housing-supply-what-buyers-and-owners-should-che-1ddff/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/property-news-2026-08-04-uae-housing-supply-what-buyers-and-owners-should-check-nex-32dea/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/property-news-2026-08-04-uae-housing-supply-what-buyers-and-owners-should-check-nex-32dea/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/blog/property-news/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/blog/property-news/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/buy-invest-dubai/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/buy-invest-dubai/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/cite/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/cite/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/contact/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/contact/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/dubai-data/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/dubai-data/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
       "location": "/dubai-property-buying-cost-calculator/ [mobile]",
-      "message": "Scrollable region must have keyboard access",
+      "message": "Header order does not match the required flow",
       "detail": {
-        "id": "scrollable-region-focusable",
-        "nodes": [
-          [
-            ".guide-table-wrap"
-          ]
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
         ]
       }
     },
     {
-      "severity": "warning",
-      "category": "axe",
+      "severity": "error",
+      "category": "runtime",
+      "location": "/dubai-property-buying-cost-calculator/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
       "location": "/dubai-property-buying-costs/ [mobile]",
-      "message": "Scrollable region must have keyboard access",
+      "message": "Header order does not match the required flow",
       "detail": {
-        "id": "scrollable-region-focusable",
-        "nodes": [
-          [
-            ".guide-table-wrap"
-          ]
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
         ]
       }
     },
     {
-      "severity": "warning",
-      "category": "axe",
+      "severity": "error",
+      "category": "runtime",
+      "location": "/dubai-property-buying-costs/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
       "location": "/dubai-property-investment-indian-buyers/ [mobile]",
-      "message": "Scrollable region must have keyboard access",
+      "message": "Header order does not match the required flow",
       "detail": {
-        "id": "scrollable-region-focusable",
-        "nodes": [
-          [
-            ".guide-table-wrap"
-          ]
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
         ]
       }
     },
     {
-      "severity": "warning",
-      "category": "axe",
+      "severity": "error",
+      "category": "runtime",
+      "location": "/dubai-property-investment-indian-buyers/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/dubai-property-investment-uk-buyers/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/dubai-property-investment-uk-buyers/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/dubai-rental-yield-calculator/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/dubai-rental-yield-calculator/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
       "location": "/mortgage-vs-cash-dubai-property/ [mobile]",
-      "message": "Scrollable region must have keyboard access",
+      "message": "Header order does not match the required flow",
       "detail": {
-        "id": "scrollable-region-focusable",
-        "nodes": [
-          [
-            "#rules > .guide-table-wrap"
-          ],
-          [
-            "#comparison > .guide-table-wrap"
-          ]
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
         ]
       }
     },
     {
-      "severity": "warning",
-      "category": "axe",
+      "severity": "error",
+      "category": "runtime",
+      "location": "/mortgage-vs-cash-dubai-property/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
       "location": "/off-plan-vs-ready-property-dubai/ [mobile]",
-      "message": "Scrollable region must have keyboard access",
+      "message": "Header order does not match the required flow",
       "detail": {
-        "id": "scrollable-region-focusable",
-        "nodes": [
-          [
-            ".guide-table-wrap"
-          ]
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
         ]
       }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/off-plan-vs-ready-property-dubai/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/real-estate-marketing/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/real-estate-marketing/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
+    },
+    {
+      "severity": "error",
+      "category": "navigation",
+      "location": "/sell-dubai-property/ [mobile]",
+      "message": "Header order does not match the required flow",
+      "detail": {
+        "expected": [
+          "Home",
+          "Your Goal",
+          "Dubai Data",
+          "Abu Dhabi Data",
+          "Ajman Data",
+          "About Me",
+          "News",
+          "Contact Me"
+        ],
+        "actual": [
+          "Home",
+          "Your Goal",
+          "Tools",
+          "About Me",
+          "News",
+          "Contact Me"
+        ]
+      }
+    },
+    {
+      "severity": "error",
+      "category": "runtime",
+      "location": "/sell-dubai-property/ [mobile]",
+      "message": "locator.click: Error: strict mode violation: locator('#mobile-site-menu').locator('.goal-nav > summary') resolved to 2 elements:\n    1) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Your Goal menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Your Goal menu')\n    2) <summary aria-haspopup=\"true\" aria-expanded=\"false\" aria-label=\"Open property data and tools menu\">…</summary> aka getByRole('navigation', { name: 'Site navigation' }).getByLabel('Open property data and tools')\n\nCall log:\n  - waiting for locator('#mobile-site-menu').locator('.goal-nav > summary')\n"
     }
   ]
 }
