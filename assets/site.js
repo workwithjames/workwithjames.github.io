@@ -8,6 +8,7 @@
       {key:'about-flow-right',href:'/assets/about-flow-right.css?v=1'},
       {key:'scroll-navigation',href:'/assets/scroll-navigation.css?v=1'},
       {key:'header-goal-nav',href:'/assets/header-goal-nav.css?v=2'},
+      {key:'tools-navigation',href:'/assets/tools-navigation.css?v=1'},
       {key:'cta-system',href:'/assets/cta-system.css?v=1'}
     ];
     styles.forEach(function(item){
@@ -56,6 +57,132 @@
     window.dataLayer.push(Object.assign({event:name},data));
   }
 
+  var propertyData=[
+    {
+      href:'/dubai-data/',
+      title:'Dubai Data',
+      label:'Daily market dashboard',
+      description:'Explore recent transaction activity, median prices, area comparisons, rental yields and budget-based affordability.',
+      action:'Open Dubai Data',
+      icon:'database'
+    },
+    {
+      href:'/abu-dhabi-data/',
+      title:'Abu Dhabi Data',
+      label:'Official market dashboard',
+      description:'Review public ADREC and DARI transaction, sales, lease and price indicators for Abu Dhabi.',
+      action:'Open Abu Dhabi Data',
+      icon:'chart'
+    },
+    {
+      href:'/ajman-data/',
+      title:'Ajman Data',
+      label:'Public structured records',
+      description:'Filter public sales and mortgage records by period, sector, district, project and unit type.',
+      action:'Open Ajman Data',
+      icon:'layers'
+    }
+  ];
+
+  var investmentCalculators=[
+    {
+      href:'/dubai-rental-yield-calculator/',
+      title:'Dubai Rental Yield Calculator',
+      navTitle:'Rental Yield Calculator',
+      label:'Investment calculator',
+      description:'Compare gross and net rental yield for two Dubai properties, including vacancy and recurring ownership costs.',
+      action:'Compare rental yields',
+      icon:'chart'
+    },
+    {
+      href:'/dubai-property-buying-cost-calculator/',
+      title:'Dubai Property Buying Cost Calculator',
+      navTitle:'Property Buying Cost Calculator',
+      label:'Buyer cost calculator',
+      description:'Estimate acquisition fees and the total upfront cash required for a Dubai property purchase.',
+      action:'Estimate buying costs',
+      icon:'tag'
+    }
+  ];
+
+  var buyerTools=[
+    {
+      href:'/buy-invest-dubai/#buyer-enquiry',
+      matchPath:'/buy-invest-dubai/',
+      title:'Buyer Requirements Brief',
+      label:'Interactive buyer tool',
+      description:'Organise your purpose, budget, payment route, property type, preferred areas and purchase timeline.',
+      action:'Build a buyer brief',
+      icon:'compass'
+    },
+    {
+      href:'/best-dubai-communities-by-budget/',
+      title:'Dubai Communities by Budget',
+      label:'Buyer decision guide',
+      description:'Screen Dubai communities across practical purchase-budget bands before creating a shortlist.',
+      action:'Explore communities',
+      icon:'map'
+    }
+  ];
+
+  var sellerTools=[
+    {
+      href:'/sell-dubai-property/#seller-enquiry',
+      matchPath:'/sell-dubai-property/',
+      title:'Seller Preparation Brief',
+      label:'Interactive seller tool',
+      description:'Prepare the property facts, occupancy, expected price, timeline and selling priorities for a focused discussion.',
+      action:'Build a seller brief',
+      icon:'home'
+    }
+  ];
+
+  var dropdownGroups=[
+    {title:'Property Data',items:propertyData},
+    {title:'Calculators',items:investmentCalculators},
+    {title:'Buyer and Seller Tools',items:[buyerTools[0],sellerTools[0]]}
+  ];
+
+  var homeToolGroups=[
+    {
+      id:'property-data',
+      title:'Property Data',
+      description:'Review UAE market activity and official public records before comparing individual opportunities.',
+      items:propertyData
+    },
+    {
+      id:'investment-calculators',
+      title:'Investment Calculators',
+      description:'Test income assumptions and estimate the full cash requirement behind a Dubai property purchase.',
+      items:investmentCalculators
+    },
+    {
+      id:'buyer-tools',
+      title:'Buyer Tools',
+      description:'Turn a broad property search into clearer criteria, budget ranges and a structured buyer brief.',
+      items:buyerTools
+    },
+    {
+      id:'seller-tools',
+      title:'Seller Tools',
+      description:'Organise the property information needed for pricing, positioning and a more useful first conversation.',
+      items:sellerTools
+    }
+  ];
+
+  function normalisePath(value){
+    var path=value||'/';
+    try{path=new URL(path,location.origin).pathname;}catch(error){}
+    path=path.replace(/\/index\.html$/,'/');
+    if(path.charAt(0)!=='/'){path='/'+path;}
+    if(path!=='/'&&path.indexOf('.')===-1&&path.charAt(path.length-1)!=='/'){path+='/';}
+    return path;
+  }
+
+  function itemPath(item){return normalisePath(item.matchPath||item.href);}
+  function isCurrentItem(item){return normalisePath(location.pathname)===itemPath(item);}
+  function allToolItems(){return propertyData.concat(investmentCalculators,buyerTools,sellerTools);}
+
   function removeVisibleBlogDates(){
     document.querySelectorAll('.article-meta time,.article-byline time').forEach(function(date){date.remove();});
   }
@@ -76,70 +203,286 @@
     });
   }
 
-  function prepareGoalMenus(){
+  function createToolsMenu(menuIndex){
+    var details=document.createElement('details');
+    details.className='goal-nav tools-nav';
+    details.setAttribute('data-menu-name','Tools');
+    if(allToolItems().some(isCurrentItem)){details.classList.add('is-current');}
+
+    var summary=document.createElement('summary');
+    summary.innerHTML='Tools <span class="goal-nav-caret" aria-hidden="true">⌄</span>';
+    summary.setAttribute('aria-haspopup','true');
+    summary.setAttribute('aria-expanded','false');
+    summary.setAttribute('aria-label','Open property data and tools menu');
+
+    var menu=document.createElement('div');
+    menu.className='goal-nav-menu tools-nav-menu';
+    menu.setAttribute('aria-label','Property data and tools');
+
+    dropdownGroups.forEach(function(group,groupIndex){
+      var groupElement=document.createElement('section');
+      groupElement.className='tools-nav-group';
+      var heading=document.createElement('span');
+      heading.className='tools-nav-heading';
+      heading.id='tools-menu-'+menuIndex+'-group-'+groupIndex;
+      heading.textContent=group.title;
+      groupElement.setAttribute('aria-labelledby',heading.id);
+      groupElement.appendChild(heading);
+
+      group.items.forEach(function(item){
+        var link=document.createElement('a');
+        link.href=item.href;
+        if(isCurrentItem(item)){link.setAttribute('aria-current','page');}
+        var title=document.createElement('strong');
+        title.textContent=item.navTitle||item.title;
+        var description=document.createElement('small');
+        description.textContent=item.label;
+        link.appendChild(title);
+        link.appendChild(description);
+        groupElement.appendChild(link);
+      });
+      menu.appendChild(groupElement);
+    });
+
+    details.appendChild(summary);
+    details.appendChild(menu);
+    return details;
+  }
+
+  function isTopLevelToolLink(link){
+    var path=normalisePath(link.getAttribute('href'));
+    return propertyData.concat(investmentCalculators).some(function(item){return itemPath(item)===path;});
+  }
+
+  function injectToolsMenus(){
+    var navigationContainers=Array.prototype.slice.call(document.querySelectorAll('.site-header .global-links,.mobile-page-tabs'));
+    navigationContainers.forEach(function(container,index){
+      Array.prototype.slice.call(container.children).forEach(function(child){
+        if(child.tagName==='A'&&isTopLevelToolLink(child)){child.remove();}
+      });
+      if(Array.prototype.slice.call(container.children).some(function(child){return child.classList&&child.classList.contains('tools-nav');})){return;}
+
+      var menu=createToolsMenu(index);
+      var goalMenu=Array.prototype.slice.call(container.children).find(function(child){return child.classList&&child.classList.contains('goal-nav')&&!child.classList.contains('tools-nav');});
+      if(goalMenu){
+        goalMenu.insertAdjacentElement('afterend',menu);
+        return;
+      }
+
+      var anchor=Array.prototype.slice.call(container.children).find(function(child){
+        return child.tagName==='A'&&normalisePath(child.getAttribute('href'))==='/real-estate-marketing/';
+      });
+      if(anchor){anchor.insertAdjacentElement('afterend',menu);}else{container.appendChild(menu);}
+    });
+  }
+
+  function prepareDropdownMenus(){
     var menus=Array.prototype.slice.call(document.querySelectorAll('.goal-nav'));
     if(!menus.length){return;}
 
+    function focusLink(menu,index){
+      var links=Array.prototype.slice.call(menu.querySelectorAll('.goal-nav-menu a'));
+      if(!links.length){return;}
+      var safeIndex=(index+links.length)%links.length;
+      links[safeIndex].focus();
+    }
+
     menus.forEach(function(menu){
+      if(menu.getAttribute('data-menu-ready')==='true'){return;}
+      menu.setAttribute('data-menu-ready','true');
+      var summary=menu.querySelector('summary');
+      if(summary){
+        summary.setAttribute('aria-haspopup','true');
+        summary.setAttribute('aria-expanded',menu.open?'true':'false');
+        summary.addEventListener('keydown',function(keyEvent){
+          if(keyEvent.key==='ArrowDown'||keyEvent.key==='ArrowUp'){
+            keyEvent.preventDefault();
+            menu.open=true;
+            window.requestAnimationFrame(function(){focusLink(menu,keyEvent.key==='ArrowDown'?0:-1);});
+          }
+        });
+      }
+
       menu.addEventListener('toggle',function(){
+        if(summary){summary.setAttribute('aria-expanded',menu.open?'true':'false');}
         if(!menu.open){return;}
         menus.forEach(function(other){if(other!==menu){other.open=false;}});
-        event('navigation_menu_open',{menu_name:'Your Goal',page_path:location.pathname});
+        event('navigation_menu_open',{menu_name:menu.getAttribute('data-menu-name')||'Your Goal',page_path:location.pathname});
       });
-      menu.querySelectorAll('a').forEach(function(link){
+
+      var links=Array.prototype.slice.call(menu.querySelectorAll('.goal-nav-menu a'));
+      links.forEach(function(link,linkIndex){
         link.addEventListener('click',function(){menu.open=false;});
+        link.addEventListener('keydown',function(keyEvent){
+          if(keyEvent.key==='ArrowDown'){
+            keyEvent.preventDefault();
+            focusLink(menu,linkIndex+1);
+          }else if(keyEvent.key==='ArrowUp'){
+            keyEvent.preventDefault();
+            focusLink(menu,linkIndex-1);
+          }else if(keyEvent.key==='Home'){
+            keyEvent.preventDefault();
+            focusLink(menu,0);
+          }else if(keyEvent.key==='End'){
+            keyEvent.preventDefault();
+            focusLink(menu,-1);
+          }else if(keyEvent.key==='Escape'){
+            keyEvent.preventDefault();
+            menu.open=false;
+            if(summary){summary.focus();}
+          }
+        });
       });
     });
 
+    if(document.documentElement.getAttribute('data-dropdown-global-ready')==='true'){return;}
+    document.documentElement.setAttribute('data-dropdown-global-ready','true');
     document.addEventListener('click',function(clickEvent){
       if(clickEvent.target.closest('.goal-nav')){return;}
-      menus.forEach(function(menu){menu.open=false;});
+      document.querySelectorAll('.goal-nav[open]').forEach(function(menu){menu.open=false;});
     });
-
     document.addEventListener('keydown',function(keyEvent){
       if(keyEvent.key!=='Escape'){return;}
-      menus.forEach(function(menu){
-        if(menu.open){
-          menu.open=false;
-          var summary=menu.querySelector('summary');
-          if(summary){summary.focus();}
-        }
+      document.querySelectorAll('.goal-nav[open]').forEach(function(menu){
+        menu.open=false;
+        var summary=menu.querySelector('summary');
+        if(summary){summary.focus();}
       });
     });
   }
 
+  function iconMarkup(icon){
+    return '<svg aria-hidden="true"><use href="/assets/jr-visual-icons.svg#icon-'+icon+'"></use></svg>';
+  }
+
+  function createToolCard(item){
+    var card=document.createElement('a');
+    card.className='tool-directory-card';
+    card.href=item.href;
+    if(isCurrentItem(item)){card.setAttribute('aria-current','page');}
+    card.innerHTML='<span class="tool-directory-icon" aria-hidden="true">'+iconMarkup(item.icon)+'</span>'+
+      '<span class="tool-directory-copy"><span class="tool-directory-label">'+item.label+'</span><strong>'+item.title+'</strong><span class="tool-directory-description">'+item.description+'</span></span>'+
+      '<span class="tool-directory-action">'+item.action+' <span aria-hidden="true">→</span></span>';
+    return card;
+  }
+
+  function organiseHomeToolsDirectory(){
+    var section=document.querySelector('.home-data');
+    if(!section){return;}
+    var heading=section.querySelector('.home-section-heading');
+    if(heading){
+      var kicker=heading.querySelector('.section-kicker');
+      var title=heading.querySelector('h2');
+      var description=heading.querySelector(':scope > p');
+      if(kicker){kicker.textContent='Property data and tools';}
+      if(title){title.textContent='Property data and decision tools in one place.';}
+      if(description){description.textContent='Open UAE property-data resources, estimate Dubai rental yield and buying costs, or prepare a focused buyer or seller brief.';}
+    }
+
+    var existingGrid=section.querySelector('.home-data-grid,.tools-directory');
+    if(!existingGrid){return;}
+    var directory=document.createElement('div');
+    directory.className='tools-directory';
+
+    homeToolGroups.forEach(function(group){
+      var category=document.createElement('section');
+      category.className='tools-directory-category';
+      category.setAttribute('data-category',group.id);
+      var headingBlock=document.createElement('div');
+      headingBlock.className='tools-directory-heading';
+      headingBlock.innerHTML='<h3>'+group.title+'</h3><p>'+group.description+'</p>';
+      var grid=document.createElement('div');
+      grid.className='tools-directory-grid'+(group.items.length===1?' is-single':'');
+      group.items.forEach(function(item){grid.appendChild(createToolCard(item));});
+      category.appendChild(headingBlock);
+      category.appendChild(grid);
+      directory.appendChild(category);
+    });
+    existingGrid.replaceWith(directory);
+  }
+
+  function createFooterGroup(group){
+    var nav=document.createElement('nav');
+    nav.className='footer-group';
+    nav.setAttribute('aria-label',group.title);
+    var title=document.createElement('h2');
+    title.textContent=group.title;
+    nav.appendChild(title);
+    group.items.forEach(function(item){
+      var link=document.createElement('a');
+      link.href=item.href;
+      link.textContent=item.label;
+      if(normalisePath(location.pathname)===normalisePath(item.matchPath||item.href)){link.setAttribute('aria-current','page');}
+      nav.appendChild(link);
+    });
+    return nav;
+  }
+
   function organiseFooterNavigation(){
-    var footerOrder=[
-      {href:'/',label:'Home'},
-      {href:'/buy-invest-dubai/',label:'Buy / Invest'},
-      {href:'/sell-dubai-property/',label:'Sell'},
-      {href:'/real-estate-marketing/',label:'Marketing'},
-      {href:'/dubai-data/',label:'Dubai Data'},
-      {href:'/abu-dhabi-data/',label:'Abu Dhabi Data'},
-      {href:'/ajman-data/',label:'Ajman Data'},
-      {href:'/blog/',label:'News'},
-      {href:'/about-me/',label:'About Me'},
-      {href:'/contact/',label:'Contact Me'},
-      {href:'/cite/',label:'Cite this site'}
+    var footerGroups=[
+      {
+        title:'Your Goal',
+        items:[
+          {href:'/buy-invest-dubai/',label:'Buy / Invest'},
+          {href:'/sell-dubai-property/',label:'Sell'},
+          {href:'/real-estate-marketing/',label:'Real Estate Marketing'}
+        ]
+      },
+      {
+        title:'Transactions',
+        items:[
+          {href:'/dubai-data/',label:'Dubai Data'},
+          {href:'/abu-dhabi-data/',label:'Abu Dhabi Data'},
+          {href:'/ajman-data/',label:'Ajman Data'}
+        ]
+      },
+      {
+        title:'Tools',
+        items:[
+          {href:'/dubai-rental-yield-calculator/',label:'Rental Yield Calculator'},
+          {href:'/dubai-property-buying-cost-calculator/',label:'Property Buying Cost Calculator'},
+          {href:'/buy-invest-dubai/#buyer-enquiry',matchPath:'/buy-invest-dubai/',label:'Buyer Requirements Brief'},
+          {href:'/sell-dubai-property/#seller-enquiry',matchPath:'/sell-dubai-property/',label:'Seller Preparation Brief'}
+        ]
+      },
+      {
+        title:'Company',
+        items:[
+          {href:'/about-me/',label:'About Me'},
+          {href:'/blog/',label:'News'},
+          {href:'/contact/',label:'Contact Me'},
+          {href:'/cite/',label:'Cite This Site'}
+        ]
+      }
     ];
-    var allowed=footerOrder.map(function(item){return item.href;});
 
-    document.querySelectorAll('.footer-links').forEach(function(nav){
-      var existing={};
-      nav.querySelectorAll('a').forEach(function(link){
-        var href=link.getAttribute('href');
-        if(allowed.indexOf(href)===-1){link.remove();return;}
-        existing[href]=link;
-      });
+    document.querySelectorAll('footer .footer-shell').forEach(function(shell){
+      if(shell.getAttribute('data-footer-organised')==='true'){return;}
+      shell.setAttribute('data-footer-organised','true');
+      shell.classList.add('footer-shell-rich','footer-organised');
 
-      footerOrder.forEach(function(item){
-        var link=existing[item.href]||document.createElement('a');
-        link.href=item.href;
-        link.textContent=item.label;
-        if(location.pathname===item.href){link.setAttribute('aria-current','page');}
-        else{link.removeAttribute('aria-current');}
-        nav.appendChild(link);
-      });
+      var existingLinkedIn=shell.querySelector('.footer-linkedin');
+      var linkedInHref=existingLinkedIn?existingLinkedIn.getAttribute('href'):'https://ae.linkedin.com/in/james-ravi-dubai';
+      shell.innerHTML='';
+
+      var identity=document.createElement('div');
+      identity.className='footer-identity';
+      identity.innerHTML='<a class="brand" href="/" aria-label="James Realty home">James Realty</a><p>© 2026 James. Built in Dubai.</p>';
+
+      var groups=document.createElement('div');
+      groups.className='footer-groups';
+      footerGroups.forEach(function(group){groups.appendChild(createFooterGroup(group));});
+
+      var linkedIn=document.createElement('a');
+      linkedIn.className='footer-linkedin';
+      linkedIn.href=linkedInHref;
+      linkedIn.target='_blank';
+      linkedIn.rel='me noreferrer';
+      linkedIn.innerHTML='LinkedIn <span aria-hidden="true">↗</span>';
+
+      shell.appendChild(identity);
+      shell.appendChild(groups);
+      shell.appendChild(linkedIn);
     });
   }
 
@@ -242,7 +585,9 @@
     removeVisibleBlogDates();
     updateHeaderBrand();
     renameBlogPageLabels();
-    prepareGoalMenus();
+    injectToolsMenus();
+    prepareDropdownMenus();
+    organiseHomeToolsDirectory();
     organiseFooterNavigation();
     prepareAboutFlow();
     preparePageScrollControls();
@@ -258,7 +603,7 @@
     var link=e.target.closest('a');
     if(!link){return;}
     var href=link.getAttribute('href')||'';
-    var isCta=link.matches('.button,.mobile-conversion')||Boolean(link.closest('.home-journey,.home-data-card,.journey-links,.market-related,.property-news-link-grid,.related-reading,.buyer-cluster-card,.cluster-cta'));
+    var isCta=link.matches('.button,.mobile-conversion')||Boolean(link.closest('.home-journey,.home-data-card,.tools-directory,.journey-links,.market-related,.property-news-link-grid,.related-reading,.buyer-cluster-card,.cluster-cta'));
     if(isCta){
       event('cta_click',{
         link_text:(link.textContent||'').replace(/\s+/g,' ').trim(),
