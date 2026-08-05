@@ -1,0 +1,98 @@
+/* Property data, tools navigation, homepage directory and organised footer */
+.tools-nav-menu{width:min(620px,calc(100vw - 34px));max-height:min(70vh,580px);grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:11px;overflow:auto;overscroll-behavior:contain}
+.tools-nav-group{min-width:0;border:1px solid rgba(129,140,248,.13);border-radius:12px;background:rgba(10,10,26,.34);padding:7px}
+.tools-nav-group:last-child:nth-child(odd){grid-column:1/-1}
+.tools-nav-heading{display:block;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;padding:8px 10px 6px;font-size:.62rem;font-weight:850}
+.tools-nav-menu a{display:grid!important;gap:4px;min-height:56px!important;padding:10px 11px!important}
+.tools-nav-menu a strong{color:inherit;font-size:.78rem;line-height:1.25}
+.tools-nav-menu a small{color:#949bb5;font-size:.64rem;line-height:1.35}
+.tools-nav-menu a:hover small,.tools-nav-menu a:focus-visible small,.tools-nav-menu a[aria-current=page] small{color:#cbd2e8}
+.tools-nav-menu a[aria-current=page]:after{content:"Current";position:absolute;top:9px;right:9px;color:#bfc8ff;letter-spacing:.06em;text-transform:uppercase;font-size:.5rem;font-weight:850}
+.tools-nav-menu a[aria-current=page] strong{padding-right:42px}
+
+.tools-directory{display:grid;gap:46px;margin-top:34px}
+.tools-directory-category{min-width:0}
+.tools-directory-heading{display:grid;grid-template-columns:minmax(180px,.62fr) minmax(280px,1.38fr);align-items:end;gap:30px;margin-bottom:17px}
+.tools-directory-heading h3{margin:0;color:var(--text);letter-spacing:-.035em;font-size:clamp(1.45rem,2.6vw,2rem);line-height:1.05}
+.tools-directory-heading p{max-width:690px;margin:0;color:var(--muted);font-size:.82rem;line-height:1.65}
+.tools-directory-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.tools-directory-category[data-category="investment-calculators"] .tools-directory-grid,
+.tools-directory-category[data-category="buyer-tools"] .tools-directory-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.tools-directory-grid.is-single{grid-template-columns:minmax(0,520px)}
+.tool-directory-card{position:relative;isolation:isolate;display:grid;grid-template-columns:46px minmax(0,1fr);grid-template-rows:1fr auto;gap:17px 15px;min-width:0;min-height:225px;padding:23px;border:1px solid var(--line);border-radius:19px;background:linear-gradient(145deg,rgba(129,140,248,.105),transparent 48%),var(--surface);overflow:hidden;transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease}
+.tool-directory-card:before{content:"";position:absolute;z-index:-1;inset:0 auto 0 0;width:3px;background:linear-gradient(var(--accent),var(--accent-2));opacity:.68}
+.tool-directory-card:hover{border-color:rgba(129,140,248,.58);background:linear-gradient(145deg,rgba(129,140,248,.17),transparent 54%),var(--surface);transform:translateY(-3px);box-shadow:0 18px 44px rgba(0,0,0,.2)}
+.tool-directory-card[aria-current=page]{border-color:rgba(129,140,248,.68);box-shadow:0 0 0 1px rgba(129,140,248,.16) inset}
+.tool-directory-icon{display:grid;place-items:center;width:44px;height:44px;border:1px solid rgba(129,140,248,.34);border-radius:13px;color:var(--accent);background:rgba(129,140,248,.1)}
+.tool-directory-icon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.tool-directory-copy{display:flex;min-width:0;flex-direction:column;align-items:flex-start}
+.tool-directory-label{color:var(--accent);letter-spacing:.085em;text-transform:uppercase;font-size:.59rem;font-weight:850;line-height:1.35}
+.tool-directory-copy>strong{margin-top:8px;color:var(--text);letter-spacing:-.025em;font-size:1.04rem;line-height:1.25}
+.tool-directory-description{margin-top:9px;color:var(--muted);font-size:.76rem;line-height:1.6}
+.tool-directory-action{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:15px;border-top:1px solid rgba(36,36,75,.92);color:#c7cbff;font-size:.72rem;font-weight:800}
+.tool-directory-card:hover .tool-directory-action{color:#fff}
+
+.footer-shell-rich.footer-organised{display:grid;grid-template-columns:minmax(165px,.62fr) minmax(0,2.15fr) auto;align-items:start;gap:34px;min-height:0;padding-top:42px;padding-bottom:42px}
+.footer-organised .footer-identity{align-content:start;gap:8px}
+.footer-organised .footer-identity .brand{width:max-content}
+.footer-organised .footer-identity p{max-width:180px;margin:0;color:var(--muted);font-size:.7rem;line-height:1.55}
+.footer-groups{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:30px;min-width:0}
+.footer-group{display:flex;min-width:0;flex-direction:column;align-items:flex-start}
+.footer-group h2{margin:0 0 12px;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;font-size:.62rem;font-weight:850}
+.footer-group a{display:flex;align-items:center;min-height:34px;color:#b8b8c9;font-size:.72rem;font-weight:650;line-height:1.35;transition:color .18s ease,transform .18s ease}
+.footer-group a:hover,.footer-group a:focus-visible{color:#fff;transform:translateX(2px)}
+.footer-group a[aria-current=page]{color:#fff}
+.footer-group a[aria-current=page]:before{content:"";width:5px;height:5px;margin-right:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px rgba(129,140,248,.7)}
+.footer-organised .footer-linkedin{justify-self:end;white-space:nowrap;padding-top:2px}
+
+@media(max-width:1180px) and (min-width:901px){
+  .tools-nav-menu{width:min(560px,calc(100vw - 28px))}
+  .tools-nav-menu a{min-height:52px!important}
+}
+
+@media(max-width:900px){
+  .site-header .global-links{display:none}
+  .mobile-page-tabs .tools-nav-menu{position:fixed;z-index:420;top:var(--fixed-header-offset,112px);right:14px;left:14px;width:auto;max-height:calc(100vh - var(--fixed-header-offset,112px) - 26px);grid-template-columns:repeat(2,minmax(0,1fr));transform:none;box-shadow:0 26px 80px rgba(0,0,0,.62)}
+  .mobile-page-tabs .tools-nav-menu:before{display:none}
+  .tools-directory-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tools-directory-grid.is-single{grid-template-columns:minmax(0,520px)}
+  .footer-shell-rich.footer-organised{grid-template-columns:1fr auto;gap:28px}
+  .footer-groups{grid-column:1/-1;grid-row:2;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 34px}
+  .footer-organised .footer-linkedin{grid-column:2;grid-row:1}
+}
+
+@media(max-width:680px){
+  .tools-directory{gap:38px;margin-top:28px}
+  .tools-directory-heading{grid-template-columns:1fr;gap:9px}
+  .tools-directory-grid,
+  .tools-directory-category[data-category="investment-calculators"] .tools-directory-grid,
+  .tools-directory-category[data-category="buyer-tools"] .tools-directory-grid,
+  .tools-directory-grid.is-single{grid-template-columns:1fr}
+  .tool-directory-card{min-height:0}
+}
+
+@media(max-width:560px){
+  .mobile-page-tabs .tools-nav-menu{top:var(--fixed-header-offset,112px);grid-template-columns:1fr;padding:9px}
+  .tools-nav-group:last-child:nth-child(odd){grid-column:auto}
+  .tools-nav-menu a{min-height:58px!important;padding:11px 12px!important}
+  .tools-nav-menu a strong{font-size:.82rem}
+  .tools-nav-menu a small{font-size:.67rem}
+  .tools-directory{gap:34px}
+  .tool-directory-card{grid-template-columns:42px minmax(0,1fr);padding:20px}
+  .tool-directory-icon{width:41px;height:41px}
+  .tool-directory-copy>strong{font-size:1rem}
+  .tool-directory-description{font-size:.75rem}
+  .footer-shell-rich.footer-organised{grid-template-columns:1fr;gap:22px;padding-top:31px;padding-bottom:90px}
+  .footer-groups{grid-column:auto;grid-row:auto;grid-template-columns:repeat(2,minmax(0,1fr));gap:25px 20px;width:100%}
+  .footer-organised .footer-linkedin{grid-column:auto;grid-row:auto;justify-self:start;min-height:40px;display:flex;align-items:center}
+  .footer-group a{min-height:40px;font-size:.75rem}
+}
+
+@media(max-width:390px){
+  .footer-groups{grid-template-columns:1fr}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .tool-directory-card,.footer-group a{transition:none}
+  .tool-directory-card:hover,.footer-group a:hover{transform:none}
+}
