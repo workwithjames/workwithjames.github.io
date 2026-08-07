@@ -6,8 +6,8 @@
 .tools-nav-group{min-width:0;border:1px solid rgba(129,140,248,.13);border-radius:12px;background:rgba(10,10,26,.34);padding:7px}
 .tools-nav-group:last-child:nth-child(odd){grid-column:1/-1}
 .tools-nav-heading{display:block;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;padding:8px 10px 6px;font-size:.62rem;font-weight:850}
-.site-header .tools-nav-menu a{display:grid!important;width:100%!important;max-width:none!important;grid-template-columns:minmax(0,1fr)!important;justify-content:stretch!important;justify-items:start!important;align-content:start!important;align-items:start!important;gap:4px;min-height:56px!important;margin:0!important;padding:10px 11px!important;text-align:left!important}
-.site-header .tools-nav-menu a strong,.site-header .tools-nav-menu a small{display:block!important;width:100%!important;justify-self:stretch!important;margin:0!important;text-align:left!important}
+.site-header .tools-nav-menu a{display:grid!important;width:100%!important;max-width:none!important;grid-template-columns:minmax(0,1fr)!important;justify-content:start!important;justify-items:start!important;align-content:start!important;align-items:start!important;gap:4px;min-height:56px!important;margin:0!important;padding:10px!important;text-align:left!important}
+.site-header .tools-nav-menu a strong,.site-header .tools-nav-menu a small{display:block!important;width:100%!important;justify-self:start!important;margin:0!important;text-align:left!important}
 .tools-nav-menu a strong{color:inherit;font-size:.78rem;line-height:1.25}
 .tools-nav-menu a small{color:#949bb5;font-size:.64rem;line-height:1.35}
 .tools-nav-menu a:hover small,.tools-nav-menu a:focus-visible small,.tools-nav-menu a[aria-current=page] small{color:#cbd2e8}
