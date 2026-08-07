@@ -1,5 +1,9 @@
 /* Property data, tools navigation, homepage directory and organised footer */
 .tools-nav-menu{width:min(620px,calc(100vw - 34px));max-height:min(70vh,580px);grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:11px;overflow:auto;overscroll-behavior:contain}
+.site-header .tools-nav>.tools-nav-menu{left:0!important;right:auto!important;transform:none!important;text-align:left!important}
+.site-header .tools-nav>.tools-nav-menu:before{left:28px!important;transform:rotate(45deg)!important}
+.tools-nav-group,.tools-nav-heading,.tools-nav-menu a,.tools-nav-menu a strong,.tools-nav-menu a small{text-align:left!important}
+.tools-nav-menu a{justify-items:start!important}
 .tools-nav-group{min-width:0;border:1px solid rgba(129,140,248,.13);border-radius:12px;background:rgba(10,10,26,.34);padding:7px}
 .tools-nav-group:last-child:nth-child(odd){grid-column:1/-1}
 .tools-nav-heading{display:block;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;padding:8px 10px 6px;font-size:.62rem;font-weight:850}
