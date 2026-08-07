@@ -113,3 +113,86 @@
   .tool-directory-card,.footer-group a{transition:none}
   .tool-directory-card:hover,.footer-group a:hover{transform:none}
 }
+
+/* Mobile Tools: turn the entire tab area into one natural vertical scroll sheet. */
+@media(max-width:900px){
+  .mobile-page-tabs:has(> .tools-nav[open]){
+    top:var(--fixed-header-height,68px)!important;
+    right:0!important;
+    bottom:0!important;
+    left:0!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    padding:0!important;
+    display:block!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    -webkit-overflow-scrolling:touch!important;
+    overscroll-behavior-x:none!important;
+    overscroll-behavior-y:contain!important;
+    touch-action:pan-y!important;
+    background:rgba(10,10,26,.98)!important;
+    border:0!important;
+    box-shadow:0 18px 60px rgba(0,0,0,.45)!important;
+    scrollbar-width:auto!important;
+  }
+  .mobile-page-tabs:has(> .tools-nav[open])>a,
+  .mobile-page-tabs:has(> .tools-nav[open])>.goal-nav:not(.tools-nav){display:none!important}
+  .mobile-page-tabs:has(> .tools-nav[open])>.tools-nav{
+    position:static!important;
+    display:block!important;
+    width:100%!important;
+    margin:0!important;
+    padding:0!important;
+  }
+  .mobile-page-tabs:has(> .tools-nav[open])>.tools-nav>summary{
+    position:sticky!important;
+    top:0!important;
+    z-index:430!important;
+    display:flex!important;
+    width:100%!important;
+    min-height:52px!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    margin:0!important;
+    padding:0 18px!important;
+    border:0!important;
+    border-bottom:1px solid rgba(129,140,248,.22)!important;
+    border-radius:0!important;
+    color:#f4f4fb!important;
+    background:rgba(13,13,32,.98)!important;
+    box-shadow:0 10px 24px rgba(0,0,0,.22)!important;
+    font-size:.82rem!important;
+    font-weight:800!important;
+    touch-action:manipulation!important;
+  }
+  .mobile-page-tabs:has(> .tools-nav[open]) .tools-nav[open]>.tools-nav-menu{
+    position:static!important;
+    inset:auto!important;
+    display:grid!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    margin:0!important;
+    padding:14px 12px max(24px,env(safe-area-inset-bottom))!important;
+    overflow:visible!important;
+    overscroll-behavior:auto!important;
+    touch-action:auto!important;
+    transform:none!important;
+    border:0!important;
+    border-radius:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+    pointer-events:auto!important;
+  }
+}
+
+@media(max-width:560px){
+  .mobile-page-tabs:has(> .tools-nav[open]) .tools-nav[open]>.tools-nav-menu{
+    grid-template-columns:1fr!important;
+    gap:12px!important;
+    padding:12px 10px max(24px,env(safe-area-inset-bottom))!important;
+  }
+}
