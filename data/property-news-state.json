@@ -6,6 +6,7 @@
     "https://gulfnews.com/business/property/dubai-homebuyers-get-more-choice-as-24800-new-units-enter-the-market-1.500625443",
     "https://gulfnews.com/business/property/dubai-rents-ease-62-while-home-prices-stay-above-2025-levels-1.500623468",
     "https://gulfnews.com/business/property/dubai-villa-sells-for-dh110m-nearly-doubling-jumeirah-golf-estates-record-1.500628980",
+    "https://gulfnews.com/business/property/dubais-350-metre-trump-tower-moves-into-next-construction-phase-1.500632456",
     "https://gulfnews.com/business/property/early-completion-sets-new-pace-for-abu-dhabi-housing-1.500630309",
     "https://gulfnews.com/business/property/emaar-homebuyers-can-secure-up-to-50-financing-before-handover-1.500623531",
     "https://gulfnews.com/business/property/imtiaz-records-another-launch-day-sell-out-with-dh15-billion-raw-district-2-1.500621203",
@@ -14,8 +15,10 @@
     "https://gulfnews.com/business/property/rockhill-bets-dh250-million-on-affordable-premium-living-with-its-first-ajman-tower-1.500617833",
     "https://gulfnews.com/business/property/top-10-tallest-under-construction-skyscrapers-in-the-uae-2026-1.500623030",
     "https://gulfnews.com/business/property/uae-investors-account-for-half-of-sharjah-property-market-during-h1-2026-1.500621868",
+    "https://gulfnews.com/business/property/where-sharjah-property-buyers-spent-most-as-july-deals-hit-dh7-billion-1.500632308",
     "https://www.khaleejtimes.com/business/aviation",
     "https://www.khaleejtimes.com/business/dubai-delivers-record-24800-new-homes-in-h1-2026-as-market-matures",
+    "https://www.khaleejtimes.com/business/dubai-office-sales-nearly-triple-to-dh158-billion-in-h1-2026",
     "https://www.khaleejtimes.com/business/energy",
     "https://www.khaleejtimes.com/business/energy/uae-fuel-prices-full-tank-cost-august-2026",
     "https://www.khaleejtimes.com/business/energy/uae-petrol-diesel-prices-august-2026-announced",
@@ -38,7 +41,9 @@
     "https://www.khaleejtimes.com/business/property/record-transactions-and-global-brands-fuel-abu-dhabis-next-phase-of-real-estate-growth",
     "https://www.khaleejtimes.com/business/property/sheikh-mohammed-issues-new-law-to-regulate-shared-housing-in-dubai",
     "https://www.khaleejtimes.com/business/sharjah-property-sales-more-than-double-in-h1-2026-as-prices-ease",
+    "https://www.khaleejtimes.com/business/sharjah-real-estate-transactions-surge-618-to-dh7-billion-in-july",
     "https://www.khaleejtimes.com/business/tech",
+    "https://www.khaleejtimes.com/business/trump-tower-dubai-construction-enters-next-phase-with-new-contractor-appointment",
     "https://www.khaleejtimes.com/business/uae-commercial-rents-jump-as-abu-dhabi-prime-office-availability-falls-to-01",
     "https://www.khaleejtimes.com/business/wynn-al-marjan-island-pushes-opening-to-september-2027-amid-regional-conflict-fallout",
     "https://www.thenationalnews.com/business/property/2026/06/05/french-riviera-hotel-provencal-john-caudwell-villas-for-sale",
@@ -61,7 +66,8 @@
     "https://www.thenationalnews.com/business/property/2026/07/18/abu-dhabi-property-transactions-surge-112-despite-war-to-hit-dh117-billion-in-first-half-of-2026",
     "https://www.thenationalnews.com/business/property/2026/07/22/abu-dhabi-home-prices-surge-in-first-half-of-2026-despite-iran-war-uncertainty",
     "https://www.thenationalnews.com/business/property/2026/07/29/aldars-second-quarter-profit-rises-10-on-revenue-boost-from-property-sales",
-    "https://www.thenationalnews.com/business/property/2026/08/04/river-park-tower-joins-londons-nine-elms-skyscraper-set"
+    "https://www.thenationalnews.com/business/property/2026/08/04/river-park-tower-joins-londons-nine-elms-skyscraper-set",
+    "https://www.thenationalnews.com/business/property/2026/08/06/dubais-1bn-trump-tower-moves-forward-as-key-contract-issued"
   ],
   "seen_title_signatures": [
     "000 150 dh200bn dubai emaar house launch megaproject people set",
@@ -78,6 +84,7 @@
     "2026 dubai fines guide housing law limits occupancy permits rules shared",
     "2030 aims dh200bn double dubai group its more omniyat portfolio than",
     "222 ali dh2 homes jebel launches nakheel palm prices sale",
+    "350 construction dubai into metre moves next phase tower trump",
     "5bn arada investment launches platform target",
     "abdulla developer monthly properties rise rostamani spotlight",
     "about all dubai valuation",
@@ -99,6 +106,7 @@
     "best dubai expats move time year",
     "better call caudwell history hotel john own provencal restored riviera slice want",
     "between difference duplex townhouse",
+    "billion buyers deals dh7 hit july most sharjah spent where",
     "boats floating generation living london riverside",
     "buyer guide",
     "buyers check housing next owners should supply",
@@ -228,7 +236,31 @@
       "source_url": "https://www.thenationalnews.com/business/property/2026/08/04/river-park-tower-joins-londons-nine-elms-skyscraper-set",
       "image": "/images/property-news/property-news-2026-08-04-uae-housing-supply-what-buyers-and-owners-should-check-nex-32dea.svg",
       "auto": true
+    },
+    {
+      "slug": "property-news-2026-08-06-how-to-read-the-latest-dubai-property-market-signal-5cfed",
+      "title": "How to read the latest Dubai property-market signal",
+      "description": "A source-linked reading of a new Gulf News property report, with the headline separated from the evidence needed for a decision.",
+      "category": "UAE property market",
+      "date": "2026-08-06",
+      "read_time": "4 min read",
+      "source_name": "Gulf News",
+      "source_url": "https://gulfnews.com/business/property/dubais-350-metre-trump-tower-moves-into-next-construction-phase-1.500632456",
+      "image": "/images/property-news/property-news-2026-08-06-how-to-read-the-latest-dubai-property-market-signal-5cfed.svg",
+      "auto": true
+    },
+    {
+      "slug": "property-news-2026-08-06-sharjah-homebuyer-update-a-practical-decision-checklist-d84dc",
+      "title": "Sharjah homebuyer update: a practical decision checklist",
+      "description": "An independent reading of a new Gulf News homebuyer report, with affordability and property-level checks added.",
+      "category": "UAE home buying",
+      "date": "2026-08-06",
+      "read_time": "4 min read",
+      "source_name": "Gulf News",
+      "source_url": "https://gulfnews.com/business/property/where-sharjah-property-buyers-spent-most-as-july-deals-hit-dh7-billion-1.500632308",
+      "image": "/images/property-news/property-news-2026-08-06-sharjah-homebuyer-update-a-practical-decision-checklist-d84dc.svg",
+      "auto": true
     }
   ],
-  "updated_at": "2026-08-06T11:28:17+04:00"
+  "updated_at": "2026-08-07T05:44:15+04:00"
 }
