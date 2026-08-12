@@ -13,6 +13,7 @@
     "https://gulfnews.com/business/property/emaar-development-sells-dh224bn-of-homes-profit-jumps-43-in-h1-1.500633520",
     "https://gulfnews.com/business/property/emaar-homebuyers-can-secure-up-to-50-financing-before-handover-1.500623531",
     "https://gulfnews.com/business/property/former-dubai-zoo-site-gets-construction-contract-for-90-home-community-1.500636033",
+    "https://gulfnews.com/business/property/global-partners-secures-300-million-for-next-growth-phase-1.500638576",
     "https://gulfnews.com/business/property/imtiaz-records-another-launch-day-sell-out-with-dh15-billion-raw-district-2-1.500621203",
     "https://gulfnews.com/business/property/is-jeddah-tower-on-course-to-become-the-worlds-tallest-building-1.500623570",
     "https://gulfnews.com/business/property/modon-h1-net-profit-reaches-dh22-billion-after-property-sales-hit-dh26-billion-1.500625097",
@@ -42,6 +43,7 @@
     "https://www.khaleejtimes.com/business/property/dubai-rental-index-shared-housing-units",
     "https://www.khaleejtimes.com/business/property/dubai-residential-real-estate-shows-resilience-amid-quieter-market",
     "https://www.khaleejtimes.com/business/property/dubai-short-term-rentals-show-resilience-as-longer-stays-support-market",
+    "https://www.khaleejtimes.com/business/property/dubai-startup-datahabibi-launches-ai-platform-for-property-intelligence",
     "https://www.khaleejtimes.com/business/property/emaar-h1-net-profit-rises-26-to-dh111-billion-as-revenue-climbs-21",
     "https://www.khaleejtimes.com/business/property/janu-al-marjan-island-ras-al-khaimah-construction-starts",
     "https://www.khaleejtimes.com/business/property/jumeirah-golf-estates-villa-sale-hits-record-dh110m-amid-luxury-boom",
@@ -81,7 +83,8 @@
     "https://www.thenationalnews.com/business/property/2026/08/04/river-park-tower-joins-londons-nine-elms-skyscraper-set",
     "https://www.thenationalnews.com/business/property/2026/08/06/dubais-1bn-trump-tower-moves-forward-as-key-contract-issued",
     "https://www.thenationalnews.com/business/property/2026/08/07/emaar-reports-9-increase-in-its-second-quarter-profit-on-higher-revenue",
-    "https://www.thenationalnews.com/business/property/2026/08/12/arada-uk-bosss-three-point-plan-to-get-britains-building-industry-bouncing"
+    "https://www.thenationalnews.com/business/property/2026/08/12/arada-uk-bosss-three-point-plan-to-get-britains-building-industry-bouncing",
+    "https://www.thenationalnews.com/business/property/2026/08/12/moodys-considers-ratings-downgrade-for-dubai-based-binghatti-amid-iran-war-fallout"
   ],
   "seen_title_signatures": [
     "000 150 dh200bn dubai emaar house launch megaproject people set",
@@ -98,6 +101,7 @@
     "2026 dubai fines guide housing law limits occupancy permits rules shared",
     "2030 aims dh200bn double dubai group its more omniyat portfolio than",
     "222 ali dh2 homes jebel launches nakheel palm prices sale",
+    "300 global growth million next partners phase secures",
     "350 construction dubai into metre moves next phase tower trump",
     "4bn development dh22 emaar homes jumps profit sells",
     "5bn arada investment launches platform target",
@@ -113,6 +117,7 @@
     "ajman",
     "all here starts",
     "alta developer development estate monthly real rise spotlight",
+    "amid based binghatti considers downgrade dubai fallout iran moody ratings war",
     "anxiety downing london luxury market merry round sparks street",
     "arada boss bouncing britain building get industry plan point three",
     "arada expansion first london project push residential unveils",
@@ -343,7 +348,31 @@
       "source_url": "https://www.thenationalnews.com/business/property/2026/08/12/arada-uk-bosss-three-point-plan-to-get-britains-building-industry-bouncing",
       "image": "/images/property-news/property-news-2026-08-12-how-to-read-the-latest-sharjah-property-market-signal-34fcf.svg",
       "auto": true
+    },
+    {
+      "slug": "property-news-2026-08-12-reading-the-latest-uae-luxury-property-signal-2c263",
+      "title": "Reading the latest UAE luxury-property signal",
+      "description": "An independent reading of a new Gulf News luxury-property report, separating an exceptional headline from comparable evidence.",
+      "category": "UAE luxury property",
+      "date": "2026-08-12",
+      "read_time": "4 min read",
+      "source_name": "Gulf News",
+      "source_url": "https://gulfnews.com/business/property/global-partners-secures-300-million-for-next-growth-phase-1.500638576",
+      "image": "/images/property-news/property-news-2026-08-12-reading-the-latest-uae-luxury-property-signal-2c263.svg",
+      "auto": true
+    },
+    {
+      "slug": "property-news-2026-08-12-how-to-read-the-latest-dubai-property-market-signal-21f76",
+      "title": "How to read the latest Dubai property-market signal",
+      "description": "A source-linked reading of a new The National property report, with the headline separated from the evidence needed for a decision.",
+      "category": "UAE property market",
+      "date": "2026-08-12",
+      "read_time": "4 min read",
+      "source_name": "The National",
+      "source_url": "https://www.thenationalnews.com/business/property/2026/08/12/moodys-considers-ratings-downgrade-for-dubai-based-binghatti-amid-iran-war-fallout",
+      "image": "/images/property-news/property-news-2026-08-12-how-to-read-the-latest-dubai-property-market-signal-21f76.svg",
+      "auto": true
     }
   ],
-  "updated_at": "2026-08-12T13:50:18+04:00"
+  "updated_at": "2026-08-12T18:34:16+04:00"
 }
