@@ -22,6 +22,7 @@
     "https://gulfnews.com/business/property/rockhill-bets-dh250-million-on-affordable-premium-living-with-its-first-ajman-tower-1.500617833",
     "https://gulfnews.com/business/property/top-10-tallest-under-construction-skyscrapers-in-the-uae-2026-1.500623030",
     "https://gulfnews.com/business/property/uae-investors-account-for-half-of-sharjah-property-market-during-h1-2026-1.500621868",
+    "https://gulfnews.com/business/property/uaes-top-10-developers-sell-dh1137-billion-of-property-in-six-months-1.500639749",
     "https://gulfnews.com/business/property/where-sharjah-property-buyers-spent-most-as-july-deals-hit-dh7-billion-1.500632308",
     "https://www.khaleejtimes.com/business/aviation",
     "https://www.khaleejtimes.com/business/dubai-delivers-record-24800-new-homes-in-h1-2026-as-market-matures",
@@ -136,6 +137,7 @@
     "better call caudwell history hotel john own provencal restored riviera slice want",
     "between difference duplex townhouse",
     "billion buyers deals dh7 hit july most sharjah spent where",
+    "billion developers dh113 months sell six top",
     "boats floating generation living london riverside",
     "buyer guide",
     "buyers check dubai housing next owners should supply",
@@ -405,7 +407,19 @@
       "source_url": "https://www.thenationalnews.com/business/property/2026/08/13/uae-property-monthly-rent-apartment",
       "image": "/images/property-news/property-news-2026-08-13-uae-rental-update-what-tenants-and-landlords-should-verify-cbf17.svg",
       "auto": true
+    },
+    {
+      "slug": "property-news-2026-08-13-how-to-read-the-latest-abu-dhabi-property-market-signal-abda4",
+      "title": "How to read the latest Abu Dhabi property-market signal",
+      "description": "A source-linked reading of a new Gulf News property report, with the headline separated from the evidence needed for a decision.",
+      "category": "UAE property market",
+      "date": "2026-08-13",
+      "read_time": "4 min read",
+      "source_name": "Gulf News",
+      "source_url": "https://gulfnews.com/business/property/uaes-top-10-developers-sell-dh1137-billion-of-property-in-six-months-1.500639749",
+      "image": "/images/property-news/property-news-2026-08-13-how-to-read-the-latest-abu-dhabi-property-market-signal-abda4.svg",
+      "auto": true
     }
   ],
-  "updated_at": "2026-08-13T13:50:31+04:00"
+  "updated_at": "2026-08-13T18:35:31+04:00"
 }
