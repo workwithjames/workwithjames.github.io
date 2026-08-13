@@ -6,6 +6,7 @@
     "https://gulfnews.com/business/property/damac-to-host-two-day-mortgage-event-with-uae-banks-this-weekend-1.500633497",
     "https://gulfnews.com/business/property/dubai-homebuyers-get-more-choice-as-24800-new-units-enter-the-market-1.500625443",
     "https://gulfnews.com/business/property/dubai-rents-ease-62-while-home-prices-stay-above-2025-levels-1.500623468",
+    "https://gulfnews.com/business/property/dubai-to-launch-rent-now-pay-later-service-with-zero-interest-instalments-1.500639254",
     "https://gulfnews.com/business/property/dubai-villa-sells-for-dh110m-nearly-doubling-jumeirah-golf-estates-record-1.500628980",
     "https://gulfnews.com/business/property/dubais-350-metre-trump-tower-moves-into-next-construction-phase-1.500632456",
     "https://gulfnews.com/business/property/early-completion-sets-new-pace-for-abu-dhabi-housing-1.500630309",
@@ -32,6 +33,7 @@
     "https://www.khaleejtimes.com/business/energy",
     "https://www.khaleejtimes.com/business/energy/uae-fuel-prices-full-tank-cost-august-2026",
     "https://www.khaleejtimes.com/business/energy/uae-petrol-diesel-prices-august-2026-announced",
+    "https://www.khaleejtimes.com/business/etihad-rail-to-boost-fujairah-property-market-as-investors-eye-price-growth",
     "https://www.khaleejtimes.com/business/galadari-brothers",
     "https://www.khaleejtimes.com/business/innovation-city",
     "https://www.khaleejtimes.com/business/markets",
@@ -85,7 +87,8 @@
     "https://www.thenationalnews.com/business/property/2026/08/06/dubais-1bn-trump-tower-moves-forward-as-key-contract-issued",
     "https://www.thenationalnews.com/business/property/2026/08/07/emaar-reports-9-increase-in-its-second-quarter-profit-on-higher-revenue",
     "https://www.thenationalnews.com/business/property/2026/08/12/arada-uk-bosss-three-point-plan-to-get-britains-building-industry-bouncing",
-    "https://www.thenationalnews.com/business/property/2026/08/12/moodys-considers-ratings-downgrade-for-dubai-based-binghatti-amid-iran-war-fallout"
+    "https://www.thenationalnews.com/business/property/2026/08/12/moodys-considers-ratings-downgrade-for-dubai-based-binghatti-amid-iran-war-fallout",
+    "https://www.thenationalnews.com/business/property/2026/08/13/uae-property-monthly-rent-apartment"
   ],
   "seen_title_signatures": [
     "000 150 dh200bn dubai emaar house launch megaproject people set",
@@ -124,6 +127,7 @@
     "arada expansion first london project push residential unveils",
     "are buying dubai living long not only residents returns short term",
     "are construction costs developers dubai off plan pricing reshaping rising",
+    "are here monthly more opting rentals residents",
     "areas best buy commercial development dubai land residential",
     "backlog billion books climbs dh164 dh26 emaar sales",
     "banks damac day event host mortgage two weekend",
@@ -151,6 +155,7 @@
     "dh110m doubling dubai estates golf jumeirah nearly record sells villa",
     "dubai",
     "dubai flexi launches month pay per rent scheme support tenants",
+    "dubai instalments interest later launch now pay rent service zero",
     "dubai luxury reading signal",
     "dubai market read signal",
     "elms joins london nine park river set skyscraper tower",
@@ -374,7 +379,31 @@
       "source_url": "https://www.thenationalnews.com/business/property/2026/08/12/moodys-considers-ratings-downgrade-for-dubai-based-binghatti-amid-iran-war-fallout",
       "image": "/images/property-news/property-news-2026-08-12-how-to-read-the-latest-dubai-property-market-signal-21f76.svg",
       "auto": true
+    },
+    {
+      "slug": "property-news-2026-08-13-dubai-housing-supply-what-buyers-and-owners-should-check-n-8ca93",
+      "title": "Dubai housing supply: what buyers and owners should check next",
+      "description": "A source-linked reading of new Gulf News reporting on housing supply, buyer choice and the checks that matter at community level.",
+      "category": "UAE housing supply",
+      "date": "2026-08-13",
+      "read_time": "4 min read",
+      "source_name": "Gulf News",
+      "source_url": "https://gulfnews.com/business/property/dubai-to-launch-rent-now-pay-later-service-with-zero-interest-instalments-1.500639254",
+      "image": "/images/property-news/property-news-2026-08-13-dubai-housing-supply-what-buyers-and-owners-should-check-n-8ca93.svg",
+      "auto": true
+    },
+    {
+      "slug": "property-news-2026-08-13-uae-rental-update-what-tenants-and-landlords-should-verify-cbf17",
+      "title": "UAE rental update: what tenants and landlords should verify",
+      "description": "A practical reading of a new The National rental report for tenants and landlords, with registered evidence and costs kept in view.",
+      "category": "UAE rental market",
+      "date": "2026-08-13",
+      "read_time": "4 min read",
+      "source_name": "The National",
+      "source_url": "https://www.thenationalnews.com/business/property/2026/08/13/uae-property-monthly-rent-apartment",
+      "image": "/images/property-news/property-news-2026-08-13-uae-rental-update-what-tenants-and-landlords-should-verify-cbf17.svg",
+      "auto": true
     }
   ],
-  "updated_at": "2026-08-13T03:24:28+04:00"
+  "updated_at": "2026-08-13T09:53:10+04:00"
 }
