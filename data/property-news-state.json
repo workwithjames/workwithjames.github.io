@@ -24,6 +24,7 @@
     "https://gulfnews.com/business/property/uae-investors-account-for-half-of-sharjah-property-market-during-h1-2026-1.500621868",
     "https://gulfnews.com/business/property/uaes-top-10-developers-sell-dh1137-billion-of-property-in-six-months-1.500639749",
     "https://gulfnews.com/business/property/where-sharjah-property-buyers-spent-most-as-july-deals-hit-dh7-billion-1.500632308",
+    "https://gulfnews.com/business/property/zoya-developments-sells-out-elinor-project-in-under-two-weeks-1.500640776",
     "https://www.khaleejtimes.com/business/aviation",
     "https://www.khaleejtimes.com/business/dubai-delivers-record-24800-new-homes-in-h1-2026-as-market-matures",
     "https://www.khaleejtimes.com/business/dubai-home-prices-rents-decline-as-supply-rises-32000-more-units-due-this-year",
@@ -158,6 +159,7 @@
     "developer fate monthly rise source spotlight",
     "developer group monthly reportage rise spotlight",
     "developer monthly rise spotlight townx",
+    "developments elinor out project sells two under weeks zoya",
     "dh110m doubling dubai estates golf jumeirah nearly record sells villa",
     "dubai",
     "dubai flexi launches month pay per rent scheme support tenants",
@@ -422,7 +424,19 @@
       "source_url": "https://gulfnews.com/business/property/uaes-top-10-developers-sell-dh1137-billion-of-property-in-six-months-1.500639749",
       "image": "/images/property-news/property-news-2026-08-13-how-to-read-the-latest-abu-dhabi-property-market-signal-abda4.svg",
       "auto": true
+    },
+    {
+      "slug": "property-news-2026-08-14-how-to-read-the-latest-dubai-property-market-signal-96e5c",
+      "title": "How to read the latest Dubai property-market signal",
+      "description": "A source-linked reading of a new Gulf News property report, with the headline separated from the evidence needed for a decision.",
+      "category": "UAE property market",
+      "date": "2026-08-14",
+      "read_time": "4 min read",
+      "source_name": "Gulf News",
+      "source_url": "https://gulfnews.com/business/property/zoya-developments-sells-out-elinor-project-in-under-two-weeks-1.500640776",
+      "image": "/images/property-news/property-news-2026-08-14-how-to-read-the-latest-dubai-property-market-signal-96e5c.svg",
+      "auto": true
     }
   ],
-  "updated_at": "2026-08-14T09:19:42+04:00"
+  "updated_at": "2026-08-14T13:30:23+04:00"
 }
