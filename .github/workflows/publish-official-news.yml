@@ -8,8 +8,10 @@ on:
 permissions:
   contents: write
 
+# Official updates, property briefs and the quality audit all modify generated
+# website files. Keep those repository writes in one queue to avoid push races.
 concurrency:
-  group: official-uae-news
+  group: site-content-writes
   cancel-in-progress: false
 
 jobs:
@@ -36,7 +38,9 @@ jobs:
 
       - name: Commit website updates
         id: publish
+        shell: bash
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/official-news-state.json blog/index.html blog/official-updates feed.xml sitemap.xml
