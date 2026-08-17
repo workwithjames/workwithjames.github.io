@@ -169,7 +169,7 @@ jobs:
                 await page.waitForTimeout(1200);
 
                 const result = await page.evaluate(({ expectedDirection, viewportName }) => {
-                  const requiredNames = ['name', 'email', 'phone', 'country', 'budget', 'consent'];
+                  const requiredNames = ['name', 'phone', 'budget', 'consent'];
                   const missingAnchors = [...document.querySelectorAll('a[href^="#"]')]
                     .map((link) => link.getAttribute('href'))
                     .filter((href) => href && href.length > 1 && !document.querySelector(href));
@@ -185,7 +185,7 @@ jobs:
 
                   return {
                     h1Count: document.querySelectorAll('h1').length,
-                    formCount: document.querySelectorAll('form[data-whatsapp-landing]').length,
+                    formCount: document.querySelectorAll('form[data-lead-capture]').length,
                     requiredFields: requiredNames.every((name) => document.querySelector(`[name="${name}"]`)?.required),
                     horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 2,
                     brokenImages,

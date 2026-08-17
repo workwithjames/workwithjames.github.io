@@ -29,6 +29,7 @@ for (const [slug,host] of pages) {
   const canonical = first(html,/<link rel="canonical" href="([^"]+)"/i);
   const heroImage = first(html,/<img class="jr-hero__image" src="([^"]+)"/i);
   const heroAlt = first(html,/<img class="jr-hero__image"[^>]+alt="([^"]+)"/i);
+  const projectImages = [...html.matchAll(/<img src="https:\/\/jamesrealty\.uk\/(images\/(?:projects|investors)\/[^"?]+)"/gi)].map(match=>match[1]);
   const h1s = (html.match(/<h1\b/gi)||[]).length;
   const h2s = (html.match(/<h2\b/gi)||[]).length;
   const ids = new Set([...html.matchAll(/\sid="([^"]+)"/g)].map(match=>match[1]));
@@ -43,7 +44,11 @@ for (const [slug,host] of pages) {
   const imagePath = heroImage.replace('https://jamesrealty.uk/',ROOT + '/');
   if (!fs.existsSync(imagePath)) fail(slug,`hero image file missing: ${imagePath}`);
   if (!/width="1600" height="900"/.test(html)) fail(slug,'hero intrinsic dimensions missing');
-  if (!/data-whatsapp-landing/.test(html) || !/name="name"/.test(html) || !/name="email"/.test(html) || !/name="phone"/.test(html) || !/name="budget"/.test(html)) fail(slug,'lead form fields are incomplete');
+  if (!/data-lead-capture/.test(html) || !/name="name"[^>]*required/.test(html) || !/name="phone"[^>]*required/.test(html) || !/name="budget"[^>]*required/.test(html) || !/name="consent"[^>]*required/.test(html)) fail(slug,'required lead-capture fields are incomplete');
+  if (!/data-lead-success[^>]*hidden/.test(html) || !/data-whatsapp-continue/.test(html)) fail(slug,'post-capture WhatsApp continuation is missing');
+  if (!/openstreetmap\.org\/export\/embed/.test(html) || !/data-map-action/.test(html)) fail(slug,'real interactive location map is missing');
+  if (projectImages.length < 2) fail(slug,`expected at least two project visuals, found ${projectImages.length}`);
+  for (const image of projectImages) if (!fs.existsSync(path.join(ROOT,image))) fail(slug,`project image file missing: ${image}`);
   if (!/landing-experience\.js/.test(html) || !/GTM-M74SL57L/.test(html)) fail(slug,'analytics or interaction script missing');
   if (!/FAQPage/.test(html) || !/RealEstateAgent/.test(html)) fail(slug,'required structured data missing');
   if (/assets\/(site|landing-pages|header-goal-nav)\.js|footer-shell|header-shell/.test(html)) fail(slug,'global site chrome remains on landing page');
@@ -55,7 +60,7 @@ for (const [slug,host] of pages) {
   if (slug==='ar' && !/<html lang="ar-AE" dir="rtl">/.test(html)) fail(slug,'Arabic language or RTL direction missing');
   if (slug!=='ar' && /dir="rtl"/.test(html)) fail(slug,'unexpected RTL direction');
 
-  records.push({slug,host,title,description,heroImage,text:strip(html)});
+  records.push({slug,host,title,description,heroImage,projectImages,text:strip(html)});
 }
 
 for (const field of ['title','description','heroImage']) {
@@ -82,6 +87,17 @@ for (const [,host] of pages) {
   if (!wrangler.includes(`"pattern": "${host}"`)) fail('wrangler',`missing custom domain for ${host}`);
 }
 if (!worker.includes("headers.set('x-robots-tag', 'index, follow')")) fail('worker','indexable canonical response header missing');
+if (!worker.includes("incoming.pathname === '/api/lead'") || !worker.includes('env.LEADS.prepare')) fail('worker','durable lead-capture endpoint or D1 persistence is missing');
+if (!wrangler.includes('"binding": "LEADS"')) fail('wrangler','D1 lead binding is missing');
+const interaction = fs.readFileSync(path.join(ROOT,'assets','landing-experience.js'),'utf8');
+if (!interaction.includes("const leadEndpoint='/api/lead'") || !interaction.includes("track('generate_lead'")) fail('interaction','lead endpoint or qualified-lead analytics event missing');
+if (interaction.includes('Math.random')) fail('interaction','non-cryptographic lead identifier fallback found');
+
+const allProjectImages = new Map();
+for (const row of records) for (const image of row.projectImages) {
+  if (allProjectImages.has(image)) fail(row.slug,`project image reused with ${allProjectImages.get(image)}: ${image}`);
+  allProjectImages.set(image,row.slug);
+}
 
 console.log(JSON.stringify({
   pages:records.map(row=>({slug:row.slug,host:row.host,titleLength:row.title.length,descriptionLength:row.description.length,heroImage:path.basename(row.heroImage)})),
