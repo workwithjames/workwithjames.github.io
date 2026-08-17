@@ -7,6 +7,8 @@
 .theme-binghatti .jr-project:not(:first-child) figure{height:255px}
 .theme-binghatti .jr-project__body{height:auto!important;min-height:0!important;align-self:start}
 .theme-binghatti .jr-project__bottom{min-height:0!important}
+.theme-binghatti .bh-branded-grid{align-items:start}
+.theme-binghatti .bh-branded-list{align-self:start}
 .theme-binghatti .bh-branded-list article{min-height:0}
 .theme-binghatti .bh-branded-list p{max-width:38ch}
 .theme-binghatti .bh-location-grid article{min-height:185px}
