@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - '.github/workflows/apply-landing-layout-fixes.yml'
+      - 'assets/landing-layout-fixes.css'
 
 permissions:
   contents: write
@@ -61,7 +62,7 @@ jobs:
               html = path.read_text(encoding='utf-8')
               html, count = re.subn(
                   r'landing-experience\.css\?v=\d+',
-                  'landing-experience.css?v=7',
+                  'landing-experience.css?v=8',
                   html,
               )
               if count == 0:
