@@ -1,0 +1,102 @@
+name: Apply Emaar premium refresh
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/apply-emaar-premium-refresh.yml'
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Refresh Emaar landing content and hierarchy
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path('landing/emaar/index.html')
+          html = path.read_text(encoding='utf-8')
+
+          def sub(pattern, repl, label, flags=re.S):
+              global html
+              html2, n = re.subn(pattern, repl, html, count=1, flags=flags)
+              if n != 1:
+                  raise SystemExit(f'{label}: expected 1 replacement, got {n}')
+              html = html2
+
+          # Metadata and page-specific stylesheet
+          html = html.replace(
+              '<title>Emaar Properties Dubai | Latest Projects &amp; Investment</title>',
+              '<title>Emaar Dubai Properties | Latest Launches &amp; Independent Advice</title>'
+          )
+          html = html.replace(
+              'Compare current Emaar projects, verified starting prices and Dubai communities with independent unit-level guidance from James Realty.',
+              'Compare Emaar’s latest Dubai launches, published starting prices and key communities with independent buyer guidance from James Realty.'
+          )
+          if 'emaar-premium.css' not in html:
+              html = html.replace(
+                  '<link rel="stylesheet" href="https://jamesrealty.uk/assets/landing-experience.css?v=8">',
+                  '<link rel="stylesheet" href="https://jamesrealty.uk/assets/landing-experience.css?v=8"><link rel="stylesheet" href="https://jamesrealty.uk/assets/emaar-premium.css?v=1">'
+              )
+
+          # Keep structured FAQ accurate to the broader live launch set.
+          html = html.replace(
+              'Golf Fields, Golf Vale and Fior 1 were listed by Emaar when checked on 17 August 2026. The launch list and inventory change, so availability is reconfirmed when you enquire.',
+              'Golf Fields, Golf Vale, Fior 1, Creek Bay, Creek Haven and Terra Woods were listed by Emaar among its latest launches when checked on 17 August 2026. The launch list and inventory change, so availability is reconfirmed when you enquire.'
+          )
+          html = html.replace(
+              'Three current releases. Three different investment cases.',
+              'Featured Emaar launches for comparison.'
+          )
+
+          hero = '''<section class="jr-hero jr-hero--editorial" aria-labelledby="hero-title"><figure class="jr-hero__media"><img class="jr-hero__image" src="https://jamesrealty.uk/images/landing/emaar-dubai-waterfront-investment.webp" width="1600" height="900" alt="Contemporary waterfront residences in a premium Dubai master community at dusk" fetchpriority="high" decoding="async"><span class="jr-hero__wash"></span></figure><div class="jr-shell jr-hero__inner"><div class="jr-hero__copy" data-reveal><p class="jr-kicker">Independent Emaar buyer advisory</p><h1 class="jr-display" id="hero-title">Emaar Dubai, compared beyond the brochure.</h1><p class="jr-hero__lead">Six of Emaar’s latest launches, current published starting prices, and the community trade-offs that matter before you reserve.</p><div class="jr-actions"><a class="jr-button jr-button--light" data-cta="hero-primary" data-location="hero" href="#enquire">Check live availability</a><a class="jr-text-link" data-cta="hero-secondary" data-location="hero" href="#projects">Compare 6 launches <span aria-hidden="true">↘</span></a></div><ul class="jr-hero__proof"><li>Official developer sources</li><li>Published price checks</li><li>Independent shortlist</li></ul><span class="emaar-checked">Launch list checked 17 Aug 2026 · inventory and payment plans can change</span></div><p class="jr-hero__independent">Independent James Realty advisory — not Emaar’s official website.</p></div></section>'''
+          sub(r'<section class="jr-hero jr-hero--editorial".*?</section>', hero, 'hero')
+
+          facts = '''<section class="jr-facts" aria-label="Published starting prices"><div class="jr-shell jr-facts__track"><article><span>01</span><strong>AED 1.09m</strong><small>Golf Vale · published starting price</small></article><article><span>02</span><strong>AED 1.26m</strong><small>Golf Fields · published starting price</small></article><article><span>03</span><strong>AED 1.60m</strong><small>Terra Woods · published starting price</small></article><article><span>04</span><strong>AED 2.20m</strong><small>Fior 1 · published starting price</small></article></div></section>'''
+          sub(r'<section class="jr-facts".*?</section>', facts, 'facts')
+
+          brief = '''<section class="jr-section emaar-brief" id="overview"><div class="jr-shell"><header class="jr-heading" data-reveal><p class="jr-kicker">Start with the investment brief</p><h2 class="jr-display">Choose the reason to buy before the project name.</h2><p>The latest Emaar launches span golf communities, marina-front living, Creek waterfront apartments and Expo Living. The right shortlist depends on budget, use case, time horizon and exit audience.</p></header><div class="emaar-brief-grid"><article class="emaar-brief-card" data-reveal><span>01 · Entry point</span><h3>Lower published starting price</h3><p>Golf Vale currently carries the lowest published starting price among the six launches compared here.</p><strong>Golf Vale · from AED 1.09m</strong></article><article class="emaar-brief-card" data-reveal><span>02 · Golf community</span><h3>Emaar South</h3><p>Golf Fields and Golf Vale combine apartments and townhouses with a golf-led master-community setting.</p><strong>Compare both Emaar South releases</strong></article><article class="emaar-brief-card" data-reveal><span>03 · Waterfront</span><h3>Marina or Creek</h3><p>Fior 1, Creek Bay and Creek Haven target buyers who prioritise waterfront positioning and a more urban lifestyle.</p><strong>Three distinct waterfront cases</strong></article><article class="emaar-brief-card" data-reveal><span>04 · Expo corridor</span><h3>Expo Living</h3><p>Terra Woods adds a different proposition: apartments and townhouses within Emaar’s Expo Living community.</p><strong>Terra Woods · from AED 1.60m</strong></article></div></div></section>'''
+          sub(r'<section class="jr-section jr-signature".*?</section>', brief, 'brief')
+
+          projects = '''<section class="jr-section jr-project-section" id="projects"><div class="jr-shell"><header class="jr-heading" data-reveal><p class="jr-kicker">Latest launch shortlist</p><h2 class="jr-display">Six current launches. Three very different locations.</h2><p>Emaar’s official latest-launch list changes frequently. Prices below are published starting prices checked on 17 August 2026—not promises of a currently available unit. Live inventory, floor plans and payment schedules are reconfirmed before advice.</p></header><div class="jr-projects"><article class="jr-project" data-reveal data-project-card="Golf Fields"><figure><img src="https://jamesrealty.uk/images/projects/emaar-golf-community-apartments.webp" width="724" height="543" loading="lazy" decoding="async" alt="Representative golf-edge apartments in a landscaped Dubai master community"><figcaption>James Realty advisory visual — not an official project render</figcaption></figure><div class="jr-project__body"><span class="jr-project__meta">Emaar South · latest launch</span><h3>Golf Fields</h3><p>One- to three-bedroom apartments and three-bedroom townhouses in a golf-oriented Emaar South setting.</p><ul><li>1–3 bedroom apartments</li><li>3 bedroom townhouses</li><li>Golf-led community</li></ul><div class="jr-project__bottom"><span><strong>From AED 1.26m</strong><small>Published by Emaar · checked 17 Aug 2026</small></span><a class="jr-project__source" data-source-link href="https://www.emaar.com/en/properties/golf-fields-at-emaar-south" target="_blank" rel="noopener noreferrer">Official source ↗</a></div><a class="jr-project__cta" href="#enquire" data-project-select="Golf Fields">Check Golf Fields units <span aria-hidden="true">→</span></a></div></article><article class="jr-project" data-reveal data-project-card="Golf Vale"><figure><img src="https://jamesrealty.uk/images/projects/emaar-family-townhouses.webp" width="724" height="543" loading="lazy" decoding="async" alt="Representative contemporary family townhouses in a landscaped Dubai community"><figcaption>James Realty advisory visual — not an official project render</figcaption></figure><div class="jr-project__body"><span class="jr-project__meta">Emaar South · latest launch</span><h3>Golf Vale</h3><p>One- to three-bedroom apartments and three-bedroom townhouses, with the lowest published starting price in this six-project shortlist.</p><ul><li>1–3 bedroom apartments</li><li>3 bedroom townhouses</li><li>Published from AED 1.09m</li></ul><div class="jr-project__bottom"><span><strong>From AED 1.09m</strong><small>Published by Emaar · checked 17 Aug 2026</small></span><a class="jr-project__source" data-source-link href="https://www.emaar.com/en/properties/golf-vale-at-emaar-south" target="_blank" rel="noopener noreferrer">Official source ↗</a></div><a class="jr-project__cta" href="#enquire" data-project-select="Golf Vale">Check Golf Vale units <span aria-hidden="true">→</span></a></div></article><article class="jr-project" data-reveal data-project-card="Fior 1"><figure><img src="https://jamesrealty.uk/images/projects/emaar-waterfront-marina-residences.webp" width="724" height="543" loading="lazy" decoding="async" alt="Representative premium marina-front apartments in Dubai at blue hour"><figcaption>James Realty advisory visual — not an official project render</figcaption></figure><div class="jr-project__body"><span class="jr-project__meta">Rashid Yachts &amp; Marina · latest launch</span><h3>Fior 1</h3><p>One- to three-bedroom marina-front apartments positioned around waterfront views, promenade living and the Rashid Yachts &amp; Marina masterplan.</p><ul><li>1–3 bedroom apartments</li><li>Marina-front setting</li><li>Published from AED 2.20m</li></ul><div class="jr-project__bottom"><span><strong>From AED 2.20m</strong><small>Published by Emaar · checked 17 Aug 2026</small></span><a class="jr-project__source" data-source-link href="https://www.emaar.com/en/properties/fior-1-at-rashid-yachts-and-marina" target="_blank" rel="noopener noreferrer">Official source ↗</a></div><a class="jr-project__cta" href="#enquire" data-project-select="Fior 1">Check Fior 1 units <span aria-hidden="true">→</span></a></div></article></div><div class="emaar-more-launches" aria-label="More current Emaar launches"><article class="emaar-launch-card" data-reveal><span class="emaar-launch-index">04 · DUBAI CREEK HARBOUR</span><h3>Creek Bay</h3><span class="emaar-location">1, 2 &amp; 3 bedroom apartments</span><p>Waterfront apartments at Dubai Creek Harbour with Creek views and a walkable harbourfront setting.</p><footer><span><strong>From AED 1.80m</strong><small>Published starting price</small></span><a href="https://www.emaar.com/en/properties/creek-bay-at-dubai-creek-harbour" target="_blank" rel="noopener noreferrer">Official source ↗</a></footer></article><article class="emaar-launch-card" data-reveal><span class="emaar-launch-index">05 · DUBAI CREEK HARBOUR</span><h3>Creek Haven</h3><span class="emaar-location">1, 2 &amp; 3 bedroom apartments</span><p>Creek and park-facing residences within Dubai Creek Harbour, positioned around promenades, green spaces and waterfront living.</p><footer><span><strong>From AED 1.86m</strong><small>Published starting price</small></span><a href="https://www.emaar.com/en/properties/creek-haven-at-dubai-creek-harbour" target="_blank" rel="noopener noreferrer">Official source ↗</a></footer></article><article class="emaar-launch-card" data-reveal><span class="emaar-launch-index">06 · EXPO LIVING</span><h3>Terra Woods</h3><span class="emaar-location">1–3 bedroom apartments &amp; townhouse</span><p>A community-led Expo Living release centred on green spaces, courtyards and connectivity to the Expo City / Dubai South corridor.</p><footer><span><strong>From AED 1.60m</strong><small>Published starting price</small></span><a href="https://www.emaar.com/en/properties/terra-woods-at-expo-living" target="_blank" rel="noopener noreferrer">Official source ↗</a></footer></article></div></div></section>'''
+          sub(r'<section class="jr-section jr-project-section".*?</section>', projects, 'projects')
+
+          communities = '''<section class="jr-section emaar-communities" id="locations"><div class="jr-shell emaar-community-grid"><div class="emaar-community-lead" data-reveal><p class="jr-kicker">Community first</p><h2 class="jr-display">The address changes the investment case.</h2><p>Two projects can carry the same developer name and still have very different tenant pools, resale competition, lifestyle appeal and holding periods. Compare the master community before choosing a floor plan.</p></div><div class="emaar-community-list"><article data-reveal><span>01</span><h3>Emaar South</h3><p>Golf Fields and Golf Vale. Golf-oriented community living within Dubai South.</p></article><article data-reveal><span>02</span><h3>Dubai Creek Harbour</h3><p>Creek Bay and Creek Haven. Waterfront apartments, promenades, parks and proximity to Ras Al Khor.</p></article><article data-reveal><span>03</span><h3>Rashid Yachts &amp; Marina</h3><p>Fior 1. A marina-front proposition shaped around waterfront living and yachting-led placemaking.</p></article><article data-reveal><span>04</span><h3>Expo Living</h3><p>Terra Woods. A newer urban community beside Expo City within the wider Dubai South growth corridor.</p></article></div></div></section>'''
+          sub(r'<section class="jr-section jr-map-section".*?</section>', communities, 'communities')
+
+          # Navigation and CTA language
+          html = html.replace('>New releases</a><a href="#locations">Communities</a>', '>Latest launches</a><a href="#locations">Communities</a>')
+          html = html.replace('>Request current prices</a>', '>Check live availability</a>', 1)
+
+          path.write_text(html, encoding='utf-8')
+          PY
+
+      - name: Commit Emaar refresh
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No changes required.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add landing/emaar/index.html
+          git commit -m 'Refresh Emaar landing page design and launch information'
+          git push origin HEAD:main
+
+      - name: Request Pages rebuild
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST repos/${{ github.repository }}/pages/builds
