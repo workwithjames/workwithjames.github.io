@@ -59,11 +59,12 @@
   });
 
   qsa('[data-underwriting-tool]').forEach(tool=>{
+    const calculator=qs('form',tool);
     const output=qs('[data-underwriting-output]',tool);
     const update=()=>{
-      const price=Number(tool.elements.price.value)||1;
-      const annual=(Number(tool.elements.rent.value)||0)*12*((Number(tool.elements.occupancy.value)||0)/100);
-      const net=Math.max(0,annual-(Number(tool.elements.costs.value)||0));
+      const price=Number(calculator?.elements.price.value)||1;
+      const annual=(Number(calculator?.elements.rent.value)||0)*12*((Number(calculator?.elements.occupancy.value)||0)/100);
+      const net=Math.max(0,annual-(Number(calculator?.elements.costs.value)||0));
       const netYield=(net/price)*100;
       const usd=net/3.6725;
       output.textContent=`${netYield.toFixed(2)}% net scenario · ${new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(usd)}/yr`;
