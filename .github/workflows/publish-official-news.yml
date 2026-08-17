@@ -13,8 +13,8 @@ on:
 permissions:
   contents: write
 
-# Official updates, property briefs and the quality audit all modify generated
-# website files. Keep those repository writes in one queue to avoid push races.
+# Official updates and property briefs both modify generated website files. Keep
+# those repository writes in one queue so they cannot overwrite each other.
 concurrency:
   group: site-content-writes
   cancel-in-progress: false
@@ -22,6 +22,7 @@ concurrency:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    timeout-minutes: 12
     steps:
       - name: Check out website
         uses: actions/checkout@v4
@@ -37,6 +38,19 @@ jobs:
 
       - name: Install monitor dependencies
         run: pip install -r requirements-official-news.txt
+
+      - name: Tune monitor network retries
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('scripts/import_official_news.py')
+          text = path.read_text(encoding='utf-8')
+          text = text.replace('for i in range(3):', 'for i in range(2):', 1)
+          text = text.replace('S.get(u,timeout=30,', 'S.get(u,timeout=12,', 1)
+          path.write_text(text, encoding='utf-8')
+          PY
 
       - name: Validate publisher scripts
         run: |
@@ -56,7 +70,10 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/official-news-state.json blog/index.html blog/official-updates feed.xml sitemap.xml
+          git add data/official-news-state.json blog/index.html feed.xml sitemap.xml
+          if [ -d blog/official-updates ]; then
+            git add -A blog/official-updates
+          fi
           if git diff --cached --quiet; then
             echo "No website changes detected."
             echo "changed=false" >> "$GITHUB_OUTPUT"
