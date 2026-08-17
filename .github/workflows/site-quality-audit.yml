@@ -21,9 +21,11 @@ on:
 permissions:
   contents: write
 
+# The audit writes its generated report back to main, so serialize it with the
+# automated publishers that also commit generated site files.
 concurrency:
-  group: site-quality-audit
-  cancel-in-progress: true
+  group: site-content-writes
+  cancel-in-progress: false
 
 jobs:
   audit:
@@ -117,6 +119,7 @@ jobs:
       - name: Commit audit report
         shell: bash
         run: |
+          set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add audit/site-audit-report.json
@@ -124,7 +127,8 @@ jobs:
             echo 'Audit report unchanged.'
           else
             git commit -m 'Update automated site quality report'
-            git push
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
 
       - name: Enforce error-free audit
