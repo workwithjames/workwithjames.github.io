@@ -594,7 +594,9 @@ function formV4Markup(page) {
 function formV4(page) {
   return formV4Markup(page)
     .replace('</select><label>Goal or timeline', '</select></label><label>Goal or timeline')
-    .replace('</select><label>الهدف والجدول الزمني', '</select></label><label>الهدف والجدول الزمني');
+    .replace('</select><label>الهدف والجدول الزمني', '</select></label><label>الهدف والجدول الزمني')
+    .replace('I agree that James Realty may contact me about this enquiry.', 'I agree that James Realty may contact me about this enquiry. <a href="https://jamesrealty.uk/privacy-policy/" target="_blank" rel="noopener noreferrer">Privacy policy</a>.')
+    .replace('أوافق على أن يتواصل معي جيمس ريالتي بخصوص هذا الطلب.', 'أوافق على أن يتواصل معي جيمس ريالتي بخصوص هذا الطلب. <a href="https://jamesrealty.uk/privacy-policy/" target="_blank" rel="noopener noreferrer">سياسة الخصوصية</a>.');
 }
 
 function faqV4(page) {
