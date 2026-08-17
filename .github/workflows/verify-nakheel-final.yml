@@ -1,0 +1,49 @@
+name: Verify Nakheel final landing
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/verify-nakheel-final.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install browser driver
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save puppeteer-core@24 >/dev/null 2>&1
+      - name: Verify final public Nakheel render
+        shell: bash
+        run: |
+          cat > nakheel-final.mjs <<'JS'
+          import puppeteer from 'puppeteer-core';
+          import {execSync} from 'node:child_process';
+          const chrome=execSync('which google-chrome || which chromium || which chromium-browser').toString().trim();
+          const browser=await puppeteer.launch({headless:true,executablePath:chrome,args:['--no-sandbox']});
+          const page=await browser.newPage();
+          const read=async(width,height)=>{
+            await page.setViewport({width,height,deviceScaleFactor:1});
+            let d;
+            for(let i=0;i<26;i++){
+              await page.goto(`https://nakheel.jamesrealty.uk/?final=${Date.now()}-${i}`,{waitUntil:'networkidle2',timeout:45000});
+              d=await page.evaluate(()=>{
+                const h=s=>[...document.querySelectorAll(s)].map(e=>Math.round(e.getBoundingClientRect().height));
+                const css=[...document.querySelectorAll('link[rel="stylesheet"]')].map(e=>e.href);
+                return {premium:css.some(x=>x.includes('nakheel-premium.css?v=1')),finalCss:css.some(x=>x.includes('nakheel-spacing-final.css?v=1')),title:document.querySelector('h1')?.textContent?.trim()||'',text:document.body.innerText,overflow:document.documentElement.scrollWidth-window.innerWidth,hero:h('.jr-hero'),facts:h('.jr-facts__track article'),spectrum:h('.nk-spectrum-card'),map:h('.jr-map iframe'),projectBodies:h('.jr-project__body'),projects:h('.jr-project'),current:h('.nk-current-card'),lens:h('.jr-lens__grid article'),process:h('.jr-process__rail li')};
+              });
+              if(d.premium&&d.finalCss&&d.title.includes('Choose the island before the unit')) return d;
+              await new Promise(r=>setTimeout(r,15000));
+            }
+            return d;
+          };
+          const desktop=await read(1440,1000);
+          const mobile=await read(390,844);
+          const max=a=>a?.length?Math.max(...a):0;
+          const checks={css:desktop.premium&&desktop.finalCss&&mobile.premium&&mobile.finalCss,hero:desktop.title.includes('Choose the island before the unit'),facts:desktop.text.includes('Palm Central')&&desktop.text.includes('Bay Villas')&&desktop.text.includes('Bay Grove')&&desktop.text.includes('Como Residences'),desktopOverflow:desktop.overflow<=2,mobileOverflow:mobile.overflow<=2,heroHeight:max(desktop.hero)<=880,factsHeight:max(desktop.facts)<=125,spectrum:max(desktop.spectrum)<=270,map:max(desktop.map)<=420,projectBodies:max(desktop.projectBodies)<=520,current:max(desktop.current)<=330,lens:max(desktop.lens)<=150,process:max(desktop.process)<=180,mobileProjects:max(mobile.projectBodies)<=720,mobileCurrent:max(mobile.current)<=420};
+          console.log('NAKHEEL_FINAL_QA|'+JSON.stringify({checks,desktop,mobile}));
+          await browser.close();
+          if(!Object.values(checks).every(Boolean)) process.exit(1);
+          JS
+          node nakheel-final.mjs
