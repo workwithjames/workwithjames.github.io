@@ -1,0 +1,22 @@
+name: Rebuild Pages once
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/rebuild-pages-once.yml'
+
+permissions:
+  contents: read
+  pages: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request clean GitHub Pages rebuild
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          sleep 8
+          gh api --method POST repos/${{ github.repository }}/pages/builds
