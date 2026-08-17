@@ -1,0 +1,111 @@
+name: Apply Binghatti premium refresh
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-binghatti-premium-refresh.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Refresh Binghatti landing
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, json
+          p=Path('landing/binghatti/index.html')
+          s=p.read_text(encoding='utf-8')
+
+          # Head / metadata
+          s=s.replace('<title>Binghatti Properties Dubai | Latest Projects &amp; Prices</title>', '<title>Binghatti Dubai | New Releases &amp; Branded Residences</title>')
+          s=s.replace('Compare current Binghatti launches, apartments, villas and payment plans with verified official details and independent investor analysis.', 'Compare Binghatti new releases and branded residences in Dubai with current official project facts, published prices and independent investor analysis.')
+          base='<link rel="stylesheet" href="https://jamesrealty.uk/assets/landing-experience.css?v=8">'
+          extra='<link rel="stylesheet" href="https://jamesrealty.uk/assets/binghatti-premium.css?v=1">'
+          if extra not in s:
+              s=s.replace(base,base+extra)
+
+          # Update structured data to match visible content.
+          m=re.search(r'<script type="application/ld\+json">(.*?)</script>',s,re.S)
+          if m:
+              data=json.loads(m.group(1))
+              for node in data.get('@graph',[]):
+                  if node.get('@type')=='WebPage':
+                      node['name']='Binghatti Dubai | New Releases & Branded Residences'
+                      node['description']='Compare Binghatti new releases and branded residences in Dubai with current official project facts, published prices and independent investor analysis.'
+                      node['dateModified']='2026-08-17'
+                  elif node.get('@type')=='Service':
+                      node['description']='Compare Binghatti new releases and branded residences in Dubai with current official project facts, published prices and independent investor analysis.'
+                      node['audience']={'@type':'Audience','audienceType':'Binghatti Dubai buyers and investors'}
+                  elif node.get('@type')=='ItemList':
+                      node['name']='Current Binghatti new releases compared'
+                      node['itemListElement']=[
+                        {'@type':'ListItem','position':1,'url':'https://www.binghatti.com/en/projects/binghatti-skyflame','name':'Binghatti Skyflame'},
+                        {'@type':'ListItem','position':2,'url':'https://www.binghatti.com/en/projects/binghatti-etherea','name':'Binghatti Etherea'},
+                        {'@type':'ListItem','position':3,'url':'https://www.binghatti.com/en/property-search/binghatti-luxuria','name':'Binghatti Luxuria'},
+                        {'@type':'ListItem','position':4,'url':'https://www.binghatti.com/en/branded-projects/mercedes-benz-places-binghatti-city','name':'Mercedes-Benz Places | Binghatti City'}]
+                  elif node.get('@type')=='FAQPage':
+                      node['mainEntity']=[
+                        {'@type':'Question','name':'What are Binghatti’s newest highlighted projects?','acceptedAnswer':{'@type':'Answer','text':'Binghatti’s current New Releases page highlights Luxuria in JVT, Etherea in JVC, Skyflame in Majan and Mercedes-Benz Places | Binghatti City in Meydan.'}},
+                        {'@type':'Question','name':'What is the Skyflame payment plan?','acceptedAnswer':{'@type':'Answer','text':'Binghatti currently states 20% on booking, 50% during construction and 30% on completion for Skyflame. Request the dated instalment schedule before reserving.'}},
+                        {'@type':'Question','name':'What is the Etherea payment plan?','acceptedAnswer':{'@type':'Answer','text':'Binghatti currently states 20% on booking, 50% during construction and 30% on completion for Etherea.'}},
+                        {'@type':'Question','name':'What is Mercedes-Benz Places | Binghatti City?','acceptedAnswer':{'@type':'Answer','text':'It is Binghatti’s Mercedes-Benz branded city-scale community in Meydan, with 12 towers, a central park and residences from studios to five bedrooms.'}},
+                        {'@type':'Question','name':'Are branded residences automatically better investments?','acceptedAnswer':{'@type':'Answer','text':'No. Compare the brand premium, service charges, unit plan, location, payment schedule and likely future buyer or tenant pool.'}}]
+              s=s[:m.start(1)]+json.dumps(data,separators=(',',':'),ensure_ascii=False)+s[m.end(1):]
+
+          # Hero copy / CTA
+          s=s.replace('Architecture meets unit economics','Independent Binghatti project advisory')
+          s=s.replace('Form. Location. Numbers. In that order.','Architecture gets attention. The unit still has to work.')
+          s=s.replace('A sharp comparison of Binghatti’s fast-moving release pipeline—from urban apartments to its first master-planned villa community.','Compare Binghatti’s newest Dubai releases and branded residences through the exact unit, published price, payment timing, location and future buyer pool.')
+          s=s.replace('Compare available units','Get current Binghatti shortlist')
+          s=s.replace('Enter the collection','Explore current releases')
+          s=s.replace('<ul class="jr-hero__proof"><li>Latest release review</li><li>Payment-plan mapping</li><li>Unit efficiency check</li></ul>', '<ul class="jr-hero__proof"><li>Official Binghatti sources</li><li>Published price checks</li><li>Unit + payment-plan review</li></ul><span class="bh-checked">Project facts checked 17 Aug 2026 · live inventory can change</span>')
+          s=s.replace('Independent James Realty advisory — not the developer’s official website.','Independent James Realty advisory — not Binghatti’s official website.')
+
+          # Nav
+          s=s.replace('<a href="#projects">New forms</a><a href="#locations">Locations</a><a href="#why-invest">Investor matrix</a><a href="#enquire">Express interest</a>', '<a href="#overview">New releases</a><a href="#projects">Project edit</a><a href="#comparison">Branded luxury</a><a href="#enquire">Private shortlist</a>')
+
+          facts='''<section class="jr-facts" aria-label="Binghatti at a glance"><div class="jr-shell jr-facts__track"><article><span>01</span><strong>Skyflame</strong><small>Majan · from AED 585k</small></article><article><span>02</span><strong>Etherea</strong><small>JVC · studio to 2 BR</small></article><article><span>03</span><strong>Luxuria</strong><small>JVT · from AED 765,999</small></article><article><span>04</span><strong>Mercedes-Benz City</strong><small>Meydan · 12-tower community</small></article></div></section>'''
+          s,n=re.subn(r'<section class="jr-facts".*?</section>',facts,s,count=1,flags=re.S)
+          if n!=1: raise SystemExit(f'facts replacement failed: {n}')
+
+          releases='''<section class="jr-section bh-release-section" id="overview"><div class="jr-shell"><header class="jr-heading jr-heading--compact" data-reveal><p class="jr-kicker">Current new releases</p><h2 class="jr-display">Four very different Binghatti propositions.</h2><p>Ticket size alone is not a strategy. Compare the exact location, apartment plan, delivery timing, local pipeline and brand premium before choosing a project.</p></header><div class="bh-release-grid"><article class="bh-release-card" data-reveal><span>01 · Majan</span><h3>Skyflame</h3><p>Twin-tower, resort-inspired apartments with studios, one- and two-bedroom homes.</p><strong>From AED 585,000</strong><small>Official portfolio starting price</small></article><article class="bh-release-card" data-reveal><span>02 · JVC</span><h3>Etherea</h3><p>Studio, one- and two-bedroom apartments with handover currently scheduled for July 2027.</p><strong>Studios from AED 786,999</strong><small>Current official unit listing</small></article><article class="bh-release-card" data-reveal><span>03 · JVT</span><h3>Luxuria</h3><p>Studio, one- and two-bedroom apartments with open-sky terraces and access to E311 and Al Khail Road.</p><strong>Studios from AED 765,999</strong><small>Current official property search</small></article><article class="bh-release-card" data-reveal><span>04 · Meydan</span><h3>Mercedes-Benz City</h3><p>A 12-tower Mercedes-Benz branded community with a central park and studios through five-bedroom residences.</p><strong>20 / 50 / 30 plan</strong><small>Official project payment structure</small></article></div></div></section>'''
+          s,n=re.subn(r'<section class="jr-section jr-signature".*?</section>',releases,s,count=1,flags=re.S)
+          if n!=1: raise SystemExit(f'releases replacement failed: {n}')
+
+          projects='''<section class="jr-section jr-project-section" id="projects"><div class="jr-shell"><header class="jr-heading" data-reveal><p class="jr-kicker">Current opportunity edit</p><h2 class="jr-display">Three apartment launches to underwrite now.</h2><p>These are current Binghatti apartment propositions at different entry points. Published prices are snapshots; the exact unit, size, stack and payment schedule must be reconfirmed before reservation.</p></header><div class="jr-projects"><article class="jr-project" data-reveal data-project-card="Binghatti Skyflame"><figure><img src="https://jamesrealty.uk/images/projects/binghatti-crystalline-apartments.webp" width="724" height="543" loading="lazy" decoding="async" alt="Representative crystalline Dubai apartment architecture for Binghatti project comparison"><figcaption>James Realty advisory visual — not an official project render</figcaption></figure><div class="jr-project__body"><span class="jr-project__meta">Majan · New release</span><h3>Skyflame</h3><p>Studios, one- and two-bedroom residences in a twin-tower resort-inspired project. Binghatti currently states completion by 31 December 2027.</p><ul><li>Studio · 1 BR · 2 BR</li><li>20% booking · 50% construction · 30% completion</li><li>Majan · access to E311</li></ul><div class="jr-project__bottom"><span><strong>From AED 585,000</strong><small>Official portfolio starting price</small></span><a class="jr-project__source" data-source-link href="https://www.binghatti.com/en/projects/binghatti-skyflame" target="_blank" rel="noopener noreferrer">Official source ↗</a></div><a class="jr-project__cta" href="#enquire" data-project-select="Binghatti Skyflame">Get current units <span aria-hidden="true">→</span></a></div></article><article class="jr-project" data-reveal data-project-card="Binghatti Etherea"><figure><img src="https://jamesrealty.uk/images/projects/binghatti-copper-geometric-tower.webp" width="724" height="543" loading="lazy" decoding="async" alt="Representative geometric Dubai residential tower for Binghatti project comparison"><figcaption>James Realty advisory visual — not an official project render</figcaption></figure><div class="jr-project__body"><span class="jr-project__meta">JVC · New release</span><h3>Etherea</h3><p>A 24-storey JVC residential proposition with studios, one- and two-bedroom apartments and a current July 2027 handover schedule.</p><ul><li>Studio · 1 BR · 2 BR</li><li>20% booking · 50% construction · 30% completion</li><li>JVC · E311 + Al Khail access</li></ul><div class="jr-project__bottom"><span><strong>Studios from AED 786,999</strong><small>Current official unit listing</small></span><a class="jr-project__source" data-source-link href="https://www.binghatti.com/en/projects/binghatti-etherea" target="_blank" rel="noopener noreferrer">Official source ↗</a></div><a class="jr-project__cta" href="#enquire" data-project-select="Binghatti Etherea">Get current units <span aria-hidden="true">→</span></a></div></article><article class="jr-project" data-reveal data-project-card="Binghatti Luxuria"><figure><img src="https://jamesrealty.uk/images/projects/binghatti-sculptural-villas.webp" width="724" height="543" loading="lazy" decoding="async" alt="Representative sculptural Binghatti-style architecture used for independent project comparison"><figcaption>James Realty advisory visual — not an official project render</figcaption></figure><div class="jr-project__body"><span class="jr-project__meta">JVT · New release</span><h3>Luxuria</h3><p>Contemporary JVT apartments spanning studios to two bedrooms. Current official property search lists studios from AED 765,999.</p><ul><li>Studio · 1 BR · 2 BR</li><li>Jumeirah Village Triangle</li><li>Exact payment schedule checked at enquiry</li></ul><div class="jr-project__bottom"><span><strong>Studios from AED 765,999</strong><small>Current official property search</small></span><a class="jr-project__source" data-source-link href="https://www.binghatti.com/en/property-search/binghatti-luxuria" target="_blank" rel="noopener noreferrer">Official source ↗</a></div><a class="jr-project__cta" href="#enquire" data-project-select="Binghatti Luxuria">Get current units <span aria-hidden="true">→</span></a></div></article></div></div></section>'''
+          s,n=re.subn(r'<section class="jr-section jr-project-section".*?</section>',projects,s,count=1,flags=re.S)
+          if n!=1: raise SystemExit(f'projects replacement failed: {n}')
+
+          branded='''<section class="jr-section bh-branded" id="comparison"><div class="jr-shell"><div class="bh-branded-grid"><article class="bh-branded-intro" data-reveal><p class="jr-kicker">Branded luxury collection</p><h2 class="jr-display">The brand name is only the first line of the underwriting.</h2><p>Binghatti’s branded residences operate at a very different price point from its mainstream apartment launches. Compare scarcity, usable area, recurring charges, brand terms and resale depth before paying a brand premium.</p><a href="https://www.binghatti.com/en/branded-projects" target="_blank" rel="noopener noreferrer">Official branded collection ↗</a></article><div class="bh-branded-list"><article data-reveal><span>01 · Business Bay</span><strong>Bugatti Residences</strong><p>Official branded portfolio currently publishes residences from AED 19.5m.</p></article><article data-reveal><span>02 · Business Bay</span><strong>Burj Binghatti Jacob &amp; Co</strong><p>Official branded portfolio currently publishes residences from AED 8.4m.</p></article><article data-reveal><span>03 · Meydan</span><strong>Mercedes-Benz Places | Binghatti City</strong><p>12 towers, central park, studios to five bedrooms and a 20/50/30 payment structure.</p></article><article data-reveal><span>04 · Downtown</span><strong>Mercedes-Benz Places | Binghatti</strong><p>Ultra-prime Downtown branded residences; exact available unit pricing should be checked live.</p></article></div></div></div></section>'''
+          s,n=re.subn(r'<section class="jr-section jr-matrix".*?</section>',branded,s,count=1,flags=re.S)
+          if n!=1: raise SystemExit(f'branded replacement failed: {n}')
+
+          locations='''<section class="jr-section bh-locations" id="locations"><div class="jr-shell"><header class="jr-heading jr-heading--compact" data-reveal><p class="jr-kicker">Location changes the exit pool</p><h2 class="jr-display">Four neighbourhoods. Four different demand stories.</h2><p>A JVC or JVT apartment should not be underwritten like Majan or a Mercedes-Benz branded home in Meydan. Use local comparable evidence and competing pipeline for each location.</p></header><div class="bh-location-grid"><article data-reveal><span>01 · Majan</span><strong>Skyflame</strong><p>Lower-entry apartment proposition in a developing Dubailand corridor.</p><small>Test: rent + future supply</small></article><article data-reveal><span>02 · JVC</span><strong>Etherea</strong><p>Established apartment market with large transaction and rental comparables.</p><small>Test: layout + competition</small></article><article data-reveal><span>03 · JVT</span><strong>Luxuria</strong><p>Connected residential district with a different supply and tenant profile from JVC.</p><small>Test: entry price + stock</small></article><article data-reveal><span>04 · Meydan</span><strong>Mercedes-Benz City</strong><p>Branded city-scale proposition where brand premium and masterplan delivery matter.</p><small>Test: premium + phasing</small></article></div></div></section>'''
+          s,n=re.subn(r'<section class="jr-section jr-map-section".*?</section>',locations,s,count=1,flags=re.S)
+          if n!=1: raise SystemExit(f'locations replacement failed: {n}')
+
+          # Visible FAQ wording and CTA clean-up where old names remain.
+          s=s.replace('What are Binghatti’s latest highlighted releases?','What are Binghatti’s newest highlighted projects?')
+          s=s.replace('What is the current Skyflame payment plan?','What is the Skyflame payment plan?')
+          s=s.replace('What prices are verified here?','Which published prices are shown here?')
+          s=s.replace('Request current units','Get current units')
+          s=s.replace('Request current availability','Get current availability')
+          s=s.replace('Express interest','Private shortlist')
+
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit Binghatti refresh
+        shell: bash
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add landing/binghatti/index.html
+          git commit -m 'Refresh Binghatti landing with current releases'
+          git push origin HEAD:main
