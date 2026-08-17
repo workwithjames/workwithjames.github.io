@@ -53,16 +53,16 @@ jobs:
                 return { x:r.x, y:r.y, width:r.width, height:r.height };
               });
               const cssHrefs = [...document.querySelectorAll('link[rel="stylesheet"]')].map(x => x.href);
-              const facts = rects('.jr-facts article');
-              const signature = rects('.jr-signature article');
-              const process = rects('.jr-process__rail li');
-              const projects = rects('.jr-projects > .jr-project');
-              const lensAside = rects('.jr-lens__aside')[0] || null;
-              const lensGrid = rects('.jr-lens__grid')[0] || null;
               return {
-                cssV7: cssHrefs.some(h => h.includes('landing-experience.css?v=7')),
+                dir: document.documentElement.dir || 'ltr',
+                cssV8: cssHrefs.some(h => h.includes('landing-experience.css?v=8')),
                 overflow: document.documentElement.scrollWidth - window.innerWidth,
-                facts, signature, process, projects, lensAside, lensGrid,
+                facts: rects('.jr-facts article'),
+                signature: rects('.jr-signature article'),
+                process: rects('.jr-process__rail li'),
+                projects: rects('.jr-projects > .jr-project'),
+                lensAside: rects('.jr-lens__aside')[0] || null,
+                lensGrid: rects('.jr-lens__grid')[0] || null,
               };
             });
           }
@@ -74,7 +74,7 @@ jobs:
             for (let attempt = 0; attempt < 8; attempt++) {
               await page.goto(`https://${host}/?layoutqa=${Date.now()}-${attempt}`, { waitUntil:'networkidle2', timeout:45000 });
               desktop = await metrics(page);
-              if (desktop.cssV7) break;
+              if (desktop.cssV8) break;
               await sleep(20000);
             }
 
@@ -86,7 +86,8 @@ jobs:
               const ys = desktop.projects.slice(0,3).map(x => x.y);
               projectTopSpread = Math.max(...ys) - Math.min(...ys);
             }
-            const lensPlacementOK = !desktop.lensAside || !desktop.lensGrid || desktop.lensAside.x < desktop.lensGrid.x;
+            const lensPlacementOK = !desktop.lensAside || !desktop.lensGrid ||
+              (desktop.dir === 'rtl' ? desktop.lensAside.x > desktop.lensGrid.x : desktop.lensAside.x < desktop.lensGrid.x);
 
             await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 });
             await page.reload({ waitUntil:'networkidle2', timeout:45000 });
@@ -94,7 +95,7 @@ jobs:
             const mobileFactMaxWidth = mobile.facts.length ? Math.max(...mobile.facts.map(x => x.width)) : 0;
 
             const checks = {
-              cssV7: desktop.cssV7,
+              cssV8: desktop.cssV8,
               desktopOverflow: desktop.overflow <= 2,
               compactFacts: !desktop.facts.length || factsMax <= 125,
               compactSignature: !desktop.signature.length || signatureMax <= 235,
@@ -109,6 +110,7 @@ jobs:
             console.log('LAYOUT|' + host + '|' + JSON.stringify({
               pass, checks,
               desktop: {
+                dir: desktop.dir,
                 overflow: round(desktop.overflow),
                 factsMax: round(factsMax),
                 signatureMax: round(signatureMax),
