@@ -1,0 +1,15 @@
+/* Final Nakheel whitespace corrections after live rendered QA. */
+.theme-nakheel .jr-projects{grid-template-columns:1fr 1fr;align-items:start}
+.theme-nakheel .jr-project:first-child{grid-column:1/-1;grid-row:auto;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(360px,.88fr);align-items:stretch}
+.theme-nakheel .jr-project:first-child figure{height:410px;min-height:0}
+.theme-nakheel .jr-project:not(:first-child){display:block}
+.theme-nakheel .jr-project:not(:first-child) figure{height:270px;min-height:0}
+.theme-nakheel .jr-project__body{height:auto!important;min-height:0!important;justify-content:flex-start!important}
+.theme-nakheel .jr-project:first-child .jr-project__body{padding:25px 28px}
+.theme-nakheel .jr-project__bottom{margin-top:10px}
+.theme-nakheel .nk-current-card{min-height:0;padding:24px 26px}
+.theme-nakheel .nk-current-card h3{margin:20px 0 9px;font-size:clamp(1.9rem,2.6vw,2.9rem)}
+.theme-nakheel .nk-current-card p{line-height:1.48}
+.theme-nakheel .nk-current-card a{margin-top:18px;padding-top:0}
+@media(max-width:1100px){.theme-nakheel .jr-project:first-child{grid-template-columns:1fr}.theme-nakheel .jr-project:first-child figure{height:380px}.theme-nakheel .jr-project:not(:first-child){display:grid;grid-template-columns:minmax(240px,.8fr) minmax(0,1.2fr)}.theme-nakheel .jr-project:not(:first-child) figure{height:100%;min-height:320px}}
+@media(max-width:760px){.theme-nakheel .jr-projects{grid-template-columns:1fr}.theme-nakheel .jr-project:first-child,.theme-nakheel .jr-project:not(:first-child){display:block;grid-column:auto}.theme-nakheel .jr-project:first-child figure,.theme-nakheel .jr-project:not(:first-child) figure{height:auto;min-height:0;aspect-ratio:4/3}.theme-nakheel .jr-project__body{padding:20px}.theme-nakheel .nk-current-card{padding:21px}.theme-nakheel .nk-current-card h3{margin-top:16px;font-size:2rem}.theme-nakheel .nk-current-card a{margin-top:16px}}
