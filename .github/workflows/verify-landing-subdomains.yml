@@ -112,3 +112,117 @@ jobs:
           PY
 
           python /tmp/verify.py
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install browser audit tools
+        run: |
+          npm install --no-save --no-package-lock playwright@1.54.2
+          npx playwright install --with-deps chromium
+
+      - name: Verify responsive rendering and lead UI
+        shell: bash
+        run: |
+          node <<'NODE'
+          const { chromium } = require('playwright');
+          (async () => {
+
+          const targets = [
+            ['emaar.jamesrealty.uk', 'ltr'],
+            ['aldar.jamesrealty.uk', 'ltr'],
+            ['damac.jamesrealty.uk', 'ltr'],
+            ['binghatti.jamesrealty.uk', 'ltr'],
+            ['nakheel.jamesrealty.uk', 'ltr'],
+            ['mudon.jamesrealty.uk', 'ltr'],
+            ['dubai.jamesrealty.uk', 'ltr'],
+            ['dubairealestate.jamesrealty.uk', 'ltr'],
+            ['dubaiproperties.jamesrealty.uk', 'ltr'],
+            ['dubaiproperty.jamesrealty.uk', 'rtl'],
+          ];
+          const viewports = [
+            ['desktop', 1440, 1000],
+            ['tablet', 1024, 900],
+            ['mobile', 390, 844],
+          ];
+          const browser = await chromium.launch({ headless: true });
+          let failed = false;
+
+          for (const [viewportName, width, height] of viewports) {
+            const context = await browser.newContext({
+              viewport: { width, height },
+              reducedMotion: 'reduce',
+            });
+
+            for (const [host, expectedDirection] of targets) {
+              const page = await context.newPage();
+              const pageErrors = [];
+              page.on('pageerror', (error) => pageErrors.push(error.message));
+
+              try {
+                const response = await page.goto(`https://${host}/`, {
+                  waitUntil: 'domcontentloaded',
+                  timeout: 30000,
+                });
+                await page.waitForTimeout(1200);
+
+                const result = await page.evaluate(({ expectedDirection, viewportName }) => {
+                  const requiredNames = ['name', 'email', 'phone', 'country', 'budget', 'consent'];
+                  const missingAnchors = [...document.querySelectorAll('a[href^="#"]')]
+                    .map((link) => link.getAttribute('href'))
+                    .filter((href) => href && href.length > 1 && !document.querySelector(href));
+                  const brokenImages = [...document.images]
+                    .filter((image) => !image.complete || image.naturalWidth === 0)
+                    .map((image) => image.currentSrc || image.src);
+                  const direction = document.documentElement.getAttribute('dir')
+                    || getComputedStyle(document.documentElement).direction;
+                  const mobileCta = document.querySelector('.jr-mobile-cta');
+                  const mobileCtaVisible = mobileCta
+                    ? getComputedStyle(mobileCta).display !== 'none'
+                    : false;
+
+                  return {
+                    h1Count: document.querySelectorAll('h1').length,
+                    formCount: document.querySelectorAll('form[data-whatsapp-landing]').length,
+                    requiredFields: requiredNames.every((name) => document.querySelector(`[name="${name}"]`)?.required),
+                    horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 2,
+                    brokenImages,
+                    missingAnchors,
+                    direction,
+                    directionMatches: direction === expectedDirection,
+                    mobileCtaMatches: viewportName !== 'mobile' || mobileCtaVisible,
+                  };
+                }, { expectedDirection, viewportName });
+
+                const ok = response?.status() === 200
+                  && result.h1Count === 1
+                  && result.formCount === 1
+                  && result.requiredFields
+                  && !result.horizontalOverflow
+                  && result.brokenImages.length === 0
+                  && result.missingAnchors.length === 0
+                  && result.directionMatches
+                  && result.mobileCtaMatches
+                  && pageErrors.length === 0;
+                failed ||= !ok;
+                console.log(`BROWSER|${host}|viewport=${viewportName}|status=${response?.status()}|h1=${result.h1Count}|form=${result.formCount}|required=${result.requiredFields ? 'PASS' : 'FAIL'}|overflow=${result.horizontalOverflow ? 'FAIL' : 'PASS'}|images=${result.brokenImages.length ? 'FAIL' : 'PASS'}|anchors=${result.missingAnchors.length ? 'FAIL' : 'PASS'}|direction=${result.directionMatches ? 'PASS' : 'FAIL'}|mobile_cta=${result.mobileCtaMatches ? 'PASS' : 'FAIL'}|js=${pageErrors.length ? 'FAIL' : 'PASS'}|overall=${ok ? 'PASS' : 'FAIL'}`);
+              } catch (error) {
+                failed = true;
+                console.error(`BROWSER|${host}|viewport=${viewportName}|overall=FAIL|error=${error.message}`);
+              } finally {
+                await page.close();
+              }
+            }
+
+            await context.close();
+          }
+
+          await browser.close();
+          process.exit(failed ? 1 : 0);
+          })().catch((error) => {
+            console.error(error);
+            process.exit(1);
+          });
+          NODE
