@@ -166,7 +166,15 @@ jobs:
                   waitUntil: 'domcontentloaded',
                   timeout: 30000,
                 });
-                await page.waitForTimeout(1200);
+                await page.evaluate(async () => {
+                  const step = Math.max(500, Math.floor(innerHeight * .8));
+                  for (let y = 0; y < document.documentElement.scrollHeight; y += step) {
+                    scrollTo(0, y);
+                    await new Promise((resolve) => setTimeout(resolve, 45));
+                  }
+                  scrollTo(0, 0);
+                });
+                await page.waitForTimeout(800);
 
                 const result = await page.evaluate(({ expectedDirection, viewportName }) => {
                   const requiredNames = ['name', 'phone', 'budget', 'consent'];
@@ -208,6 +216,7 @@ jobs:
                   && pageErrors.length === 0;
                 failed ||= !ok;
                 console.log(`BROWSER|${host}|viewport=${viewportName}|status=${response?.status()}|h1=${result.h1Count}|form=${result.formCount}|required=${result.requiredFields ? 'PASS' : 'FAIL'}|overflow=${result.horizontalOverflow ? 'FAIL' : 'PASS'}|images=${result.brokenImages.length ? 'FAIL' : 'PASS'}|anchors=${result.missingAnchors.length ? 'FAIL' : 'PASS'}|direction=${result.directionMatches ? 'PASS' : 'FAIL'}|mobile_cta=${result.mobileCtaMatches ? 'PASS' : 'FAIL'}|js=${pageErrors.length ? 'FAIL' : 'PASS'}|overall=${ok ? 'PASS' : 'FAIL'}`);
+                if (!ok) console.log(`DETAILS|${host}|viewport=${viewportName}|broken_images=${JSON.stringify(result.brokenImages)}|missing_anchors=${JSON.stringify(result.missingAnchors)}|page_errors=${JSON.stringify(pageErrors)}`);
               } catch (error) {
                 failed = true;
                 console.error(`BROWSER|${host}|viewport=${viewportName}|overall=FAIL|error=${error.message}`);

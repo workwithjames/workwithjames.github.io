@@ -506,7 +506,7 @@ function headV4(page) {
   return `<!doctype html><html lang="${page.lang}"${page.dir?` dir="${page.dir}"`:''}><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#111411">
 <title>${escapeHtml(page.title)}</title><meta name="description" content="${escapeHtml(page.description)}"><meta name="robots" content="noindex,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-<link rel="canonical" href="${canonical}"><link rel="icon" href="https://jamesrealty.uk/favicon.svg" type="image/svg+xml"><link rel="preload" as="image" href="${image}" fetchpriority="high"><link rel="stylesheet" href="https://jamesrealty.uk/assets/landing-experience.css?v=4">
+<link rel="canonical" href="${canonical}"><link rel="icon" href="https://jamesrealty.uk/favicon.svg" type="image/svg+xml"><link rel="preload" as="image" href="${image}" fetchpriority="high"><link rel="stylesheet" href="https://jamesrealty.uk/assets/landing-experience.css?v=5">
 <meta property="og:type" content="website"><meta property="og:site_name" content="James Realty"><meta property="og:locale" content="${locale}"><meta property="og:title" content="${escapeHtml(page.title)}"><meta property="og:description" content="${escapeHtml(page.description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${image}"><meta property="og:image:alt" content="${escapeHtml(page.imageAlt)}">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${escapeHtml(page.title)}"><meta name="twitter:description" content="${escapeHtml(page.description)}"><meta name="twitter:image" content="${image}">
 <script type="application/ld+json">${JSON.stringify(schemaV4(page)).replace(/</g,'\\u003c')}</script><script>window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'landing_view',landing_page:${JSON.stringify(page.title)},landing_host:${JSON.stringify(page.host)},landing_audience:${JSON.stringify(page.kicker)},experience_version:'v4'});</script><script async src="https://www.googletagmanager.com/gtm.js?id=GTM-M74SL57L"></script>
@@ -612,7 +612,7 @@ function footerV4(page) {
 function renderV4(page) {
   const sections={signature:()=>signatureV4(page),projects:()=>projectCardsV4(page),map:()=>mapV4(page),lens:()=>lensV4(page),journey:()=>journeyV4(page),matrix:()=>matrixV4(page),day:()=>dayV4(page),currency:()=>currencyV4(page),underwriting:()=>underwritingV4(page),costs:()=>marketModuleV4(page,'costs'),payment:()=>marketModuleV4(page,'payment'),arabicGuide:()=>marketModuleV4(page,'arabicGuide')};
   const flow=page.flow.map(name=>sections[name]()).join('');
-  return `${headV4(page)}<body class="theme-${page.theme}" data-page="${escapeHtml(page.title)}">${navV4(page)}<main id="content">${heroV4(page)}${proofV4(page)}${flow}${formV4(page)}${faqV4(page)}</main>${footerV4(page)}<script src="https://jamesrealty.uk/assets/landing-experience.js?v=4" defer></script></body></html>\n`;
+  return `${headV4(page)}<body class="theme-${page.theme}" data-page="${escapeHtml(page.title)}">${navV4(page)}<main id="content">${heroV4(page)}${proofV4(page)}${flow}${formV4(page)}${faqV4(page)}</main>${footerV4(page)}<script src="https://jamesrealty.uk/assets/landing-experience.js?v=5" defer></script></body></html>\n`;
 }
 
 for (const page of pages) {
