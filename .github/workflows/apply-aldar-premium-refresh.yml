@@ -1,0 +1,98 @@
+name: Apply Aldar premium refresh
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/apply-aldar-premium-refresh.yml'
+permissions:
+  contents: write
+  pages: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Refresh Aldar landing content and hierarchy
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path('landing/aldar/index.html')
+          html = path.read_text(encoding='utf-8')
+
+          def sub(pattern, repl, label, flags=re.S):
+              global html
+              html2, n = re.subn(pattern, repl, html, count=1, flags=flags)
+              if n != 1:
+                  raise SystemExit(f'{label}: expected 1 replacement, got {n}')
+              html = html2
+
+          # Metadata and dedicated stylesheet.
+          html = html.replace(
+              '<title>Aldar Properties | Abu Dhabi &amp; Dubai Projects 2026</title>',
+              '<title>Aldar Properties UAE | Current Yas, Saadiyat &amp; Dubai Projects</title>'
+          )
+          old_desc = 'Compare current Aldar launches across Saadiyat, Yas Island and Dubai with verified project facts and independent investor guidance.'
+          new_desc = 'Compare current Aldar releases across Yas Island, Saadiyat, Al Ghadeer and Dubai with verified official project facts and independent buyer guidance from James Realty.'
+          html = html.replace(old_desc, new_desc)
+          html = html.replace('Aldar Properties | Abu Dhabi &amp; Dubai Projects 2026', 'Aldar Properties UAE | Current Yas, Saadiyat &amp; Dubai Projects')
+          html = html.replace('Aldar Properties | Abu Dhabi & Dubai Projects 2026', 'Aldar Properties UAE | Current Yas, Saadiyat & Dubai Projects')
+          if 'aldar-premium.css' not in html:
+              html = html.replace(
+                  '<link rel="stylesheet" href="https://jamesrealty.uk/assets/landing-experience.css?v=8">',
+                  '<link rel="stylesheet" href="https://jamesrealty.uk/assets/landing-experience.css?v=8"><link rel="stylesheet" href="https://jamesrealty.uk/assets/aldar-premium.css?v=1">'
+              )
+
+          # Keep FAQ structured data aligned with the live official portfolio.
+          html = html.replace(
+              'Aldar’s official website highlights The Row Saadiyat and Mandarin Oriental Residences, while The Canopies at Yas Point publishes current property details. Availability changes by release.',
+              'Current Aldar opportunities highlighted here include The Canopies at Yas Point, Yas Park Place, Baccarat Residences Saadiyat, Al Ghadeer Gardens and The Wilds Residences. Availability changes by release and is reconfirmed when you enquire.'
+          )
+          html = html.replace('What is The Canopies payment plan?', 'Which current Aldar release publishes a starting price?')
+          html = html.replace(
+              'The official project page shows a 55/45 plan with 5% down, an AED 1.65 million starting price and estimated 2030 handover. Request the dated unit schedule.',
+              'Aldar’s current Al Ghadeer Gardens page advertises a new release from AED 2 million. Prices, unit mix and availability can change, so the exact live release is checked before advice.'
+          )
+
+          hero = '''<section class="jr-hero jr-hero--destination" aria-labelledby="hero-title"><figure class="jr-hero__media"><img class="jr-hero__image" src="https://jamesrealty.uk/images/landing/aldar-yas-waterfront-investment.webp" width="1600" height="900" alt="Premium waterfront residences and landscaped setting representing Aldar property in Abu Dhabi" fetchpriority="high" decoding="async"><span class="jr-hero__wash"></span></figure><div class="jr-shell jr-hero__inner"><div class="jr-hero__copy" data-reveal><p class="jr-kicker">Independent Aldar property advisory</p><h1 class="jr-display" id="hero-title">Aldar, compared by destination—not just brochure.</h1><p class="jr-hero__lead">Compare current Yas Island, Saadiyat, Al Ghadeer and Dubai releases through official project facts, live availability checks and the buyer profile each location is actually built around.</p><div class="jr-actions"><a class="jr-button jr-button--light" data-cta="hero-primary" data-location="hero" href="#enquire">Get my Aldar shortlist</a><a class="jr-text-link" data-cta="hero-secondary" data-location="hero" href="#projects">Compare current releases <span aria-hidden="true">↘</span></a></div><ul class="jr-hero__proof"><li>Official Aldar sources</li><li>Abu Dhabi + Dubai</li><li>Independent unit checks</li></ul><span class="aldar-checked">Portfolio facts checked 17 Aug 2026 · live inventory can change</span></div><p class="jr-hero__independent">Independent James Realty advisory — not Aldar’s official website.</p></div></section>'''
+          sub(r'<section class="jr-hero jr-hero--destination".*?</section>', hero, 'hero')
+
+          facts = '''<section class="jr-facts" aria-label="Current Aldar portfolio facts"><div class="jr-shell jr-facts__track"><article><span>01</span><strong>80%</strong><small>H1 2026 UAE sales to overseas &amp; expat buyers</small></article><article><span>02</span><strong>592 homes</strong><small>The Canopies at Yas Point</small></article><article><span>03</span><strong>740 homes</strong><small>The Wilds Residences in Dubai</small></article><article><span>04</span><strong>From AED 2m</strong><small>Current Al Ghadeer Gardens release</small></article></div></section>'''
+          sub(r'<section class="jr-facts".*?</section>', facts, 'facts')
+
+          pathways = '''<section class="jr-section aldar-pathways" id="overview"><div class="jr-shell"><header class="jr-heading" data-reveal><p class="jr-kicker">Start with how you want the asset to work</p><h2 class="jr-display">Four Aldar pathways. Four different buyer stories.</h2><p>A waterfront apartment on Yas, an ultra-prime Saadiyat residence, a connected family home at Al Ghadeer and a nature-led Dubai apartment should not be compared on headline price alone.</p></header><div class="aldar-pathway-grid"><article class="aldar-pathway-card" data-reveal><span>01 · Waterfront</span><h3>Yas Point</h3><p>The Canopies is the first residential community within Aldar’s new Yas Point destination, combining waterfront access with a park-centred setting.</p><strong>Best for buyers prioritising new-destination waterfront living</strong></article><article class="aldar-pathway-card" data-reveal><span>02 · Park living</span><h3>Yas Park Place</h3><p>A garden-led address beside Yas Central Park, positioned close to the island’s entertainment, retail and waterfront ecosystem.</p><strong>Best for buyers who want established Yas Island lifestyle demand</strong></article><article class="aldar-pathway-card" data-reveal><span>03 · Culture + luxury</span><h3>Saadiyat</h3><p>Baccarat Residences sits within Saadiyat Cultural District for a very different ultra-prime, internationally oriented buyer profile.</p><strong>Best for scarcity, culture and branded-residence positioning</strong></article><article class="aldar-pathway-card" data-reveal><span>04 · Family + nature</span><h3>Al Ghadeer / Dubai</h3><p>Al Ghadeer Gardens and The Wilds Residences focus more heavily on family living, green space and long-horizon community demand.</p><strong>Best for buyers prioritising liveability and broader resident pools</strong></article></div></div></section>'''
+          sub(r'<section class="jr-section jr-signature".*?</section>', pathways, 'pathways')
+
+          destinations = '''<section class="jr-section aldar-destination-section" id="locations"><div class="jr-shell"><div class="aldar-destinations"><div class="aldar-destination-intro" data-reveal><p class="jr-kicker">Destination first</p><h2 class="jr-display">The location changes the investment case.</h2><p>Aldar spans established Abu Dhabi destinations, a strategic Abu Dhabi–Dubai corridor and newer Dubai communities. Compare resident profile, competing supply, access and holding period before choosing the unit.</p></div><div class="aldar-destination-grid"><article class="aldar-destination-card" data-reveal><span>01</span><h3>Yas Island</h3><p>Leisure, employment, hospitality and a growing residential base. Current opportunities include The Canopies and Yas Park Place.</p></article><article class="aldar-destination-card" data-reveal><span>02</span><h3>Saadiyat Island</h3><p>Beach, culture and ultra-prime positioning. Baccarat Residences targets a smaller, more specialised luxury audience.</p></article><article class="aldar-destination-card" data-reveal><span>03</span><h3>Al Ghadeer</h3><p>A family-led community on the Abu Dhabi–Dubai corridor, with a current new release advertised from AED 2 million.</p></article><article class="aldar-destination-card" data-reveal><span>04</span><h3>Dubai</h3><p>The Wilds Residences extends Aldar’s nature-led community strategy into Dubai with 740 apartments and duplexes.</p></article></div></div><div class="aldar-map-wrap"><iframe title="Abu Dhabi to Dubai Aldar destination map" src="https://www.openstreetmap.org/export/embed.html?bbox=54.20%2C24.10%2C55.80%2C25.35&amp;layer=mapnik" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><aside class="aldar-map-note" data-reveal><strong>Use geography as a filter—not decoration.</strong><p>This regional map is for orientation. Exact commute times, nearby construction, views and access should be checked for the specific project and unit before reserving.</p><a href="https://www.openstreetmap.org/#map=9/24.70/55.02" target="_blank" rel="noopener noreferrer">Open regional map ↗</a></aside></div></div></section>'''
+          sub(r'<section class="jr-section jr-map-section".*?</section>', destinations, 'destinations')
+
+          projects = '''<section class="jr-section jr-project-section" id="projects"><div class="jr-shell"><header class="jr-heading" data-reveal><p class="jr-kicker">Current opportunity edit</p><h2 class="jr-display">Five current Aldar opportunities worth comparing differently.</h2><p>The figures below come from Aldar’s current property pages and 2026 announcements. They are context—not promises of a live unit. Exact inventory, price, payment schedule and fees are reconfirmed before advice.</p></header><div class="jr-projects"><article class="jr-project" data-reveal data-project-card="The Canopies"><figure><img src="https://jamesrealty.uk/images/projects/aldar-yas-waterfront-apartments.webp" width="724" height="543" loading="lazy" decoding="async" alt="Representative nature-led waterfront apartments on Yas Island"><figcaption>James Realty advisory visual — not an official project render</figcaption></figure><div class="jr-project__body"><span class="jr-project__meta">Yas Point · July 2026</span><h3>The Canopies</h3><p>The first residential community within Yas Point: 592 apartments across six mid-rise buildings with more than 20,000 sqm of landscaped open space.</p><ul><li>592 apartments</li><li>Park-centred waterfront setting</li><li>New Yas Point destination</li></ul><div class="jr-project__bottom"><span><strong>Check live release</strong><small>Price and inventory verified by unit</small></span><a class="jr-project__source" data-source-link href="https://www.aldar.com/properties/en/uae/yas-island/the-canopies-at-yas-point" target="_blank" rel="noopener noreferrer">Official source ↗</a></div><a class="jr-project__cta" href="#enquire" data-project-select="The Canopies">Check The Canopies units <span aria-hidden="true">→</span></a></div></article><article class="jr-project" data-reveal data-project-card="Baccarat Residences Saadiyat"><figure><img src="https://jamesrealty.uk/images/projects/aldar-saadiyat-cultural-residences.webp" width="724" height="543" loading="lazy" decoding="async" alt="Representative cultural-district residences with pale stone colonnades"><figcaption>James Realty advisory visual — not an official project render</figcaption></figure><div class="jr-project__body"><span class="jr-project__meta">Saadiyat Cultural District · 2026</span><h3>Baccarat Residences Saadiyat</h3><p>A 77-home ultra-prime collection spanning two- to four-bedroom residences, sky villas and penthouses beside Abu Dhabi’s cultural landmarks.</p><ul><li>77 exclusive homes</li><li>2–4 bedrooms + sky villas</li><li>Culture-led ultra-prime positioning</li></ul><div class="jr-project__bottom"><span><strong>Request current release</strong><small>Availability and charges verified by unit</small></span><a class="jr-project__source" data-source-link href="https://www.aldar.com/properties/en/uae/saadiyat-island/baccarat-residences-saadiyat" target="_blank" rel="noopener noreferrer">Official source ↗</a></div><a class="jr-project__cta" href="#enquire" data-project-select="Baccarat Residences Saadiyat">Check Baccarat units <span aria-hidden="true">→</span></a></div></article><article class="jr-project" data-reveal data-project-card="The Wilds Residences"><figure><img src="https://jamesrealty.uk/images/projects/aldar-nature-led-villas.webp" width="724" height="543" loading="lazy" decoding="async" alt="Representative nature-led family residences in a landscaped UAE community"><figcaption>James Realty advisory visual — not an official project render</figcaption></figure><div class="jr-project__body"><span class="jr-project__meta">Dubai · The Wilds</span><h3>The Wilds Residences</h3><p>A nature-led collection of 740 one- to three-bedroom residences and duplexes within Aldar’s wider Wilds master community in Dubai.</p><ul><li>740 homes</li><li>1–3 bedroom residences</li><li>Duplex options + extensive amenities</li></ul><div class="jr-project__bottom"><span><strong>Check live release</strong><small>Inventory verified before advice</small></span><a class="jr-project__source" data-source-link href="https://www.aldar.com/properties/en/uae/dubai/the-wilds-residences" target="_blank" rel="noopener noreferrer">Official source ↗</a></div><a class="jr-project__cta" href="#enquire" data-project-select="The Wilds Residences">Check The Wilds units <span aria-hidden="true">→</span></a></div></article></div><div class="aldar-more"><article class="aldar-more-card" data-reveal><span>04 · YAS ISLAND</span><h3>Yas Park Place</h3><p>A garden-led mid-rise community beside Yas Central Park. Aldar’s current project page is promoting the final release of homes.</p><footer><span><strong>Final release</strong><small>Live availability required</small></span><a href="https://www.aldar.com/properties/en/yasparkplace" target="_blank" rel="noopener noreferrer">Official source ↗</a></footer></article><article class="aldar-more-card" data-reveal><span>05 · AL GHadeer</span><h3>Al Ghadeer Gardens</h3><p>A current new release of villas and townhouses on the Abu Dhabi–Dubai corridor, built around family living, open landscapes and connectivity.</p><footer><span><strong>From AED 2m</strong><small>Published on Aldar’s current page</small></span><a href="https://www.aldar.com/properties/en/alghadeer" target="_blank" rel="noopener noreferrer">Official source ↗</a></footer></article></div></div></section>'''
+          sub(r'<section class="jr-section jr-project-section".*?</section>', projects, 'projects')
+
+          # Navigation and CTA language.
+          html = html.replace('>Opportunity map</a><a href="#projects">Current launches</a>', '>Destinations</a><a href="#projects">Current releases</a>')
+          html = html.replace('>Decision framework</a><a href="#enquire">Speak to James</a>', '>Investor lens</a><a href="#enquire">Get shortlist</a>')
+          html = html.replace('>Check available Aldar units</a>', '>Get my Aldar shortlist</a>', 1)
+
+          path.write_text(html, encoding='utf-8')
+          PY
+      - name: Commit Aldar refresh
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No changes required.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add landing/aldar/index.html
+          git commit -m 'Refresh Aldar landing design and current project information'
+          git push origin HEAD:main
+      - name: Request Pages rebuild
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST repos/workwithjames/workwithjames.github.io/pages/builds
