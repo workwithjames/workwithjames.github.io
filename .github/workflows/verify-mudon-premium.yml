@@ -1,0 +1,68 @@
+name: Verify Mudon premium landing
+on:
+  push:
+    paths:
+      - '.github/workflows/verify-mudon-premium.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install browser driver
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save puppeteer-core@24 >/dev/null 2>&1
+          which google-chrome || which chromium || which chromium-browser
+      - name: Verify live Mudon layout and content
+        shell: bash
+        run: |
+          cat > mudon-qa.mjs <<'JS'
+          import puppeteer from 'puppeteer-core';
+          import { execSync } from 'node:child_process';
+          const chrome=execSync('which google-chrome || which chromium || which chromium-browser').toString().trim();
+          const browser=await puppeteer.launch({headless:true,executablePath:chrome,args:['--no-sandbox']});
+          const page=await browser.newPage();
+          await page.setViewport({width:1440,height:1000,deviceScaleFactor:1});
+          let data;
+          for(let i=0;i<14;i++){
+            await page.goto(`https://mudon.jamesrealty.uk/?mudonqa=${Date.now()}-${i}`,{waitUntil:'networkidle2',timeout:45000});
+            data=await page.evaluate(()=>{
+              const hs=s=>[...document.querySelectorAll(s)].map(e=>Math.round(e.getBoundingClientRect().height));
+              const styles=[...document.querySelectorAll('link[rel="stylesheet"]')].map(x=>x.href);
+              return {
+                css:styles.some(h=>h.includes('mudon-premium.css?v=1')),
+                title:document.querySelector('h1')?.textContent?.trim()||'',
+                body:document.body.innerText,
+                overflow:document.documentElement.scrollWidth-window.innerWidth,
+                pathways:hs('.mudon-pathway-card'),
+                status:hs('.mudon-status-card'),
+                process:hs('.jr-process__rail li'),
+                map:hs('.mudon-map-frame iframe'),
+                projectBodies:hs('.jr-project__body')
+              };
+            });
+            if(data.css && data.title.includes('street-by-street')) break;
+            await new Promise(r=>setTimeout(r,15000));
+          }
+          const max=a=>a.length?Math.max(...a):0;
+          const desktop={
+            css:data.css,
+            hero:data.title.includes('street-by-street'),
+            content:data.body.includes('96.13%')&&data.body.includes('93.76%')&&data.body.includes('89.64%')&&data.body.includes('88.27%')&&data.body.includes('Mudon Views')&&data.body.includes('Arabella'),
+            overflow:data.overflow<=2,
+            pathways:max(data.pathways)<=280,
+            status:max(data.status)<=260,
+            process:max(data.process)<=190,
+            map:max(data.map)<=420,
+            projects:max(data.projectBodies)<=520
+          };
+          await page.setViewport({width:390,height:844,deviceScaleFactor:1});
+          await page.reload({waitUntil:'networkidle2',timeout:45000});
+          const mobile=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth-window.innerWidth,css:[...document.querySelectorAll('link[rel="stylesheet"]')].some(x=>x.href.includes('mudon-premium.css?v=1')),title:document.querySelector('h1')?.textContent?.trim()||''}));
+          const checks={...desktop,mobileOverflow:mobile.overflow<=2,mobileCss:mobile.css,mobileHero:mobile.title.includes('street-by-street')};
+          console.log('MUDON_PREMIUM_QA|'+JSON.stringify({checks,desktop:data,mobile}));
+          await browser.close();
+          if(!Object.values(checks).every(Boolean)) process.exit(1);
+          JS
+          node mudon-qa.mjs
