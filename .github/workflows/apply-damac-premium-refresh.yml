@@ -1,0 +1,69 @@
+name: Apply DAMAC premium refresh
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-damac-premium-refresh.yml'
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Refresh DAMAC landing
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('landing/damac/index.html')
+          s=p.read_text(encoding='utf-8')
+          def sub(pattern,repl,label):
+              global s
+              s2,n=re.subn(pattern,repl,s,count=1,flags=re.S)
+              if n!=1: raise SystemExit(f'{label}: expected 1 replacement, got {n}')
+              s=s2
+
+          if 'damac-premium.css' not in s:
+              s=s.replace('<link rel="stylesheet" href="https://jamesrealty.uk/assets/landing-experience.css?v=8">','<link rel="stylesheet" href="https://jamesrealty.uk/assets/landing-experience.css?v=8"><link rel="stylesheet" href="https://jamesrealty.uk/assets/damac-premium.css?v=1">')
+
+          hero='''<section class="jr-hero jr-hero--cinematic" aria-labelledby="hero-title"><figure class="jr-hero__media"><img class="jr-hero__image" src="https://jamesrealty.uk/images/landing/damac-branded-waterfront-residences.webp" width="1600" height="900" alt="Curved luxury waterfront residence with private pool representing DAMAC branded property in Dubai" fetchpriority="high" decoding="async"><span class="jr-hero__wash"></span></figure><div class="jr-shell jr-hero__inner"><div class="jr-hero__copy" data-reveal><p class="jr-kicker">Independent DAMAC property advisory</p><h1 class="jr-display" id="hero-title">Luxury should hold up after the reveal.</h1><p class="jr-hero__lead">Compare DAMAC’s current branded, waterfront and master-community propositions through the exact unit, payment timing, ownership cost and future buyer audience—not the launch spectacle alone.</p><div class="jr-actions"><a class="jr-button jr-button--light" data-cta="hero-primary" data-location="hero" href="#enquire">Get current DAMAC shortlist</a><a class="jr-text-link" data-cta="hero-secondary" data-location="hero" href="#projects">Compare current projects <span aria-hidden="true">↘</span></a></div><ul class="jr-hero__proof"><li>Official DAMAC sources</li><li>Unit + payment-plan checks</li><li>Independent commercial review</li></ul><span class="damac-checked">Project facts checked 17 Aug 2026 · live inventory can change</span></div><p class="jr-hero__independent">Independent James Realty advisory — not DAMAC Properties’ official website.</p></div></section>'''
+          sub(r'<section class="jr-hero jr-hero--cinematic".*?</section>',hero,'hero')
+
+          facts='''<section class="jr-facts" aria-label="DAMAC at a glance"><div class="jr-shell jr-facts__track"><article><span>01</span><strong>Chelsea Residences</strong><small>1–3 BR · Dubai Maritime City</small></article><article><span>02</span><strong>DAMAC Islands 2</strong><small>From AED 2.99m · 20m sq ft</small></article><article><span>03</span><strong>Riverside Views</strong><small>1–2 BR · Dubai Investment Park</small></article><article><span>04</span><strong>Safa Gate</strong><small>1–2 BR · Sheikh Zayed Road</small></article></div></section>'''
+          sub(r'<section class="jr-facts".*?</section>',facts,'facts')
+
+          # Tighten and correct the three primary project profiles.
+          s=s.replace('A Chelsea-branded waterfront development with more than 1,400 residences and hospitality-led amenities.','Dubai’s first football-branded residential project, created with Chelsea Football Club, with more than 1,400 residences in Dubai Maritime City.')
+          s=s.replace('<li>1–3 bedroom apartments</li><li>Sea-view positioning</li><li>Brand and fee review</li>','<li>1–3 bedroom apartments</li><li>More than 1,400 residences</li><li>Brand, fee and resale-premium review</li>')
+          s=s.replace('<strong>From AED 3.005m</strong><small>Official project page</small>','<strong>Live price check</strong><small>Official page currently lists pricing on request</small>')
+          s=s.replace('Townhouses and villas positioned around a resort-lifestyle community concept for family and second-home buyers.','A 20 million sq ft master community built around eight tropical-island themes, with townhouses and villas positioned for lifestyle-led family and second-home demand.')
+          s=s.replace('<li>Townhouses and villas</li><li>Phased master community</li><li>Handover evidence required</li>','<li>20 million sq ft master community</li><li>Eight tropical-island themes</li><li>Townhouse and villa stock must be checked live</li>')
+          s=s.replace('Apartment-led community living for buyers comparing amenities, practical connectivity and a wider neighbourhood proposition.','Off-plan 1- and 2-bedroom apartments in Dubai Investment Park, positioned around DAMAC Riverside’s wellness-led waterfront community concept.')
+          s=s.replace('<li>Apartment collection</li><li>Community amenities</li><li>Total-cost comparison</li>','<li>1–2 bedroom apartments</li><li>Dubai Investment Park</li><li>Completion, service-charge and payment review</li>')
+          s=s.replace('<strong>Request live units</strong><small>Dated price sheet required</small>','<strong>Live price check</strong><small>Official page currently lists pricing on request</small>')
+
+          current='''<section class="jr-section damac-current-edit" id="overview"><div class="jr-shell"><div class="damac-current-grid"><article class="damac-current-feature" data-reveal><p class="jr-kicker">Also on the current shortlist</p><h2 class="jr-display">Safa Gate</h2><p>Off-plan 1- and 2-bedroom apartments on Sheikh Zayed Road at the edge of Safa Park. This is the city-facing alternative to DAMAC’s waterfront and master-community propositions, so compare location premium, view, stack and recurring costs separately.</p><a href="https://www.damacproperties.com/en/projects/safa-gate/" target="_blank" rel="noopener noreferrer">Official DAMAC project page ↗</a></article><div class="damac-current-notes"><article data-reveal><span>01 · Branded</span><strong>Chelsea Residences</strong><p>Test the brand premium against fees, view, floor plan and future resale depth.</p></article><article data-reveal><span>02 · Masterplan</span><strong>DAMAC Islands 2</strong><p>Model delivery timing, phase position and the exact townhouse or villa rather than the community concept alone.</p></article><article data-reveal><span>03 · Apartments</span><strong>Riverside Views</strong><p>Compare unit efficiency, completion timing, payment obligations and competing supply in the wider corridor.</p></article><article data-reveal><span>04 · City address</span><strong>Safa Gate</strong><p>Underwrite Sheikh Zayed Road positioning, Safa Park proximity, view protection and ownership cost.</p></article></div></div></div></section>'''
+          sub(r'<section class="jr-section jr-signature".*?</section>',current,'current edit')
+
+          # Navigation and CTA copy.
+          s=s.replace('>The collection</a><a href="#why-invest">Luxury lens</a><a href="#process">Buyer journey</a><a href="#enquire">Private enquiry</a>','>Current projects</a><a href="#overview">Safa Gate</a><a href="#why-invest">Buyer lens</a><a href="#enquire">Private brief</a>')
+          s=s.replace('>Request luxury availability</a>','>Get current DAMAC shortlist</a>',1)
+
+          # Structured data / FAQ accuracy.
+          s=s.replace('"name":"Three ways to buy the DAMAC proposition"','"name":"Current DAMAC opportunities compared"')
+          s=s.replace('{"@type":"ListItem","position":3,"url":"https://www.damacproperties.com/en/communities/damac-riverside/projects/damac-riverside-views/","name":"Riverside Views"}]','{"@type":"ListItem","position":3,"url":"https://www.damacproperties.com/en/communities/damac-riverside/projects/damac-riverside-views/","name":"Riverside Views"},{"@type":"ListItem","position":4,"url":"https://www.damacproperties.com/en/projects/safa-gate/","name":"Safa Gate"}]')
+          s=s.replace('Chelsea Residences, DAMAC Islands 2 and DAMAC Riverside Views represent three distinct current propositions. Live inventory is checked when you enquire.','Chelsea Residences, DAMAC Islands 2, DAMAC Riverside Views and Safa Gate represent four distinct current propositions. Live inventory is checked when you enquire.')
+          s=s.replace('Luxury property, commercially examined','DAMAC property, commercially examined')
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit DAMAC refresh
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add landing/damac/index.html
+          git commit -m 'Refresh DAMAC landing design and current project information'
+          git push origin HEAD:main
