@@ -443,7 +443,7 @@ def save_state(state: dict) -> None:
 def ensure_css_link(content: str) -> str:
     if "/assets/property-news.css" in content:
         return content
-    link = '<link rel="stylesheet" href="/assets/property-news.css?v=1"/>'
+    link = '<link rel="stylesheet" href="/assets/property-news.css?v=2"/>'
     if "</head>" in content:
         return content.replace("</head>", link + "</head>", 1)
     return content
@@ -480,7 +480,7 @@ def build_head(post: Post, structured: dict) -> str:
     published = f"{post.date}T20:00:00+04:00"
     canonical = post.url
     image_url = SITE + post.image
-    return f'''<!DOCTYPE html><html lang="en-AE"><head>{GTM_HEAD}<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/css/5576f66c8ff02a6a.css?v=12"/><link rel="stylesheet" href="/assets/property-news.css?v=1"/><link rel="shortcut icon" href="/favicon.svg"/><link rel="icon" href="/favicon.svg"/><link rel="apple-touch-icon" href="/favicon-192.png"/><title>{esc(post.title)} | James</title><meta name="description" content="{esc(post.description)}"/><meta name="author" content="James"/><meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1"/><link rel="canonical" href="{canonical}"/><meta property="og:type" content="article"/><meta property="og:title" content="{esc(post.title)}"/><meta property="og:description" content="{esc(post.description)}"/><meta property="og:url" content="{canonical}"/><meta property="og:image" content="{image_url}"/><meta property="og:image:alt" content="{esc(image_alt(post))}"/><meta property="article:published_time" content="{published}"/><meta property="article:modified_time" content="{published}"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="{esc(post.title)}"/><meta name="twitter:description" content="{esc(post.description)}"/><meta name="twitter:image" content="{image_url}"/><script type="application/ld+json">{json.dumps(structured, ensure_ascii=False, separators=(',', ':'))}</script><link rel="alternate" type="application/rss+xml" title="James Blog" href="{SITE}/feed.xml"/><link rel="manifest" href="/site.webmanifest"/><meta name="theme-color" content="#0a0a1a"/><meta property="og:locale" content="en_AE"/><script defer src="/assets/site.js?v=5"></script></head>'''
+    return f'''<!DOCTYPE html><html lang="en-AE"><head>{GTM_HEAD}<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/css/5576f66c8ff02a6a.css?v=12"/><link rel="stylesheet" href="/assets/property-news.css?v=2"/><link rel="shortcut icon" href="/favicon.svg"/><link rel="icon" href="/favicon.svg"/><link rel="apple-touch-icon" href="/favicon-192.png"/><title>{esc(post.title)} | James</title><meta name="description" content="{esc(post.description)}"/><meta name="author" content="James"/><meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1"/><link rel="canonical" href="{canonical}"/><meta property="og:type" content="article"/><meta property="og:title" content="{esc(post.title)}"/><meta property="og:description" content="{esc(post.description)}"/><meta property="og:url" content="{canonical}"/><meta property="og:image" content="{image_url}"/><meta property="og:image:alt" content="{esc(image_alt(post))}"/><meta property="article:published_time" content="{published}"/><meta property="article:modified_time" content="{published}"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="{esc(post.title)}"/><meta name="twitter:description" content="{esc(post.description)}"/><meta name="twitter:image" content="{image_url}"/><script type="application/ld+json">{json.dumps(structured, ensure_ascii=False, separators=(',', ':'))}</script><link rel="alternate" type="application/rss+xml" title="James Blog" href="{SITE}/feed.xml"/><link rel="manifest" href="/site.webmanifest"/><meta name="theme-color" content="#0a0a1a"/><meta property="og:locale" content="en_AE"/><script defer src="/assets/site.js?v=5"></script></head>'''
 
 
 def fact_grid(facts: list[list[str]]) -> str:
@@ -729,7 +729,13 @@ def is_property_relevant(article: dict) -> bool:
         "off-plan", "construction", "community", "residential", "commercial real estate",
         "land sale", "yield", "service charge", "handover", "building",
     )
-    return any(signal in text for signal in signals)
+    uae_signals = (
+        "uae", "united arab emirates", "dubai", "abu dhabi", "sharjah", "ajman",
+        "ras al khaimah", "rak", "fujairah", "umm al quwain",
+    )
+    # Publisher category pages sometimes surface London, UK or other foreign
+    # stories. A property keyword alone is not enough for a UAE news brief.
+    return any(signal in text for signal in signals) and any(signal in text for signal in uae_signals)
 
 
 def title_signature(value: str) -> str:
@@ -760,7 +766,7 @@ def theme_for(title: str, description: str) -> str:
     text = (title + " " + description).lower()
     if any(k in text for k in ["broker", "regulator", "ranking", "licence", "framework", "rule"]):
         return "regulation"
-    if any(k in text for k in ["record", "luxury", "villa", "mansion", "penthouse", "million"]):
+    if any(k in text for k in ["record sale", "luxury", "ultra-prime", "mansion", "penthouse"]):
         return "luxury"
     if any(k in text for k in ["unit", "home", "handover", "supply", "launch", "completion"]):
         return "supply"
@@ -772,25 +778,14 @@ def theme_for(title: str, description: str) -> str:
 
 
 def auto_title(article: dict, theme: str) -> str:
-    text = f"{article.get('title', '')} {article.get('description', '')}".lower()
-    location = "UAE"
-    for needle, label in (
-        ("abu dhabi", "Abu Dhabi"), ("dubai", "Dubai"), ("sharjah", "Sharjah"),
-        ("ras al khaimah", "Ras Al Khaimah"), ("ajman", "Ajman"),
-    ):
-        if needle in text:
-            location = label
-            break
-    titles = {
-        "regulation": f"What the latest {location} property rules mean in practice",
-        "luxury": f"Reading the latest {location} luxury-property signal",
-        "supply": f"{location} housing supply: what buyers and owners should check next",
-        "rental": f"{location} rental update: what tenants and landlords should verify",
-        "buyer": f"{location} homebuyer update: a practical decision checklist",
-        "market": f"How to read the latest {location} property-market signal",
-    }
+    # Preserve the source-specific subject instead of collapsing unrelated news
+    # into a handful of repetitive SEO templates. The brief body and suffix make
+    # clear that this is independent analysis rather than copied reporting.
+    title = re.sub(r"\s+", " ", html.unescape(article.get("title", ""))).strip(" -|:")
+    title = re.sub(r"\s+[|–—-]\s+(?:Gulf News|The National|Khaleej Times|Arabian Business).*$", "", title, flags=re.I)
+    title = title[:96].rstrip(" ,;:-")
     suffix = hashlib.sha1(article["url"].encode()).hexdigest()[:5]
-    return titles[theme], suffix
+    return title, suffix
 
 
 def extract_facts(paragraphs: list[str]) -> list[list[str]]:
@@ -984,7 +979,7 @@ def render_hub(posts: list[Post]) -> str:
             ],
         },
     }
-    return f'''<!DOCTYPE html><html lang="en-AE"><head>{GTM_HEAD}<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/css/5576f66c8ff02a6a.css?v=12"/><link rel="stylesheet" href="/assets/property-news.css?v=1"/><link rel="shortcut icon" href="/favicon.svg"/><link rel="icon" href="/favicon.svg"/><link rel="apple-touch-icon" href="/favicon-192.png"/><title>UAE Property News Analysis | James</title><meta name="description" content="Original source-led analysis of UAE property reporting from Khaleej Times, Gulf News, The National and Arabian Business."/><link rel="canonical" href="{SITE}/blog/property-news/"/><meta property="og:type" content="website"/><meta property="og:title" content="UAE Property News Analysis"/><meta property="og:description" content="Property headlines explained with source links, market context and due-diligence checks."/><meta property="og:url" content="{SITE}/blog/property-news/"/><meta property="og:image" content="{SITE + posts[0].image}"/><meta property="og:image:alt" content="{esc(image_alt(posts[0]))}"/><script type="application/ld+json">{json.dumps(item_list, ensure_ascii=False, separators=(',', ':'))}</script><link rel="alternate" type="application/rss+xml" href="/feed.xml"/><script defer src="/assets/site.js?v=5"></script></head><body>{GTM_BODY}<a class="skip-link" href="#main-content">Skip to main content</a>{NAV_HEADER}<main id="main-content"><section class="section-shell news-hub-hero"><p class="section-kicker">Monitored UAE property news</p><h1>Property headlines, with the decision context added.</h1><p class="hero-description">This page tracks new property reporting from Khaleej Times, Gulf News, The National and Arabian Business. Each entry is an original brief with a direct source link, important limitations and practical checks for buyers, tenants, owners and investors.</p><div class="hero-actions"><a class="button button-primary" href="/blog/">All property guides</a><a class="button button-outline" href="/">Dubai Data</a><a class="button button-outline" href="/abu-dhabi-data/">Abu Dhabi Data</a></div></section><section class="section-shell"><div class="news-automation-note"><strong>Publishing schedule:</strong> The monitor checks all four publisher pages hourly. A new article is normally converted into a source brief within the next successful GitHub Actions run.</div><div class="news-hub-grid">{cards}</div></section><section class="section-shell contact-card"><div><p class="section-kicker">Need deeper analysis?</p><h2>Connect market reporting to a project, audience or acquisition plan.</h2><p>Share the property, target market and commercial objective.</p></div><a class="button nav-whatsapp" href="/contact/">Contact James <span aria-hidden="true">→</span></a></section></main>{FOOTER}</body></html>'''
+    return f'''<!DOCTYPE html><html lang="en-AE"><head>{GTM_HEAD}<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/css/5576f66c8ff02a6a.css?v=12"/><link rel="stylesheet" href="/assets/property-news.css?v=2"/><link rel="shortcut icon" href="/favicon.svg"/><link rel="icon" href="/favicon.svg"/><link rel="apple-touch-icon" href="/favicon-192.png"/><title>UAE Property News Analysis | James</title><meta name="description" content="Original source-led analysis of UAE property reporting from Khaleej Times, Gulf News, The National and Arabian Business."/><link rel="canonical" href="{SITE}/blog/property-news/"/><meta property="og:type" content="website"/><meta property="og:title" content="UAE Property News Analysis"/><meta property="og:description" content="Property headlines explained with source links, market context and due-diligence checks."/><meta property="og:url" content="{SITE}/blog/property-news/"/><meta property="og:image" content="{SITE + posts[0].image}"/><meta property="og:image:alt" content="{esc(image_alt(posts[0]))}"/><script type="application/ld+json">{json.dumps(item_list, ensure_ascii=False, separators=(',', ':'))}</script><link rel="alternate" type="application/rss+xml" href="/feed.xml"/><script defer src="/assets/site.js?v=5"></script></head><body>{GTM_BODY}<a class="skip-link" href="#main-content">Skip to main content</a>{NAV_HEADER}<main id="main-content"><section class="section-shell news-hub-hero"><p class="section-kicker">Monitored UAE property news</p><h1>Property headlines, with the decision context added.</h1><p class="hero-description">This page tracks new property reporting from Khaleej Times, Gulf News, The National and Arabian Business. Each entry is an original brief with a direct source link, important limitations and practical checks for buyers, tenants, owners and investors.</p><div class="hero-actions"><a class="button button-primary" href="/blog/">All property guides</a><a class="button button-outline" href="/">Dubai Data</a><a class="button button-outline" href="/abu-dhabi-data/">Abu Dhabi Data</a></div></section><section class="section-shell"><div class="news-automation-note"><strong>Publishing schedule:</strong> The monitor checks all four publisher pages hourly. A new article is normally converted into a source brief within the next successful GitHub Actions run.</div><div class="news-hub-grid">{cards}</div></section><section class="section-shell contact-card"><div><p class="section-kicker">Need deeper analysis?</p><h2>Connect market reporting to a project, audience or acquisition plan.</h2><p>Share the property, target market and commercial objective.</p></div><a class="button nav-whatsapp" href="/contact/">Contact James <span aria-hidden="true">→</span></a></section></main>{FOOTER}</body></html>'''
 
 
 def update_feed(posts: list[Post]) -> None:
@@ -1144,12 +1139,20 @@ def create_auto_posts(state: dict, current_posts: list[Post]) -> list[Post]:
     signatures = set(state.get("seen_title_signatures", []))
     signatures.update(signature for signature in (title_signature(post.title) for post in current_posts) if signature)
     new_posts: list[Post] = []
+    active_auto_count = sum(1 for post in current_posts if post.auto)
+    max_active_auto_posts = 24  # Must not exceed the unique curated image pool.
+    if active_auto_count >= max_active_auto_posts:
+        print("Property-news image capacity reached; skipping new automated briefs until a unique image is added.")
+        return new_posts
     discovered: list[tuple[str, str]] = []
     for category in CATEGORY_PAGES:
         for url in discover_links(category):
             discovered.append((url, category["name"]))
     cutoff = NOW - timedelta(hours=48)
     for url, source_name in discovered:
+        if active_auto_count + len(new_posts) >= max_active_auto_posts:
+            print("Property-news image capacity reached during this run; remaining links were left for a later check.")
+            break
         url = canonical_url(url)
         if url in seen:
             continue
