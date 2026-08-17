@@ -1,0 +1,19 @@
+name: Rebuild Emaar spacing final
+
+on:
+  push:
+    paths:
+      - '.github/workflows/rebuild-emaar-spacing-final.yml'
+
+permissions:
+  pages: write
+  contents: read
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request clean GitHub Pages rebuild
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST repos/${{ github.repository }}/pages/builds
