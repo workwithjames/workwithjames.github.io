@@ -1,0 +1,15 @@
+/* Final Binghatti whitespace and alignment corrections. */
+.theme-binghatti .jr-projects{grid-template-columns:1fr 1fr;align-items:start}
+.theme-binghatti .jr-project:first-child{grid-column:1/-1;grid-row:auto;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(350px,.92fr)}
+.theme-binghatti .jr-project:first-child figure{height:410px}
+.theme-binghatti .jr-project:not(:first-child){display:block}
+.theme-binghatti .jr-project:not(:first-child) figure{height:255px}
+.theme-binghatti .jr-project__body{height:auto!important;min-height:0!important;align-self:start}
+.theme-binghatti .jr-project__bottom{min-height:0!important}
+.theme-binghatti .bh-branded-list article{min-height:0}
+.theme-binghatti .bh-branded-list p{max-width:38ch}
+.theme-binghatti .bh-location-grid article{min-height:185px}
+.theme-binghatti .bh-release-card{min-height:215px}
+.theme-binghatti .jr-lens__aside{align-self:start}
+@media(max-width:1100px){.theme-binghatti .jr-projects{grid-template-columns:1fr}.theme-binghatti .jr-project:first-child{grid-column:auto;display:block}.theme-binghatti .jr-project:first-child figure,.theme-binghatti .jr-project:not(:first-child) figure{height:320px}}
+@media(max-width:760px){.theme-binghatti .jr-project:first-child figure,.theme-binghatti .jr-project:not(:first-child) figure{height:auto;aspect-ratio:4/3}.theme-binghatti .bh-release-card{min-height:0}.theme-binghatti .bh-location-grid article{min-height:0}.theme-binghatti .bh-branded-intro{padding:26px}.theme-binghatti .bh-branded-list article{padding:20px}.theme-binghatti .jr-project__bottom{display:flex;gap:12px;align-items:flex-start}}
