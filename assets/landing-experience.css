@@ -87,8 +87,10 @@
 .jr-project__bottom{min-height:0;padding-top:18px;align-items:flex-end}
 .jr-project__cta{margin-top:16px}
 .theme-emaar .jr-project:first-child{margin-top:0}
-.theme-binghatti .jr-project:nth-child(2){transform:none}
-.theme-binghatti .jr-project:nth-child(2):hover{transform:translateY(-8px)}
+/* Match the shared reveal transform before entry, then settle all Binghatti cards on the same baseline. */
+.theme-binghatti .jr-project:nth-child(2):not(.is-visible){transform:translateY(28px)}
+.theme-binghatti .jr-project:nth-child(2).is-visible{transform:none}
+.theme-binghatti .jr-project:nth-child(2).is-visible:hover{transform:translateY(-8px)}
 
 /* Keep standard 3-card investor pages balanced on desktop instead of a tall 2+1 layout */
 .theme-uk .jr-projects,
