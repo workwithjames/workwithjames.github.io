@@ -31,7 +31,7 @@ jobs:
               const hs=s=>[...document.querySelectorAll(s)].map(e=>Math.round(e.getBoundingClientRect().height));
               const styles=[...document.querySelectorAll('link[rel="stylesheet"]')].map(x=>x.href);
               return {
-                css:styles.some(h=>h.includes('mudon-premium.css?v=1')),
+                css:styles.some(h=>h.includes('mudon-premium.css?v=2')),
                 title:document.querySelector('h1')?.textContent?.trim()||'',
                 body:document.body.innerText,
                 overflow:document.documentElement.scrollWidth-window.innerWidth,
@@ -59,7 +59,7 @@ jobs:
           };
           await page.setViewport({width:390,height:844,deviceScaleFactor:1});
           await page.reload({waitUntil:'networkidle2',timeout:45000});
-          const mobile=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth-window.innerWidth,css:[...document.querySelectorAll('link[rel="stylesheet"]')].some(x=>x.href.includes('mudon-premium.css?v=1')),title:document.querySelector('h1')?.textContent?.trim()||''}));
+          const mobile=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth-window.innerWidth,css:[...document.querySelectorAll('link[rel="stylesheet"]')].some(x=>x.href.includes('mudon-premium.css?v=2')),title:document.querySelector('h1')?.textContent?.trim()||''}));
           const checks={...desktop,mobileOverflow:mobile.overflow<=2,mobileCss:mobile.css,mobileHero:mobile.title.includes('street-by-street')};
           console.log('MUDON_PREMIUM_QA|'+JSON.stringify({checks,desktop:data,mobile}));
           await browser.close();
