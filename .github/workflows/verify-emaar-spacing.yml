@@ -1,0 +1,68 @@
+name: Verify Emaar spacing
+
+on:
+  push:
+    paths:
+      - '.github/workflows/verify-emaar-spacing.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install browser driver
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save puppeteer-core@24 >/dev/null 2>&1
+          which google-chrome || which chromium || which chromium-browser
+      - name: Verify live Emaar spacing
+        shell: bash
+        run: |
+          cat > emaar-spacing-qa.mjs <<'JS'
+          import puppeteer from 'puppeteer-core';
+          import { execSync } from 'node:child_process';
+          const chrome = execSync('which google-chrome || which chromium || which chromium-browser').toString().trim();
+          const browser = await puppeteer.launch({headless:true, executablePath:chrome, args:['--no-sandbox']});
+          const page = await browser.newPage();
+          await page.setViewport({width:1440,height:1000,deviceScaleFactor:1});
+          let data;
+          for(let i=0;i<10;i++){
+            await page.goto(`https://emaar.jamesrealty.uk/?spacingqa=${Date.now()}-${i}`, {waitUntil:'networkidle2',timeout:45000});
+            data = await page.evaluate(() => {
+              const hs=s=>[...document.querySelectorAll(s)].map(e=>Math.round(e.getBoundingClientRect().height));
+              const styles=[...document.querySelectorAll('link[rel="stylesheet"]')].map(x=>x.href);
+              return {
+                spacingCss:styles.some(h=>h.includes('emaar-spacing.css?v=1')),
+                overflow:document.documentElement.scrollWidth-window.innerWidth,
+                brief:hs('.emaar-brief-card'),
+                launches:hs('.emaar-launch-card'),
+                community:hs('.emaar-community-lead'),
+                process:hs('.jr-process__rail li')
+              };
+            });
+            if(data.spacingCss) break;
+            await new Promise(r=>setTimeout(r,15000));
+          }
+          const max=a=>a.length?Math.max(...a):0;
+          const desktop={
+            spacingCss:data.spacingCss,
+            overflow:data.overflow<=2,
+            brief:max(data.brief)<=230,
+            launches:max(data.launches)<=280,
+            community:max(data.community)<=450,
+            process:max(data.process)<=190
+          };
+          await page.setViewport({width:390,height:844,deviceScaleFactor:1});
+          await page.reload({waitUntil:'networkidle2',timeout:45000});
+          const mobile=await page.evaluate(()=>({
+            overflow:document.documentElement.scrollWidth-window.innerWidth,
+            spacingCss:[...document.querySelectorAll('link[rel="stylesheet"]')].some(x=>x.href.includes('emaar-spacing.css?v=1'))
+          }));
+          const checks={...desktop,mobileOverflow:mobile.overflow<=2,mobileCss:mobile.spacingCss};
+          console.log('EMAAR_SPACING_QA|' + JSON.stringify({checks,desktop:data,mobile}));
+          await browser.close();
+          if(!Object.values(checks).every(Boolean)) process.exit(1);
+          JS
+          node emaar-spacing-qa.mjs
