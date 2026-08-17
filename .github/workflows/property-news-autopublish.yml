@@ -2,7 +2,7 @@ name: Publish property news briefs
 
 on:
   schedule:
-    - cron: '23 * * * *'
+    - cron: '35 * * * *'
   workflow_dispatch:
   push:
     paths:
@@ -13,8 +13,8 @@ on:
 permissions:
   contents: write
 
-# All workflows that commit generated website files share this group. This prevents
-# concurrent publishers/audits from rebasing and pushing the same generated files.
+# Official updates and property briefs both modify generated website files. Keep
+# those repository writes in one queue as a fallback for unusually slow runs.
 concurrency:
   group: site-content-writes
   cancel-in-progress: false
@@ -72,8 +72,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -m "Auto-publish UAE property news briefs"
-          # A shared concurrency group should make this uncommon, but rebase once
-          # before pushing so a manual commit made during the run is preserved.
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push origin "HEAD:${GITHUB_REF_NAME}"
           echo "changed=true" >> "$GITHUB_OUTPUT"
