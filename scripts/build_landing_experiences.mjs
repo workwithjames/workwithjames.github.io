@@ -19,7 +19,7 @@ const pages = [
     heroProof: ['Current launch check', 'Official price evidence', 'Unit-level comparison'],
     primary: 'Request current prices', secondary: 'Compare latest projects',
     nav: [['New releases','projects'],['Communities','locations'],['Investor lens','why-invest'],['Enquire','enquire']],
-    bar: [['Valia','Dubai Creek Harbour'],['Golf Trails','Emaar South'],['Fior 1','Rashid Yachts & Marina'],['Independent','James Realty advice']],
+    bar: [['Golf Fields','Emaar South'],['Golf Vale','Emaar South'],['Fior 1','Rashid Yachts & Marina'],['Independent','James Realty advice']],
     projectsTitle: 'Three current releases. Three different investment cases.',
     projectsIntro: 'Emaar’s official latest-launch list changes frequently. These releases were visible on the developer’s official website when checked; live units and schedules are reconfirmed before recommendation.',
     projects: [
@@ -37,7 +37,7 @@ const pages = [
     journeyTitle:'From launch list to exact unit',
     journey:[['01','Define','Budget, use, time horizon and acceptable downside.'],['02','Compare','Community, layout, cash flow and relevant alternatives.'],['03','Verify','Dated price sheet, payment plan and reservation documents.'],['04','Decide','Proceed only when the unit fits the investment brief.']],
     formTitle:'Receive an Emaar shortlist—not a project dump.', formText:'Share the budget, property type and intended holding strategy. James will return current Emaar options with the key trade-offs visible.', formIntro:'Hello James, I would like a current Emaar project shortlist.',
-    faq:[['What are Emaar’s latest projects?','Emaar’s official website currently lists Valia, Golf Trails and Fior 1 among its latest launches. The list and inventory change, so current availability is reconfirmed when you enquire.'],['What is the lowest verified entry price shown here?','Golf Trails publishes an official starting price of AED 1.25 million. A starting figure does not confirm an available unit or the total acquisition cost.'],['Can an overseas buyer purchase Emaar property?','Foreign buyers may own eligible property in designated Dubai freehold areas, subject to the exact project, identity checks and registration process.'],['Are payment plans guaranteed?','No. Plans can vary by project, release and unit. Request the dated schedule for the exact unit before reserving.'],['Is Emaar property guaranteed to appreciate?','No property return is guaranteed. Compare price, total costs, future supply, demand evidence and a downside scenario.']],
+    faq:[['Which Emaar releases are highlighted here?','Golf Fields, Golf Vale and Fior 1 were listed by Emaar when checked on 17 August 2026. The launch list and inventory change, so availability is reconfirmed when you enquire.'],['What is the lowest verified entry price shown here?','Golf Vale publishes an official starting price of AED 1.09 million. A starting figure does not confirm an available unit or the total acquisition cost.'],['Can an overseas buyer purchase Emaar property?','Foreign buyers may own eligible property in designated Dubai freehold areas, subject to the exact project, identity checks and registration process.'],['Are payment plans guaranteed?','No. Plans can vary by project, release and unit. Request the dated schedule for the exact unit before reserving.'],['Is Emaar property guaranteed to appreciate?','No property return is guaranteed. Compare price, total costs, future supply, demand evidence and a downside scenario.']],
     sources:[['Emaar latest launches','https://www.emaar.com/en'],['Dubai buying costs guide','https://jamesrealty.uk/dubai-property-buying-costs/'],['Off-plan vs ready guide','https://jamesrealty.uk/off-plan-vs-ready-property-dubai/']],
   },
   {
@@ -157,6 +157,118 @@ const pages = [
   },
 ];
 
+const enhancements = {
+  emaar: {
+    heroMode: 'editorial', map: { lat: '25.1117', lon: '55.2708', bbox: '55.05,24.94,55.48,25.30' },
+    projectImages: ['emaar-golf-community-apartments.webp','emaar-family-townhouses.webp','emaar-waterfront-marina-residences.webp'],
+    projectAlts: ['Representative golf-edge apartments in a landscaped Dubai master community','Representative contemporary family townhouses in a landscaped Dubai community','Representative premium marina-front apartments in Dubai at blue hour'],
+    signature: ['Master communities','Emaar South','Golf-led homes and Dubai South connectivity.','Rashid Yachts & Marina','Marina living close to central Dubai.','Dubai Creek Harbour','Waterfront scale with an evolving infrastructure story.'],
+    flow: ['signature','projects','map','lens','journey'],
+  },
+  aldar: {
+    heroMode: 'destination', map: { lat: '24.4941', lon: '54.6079', bbox: '54.30,24.30,54.82,24.62' },
+    projectImages: ['aldar-yas-waterfront-apartments.webp','aldar-saadiyat-cultural-residences.webp','aldar-nature-led-villas.webp'],
+    projectAlts: ['Representative nature-led waterfront apartments on Yas Island','Representative cultural-district residences with pale stone colonnades','Representative nature-led family villas in a landscaped UAE community'],
+    signature: ['Live the destination','Yas Point','Water, gardens and leisure-led daily life.','Saadiyat Island','Culture, beach and rare residential positioning.','The Wilds, Dubai','Nature-led family living in a new Dubai community.'],
+    flow: ['signature','map','projects','lens','journey'],
+  },
+  damac: {
+    heroMode: 'cinematic', map: { lat: '25.2295', lon: '55.2834', bbox: '55.08,24.98,55.48,25.35' },
+    projectImages: ['damac-sea-view-residences.webp','damac-lagoon-villa-community.webp','damac-resort-residences.webp'],
+    projectAlts: ['Representative cinematic sea-view luxury residence above Dubai Maritime City','Representative resort lagoon villa community in Dubai','Representative hospitality-inspired apartment arrival with water features'],
+    signature: ['The private edit','Branded waterfront','A premium that must be tested against service and resale depth.','Resort community','Lifestyle scale with construction, fees and family demand to model.','Apartment neighbourhood','Unit efficiency and operating costs before spectacle.'],
+    flow: ['projects','signature','lens','journey','map'],
+  },
+  binghatti: {
+    heroMode: 'graphic', map: { lat: '25.1800', lon: '55.3100', bbox: '55.16,25.03,55.43,25.29' },
+    projectImages: ['binghatti-copper-geometric-tower.webp','binghatti-sculptural-villas.webp','binghatti-crystalline-apartments.webp'],
+    projectAlts: ['Representative geometric Dubai apartment tower with copper balcony frames','Representative sculptural villa compound with angular sandstone screens','Representative crystalline mid-rise apartment tower in Dubai'],
+    signature: ['Compare the form','Urban apartments','Fast-moving supply; layout and building position matter.','Villa masterplan','Lower density, larger capital exposure and a different exit pool.','Value apartment','Ticket size helps entry; local pipeline decides resilience.'],
+    flow: ['signature','projects','matrix','map','lens','journey'],
+  },
+  nakheel: {
+    heroMode: 'coastline', map: { lat: '25.0134', lon: '54.9870', bbox: '54.82,24.90,55.23,25.18' },
+    projectImages: ['nakheel-private-island-villas.webp','nakheel-lagoon-residences.webp','nakheel-beachfront-tower.webp'],
+    projectAlts: ['Representative aerial view of private island villas and beaches in Dubai','Representative low-rise private residences around a protected island lagoon','Representative mature beachfront tower residence on the Dubai coast'],
+    signature: ['Read the coastline','Private frond villa','Beach orientation, plot utility and handover evidence.','Island apartment','A broader entry route into a long-horizon masterplan.','Mature waterfront','Established access and operations versus a newer-island premium.'],
+    flow: ['map','signature','projects','lens','journey'],
+  },
+  mudon: {
+    heroMode: 'residential', map: { lat: '25.0267', lon: '55.2636', bbox: '55.20,24.98,55.33,25.08' },
+    projectImages: ['mudon-family-townhouses.webp','mudon-community-park.webp','mudon-villa-street.webp'],
+    projectAlts: ['Representative leafy family townhouse cluster in Mudon-style Dubai community','Representative green community park with cycling path and family pavilion','Representative practical villa street with private gardens and mature trees'],
+    signature: ['The everyday test','Morning','School and work routes in real peak traffic.','Afternoon','Shade, parks, pools and children’s movement.','Weekend','Retail, sports and the drive to wider Dubai.'],
+    flow: ['signature','projects','map','day','lens','journey'],
+  },
+  uk: {
+    heroMode: 'market', map: { lat: '25.2048', lon: '55.2708', bbox: '55.08,24.98,55.46,25.35' },
+    projectImages: ['uk-downtown-dubai-apartment.webp','uk-dubai-hills-apartment.webp'],
+    projectAlts: ['Representative Downtown Dubai investment apartment viewed from a balcony','Representative Dubai Hills apartment overlooking green park and golf landscape'],
+    flow: ['currency','projects','costs','map','lens','journey'],
+  },
+  usa: {
+    heroMode: 'underwriting', map: { lat: '25.0800', lon: '55.1450', bbox: '55.05,24.96,55.38,25.28' },
+    projectImages: ['usa-dubai-marina-apartment.webp','usa-dubai-townhouse.webp'],
+    projectAlts: ['Representative ready apartment overlooking Dubai Marina','Representative Dubai family townhouse in a shaded master community'],
+    flow: ['underwriting','projects','costs','map','lens','journey'],
+  },
+  india: {
+    heroMode: 'payment', map: { lat: '25.1972', lon: '55.3614', bbox: '55.16,24.98,55.48,25.32' },
+    projectImages: ['india-dubai-creek-apartment.webp','india-waterfront-offplan.webp'],
+    projectAlts: ['Representative efficient Dubai Creek investment apartment with waterfront view','Representative off-plan waterfront apartment building with landscaped promenade'],
+    flow: ['currency','projects','payment','map','lens','journey'],
+  },
+  ar: {
+    heroMode: 'arabic', map: { lat: '25.2048', lon: '55.2708', bbox: '55.08,24.98,55.46,25.35' },
+    projectImages: ['arabic-dubai-villa-courtyard.webp','arabic-downtown-apartment.webp'],
+    projectAlts: ['فناء فيلا عصرية في دبي مع جلسة خارجية خاصة ومظللة','شقة فاخرة في وسط دبي بإطلالة على الأفق عند الغروب'],
+    flow: ['projects','arabicGuide','map','lens','journey'],
+  },
+};
+
+for (const page of pages) Object.assign(page, enhancements[page.slug]);
+
+const currentProjectOverrides = {
+  emaar: [
+    {meta:'Latest release · Emaar South',name:'Golf Fields',desc:'One- to three-bedroom apartments and three-bedroom townhouses beside the golf landscape in Dubai South.',facts:['1–3 bedroom apartments','3 bedroom townhouses','Official latest-launch list'],price:'From AED 1.26m',priceNote:'Official price checked 17 Aug 2026',source:'https://www.emaar.com/en/properties/golf-fields-at-emaar-south'},
+    {meta:'Latest release · Emaar South',name:'Golf Vale',desc:'Golf-view apartments and townhouses for buyers comparing a lower entry point with a long-horizon growth corridor.',facts:['1–3 bedroom apartments','3 bedroom townhouses','Dubai South location'],price:'From AED 1.09m',priceNote:'Official price checked 17 Aug 2026',source:'https://www.emaar.com/en/properties/golf-vale-at-emaar-south'},
+    {meta:'Latest release · Rashid Yachts & Marina',name:'Fior 1',desc:'One- to three-bedroom marina-front apartments shaped around waterfront views and central-Dubai access.',facts:['1–3 bedroom apartments','Marina masterplan','Current official launch'],price:'From AED 2.2m',priceNote:'Official price checked 17 Aug 2026',source:'https://www.emaar.com/en/properties/fior-1-at-rashid-yachts-and-marina'},
+  ],
+  aldar: [
+    {meta:'July 2026 launch · Yas Point',name:'The Canopies',desc:'The first residential community at Yas Point, pairing nature-led waterfront living with the wider Yas Island demand story.',facts:['Yas Point waterfront','Official July 2026 launch','Unit schedule required'],price:'From AED 1.65m',priceNote:'Official launch figure; reconfirm unit',source:'https://www.aldar.com/en/news-and-media/aldar-launches-the-canopies-at-yas-point-bringing-nature-inspired-living-to-yas-island-s-northern-shore'},
+    {meta:'February 2026 · Saadiyat Island',name:'Baccarat Residences Saadiyat',desc:'A limited collection of 77 branded homes in Saadiyat Cultural District for a highly specific luxury buyer profile.',facts:['77 residences','2–3 bedroom collection','Brand and fee review'],price:'Request current release',priceNote:'Availability and charges verified by unit',source:'https://www.aldar.com/en/news-and-media/aldar-launches-baccarat-residences-saadiyat'},
+    {meta:'February 2026 · Dubai',name:'The Wilds Residences',desc:'Six residential buildings extending Aldar’s nature-led Wilds community proposition in Dubai.',facts:['Nature-led Dubai community','Six residential buildings','Current availability required'],price:'Request current release',priceNote:'Official release; live sheet required',source:'https://www.aldar.com/en/news-and-media/aldar-introduces-the-wilds-residences'},
+  ],
+  damac: [
+    {meta:'Dubai Maritime City · Branded waterfront',name:'Chelsea Residences',desc:'A Chelsea-branded waterfront development with more than 1,400 residences and hospitality-led amenities.',facts:['1–3 bedroom apartments','Sea-view positioning','Brand and fee review'],price:'From AED 3.005m',priceNote:'Official project page',source:'https://www.damacproperties.com/en/projects/chelsea-residences/'},
+    {meta:'Resort community · Villas',name:'DAMAC Islands 2',desc:'Townhouses and villas positioned around a resort-lifestyle community concept for family and second-home buyers.',facts:['Townhouses and villas','Phased master community','Handover evidence required'],price:'From AED 2.99m',priceNote:'Official website figure',source:'https://www.damacproperties.com/en/communities/damac-islands-2-community/projects/damac-islands-2/'},
+    {meta:'Riverside · Apartments',name:'Riverside Views',desc:'Apartment-led community living for buyers comparing amenities, practical connectivity and a wider neighbourhood proposition.',facts:['Apartment collection','Community amenities','Total-cost comparison'],price:'Request live units',priceNote:'Dated price sheet required',source:'https://www.damacproperties.com/en/communities/damac-riverside/projects/damac-riverside-views/'},
+  ],
+  binghatti: [
+    {meta:'Al Jaddaf · Current portfolio',name:'Binghatti Wraith',desc:'Studios to three-bedroom apartments in a well-connected urban district, with exact unit efficiency and local supply to compare.',facts:['Studio–3 bedroom range','Al Jaddaf','Building-level demand check'],price:'From AED 799,999',priceNote:'Official portfolio starting price',source:'https://www.binghatti.com/en/projects'},
+    {meta:'Academic City · Villa community',name:'Tilal Binghatti',desc:'Binghatti’s villa-community format for buyers comparing larger homes, lower density and a narrower future buyer pool.',facts:['4–7 bedroom range','Academic City','Community phasing review'],price:'From AED 4.2m',priceNote:'Official portfolio starting price',source:'https://www.binghatti.com/en/projects'},
+    {meta:'Majan · Value apartments',name:'Binghatti Skyflame',desc:'Studio to two-bedroom apartments with a lower headline entry point in a developing Dubai residential node.',facts:['Studio–2 bedroom range','Majan','Pipeline and rent evidence'],price:'From AED 585,000',priceNote:'Official portfolio starting price',source:'https://www.binghatti.com/en/projects'},
+  ],
+  uk: [
+    {meta:'Current Emaar example · Emaar South',name:'Golf Vale',desc:'A golf-edge apartment and townhouse release for a UK buyer comparing lower entry price with Dubai South’s longer infrastructure horizon.',facts:['From AED 1.09m','1–3 bed apartments','GBP cash-flow model needed'],price:'≈ £220k at your rate',priceNote:'Use the editable calculator; excludes costs',source:'https://www.emaar.com/en/properties/golf-vale-at-emaar-south'},
+    {meta:'Current Aldar example · Yas Point',name:'The Canopies',desc:'A nature-led waterfront launch on Yas Island for buyers considering Abu Dhabi alongside Dubai.',facts:['From AED 1.65m','Official July 2026 launch','Abu Dhabi cost path'],price:'≈ £333k at your rate',priceNote:'Illustrative only; live rate and unit required',source:'https://www.aldar.com/en/news-and-media/aldar-launches-the-canopies-at-yas-point-bringing-nature-inspired-living-to-yas-island-s-northern-shore'},
+  ],
+  usa: [
+    {meta:'Ready-market lens · Dubai Marina',name:'Ready marina apartment',desc:'A completed unit can be underwritten against building-level rent, vacancy, service charges and management from day one.',facts:['Inspect before closing','Comparable rents','Operating setup'],price:'Model net USD income',priceNote:'No yield is guaranteed',source:'https://jamesrealty.uk/dubai-rental-yield-calculator/'},
+    {meta:'Current DAMAC example · Maritime City',name:'Chelsea Residences',desc:'A branded off-plan waterfront proposition where brand premium, completion exposure, recurring fees and future exit depth must be modeled.',facts:['From AED 3.005m','1–3 bedroom apartments','Branded fee review'],price:'≈ $818k at AED peg',priceNote:'Excludes transaction and operating costs',source:'https://www.damacproperties.com/en/projects/chelsea-residences/'},
+  ],
+  india: [
+    {meta:'Current Binghatti example · Majan',name:'Binghatti Skyflame',desc:'A lower headline entry point that still needs a complete INR schedule across booking, construction, completion and costs.',facts:['From AED 585k','Studio–2 bedroom range','LRS calendar first'],price:'Map full INR outflow',priceNote:'Editable rate; bank advice required',source:'https://www.binghatti.com/en/projects'},
+    {meta:'Current Emaar example · Emaar South',name:'Golf Fields',desc:'Apartments and townhouses for buyers comparing staged off-plan payments with a longer Dubai South holding case.',facts:['From AED 1.26m','1–3 bed apartments','3 bed townhouses'],price:'Plan every remittance',priceNote:'Not only the booking amount',source:'https://www.emaar.com/en/properties/golf-fields-at-emaar-south'},
+  ],
+  ar: [
+    {meta:'مشروع حالي · نخيل',name:'بالم سنترال — نخلة جبل علي',desc:'مساكن خاصة معاصرة في قلب الجزيرة؛ القرار يحتاج إلى مراجعة الوحدة والإطلالة والجدول الزمني والتكاليف.',facts:['شقق وتاون هاوس','مشروع واجهة بحرية','التحقق من الوحدة الحالية'],price:'اطلب السعر الحالي',priceNote:'السعر والتوفر حسب الإصدار',source:'https://www.nakheel.com/en/new-launches/palm-central-private-residences'},
+    {meta:'إطلاق يوليو 2026 · الدار',name:'ذا كانوبيز — ياس بوينت',desc:'مجتمع سكني جديد بطابع طبيعي على الواجهة البحرية في جزيرة ياس، مع اختلاف إجراءات الشراء والتسجيل عن دبي.',facts:['ابتداءً من 1.65 مليون درهم','واجهة بحرية في ياس','مقارنة أبوظبي ودبي'],price:'من 1.65 مليون درهم',priceNote:'رقم الإطلاق الرسمي؛ تحقق من الوحدة',source:'https://www.aldar.com/en/news-and-media/aldar-launches-the-canopies-at-yas-point-bringing-nature-inspired-living-to-yas-island-s-northern-shore'},
+  ],
+};
+
+for (const page of pages) if (currentProjectOverrides[page.slug]) page.projects = currentProjectOverrides[page.slug];
+
 pages.push(
   {
     slug:'uk',theme:'uk',host:'dubai.jamesrealty.uk',lang:'en-GB',layout:'split',
@@ -255,6 +367,13 @@ pages.push(
     countryDefault:'الإمارات العربية المتحدة',currency:'درهم إماراتي',arabic:true,
   }
 );
+
+// International pages are appended after the developer configuration above, so
+// apply the shared enhancement layer only once the full page collection exists.
+for (const page of pages) {
+  Object.assign(page, enhancements[page.slug]);
+  if (currentProjectOverrides[page.slug]) page.projects = currentProjectOverrides[page.slug];
+}
 
 function escapeHtml(value='') {
   return String(value).replace(/[&<>"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[char]));
@@ -366,9 +485,137 @@ function render(page) {
   return `${head(page)}<body class="theme-${page.theme}" data-page="${escapeHtml(page.title)}">${nav(page)}<main id="content">${hero(page)}${proofBar(page)}${main}${form(page)}${faq(page)}</main>${footer(page)}<script src="https://jamesrealty.uk/assets/landing-experience.js?v=3" defer></script></body></html>\n`;
 }
 
+function schemaV4(page) {
+  const canonical = `https://${page.host}/`;
+  return {
+    '@context':'https://schema.org',
+    '@graph':[
+      {'@type':'WebPage','@id':`${canonical}#webpage`,url:canonical,name:page.title,description:page.description,inLanguage:page.lang,dateModified:'2026-08-17',isPartOf:{'@id':'https://jamesrealty.uk/#website'},mainEntity:{'@id':`${canonical}#service`}},
+      {'@type':'RealEstateAgent','@id':'https://jamesrealty.uk/#organization',name:'James Realty',url:'https://jamesrealty.uk/',telephone:'+971528420933',image:'https://jamesrealty.uk/james-ravi-profile.jpg',areaServed:[{'@type':'Country','name':'United Arab Emirates'},{'@type':'City','name':'Dubai'},{'@type':'City','name':'Abu Dhabi'}]},
+      {'@type':'Service','@id':`${canonical}#service`,name:page.arabic?'استشارات عقارية مستقلة في دبي':`${page.theme[0].toUpperCase()+page.theme.slice(1)} property advisory`,description:page.description,provider:{'@id':'https://jamesrealty.uk/#organization'},audience:{'@type':'Audience',audienceType:page.kicker},url:canonical},
+      {'@type':'ItemList','@id':`${canonical}#projects`,name:page.projectsTitle,itemListElement:page.projects.map((project,index)=>({'@type':'ListItem',position:index+1,url:project.source,name:project.name}))},
+      {'@type':'FAQPage','mainEntity':page.faq.map(([question,answer])=>({'@type':'Question',name:question,acceptedAnswer:{'@type':'Answer',text:answer}}))},
+    ],
+  };
+}
+
+function headV4(page) {
+  const canonical = `https://${page.host}/`;
+  const image = `https://jamesrealty.uk/images/landing/${page.image}`;
+  const locale = page.lang.replace('-','_');
+  return `<!doctype html><html lang="${page.lang}"${page.dir?` dir="${page.dir}"`:''}><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#111411">
+<title>${escapeHtml(page.title)}</title><meta name="description" content="${escapeHtml(page.description)}"><meta name="robots" content="noindex,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<link rel="canonical" href="${canonical}"><link rel="icon" href="https://jamesrealty.uk/favicon.svg" type="image/svg+xml"><link rel="preload" as="image" href="${image}" fetchpriority="high"><link rel="stylesheet" href="https://jamesrealty.uk/assets/landing-experience.css?v=4">
+<meta property="og:type" content="website"><meta property="og:site_name" content="James Realty"><meta property="og:locale" content="${locale}"><meta property="og:title" content="${escapeHtml(page.title)}"><meta property="og:description" content="${escapeHtml(page.description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${image}"><meta property="og:image:alt" content="${escapeHtml(page.imageAlt)}">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${escapeHtml(page.title)}"><meta name="twitter:description" content="${escapeHtml(page.description)}"><meta name="twitter:image" content="${image}">
+<script type="application/ld+json">${JSON.stringify(schemaV4(page)).replace(/</g,'\\u003c')}</script><script>window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'landing_view',landing_page:${JSON.stringify(page.title)},landing_host:${JSON.stringify(page.host)},landing_audience:${JSON.stringify(page.kicker)},experience_version:'v4'});</script><script async src="https://www.googletagmanager.com/gtm.js?id=GTM-M74SL57L"></script>
+</head>`;
+}
+
+function navV4(page) {
+  const links = page.nav.map(([label,id])=>`<a href="#${id}">${escapeHtml(label)}</a>`).join('');
+  return `<a class="skip-link" href="#content">${page.arabic?'انتقل إلى المحتوى':'Skip to content'}</a><nav class="jr-nav" aria-label="${page.arabic?'التنقل في الصفحة':'Landing page navigation'}"><div class="jr-shell jr-nav__inner"><a class="jr-brand" href="https://jamesrealty.uk/" aria-label="James Realty"><span class="jr-brand__mark">JR</span><span><strong>James Realty</strong><small>${page.arabic?'استشارات عقارية مستقلة':'Independent property advisory'}</small></span></a><div class="jr-nav__links" id="landing-menu">${links}</div><a class="jr-button jr-button--small jr-nav__cta" data-cta="nav" data-location="navigation" href="#enquire">${escapeHtml(page.primary)}</a><button class="jr-menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="landing-menu">${page.arabic?'القائمة':'Menu'}</button></div></nav>`;
+}
+
+function heroV4(page) {
+  const image = `https://jamesrealty.uk/images/landing/${page.image}`;
+  const proof = page.heroProof.map(item=>`<li>${escapeHtml(item)}</li>`).join('');
+  return `<section class="jr-hero jr-hero--${page.heroMode}" aria-labelledby="hero-title"><figure class="jr-hero__media"><img class="jr-hero__image" src="${image}" width="1600" height="900" alt="${escapeHtml(page.imageAlt)}" fetchpriority="high" decoding="async"><span class="jr-hero__wash"></span></figure><div class="jr-shell jr-hero__inner"><div class="jr-hero__copy" data-reveal><p class="jr-kicker">${escapeHtml(page.kicker)}</p><h1 class="jr-display" id="hero-title">${escapeHtml(page.h1)}</h1><p class="jr-hero__lead">${escapeHtml(page.heroText)}</p><div class="jr-actions"><a class="jr-button jr-button--light" data-cta="hero-primary" data-location="hero" href="#enquire">${escapeHtml(page.primary)}</a><a class="jr-text-link" data-cta="hero-secondary" data-location="hero" href="#projects">${escapeHtml(page.secondary)} <span aria-hidden="true">↘</span></a></div><ul class="jr-hero__proof">${proof}</ul></div><p class="jr-hero__independent">${page.arabic?'صفحة استشارية مستقلة من جيمس ريالتي — وليست الموقع الرسمي للمطور.':'Independent James Realty advisory — not the developer’s official website.'}</p></div></section>`;
+}
+
+function proofV4(page) {
+  return `<section class="jr-facts" aria-label="${page.arabic?'نظرة سريعة':'At a glance'}"><div class="jr-shell jr-facts__track">${page.bar.map(([a,b],index)=>`<article><span>0${index+1}</span><strong>${escapeHtml(a)}</strong><small>${escapeHtml(b)}</small></article>`).join('')}</div></section>`;
+}
+
+function projectCardsV4(page) {
+  const note = page.arabic?'صورة توضيحية من جيمس ريالتي — ليست تصميماً رسمياً للمشروع':'James Realty advisory visual — not an official project render';
+  return `<section class="jr-section jr-project-section" id="projects"><div class="jr-shell"><header class="jr-heading" data-reveal><p class="jr-kicker">${page.arabic?'خيارات حالية':'Current opportunity edit'}</p><h2 class="jr-display">${escapeHtml(page.projectsTitle)}</h2><p>${escapeHtml(page.projectsIntro)}</p></header><div class="jr-projects">${page.projects.map((project,index)=>`<article class="jr-project" data-reveal data-project-card="${escapeHtml(project.name)}"><figure><img src="https://jamesrealty.uk/images/${page.theme==='uk'||page.theme==='usa'||page.theme==='india'||page.theme==='ar'?'investors':'projects'}/${page.projectImages[index]}" width="${page.theme==='uk'||page.theme==='usa'||page.theme==='india'||page.theme==='ar'?'430':'724'}" height="${page.theme==='uk'||page.theme==='usa'||page.theme==='india'||page.theme==='ar'?'600':'543'}" loading="lazy" decoding="async" alt="${escapeHtml(page.projectAlts[index])}"><figcaption>${note}</figcaption></figure><div class="jr-project__body"><span class="jr-project__meta">${escapeHtml(project.meta)}</span><h3>${escapeHtml(project.name)}</h3><p>${escapeHtml(project.desc)}</p><ul>${project.facts.map(f=>`<li>${escapeHtml(f)}</li>`).join('')}</ul><div class="jr-project__bottom"><span><strong>${escapeHtml(project.price)}</strong><small>${escapeHtml(project.priceNote)}</small></span><a class="jr-project__source" data-source-link href="${project.source}" target="_blank" rel="noopener noreferrer">${page.arabic?'تحقق من المصدر':'Verify facts'} ↗</a></div><a class="jr-project__cta" href="#enquire" data-project-select="${escapeHtml(project.name)}">${page.arabic?'اطلب الوحدات المتاحة':'Request current units'} <span aria-hidden="true">→</span></a></div></article>`).join('')}</div></div></section>`;
+}
+
+function signatureV4(page) {
+  if (!page.signature) return '';
+  const [title,...items] = page.signature;
+  const cards=[];
+  for(let i=0;i<items.length;i+=2) cards.push(`<article data-reveal><span>0${cards.length+1}</span><h3>${escapeHtml(items[i])}</h3><p>${escapeHtml(items[i+1])}</p></article>`);
+  return `<section class="jr-section jr-signature" id="overview"><div class="jr-shell"><header class="jr-heading jr-heading--compact"><p class="jr-kicker">${page.arabic?'نظرة على السوق':'A distinct way to explore'}</p><h2 class="jr-display">${escapeHtml(title)}</h2></header><div class="jr-signature__grid">${cards.join('')}</div></div></section>`;
+}
+
+function mapV4(page) {
+  const {lat,lon,bbox}=page.map;
+  const mapUrl=`https://www.openstreetmap.org/export/embed.html?bbox=${encodeURIComponent(bbox)}&layer=mapnik&marker=${lat}%2C${lon}`;
+  return `<section class="jr-section jr-map-section" id="locations"><div class="jr-shell jr-map"><div class="jr-map__copy" data-reveal><p class="jr-kicker">${page.arabic?'الموقع والاتصال':'Location, demand and access'}</p><h2 class="jr-display">${escapeHtml(page.routeTitle)}</h2><p>${escapeHtml(page.routeText)}</p><div class="jr-map__list">${page.route.map(([a,b])=>`<article><strong>${escapeHtml(a)}</strong><p>${escapeHtml(b)}</p></article>`).join('')}</div></div><figure class="jr-map__frame" data-reveal><iframe title="${page.arabic?'خريطة موقع العقار':'Property location map'}" src="${mapUrl}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><figcaption><span>${page.arabic?'خريطة جغرافية تفاعلية — الموقع تقريبي للمجتمع':'Interactive geographic map — community-level marker'}</span><a data-map-action href="https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=12/${lat}/${lon}" target="_blank" rel="noopener noreferrer">${page.arabic?'فتح الخريطة':'Open map'} ↗</a></figcaption></figure></div></section>`;
+}
+
+function lensV4(page) {
+  return `<section class="jr-section jr-lens-section" id="why-invest"><div class="jr-shell jr-lens"><header data-reveal><p class="jr-kicker">${page.arabic?'منهج القرار':'Investor decision lens'}</p><h2 class="jr-display">${escapeHtml(page.lensTitle)}</h2><p>${escapeHtml(page.lensText)}</p></header><div class="jr-lens__grid">${page.lenses.map(([a,b],index)=>`<article data-reveal><span class="jr-lens__bar" style="--score:${62+index*8}%"></span><strong>${escapeHtml(a)}</strong><p>${escapeHtml(b)}</p></article>`).join('')}</div><aside class="jr-lens__aside">${page.asides.map(([a,b])=>`<p><strong>${escapeHtml(a)}</strong><span>${escapeHtml(b)}</span></p>`).join('')}</aside></div></section>`;
+}
+
+function journeyV4(page) {
+  return `<section class="jr-section jr-process" id="process"><div class="jr-shell"><header class="jr-heading jr-heading--compact" data-reveal><p class="jr-kicker">${page.arabic?'خطوات واضحة':'A controlled buying path'}</p><h2 class="jr-display">${escapeHtml(page.journeyTitle)}</h2></header><ol class="jr-process__rail">${page.journey.map(([n,a,b])=>`<li data-reveal><span>${n}</span><div><h3>${escapeHtml(a)}</h3><p>${escapeHtml(b)}</p></div></li>`).join('')}</ol></div></section>`;
+}
+
+function matrixV4(page) {
+  if(page.theme!=='binghatti') return '';
+  return `<section class="jr-section jr-matrix" id="comparison"><div class="jr-shell"><header class="jr-heading jr-heading--compact"><p class="jr-kicker">Investor comparison</p><h2 class="jr-display">Three products. Three different tests.</h2></header><div class="jr-table-wrap"><table><thead><tr><th>Decision factor</th><th>Wraith</th><th>Tilal</th><th>Skyflame</th></tr></thead><tbody><tr><th>Format</th><td>Urban apartments</td><td>Large villas</td><td>Value apartments</td></tr><tr><th>Primary test</th><td>Layout + local supply</td><td>Community delivery</td><td>Pipeline + rent evidence</td></tr><tr><th>Capital profile</th><td>Mid-ticket</td><td>High concentration</td><td>Lower entry</td></tr></tbody></table></div></div></section>`;
+}
+
+function dayV4(page) {
+  if(page.theme!=='mudon') return '';
+  return `<section class="jr-section jr-day" id="lifestyle"><div class="jr-shell"><header class="jr-heading jr-heading--compact"><p class="jr-kicker">Use the community</p><h2 class="jr-display">Test Mudon across a real day.</h2></header><div class="jr-day__rail"><article><time>07:30</time><strong>School and work</strong><p>Drive the actual route in peak traffic.</p></article><article><time>16:00</time><strong>Park and pool</strong><p>Check shade, access and everyday movement.</p></article><article><time>19:30</time><strong>Retail and return</strong><p>Review convenience after the commute.</p></article></div></div></section>`;
+}
+
+function currencyV4(page) {
+  if(!['uk','india'].includes(page.theme)) return '';
+  const uk=page.theme==='uk';
+  return `<section class="jr-section jr-tool-section" id="currency"><div class="jr-shell jr-tool" data-currency-tool data-currency="${uk?'GBP':'INR'}"><div><p class="jr-kicker">${uk?'GBP / AED planning tool':'INR / AED payment tool'}</p><h2 class="jr-display">${uk?'See the budget in both currencies.':'Map the full rupee commitment.'}</h2><p>${uk?'Use an editable planning rate across price, fees and future instalments.':'Use an editable planning rate before aligning instalments with your bank and LRS calendar.'}</p></div><form><label>Property price (AED)<input name="aed" type="number" min="0" step="1000" value="1000000" inputmode="decimal"></label><label>${uk?'Planning rate (GBP per AED)':'Planning rate (INR per AED)'}<input name="rate" type="number" min="0" step="0.001" value="${uk?'0.20':'23.50'}" inputmode="decimal"></label><output data-currency-output aria-live="polite">—</output><small>Editable planning rate only; not a live foreign-exchange quote. Your bank’s rate and charges may differ.</small></form></div></section>`;
+}
+
+function underwritingV4(page) {
+  if(page.theme!=='usa') return '';
+  return `<section class="jr-section jr-tool-section" id="underwriting"><div class="jr-shell jr-tool" data-underwriting-tool><div><p class="jr-kicker">USD investor underwriting</p><h2 class="jr-display">Model the operating case—not the headline yield.</h2><p>Change the rent, occupancy and annual ownership costs. The output is a scenario, not a forecast.</p></div><form><label>Purchase price (AED)<input name="price" type="number" value="2000000" min="1" step="10000"></label><label>Monthly rent (AED)<input name="rent" type="number" value="12000" min="0" step="500"></label><label>Occupancy (%)<input name="occupancy" type="number" value="92" min="0" max="100"></label><label>Annual costs (AED)<input name="costs" type="number" value="30000" min="0" step="1000"></label><output data-underwriting-output aria-live="polite">—</output><small>Illustrative only. Excludes financing, transaction costs, tax, currency movement and future price changes.</small></form></div></section>`;
+}
+
+function marketModuleV4(page,name) {
+  if(name==='costs' && ['uk','usa'].includes(page.theme)) return `<section class="jr-section jr-costs" id="costs"><div class="jr-shell"><header class="jr-heading jr-heading--compact"><p class="jr-kicker">Total acquisition view</p><h2 class="jr-display">Price is only the first line.</h2></header><div class="jr-costs__stack"><article><span>01</span><strong>Property price</strong><p>Exact unit and dated offer.</p></article><article><span>02</span><strong>Transaction costs</strong><p>Registration, agency, trustee, finance and professional charges as applicable.</p></article><article><span>03</span><strong>Completion capital</strong><p>Final payment, furnishing, snagging and reserve.</p></article><article><span>04</span><strong>Annual operation</strong><p>Service charges, management, maintenance, vacancy and compliance.</p></article></div></div></section>`;
+  if(name==='payment' && page.theme==='india') return `<section class="jr-section jr-payment" id="payment"><div class="jr-shell"><header class="jr-heading jr-heading--compact"><p class="jr-kicker">INR / AED payment calendar</p><h2 class="jr-display">Make the bank path visible before booking.</h2></header><div class="jr-payment__flow"><article><span>India</span><strong>Authorised dealer</strong><p>Purpose, buyer, remitter, documents and current limits.</p></article><i aria-hidden="true">→</i><article><span>Dubai</span><strong>Verified recipient</strong><p>Developer escrow or seller route for the exact transaction.</p></article><i aria-hidden="true">→</i><article><span>Records</span><strong>Retain evidence</strong><p>Remittance, TCS, registration, contract and income records.</p></article></div></div></section>`;
+  if(name==='arabicGuide' && page.theme==='ar') return `<section class="jr-section jr-arabic-guide" id="guide"><div class="jr-shell"><header class="jr-heading jr-heading--compact"><p class="jr-kicker">منهج عملي للمستثمر</p><h2 class="jr-display">قارن العقار كأصل قابل للإدارة.</h2></header><div class="jr-costs__stack"><article><span>01</span><strong>حدد الاستخدام</strong><p>سكن أو دخل أو تنويع أو احتفاظ طويل الأجل.</p></article><article><span>02</span><strong>راجع التكلفة</strong><p>السعر والرسوم والتأثيث والصيانة والإدارة.</p></article><article><span>03</span><strong>اختبر الطلب</strong><p>المستأجر أو المشتري المستهدف والعرض المنافس.</p></article><article><span>04</span><strong>تحقق من الوثائق</strong><p>التسجيل والعقد وخطة السداد والحساب المستلم.</p></article></div></div></section>`;
+  return '';
+}
+
+function formV4Markup(page) {
+  const ar=page.arabic;
+  const budgetOptions=ar?['أقل من مليون درهم','1–2 مليون درهم','2–5 ملايين درهم','5–10 ملايين درهم','أكثر من 10 ملايين درهم']:['Below AED 1 million','AED 1–2 million','AED 2–5 million','AED 5–10 million','Above AED 10 million'];
+  const countryOptions=[page.countryDefault,'United Arab Emirates','United Kingdom','United States','India','Saudi Arabia','Qatar','Kuwait','Other'].filter(Boolean).filter((value,index,array)=>array.indexOf(value)===index);
+  const prefs=ar?['شقة جاهزة','عقار قيد الإنشاء','تاون هاوس','فيلا','عقار فاخر أو بعلامة تجارية']:['Ready apartment','Off-plan apartment','Townhouse','Villa','Branded or luxury residence'];
+  return `<section class="jr-section jr-form-section" id="enquire"><div class="jr-shell jr-form-wrap"><div class="jr-form-copy" data-reveal><p class="jr-kicker">${ar?'طلب استشارة خاصة':'Private advisory request'}</p><h2 class="jr-display">${escapeHtml(page.formTitle)}</h2><p>${escapeHtml(page.formText)}</p><ul><li>${ar?'يتم حفظ طلبك قبل الانتقال إلى واتساب.':'Your request is saved before WhatsApp opens.'}</li><li>${ar?'لن يتم تقديم سعر أو توفر غير مؤكد.':'Prices and availability are reconfirmed.'}</li><li>${ar?'استشارة مستقلة من جيمس ريالتي.':'Independent advice from James Realty.'}</li></ul><a class="jr-phone" data-phone-action href="tel:+971528420933">${ar?'اتصال مباشر':'Call James'} · ${PHONE}</a></div><form class="jr-form" id="landing-enquiry" data-lead-capture data-page="${escapeHtml(page.title)}" data-intro="${escapeHtml(page.formIntro)}" novalidate><input type="hidden" name="interest" value=""><input class="jr-honeypot" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true"><label>${ar?'الاسم':'Name'}<input name="name" autocomplete="name" required maxlength="100"></label><label>${ar?'رقم الهاتف أو واتساب':'Phone / WhatsApp'}<input type="tel" name="phone" autocomplete="tel" inputmode="tel" required maxlength="32"></label><label class="full">${ar?'الميزانية الاستثمارية':'Investment budget'}<select name="budget" required><option value="">${ar?'اختر':'Select'}</option>${budgetOptions.map(value=>`<option>${escapeHtml(value)}</option>`).join('')}</select></label><details class="full jr-form__optional"><summary>${ar?'إضافة التفضيلات والبريد الإلكتروني':'Add property preferences and email'}</summary><div><label>${ar?'البريد الإلكتروني':'Email'}<input type="email" name="email" autocomplete="email" maxlength="160"></label><label>${ar?'الدولة':'Country'}<select name="country"><option value="">${ar?'اختر':'Select'}</option>${countryOptions.map(value=>`<option${value===page.countryDefault?' selected':''}>${escapeHtml(value)}</option>`).join('')}</select></label><label>${ar?'نوع العقار':'Property preference'}<select name="preference"><option value="">${ar?'اختر':'Select'}</option>${prefs.map(value=>`<option>${escapeHtml(value)}</option>`).join('')}</select><label>${ar?'الهدف والجدول الزمني':'Goal or timeline'}<textarea name="notes" maxlength="600"></textarea></label></div></details><label class="full jr-consent"><input type="checkbox" name="consent" required><span>${ar?'أوافق على أن يتواصل معي جيمس ريالتي بخصوص هذا الطلب.':'I agree that James Realty may contact me about this enquiry.'}</span></label><div class="full"><button class="jr-button jr-button--light" type="submit">${ar?'احفظ الطلب وتابع':'Save request and continue'}</button><span class="jr-form__status" data-form-status aria-live="polite"></span></div><div class="full jr-form__success" data-lead-success hidden><strong>${ar?'تم حفظ طلبك.':'Your request is saved.'}</strong><p>${ar?'يمكنك الآن متابعة المحادثة على واتساب دون فقدان بيانات الطلب.':'Continue on WhatsApp; your lead details are already captured.'}</p><a class="jr-button" data-whatsapp-continue href="#">${ar?'تابع على واتساب':'Continue on WhatsApp'} ↗</a><small data-lead-reference></small></div></form></div></section>`;
+}
+
+function formV4(page) {
+  return formV4Markup(page)
+    .replace('</select><label>Goal or timeline', '</select></label><label>Goal or timeline')
+    .replace('</select><label>الهدف والجدول الزمني', '</select></label><label>الهدف والجدول الزمني');
+}
+
+function faqV4(page) {
+  const sourceLabel=page.arabic?'✓ تم التحقق من الحقائق من المصادر التالية':'✓ Facts verified from these sources';
+  const disclaimer=page.arabic?'تمت مراجعة المعلومات في 17 أغسطس 2026. قد تتغير الأسعار وخطط السداد والتوفر ومواعيد الإنجاز والأنظمة وشروط الإقامة. اطلب مستندات حديثة للوحدة قبل الاعتماد عليها. المعلومات عامة وليست استشارة قانونية أو ضريبية أو مالية أو استثمارية.':VERIFIED;
+  return `<section class="jr-section jr-faq-section" id="faq"><div class="jr-shell jr-faq"><header data-reveal><p class="jr-kicker">FAQ</p><h2 class="jr-display">${page.arabic?'أسئلة المستثمرين':'Questions to settle before reserving'}</h2></header><div>${page.faq.map(([q,a])=>`<details><summary>${escapeHtml(q)}</summary><p>${escapeHtml(a)}</p></details>`).join('')}</div><details class="jr-sources"><summary>${sourceLabel}</summary><ul>${page.sources.map(([a,b])=>`<li><a href="${b}" target="_blank" rel="noopener noreferrer">${escapeHtml(a)} ↗</a></li>`).join('')}</ul><p>${escapeHtml(disclaimer)}</p></details></div></section>`;
+}
+
+function footerV4(page) {
+  return `<footer class="jr-footer"><div class="jr-shell jr-footer__inner"><a class="jr-brand" href="https://jamesrealty.uk/"><span class="jr-brand__mark">JR</span><span><strong>James Realty</strong><small>${page.arabic?'استشارات عقارية مستقلة':'Independent property advisory'}</small></span></a><p>${page.arabic?'جيمس ريالتي جهة استشارية مستقلة وليست الموقع الرسمي لأي مطور. تستخدم أسماء المشاريع للتعريف فقط.':'James Realty is an independent advisory service, not the official website of any featured developer. Project names are used for identification only.'}</p><div><a href="https://jamesrealty.uk/about-me/">${page.arabic?'عن جيمس رافي':'About James Ravi'}</a><a href="https://jamesrealty.uk/contact/">${page.arabic?'تواصل':'Contact'}</a><a href="https://jamesrealty.uk/blog/property-news/">${page.arabic?'أخبار السوق':'Market insights'}</a></div></div></footer><div class="jr-mobile-cta"><a class="jr-button" data-cta="mobile-form" href="#enquire">${page.arabic?'احفظ طلبك':'Save your request'}</a><a class="jr-button jr-button--ghost" data-phone-action href="tel:+971528420933">${page.arabic?'اتصال':'Call'}</a></div>`;
+}
+
+function renderV4(page) {
+  const sections={signature:()=>signatureV4(page),projects:()=>projectCardsV4(page),map:()=>mapV4(page),lens:()=>lensV4(page),journey:()=>journeyV4(page),matrix:()=>matrixV4(page),day:()=>dayV4(page),currency:()=>currencyV4(page),underwriting:()=>underwritingV4(page),costs:()=>marketModuleV4(page,'costs'),payment:()=>marketModuleV4(page,'payment'),arabicGuide:()=>marketModuleV4(page,'arabicGuide')};
+  const flow=page.flow.map(name=>sections[name]()).join('');
+  return `${headV4(page)}<body class="theme-${page.theme}" data-page="${escapeHtml(page.title)}">${navV4(page)}<main id="content">${heroV4(page)}${proofV4(page)}${flow}${formV4(page)}${faqV4(page)}</main>${footerV4(page)}<script src="https://jamesrealty.uk/assets/landing-experience.js?v=4" defer></script></body></html>\n`;
+}
+
 for (const page of pages) {
   const target = path.join(ROOT,'landing',page.slug,'index.html');
   fs.mkdirSync(path.dirname(target),{recursive:true});
-  fs.writeFileSync(target,render(page),'utf8');
+  fs.writeFileSync(target,renderV4(page),'utf8');
   console.log(`Built ${page.host}`);
 }
