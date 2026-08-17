@@ -1,0 +1,47 @@
+name: Apply Emaar whitespace refinement
+
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-emaar-spacing.yml'
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Add Emaar spacing stylesheet
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('landing/emaar/index.html')
+          html = p.read_text(encoding='utf-8')
+          marker = '<link rel="stylesheet" href="https://jamesrealty.uk/assets/emaar-premium.css?v=1">'
+          extra = marker + '<link rel="stylesheet" href="https://jamesrealty.uk/assets/emaar-spacing.css?v=1">'
+          if 'emaar-spacing.css' not in html:
+              if marker not in html:
+                  raise SystemExit('Emaar premium stylesheet marker not found')
+              html = html.replace(marker, extra, 1)
+          p.write_text(html, encoding='utf-8')
+          PY
+      - name: Commit refinement
+        shell: bash
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add landing/emaar/index.html
+          git commit -m 'Reduce unnecessary whitespace on Emaar landing page'
+          git push origin HEAD:main
+      - name: Request Pages rebuild
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST repos/${{ github.repository }}/pages/builds
