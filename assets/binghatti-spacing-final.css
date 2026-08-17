@@ -1,4 +1,5 @@
 /* Final Binghatti whitespace and alignment corrections. */
+/* Build refresh: 2026-08-17 */
 .theme-binghatti .jr-projects{grid-template-columns:1fr 1fr;align-items:start}
 .theme-binghatti .jr-project:first-child{grid-column:1/-1;grid-row:auto;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(350px,.92fr)}
 .theme-binghatti .jr-project:first-child figure{height:410px}
