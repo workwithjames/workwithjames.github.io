@@ -1,0 +1,16 @@
+/* Final DAMAC layout correction: remove inherited project stretching and replace bulky map rhythm. */
+.theme-damac .jr-projects{align-items:start!important}
+.theme-damac .jr-project:not(:first-child){display:block!important;grid-template-columns:none!important;height:auto!important;min-height:0!important;align-self:start!important}
+.theme-damac .jr-project:not(:first-child) figure{height:270px!important;min-height:0!important;aspect-ratio:auto!important}
+.theme-damac .jr-project:not(:first-child) .jr-project__body{height:auto!important;min-height:0!important;align-self:auto!important;justify-content:flex-start!important}
+.theme-damac .jr-project:not(:first-child) .jr-project__body>p{min-height:0!important}
+.theme-damac .damac-location-section{background:#0b0b0b}
+.theme-damac .damac-location-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--damac-line);background:#111}
+.theme-damac .damac-location-grid article{min-height:175px;padding:23px;border-right:1px solid var(--damac-line);display:flex;flex-direction:column}
+.theme-damac .damac-location-grid article:last-child{border-right:0}
+.theme-damac .damac-location-grid span{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--damac-gold)}
+.theme-damac .damac-location-grid strong{display:block;margin:24px 0 8px;font-family:var(--display);font-stretch:125%;font-size:clamp(21px,1.8vw,28px);line-height:1}
+.theme-damac .damac-location-grid p{margin:0;color:#a49f96;font-size:.76rem;line-height:1.48}
+.theme-damac .damac-location-grid small{display:block;margin-top:auto;padding-top:15px;color:#d9cfbc;font-size:.68rem}
+@media(max-width:1100px){.theme-damac .damac-location-grid{grid-template-columns:1fr 1fr}.theme-damac .damac-location-grid article:nth-child(2){border-right:0}.theme-damac .damac-location-grid article:nth-child(-n+2){border-bottom:1px solid var(--damac-line)}}
+@media(max-width:760px){.theme-damac .jr-project:not(:first-child) figure{height:auto!important;aspect-ratio:4/3!important}.theme-damac .damac-location-grid{grid-template-columns:1fr 1fr}.theme-damac .damac-location-grid article{min-height:150px;padding:18px}.theme-damac .damac-location-grid strong{margin-top:18px;font-size:20px}.theme-damac .damac-location-grid article:nth-child(2n){border-right:0}}
