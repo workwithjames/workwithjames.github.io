@@ -1,0 +1,49 @@
+name: Verify Mudon final layout
+on:
+  push:
+    paths:
+      - '.github/workflows/verify-mudon-final.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install browser driver
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save puppeteer-core@24 >/dev/null 2>&1
+          which google-chrome || which chromium || which chromium-browser
+      - name: Verify live Mudon v2
+        shell: bash
+        run: |
+          cat > mudon-final.mjs <<'JS'
+          import puppeteer from 'puppeteer-core';
+          import { execSync } from 'node:child_process';
+          const chrome=execSync('which google-chrome || which chromium || which chromium-browser').toString().trim();
+          const browser=await puppeteer.launch({headless:true,executablePath:chrome,args:['--no-sandbox']});
+          const page=await browser.newPage();
+          const measure=async(width,height)=>{
+            await page.setViewport({width,height,deviceScaleFactor:1});
+            let d;
+            for(let i=0;i<12;i++){
+              await page.goto(`https://mudon.jamesrealty.uk/?finalqa=${Date.now()}-${i}`,{waitUntil:'networkidle2',timeout:45000});
+              d=await page.evaluate(()=>{
+                const h=s=>[...document.querySelectorAll(s)].map(e=>Math.round(e.getBoundingClientRect().height));
+                const css=[...document.querySelectorAll('link[rel="stylesheet"]')].map(e=>e.href);
+                return {v2:css.some(x=>x.includes('mudon-premium.css?v=2')),title:document.querySelector('h1')?.textContent?.trim()||'',text:document.body.innerText,overflow:document.documentElement.scrollWidth-window.innerWidth,pathways:h('.mudon-pathway-card'),status:h('.mudon-status-card'),map:h('.mudon-map-frame iframe'),projects:h('.jr-project__body'),process:h('.jr-process__rail li')};
+              });
+              if(d.v2) return d;
+              await new Promise(r=>setTimeout(r,15000));
+            }
+            return d;
+          };
+          const desktop=await measure(1440,1000);
+          const mobile=await measure(390,844);
+          const max=a=>a?.length?Math.max(...a):0;
+          const checks={v2:desktop.v2&&mobile.v2,hero:desktop.title.includes('street-by-street'),current:desktop.text.includes('96.13%')&&desktop.text.includes('93.76%')&&desktop.text.includes('89.64%')&&desktop.text.includes('88.27%'),desktopOverflow:desktop.overflow<=2,mobileOverflow:mobile.overflow<=2,pathways:max(desktop.pathways)<=280,status:max(desktop.status)<=260,map:max(desktop.map)<=420,projects:max(desktop.projects)<=520,process:max(desktop.process)<=190};
+          console.log('MUDON_FINAL_QA|'+JSON.stringify({checks,desktop,mobile}));
+          await browser.close();
+          if(!Object.values(checks).every(Boolean)) process.exit(1);
+          JS
+          node mudon-final.mjs
