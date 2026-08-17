@@ -23,7 +23,7 @@ jobs:
       - name: Check rendered desktop and mobile geometry
         shell: bash
         run: |
-          cat > /tmp/layout-qa.mjs <<'JS'
+          cat > layout-qa.mjs <<'JS'
           import puppeteer from 'puppeteer-core';
           import { execSync } from 'node:child_process';
 
@@ -128,4 +128,4 @@ jobs:
           await browser.close();
           process.exit(failed ? 1 : 0);
           JS
-          node /tmp/layout-qa.mjs
+          node layout-qa.mjs
