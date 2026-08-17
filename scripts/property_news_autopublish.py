@@ -94,8 +94,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 CSS = r"""/* Property news hub, source briefs and internal-link modules */
 .property-news-divider{grid-column:1/-1;border-top:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,.6fr);align-items:end;gap:28px;margin-top:18px;padding-top:30px}.property-news-divider h2{font-size:clamp(1.65rem,3vw,2.35rem);letter-spacing:-.04em;margin:6px 0 0}.property-news-divider p:last-child{color:var(--muted);font-size:.78rem;line-height:1.6;margin:0}.news-source-badge{display:inline-flex;align-items:center;width:max-content;border:1px solid #818cf840;border-radius:999px;background:#818cf811;color:#bfc3ff;padding:6px 10px;font-size:.63rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase}.news-fact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:18px 0}.news-fact{border:1px solid var(--line);border-radius:14px;background:#111124;padding:17px}.news-fact strong{display:block;color:var(--accent);font-size:1.05rem;margin-bottom:6px}.news-fact span{color:var(--muted);font-size:.7rem;line-height:1.5}.source-credit{border:1px solid #818cf840;border-radius:16px;background:linear-gradient(135deg,#818cf813,#111124);display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:20px;margin:28px 0;padding:20px}.source-credit p{color:var(--muted);font-size:.76rem;line-height:1.6;margin:7px 0 0}.source-credit .button{white-space:nowrap}.news-automation-note{border-left:3px solid var(--accent);background:#818cf80c;color:#b9b9ca;border-radius:0 12px 12px 0;padding:13px 15px;font-size:.72rem;line-height:1.6}.property-news-links{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:minmax(220px,.32fr) minmax(0,.68fr);gap:30px;margin-top:48px;margin-bottom:48px;padding-top:34px;padding-bottom:34px}.property-news-links h2{font-size:1.45rem;letter-spacing:-.04em;margin:7px 0 9px}.property-news-links>div>p:last-child{color:var(--muted);font-size:.74rem;line-height:1.6;margin:0}.property-news-link-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.property-news-link-grid a{border:1px solid var(--line);border-radius:14px;background:var(--surface);display:grid;gap:6px;min-width:0;padding:16px}.property-news-link-grid a:hover{border-color:#818cf86b;transform:translateY(-2px)}.property-news-link-grid span{color:var(--accent);font-size:.61rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em}.property-news-link-grid strong{font-size:.76rem;line-height:1.4}.news-hub-hero{padding-top:66px;padding-bottom:42px}.news-hub-hero h1{font-size:clamp(2.8rem,6vw,5.4rem);line-height:.96;letter-spacing:-.065em;margin:18px 0}.news-hub-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;padding-bottom:72px}.news-hub-grid .blog-tile{height:100%}.news-brief-visual{aspect-ratio:16/9;border:1px solid var(--line);border-radius:20px;overflow:hidden}.news-brief-visual img{width:100%;height:100%;object-fit:cover}.article-body .news-related{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}.article-body .news-related a{border:1px solid var(--line);border-radius:14px;background:#111124;padding:16px;font-size:.76rem;font-weight:750;line-height:1.45}.article-body .news-related a:hover{border-color:#818cf86b}.footer-links a[href='/blog/property-news/']{color:#c7c9ff}
 @media(max-width:840px){.property-news-divider,.property-news-links{grid-template-columns:1fr;gap:17px}.news-hub-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.property-news-link-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:560px){.property-news-divider{padding-top:24px}.news-fact-grid,.article-body .news-related{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.news-fact{padding:14px 12px}.source-credit{grid-template-columns:1fr;gap:14px;padding:17px}.source-credit .button{width:100%}.property-news-links{margin-top:36px;margin-bottom:36px;padding-top:27px;padding-bottom:27px}.property-news-link-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.property-news-link-grid a{padding:13px 11px}.news-hub-hero{padding-top:46px}.news-hub-grid{grid-template-columns:1fr;gap:13px;padding-bottom:52px}}
+@media(max-width:560px){.property-news-divider{padding-top:24px}.news-fact-grid,.article-body .news-related{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.news-fact{padding:14px 12px}.source-credit{grid-template-columns:1fr;gap:14px;padding:17px}.source-credit .button{width:100%}.property-news-links{margin-top:36px;margin-bottom:36px;padding-top:27px;padding-bottom:27px}.property-news-link-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.property-news-link-grid a{padding:13px 11px}.news-hub-hero{padding-top:46px}.news-hub-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding-bottom:52px}.news-hub-grid .blog-tile-copy{padding:12px 11px}.news-hub-grid .blog-tile h2{font-size:.9rem;line-height:1.22}.news-hub-grid .blog-tile-copy>p{font-size:.68rem;line-height:1.4}}
 @media(max-width:380px){.news-fact-grid,.article-body .news-related,.property-news-link-grid{grid-template-columns:1fr}}
+
+/* Main News index */
+.blog-index-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.news-hub-grid .blog-tile h2{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;min-height:3.6em;overflow:hidden}
+.blog-index-grid .blog-tile-copy{padding:18px 17px 19px}
+.blog-index-grid .blog-tile h2{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;min-height:3.6em;overflow:hidden;font-size:1.08rem;line-height:1.2;margin:12px 0 9px}
+.blog-index-grid .blog-tile-copy>p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;font-size:.78rem;line-height:1.55;margin-bottom:14px}
+@media(max-width:840px){.blog-index-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}}
+@media(max-width:560px){.blog-index-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.blog-index-grid .blog-tile-copy{padding:12px 11px 13px}.blog-index-grid .blog-tile h2{font-size:.9rem;line-height:1.22;margin:8px 0}.blog-index-grid .blog-tile-copy>p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:.68rem;line-height:1.4;margin-bottom:10px}.blog-index-grid .news-source-badge{font-size:.5rem;padding:4px 6px}.blog-index-grid .text-link{font-size:.65rem}}
 """
 
 NAV_HEADER = """<header class=\"site-header\"><nav class=\"nav-shell\" aria-label=\"Main navigation\"><a class=\"brand\" href=\"/\" aria-label=\"James Realty, Dubai Data\">James Realty</a><div class=\"nav-links global-links\"><a href=\"/\">Dubai Data</a><a href=\"/abu-dhabi-data/\">Abu Dhabi Data</a><a href=\"/about-me/\">About Me</a><a href=\"/blog/\" aria-current=\"page\">Blog</a><a href=\"/contact/\">Contact Me</a></div><a class=\"button nav-cta nav-whatsapp\" href=\"https://wa.me/971528420933\" target=\"_blank\" rel=\"noreferrer\">Work with James <span aria-hidden=\"true\">↗</span></a></nav></header><nav class=\"mobile-page-tabs section-shell\" aria-label=\"Page navigation\"><a href=\"/\">Dubai Data</a><a href=\"/abu-dhabi-data/\">Abu Dhabi Data</a><a href=\"/about-me/\">About Me</a><a href=\"/blog/\" aria-current=\"page\">Blog</a><a href=\"/contact/\">Contact Me</a></nav>"""
@@ -443,7 +452,7 @@ def save_state(state: dict) -> None:
 def ensure_css_link(content: str) -> str:
     if "/assets/property-news.css" in content:
         return content
-    link = '<link rel="stylesheet" href="/assets/property-news.css?v=1"/>'
+    link = '<link rel="stylesheet" href="/assets/property-news.css?v=2"/>'
     if "</head>" in content:
         return content.replace("</head>", link + "</head>", 1)
     return content
@@ -480,7 +489,7 @@ def build_head(post: Post, structured: dict) -> str:
     published = f"{post.date}T20:00:00+04:00"
     canonical = post.url
     image_url = SITE + post.image
-    return f'''<!DOCTYPE html><html lang="en-AE"><head>{GTM_HEAD}<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/css/5576f66c8ff02a6a.css?v=12"/><link rel="stylesheet" href="/assets/property-news.css?v=1"/><link rel="shortcut icon" href="/favicon.svg"/><link rel="icon" href="/favicon.svg"/><link rel="apple-touch-icon" href="/favicon-192.png"/><title>{esc(post.title)} | James</title><meta name="description" content="{esc(post.description)}"/><meta name="author" content="James"/><meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1"/><link rel="canonical" href="{canonical}"/><meta property="og:type" content="article"/><meta property="og:title" content="{esc(post.title)}"/><meta property="og:description" content="{esc(post.description)}"/><meta property="og:url" content="{canonical}"/><meta property="og:image" content="{image_url}"/><meta property="og:image:alt" content="{esc(image_alt(post))}"/><meta property="article:published_time" content="{published}"/><meta property="article:modified_time" content="{published}"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="{esc(post.title)}"/><meta name="twitter:description" content="{esc(post.description)}"/><meta name="twitter:image" content="{image_url}"/><script type="application/ld+json">{json.dumps(structured, ensure_ascii=False, separators=(',', ':'))}</script><link rel="alternate" type="application/rss+xml" title="James Blog" href="{SITE}/feed.xml"/><link rel="manifest" href="/site.webmanifest"/><meta name="theme-color" content="#0a0a1a"/><meta property="og:locale" content="en_AE"/><script defer src="/assets/site.js?v=5"></script></head>'''
+    return f'''<!DOCTYPE html><html lang="en-AE"><head>{GTM_HEAD}<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/css/5576f66c8ff02a6a.css?v=12"/><link rel="stylesheet" href="/assets/property-news.css?v=2"/><link rel="shortcut icon" href="/favicon.svg"/><link rel="icon" href="/favicon.svg"/><link rel="apple-touch-icon" href="/favicon-192.png"/><title>{esc(post.title)} | James</title><meta name="description" content="{esc(post.description)}"/><meta name="author" content="James"/><meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1"/><link rel="canonical" href="{canonical}"/><meta property="og:type" content="article"/><meta property="og:title" content="{esc(post.title)}"/><meta property="og:description" content="{esc(post.description)}"/><meta property="og:url" content="{canonical}"/><meta property="og:image" content="{image_url}"/><meta property="og:image:alt" content="{esc(image_alt(post))}"/><meta property="article:published_time" content="{published}"/><meta property="article:modified_time" content="{published}"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="{esc(post.title)}"/><meta name="twitter:description" content="{esc(post.description)}"/><meta name="twitter:image" content="{image_url}"/><script type="application/ld+json">{json.dumps(structured, ensure_ascii=False, separators=(',', ':'))}</script><link rel="alternate" type="application/rss+xml" title="James Blog" href="{SITE}/feed.xml"/><link rel="manifest" href="/site.webmanifest"/><meta name="theme-color" content="#0a0a1a"/><meta property="og:locale" content="en_AE"/><script defer src="/assets/site.js?v=5"></script></head>'''
 
 
 def fact_grid(facts: list[list[str]]) -> str:
@@ -729,7 +738,13 @@ def is_property_relevant(article: dict) -> bool:
         "off-plan", "construction", "community", "residential", "commercial real estate",
         "land sale", "yield", "service charge", "handover", "building",
     )
-    return any(signal in text for signal in signals)
+    uae_signals = (
+        "uae", "united arab emirates", "dubai", "abu dhabi", "sharjah", "ajman",
+        "ras al khaimah", "rak", "fujairah", "umm al quwain",
+    )
+    # Publisher category pages sometimes surface London, UK or other foreign
+    # stories. A property keyword alone is not enough for a UAE news brief.
+    return any(signal in text for signal in signals) and any(signal in text for signal in uae_signals)
 
 
 def title_signature(value: str) -> str:
@@ -760,7 +775,7 @@ def theme_for(title: str, description: str) -> str:
     text = (title + " " + description).lower()
     if any(k in text for k in ["broker", "regulator", "ranking", "licence", "framework", "rule"]):
         return "regulation"
-    if any(k in text for k in ["record", "luxury", "villa", "mansion", "penthouse", "million"]):
+    if any(k in text for k in ["record sale", "luxury", "ultra-prime", "mansion", "penthouse"]):
         return "luxury"
     if any(k in text for k in ["unit", "home", "handover", "supply", "launch", "completion"]):
         return "supply"
@@ -772,25 +787,14 @@ def theme_for(title: str, description: str) -> str:
 
 
 def auto_title(article: dict, theme: str) -> str:
-    text = f"{article.get('title', '')} {article.get('description', '')}".lower()
-    location = "UAE"
-    for needle, label in (
-        ("abu dhabi", "Abu Dhabi"), ("dubai", "Dubai"), ("sharjah", "Sharjah"),
-        ("ras al khaimah", "Ras Al Khaimah"), ("ajman", "Ajman"),
-    ):
-        if needle in text:
-            location = label
-            break
-    titles = {
-        "regulation": f"What the latest {location} property rules mean in practice",
-        "luxury": f"Reading the latest {location} luxury-property signal",
-        "supply": f"{location} housing supply: what buyers and owners should check next",
-        "rental": f"{location} rental update: what tenants and landlords should verify",
-        "buyer": f"{location} homebuyer update: a practical decision checklist",
-        "market": f"How to read the latest {location} property-market signal",
-    }
+    # Preserve the source-specific subject instead of collapsing unrelated news
+    # into a handful of repetitive SEO templates. The brief body and suffix make
+    # clear that this is independent analysis rather than copied reporting.
+    title = re.sub(r"\s+", " ", html.unescape(article.get("title", ""))).strip(" -|:")
+    title = re.sub(r"\s+[|–—-]\s+(?:Gulf News|The National|Khaleej Times|Arabian Business).*$", "", title, flags=re.I)
+    title = title[:96].rstrip(" ,;:-")
     suffix = hashlib.sha1(article["url"].encode()).hexdigest()[:5]
-    return titles[theme], suffix
+    return title, suffix
 
 
 def extract_facts(paragraphs: list[str]) -> list[list[str]]:
@@ -984,7 +988,7 @@ def render_hub(posts: list[Post]) -> str:
             ],
         },
     }
-    return f'''<!DOCTYPE html><html lang="en-AE"><head>{GTM_HEAD}<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/css/5576f66c8ff02a6a.css?v=12"/><link rel="stylesheet" href="/assets/property-news.css?v=1"/><link rel="shortcut icon" href="/favicon.svg"/><link rel="icon" href="/favicon.svg"/><link rel="apple-touch-icon" href="/favicon-192.png"/><title>UAE Property News Analysis | James</title><meta name="description" content="Original source-led analysis of UAE property reporting from Khaleej Times, Gulf News, The National and Arabian Business."/><link rel="canonical" href="{SITE}/blog/property-news/"/><meta property="og:type" content="website"/><meta property="og:title" content="UAE Property News Analysis"/><meta property="og:description" content="Property headlines explained with source links, market context and due-diligence checks."/><meta property="og:url" content="{SITE}/blog/property-news/"/><meta property="og:image" content="{SITE + posts[0].image}"/><meta property="og:image:alt" content="{esc(image_alt(posts[0]))}"/><script type="application/ld+json">{json.dumps(item_list, ensure_ascii=False, separators=(',', ':'))}</script><link rel="alternate" type="application/rss+xml" href="/feed.xml"/><script defer src="/assets/site.js?v=5"></script></head><body>{GTM_BODY}<a class="skip-link" href="#main-content">Skip to main content</a>{NAV_HEADER}<main id="main-content"><section class="section-shell news-hub-hero"><p class="section-kicker">Monitored UAE property news</p><h1>Property headlines, with the decision context added.</h1><p class="hero-description">This page tracks new property reporting from Khaleej Times, Gulf News, The National and Arabian Business. Each entry is an original brief with a direct source link, important limitations and practical checks for buyers, tenants, owners and investors.</p><div class="hero-actions"><a class="button button-primary" href="/blog/">All property guides</a><a class="button button-outline" href="/">Dubai Data</a><a class="button button-outline" href="/abu-dhabi-data/">Abu Dhabi Data</a></div></section><section class="section-shell"><div class="news-automation-note"><strong>Publishing schedule:</strong> The monitor checks all four publisher pages hourly. A new article is normally converted into a source brief within the next successful GitHub Actions run.</div><div class="news-hub-grid">{cards}</div></section><section class="section-shell contact-card"><div><p class="section-kicker">Need deeper analysis?</p><h2>Connect market reporting to a project, audience or acquisition plan.</h2><p>Share the property, target market and commercial objective.</p></div><a class="button nav-whatsapp" href="/contact/">Contact James <span aria-hidden="true">→</span></a></section></main>{FOOTER}</body></html>'''
+    return f'''<!DOCTYPE html><html lang="en-AE"><head>{GTM_HEAD}<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/css/5576f66c8ff02a6a.css?v=12"/><link rel="stylesheet" href="/assets/property-news.css?v=2"/><link rel="shortcut icon" href="/favicon.svg"/><link rel="icon" href="/favicon.svg"/><link rel="apple-touch-icon" href="/favicon-192.png"/><title>UAE Property News Analysis | James</title><meta name="description" content="Original source-led analysis of UAE property reporting from Khaleej Times, Gulf News, The National and Arabian Business."/><link rel="canonical" href="{SITE}/blog/property-news/"/><meta property="og:type" content="website"/><meta property="og:title" content="UAE Property News Analysis"/><meta property="og:description" content="Property headlines explained with source links, market context and due-diligence checks."/><meta property="og:url" content="{SITE}/blog/property-news/"/><meta property="og:image" content="{SITE + posts[0].image}"/><meta property="og:image:alt" content="{esc(image_alt(posts[0]))}"/><script type="application/ld+json">{json.dumps(item_list, ensure_ascii=False, separators=(',', ':'))}</script><link rel="alternate" type="application/rss+xml" href="/feed.xml"/><script defer src="/assets/site.js?v=5"></script></head><body>{GTM_BODY}<a class="skip-link" href="#main-content">Skip to main content</a>{NAV_HEADER}<main id="main-content"><section class="section-shell news-hub-hero"><p class="section-kicker">Monitored UAE property news</p><h1>Property headlines, with the decision context added.</h1><p class="hero-description">This page tracks new property reporting from Khaleej Times, Gulf News, The National and Arabian Business. Each entry is an original brief with a direct source link, important limitations and practical checks for buyers, tenants, owners and investors.</p><div class="hero-actions"><a class="button button-primary" href="/blog/">All property guides</a><a class="button button-outline" href="/">Dubai Data</a><a class="button button-outline" href="/abu-dhabi-data/">Abu Dhabi Data</a></div></section><section class="section-shell"><div class="news-automation-note"><strong>Publishing schedule:</strong> The monitor checks all four publisher pages hourly. A new article is normally converted into a source brief within the next successful GitHub Actions run.</div><div class="news-hub-grid">{cards}</div></section><section class="section-shell contact-card"><div><p class="section-kicker">Need deeper analysis?</p><h2>Connect market reporting to a project, audience or acquisition plan.</h2><p>Share the property, target market and commercial objective.</p></div><a class="button nav-whatsapp" href="/contact/">Contact James <span aria-hidden="true">→</span></a></section></main>{FOOTER}</body></html>'''
 
 
 def update_feed(posts: list[Post]) -> None:
@@ -1144,12 +1148,20 @@ def create_auto_posts(state: dict, current_posts: list[Post]) -> list[Post]:
     signatures = set(state.get("seen_title_signatures", []))
     signatures.update(signature for signature in (title_signature(post.title) for post in current_posts) if signature)
     new_posts: list[Post] = []
+    active_auto_count = sum(1 for post in current_posts if post.auto)
+    max_active_auto_posts = 24  # Must not exceed the unique curated image pool.
+    if active_auto_count >= max_active_auto_posts:
+        print("Property-news image capacity reached; skipping new automated briefs until a unique image is added.")
+        return new_posts
     discovered: list[tuple[str, str]] = []
     for category in CATEGORY_PAGES:
         for url in discover_links(category):
             discovered.append((url, category["name"]))
     cutoff = NOW - timedelta(hours=48)
     for url, source_name in discovered:
+        if active_auto_count + len(new_posts) >= max_active_auto_posts:
+            print("Property-news image capacity reached during this run; remaining links were left for a later check.")
+            break
         url = canonical_url(url)
         if url in seen:
             continue

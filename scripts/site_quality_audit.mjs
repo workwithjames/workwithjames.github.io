@@ -296,7 +296,10 @@ async function runtimeAudit() {
 }
 
 const staticResult = staticAudit();
-const runtimeResult = await runtimeAudit();
+const staticOnly = process.env.AUDIT_STATIC_ONLY === '1';
+const runtimeResult = staticOnly
+  ? { issues: [], routeCount: 0, viewportCount: 0 }
+  : await runtimeAudit();
 const issues = [...staticResult.issues, ...runtimeResult.issues];
 const severityCounts = issues.reduce((acc, issue) => {
   acc[issue.severity] = (acc[issue.severity] || 0) + 1;

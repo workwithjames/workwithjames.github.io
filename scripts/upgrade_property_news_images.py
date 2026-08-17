@@ -22,6 +22,12 @@ SITE = "https://jamesrealty.uk"
 # siblings of the manual News-card thumbnails here: that would look duplicated
 # even when the file names differ.
 ASSETS: dict[str, str] = {
+    "/images/landing/emaar-dubai-waterfront-investment.webp": "Premium Dubai waterfront residences representing Emaar's residential sales and project pipeline",
+    "/images/landing/aldar-yas-waterfront-investment.webp": "Abu Dhabi waterfront residences representing housing delivery and community development",
+    "/images/landing/damac-branded-waterfront-residences.webp": "Dubai waterfront sales gallery representing property finance and DAMAC buyers",
+    "/images/landing/binghatti-geometric-dubai-residences.webp": "Geometric Dubai residential towers representing Binghatti property and credit-market news",
+    "/images/landing/nakheel-dubai-island-waterfront.webp": "Dubai island community representing Nakheel handovers and waterfront development",
+    "/images/landing/mudon-family-townhouses-dubai.webp": "Landscaped Dubai family homes representing new community construction",
     "/images/mercedes-benz-places-optimized.webp": "Contemporary luxury residential tower representing Dubai's prime property market",
     "/images/jacob-co-residences-optimized.webp": "High-end Dubai residential architecture representing luxury property activity",
     "/case-studies/bugatti-residences.jpg": "Luxury Dubai residential development representing the ultra-prime housing segment",
@@ -92,12 +98,17 @@ PREFERENCES: dict[str, list[str]] = {
         "/images/real-estate-crm-review.webp",
     ],
     "buyer": [
+        "/images/landing/damac-branded-waterfront-residences.webp",
         "/images/visuals/buyer-consultation-1200.webp",
         "/images/james-realty-dubai-advisory-social-v2.jpg",
         "/images/visuals/seller-preparation-1200.webp",
         "/images/uae-property-advisory-consultation-social-v5.jpg",
     ],
     "supply": [
+        "/images/landing/nakheel-dubai-island-waterfront.webp",
+        "/images/landing/aldar-yas-waterfront-investment.webp",
+        "/images/landing/mudon-family-townhouses-dubai.webp",
+        "/images/landing/emaar-dubai-waterfront-investment.webp",
         "/images/dubai-skyline-real-estate-social-v4.jpg",
         "/images/visuals/home-property-intelligence-1200.webp",
         "/images/james-realty-dubai-advisory-social-v2.jpg",
@@ -108,6 +119,10 @@ PREFERENCES: dict[str, list[str]] = {
         "/images/dubai-portfolio-optimized.webp",
     ],
     "market": [
+        "/images/landing/binghatti-geometric-dubai-residences.webp",
+        "/images/landing/emaar-dubai-waterfront-investment.webp",
+        "/images/jacob-co-residences-optimized.webp",
+        "/images/mercedes-benz-places-optimized.webp",
         "/images/dubai-portfolio-optimized.webp",
         "/images/dubai-residential-portfolio.webp",
         "/images/dubai-skyline-real-estate-social-v4.jpg",
@@ -139,7 +154,10 @@ CATEGORY_ORDER = [
 
 def article_signal(slug: str, page_text: str) -> str:
     """Use only article-owned text; never navigation or related-link copy."""
-    bits = [slug]
+    # Historical slugs are retained for canonical stability and can contain an
+    # obsolete generic classifier (for example, "luxury" on a handover story).
+    # Use the repaired on-page title and description instead.
+    bits: list[str] = []
     for pattern in (
         r'<h1>(.*?)</h1>',
         r'<p class="article-deck">(.*?)</p>',
@@ -159,7 +177,7 @@ def category_for(slug: str, page_text: str) -> str:
     is_rental = any(word in text for word in ("rent", "rental", "tenant", "tenancy", "lease"))
     is_supply = any(word in text for word in ("supply", "delivery", "deliveries", "handover", "handovers", "new homes", "new units"))
     is_buyer = any(word in text for word in ("buyer", "homebuyer", "buying", "long-term home", "long term home"))
-    is_luxury = any(word in text for word in ("luxury", "ultra-prime", "ultra prime", "villa", "record sale", "trophy"))
+    is_luxury = any(word in text for word in ("luxury", "ultra-prime", "ultra prime", "record sale", "trophy")) or bool(re.search(r"\bvillas?\b", text))
 
     if is_abu and is_rental:
         return "abu_dhabi_rental"
@@ -173,10 +191,10 @@ def category_for(slug: str, page_text: str) -> str:
         return "sharjah"
     if is_rental:
         return "rental"
-    if is_luxury:
-        return "luxury"
     if is_supply:
         return "supply"
+    if is_luxury:
+        return "luxury"
     if is_buyer:
         return "buyer"
     return "market"
@@ -208,7 +226,10 @@ def choose_assignments(briefs: list[dict[str, object]]) -> dict[str, tuple[str, 
             old_image = str(brief["old_image"])
             preferred = PREFERENCES.get(category, PREFERENCES["market"])
 
-            if old_image in preferred and old_image in ASSETS and old_image not in used:
+            # Preserve any already-curated unique asset. Existing briefs may
+            # have a deliberately assigned developer or community visual that
+            # is more specific than the broad automatic category.
+            if old_image in ASSETS and old_image not in used:
                 selected = old_image
             else:
                 selected = next((path for path in preferred if path not in used), "")
@@ -374,7 +395,7 @@ def main() -> int:
 
     for page in sorted(ROOT.glob("blog/property-news-*/index.html")):
         text = page.read_text(encoding="utf-8")
-        if "Automated source brief" not in text or "news-brief-visual" not in text:
+        if not any(label in text for label in ("Automated source brief", "Source-linked property brief")) or "news-brief-visual" not in text:
             continue
         slug = page.parent.name
         old_image = current_hero(text)

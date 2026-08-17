@@ -7,7 +7,7 @@ on:
   push:
     paths:
       - '.github/workflows/property-news-autopublish.yml'
-      - '.automation/property-news-script/**'
+      - 'scripts/property_news_autopublish.py'
       - 'scripts/upgrade_property_news_images.py'
 
 permissions:
@@ -28,24 +28,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Restore and configure publisher script
+      - name: Validate publisher scripts
         shell: bash
         run: |
-          mkdir -p scripts
-          cat .automation/property-news-script/chunk-*.txt \
-            | tr -d '\n' \
-            | base64 -d \
-            | gzip -d \
-            > scripts/property_news_autopublish.py
-          python - <<'PY'
-          from pathlib import Path
-
-          path = Path('scripts/property_news_autopublish.py')
-          text = path.read_text(encoding='utf-8')
-          text = text.replace('James' + ' Ravi', 'James')
-          path.write_text(text, encoding='utf-8')
-          PY
-          chmod +x scripts/property_news_autopublish.py
           python -m py_compile scripts/property_news_autopublish.py
           python -m py_compile scripts/upgrade_property_news_images.py
 
