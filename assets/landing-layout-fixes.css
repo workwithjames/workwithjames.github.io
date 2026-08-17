@@ -1,0 +1,179 @@
+/* James Realty landing-page layout corrections
+   Tightens vertical rhythm, removes artificial card offsets/min-heights,
+   prevents empty grid regions, and keeps all 10 campaign pages balanced. */
+
+:root{
+  --section:clamp(64px,6.8vw,104px);
+}
+
+/* Shared section rhythm */
+.jr-section{padding-block:var(--section)}
+.jr-heading{gap:clamp(24px,5vw,72px);margin-bottom:clamp(34px,4.5vw,60px)}
+.jr-heading h2{font-size:clamp(2.7rem,5vw,5.6rem);line-height:.96}
+.jr-heading--compact{max-width:820px}
+.jr-heading--compact h2{font-size:clamp(2.7rem,4.8vw,5.2rem)}
+.jr-heading>p:last-child{max-width:54ch;font-size:.92rem;line-height:1.65}
+
+/* At-a-glance bar: compact rather than four oversized empty cells */
+.jr-facts article{
+  min-height:104px;
+  padding:20px 22px;
+  grid-template-columns:26px 1fr;
+  align-content:center;
+}
+.jr-facts strong{font-size:1rem;line-height:1.15}
+.jr-facts small{margin-top:4px;font-size:.69rem;line-height:1.35}
+
+/* Overview/signature cells: remove the large dead zone between number and title */
+.jr-signature__grid{align-items:stretch}
+.jr-signature article{
+  min-height:188px;
+  padding:26px 28px 28px;
+  justify-content:flex-start;
+}
+.jr-signature h3{
+  margin:34px 0 10px;
+  font-size:clamp(1.45rem,2vw,2.15rem);
+  line-height:1.06;
+}
+.jr-signature p{max-width:36ch;font-size:.82rem;line-height:1.5}
+
+/* Project cards: align starts, eliminate deliberate stagger and artificial text heights */
+.jr-projects{align-items:stretch}
+.jr-project{height:100%}
+.jr-project__body{display:flex;flex-direction:column;height:100%}
+.jr-project__body>p{min-height:0;margin-bottom:20px;line-height:1.58}
+.jr-project ul{margin-top:auto}
+.jr-project__bottom{min-height:0;padding-top:18px;align-items:flex-end}
+.jr-project__cta{margin-top:16px}
+.theme-emaar .jr-project:first-child{margin-top:0}
+.theme-binghatti .jr-project:nth-child(2){transform:none}
+.theme-binghatti .jr-project:nth-child(2):hover{transform:translateY(-8px)}
+
+/* Keep standard 3-card investor pages balanced on desktop instead of a tall 2+1 layout */
+.theme-uk .jr-projects,
+.theme-usa .jr-projects,
+.theme-india .jr-projects,
+.theme-ar .jr-projects{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  max-width:none;
+}
+.theme-uk .jr-project figure,
+.theme-usa .jr-project figure,
+.theme-india .jr-project figure,
+.theme-ar .jr-project figure{aspect-ratio:4/3}
+
+/* Map block: reduce unnecessary vertical bulk */
+.jr-map{gap:clamp(36px,6vw,84px)}
+.jr-map__copy h2{font-size:clamp(2.8rem,4.8vw,5.5rem)}
+.jr-map__list{margin-top:30px}
+.jr-map iframe{height:460px}
+
+/* Investor lens: place proof beside the intro instead of creating an empty left row */
+@media(min-width:1101px){
+  .jr-lens{
+    grid-template-columns:minmax(300px,.82fr) minmax(0,1.18fr);
+    grid-template-areas:
+      "intro criteria"
+      "proof criteria";
+    gap:30px clamp(48px,6vw,90px);
+    align-items:start;
+  }
+  .jr-lens>header{grid-area:intro}
+  .jr-lens__grid{grid-area:criteria}
+  .jr-lens__aside{grid-area:proof;grid-column:auto;align-self:start}
+}
+.jr-lens header h2{font-size:clamp(2.8rem,4.8vw,5.5rem);line-height:.98}
+.jr-lens header>p:last-child{max-width:48ch;line-height:1.65}
+.jr-lens__grid article{padding:21px 0}
+.jr-lens__grid strong{font-size:1.2rem}
+.jr-lens__grid p{max-width:62ch;margin-top:6px;line-height:1.5}
+.jr-lens__bar{display:none}
+.jr-lens__aside p{padding:17px 18px}
+
+/* Buying-path rail: remove the oversized empty vertical gap inside every step */
+.jr-process__rail{margin-top:46px}
+.jr-process__rail li{
+  min-height:176px;
+  padding:29px 24px 24px 0;
+}
+.jr-process__rail h3{
+  margin:30px 0 8px;
+  font-size:1.55rem;
+  line-height:1.05;
+}
+.jr-process__rail p{max-width:255px;margin-bottom:0;line-height:1.5}
+
+/* Similar oversized helper blocks used by country pages */
+.jr-day article{padding:26px}
+.jr-day strong{margin:28px 0 8px}
+.jr-costs__stack article{min-height:174px;padding:24px}
+.jr-costs__stack strong{margin:38px 0 9px}
+.jr-payment__flow article{padding:26px}
+.jr-payment__flow strong{margin:30px 0 9px}
+
+/* Forms and FAQ: keep readable widths without excessive gaps */
+.jr-form-wrap{gap:clamp(38px,6vw,86px)}
+.jr-form-copy h2{font-size:clamp(2.8rem,4.8vw,5.5rem)}
+.jr-faq{gap:clamp(36px,6vw,84px)}
+.jr-faq header h2{font-size:clamp(2.7rem,4.5vw,5rem)}
+
+@media(max-width:1100px){
+  .jr-heading{margin-bottom:40px}
+  .jr-project__body>p{min-height:0}
+  .jr-lens{gap:36px}
+  .jr-lens__aside{grid-column:auto}
+  .jr-map iframe{height:420px}
+  .theme-uk .jr-projects,
+  .theme-usa .jr-projects,
+  .theme-india .jr-projects,
+  .theme-ar .jr-projects{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media(max-width:760px){
+  :root{--section:60px}
+  .jr-heading{gap:16px;margin-bottom:30px}
+  .jr-heading h2,.jr-heading--compact h2{font-size:clamp(2.45rem,12vw,3.9rem)}
+
+  .jr-facts__track{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    overflow:visible;
+    scroll-snap-type:none;
+  }
+  .jr-facts article{
+    min-width:0;
+    min-height:92px;
+    padding:16px 14px;
+    grid-template-columns:22px 1fr;
+    border-bottom:1px solid var(--line);
+  }
+
+  .jr-signature__grid{
+    display:grid;
+    grid-template-columns:1fr;
+    overflow:visible;
+    scroll-snap-type:none;
+  }
+  .jr-signature article{
+    min-width:0;
+    min-height:148px;
+    padding:22px;
+    border-inline-end:1px solid var(--line);
+  }
+  .jr-signature h3{margin-top:22px}
+
+  .theme-uk .jr-projects,
+  .theme-usa .jr-projects,
+  .theme-india .jr-projects,
+  .theme-ar .jr-projects{grid-template-columns:1fr}
+
+  .jr-project__bottom{padding-top:15px}
+  .jr-map iframe{height:340px}
+  .jr-lens__grid article{padding:18px 0}
+  .jr-process__rail{margin-top:30px}
+  .jr-process__rail li{min-height:0;padding:20px 0}
+  .jr-process__rail h3{margin:0 0 6px}
+  .jr-day article,.jr-costs__stack article,.jr-payment__flow article{min-height:0}
+  .jr-costs__stack strong,.jr-payment__flow strong{margin-top:24px}
+}
