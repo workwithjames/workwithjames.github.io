@@ -21,11 +21,11 @@ on:
 permissions:
   contents: write
 
-# The audit writes its generated report back to main, so serialize it with the
-# automated publishers that also commit generated site files.
+# Audit runs supersede older audits, but do not share the publisher queue. The
+# report-only commit rebases before push, so it can safely coexist with publishing.
 concurrency:
-  group: site-content-writes
-  cancel-in-progress: false
+  group: site-quality-audit
+  cancel-in-progress: true
 
 jobs:
   audit:
