@@ -1,0 +1,41 @@
+name: Apply DAMAC final layout
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-damac-final-layout.yml'
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Apply final DAMAC layout
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('landing/damac/index.html')
+          s=p.read_text(encoding='utf-8')
+          needle='<link rel="stylesheet" href="https://jamesrealty.uk/assets/damac-premium.css?v=1">'
+          extra='<link rel="stylesheet" href="https://jamesrealty.uk/assets/damac-spacing-final.css?v=1">'
+          if extra not in s:
+              s=s.replace(needle,needle+extra)
+          s=s.replace('Three ways to buy the DAMAC proposition','Three DAMAC project profiles to compare now')
+          s=s.replace('Branded waterfront apartments, a resort-style villa community and apartment-led community living have different cash flows, costs and audiences.','These three profiles show how different DAMAC propositions can be. Safa Gate is compared separately below as the city-address alternative.')
+          location='''<section class="jr-section damac-location-section" id="locations"><div class="jr-shell"><header class="jr-heading jr-heading--compact" data-reveal><p class="jr-kicker">Location changes the investment case</p><h2 class="jr-display">Four addresses. Four different buyer pools.</h2><p>Do not compare these projects as if they serve the same tenant or resale audience. Start with the location, then assess the exact unit and ownership cost.</p></header><div class="damac-location-grid"><article data-reveal><span>01 · Waterfront</span><strong>Dubai Maritime City</strong><p>Chelsea Residences combines branded positioning with a maritime waterfront address.</p><small>Profile: branded apartments</small></article><article data-reveal><span>02 · Masterplan</span><strong>Dubailand</strong><p>DAMAC Islands 2 is a large-scale villa and townhouse community proposition.</p><small>Profile: family + second-home</small></article><article data-reveal><span>03 · Emerging corridor</span><strong>Dubai Investment Park</strong><p>Riverside Views is an apartment-led proposition inside the wider DAMAC Riverside community.</p><small>Profile: 1–2 bedroom apartments</small></article><article data-reveal><span>04 · City address</span><strong>Sheikh Zayed Road</strong><p>Safa Gate sits by Safa Park with a very different city-facing demand profile.</p><small>Profile: 1–2 bedroom apartments</small></article></div></div></section>'''
+          s2,n=re.subn(r'<section class="jr-section jr-map-section".*?</section>',location,s,count=1,flags=re.S)
+          if n!=1: raise SystemExit(f'location section: expected 1 replacement, got {n}')
+          p.write_text(s2,encoding='utf-8')
+          PY
+      - name: Commit final DAMAC layout
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add landing/damac/index.html
+          git commit -m 'Tighten DAMAC project cards and location comparison'
+          git push origin HEAD:main
