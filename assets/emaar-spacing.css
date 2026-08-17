@@ -1,0 +1,48 @@
+/* Emaar whitespace refinement — keeps premium breathing room while removing artificial height. */
+.theme-emaar .jr-section{padding-block:clamp(58px,5.4vw,84px)}
+.theme-emaar .jr-heading{margin-bottom:clamp(30px,3.8vw,48px)}
+.theme-emaar .emaar-brief .jr-heading{margin-bottom:32px}
+.theme-emaar .emaar-brief-card{min-height:200px;padding:24px 24px 22px}
+.theme-emaar .emaar-brief-card h3{margin:24px 0 10px}
+.theme-emaar .emaar-brief-card strong{padding-top:16px}
+
+.theme-emaar .jr-project-section .jr-heading{margin-bottom:40px}
+.theme-emaar .jr-project__body{padding:24px 24px 26px}
+.theme-emaar .jr-project__bottom{padding-top:16px}
+.theme-emaar .jr-project__cta{margin-top:15px}
+.theme-emaar .emaar-more-launches{margin-top:18px}
+.theme-emaar .emaar-launch-card{min-height:230px;padding:24px}
+.theme-emaar .emaar-launch-card h3{margin:28px 0 7px}
+.theme-emaar .emaar-launch-card p{margin:14px 0 18px}
+.theme-emaar .emaar-launch-card footer{padding-top:14px}
+
+.theme-emaar .emaar-community-grid{gap:18px}
+.theme-emaar .emaar-community-lead{min-height:420px;padding:clamp(34px,4.5vw,56px);justify-content:center}
+.theme-emaar .emaar-community-lead h2{margin-bottom:18px}
+.theme-emaar .emaar-community-list article{padding:24px}
+.theme-emaar .emaar-community-list h3{margin:26px 0 9px}
+
+.theme-emaar .jr-lens__grid article{padding-block:18px}
+.theme-emaar .jr-process__rail{margin-top:34px}
+.theme-emaar .jr-process__rail li{min-height:158px;padding-top:24px;padding-bottom:20px}
+.theme-emaar .jr-process__rail h3{margin-top:24px}
+.theme-emaar .jr-faq{gap:clamp(30px,4.5vw,62px)}
+
+@media(max-width:1100px){
+  .theme-emaar .jr-section{padding-block:64px}
+  .theme-emaar .emaar-community-lead{min-height:360px}
+}
+@media(max-width:760px){
+  .theme-emaar .jr-section{padding-block:52px}
+  .theme-emaar .jr-heading{margin-bottom:28px}
+  .theme-emaar .emaar-brief .jr-heading{margin-bottom:26px}
+  .theme-emaar .emaar-brief-card{padding:21px}
+  .theme-emaar .emaar-launch-card{min-height:0;padding:22px}
+  .theme-emaar .emaar-launch-card h3{margin-top:20px}
+  .theme-emaar .emaar-community-lead{min-height:320px;padding:26px;justify-content:center}
+  .theme-emaar .emaar-community-list article{padding:21px}
+  .theme-emaar .emaar-community-list h3{margin-top:18px}
+  .theme-emaar .jr-process__rail{margin-top:24px}
+  .theme-emaar .jr-process__rail li{min-height:0;padding-block:18px}
+  .theme-emaar .jr-process__rail h3{margin-top:0}
+}
