@@ -67,7 +67,7 @@ function removeDirectGa4Configuration(body, contentType) {
 }
 
 function replacePersonalName(body, pathname) {
-  if (pathname === '/' || pathname.startsWith('/landing/') || pathname.startsWith('/privacy-policy/')) return body;
+  if (pathname.startsWith('/landing/') || pathname.startsWith('/privacy-policy/')) return body;
   return body.split('James' + ' Ravi').join('James');
 }
 
@@ -227,7 +227,7 @@ function injectNavigationAssets(body, contentType) {
 
 function injectQualityAssets(body, contentType, pathname) {
   if (!contentType.includes('text/html')) return body;
-  if (pathname === '/' || pathname.startsWith('/landing/') || pathname.startsWith('/privacy-policy/')) return body;
+  if (pathname.startsWith('/landing/') || pathname.startsWith('/privacy-policy/')) return body;
 
   const assets = [];
   if (!body.includes('/assets/quality-fixes.css')) {
@@ -243,7 +243,7 @@ function injectQualityAssets(body, contentType, pathname) {
 function shouldInjectIntentPopup(pathname) {
   if (pathname === '/contact/' || pathname === '/about-me/' || pathname === '/cite/') return false;
   if (pathname === '/blog/' || pathname === '/blog/property-news/') return false;
-  if (pathname === '/') return false;
+  if (pathname === '/') return true;
   if (pathname.startsWith('/buy-invest-dubai/')) return true;
   if (pathname.startsWith('/sell-dubai-property/')) return true;
   if (pathname.startsWith('/real-estate-marketing/')) return true;

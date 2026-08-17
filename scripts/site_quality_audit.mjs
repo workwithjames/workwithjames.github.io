@@ -121,12 +121,10 @@ function sitemapRoutes() {
 
 async function runFunctionalChecks(page, route, location, issues) {
   if (route === '/') {
-    const projects = await page.locator('.project-list .project').count();
-    const developerDesks = await page.locator('.developer-list a').count();
-    const investorDesks = await page.locator('.market-grid a').count();
-    if (projects !== 3) pushIssue(issues, 'error', 'functional', location, `Homepage should show 3 current opportunities, found ${projects}`);
-    if (developerDesks !== 6) pushIssue(issues, 'error', 'functional', location, `Homepage should show 6 developer desks, found ${developerDesks}`);
-    if (investorDesks !== 4) pushIssue(issues, 'error', 'functional', location, `Homepage should show 4 international investor desks, found ${investorDesks}`);
+    const journeys = await page.locator('.home-journey').count();
+    const toolCards = await page.locator('.tool-directory-card').count();
+    if (journeys !== 3) pushIssue(issues, 'error', 'functional', location, `Homepage should show 3 primary journeys, found ${journeys}`);
+    if (toolCards < 4) pushIssue(issues, 'error', 'functional', location, `Homepage tool directory should show at least 4 tools, found ${toolCards}`);
   }
 
   if (route === '/contact/') {
@@ -174,7 +172,6 @@ async function runtimeAudit() {
     { name: 'mobile', width: 390, height: 844, compactNavigation: true }
   ];
   const expectedNavigation = ['Home', 'Your Goal', 'Tools', 'About Me', 'News', 'Contact Me'];
-  const expectedHomeNavigation = ['Opportunities', 'Developers', 'Locations', 'Research', 'Insights', 'About'];
 
   for (const viewport of viewports) {
     const context = await browser.newContext({ viewport: { width: viewport.width, height: viewport.height }, reducedMotion: 'reduce' });
@@ -235,7 +232,6 @@ async function runtimeAudit() {
             unnamedButtons,
             desktopNavOrder: directNavOrder('.global-links'),
             compactNavOrder: directNavOrder('.mobile-page-tabs'),
-            homeNavOrder: directNavOrder('.site-menu'),
             compactNavVisible: (() => {
               const el = document.querySelector('.mobile-page-tabs');
               return Boolean(el && getComputedStyle(el).display !== 'none' && el.getBoundingClientRect().width > 0);
@@ -253,14 +249,12 @@ async function runtimeAudit() {
         for (const item of result.unlabeled) pushIssue(issues, 'error', 'accessibility', location, 'Form control lacks an accessible label', item);
         for (const item of result.unnamedButtons) pushIssue(issues, 'error', 'accessibility', location, 'Button lacks an accessible name', item);
 
-        const isHome = route === '/';
-        const expected = isHome ? expectedHomeNavigation : expectedNavigation;
-        const actualNavigation = isHome ? result.homeNavOrder : (viewport.compactNavigation ? result.compactNavOrder : result.desktopNavOrder);
-        if (!sameOrder(actualNavigation, expected)) {
-          pushIssue(issues, 'error', 'navigation', location, 'Header order does not match the current navigation flow', { expected, actual: actualNavigation });
+        const actualNavigation = viewport.compactNavigation ? result.compactNavOrder : result.desktopNavOrder;
+        if (!sameOrder(actualNavigation, expectedNavigation)) {
+          pushIssue(issues, 'error', 'navigation', location, 'Header order does not match the current navigation flow', { expected: expectedNavigation, actual: actualNavigation });
         }
 
-        if (viewport.compactNavigation && !isHome) {
+        if (viewport.compactNavigation) {
           if (!result.compactNavVisible) pushIssue(issues, 'error', 'navigation', location, 'Compact page navigation is not visible');
           const compactNav = page.locator('.mobile-page-tabs');
           const goal = compactNav.locator('.goal-nav:not(.tools-nav) > summary');
