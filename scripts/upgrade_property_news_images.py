@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""Give every automated property-news brief a relevant local editorial photo.
+"""Give automated property-news briefs unique, relevant editorial imagery.
 
 The publisher does not copy third-party publisher images. This post-processor uses
-James Realty's own 16:9 assets, corrects old SVG placeholders and any earlier
-misclassification, and keeps article cards/state/feed references aligned.
+James Realty's own editorial assets, keeps every automated card on the main News
+page on a different visual, corrects old SVG placeholders/misclassifications, and
+keeps article cards, state, feeds and image-sitemap references aligned.
 """
 
 from __future__ import annotations
 
-import hashlib
 import html
 import json
 import re
@@ -18,39 +18,123 @@ ROOT = Path(__file__).resolve().parents[1]
 STATE_PATH = ROOT / "data" / "property-news-state.json"
 SITE = "https://jamesrealty.uk"
 
-POOLS: dict[str, list[tuple[str, str]]] = {
-    "abu_dhabi": [
-        ("/images/abu-dhabi-property-market-h1-2026.webp", "Abu Dhabi residential skyline representing current property-market activity"),
-        ("/images/property-news/adgm-broker-rankings-buyers-tenants-guide.webp", "Abu Dhabi property advisory setting representing a real-estate market update"),
+# These are deliberately different visual families. Do not add the full-size
+# siblings of the manual News-card thumbnails here: that would look duplicated
+# even when the file names differ.
+ASSETS: dict[str, str] = {
+    "/images/mercedes-benz-places-optimized.webp": "Contemporary luxury residential tower representing Dubai's prime property market",
+    "/images/jacob-co-residences-optimized.webp": "High-end Dubai residential architecture representing luxury property activity",
+    "/case-studies/bugatti-residences.jpg": "Luxury Dubai residential development representing the ultra-prime housing segment",
+    "/images/dubai-residential-portfolio.webp": "Dubai residential towers representing current property-market activity",
+    "/images/dubai-portfolio-optimized.webp": "Dubai skyline and residential development representing property-market analysis",
+    "/images/dubai-skyline-real-estate-social-v4.jpg": "Dubai skyline representing housing supply and real-estate market activity",
+    "/images/james-realty-dubai-advisory-social-v2.jpg": "Property advisory setting representing a Dubai residential-market decision",
+    "/images/james-realty-social-preview.webp": "UAE residential property scene representing market analysis and buyer decisions",
+    "/images/real-estate-crm-review.webp": "Real-estate advisory workspace representing research and market review",
+    "/images/real-estate-marketing-workshop.webp": "Real-estate planning session representing development and market analysis",
+    "/images/uae-property-advisory-consultation-social-v5.jpg": "UAE property consultation representing buyer and investor decision-making",
+    "/images/visuals/buyer-consultation-1200.webp": "Property consultation representing homebuyer research and decision-making",
+    "/images/visuals/home-property-intelligence-1200.webp": "UAE waterfront residential towers representing property-market intelligence",
+    "/images/visuals/marketing-strategy-1200.webp": "Real-estate strategy session representing market and development planning",
+    "/images/visuals/seller-preparation-1200.webp": "Residential property consultation representing tenancy and ownership decisions",
+    "/case-studies/demand-strategy.jpg": "Real-estate demand strategy scene representing property-market analysis",
+    "/case-studies/tbwa-mena-marketing.webp": "UAE market strategy visual representing regional property-demand analysis",
+    "/case-studies/tbwa-slow-trends.webp": "Market-trend analysis visual representing longer-term property signals",
+}
+
+# Preference order matters. The selector walks each list and takes the first
+# unused image, so relevance is preserved without allowing visual duplication.
+PREFERENCES: dict[str, list[str]] = {
+    "luxury": [
+        "/images/mercedes-benz-places-optimized.webp",
+        "/images/jacob-co-residences-optimized.webp",
+        "/case-studies/bugatti-residences.jpg",
+        "/images/dubai-residential-portfolio.webp",
+        "/images/dubai-portfolio-optimized.webp",
     ],
     "rental": [
-        ("/images/dubai-tenant-guest-access.webp", "Residential apartment setting representing UAE tenancy and rental-market decisions"),
-        ("/images/dubai-shared-housing-guide.webp", "UAE residential building representing rental-market and tenancy decisions"),
+        "/images/visuals/seller-preparation-1200.webp",
+        "/images/visuals/buyer-consultation-1200.webp",
+        "/images/uae-property-advisory-consultation-social-v5.jpg",
+        "/images/james-realty-dubai-advisory-social-v2.jpg",
     ],
-    "luxury": [
-        ("/images/dubai-residential-portfolio.webp", "High-end UAE residences representing luxury property-market activity"),
-        ("/images/dubai-portfolio-optimized.webp", "Premium UAE residential towers representing luxury property-market analysis"),
+    "abu_dhabi_rental": [
+        "/images/visuals/seller-preparation-1200.webp",
+        "/images/uae-property-advisory-consultation-social-v5.jpg",
+        "/images/visuals/buyer-consultation-1200.webp",
+        "/images/visuals/home-property-intelligence-1200.webp",
     ],
-    "supply": [
-        ("/images/property-news/dubai-h1-2026-delivery-led-property-cycle.webp", "Modern residential towers representing new housing delivery and supply"),
-        ("/images/property-news/dubai-24800-new-homes-buyer-choice-2026.webp", "New residential homes representing housing supply and buyer choice"),
-        ("/images/dubai-community-buying-guide.webp", "Modern residential community representing housing supply and buyer choice"),
+    "abu_dhabi_supply": [
+        "/images/uae-property-advisory-consultation-social-v5.jpg",
+        "/images/visuals/home-property-intelligence-1200.webp",
+        "/images/visuals/buyer-consultation-1200.webp",
+        "/images/james-realty-dubai-advisory-social-v2.jpg",
+        "/images/dubai-skyline-real-estate-social-v4.jpg",
+    ],
+    "abu_dhabi": [
+        "/images/uae-property-advisory-consultation-social-v5.jpg",
+        "/images/visuals/home-property-intelligence-1200.webp",
+        "/images/visuals/buyer-consultation-1200.webp",
+        "/images/james-realty-dubai-advisory-social-v2.jpg",
+        "/images/real-estate-crm-review.webp",
+    ],
+    "sharjah_buyer": [
+        "/images/visuals/buyer-consultation-1200.webp",
+        "/images/visuals/home-property-intelligence-1200.webp",
+        "/images/uae-property-advisory-consultation-social-v5.jpg",
+        "/images/james-realty-social-preview.webp",
+    ],
+    "sharjah": [
+        "/images/visuals/home-property-intelligence-1200.webp",
+        "/images/visuals/buyer-consultation-1200.webp",
+        "/images/uae-property-advisory-consultation-social-v5.jpg",
+        "/images/james-realty-social-preview.webp",
+        "/images/real-estate-crm-review.webp",
     ],
     "buyer": [
-        ("/images/property-news/dubai-residents-buying-long-term-homes.webp", "Home viewing representing UAE buyer decision-making and long-term ownership"),
-        ("/images/dubai-community-buying-guide.webp", "Residential community representing UAE homebuyer decision-making"),
+        "/images/visuals/buyer-consultation-1200.webp",
+        "/images/james-realty-dubai-advisory-social-v2.jpg",
+        "/images/visuals/seller-preparation-1200.webp",
+        "/images/uae-property-advisory-consultation-social-v5.jpg",
+    ],
+    "supply": [
+        "/images/dubai-skyline-real-estate-social-v4.jpg",
+        "/images/visuals/home-property-intelligence-1200.webp",
+        "/images/james-realty-dubai-advisory-social-v2.jpg",
+        "/images/real-estate-marketing-workshop.webp",
+        "/images/visuals/marketing-strategy-1200.webp",
+        "/case-studies/demand-strategy.jpg",
+        "/images/dubai-residential-portfolio.webp",
+        "/images/dubai-portfolio-optimized.webp",
     ],
     "market": [
-        ("/images/dubai-residential-portfolio.webp", "UAE residential towers representing current property-market analysis"),
-        ("/images/dubai-portfolio-optimized.webp", "UAE residential skyline representing property-market activity and investment analysis"),
-        ("/images/dubai-community-buying-guide.webp", "Modern UAE residential community representing current property-market activity"),
+        "/images/dubai-portfolio-optimized.webp",
+        "/images/dubai-residential-portfolio.webp",
+        "/images/dubai-skyline-real-estate-social-v4.jpg",
+        "/images/james-realty-social-preview.webp",
+        "/images/real-estate-crm-review.webp",
+        "/case-studies/demand-strategy.jpg",
+        "/case-studies/tbwa-mena-marketing.webp",
+        "/case-studies/tbwa-slow-trends.webp",
+        "/images/james-realty-dubai-advisory-social-v2.jpg",
+        "/images/real-estate-marketing-workshop.webp",
+        "/images/visuals/marketing-strategy-1200.webp",
+        "/images/visuals/home-property-intelligence-1200.webp",
     ],
 }
 
-
-def stable_pick(slug: str, pool: list[tuple[str, str]]) -> tuple[str, str]:
-    digest = hashlib.sha1(slug.encode("utf-8")).hexdigest()
-    return pool[int(digest[:8], 16) % len(pool)]
+CATEGORY_ORDER = [
+    "luxury",
+    "rental",
+    "abu_dhabi_rental",
+    "abu_dhabi_supply",
+    "abu_dhabi",
+    "sharjah_buyer",
+    "sharjah",
+    "buyer",
+    "supply",
+    "market",
+]
 
 
 def article_signal(slug: str, page_text: str) -> str:
@@ -68,23 +152,34 @@ def article_signal(slug: str, page_text: str) -> str:
     return html.unescape(' '.join(bits)).lower()
 
 
-def choose_photo(slug: str, page_text: str) -> tuple[str, str]:
+def category_for(slug: str, page_text: str) -> str:
     text = article_signal(slug, page_text)
-    is_abu_dhabi = "abu dhabi" in text or "abu-dhabi" in text
+    is_abu = "abu dhabi" in text or "abu-dhabi" in text
+    is_sharjah = "sharjah" in text
     is_rental = any(word in text for word in ("rent", "rental", "tenant", "tenancy", "lease"))
-    if is_abu_dhabi and is_rental:
-        return "/images/abu-dhabi-rent-freeze.webp", "Tenant reviewing tenancy documents in an Abu Dhabi apartment"
-    if is_abu_dhabi:
-        return stable_pick(slug, POOLS["abu_dhabi"])
+    is_supply = any(word in text for word in ("supply", "delivery", "deliveries", "handover", "handovers", "new homes", "new units"))
+    is_buyer = any(word in text for word in ("buyer", "homebuyer", "buying", "long-term home", "long term home"))
+    is_luxury = any(word in text for word in ("luxury", "ultra-prime", "ultra prime", "villa", "record sale", "trophy"))
+
+    if is_abu and is_rental:
+        return "abu_dhabi_rental"
+    if is_abu and is_supply:
+        return "abu_dhabi_supply"
+    if is_abu:
+        return "abu_dhabi"
+    if is_sharjah and is_buyer:
+        return "sharjah_buyer"
+    if is_sharjah:
+        return "sharjah"
     if is_rental:
-        return stable_pick(slug, POOLS["rental"])
-    if any(word in text for word in ("luxury", "ultra-prime", "ultra prime", "villa", "record sale", "trophy")):
-        return stable_pick(slug, POOLS["luxury"])
-    if any(word in text for word in ("supply", "delivery", "deliveries", "handover", "handovers", "new homes", "new units")):
-        return stable_pick(slug, POOLS["supply"])
-    if any(word in text for word in ("buyer", "homebuyer", "buying", "long-term home", "long term home")):
-        return stable_pick(slug, POOLS["buyer"])
-    return stable_pick(slug, POOLS["market"])
+        return "rental"
+    if is_luxury:
+        return "luxury"
+    if is_supply:
+        return "supply"
+    if is_buyer:
+        return "buyer"
+    return "market"
 
 
 def current_hero(text: str) -> str | None:
@@ -94,6 +189,43 @@ def current_hero(text: str) -> str | None:
         flags=re.I,
     )
     return match.group(1) if match else None
+
+
+def choose_assignments(briefs: list[dict[str, object]]) -> dict[str, tuple[str, str]]:
+    """Assign one relevant visual per automated brief, with no duplicate paths."""
+    selections: dict[str, tuple[str, str]] = {}
+    used: set[str] = set()
+
+    grouped: dict[str, list[dict[str, object]]] = {key: [] for key in CATEGORY_ORDER}
+    for brief in briefs:
+        grouped.setdefault(str(brief["category"]), []).append(brief)
+
+    # Newest cards get first choice within each topic; existing unique and
+    # relevant choices are preserved, which prevents image churn on later runs.
+    for category in CATEGORY_ORDER:
+        for brief in sorted(grouped.get(category, []), key=lambda item: str(item["slug"]), reverse=True):
+            slug = str(brief["slug"])
+            old_image = str(brief["old_image"])
+            preferred = PREFERENCES.get(category, PREFERENCES["market"])
+
+            if old_image in preferred and old_image in ASSETS and old_image not in used:
+                selected = old_image
+            else:
+                selected = next((path for path in preferred if path not in used), "")
+                if not selected:
+                    selected = next((path for path in ASSETS if path not in used), "")
+                if not selected:
+                    raise RuntimeError(
+                        "Not enough distinct editorial assets for the automated News cards. "
+                        "Add another unique natural image before publishing more simultaneous briefs."
+                    )
+
+            used.add(selected)
+            selections[slug] = (selected, ASSETS[selected])
+
+    if len(selections) != len(set(image for image, _alt in selections.values())):
+        raise RuntimeError("Duplicate automated News-card images remain after selection.")
+    return selections
 
 
 def update_article(path: Path, old_image: str, new_image: str, alt: str) -> bool:
@@ -169,8 +301,16 @@ def update_xml_blocks(path: Path, selections: dict[str, tuple[str, str]]) -> boo
         for slug, (image_path, _alt) in selections.items():
             if f'/blog/{slug}/' not in replacement:
                 continue
-            replacement = re.sub(r'/images/property-news/[^<"\s]+\.(?:svg|webp)', image_path, replacement)
-            replacement = re.sub(r'https://jamesrealty\.uk/images/[^<"\s]+\.webp', SITE + image_path, replacement)
+            replacement = re.sub(
+                r'https://jamesrealty\.uk/(?:images|case-studies)/[^<"\s]+\.(?:svg|webp|jpe?g|png)',
+                SITE + image_path,
+                replacement,
+            )
+            replacement = re.sub(
+                r'/(?:images|case-studies)/[^<"\s]+\.(?:svg|webp|jpe?g|png)',
+                image_path,
+                replacement,
+            )
             break
         if replacement != block:
             rebuilt.append(text[last:match.start()])
@@ -212,10 +352,25 @@ def update_state(selections: dict[str, tuple[str, str]]) -> bool:
     return changed
 
 
+def verify_main_news_grid() -> None:
+    """Fail publishing rather than knowingly leave duplicate card image URLs."""
+    path = ROOT / "blog" / "index.html"
+    if not path.exists():
+        return
+    text = path.read_text(encoding="utf-8")
+    grid = re.search(r'<div class="blog-index-grid">(.*?)</div>\s*</section>', text, flags=re.S)
+    if not grid:
+        return
+    sources = re.findall(r'<article class="blog-tile">.*?<img\s+src="([^"]+)"', grid.group(1), flags=re.S)
+    duplicates = sorted({src for src in sources if sources.count(src) > 1})
+    if duplicates:
+        raise RuntimeError("Duplicate image URLs remain in the main News grid: " + ", ".join(duplicates))
+
+
 def main() -> int:
-    selections: dict[str, tuple[str, str]] = {}
+    briefs: list[dict[str, object]] = []
+    pages: dict[str, Path] = {}
     old_svgs: set[str] = set()
-    updated_pages = 0
 
     for page in sorted(ROOT.glob("blog/property-news-*/index.html")):
         text = page.read_text(encoding="utf-8")
@@ -225,11 +380,22 @@ def main() -> int:
         old_image = current_hero(text)
         if not old_image:
             continue
-        new_image, alt = choose_photo(slug, text)
-        selections[slug] = (new_image, alt)
+        pages[slug] = page
+        briefs.append({
+            "slug": slug,
+            "old_image": old_image,
+            "category": category_for(slug, text),
+        })
         if old_image.endswith(".svg"):
             old_svgs.add(old_image)
-        if update_article(page, old_image, new_image, alt):
+
+    selections = choose_assignments(briefs)
+    updated_pages = 0
+    for brief in briefs:
+        slug = str(brief["slug"])
+        old_image = str(brief["old_image"])
+        new_image, alt = selections[slug]
+        if update_article(pages[slug], old_image, new_image, alt):
             updated_pages += 1
 
     update_card_surface(ROOT / "blog" / "index.html", selections)
@@ -237,6 +403,7 @@ def main() -> int:
     update_xml_blocks(ROOT / "feed.xml", selections)
     update_xml_blocks(ROOT / "image-sitemap.xml", selections)
     update_state(selections)
+    verify_main_news_grid()
 
     removed = 0
     for image_path in old_svgs:
@@ -245,7 +412,10 @@ def main() -> int:
             file.unlink()
             removed += 1
 
-    print(f"Property-news imagery checked: {len(selections)} automated briefs; updated {updated_pages} pages; removed {removed} SVG placeholders.")
+    print(
+        f"Property-news imagery checked: {len(selections)} automated briefs; "
+        f"all image paths unique; updated {updated_pages} pages; removed {removed} SVG placeholders."
+    )
     return 0
 
 
