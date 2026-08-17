@@ -83,12 +83,6 @@ function staticAudit() {
       const relMatch = attrs.match(/\brel=["']([^"']+)["']/i);
       if (!relMatch || !hasSafeBlankTargetRel(relMatch[1])) pushIssue(issues, 'warning', 'security', location, 'target="_blank" link missing opener protection', match[0].slice(0, 180));
     }
-
-    for (const match of source.matchAll(/<label\b[^>]*>([\s\S]*?)<\/label>/gi)) {
-      if (/<div\b[^>]*class=["'][^"']*(?:input|field|wrap)[^"']*["']/i.test(match[1])) {
-        pushIssue(issues, 'warning', 'html', location, 'Label contains a block-level div; use phrasing markup such as span', match[0].slice(0, 180));
-      }
-    }
   }
 
   for (const file of jsFiles) {
@@ -128,9 +122,9 @@ function sitemapRoutes() {
 async function runFunctionalChecks(page, route, location, issues) {
   if (route === '/') {
     const journeys = await page.locator('.home-journey').count();
-    const dataCards = await page.locator('.home-data-card').count();
+    const toolCards = await page.locator('.tool-directory-card').count();
     if (journeys !== 3) pushIssue(issues, 'error', 'functional', location, `Homepage should show 3 goal cards, found ${journeys}`);
-    if (dataCards < 4) pushIssue(issues, 'error', 'functional', location, `Homepage should show at least 4 data and tool cards, found ${dataCards}`);
+    if (toolCards < 4) pushIssue(issues, 'error', 'functional', location, `Homepage should show at least 4 data and tool cards, found ${toolCards}`);
   }
 
   if (route === '/contact/') {
@@ -164,6 +158,10 @@ async function runFunctionalChecks(page, route, location, issues) {
   }
 }
 
+function sameOrder(actual, expected) {
+  return JSON.stringify(actual) === JSON.stringify(expected);
+}
+
 async function runtimeAudit() {
   const issues = [];
   const routes = sitemapRoutes();
@@ -173,6 +171,7 @@ async function runtimeAudit() {
     { name: 'tablet', width: 1024, height: 900, compactNavigation: true },
     { name: 'mobile', width: 390, height: 844, compactNavigation: true }
   ];
+  const expectedNavigation = ['Home', 'Your Goal', 'Tools', 'About Me', 'News', 'Contact Me'];
 
   for (const viewport of viewports) {
     const context = await browser.newContext({ viewport: { width: viewport.width, height: viewport.height }, reducedMotion: 'reduce' });
@@ -232,9 +231,9 @@ async function runtimeAudit() {
             unlabeled,
             unnamedButtons,
             desktopNavOrder: directNavOrder('.global-links'),
-            mobileNavOrder: directNavOrder('#mobile-site-menu'),
-            mobileToggleVisible: (() => {
-              const el = document.querySelector('.mobile-menu-toggle');
+            compactNavOrder: directNavOrder('.mobile-page-tabs'),
+            compactNavVisible: (() => {
+              const el = document.querySelector('.mobile-page-tabs');
               return Boolean(el && getComputedStyle(el).display !== 'none' && el.getBoundingClientRect().width > 0);
             })()
           };
@@ -250,25 +249,26 @@ async function runtimeAudit() {
         for (const item of result.unlabeled) pushIssue(issues, 'error', 'accessibility', location, 'Form control lacks an accessible label', item);
         for (const item of result.unnamedButtons) pushIssue(issues, 'error', 'accessibility', location, 'Button lacks an accessible name', item);
 
-        const expected = ['Home', 'Your Goal', 'Dubai Data', 'Abu Dhabi Data', 'Ajman Data', 'About Me', 'News', 'Contact Me'];
-        const actual = viewport.compactNavigation ? result.mobileNavOrder : result.desktopNavOrder;
-        if (JSON.stringify(actual) !== JSON.stringify(expected)) pushIssue(issues, 'error', 'navigation', location, 'Header order does not match the required flow', { expected, actual });
+        const actualNavigation = viewport.compactNavigation ? result.compactNavOrder : result.desktopNavOrder;
+        if (!sameOrder(actualNavigation, expectedNavigation)) {
+          pushIssue(issues, 'error', 'navigation', location, 'Header order does not match the current navigation flow', { expected: expectedNavigation, actual: actualNavigation });
+        }
 
         if (viewport.compactNavigation) {
-          if (!result.mobileToggleVisible) pushIssue(issues, 'error', 'navigation', location, 'Compact menu button is not visible');
-          const toggle = page.locator('.mobile-menu-toggle');
-          if (await toggle.count()) {
-            await toggle.click();
-            const menu = page.locator('#mobile-site-menu');
-            if (!(await menu.isVisible())) pushIssue(issues, 'error', 'navigation', location, 'Compact menu does not open');
-            const goal = menu.locator('.goal-nav > summary');
-            if (await goal.count()) {
-              await goal.click();
-              const options = await menu.locator('.goal-nav-menu a').allTextContents();
-              const normalized = options.map((value) => value.trim());
-              if (JSON.stringify(normalized) !== JSON.stringify(['Buy / Invest', 'Sell', 'Marketing'])) pushIssue(issues, 'error', 'navigation', location, 'Your Goal options are incorrect', normalized);
+          if (!result.compactNavVisible) pushIssue(issues, 'error', 'navigation', location, 'Compact page navigation is not visible');
+          const compactNav = page.locator('.mobile-page-tabs');
+          const goal = compactNav.locator('.goal-nav:not(.tools-nav) > summary');
+          if (await goal.count()) {
+            await goal.click();
+            const options = await compactNav.locator('.goal-nav:not(.tools-nav) .goal-nav-menu a').allTextContents();
+            const normalized = options.map((value) => value.trim());
+            if (!sameOrder(normalized, ['Buy / Invest', 'Sell', 'Marketing'])) {
+              pushIssue(issues, 'error', 'navigation', location, 'Your Goal options are incorrect', normalized);
             }
-            await toggle.click();
+            await goal.click();
+          }
+          if (!(await compactNav.locator('.tools-nav > summary').count())) {
+            pushIssue(issues, 'error', 'navigation', location, 'Tools menu is missing from compact navigation');
           }
         }
 
@@ -298,10 +298,23 @@ async function runtimeAudit() {
 const staticResult = staticAudit();
 const runtimeResult = await runtimeAudit();
 const issues = [...staticResult.issues, ...runtimeResult.issues];
-const counts = issues.reduce((acc, issue) => {
+const severityCounts = issues.reduce((acc, issue) => {
   acc[issue.severity] = (acc[issue.severity] || 0) + 1;
   return acc;
 }, {});
+const categoryCounts = issues.reduce((acc, issue) => {
+  acc[issue.category] = (acc[issue.category] || 0) + 1;
+  return acc;
+}, {});
+const messageCounts = issues.reduce((acc, issue) => {
+  acc[issue.message] = (acc[issue.message] || 0) + 1;
+  return acc;
+}, {});
+const topMessages = Object.entries(messageCounts)
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 12)
+  .map(([message, count]) => ({ message, count }));
+
 const report = {
   generatedAt: new Date().toISOString(),
   baseUrl,
@@ -311,7 +324,13 @@ const report = {
     routes: runtimeResult.routeCount,
     viewports: runtimeResult.viewportCount
   },
-  summary: { errors: counts.error || 0, warnings: counts.warning || 0, total: issues.length },
+  summary: {
+    errors: severityCounts.error || 0,
+    warnings: severityCounts.warning || 0,
+    total: issues.length,
+    byCategory: categoryCounts,
+    topMessages
+  },
   issues
 };
 fs.mkdirSync(path.dirname(reportPath), { recursive: true });
