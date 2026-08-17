@@ -1,0 +1,114 @@
+name: Verify landing subdomains
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/verify-landing-subdomains.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify HTTPS, status, page identity, canonical and indexability
+        shell: bash
+        run: |
+          set -uo pipefail
+
+          cat > /tmp/verify.py <<'PY'
+          import re, subprocess, sys, tempfile
+          from pathlib import Path
+
+          targets = [
+              ("emaar.jamesrealty.uk", r"\bemaar\b"),
+              ("aldar.jamesrealty.uk", r"\baldar\b"),
+              ("damac.jamesrealty.uk", r"\bdamac\b"),
+              ("binghatti.jamesrealty.uk", r"\bbinghatti\b"),
+              ("nakheel.jamesrealty.uk", r"\bnakheel\b"),
+              ("mudon.jamesrealty.uk", r"\bmudon\b"),
+              ("dubai.jamesrealty.uk", r"\b(uk|united kingdom|british)\b"),
+              ("dubairealestate.jamesrealty.uk", r"\b(usa|u\.s\.|united states|american)\b"),
+              ("dubaiproperties.jamesrealty.uk", r"\b(india|indian)\b"),
+              ("dubaiproperty.jamesrealty.uk", r"(?:lang=[\"']ar[\"']|dir=[\"']rtl[\"']|[\u0600-\u06FF]{3,})"),
+          ]
+
+          def curl(url):
+              with tempfile.TemporaryDirectory() as td:
+                  h = Path(td)/"headers.txt"
+                  b = Path(td)/"body.txt"
+                  p = subprocess.run([
+                      "curl", "--silent", "--show-error", "--location",
+                      "--max-time", "30", "--connect-timeout", "10",
+                      "--dump-header", str(h), "--output", str(b),
+                      "--write-out", "%{http_code}\t%{url_effective}", url
+                  ], text=True, capture_output=True)
+                  return p.returncode, p.stdout.strip(), p.stderr.strip(), h.read_text(errors="replace") if h.exists() else "", b.read_text(errors="replace") if b.exists() else ""
+
+          failed = False
+          for host, identity_re in targets:
+              url = f"https://{host}/"
+              rc, meta, err, headers, html = curl(url)
+              parts = meta.split("\t", 1)
+              status = parts[0] if parts else "000"
+              effective = parts[1] if len(parts) > 1 else ""
+              https_ok = rc == 0 and effective.startswith("https://")
+              status_ok = status == "200"
+              identity_ok = bool(re.search(identity_re, html, re.I))
+
+              can = re.search(r'<link[^>]+rel=[\"\'][^\"\']*canonical[^\"\']*[\"\'][^>]+href=[\"\']([^\"\']+)', html, re.I)
+              if not can:
+                  can = re.search(r'<link[^>]+href=[\"\']([^\"\']+)[\"\'][^>]+rel=[\"\'][^\"\']*canonical[^\"\']*[\"\']', html, re.I)
+              canonical = can.group(1).strip() if can else "MISSING"
+              canonical_ok = canonical.rstrip("/") == url.rstrip("/")
+
+              robots_meta = " ".join(re.findall(r'<meta[^>]+name=[\"\']robots[\"\'][^>]+content=[\"\']([^\"\']+)', html, re.I))
+              if not robots_meta:
+                  robots_meta = " ".join(re.findall(r'<meta[^>]+content=[\"\']([^\"\']+)[\"\'][^>]+name=[\"\']robots[\"\']', html, re.I))
+              robots_meta_ok = "noindex" not in robots_meta.lower()
+
+              xrobots_values = []
+              for block in re.split(r'\r?\n\r?\n', headers):
+                  for line in block.splitlines():
+                      if line.lower().startswith("x-robots-tag:"):
+                          xrobots_values.append(line.split(":",1)[1].strip())
+              xrobots = ", ".join(xrobots_values) or "NONE"
+              xrobots_ok = "noindex" not in xrobots.lower()
+
+              rrc, rmeta, rerr, rh, robots = curl(f"https://{host}/robots.txt")
+              rparts = rmeta.split("\t",1)
+              rstatus = rparts[0] if rparts else "000"
+              robots_ok = rrc == 0 and rstatus == "200" and not re.search(r'(?im)^\s*Disallow:\s*/\s*$', robots) and bool(re.search(r'(?im)^\s*Allow:\s*/\s*$', robots))
+
+              src, smeta, serr, sh, sitemap = curl(f"https://{host}/sitemap.xml")
+              sparts = smeta.split("\t",1)
+              sstatus = sparts[0] if sparts else "000"
+              sitemap_ok = src == 0 and sstatus == "200" and url in sitemap
+
+              indexable = status_ok and canonical_ok and robots_meta_ok and xrobots_ok and robots_ok and sitemap_ok
+              overall = https_ok and status_ok and identity_ok and canonical_ok and indexable
+              failed = failed or not overall
+
+              print(
+                  "VERIFY|{host}|https={https}|status={status}|identity={identity}|canonical={canonical}|canonical_self={canonical_self}|robots_meta={robots_meta}|xrobots={xrobots}|robots_txt={robots_txt}|sitemap={sitemap}|indexable={indexable}|overall={overall}".format(
+                      host=host,
+                      https="PASS" if https_ok else f"FAIL({err or effective})",
+                      status=status,
+                      identity="PASS" if identity_ok else "FAIL",
+                      canonical=canonical,
+                      canonical_self="PASS" if canonical_ok else "FAIL",
+                      robots_meta=robots_meta or "MISSING",
+                      xrobots=xrobots,
+                      robots_txt="PASS" if robots_ok else f"FAIL(status={rstatus})",
+                      sitemap="PASS" if sitemap_ok else f"FAIL(status={sstatus})",
+                      indexable="PASS" if indexable else "FAIL",
+                      overall="PASS" if overall else "FAIL",
+                  )
+              )
+
+          sys.exit(1 if failed else 0)
+          PY
+
+          python /tmp/verify.py
