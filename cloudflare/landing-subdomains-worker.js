@@ -1,10 +1,10 @@
 /**
  * Cloudflare Worker for James Realty campaign subdomains.
  *
- * Each hostname serves a versioned, noindex fallback file from the GitHub Pages
- * origin. The Worker changes only the robots directive for the canonical host.
- * This keeps one maintainable source file while preventing fallback URLs from
- * competing in search results.
+ * Each canonical hostname serves a versioned, noindex fallback file from the
+ * GitHub Pages origin. Only the canonical host becomes indexable. This keeps
+ * one maintainable source file while preventing /landing/* fallback URLs from
+ * competing with the campaign subdomains in search results.
  */
 
 const ORIGIN = 'https://jamesrealty.uk';
@@ -20,6 +20,8 @@ const HOSTS = {
   'dubaiproperties.jamesrealty.uk': '/landing/india/',
   'dubaiproperty.jamesrealty.uk': '/landing/ar/',
 };
+
+const LAST_MODIFIED = '2026-08-17';
 
 const SECURITY_HEADERS = {
   'Referrer-Policy': 'strict-origin-when-cross-origin',
@@ -48,7 +50,7 @@ export default {
     }
 
     if (incoming.pathname === '/sitemap.xml') {
-      const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://${incoming.hostname}/</loc><lastmod>2026-08-17</lastmod></url></urlset>\n`;
+      const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://${incoming.hostname}/</loc><lastmod>${LAST_MODIFIED}</lastmod><changefreq>weekly</changefreq></url></urlset>\n`;
       return new Response(xml, { headers: { 'content-type': 'application/xml; charset=utf-8', ...SECURITY_HEADERS } });
     }
 
@@ -64,12 +66,15 @@ export default {
 
     const originalHtml = await upstream.text();
     const indexedHtml = originalHtml.replace(
-      'content="noindex,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"',
-      'content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"',
+      /(<meta\s+name=["']robots["']\s+content=["'])noindex,follow/i,
+      '$1index,follow',
     );
     const headers = new Headers(upstream.headers);
     headers.set('content-type', 'text/html; charset=utf-8');
     headers.set('cache-control', 'public, max-age=300, s-maxage=300, stale-while-revalidate=86400');
+    headers.set('x-robots-tag', 'index, follow');
+    headers.set('link', `<https://${incoming.hostname}/>; rel="canonical"`);
+    headers.set('content-language', incoming.hostname === 'dubaiproperty.jamesrealty.uk' ? 'ar-AE' : 'en');
     Object.entries(SECURITY_HEADERS).forEach(([name, value]) => headers.set(name, value));
     headers.delete('content-security-policy');
     headers.delete('content-length');

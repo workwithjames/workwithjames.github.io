@@ -2,17 +2,17 @@ name = "james-realty-landing-subdomains"
 main = "landing-subdomains-worker.js"
 compatibility_date = "2026-08-17"
 
-# After the jamesrealty.uk zone is connected, attach these routes to this Worker.
-# The hostnames also need proxied DNS records in the same Cloudflare zone.
+# Custom Domains make this Worker the origin. Cloudflare creates the necessary
+# DNS records and certificates when the Worker is deployed.
 routes = [
-  { pattern = "emaar.jamesrealty.uk/*", zone_name = "jamesrealty.uk" },
-  { pattern = "aldar.jamesrealty.uk/*", zone_name = "jamesrealty.uk" },
-  { pattern = "damac.jamesrealty.uk/*", zone_name = "jamesrealty.uk" },
-  { pattern = "binghatti.jamesrealty.uk/*", zone_name = "jamesrealty.uk" },
-  { pattern = "nakheel.jamesrealty.uk/*", zone_name = "jamesrealty.uk" },
-  { pattern = "mudon.jamesrealty.uk/*", zone_name = "jamesrealty.uk" },
-  { pattern = "dubai.jamesrealty.uk/*", zone_name = "jamesrealty.uk" },
-  { pattern = "dubairealestate.jamesrealty.uk/*", zone_name = "jamesrealty.uk" },
-  { pattern = "dubaiproperties.jamesrealty.uk/*", zone_name = "jamesrealty.uk" },
-  { pattern = "dubaiproperty.jamesrealty.uk/*", zone_name = "jamesrealty.uk" },
+  { pattern = "emaar.jamesrealty.uk", custom_domain = true },
+  { pattern = "aldar.jamesrealty.uk", custom_domain = true },
+  { pattern = "damac.jamesrealty.uk", custom_domain = true },
+  { pattern = "binghatti.jamesrealty.uk", custom_domain = true },
+  { pattern = "nakheel.jamesrealty.uk", custom_domain = true },
+  { pattern = "mudon.jamesrealty.uk", custom_domain = true },
+  { pattern = "dubai.jamesrealty.uk", custom_domain = true },
+  { pattern = "dubairealestate.jamesrealty.uk", custom_domain = true },
+  { pattern = "dubaiproperties.jamesrealty.uk", custom_domain = true },
+  { pattern = "dubaiproperty.jamesrealty.uk", custom_domain = true },
 ]
