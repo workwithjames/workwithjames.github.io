@@ -1,0 +1,30 @@
+name: Deploy landing subdomains
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "cloudflare/landing-subdomains-worker.js"
+      - "cloudflare/wrangler.jsonc"
+      - ".github/workflows/deploy-landing-subdomains.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Deploy James Realty landing subdomains
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: cloudflare
+          command: deploy --config wrangler.jsonc
