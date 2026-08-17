@@ -1,0 +1,40 @@
+name: Fix Binghatti final content
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-binghatti-final-content.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Correct remaining Binghatti copy
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('landing/binghatti/index.html')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace('Al Jaddaf, Majan and Academic City have different competing stock and demand.','Majan, JVC, JVT and Meydan have different competing stock, rent evidence and buyer demand.')
+          s=s.replace('Binghatti Properties Dubai | Latest Projects &amp; Prices','Binghatti Dubai | New Releases &amp; Branded Residences')
+          s=s.replace('Binghatti Properties Dubai | Latest Projects & Prices','Binghatti Dubai | New Releases & Branded Residences')
+          faq='''<section class="jr-section jr-faq-section" id="faq"><div class="jr-shell jr-faq"><header data-reveal><p class="jr-kicker">FAQ</p><h2 class="jr-display">Questions to settle before reserving</h2></header><div><details><summary>What are Binghatti’s newest highlighted projects?</summary><p>Binghatti’s current New Releases page highlights Luxuria in JVT, Etherea in JVC, Skyflame in Majan and Mercedes-Benz Places | Binghatti City in Meydan. Release lists and inventory can change.</p></details><details><summary>What is the Skyflame payment plan?</summary><p>Binghatti currently states 20% on booking, 50% during construction and 30% on completion for Skyflame. Request the dated instalment schedule for the exact unit before reserving.</p></details><details><summary>What is the Etherea payment plan?</summary><p>Binghatti currently states 20% on booking, 50% during construction and 30% on completion for Etherea, with handover currently scheduled for July 2027.</p></details><details><summary>What is Mercedes-Benz Places | Binghatti City?</summary><p>It is Binghatti’s Mercedes-Benz branded city-scale community in Meydan, with 12 towers, a central park and residences ranging from studios to five bedrooms. Compare the brand premium and masterplan phasing with the exact unit economics.</p></details><details><summary>Are branded residences automatically better investments?</summary><p>No. Compare the brand premium, service charges, unit plan, location, payment schedule and likely future buyer or tenant pool before deciding.</p></details></div><details class="jr-sources"><summary>✓ Facts verified from these sources</summary><ul><li><a href="https://www.binghatti.com/en/new-releases" target="_blank" rel="noopener noreferrer">Binghatti new releases ↗</a></li><li><a href="https://www.binghatti.com/en/projects" target="_blank" rel="noopener noreferrer">Binghatti project portfolio ↗</a></li><li><a href="https://www.binghatti.com/en/branded-projects" target="_blank" rel="noopener noreferrer">Binghatti branded collection ↗</a></li></ul><p>Project information checked 17 August 2026. Prices, payment plans, availability and completion schedules can change. Request dated unit-level documents before relying on them. General information only—not legal, tax, financial or investment advice.</p></details></div></section>'''
+          s2,n=re.subn(r'<section class="jr-section jr-faq-section".*?</section>',faq,s,count=1,flags=re.S)
+          if n!=1: raise SystemExit(f'FAQ replacement failed: {n}')
+          p.write_text(s2,encoding='utf-8')
+          PY
+      - name: Commit Binghatti content corrections
+        shell: bash
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add landing/binghatti/index.html
+          git commit -m 'Correct Binghatti FAQ and location copy'
+          git push origin HEAD:main
