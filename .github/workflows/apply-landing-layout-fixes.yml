@@ -1,0 +1,89 @@
+name: Apply landing layout fixes
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/apply-landing-layout-fixes.yml'
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Merge layout corrections into shared landing CSS
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          css_path = Path('assets/landing-experience.css')
+          fixes_path = Path('assets/landing-layout-fixes.css')
+          css = css_path.read_text(encoding='utf-8')
+          fixes = fixes_path.read_text(encoding='utf-8').strip()
+
+          start = '/* JR_LAYOUT_FIXES_START */'
+          end = '/* JR_LAYOUT_FIXES_END */'
+          if start in css and end in css:
+              css = re.sub(
+                  re.escape(start) + r'.*?' + re.escape(end),
+                  '',
+                  css,
+                  flags=re.S,
+              ).rstrip()
+
+          css = css.rstrip() + '\n\n' + start + '\n' + fixes + '\n' + end + '\n'
+          css_path.write_text(css, encoding='utf-8')
+
+          landing_paths = [
+              'landing/emaar/index.html',
+              'landing/aldar/index.html',
+              'landing/damac/index.html',
+              'landing/binghatti/index.html',
+              'landing/nakheel/index.html',
+              'landing/mudon/index.html',
+              'landing/uk/index.html',
+              'landing/usa/index.html',
+              'landing/india/index.html',
+              'landing/ar/index.html',
+          ]
+          for filename in landing_paths:
+              path = Path(filename)
+              html = path.read_text(encoding='utf-8')
+              html, count = re.subn(
+                  r'landing-experience\.css\?v=\d+',
+                  'landing-experience.css?v=7',
+                  html,
+              )
+              if count == 0:
+                  raise SystemExit(f'Could not find landing stylesheet version in {filename}')
+              path.write_text(html, encoding='utf-8')
+          PY
+
+      - name: Commit layout corrections
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No changes required.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/landing-experience.css landing/*/index.html
+          git commit -m 'Apply balanced spacing across landing pages'
+          git push origin HEAD:main
+
+      - name: Request GitHub Pages rebuild
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST repos/${{ github.repository }}/pages/builds
