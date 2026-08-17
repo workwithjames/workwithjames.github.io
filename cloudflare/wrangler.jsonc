@@ -1,4 +1,5 @@
 {
+  "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "james-realty-landing-subdomains",
   "main": "landing-subdomains-worker.js",
   "compatibility_date": "2026-08-17",
@@ -15,5 +16,9 @@
     { "pattern": "dubairealestate.jamesrealty.uk", "custom_domain": true },
     { "pattern": "dubaiproperties.jamesrealty.uk", "custom_domain": true },
     { "pattern": "dubaiproperty.jamesrealty.uk", "custom_domain": true }
-  ]
+  ],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  }
 }
