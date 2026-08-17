@@ -1,0 +1,129 @@
+/* Emaar premium landing refresh — scoped to the Emaar campaign only */
+.theme-emaar{
+  --emaar-ink:#10110f;
+  --emaar-ivory:#f7f4ed;
+  --emaar-sand:#e8dfd1;
+  --emaar-bronze:#a97852;
+  --emaar-bronze-deep:#775039;
+  --emaar-muted:#67655f;
+  --emaar-line:rgba(16,17,15,.14);
+  background:var(--emaar-ivory);
+}
+.theme-emaar .jr-nav{background:rgba(247,244,237,.91);border-color:rgba(16,17,15,.1);box-shadow:0 8px 30px rgba(20,18,14,.04)}
+.theme-emaar .jr-nav__inner{height:74px}
+.theme-emaar .jr-brand__mark{background:var(--emaar-ink);border-radius:50%}
+.theme-emaar .jr-nav__links a{font-size:.72rem;color:#373832}
+.theme-emaar .jr-nav__cta{background:var(--emaar-ink);border-color:var(--emaar-ink);border-radius:999px;padding-inline:20px}
+
+.theme-emaar .jr-hero{min-height:min(900px,100svh);background:#11120f}
+.theme-emaar .jr-hero__wash{background:linear-gradient(90deg,rgba(12,13,11,.96) 0%,rgba(12,13,11,.79) 42%,rgba(12,13,11,.18) 75%,rgba(12,13,11,.08) 100%),linear-gradient(0deg,rgba(10,11,9,.62),transparent 52%)}
+.theme-emaar .jr-hero__inner{min-height:calc(min(900px,100svh) - 74px);padding-block:clamp(78px,12vh,126px) 54px;align-items:flex-end}
+.theme-emaar .jr-hero--editorial .jr-hero__copy{width:min(760px,66%);margin-inline-start:0}
+.theme-emaar .jr-hero h1{max-width:800px;margin-bottom:26px;font-size:clamp(3.8rem,7vw,7.4rem);line-height:.91;letter-spacing:-.055em}
+.theme-emaar .jr-hero__lead{max-width:610px;color:rgba(255,255,255,.79);font-size:clamp(1rem,1.35vw,1.18rem)}
+.theme-emaar .jr-hero .jr-kicker{display:inline-flex;align-items:center;gap:10px;color:#ead7c5;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);padding:9px 13px;border-radius:999px;backdrop-filter:blur(12px)}
+.theme-emaar .jr-hero .jr-kicker:before{content:'';width:7px;height:7px;border-radius:50%;background:#d4a983;box-shadow:0 0 0 5px rgba(212,169,131,.12)}
+.theme-emaar .jr-hero .jr-button--light{border-radius:999px;padding-inline:25px;background:#f6f1e8;border-color:#f6f1e8}
+.theme-emaar .jr-hero .jr-text-link{color:#fff;border-color:rgba(255,255,255,.5)}
+.theme-emaar .jr-hero__proof{gap:12px;margin-top:32px}
+.theme-emaar .jr-hero__proof li{padding:9px 12px;border:1px solid rgba(255,255,255,.14);border-radius:999px;background:rgba(255,255,255,.055);font-size:.64rem;backdrop-filter:blur(10px)}
+.theme-emaar .jr-hero__independent{max-width:280px;color:rgba(255,255,255,.66)}
+.theme-emaar .emaar-checked{display:block;margin-top:12px;color:rgba(255,255,255,.5);font-size:.68rem;letter-spacing:.04em}
+
+.theme-emaar .jr-facts{background:#151611;color:#f8f4eb;border-color:rgba(255,255,255,.11)}
+.theme-emaar .jr-facts article{border-color:rgba(255,255,255,.1);padding-block:21px}
+.theme-emaar .jr-facts article>span{color:#c99b76}
+.theme-emaar .jr-facts strong{color:#fff;font-size:1.02rem}
+.theme-emaar .jr-facts small{color:rgba(255,255,255,.58)}
+
+.theme-emaar .emaar-brief{background:#f7f4ed}
+.theme-emaar .emaar-brief .jr-heading{margin-bottom:42px}
+.theme-emaar .emaar-brief-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--emaar-line);background:#fff}
+.theme-emaar .emaar-brief-card{min-height:230px;padding:30px 28px;border-inline-end:1px solid var(--emaar-line);display:flex;flex-direction:column}
+.theme-emaar .emaar-brief-card:last-child{border-inline-end:0}
+.theme-emaar .emaar-brief-card span{color:var(--emaar-bronze);font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.theme-emaar .emaar-brief-card h3{margin:34px 0 12px;font-family:var(--display);font-stretch:125%;font-size:clamp(1.5rem,2vw,2.15rem);line-height:1.04}
+.theme-emaar .emaar-brief-card p{margin:0;color:var(--emaar-muted);font-size:.82rem;line-height:1.55}
+.theme-emaar .emaar-brief-card strong{margin-top:auto;padding-top:22px;color:var(--emaar-bronze-deep);font-size:.72rem;letter-spacing:.03em}
+
+.theme-emaar .jr-project-section{background:#eeebe4}
+.theme-emaar .jr-project-section .jr-heading{align-items:start}
+.theme-emaar .jr-projects{gap:24px}
+.theme-emaar .jr-project{border:0;background:#fff;box-shadow:0 18px 55px rgba(32,28,22,.07);border-radius:14px;overflow:hidden}
+.theme-emaar .jr-project:hover{transform:translateY(-6px);box-shadow:0 26px 74px rgba(32,28,22,.12)}
+.theme-emaar .jr-project figure{aspect-ratio:1.25/1}
+.theme-emaar .jr-project figcaption{inset:auto 14px 14px;border-radius:999px;background:rgba(13,14,12,.66);padding:6px 10px}
+.theme-emaar .jr-project__body{padding:28px 28px 30px}
+.theme-emaar .jr-project__meta{color:var(--emaar-bronze-deep);letter-spacing:.12em}
+.theme-emaar .jr-project h3{font-size:clamp(2rem,2.5vw,2.8rem)}
+.theme-emaar .jr-project__body>p{color:#62615c}
+.theme-emaar .jr-project ul{border-color:rgba(16,17,15,.1)}
+.theme-emaar .jr-project__bottom{padding-top:20px}
+.theme-emaar .jr-project__bottom strong{font-size:1.25rem}
+.theme-emaar .jr-project__cta{margin-top:18px;padding:15px 18px;background:#12130f;color:#fff;border:0;border-radius:999px}
+.theme-emaar .jr-project__cta:hover{background:var(--emaar-bronze-deep)}
+.theme-emaar .emaar-more-launches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:22px}
+.theme-emaar .emaar-launch-card{position:relative;min-height:260px;padding:27px 27px 24px;background:#171813;color:#f5f1e8;border-radius:14px;overflow:hidden}
+.theme-emaar .emaar-launch-card:before{content:'';position:absolute;width:190px;height:190px;border-radius:50%;right:-65px;top:-85px;background:radial-gradient(circle,rgba(201,155,118,.35),rgba(201,155,118,0) 70%)}
+.theme-emaar .emaar-launch-card .emaar-launch-index{color:#d3a47f;font-size:.65rem;font-weight:700;letter-spacing:.12em}
+.theme-emaar .emaar-launch-card h3{margin:40px 0 7px;font-family:var(--display);font-size:clamp(1.7rem,2.3vw,2.4rem);font-stretch:125%;line-height:1}
+.theme-emaar .emaar-launch-card .emaar-location{display:block;color:rgba(255,255,255,.56);font-size:.7rem}
+.theme-emaar .emaar-launch-card p{margin:18px 0 26px;color:rgba(255,255,255,.72);font-size:.78rem;line-height:1.55}
+.theme-emaar .emaar-launch-card footer{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-top:auto;padding-top:18px;border-top:1px solid rgba(255,255,255,.12)}
+.theme-emaar .emaar-launch-card strong{display:block;font-size:1.05rem}
+.theme-emaar .emaar-launch-card small{display:block;color:rgba(255,255,255,.48);font-size:.59rem}
+.theme-emaar .emaar-launch-card a{font-size:.67rem;text-decoration:underline;text-underline-offset:3px}
+
+.theme-emaar .emaar-communities{background:#fff}
+.theme-emaar .emaar-community-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:22px}
+.theme-emaar .emaar-community-lead{min-height:500px;padding:clamp(34px,5vw,66px);background:#171813;color:#fff;border-radius:18px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
+.theme-emaar .emaar-community-lead:before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 75% 18%,rgba(201,155,118,.3),transparent 34%),linear-gradient(145deg,transparent 48%,rgba(255,255,255,.035))}
+.theme-emaar .emaar-community-lead>*{position:relative}
+.theme-emaar .emaar-community-lead .jr-kicker{color:#d7ac89}
+.theme-emaar .emaar-community-lead h2{max-width:650px;margin-bottom:24px;font-size:clamp(3rem,5vw,5.5rem)}
+.theme-emaar .emaar-community-lead p{max-width:560px;color:rgba(255,255,255,.7)}
+.theme-emaar .emaar-community-list{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--emaar-line);border-radius:18px;overflow:hidden}
+.theme-emaar .emaar-community-list article{padding:28px;border-right:1px solid var(--emaar-line);border-bottom:1px solid var(--emaar-line);background:#faf8f3}
+.theme-emaar .emaar-community-list article:nth-child(2n){border-right:0}
+.theme-emaar .emaar-community-list article:nth-last-child(-n+2){border-bottom:0}
+.theme-emaar .emaar-community-list span{color:var(--emaar-bronze);font-size:.63rem;font-weight:700;letter-spacing:.12em}
+.theme-emaar .emaar-community-list h3{margin:40px 0 10px;font-family:var(--display);font-stretch:125%;font-size:1.55rem;line-height:1.05}
+.theme-emaar .emaar-community-list p{margin:0;color:var(--emaar-muted);font-size:.76rem;line-height:1.55}
+
+.theme-emaar .jr-lens-section{background:#e9e2d8}
+.theme-emaar .jr-lens__aside{background:#f7f3eb}
+.theme-emaar .jr-process-section{background:#11130f}
+.theme-emaar .jr-form-section{background:linear-gradient(145deg,#8d6043,#aa7954)}
+.theme-emaar .jr-form{border-radius:14px;box-shadow:0 24px 80px rgba(42,28,19,.16)}
+.theme-emaar .jr-faq-section{background:#f7f4ed}
+
+@media(max-width:1100px){
+  .theme-emaar .jr-hero--editorial .jr-hero__copy{width:min(820px,82%)}
+  .theme-emaar .emaar-brief-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .theme-emaar .emaar-brief-card:nth-child(2){border-inline-end:0}
+  .theme-emaar .emaar-brief-card:nth-child(-n+2){border-bottom:1px solid var(--emaar-line)}
+  .theme-emaar .emaar-more-launches{grid-template-columns:1fr 1fr}
+  .theme-emaar .emaar-launch-card:last-child{grid-column:1/-1}
+  .theme-emaar .emaar-community-grid{grid-template-columns:1fr}
+  .theme-emaar .emaar-community-lead{min-height:420px}
+}
+@media(max-width:760px){
+  .theme-emaar .jr-nav__inner{height:68px}
+  .theme-emaar .jr-hero{min-height:790px}
+  .theme-emaar .jr-hero__inner{min-height:722px;padding-block:92px 36px}
+  .theme-emaar .jr-hero--editorial .jr-hero__copy{width:100%}
+  .theme-emaar .jr-hero h1{font-size:clamp(3.2rem,15vw,4.7rem)}
+  .theme-emaar .jr-hero__proof{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .theme-emaar .jr-hero__proof li{justify-content:center;text-align:center}
+  .theme-emaar .emaar-brief-grid{grid-template-columns:1fr;border-bottom:0}
+  .theme-emaar .emaar-brief-card{min-height:0;padding:24px;border-inline-end:0;border-bottom:1px solid var(--emaar-line)!important}
+  .theme-emaar .emaar-brief-card h3{margin-top:22px}
+  .theme-emaar .emaar-more-launches{grid-template-columns:1fr}
+  .theme-emaar .emaar-launch-card:last-child{grid-column:auto}
+  .theme-emaar .emaar-launch-card{min-height:230px}
+  .theme-emaar .emaar-community-lead{min-height:390px;padding:30px}
+  .theme-emaar .emaar-community-list{grid-template-columns:1fr}
+  .theme-emaar .emaar-community-list article{border-right:0!important;border-bottom:1px solid var(--emaar-line)!important}
+  .theme-emaar .emaar-community-list article:last-child{border-bottom:0!important}
+  .theme-emaar .emaar-community-list h3{margin-top:24px}
+}
