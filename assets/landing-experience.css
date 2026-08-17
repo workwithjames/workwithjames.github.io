@@ -26,3 +26,13 @@
 /* A clipped honeypot avoids creating a negative scroll range in RTL documents. */
 .jr-honeypot{position:absolute!important;inset:auto!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;white-space:nowrap!important;border:0!important}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}[data-reveal]{opacity:1;transform:none}}
+
+/* V6 editorial hierarchy: uppercase only where it strengthens brand expression. */
+.jr-heading>p:last-child,.jr-map__copy>p,.jr-lens header>p:last-child,.jr-form-copy>p{max-width:62ch}
+.jr-project h3,.jr-signature h3,.jr-map__list strong,.jr-lens__grid strong,.jr-faq summary{text-wrap:balance}
+.jr-project__bottom strong,.jr-lens__aside strong{font-family:var(--body);font-stretch:normal;font-weight:750;letter-spacing:.075em;line-height:1.18;text-transform:uppercase}
+.jr-project__bottom strong{font-size:.82rem}.jr-lens__aside strong{font-size:.68rem}
+.theme-emaar .jr-hero h1,.theme-damac .jr-hero h1{text-transform:uppercase;line-height:.88;letter-spacing:-.055em}
+.theme-emaar .jr-hero h1{max-width:780px;font-size:clamp(3.35rem,6.7vw,7.2rem)}
+.theme-damac .jr-hero h1{max-width:980px;margin-inline:auto;font-size:clamp(3.2rem,6.25vw,6.9rem)}
+@media(max-width:760px){.theme-emaar .jr-hero h1,.theme-damac .jr-hero h1{font-size:clamp(2.85rem,13.7vw,4.35rem);letter-spacing:-.045em}.jr-project__bottom{align-items:center}.jr-project__source{max-width:94px;text-align:end}}
