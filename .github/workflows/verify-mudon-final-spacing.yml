@@ -1,0 +1,46 @@
+name: Verify Mudon final spacing live
+on:
+  push:
+    paths:
+      - '.github/workflows/verify-mudon-final-spacing.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install browser driver
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save puppeteer-core@24 >/dev/null 2>&1
+      - name: Verify final public render
+        shell: bash
+        run: |
+          cat > final-spacing.mjs <<'JS'
+          import puppeteer from 'puppeteer-core';
+          import { execSync } from 'node:child_process';
+          const chrome=execSync('which google-chrome || which chromium || which chromium-browser').toString().trim();
+          const browser=await puppeteer.launch({headless:true,executablePath:chrome,args:['--no-sandbox']});
+          const page=await browser.newPage();
+          await page.setViewport({width:1440,height:1000,deviceScaleFactor:1});
+          let d;
+          for(let i=0;i<30;i++){
+            await page.goto(`https://mudon.jamesrealty.uk/?spacingfinal=${Date.now()}-${i}`,{waitUntil:'networkidle2',timeout:45000});
+            d=await page.evaluate(()=>{
+              const h=s=>[...document.querySelectorAll(s)].map(e=>Math.round(e.getBoundingClientRect().height));
+              const css=[...document.querySelectorAll('link[rel="stylesheet"]')].map(e=>e.href);
+              return {finalCss:css.some(x=>x.includes('mudon-spacing-final.css?v=1')),title:document.querySelector('h1')?.textContent?.trim()||'',overflow:document.documentElement.scrollWidth-window.innerWidth,pathways:h('.mudon-pathway-card'),status:h('.mudon-status-card'),map:h('.mudon-map-frame iframe'),projects:h('.jr-project__body'),process:h('.jr-process__rail li')};
+            });
+            if(d.finalCss) break;
+            await new Promise(r=>setTimeout(r,15000));
+          }
+          const max=a=>a.length?Math.max(...a):0;
+          await page.setViewport({width:390,height:844,deviceScaleFactor:1});
+          await page.reload({waitUntil:'networkidle2',timeout:45000});
+          const m=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth-window.innerWidth,finalCss:[...document.querySelectorAll('link[rel="stylesheet"]')].some(x=>x.href.includes('mudon-spacing-final.css?v=1')),status:[...document.querySelectorAll('.mudon-status-card')].map(e=>Math.round(e.getBoundingClientRect().height))}));
+          const checks={finalCss:d.finalCss&&m.finalCss,hero:d.title.includes('street-by-street'),desktopOverflow:d.overflow<=2,mobileOverflow:m.overflow<=2,pathways:max(d.pathways)<=280,status:max(d.status)<=260,mobileStatus:max(m.status)<=280,map:max(d.map)<=420,projects:max(d.projects)<=520,process:max(d.process)<=190};
+          console.log('MUDON_SPACING_FINAL|'+JSON.stringify({checks,desktop:d,mobile:m}));
+          await browser.close();
+          if(!Object.values(checks).every(Boolean)) process.exit(1);
+          JS
+          node final-spacing.mjs
