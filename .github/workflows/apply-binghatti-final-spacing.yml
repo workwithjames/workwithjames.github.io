@@ -1,0 +1,43 @@
+name: Apply Binghatti final spacing
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-binghatti-final-spacing.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Link final Binghatti spacing and align metadata
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('landing/binghatti/index.html')
+          s=p.read_text(encoding='utf-8')
+          premium='<link rel="stylesheet" href="https://jamesrealty.uk/assets/binghatti-premium.css?v=1">'
+          final='<link rel="stylesheet" href="https://jamesrealty.uk/assets/binghatti-spacing-final.css?v=1">'
+          if final not in s:
+              s=s.replace(premium,premium+final)
+          old='Binghatti Properties Dubai | Latest Projects &amp; Prices'
+          new='Binghatti Dubai | New Releases &amp; Branded Residences'
+          s=s.replace(f'<meta property="og:title" content="{old}">',f'<meta property="og:title" content="{new}">')
+          s=s.replace(f'<meta name="twitter:title" content="{old}">',f'<meta name="twitter:title" content="{new}">')
+          s=s.replace('landing_page:"Binghatti Properties Dubai | Latest Projects & Prices"','landing_page:"Binghatti Dubai | New Releases & Branded Residences"')
+          s=s.replace('data-page="Binghatti Properties Dubai | Latest Projects &amp; Prices"','data-page="Binghatti Dubai | New Releases &amp; Branded Residences"')
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit final Binghatti spacing
+        shell: bash
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add landing/binghatti/index.html
+          git commit -m 'Tighten Binghatti layout and align metadata'
+          git push origin HEAD:main
