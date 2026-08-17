@@ -1,0 +1,131 @@
+name: Verify live landing layout
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/verify-live-landing-layout.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install browser driver
+        shell: bash
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save puppeteer-core@24 >/dev/null 2>&1
+          which google-chrome || which chromium || which chromium-browser
+
+      - name: Check rendered desktop and mobile geometry
+        shell: bash
+        run: |
+          cat > /tmp/layout-qa.mjs <<'JS'
+          import puppeteer from 'puppeteer-core';
+          import { execSync } from 'node:child_process';
+
+          const hosts = [
+            'emaar.jamesrealty.uk',
+            'aldar.jamesrealty.uk',
+            'damac.jamesrealty.uk',
+            'binghatti.jamesrealty.uk',
+            'nakheel.jamesrealty.uk',
+            'mudon.jamesrealty.uk',
+            'dubai.jamesrealty.uk',
+            'dubairealestate.jamesrealty.uk',
+            'dubaiproperties.jamesrealty.uk',
+            'dubaiproperty.jamesrealty.uk',
+          ];
+          const chrome = execSync('which google-chrome || which chromium || which chromium-browser').toString().trim();
+          const browser = await puppeteer.launch({ headless: true, executablePath: chrome, args: ['--no-sandbox'] });
+          let failed = false;
+
+          const sleep = ms => new Promise(r => setTimeout(r, ms));
+          const round = n => Math.round(n * 10) / 10;
+
+          async function metrics(page) {
+            return page.evaluate(() => {
+              const rects = sel => [...document.querySelectorAll(sel)].map(el => {
+                const r = el.getBoundingClientRect();
+                return { x:r.x, y:r.y, width:r.width, height:r.height };
+              });
+              const cssHrefs = [...document.querySelectorAll('link[rel="stylesheet"]')].map(x => x.href);
+              const facts = rects('.jr-facts article');
+              const signature = rects('.jr-signature article');
+              const process = rects('.jr-process__rail li');
+              const projects = rects('.jr-projects > .jr-project');
+              const lensAside = rects('.jr-lens__aside')[0] || null;
+              const lensGrid = rects('.jr-lens__grid')[0] || null;
+              return {
+                cssV7: cssHrefs.some(h => h.includes('landing-experience.css?v=7')),
+                overflow: document.documentElement.scrollWidth - window.innerWidth,
+                facts, signature, process, projects, lensAside, lensGrid,
+              };
+            });
+          }
+
+          for (const host of hosts) {
+            const page = await browser.newPage();
+            await page.setViewport({ width: 1440, height: 1000, deviceScaleFactor: 1 });
+            let desktop;
+            for (let attempt = 0; attempt < 8; attempt++) {
+              await page.goto(`https://${host}/?layoutqa=${Date.now()}-${attempt}`, { waitUntil:'networkidle2', timeout:45000 });
+              desktop = await metrics(page);
+              if (desktop.cssV7) break;
+              await sleep(20000);
+            }
+
+            const factsMax = desktop.facts.length ? Math.max(...desktop.facts.map(x => x.height)) : 0;
+            const signatureMax = desktop.signature.length ? Math.max(...desktop.signature.map(x => x.height)) : 0;
+            const processMax = desktop.process.length ? Math.max(...desktop.process.map(x => x.height)) : 0;
+            let projectTopSpread = 0;
+            if (['emaar.jamesrealty.uk','binghatti.jamesrealty.uk'].includes(host) && desktop.projects.length >= 3) {
+              const ys = desktop.projects.slice(0,3).map(x => x.y);
+              projectTopSpread = Math.max(...ys) - Math.min(...ys);
+            }
+            const lensPlacementOK = !desktop.lensAside || !desktop.lensGrid || desktop.lensAside.x < desktop.lensGrid.x;
+
+            await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 });
+            await page.reload({ waitUntil:'networkidle2', timeout:45000 });
+            const mobile = await metrics(page);
+            const mobileFactMaxWidth = mobile.facts.length ? Math.max(...mobile.facts.map(x => x.width)) : 0;
+
+            const checks = {
+              cssV7: desktop.cssV7,
+              desktopOverflow: desktop.overflow <= 2,
+              compactFacts: !desktop.facts.length || factsMax <= 125,
+              compactSignature: !desktop.signature.length || signatureMax <= 235,
+              compactProcess: !desktop.process.length || processMax <= 220,
+              alignedSpecialProjects: projectTopSpread <= 10,
+              lensPlacement: lensPlacementOK,
+              mobileOverflow: mobile.overflow <= 2,
+              mobileFactsCompact: !mobile.facts.length || mobileFactMaxWidth <= 200,
+            };
+            const pass = Object.values(checks).every(Boolean);
+            failed ||= !pass;
+            console.log('LAYOUT|' + host + '|' + JSON.stringify({
+              pass, checks,
+              desktop: {
+                overflow: round(desktop.overflow),
+                factsMax: round(factsMax),
+                signatureMax: round(signatureMax),
+                processMax: round(processMax),
+                projectTopSpread: round(projectTopSpread),
+                lensAsideX: desktop.lensAside ? round(desktop.lensAside.x) : null,
+                lensGridX: desktop.lensGrid ? round(desktop.lensGrid.x) : null,
+              },
+              mobile: {
+                overflow: round(mobile.overflow),
+                factMaxWidth: round(mobileFactMaxWidth),
+              }
+            }));
+            await page.close();
+          }
+
+          await browser.close();
+          process.exit(failed ? 1 : 0);
+          JS
+          node /tmp/layout-qa.mjs
