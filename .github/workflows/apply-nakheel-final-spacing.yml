@@ -1,0 +1,35 @@
+name: Apply Nakheel final spacing
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/apply-nakheel-final-spacing.yml'
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Link final Nakheel spacing CSS
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('landing/nakheel/index.html')
+          s=p.read_text(encoding='utf-8')
+          needle='<link rel="stylesheet" href="https://jamesrealty.uk/assets/nakheel-premium.css?v=1">'
+          extra='<link rel="stylesheet" href="https://jamesrealty.uk/assets/nakheel-spacing-final.css?v=1">'
+          if extra not in s:
+              s=s.replace(needle,needle+extra)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit spacing link
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add landing/nakheel/index.html
+          git commit -m 'Apply final Nakheel whitespace corrections'
+          git push origin HEAD:main
