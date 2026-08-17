@@ -1,0 +1,76 @@
+name: Verify Binghatti final landing
+on:
+  push:
+    paths:
+      - '.github/workflows/verify-binghatti-final.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install browser driver
+        shell: bash
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save puppeteer-core@24 >/dev/null 2>&1
+      - name: Verify final public Binghatti render
+        shell: bash
+        run: |
+          cat > binghatti-final.mjs <<'JS'
+          import puppeteer from 'puppeteer-core';
+          import {execSync} from 'node:child_process';
+          const chrome=execSync('which google-chrome || which chromium || which chromium-browser').toString().trim();
+          const browser=await puppeteer.launch({headless:true,executablePath:chrome,args:['--no-sandbox']});
+          const page=await browser.newPage();
+          const read=async(width,height)=>{
+            await page.setViewport({width,height,deviceScaleFactor:1});
+            let d;
+            for(let i=0;i<26;i++){
+              await page.goto(`https://binghatti.jamesrealty.uk/?final=${Date.now()}-${i}`,{waitUntil:'networkidle2',timeout:45000});
+              d=await page.evaluate(()=>{
+                const h=s=>[...document.querySelectorAll(s)].map(e=>Math.round(e.getBoundingClientRect().height));
+                const css=[...document.querySelectorAll('link[rel="stylesheet"]')].map(e=>e.href);
+                return {
+                  premium:css.some(x=>x.includes('binghatti-premium.css?v=1')),
+                  finalCss:css.some(x=>x.includes('binghatti-spacing-final.css?v=1')),
+                  title:document.querySelector('h1')?.textContent?.trim()||'',
+                  text:document.body.innerText,
+                  overflow:document.documentElement.scrollWidth-window.innerWidth,
+                  hero:h('.jr-hero'),facts:h('.jr-facts__track article'),releases:h('.bh-release-card'),projectBodies:h('.jr-project__body'),projects:h('.jr-project'),branded:h('.bh-branded-list article'),locations:h('.bh-location-grid article'),lens:h('.jr-lens__grid article'),process:h('.jr-process__rail li'),iframes:document.querySelectorAll('iframe').length
+                };
+              });
+              if(d.premium&&d.finalCss&&d.title.includes('Architecture gets attention')) return d;
+              await new Promise(r=>setTimeout(r,15000));
+            }
+            return d;
+          };
+          const desktop=await read(1440,1000);
+          const mobile=await read(390,844);
+          const max=a=>a?.length?Math.max(...a):0;
+          const checks={
+            css:desktop.premium&&desktop.finalCss&&mobile.premium&&mobile.finalCss,
+            hero:desktop.title.includes('Architecture gets attention'),
+            currentFacts:desktop.text.includes('Skyflame')&&desktop.text.includes('Etherea')&&desktop.text.includes('Luxuria')&&desktop.text.includes('Mercedes-Benz City'),
+            brandedFacts:desktop.text.includes('Bugatti Residences')&&desktop.text.includes('Burj Binghatti Jacob')&&desktop.text.includes('Mercedes-Benz Places | Binghatti City'),
+            noBulkyMap:desktop.iframes===0,
+            desktopOverflow:desktop.overflow<=2,
+            mobileOverflow:mobile.overflow<=2,
+            heroHeight:max(desktop.hero)<=880,
+            facts:max(desktop.facts)<=125,
+            releases:max(desktop.releases)<=270,
+            projectBodies:max(desktop.projectBodies)<=520,
+            branded:max(desktop.branded)<=260,
+            locations:max(desktop.locations)<=230,
+            lens:max(desktop.lens)<=150,
+            process:max(desktop.process)<=180,
+            mobileProjects:max(mobile.projectBodies)<=720,
+            mobileBranded:max(mobile.branded)<=300,
+            mobileLocations:max(mobile.locations)<=270
+          };
+          console.log('BINGHATTI_FINAL_QA|'+JSON.stringify({checks,desktop,mobile}));
+          await browser.close();
+          if(!Object.values(checks).every(Boolean)) process.exit(1);
+          JS
+          node binghatti-final.mjs
