@@ -66,7 +66,8 @@ function removeDirectGa4Configuration(body, contentType) {
   return body.replace(directLoaderPattern, '').replace(directConfigPattern, '');
 }
 
-function replacePersonalName(body) {
+function replacePersonalName(body, pathname) {
+  if (pathname === '/' || pathname.startsWith('/landing/')) return body;
   return body.split('James' + ' Ravi').join('James');
 }
 
@@ -224,8 +225,9 @@ function injectNavigationAssets(body, contentType) {
   return assets.length ? body.replace('</head>', `${assets.join('')}</head>`) : body;
 }
 
-function injectQualityAssets(body, contentType) {
+function injectQualityAssets(body, contentType, pathname) {
   if (!contentType.includes('text/html')) return body;
+  if (pathname === '/' || pathname.startsWith('/landing/')) return body;
 
   const assets = [];
   if (!body.includes('/assets/quality-fixes.css')) {
@@ -241,7 +243,7 @@ function injectQualityAssets(body, contentType) {
 function shouldInjectIntentPopup(pathname) {
   if (pathname === '/contact/' || pathname === '/about-me/' || pathname === '/cite/') return false;
   if (pathname === '/blog/' || pathname === '/blog/property-news/') return false;
-  if (pathname === '/') return true;
+  if (pathname === '/') return false;
   if (pathname.startsWith('/buy-invest-dubai/')) return true;
   if (pathname.startsWith('/sell-dubai-property/')) return true;
   if (pathname.startsWith('/real-estate-marketing/')) return true;
@@ -327,14 +329,14 @@ export async function onRequest(context) {
   }
 
   body = removeDirectGa4Configuration(body, contentType);
-  body = replacePersonalName(body);
+  body = replacePersonalName(body, pathname);
   body = renameBlogPageLabels(body, contentType);
   body = rewriteDubaiDataContentLinks(body, contentType);
   body = standardizeHeaderNavigation(body, contentType, pathname);
   body = addConversionFooterLinks(body, contentType);
   body = injectNavigationAssets(body, contentType);
   body = injectIntentPopupAssets(body, contentType, pathname);
-  body = injectQualityAssets(body, contentType);
+  body = injectQualityAssets(body, contentType, pathname);
   body = hardenBlankTargets(body, contentType);
   body = replaceMissingSocialPreview(body, contentType);
   body = normalizeAssetVersions(body, contentType);
