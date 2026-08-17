@@ -1,0 +1,19 @@
+{
+  "name": "james-realty-landing-subdomains",
+  "main": "landing-subdomains-worker.js",
+  "compatibility_date": "2026-08-17",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [
+    { "pattern": "emaar.jamesrealty.uk", "custom_domain": true },
+    { "pattern": "aldar.jamesrealty.uk", "custom_domain": true },
+    { "pattern": "damac.jamesrealty.uk", "custom_domain": true },
+    { "pattern": "binghatti.jamesrealty.uk", "custom_domain": true },
+    { "pattern": "nakheel.jamesrealty.uk", "custom_domain": true },
+    { "pattern": "mudon.jamesrealty.uk", "custom_domain": true },
+    { "pattern": "dubai.jamesrealty.uk", "custom_domain": true },
+    { "pattern": "dubairealestate.jamesrealty.uk", "custom_domain": true },
+    { "pattern": "dubaiproperties.jamesrealty.uk", "custom_domain": true },
+    { "pattern": "dubaiproperty.jamesrealty.uk", "custom_domain": true }
+  ]
+}
