@@ -67,7 +67,7 @@ function removeDirectGa4Configuration(body, contentType) {
 }
 
 function replacePersonalName(body, pathname) {
-  if (pathname === '/' || pathname.startsWith('/landing/')) return body;
+  if (pathname === '/' || pathname.startsWith('/landing/') || pathname.startsWith('/privacy-policy/')) return body;
   return body.split('James' + ' Ravi').join('James');
 }
 
@@ -227,7 +227,7 @@ function injectNavigationAssets(body, contentType) {
 
 function injectQualityAssets(body, contentType, pathname) {
   if (!contentType.includes('text/html')) return body;
-  if (pathname === '/' || pathname.startsWith('/landing/')) return body;
+  if (pathname === '/' || pathname.startsWith('/landing/') || pathname.startsWith('/privacy-policy/')) return body;
 
   const assets = [];
   if (!body.includes('/assets/quality-fixes.css')) {
