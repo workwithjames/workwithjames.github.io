@@ -1,0 +1,47 @@
+name: Apply Emaar spacing refinement v2
+
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-emaar-spacing-v2.yml'
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Add spacing v2 stylesheet
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('landing/emaar/index.html')
+          html=p.read_text(encoding='utf-8')
+          marker='<link rel="stylesheet" href="https://jamesrealty.uk/assets/emaar-spacing.css?v=1">'
+          extra=marker+'<link rel="stylesheet" href="https://jamesrealty.uk/assets/emaar-spacing-v2.css?v=1">'
+          if 'emaar-spacing-v2.css' not in html:
+              if marker not in html:
+                  raise SystemExit('Existing spacing stylesheet marker not found')
+              html=html.replace(marker,extra,1)
+          p.write_text(html,encoding='utf-8')
+          PY
+      - name: Commit v2 link
+        shell: bash
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add landing/emaar/index.html
+          git commit -m 'Apply tighter Emaar spacing refinement'
+          git push origin HEAD:main
+      - name: Request Pages rebuild
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST repos/${{ github.repository }}/pages/builds
