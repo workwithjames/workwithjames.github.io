@@ -8,7 +8,6 @@
  */
 
 const ORIGIN = 'https://jamesrealty.uk';
-const LAYOUT_FIX_STYLESHEET = `${ORIGIN}/assets/landing-layout-fixes.css?v=20260817-1`;
 const HOSTS = {
   'emaar.jamesrealty.uk': '/landing/emaar/',
   'aldar.jamesrealty.uk': '/landing/aldar/',
@@ -199,11 +198,6 @@ export default {
     const response = new Response(request.method === 'HEAD' ? null : upstream.body, { status: 200, headers });
     if (request.method === 'HEAD') return response;
     return new HTMLRewriter()
-      .on('head', {
-        element(element) {
-          element.append(`<link rel="stylesheet" href="${LAYOUT_FIX_STYLESHEET}">`, { html: true });
-        },
-      })
       .on('meta[name="robots"]', {
         element(element) {
           element.setAttribute('content', 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1');
