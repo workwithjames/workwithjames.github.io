@@ -1,0 +1,16 @@
+/* Final Mudon spacing pass: construction cards only. */
+@media(min-width:761px){
+.theme-mudon .mudon-status-card{min-height:0!important;padding:16px 17px!important;display:block!important}
+.theme-mudon .mudon-status-card>span{font-size:10px!important;letter-spacing:.1em!important}
+.theme-mudon .mudon-status-card strong{font-size:34px!important;margin:12px 0 4px!important;line-height:1!important}
+.theme-mudon .mudon-status-card h3{font-size:18px!important;margin:0 0 6px!important;line-height:1.15!important}
+.theme-mudon .mudon-status-card p{font-size:13px!important;line-height:1.35!important;margin:0!important}
+.theme-mudon .mudon-status-card footer{font-size:11px!important;line-height:1.35!important;margin-top:10px!important;padding-top:9px!important}
+}
+@media(max-width:760px){
+.theme-mudon .mudon-status-card{min-height:0!important;padding:18px!important}
+.theme-mudon .mudon-status-card strong{font-size:34px!important;margin:12px 0 4px!important}
+.theme-mudon .mudon-status-card h3{margin-bottom:6px!important}
+.theme-mudon .mudon-status-card p{line-height:1.4!important}
+.theme-mudon .mudon-status-card footer{margin-top:10px!important;padding-top:8px!important}
+}
