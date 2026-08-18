@@ -1,12 +1,12 @@
 name: Deploy static site to Pages
-# Deploy optimized landing contact forms: 2026-08-18
+# Deploy optimized landing contact forms and record deployment success: 2026-08-18
 on:
   push:
     paths:
       - '.github/workflows/deploy-pages-static-now.yml'
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 concurrency:
@@ -36,7 +36,31 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+  record:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Record successful Pages deployment
+        shell: bash
+        run: |
+          mkdir -p .github/qa
+          cat > .github/qa/landing-form-v2-deployment.txt <<EOF
+          status=success
+          workflow_sha=${GITHUB_SHA}
+          page_url=${{ needs.deploy.outputs.page_url }}
+          deployed_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          EOF
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/qa/landing-form-v2-deployment.txt
+          git commit -m 'Record landing form Pages deployment' || exit 0
+          git push origin HEAD:main
