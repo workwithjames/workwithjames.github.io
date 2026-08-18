@@ -23,6 +23,13 @@ def write_if_changed(path: Path, original: str, updated: str) -> bool:
     return True
 
 
+def remove_em_dashes(text: str) -> str:
+    """Remove AI-looking em dashes while preserving natural sentence flow."""
+    text = re.sub(r"\s+—\s+", ", ", text)
+    text = re.sub(r"\s*—\s*", ", ", text)
+    return text
+
+
 def update_css() -> bool:
     path = ROOT / "assets" / "landing-experience.css"
     original = path.read_text(encoding="utf-8")
@@ -105,9 +112,12 @@ def update_generator() -> bool:
     updated = updated.replace(old_v4_form, new_v4_form)
     updated = updated.replace(old_v4_mobile, new_v4_mobile)
     updated = updated.replace(old_legacy_contact, new_legacy_contact)
+    updated = remove_em_dashes(updated)
 
     if 'href="tel:+971528420933"' in updated:
         raise RuntimeError("The landing generator still contains a visible telephone CTA")
+    if "—" in updated:
+        raise RuntimeError("The landing generator still contains an em dash")
     return write_if_changed(path, original, updated)
 
 
@@ -143,6 +153,7 @@ def update_landing_pages() -> tuple[int, int]:
             )
 
         updated = tel_anchor.sub(replace_tel, updated)
+        updated = remove_em_dashes(updated)
         replaced_total += per_page
 
         if 'href="tel:' in updated:
@@ -151,6 +162,8 @@ def update_landing_pages() -> tuple[int, int]:
             raise RuntimeError(f"{slug}: a visible raw James Realty phone number remains")
         if "data-whatsapp-action" not in updated:
             raise RuntimeError(f"{slug}: no tracked WhatsApp CTA found")
+        if "—" in updated:
+            raise RuntimeError(f"{slug}: an em dash remains")
         if "landing-experience.css?v=9" not in updated or "landing-experience.js?v=7" not in updated:
             raise RuntimeError(f"{slug}: current shared-asset versions are missing")
 
@@ -256,6 +269,7 @@ def main() -> int:
         changed_parts.append("live responsive QA")
 
     print(f"Converted {replacement_count} visible phone links to WhatsApp CTAs.")
+    print("Removed em dashes from all landing-page source and generator content.")
     print("Updated: " + (", ".join(changed_parts) if changed_parts else "nothing; already current"))
     return 0
 
