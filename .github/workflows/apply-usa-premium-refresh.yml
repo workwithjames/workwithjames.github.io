@@ -1,0 +1,130 @@
+name: Apply USA investor premium refresh
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-usa-premium-refresh.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Refresh USA investor landing
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, json
+          p=Path('landing/usa/index.html')
+          s=p.read_text(encoding='utf-8')
+
+          old_title='Dubai Real Estate for Americans | US Investor Guide'
+          new_title='Dubai Real Estate for Americans | USD Underwriting & Current Projects'
+          old_desc='A US-focused guide to Dubai real estate ownership, remote buying, USD/AED planning, federal reporting questions and investment due diligence.'
+          new_desc='Compare current Dubai real estate from the US with USD underwriting, official acquisition-cost guidance and cross-border reporting questions.'
+          s=s.replace(old_title,new_title).replace(old_desc,new_desc)
+          s=s.replace('dateModified":"2026-08-17','dateModified":"2026-08-18')
+          base='<link rel="stylesheet" href="https://jamesrealty.uk/assets/landing-form-v2.css?v=1">'
+          premium='<link rel="stylesheet" href="https://jamesrealty.uk/assets/usa-premium.css?v=1">'
+          if premium not in s:
+              s=s.replace(base,base+premium)
+
+          # Structured data aligned to visible page.
+          m=re.search(r'<script type="application/ld\+json">(.*?)</script>',s,re.S)
+          if m:
+              data=json.loads(m.group(1))
+              for node in data.get('@graph',[]):
+                  t=node.get('@type')
+                  if t=='WebPage':
+                      node['name']=new_title
+                      node['description']=new_desc
+                      node['dateModified']='2026-08-18'
+                  elif t=='Service':
+                      node['name']='US to Dubai real estate advisory'
+                      node['description']='Independent Dubai real estate comparison for US buyers, including USD underwriting, current projects, acquisition costs and cross-border due diligence.'
+                      node['audience']={'@type':'Audience','audienceType':'US buyers and investors considering Dubai real estate'}
+                  elif t=='ItemList':
+                      node['name']='Current Dubai real estate examples for US buyers'
+                      node['itemListElement']=[
+                        {'@type':'ListItem','position':1,'url':'https://www.binghatti.com/en/projects/binghatti-skyflame','name':'Binghatti Skyflame'},
+                        {'@type':'ListItem','position':2,'url':'https://www.emaar.com/en/properties/creek-bay-at-dubai-creek-harbour','name':'Creek Bay at Dubai Creek Harbour'},
+                        {'@type':'ListItem','position':3,'url':'https://www.damacproperties.com/en/projects/chelsea-residences/','name':'Chelsea Residences'}]
+                  elif t=='FAQPage':
+                      node['mainEntity']=[
+                        {'@type':'Question','name':'Can Americans own Dubai real estate?','acceptedAnswer':{'@type':'Answer','text':'Foreign buyers may own eligible property in designated Dubai freehold areas, subject to the exact property, identification and registration process.'}},
+                        {'@type':'Question','name':'Is the UAE dirham fixed to the US dollar?','acceptedAnswer':{'@type':'Answer','text':'The Central Bank of the UAE maintains the dirham peg to the US dollar and currently intervenes around USD/AED 3.672 to 3.673. Bank and wire charges can still affect the effective cost.'}},
+                        {'@type':'Question','name':'How are Dubai property sale-registration fees structured?','acceptedAnswer':{'@type':'Answer','text':'Dubai Land Department currently lists 2% of sale value for the buyer and 2% for the seller for completed-property sale registration, plus applicable title, map and trustee/service-partner fees.'}},
+                        {'@type':'Question','name':'Do US taxpayers report Dubai rental income?','acceptedAnswer':{'@type':'Answer','text':'US citizens and resident aliens are generally subject to US tax on worldwide income, including foreign rental income. Obtain current professional US tax advice for your circumstances.'}},
+                        {'@type':'Question','name':'Does directly owned Dubai real estate itself go on FBAR or Form 8938?','acceptedAnswer':{'@type':'Answer','text':'IRS guidance states directly held foreign real estate itself is not reportable on FBAR or Form 8938. Foreign financial accounts or interests in foreign entities used to hold property may create separate reporting obligations.'}}]
+              s=s[:m.start(1)]+json.dumps(data,separators=(',',':'),ensure_ascii=False)+s[m.end(1):]
+
+          # Data layer/body page title
+          s=s.replace('landing_page:"Dubai Real Estate for Americans | US Investor Guide"',f'landing_page:"{new_title}"')
+          s=s.replace('landing_audience:"US to Dubai cross-border desk"','landing_audience:"Independent US-to-Dubai real estate advisory"')
+          s=s.replace('data-page="Dubai Real Estate for Americans | US Investor Guide"',f'data-page="{new_title}"')
+
+          # Nav
+          s=s.replace('<a href="#why-invest">Investment case</a><a href="#projects">Property formats</a><a href="#process">Execution plan</a><a href="#enquire">Talk to James</a>', '<a href="#underwriting">USD model</a><a href="#projects">Current Dubai options</a><a href="#costs">Costs &amp; reporting</a><a href="#enquire">Get shortlist</a>')
+          s=s.replace('Get a US investor brief','Get my Dubai underwriting brief')
+
+          # Hero
+          s=s.replace('US to Dubai cross-border desk','Independent US-to-Dubai real estate advisory')
+          s=s.replace('Underwrite Dubai like an overseas asset—not a vacation purchase.','Dubai real estate, underwritten in dollars before you reserve.')
+          s=s.replace('A US-investor framework connecting Dubai title, property operations and unit economics with the American reporting and ownership questions that remain relevant.','Compare current Dubai projects through the exact unit, USD-equivalent capital, acquisition costs, operating assumptions and US reporting questions that matter before you reserve.')
+          s=s.replace('Review the cross-border plan','Compare current projects')
+          s=s.replace('<ul class="jr-hero__proof"><li>USD/AED framework</li><li>US reporting questions surfaced</li><li>Dubai unit underwriting</li></ul>', '<ul class="jr-hero__proof"><li>USD/AED peg-aware underwriting</li><li>Current Dubai project examples</li><li>Official cost + IRS sources</li></ul><span class="us-checked">Facts checked 18 Aug 2026 · availability and operating assumptions move</span>')
+
+          facts='''<section class="jr-facts" aria-label="US buyer essentials"><div class="jr-shell jr-facts__track"><article><span>01</span><strong>3.672–3.673</strong><small>CBUAE USD/AED intervention range</small></article><article><span>02</span><strong>2% + 2%</strong><small>DLD sale-registration fee split</small></article><article><span>03</span><strong>Worldwide income</strong><small>US federal reporting still matters</small></article><article><span>04</span><strong>Unit economics</strong><small>Rent minus vacancy and annual costs</small></article></div></section>'''
+          s,n=re.subn(r'<section class="jr-facts".*?</section>',facts,s,count=1,flags=re.S)
+          if n!=1: raise SystemExit(f'facts replacement failed: {n}')
+
+          tool='''<section class="jr-section jr-tool-section" id="underwriting"><div class="jr-shell jr-tool" data-underwriting-tool><div><p class="jr-kicker">USD operating model</p><h2 class="jr-display">Model the property before you model the story.</h2><p>Change price, rent, occupancy and annual operating costs. The result is a simple net-yield scenario plus annual USD income at the 3.6725 planning conversion—not a forecast or tax calculation.</p></div><form><label>Purchase price (AED)<input name="price" type="number" value="2000000" min="1" step="10000"></label><label>Monthly rent (AED)<input name="rent" type="number" value="12000" min="0" step="500"></label><label>Occupancy (%)<input name="occupancy" type="number" value="92" min="0" max="100"></label><label>Annual operating costs (AED)<input name="costs" type="number" value="30000" min="0" step="1000"></label><output data-underwriting-output aria-live="polite">—</output><small>Illustrative only. Excludes purchase costs, financing, US tax, future price changes and one-off capital expenditure.</small><div class="us-model-note"><span><strong>AED / USD</strong>CBUAE maintains the dirham peg; bank and wire fees can still affect your effective cost.</span><span><strong>Operating case</strong>Use building-level rent, realistic vacancy, service charges and management—not brochure yield.</span><span><strong>Downside case</strong>Reduce rent and occupancy and increase costs before deciding how much margin you really have.</span></div></form></div></section>'''
+          s,n=re.subn(r'<section class="jr-section jr-tool-section".*?</section>',tool,s,count=1,flags=re.S)
+          if n!=1: raise SystemExit(f'tool replacement failed: {n}')
+
+          projects='''<section class="jr-section jr-project-section" id="projects"><div class="jr-shell"><header class="jr-heading" data-reveal><p class="jr-kicker">Current Dubai opportunity edit</p><h2 class="jr-display">Three different ways to take Dubai exposure.</h2><p>These are deliberately different propositions: lower-entry apartments in Majan, a waterfront Emaar master community, and a football-branded waterfront project in Dubai Maritime City. Published prices are starting points—not guaranteed live inventory.</p></header><div class="jr-projects"><article class="jr-project" data-reveal data-project-card="Binghatti Skyflame"><figure><img src="https://jamesrealty.uk/images/projects/binghatti-copper-geometric-tower.webp" width="724" height="543" loading="lazy" decoding="async" alt="Representative geometric Dubai apartment architecture for Binghatti Skyflame comparison"><figcaption>James Realty advisory visual — not an official project render</figcaption></figure><div class="jr-project__body"><span class="jr-project__meta">Majan · lower entry point</span><h3>Binghatti Skyflame</h3><p>Studios, one- and two-bedroom apartments. Binghatti currently states a 20/50/30 payment plan and scheduled completion by 31 December 2027.</p><ul><li>Studio · 1 BR · 2 BR</li><li>20% booking · 50% construction · 30% completion</li><li>Majan · E311 access</li></ul><div class="jr-project__bottom"><span><strong>From AED 585,000</strong><small>≈ $159k at 3.6725 · before costs</small></span><a class="jr-project__source" data-source-link href="https://www.binghatti.com/en/projects/binghatti-skyflame" target="_blank" rel="noopener noreferrer">Official source ↗</a></div><a class="jr-project__cta" href="#enquire" data-project-select="Binghatti Skyflame">Check current Skyflame units <span aria-hidden="true">→</span></a><small class="us-project-note">Test future Majan supply, actual unit size and the full dated instalment schedule.</small></div></article><article class="jr-project" data-reveal data-project-card="Creek Bay"><figure><img src="https://jamesrealty.uk/images/investors/usa-dubai-marina-apartment.webp" width="430" height="600" loading="lazy" decoding="async" alt="Representative premium Dubai waterfront apartment for Creek Bay comparison"><figcaption>James Realty advisory visual — not an official project render</figcaption></figure><div class="jr-project__body"><span class="jr-project__meta">Dubai Creek Harbour · waterfront</span><h3>Creek Bay</h3><p>One-, two- and three-bedroom waterfront apartments in Dubai Creek Harbour, with Emaar currently publishing a starting price of AED 1.8m.</p><ul><li>1–3 bedroom apartments</li><li>Waterfront promenade setting</li><li>Emaar master community</li></ul><div class="jr-project__bottom"><span><strong>From AED 1.8m</strong><small>≈ $490k at 3.6725 · before costs</small></span><a class="jr-project__source" data-source-link href="https://www.emaar.com/en/properties/creek-bay-at-dubai-creek-harbour" target="_blank" rel="noopener noreferrer">Official source ↗</a></div><a class="jr-project__cta" href="#enquire" data-project-select="Creek Bay">Check current Creek Bay units <span aria-hidden="true">→</span></a><small class="us-project-note">Test view premium, service charges, competing waterfront supply and the exact unit stack.</small></div></article><article class="jr-project" data-reveal data-project-card="Chelsea Residences"><figure><img src="https://jamesrealty.uk/images/landing/damac-branded-waterfront-residences.webp" width="724" height="543" loading="lazy" decoding="async" alt="Representative branded waterfront residence visual for Chelsea Residences comparison"><figcaption>James Realty advisory visual — not an official project render</figcaption></figure><div class="jr-project__body"><span class="jr-project__meta">Dubai Maritime City · branded waterfront</span><h3>Chelsea Residences</h3><p>DAMAC describes this Chelsea FC-branded off-plan project as more than 1,400 residences in Dubai Maritime City, with one-, two- and three-bedroom apartments.</p><ul><li>1–3 bedroom apartments</li><li>Football-branded waterfront proposition</li><li>Brand premium + recurring-cost review</li></ul><div class="jr-project__bottom"><span><strong>Price on request</strong><small>DAMAC currently does not publish a starting price</small></span><a class="jr-project__source" data-source-link href="https://www.damacproperties.com/en/projects/chelsea-residences/" target="_blank" rel="noopener noreferrer">Official source ↗</a></div><a class="jr-project__cta" href="#enquire" data-project-select="Chelsea Residences">Check current Chelsea units <span aria-hidden="true">→</span></a><small class="us-project-note">Compare the brand premium, service charges, delivery risk and future resale depth before paying for the label.</small></div></article></div></div></section>'''
+          s,n=re.subn(r'<section class="jr-section jr-project-section".*?</section>',projects,s,count=1,flags=re.S)
+          if n!=1: raise SystemExit(f'projects replacement failed: {n}')
+
+          strategies='''<section class="jr-section us-strategy-section" id="strategy"><div class="jr-shell"><header class="jr-heading jr-heading--compact" data-reveal><p class="jr-kicker">Choose the exposure</p><h2 class="jr-display">The operating model should choose the property.</h2></header><div class="us-strategy-grid"><article data-reveal><span>01 · Lower entry</span><h3>Off-plan apartment</h3><p>Map every capital call, delivery date and competing pipeline. Low ticket size is not the same as low risk.</p><strong>Best when staged capital matters</strong></article><article data-reveal><span>02 · Master community</span><h3>Waterfront apartment</h3><p>Test view premium, service charges, masterplan delivery, tenant depth and resale comparables.</p><strong>Best when location quality matters</strong></article><article data-reveal><span>03 · Brand premium</span><h3>Branded residence</h3><p>Separate the real estate value from the brand premium and model recurring charges plus the future buyer pool.</p><strong>Best when scarcity can be proven</strong></article></div></div></section>'''
+
+          costs='''<section class="jr-section us-cost-section" id="costs"><div class="jr-shell"><header class="jr-heading jr-heading--compact" data-reveal><p class="jr-kicker">Acquisition basis</p><h2 class="jr-display">Underwrite the all-in basis, not the brochure price.</h2><p>Dubai Land Department currently lists 2% of sale value for the buyer and 2% for the seller on completed-property sale registration, plus applicable title, map and trustee/service-partner charges. Off-plan registration and financing add their own line items.</p></header><div class="us-cost-grid"><article><span>01</span><strong>DLD registration</strong><p>Official completed-sale service lists 2% buyer + 2% seller of sale value.</p><small>Contractual allocation may differ.</small></article><article><span>02</span><strong>Transaction extras</strong><p>Title, map, trustee/service partner, agency, mortgage and professional fees may apply.</p><small>Use a dated deal-specific cost sheet.</small></article><article><span>03</span><strong>Completion capital</strong><p>Final instalment, snagging, furnishing, utilities, deposits and an operating reserve.</p><small>Keep this separate from purchase price.</small></article><article><span>04</span><strong>Annual operation</strong><p>Service charges, management, maintenance, vacancy, insurance and future capital work.</p><small>These belong in the net-yield model.</small></article></div></div></section>'''
+          s,n=re.subn(r'<section class="jr-section jr-costs".*?</section>',strategies+costs,s,count=1,flags=re.S)
+          if n!=1: raise SystemExit(f'cost replacement failed: {n}')
+
+          locations='''<section class="jr-section us-location-section" id="locations"><div class="jr-shell"><header class="jr-heading jr-heading--compact" data-reveal><p class="jr-kicker">Dubai geography</p><h2 class="jr-display">Three districts. Three different underwriting problems.</h2><p>Majan, Dubai Creek Harbour and Dubai Maritime City should not share one rent or resale assumption. Use local comparables and competing pipeline for each.</p></header><div class="us-location-grid"><article data-reveal><span>01 · Majan</span><strong>Lower-entry growth corridor</strong><p>Entry price can be attractive, but rent depth and future apartment supply need to be stress-tested.</p><small>Example: Skyflame</small></article><article data-reveal><span>02 · Creek Harbour</span><strong>Waterfront masterplan</strong><p>Higher entry pricing reflects master-community and waterfront positioning; view and service-charge differences matter.</p><small>Example: Creek Bay</small></article><article data-reveal><span>03 · Maritime City</span><strong>Branded waterfront</strong><p>Brand, water views and project positioning add premium; resale depth and recurring costs must justify it.</p><small>Example: Chelsea Residences</small></article></div></div></section>'''
+          s,n=re.subn(r'<section class="jr-section jr-map-section".*?</section>',locations,s,count=1,flags=re.S)
+          if n!=1: raise SystemExit(f'location replacement failed: {n}')
+
+          reporting='''<section class="jr-section us-reporting-section" id="why-invest"><div class="jr-shell"><header class="jr-heading jr-heading--compact" data-reveal><p class="jr-kicker">US reporting reality</p><h2 class="jr-display">Dubai changes the asset. It does not switch off US rules.</h2><p>Use qualified US tax advice for your facts. The key distinction is between directly held real estate, foreign financial accounts and interests in foreign entities.</p></header><div class="us-reporting-grid"><article><span>01</span><strong>Worldwide income</strong><p>IRS guidance says US citizens and resident aliens are generally subject to US tax on worldwide income, including foreign rental income.</p><small>Tax treatment depends on your facts.</small></article><article><span>02</span><strong>Direct real estate</strong><p>IRS guidance states directly held foreign real estate itself is not reportable on FBAR or Form 8938.</p><small>That does not eliminate income-tax reporting.</small></article><article><span>03</span><strong>Foreign accounts</strong><p>FBAR can apply when aggregate reportable foreign financial accounts exceed $10,000 at any time in the year.</p><small>Property itself is not a financial account.</small></article><article><span>04</span><strong>Entity ownership</strong><p>A foreign company, partnership, trust or other structure can create separate US reporting questions.</p><small>Choose structure only with tailored advice.</small></article></div></div></section>'''
+          s,n=re.subn(r'<section class="jr-section jr-lens-section".*?</section>',reporting,s,count=1,flags=re.S)
+          if n!=1: raise SystemExit(f'reporting replacement failed: {n}')
+
+          process='''<section class="jr-section jr-process" id="process"><div class="jr-shell"><header class="jr-heading jr-heading--compact" data-reveal><p class="jr-kicker">Controlled purchase path</p><h2 class="jr-display">From a US brief to a verified Dubai unit.</h2></header><ol class="jr-process__rail"><li data-reveal><span>01</span><div><h3>Set the USD ceiling</h3><p>Price, registration, completion reserve and operating capital.</p></div></li><li data-reveal><span>02</span><div><h3>Underwrite exact units</h3><p>Rent, vacancy, service charge, layout, view and competing supply.</p></div></li><li data-reveal><span>03</span><div><h3>Verify the transaction</h3><p>Developer or seller, registration, recipient account and dated documents.</p></div></li><li data-reveal><span>04</span><div><h3>Complete with advisers</h3><p>Use Dubai conveyancing and qualified US tax/legal advice where appropriate.</p></div></li></ol></div></section>'''
+          s,n=re.subn(r'<section class="jr-section jr-process".*?</section>',process,s,count=1,flags=re.S)
+          if n!=1: raise SystemExit(f'process replacement failed: {n}')
+
+          # Form copy while preserving optimized shared form markup.
+          s=s.replace('Get a US-to-Dubai investment brief.','Get a Dubai shortlist with a USD operating model.')
+          s=s.replace('Share your USD budget, return target and ownership preference. Receive current options with a base case and the US questions that need professional advice.','Share your budget and objective. I’ll compare current Dubai units, all-in acquisition basis, operating assumptions and the cross-border questions to take to your US adviser.')
+          s=s.replace('Hello James, I am based in the US and would like Dubai property recommendations.','Hello James, I am based in the US and would like a Dubai real estate shortlist with USD underwriting.')
+
+          faq='''<section class="jr-section jr-faq-section" id="faq"><div class="jr-shell jr-faq"><header data-reveal><p class="jr-kicker">FAQ</p><h2 class="jr-display">Questions to settle before reserving.</h2></header><div><details><summary>Can Americans own Dubai real estate?</summary><p>Foreign buyers may own eligible property in designated Dubai freehold areas, subject to the exact property, identification and registration process.</p></details><details><summary>Is the UAE dirham fixed to the US dollar?</summary><p>The Central Bank of the UAE maintains the dirham peg to the US dollar and currently intervenes around USD/AED 3.672–3.673. Bank, card and wire charges can still affect the effective conversion cost.</p></details><details><summary>How are Dubai sale-registration fees structured?</summary><p>Dubai Land Department currently lists 2% of sale value for the buyer and 2% for the seller on its completed-property sale-registration service, plus applicable title, map and trustee/service-partner fees. Obtain a dated cost sheet for the exact transaction.</p></details><details><summary>Do US taxpayers report Dubai rental income?</summary><p>US citizens and resident aliens are generally subject to US tax on worldwide income, including foreign rental income. Use a qualified US tax adviser for your circumstances.</p></details><details><summary>Does directly owned Dubai real estate itself go on FBAR or Form 8938?</summary><p>IRS guidance states directly held foreign real estate itself is not reportable on FBAR or Form 8938. Foreign financial accounts or interests in foreign entities used to hold property may create separate reporting obligations.</p></details></div><details class="jr-sources"><summary>✓ Facts verified from primary sources</summary><ul><li><a href="https://centralbank.ae/en/our-operations/monetary-policy-and-domestic-markets/domestic-market-operations/" target="_blank" rel="noopener noreferrer">Central Bank of the UAE — USD/AED peg operations ↗</a></li><li><a href="https://dubailand.gov.ae/en/eservices/property-sale-registration/" target="_blank" rel="noopener noreferrer">Dubai Land Department — property sale registration ↗</a></li><li><a href="https://www.irs.gov/individuals/international-taxpayers/us-citizens-and-resident-aliens-abroad" target="_blank" rel="noopener noreferrer">IRS — US citizens and resident aliens abroad ↗</a></li><li><a href="https://www.irs.gov/businesses/comparison-of-form-8938-and-fbar-requirements" target="_blank" rel="noopener noreferrer">IRS — Form 8938 and FBAR comparison ↗</a></li></ul><p>Project and public guidance checked 18 August 2026. Prices, payment plans, availability, completion schedules, regulations and tax rules can change. Request dated unit documents and obtain qualified US/UAE advice before relying on them. General information only—not legal, tax, financial or investment advice.</p></details></div></section>'''
+          s,n=re.subn(r'<section class="jr-section jr-faq-section".*?</section>',faq,s,count=1,flags=re.S)
+          if n!=1: raise SystemExit(f'FAQ replacement failed: {n}')
+
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit USA refresh
+        shell: bash
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add landing/usa/index.html
+          git commit -m 'Refresh USA Dubai investor landing'
+          git push origin HEAD:main
