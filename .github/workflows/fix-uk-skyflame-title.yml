@@ -1,0 +1,32 @@
+name: Fix UK Skyflame title
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-uk-skyflame-title.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Use full project name
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('landing/uk/index.html')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace('<h3>Skyflame</h3>','<h3>Binghatti Skyflame</h3>',1)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit correction
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add landing/uk/index.html
+          git commit -m 'Use full Binghatti Skyflame project name'
+          git push origin HEAD:main
