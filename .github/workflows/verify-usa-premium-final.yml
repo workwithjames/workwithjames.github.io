@@ -1,0 +1,106 @@
+name: Verify USA premium landing final
+on:
+  push:
+    paths:
+      - '.github/workflows/verify-usa-premium-final.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Install browser driver
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save puppeteer-core@24 >/dev/null 2>&1
+      - name: Verify public USA landing
+        id: qa
+        continue-on-error: true
+        shell: bash
+        run: |
+          cat > /tmp/usa-final.mjs <<'JS'
+          import puppeteer from 'puppeteer-core';
+          import {execSync} from 'node:child_process';
+          import fs from 'node:fs';
+          const chrome=execSync('which google-chrome || which chromium || which chromium-browser').toString().trim();
+          const browser=await puppeteer.launch({headless:true,executablePath:chrome,args:['--no-sandbox']});
+          const page=await browser.newPage();
+          const read=async(width,height)=>{
+            await page.setViewport({width,height,deviceScaleFactor:1});
+            let d;
+            for(let i=0;i<24;i++){
+              await page.goto(`https://dubairealestate.jamesrealty.uk/?usafinal=${Date.now()}-${i}`,{waitUntil:'networkidle2',timeout:45000});
+              d=await page.evaluate(()=>{
+                const h=s=>[...document.querySelectorAll(s)].map(e=>Math.round(e.getBoundingClientRect().height));
+                const css=[...document.querySelectorAll('link[rel="stylesheet"]')].map(e=>e.href);
+                return {
+                  premium:css.some(x=>x.includes('usa-premium.css?v=1')),
+                  formCss:css.some(x=>x.includes('landing-form-v2.css?v=1')),
+                  title:document.querySelector('h1')?.textContent?.trim()||'',
+                  text:document.body.innerText,
+                  overflow:document.documentElement.scrollWidth-window.innerWidth,
+                  hero:h('.jr-hero'),facts:h('.jr-facts article'),tool:h('.jr-tool form'),projectBodies:h('.jr-project__body'),strategies:h('.us-strategy-grid article'),costs:h('.us-cost-grid article'),reporting:h('.us-reporting-grid article'),locations:h('.us-location-grid article'),process:h('.jr-process__rail li'),form:h('.jr-form'),iframes:document.querySelectorAll('iframe').length
+                };
+              });
+              if(d.premium&&d.title.includes('underwritten in dollars')&&d.text.includes('Binghatti Skyflame')&&d.text.includes('Chelsea Residences')) return d;
+              await new Promise(r=>setTimeout(r,12000));
+            }
+            return d;
+          };
+          const desktop=await read(1440,1000);
+          const mobile=await read(390,844);
+          const max=a=>a?.length?Math.max(...a):0;
+          const checks={
+            premiumCss:desktop.premium&&mobile.premium,
+            formCss:desktop.formCss&&mobile.formCss,
+            correctHero:desktop.title.includes('underwritten in dollars'),
+            currentProjects:desktop.text.includes('Binghatti Skyflame')&&desktop.text.includes('Creek Bay')&&desktop.text.includes('Chelsea Residences'),
+            currentChelsea:desktop.text.includes('Price on request')&&!desktop.text.includes('3.005m'),
+            pegInfo:desktop.text.includes('3.672')&&desktop.text.includes('CBUAE'),
+            reportingInfo:desktop.text.includes('Worldwide income')&&desktop.text.includes('FBAR')&&desktop.text.includes('Form 8938'),
+            noBulkyMap:desktop.iframes===0,
+            desktopOverflow:desktop.overflow<=2,
+            mobileOverflow:mobile.overflow<=2,
+            heroHeight:max(desktop.hero)<=820,
+            mobileHero:max(mobile.hero)<=780,
+            facts:max(desktop.facts)<=125,
+            tool:max(desktop.tool)<=590,
+            projectBodies:max(desktop.projectBodies)<=520,
+            strategies:max(desktop.strategies)<=255,
+            costs:max(desktop.costs)<=235,
+            reporting:max(desktop.reporting)<=250,
+            locations:max(desktop.locations)<=235,
+            process:max(desktop.process)<=180,
+            mobileProjectBodies:max(mobile.projectBodies)<=700,
+            mobileStrategies:max(mobile.strategies)<=300,
+            mobileCosts:max(mobile.costs)<=290,
+            mobileReporting:max(mobile.reporting)<=320,
+            mobileLocations:max(mobile.locations)<=300
+          };
+          const report={checked_at:new Date().toISOString(),pass:Object.values(checks).every(Boolean),checks,desktop,mobile};
+          console.log('USA_FINAL_QA|'+JSON.stringify(report));
+          fs.mkdirSync('.github/qa',{recursive:true});
+          fs.writeFileSync('.github/qa/usa-premium-final.json',JSON.stringify(report,null,2)+'\n');
+          await browser.close();
+          if(!report.pass) process.exit(1);
+          JS
+          node /tmp/usa-final.mjs
+      - name: Save report
+        if: always()
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/qa/usa-premium-final.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record final USA landing QA'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      - name: Fail if QA failed
+        if: steps.qa.outcome != 'success'
+        run: exit 1
