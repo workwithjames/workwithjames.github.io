@@ -1,1 +1,1 @@
-Run landing WhatsApp and responsive polish against the current main branch.
+Run landing WhatsApp, responsive, and em dash cleanup against the current main branch.
