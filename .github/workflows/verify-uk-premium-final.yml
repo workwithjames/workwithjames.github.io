@@ -1,0 +1,103 @@
+name: Verify UK premium landing final
+on:
+  push:
+    paths:
+      - '.github/workflows/verify-uk-premium-final.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Install browser driver
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save puppeteer-core@24 >/dev/null 2>&1
+      - name: Verify public UK landing
+        id: qa
+        continue-on-error: true
+        shell: bash
+        run: |
+          cat > /tmp/uk-final.mjs <<'JS'
+          import puppeteer from 'puppeteer-core';
+          import {execSync} from 'node:child_process';
+          import fs from 'node:fs';
+          const chrome=execSync('which google-chrome || which chromium || which chromium-browser').toString().trim();
+          const browser=await puppeteer.launch({headless:true,executablePath:chrome,args:['--no-sandbox']});
+          const page=await browser.newPage();
+          const read=async(width,height)=>{
+            await page.setViewport({width,height,deviceScaleFactor:1});
+            let d;
+            for(let i=0;i<24;i++){
+              await page.goto(`https://dubai.jamesrealty.uk/?ukfinal=${Date.now()}-${i}`,{waitUntil:'networkidle2',timeout:45000});
+              d=await page.evaluate(()=>{
+                const h=s=>[...document.querySelectorAll(s)].map(e=>Math.round(e.getBoundingClientRect().height));
+                const css=[...document.querySelectorAll('link[rel="stylesheet"]')].map(e=>e.href);
+                return {
+                  premium:css.some(x=>x.includes('uk-premium.css?v=1')),
+                  formCss:css.some(x=>x.includes('landing-form-v2.css?v=1')),
+                  title:document.querySelector('h1')?.textContent?.trim()||'',
+                  text:document.body.innerText,
+                  overflow:document.documentElement.scrollWidth-window.innerWidth,
+                  hero:h('.jr-hero'),facts:h('.jr-facts article'),tool:h('.jr-tool form'),projectBodies:h('.jr-project__body'),routes:h('.uk-route-grid article'),costs:h('.uk-cost-grid article'),locations:h('.uk-location-grid article'),lens:h('.jr-lens__grid article'),process:h('.jr-process__rail li'),form:h('.jr-form'),iframes:document.querySelectorAll('iframe').length
+                };
+              });
+              if(d.premium&&d.title.includes('underwritten in pounds')&&d.text.includes('Skyflame')&&d.text.includes('Creek Bay')) return d;
+              await new Promise(r=>setTimeout(r,12000));
+            }
+            return d;
+          };
+          const desktop=await read(1440,1000);
+          const mobile=await read(390,844);
+          const max=a=>a?.length?Math.max(...a):0;
+          const checks={
+            premiumCss:desktop.premium&&mobile.premium,
+            formCss:desktop.formCss&&mobile.formCss,
+            correctHero:desktop.title.includes('underwritten in pounds'),
+            dubaiProjects:desktop.text.includes('Binghatti Skyflame')&&desktop.text.includes('Golf Vale')&&desktop.text.includes('Creek Bay'),
+            noAbuDhabiMismatch:!desktop.text.includes('The Canopies'),
+            officialFeeCopy:desktop.text.includes('2% buyer')&&desktop.text.includes('2% seller'),
+            noBulkyMap:desktop.iframes===0,
+            desktopOverflow:desktop.overflow<=2,
+            mobileOverflow:mobile.overflow<=2,
+            heroHeight:max(desktop.hero)<=850,
+            facts:max(desktop.facts)<=125,
+            tool:max(desktop.tool)<=520,
+            projectBodies:max(desktop.projectBodies)<=500,
+            routes:max(desktop.routes)<=260,
+            costs:max(desktop.costs)<=240,
+            locations:max(desktop.locations)<=235,
+            lens:max(desktop.lens)<=155,
+            process:max(desktop.process)<=180,
+            mobileProjectBodies:max(mobile.projectBodies)<=700,
+            mobileRoutes:max(mobile.routes)<=300,
+            mobileCosts:max(mobile.costs)<=270,
+            mobileLocations:max(mobile.locations)<=290
+          };
+          const report={checked_at:new Date().toISOString(),pass:Object.values(checks).every(Boolean),checks,desktop,mobile};
+          console.log('UK_FINAL_QA|'+JSON.stringify(report));
+          fs.mkdirSync('.github/qa',{recursive:true});
+          fs.writeFileSync('.github/qa/uk-premium-final.json',JSON.stringify(report,null,2)+'\n');
+          await browser.close();
+          if(!report.pass) process.exit(1);
+          JS
+          node /tmp/uk-final.mjs
+      - name: Save report
+        if: always()
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/qa/uk-premium-final.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record final UK landing QA'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      - name: Fail if QA failed
+        if: steps.qa.outcome != 'success'
+        run: exit 1
