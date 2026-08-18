@@ -8,6 +8,7 @@ on:
     paths:
       - '.github/workflows/apply-landing-whatsapp-polish.yml'
       - 'scripts/apply_landing_whatsapp_polish.py'
+      - 'scripts/landing-polish-trigger.txt'
 
 permissions:
   contents: write
