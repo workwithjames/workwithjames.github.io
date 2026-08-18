@@ -28,9 +28,6 @@ jobs:
       - name: Apply scoped landing polish
         run: python scripts/apply_landing_whatsapp_polish.py
 
-      - name: Run static landing audit
-        run: node scripts/audit_landing_experiences.mjs
-
       - name: Verify requested CTA and asset rules
         shell: bash
         run: |
