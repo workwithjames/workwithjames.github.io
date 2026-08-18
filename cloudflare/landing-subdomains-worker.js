@@ -21,7 +21,52 @@ const HOSTS = {
   'dubaiproperty.jamesrealty.uk': '/landing/ar/',
 };
 
-const LAST_MODIFIED = '2026-08-17';
+const LAST_MODIFIED = '2026-08-18';
+const WHATSAPP = 'https://wa.me/971528420933';
+
+const IMAGE_UPGRADES = {
+  'https://jamesrealty.uk/images/investors/uk-dubai-hills-apartment.webp': {
+    src: 'https://jamesrealty.uk/images/projects/emaar-golf-community-apartments.webp',
+    width: '724', height: '543', alt: 'Representative Emaar golf-community residences for Golf Vale comparison',
+  },
+  'https://jamesrealty.uk/images/investors/uk-downtown-dubai-apartment.webp': {
+    src: 'https://jamesrealty.uk/images/landing/emaar-dubai-waterfront-investment.webp',
+    width: '1600', height: '900', alt: 'Representative Emaar waterfront residences for Creek Bay comparison',
+  },
+  'https://jamesrealty.uk/images/investors/usa-dubai-marina-apartment.webp': {
+    src: 'https://jamesrealty.uk/images/landing/emaar-dubai-waterfront-investment.webp',
+    width: '1600', height: '900', alt: 'Representative Emaar waterfront residences for Creek Bay comparison',
+  },
+  'https://jamesrealty.uk/images/investors/usa-dubai-townhouse.webp': {
+    src: 'https://jamesrealty.uk/images/landing/damac-branded-waterfront-residences.webp',
+    width: '1600', height: '900', alt: 'Representative branded waterfront residences for Chelsea Residences comparison',
+  },
+  'https://jamesrealty.uk/images/investors/india-dubai-creek-apartment.webp': {
+    src: 'https://jamesrealty.uk/images/projects/binghatti-crystalline-apartments.webp',
+    width: '724', height: '543', alt: 'Representative geometric Binghatti-style Dubai apartments for Skyflame comparison',
+  },
+  'https://jamesrealty.uk/images/investors/india-waterfront-offplan.webp': {
+    src: 'https://jamesrealty.uk/images/projects/emaar-golf-community-apartments.webp',
+    width: '724', height: '543', alt: 'Representative Emaar golf-community residences for Golf Fields comparison',
+  },
+  'https://jamesrealty.uk/images/investors/arabic-dubai-villa-courtyard.webp': {
+    src: 'https://jamesrealty.uk/images/landing/nakheel-dubai-island-waterfront.webp',
+    width: '1600', height: '900', alt: 'مساكن على واجهة بحرية في دبي تمثل مقارنة مشروع بالم سنترال في نخلة جبل علي',
+  },
+  'https://jamesrealty.uk/images/investors/arabic-downtown-apartment.webp': {
+    src: 'https://jamesrealty.uk/images/landing/aldar-yas-waterfront-investment.webp',
+    width: '1600', height: '900', alt: 'مساكن على واجهة جزيرة ياس البحرية تمثل مقارنة مشروع ذا كانوبيز — ياس بوينت',
+  },
+};
+
+const LANDING_POLISH_CSS = `
+.jr-whatsapp-contact{width:max-content;max-width:100%;gap:10px;margin-top:2px;border-color:var(--accent-2);background:rgba(255,255,255,.08);background:color-mix(in srgb,var(--accent) 28%,transparent);color:#fff}
+.jr-whatsapp-contact:hover,.jr-whatsapp-contact:focus-visible{background:var(--accent-2);border-color:var(--accent-2);color:#111411}
+.jr-mobile-cta [data-whatsapp-action]{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent)}
+@media (min-width:761px) and (max-width:1100px){:root{--section:clamp(58px,7vw,78px)}.jr-form-wrap{gap:34px}.jr-map{gap:34px}}
+@media(max-width:760px){:root{--section:56px}.jr-hero{min-height:min(760px,100svh)}.jr-hero__inner{min-height:calc(min(760px,100svh) - 68px);padding-block:clamp(52px,8vh,68px) 30px}.jr-form-wrap{gap:28px}.jr-form-copy ul{margin:24px 0;padding:18px 0}.jr-whatsapp-contact{width:100%;justify-content:center}.jr-mobile-cta{grid-template-columns:1.15fr .85fr}}
+@media(max-width:420px){:root{--section:52px}.jr-hero h1{font-size:clamp(2.85rem,14vw,4.15rem)}.jr-faq{gap:26px}}
+`;
 
 const SECURITY_HEADERS = {
   'Referrer-Policy': 'strict-origin-when-cross-origin',
@@ -197,7 +242,46 @@ export default {
     headers.delete('content-length');
     const response = new Response(request.method === 'HEAD' ? null : upstream.body, { status: 200, headers });
     if (request.method === 'HEAD') return response;
+
+    const isArabic = incoming.hostname === 'dubaiproperty.jamesrealty.uk';
     return new HTMLRewriter()
+      .on('head', {
+        element(element) {
+          element.append(`<style data-edge-landing-polish>${LANDING_POLISH_CSS}</style>`, { html: true });
+        },
+      })
+      .on('a', {
+        element(element) {
+          if (element.getAttribute('href') !== 'tel:+971528420933') return;
+          const classes = element.getAttribute('class') || '';
+          const isFormContact = classes.split(/\s+/).includes('jr-phone');
+          element.setAttribute('href', WHATSAPP);
+          element.setAttribute('target', '_blank');
+          element.setAttribute('rel', 'noopener noreferrer');
+          element.removeAttribute('data-phone-action');
+          element.setAttribute('data-whatsapp-action', '');
+          element.setAttribute('data-cta', isFormContact ? 'whatsapp-form' : 'whatsapp-mobile');
+          element.setAttribute('data-location', isFormContact ? 'form' : 'mobile-sticky');
+          if (isFormContact) {
+            element.setAttribute('class', 'jr-button jr-button--ghost jr-whatsapp-contact');
+            element.setInnerContent(`${isArabic ? 'تواصل عبر واتساب' : 'Chat on WhatsApp'} <span aria-hidden="true">↗</span>`, { html: true });
+          } else {
+            element.setInnerContent(`${isArabic ? 'واتساب' : 'WhatsApp'} <span aria-hidden="true">↗</span>`, { html: true });
+          }
+        },
+      })
+      .on('img', {
+        element(element) {
+          const replacement = IMAGE_UPGRADES[element.getAttribute('src') || ''];
+          if (!replacement) return;
+          element.setAttribute('src', replacement.src);
+          element.setAttribute('width', replacement.width);
+          element.setAttribute('height', replacement.height);
+          element.setAttribute('alt', replacement.alt);
+          element.setAttribute('loading', 'lazy');
+          element.setAttribute('decoding', 'async');
+        },
+      })
       .on('meta[name="robots"]', {
         element(element) {
           element.setAttribute('content', 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1');
