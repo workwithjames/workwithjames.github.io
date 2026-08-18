@@ -85,11 +85,12 @@ jobs:
                   print(f'Valid XML: {file}')
           PY
 
-      - name: Verify Google Tag Manager coverage
+      - name: Audit Google Tag Manager coverage
         shell: bash
         run: |
           set -euo pipefail
           python - <<'PY'
+          import json
           import pathlib
 
           root = pathlib.Path('.')
@@ -112,12 +113,22 @@ jobs:
                   missing.append(path.as_posix())
 
           tagged = len(html_files) - len(missing)
+          report = {
+              'containerId': container_id,
+              'htmlFilesChecked': len(html_files),
+              'taggedFiles': tagged,
+              'missingFiles': missing,
+              'excludedTechnicalFiles': sorted(excluded),
+          }
+          (root / 'audit').mkdir(exist_ok=True)
+          (root / 'audit' / 'google-tag-audit.json').write_text(
+              json.dumps(report, indent=2) + '\n', encoding='utf-8'
+          )
           print(f'Google Tag Manager {container_id}: {tagged}/{len(html_files)} user-facing HTML files tagged')
           if missing:
               print('Missing Google Tag Manager:')
               for path in missing:
                   print(f' - {path}')
-              raise SystemExit(1)
           PY
 
       - name: Start Cloudflare Pages locally
@@ -151,21 +162,22 @@ jobs:
         if: failure()
         run: cat /tmp/wrangler.log || true
 
-      - name: Commit audit report
+      - name: Commit audit reports
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add audit/site-audit-report.json
+          git add audit/site-audit-report.json audit/google-tag-audit.json
           if git diff --cached --quiet; then
-            echo 'Audit report unchanged.'
+            echo 'Audit reports unchanged.'
           else
-            git commit -m 'Update automated site quality report'
+            git commit -m 'Update automated site quality reports'
             git pull --rebase origin "${GITHUB_REF_NAME}"
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
 
-      - name: Enforce error-free audit
+      - name: Enforce error-free audits
         run: |
           node -e "const report=require('./audit/site-audit-report.json'); if(report.summary.errors){console.error('Site audit errors:',report.summary.errors); process.exit(1)} console.log('Site audit passed with no errors.')"
+          node -e "const report=require('./audit/google-tag-audit.json'); if(report.missingFiles.length){console.error('Pages missing Google Tag Manager:',report.missingFiles); process.exit(1)} console.log('Google Tag Manager coverage passed:',report.taggedFiles+'/'+report.htmlFilesChecked)"
