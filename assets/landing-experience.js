@@ -6,6 +6,39 @@
   const track=(event,detail={})=>dataLayer.push({event,landing_page:pageName,landing_host:location.host,...detail});
   const qs=(selector,root=document)=>root.querySelector(selector);
   const qsa=(selector,root=document)=>[...root.querySelectorAll(selector)];
+  const whatsappBase='https://wa.me/971528420933';
+
+  /* Conversion polish is applied through the shared runtime so every current bespoke
+     landing page keeps its developer/country-specific HTML and premium CSS intact. */
+  qsa('a[href^="tel:+971528420933"]').forEach(link=>{
+    const isFormContact=link.classList.contains('jr-phone');
+    link.href=whatsappBase;
+    link.target='_blank';
+    link.rel='noopener noreferrer';
+    link.removeAttribute('data-phone-action');
+    link.setAttribute('data-whatsapp-action','');
+    link.dataset.location=isFormContact?'form':'mobile-sticky';
+    if(isFormContact){
+      link.className='jr-button jr-button--ghost jr-whatsapp-contact';
+      link.innerHTML=`${isArabic?'تواصل عبر واتساب':'Chat on WhatsApp'} <span aria-hidden="true">↗</span>`;
+    }else{
+      link.innerHTML=`${isArabic?'واتساب':'WhatsApp'} <span aria-hidden="true">↗</span>`;
+    }
+  });
+
+  if(!qs('style[data-landing-runtime-polish]')){
+    const style=document.createElement('style');
+    style.setAttribute('data-landing-runtime-polish','');
+    style.textContent=`
+      .jr-whatsapp-contact{width:max-content;max-width:100%;gap:10px;margin-top:2px;border-color:var(--accent-2);background:rgba(255,255,255,.08);background:color-mix(in srgb,var(--accent) 28%,transparent);color:#fff}
+      .jr-whatsapp-contact:hover,.jr-whatsapp-contact:focus-visible{background:var(--accent-2);border-color:var(--accent-2);color:#111411}
+      .jr-mobile-cta [data-whatsapp-action]{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent)}
+      @media (min-width:761px) and (max-width:1100px){:root{--section:clamp(58px,7vw,78px)}.jr-form-wrap{gap:34px}.jr-map{gap:34px}}
+      @media(max-width:760px){:root{--section:56px}.jr-hero{min-height:min(760px,100svh)}.jr-hero__inner{min-height:calc(min(760px,100svh) - 68px);padding-block:clamp(52px,8vh,68px) 30px}.jr-form-wrap{gap:28px}.jr-form-copy ul{margin:24px 0;padding:18px 0}.jr-whatsapp-contact{width:100%;justify-content:center}.jr-mobile-cta{grid-template-columns:1.15fr .85fr}}
+      @media(max-width:420px){:root{--section:52px}.jr-hero h1{font-size:clamp(2.85rem,14vw,4.15rem)}.jr-faq{gap:26px}}
+    `;
+    document.head.append(style);
+  }
 
   const menuButton=qs('[data-menu-toggle]');
   const menu=qs('#landing-menu');
@@ -30,6 +63,7 @@
   qsa('[data-source-link]').forEach(link=>link.addEventListener('click',()=>track('landing_source_click',{link_url:link.href})));
   qsa('[data-map-action]').forEach(link=>link.addEventListener('click',()=>track('landing_map_open',{link_url:link.href})));
   qsa('[data-phone-action]').forEach(link=>link.addEventListener('click',()=>track('landing_phone_click',{link_url:link.href})));
+  qsa('[data-whatsapp-action]').forEach(link=>link.addEventListener('click',()=>track('landing_whatsapp_click',{link_url:link.href,cta_location:link.dataset.location||'page'})));
 
   const form=qs('[data-lead-capture]');
   qsa('[data-project-select]').forEach(link=>link.addEventListener('click',()=>{
