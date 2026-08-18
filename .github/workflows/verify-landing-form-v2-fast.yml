@@ -1,0 +1,135 @@
+name: Verify landing form v2 fast
+on:
+  push:
+    paths:
+      - '.github/workflows/verify-landing-form-v2-fast.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Install browser driver
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save puppeteer-core@24 >/dev/null 2>&1
+      - name: Run parallel public-browser QA
+        id: qa
+        continue-on-error: true
+        shell: bash
+        run: |
+          cat > /tmp/form-fast-qa.mjs <<'JS'
+          import puppeteer from 'puppeteer-core';
+          import {execSync} from 'node:child_process';
+          import fs from 'node:fs';
+          const chrome=execSync('which google-chrome || which chromium || which chromium-browser').toString().trim();
+          const browser=await puppeteer.launch({headless:true,executablePath:chrome,args:['--no-sandbox']});
+          const targets=[
+            ['emaar','https://emaar.jamesrealty.uk/'],['aldar','https://aldar.jamesrealty.uk/'],['damac','https://damac.jamesrealty.uk/'],['binghatti','https://binghatti.jamesrealty.uk/'],['nakheel','https://nakheel.jamesrealty.uk/'],['mudon','https://mudon.jamesrealty.uk/'],['uk','https://dubai.jamesrealty.uk/'],['usa','https://dubairealestate.jamesrealty.uk/'],['india','https://dubaiproperties.jamesrealty.uk/'],['ar','https://dubaiproperty.jamesrealty.uk/']
+          ];
+          const wait=ms=>new Promise(r=>setTimeout(r,ms));
+          async function check([key,url]){
+            const page=await browser.newPage();
+            let ready=false;
+            let last='';
+            for(let i=0;i<12;i++){
+              try{
+                await page.setViewport({width:1440,height:1000,deviceScaleFactor:1});
+                await page.goto(`${url}?formfast=${Date.now()}-${i}`,{waitUntil:'domcontentloaded',timeout:30000});
+                await wait(900);
+                const state=await page.evaluate(()=>({
+                  css:[...document.querySelectorAll('link[rel="stylesheet"]')].some(x=>x.href.includes('landing-form-v2.css?v=1')),
+                  js:[...document.scripts].some(x=>x.src.includes('landing-form-v2.js?v=1')),
+                  enhanced:!!document.querySelector('.jr-form__introbar')
+                }));
+                if(state.css&&state.js&&state.enhanced){ready=true;break;}
+                last=JSON.stringify(state);
+              }catch(e){last=String(e.message||e);}
+              await wait(10000);
+            }
+            if(!ready){await page.close();return {key,url,pass:false,error:`not live after polling: ${last}`};}
+            const desktop=await page.evaluate(()=>{
+              const form=document.querySelector('[data-lead-capture]');
+              const fields=[...form.querySelectorAll('input:not(.jr-honeypot):not([type="hidden"]),select')];
+              const optional=form.querySelector('.jr-form__optional');
+              const submit=form.querySelector('button[type="submit"]');
+              return {
+                overflow:document.documentElement.scrollWidth-window.innerWidth,
+                formWidth:Math.round(form.getBoundingClientRect().width),
+                grid:getComputedStyle(form).gridTemplateColumns,
+                bg:getComputedStyle(form).backgroundColor,
+                minFieldHeight:Math.min(...fields.map(f=>f.getBoundingClientRect().height)),
+                submitWidth:Math.round(submit.getBoundingClientRect().width),
+                optionalClosed:!optional.open,
+                intro:document.querySelector('.jr-form__introbar')?.innerText.trim()||'',
+                privacy:document.querySelector('.jr-form__privacy-note')?.innerText.trim()||'',
+                dir:document.documentElement.dir||'ltr'
+              };
+            });
+            const project=await page.$('[data-project-select]');
+            let interest=true;
+            if(project){
+              await project.click();
+              await wait(80);
+              interest=await page.evaluate(()=>{
+                const box=document.querySelector('.jr-form__interest');
+                return !!box&&!box.hidden&&!!document.querySelector('[data-form-interest]')?.textContent.trim();
+              });
+            }
+            await page.setViewport({width:390,height:844,deviceScaleFactor:1});
+            await page.goto(`${url}?formfastm=${Date.now()}`,{waitUntil:'domcontentloaded',timeout:30000});
+            await page.waitForSelector('.jr-form__introbar',{timeout:10000});
+            const mobile=await page.evaluate(()=>{
+              const form=document.querySelector('[data-lead-capture]');
+              const fields=[...form.querySelectorAll('input:not(.jr-honeypot):not([type="hidden"]),select')];
+              return {
+                overflow:document.documentElement.scrollWidth-window.innerWidth,
+                formWidth:Math.round(form.getBoundingClientRect().width),
+                grid:getComputedStyle(form).gridTemplateColumns,
+                minFieldHeight:Math.min(...fields.map(f=>f.getBoundingClientRect().height))
+              };
+            });
+            const checks={
+              desktopOverflow:desktop.overflow<=2,
+              desktopTwoColumn:desktop.grid.split(' ').filter(Boolean).length>=2,
+              desktopFields:desktop.minFieldHeight>=50,
+              submitWide:desktop.submitWidth>=desktop.formWidth*.72,
+              optionalClosed:desktop.optionalClosed,
+              interestContext:interest,
+              privacyNote:desktop.privacy.length>15,
+              mobileOverflow:mobile.overflow<=2,
+              mobileOneColumn:mobile.grid.split(' ').filter(Boolean).length===1,
+              mobileFields:mobile.minFieldHeight>=50,
+              rtl:key!=='ar'||desktop.dir==='rtl',
+              arabicIntro:key!=='ar'||desktop.intro.includes('طلب خاص')
+            };
+            await page.close();
+            return {key,url,pass:Object.values(checks).every(Boolean),checks,desktop,mobile};
+          }
+          const results=await Promise.all(targets.map(check));
+          await browser.close();
+          const report={checked_at:new Date().toISOString(),pass:results.every(r=>r.pass),results};
+          fs.mkdirSync('.github/qa',{recursive:true});
+          fs.writeFileSync('.github/qa/landing-form-v2-fast.json',JSON.stringify(report,null,2)+'\n');
+          console.log('FORM_FAST_QA|'+JSON.stringify(report));
+          if(!report.pass) process.exit(1);
+          JS
+          node /tmp/form-fast-qa.mjs
+      - name: Save QA report
+        if: always()
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/qa/landing-form-v2-fast.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record fast live QA for landing form v2'
+            git push origin HEAD:main
+          fi
+      - name: Fail if QA failed
+        if: steps.qa.outcome != 'success'
+        run: exit 1
