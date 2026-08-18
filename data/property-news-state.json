@@ -1,6 +1,7 @@
 {
   "seen_urls": [
     "https://gulfnews.com/business/property/adgm-launches-broker-rankings-for-property-buyers-and-tenants-1.500626469",
+    "https://gulfnews.com/business/property/ajman-rental-contracts-reach-dh291-billion-in-first-half-of-2026-1.500644264",
     "https://gulfnews.com/business/property/arif-developments-honoured-at-9th-golden-excellence-awards-1.500622447",
     "https://gulfnews.com/business/property/beyond-supply-glut-manila-condo-market-faces-repricing-what-it-means-1.500630690",
     "https://gulfnews.com/business/property/damac-to-host-two-day-mortgage-event-with-uae-banks-this-weekend-1.500633497",
@@ -107,6 +108,7 @@
     "164 6bn 9bn aed backlog emaar reaches sales",
     "186 attracts developers dubai months seven",
     "2026 800 added buyers choice dubai greater homes means",
+    "2026 ajman billion contracts dh2 first half reach rental",
     "2026 cycle delivery dubai handovers led more signal",
     "350 construction dubai enters its metre next phase tower trump",
     "4bn aed development emaar growth profit sales",
@@ -288,7 +290,7 @@
       "read_time": "4 min read",
       "source_name": "Gulf News",
       "source_url": "https://gulfnews.com/business/property/dubai-to-launch-rent-now-pay-later-service-with-zero-interest-instalments-1.500639254",
-      "image": "/images/visuals/buyer-consultation-1200.webp",
+      "image": "/images/uae-property-advisory-consultation-social-v5.jpg",
       "auto": true
     },
     {
@@ -300,7 +302,7 @@
       "read_time": "4 min read",
       "source_name": "The National",
       "source_url": "https://www.thenationalnews.com/business/property/2026/08/13/uae-property-monthly-rent-apartment",
-      "image": "/images/visuals/seller-preparation-1200.webp",
+      "image": "/images/visuals/buyer-consultation-1200.webp",
       "auto": true
     },
     {
@@ -350,7 +352,19 @@
       "source_url": "https://gulfnews.com/business/property/nakheel-begins-handover-of-892-homes-at-jebel-ali-village-1.500643237",
       "image": "/images/landing/nakheel-dubai-island-waterfront.webp",
       "auto": true
+    },
+    {
+      "slug": "property-news-2026-08-18-ajman-rental-contracts-reach-dh2-91-billion-in-first-half-06d3d",
+      "title": "Ajman rental contracts reach Dh2.91 billion in first half of 2026",
+      "description": "A practical reading of a new Gulf News rental report for tenants and landlords, with registered evidence and costs kept in view.",
+      "category": "UAE rental market",
+      "date": "2026-08-18",
+      "read_time": "4 min read",
+      "source_name": "Gulf News",
+      "source_url": "https://gulfnews.com/business/property/ajman-rental-contracts-reach-dh291-billion-in-first-half-of-2026-1.500644264",
+      "image": "/images/visuals/seller-preparation-1200.webp",
+      "auto": true
     }
   ],
-  "updated_at": "2026-08-18T07:25:41+04:00"
+  "updated_at": "2026-08-18T09:08:24+04:00"
 }
