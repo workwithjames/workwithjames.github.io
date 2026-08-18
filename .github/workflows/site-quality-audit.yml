@@ -85,6 +85,41 @@ jobs:
                   print(f'Valid XML: {file}')
           PY
 
+      - name: Verify Google Tag Manager coverage
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib
+
+          root = pathlib.Path('.')
+          container_id = 'GTM-M74SL57L'
+          excluded = {
+              '404.html',
+              '_not-found.html',
+              'digital/404.html',
+          }
+          html_files = sorted(
+              path for path in root.rglob('*.html')
+              if '.git' not in path.parts
+              and '_next' not in path.parts
+              and path.as_posix() not in excluded
+          )
+          missing = []
+          for path in html_files:
+              source = path.read_text(encoding='utf-8', errors='replace')
+              if container_id not in source:
+                  missing.append(path.as_posix())
+
+          tagged = len(html_files) - len(missing)
+          print(f'Google Tag Manager {container_id}: {tagged}/{len(html_files)} user-facing HTML files tagged')
+          if missing:
+              print('Missing Google Tag Manager:')
+              for path in missing:
+                  print(f' - {path}')
+              raise SystemExit(1)
+          PY
+
       - name: Start Cloudflare Pages locally
         shell: bash
         run: |
