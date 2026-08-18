@@ -1,5 +1,5 @@
 name: Deploy static site to Pages
-# Deploy refreshed UK investor landing: 2026-08-18
+# Deploy refreshed USA investor landing: 2026-08-18
 on:
   push:
     paths:
