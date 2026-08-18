@@ -1,4 +1,5 @@
 name: Verify landing form v2 fast
+# Rerun after successful Pages deployment: 2026-08-18
 on:
   push:
     paths:
