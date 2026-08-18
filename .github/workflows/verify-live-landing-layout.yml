@@ -5,6 +5,9 @@ on:
   push:
     paths:
       - '.github/workflows/verify-live-landing-layout.yml'
+      - 'assets/landing-experience.js'
+      - 'assets/landing-experience.css'
+      - 'landing/**/index.html'
 
 permissions:
   contents: read
@@ -12,6 +15,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Install browser driver
         shell: bash
@@ -20,7 +24,7 @@ jobs:
           npm install --no-save puppeteer-core@24 >/dev/null 2>&1
           which google-chrome || which chromium || which chromium-browser
 
-      - name: Check rendered desktop and mobile geometry
+      - name: Check rendered desktop laptop tablet and mobile experience
         shell: bash
         run: |
           cat > layout-qa.mjs <<'JS'
@@ -39,95 +43,152 @@ jobs:
             'dubaiproperties.jamesrealty.uk',
             'dubaiproperty.jamesrealty.uk',
           ];
+          const viewports = [
+            {name:'desktop',width:1440,height:1000},
+            {name:'laptop',width:1024,height:850},
+            {name:'tablet',width:768,height:1024},
+            {name:'mobile',width:390,height:844},
+          ];
           const chrome = execSync('which google-chrome || which chromium || which chromium-browser').toString().trim();
-          const browser = await puppeteer.launch({ headless: true, executablePath: chrome, args: ['--no-sandbox'] });
+          const browser = await puppeteer.launch({ headless:true, executablePath:chrome, args:['--no-sandbox'] });
           let failed = false;
-
-          const sleep = ms => new Promise(r => setTimeout(r, ms));
+          const sleep = ms => new Promise(resolve => setTimeout(resolve,ms));
           const round = n => Math.round(n * 10) / 10;
 
-          async function metrics(page) {
+          async function settleImages(page){
+            await page.evaluate(() => {
+              document.querySelectorAll('.jr-project img').forEach(img => { img.loading='eager'; });
+              window.scrollTo(0,document.body.scrollHeight);
+            });
+            await sleep(500);
+            await page.evaluate(async () => {
+              const images=[...document.querySelectorAll('.jr-hero__image,.jr-project img')];
+              await Promise.all(images.map(img => {
+                if(img.complete) return Promise.resolve();
+                return new Promise(resolve => {
+                  const done=()=>resolve();
+                  img.addEventListener('load',done,{once:true});
+                  img.addEventListener('error',done,{once:true});
+                  setTimeout(done,5000);
+                });
+              }));
+              window.scrollTo(0,0);
+            });
+          }
+
+          async function metrics(page){
             return page.evaluate(() => {
               const rects = sel => [...document.querySelectorAll(sel)].map(el => {
-                const r = el.getBoundingClientRect();
-                return { x:r.x, y:r.y, width:r.width, height:r.height };
+                const r=el.getBoundingClientRect();
+                return {x:r.x,y:r.y,width:r.width,height:r.height,right:r.right,bottom:r.bottom};
               });
-              const cssHrefs = [...document.querySelectorAll('link[rel="stylesheet"]')].map(x => x.href);
+              const cssHrefs=[...document.querySelectorAll('link[rel="stylesheet"]')].map(x=>x.href);
+              const sections=rects('main > section').sort((a,b)=>a.y-b.y);
+              let maxSectionGap=0;
+              for(let i=1;i<sections.length;i++) maxSectionGap=Math.max(maxSectionGap,sections[i].y-sections[i-1].bottom);
+              const projectImages=[...document.querySelectorAll('.jr-project img')].map(img=>{
+                const r=img.getBoundingClientRect();
+                return {src:img.currentSrc||img.src,naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,displayWidth:r.width,displayHeight:r.height,complete:img.complete};
+              });
+              const hero= document.querySelector('.jr-hero');
+              const heroRect=hero?.getBoundingClientRect();
+              const form=document.querySelector('.jr-form');
+              const formRect=form?.getBoundingClientRect();
+              const buttons=[...document.querySelectorAll('.jr-button')].map(button=>({text:button.textContent.trim(),overflow:button.scrollWidth-button.clientWidth,height:button.getBoundingClientRect().height}));
               return {
-                dir: document.documentElement.dir || 'ltr',
-                cssV8: cssHrefs.some(h => h.includes('landing-experience.css?v=8')),
-                overflow: document.documentElement.scrollWidth - window.innerWidth,
-                facts: rects('.jr-facts article'),
-                signature: rects('.jr-signature article'),
-                process: rects('.jr-process__rail li'),
-                projects: rects('.jr-projects > .jr-project'),
-                lensAside: rects('.jr-lens__aside')[0] || null,
-                lensGrid: rects('.jr-lens__grid')[0] || null,
+                dir:document.documentElement.dir||'ltr',
+                cssV8:cssHrefs.some(h=>h.includes('landing-experience.css?v=8')),
+                runtimePolish:Boolean(document.querySelector('style[data-landing-runtime-polish]')),
+                overflow:document.documentElement.scrollWidth-window.innerWidth,
+                rawPhoneVisible:document.body.innerText.includes('+971 52 842 0933'),
+                telCtas:document.querySelectorAll('a[href^="tel:+971528420933"]').length,
+                whatsappCtas:document.querySelectorAll('[data-whatsapp-action][href^="https://wa.me/971528420933"]').length,
+                facts:rects('.jr-facts article'),
+                signature:rects('.jr-signature article'),
+                process:rects('.jr-process__rail li'),
+                projects:rects('.jr-projects > .jr-project'),
+                projectImages,
+                lensAside:rects('.jr-lens__aside')[0]||null,
+                lensGrid:rects('.jr-lens__grid')[0]||null,
+                heroHeight:heroRect?.height||0,
+                maxSectionGap,
+                formFits:!formRect||(formRect.left>=-2 && formRect.right<=window.innerWidth+2),
+                buttonOverflow:buttons.filter(item=>item.overflow>2),
               };
             });
           }
 
-          for (const host of hosts) {
-            const page = await browser.newPage();
-            await page.setViewport({ width: 1440, height: 1000, deviceScaleFactor: 1 });
-            let desktop;
-            for (let attempt = 0; attempt < 8; attempt++) {
-              await page.goto(`https://${host}/?layoutqa=${Date.now()}-${attempt}`, { waitUntil:'networkidle2', timeout:45000 });
-              desktop = await metrics(page);
-              if (desktop.cssV8) break;
-              await sleep(20000);
+          function evaluate(host,name,m){
+            const factsMax=m.facts.length?Math.max(...m.facts.map(x=>x.height)):0;
+            const signatureMax=m.signature.length?Math.max(...m.signature.map(x=>x.height)):0;
+            const processMax=m.process.length?Math.max(...m.process.map(x=>x.height)):0;
+            const factMaxWidth=m.facts.length?Math.max(...m.facts.map(x=>x.width)):0;
+            let projectTopSpread=0;
+            if(['emaar.jamesrealty.uk','binghatti.jamesrealty.uk'].includes(host) && m.projects.length>=3){
+              const ys=m.projects.slice(0,3).map(x=>x.y);
+              projectTopSpread=Math.max(...ys)-Math.min(...ys);
             }
-
-            const factsMax = desktop.facts.length ? Math.max(...desktop.facts.map(x => x.height)) : 0;
-            const signatureMax = desktop.signature.length ? Math.max(...desktop.signature.map(x => x.height)) : 0;
-            const processMax = desktop.process.length ? Math.max(...desktop.process.map(x => x.height)) : 0;
-            let projectTopSpread = 0;
-            if (['emaar.jamesrealty.uk','binghatti.jamesrealty.uk'].includes(host) && desktop.projects.length >= 3) {
-              const ys = desktop.projects.slice(0,3).map(x => x.y);
-              projectTopSpread = Math.max(...ys) - Math.min(...ys);
-            }
-            const lensPlacementOK = !desktop.lensAside || !desktop.lensGrid ||
-              (desktop.dir === 'rtl' ? desktop.lensAside.x > desktop.lensGrid.x : desktop.lensAside.x < desktop.lensGrid.x);
-
-            await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 });
-            await page.reload({ waitUntil:'networkidle2', timeout:45000 });
-            const mobile = await metrics(page);
-            const mobileFactMaxWidth = mobile.facts.length ? Math.max(...mobile.facts.map(x => x.width)) : 0;
-
-            const checks = {
-              cssV8: desktop.cssV8,
-              desktopOverflow: desktop.overflow <= 2,
-              compactFacts: !desktop.facts.length || factsMax <= 125,
-              compactSignature: !desktop.signature.length || signatureMax <= 235,
-              compactProcess: !desktop.process.length || processMax <= 220,
-              alignedSpecialProjects: projectTopSpread <= 10,
-              lensPlacement: lensPlacementOK,
-              mobileOverflow: mobile.overflow <= 2,
-              mobileFactsCompact: !mobile.facts.length || mobileFactMaxWidth <= 200,
+            const lensPlacementOK=!m.lensAside||!m.lensGrid||(m.dir==='rtl'?m.lensAside.x>m.lensGrid.x:m.lensAside.x<m.lensGrid.x);
+            const imageQualityOK=m.projectImages.every(img=>img.complete && img.naturalWidth>0 && img.naturalHeight>0 && img.naturalWidth>=Math.min(1600,img.displayWidth*1.18));
+            return {
+              cssV8:m.cssV8,
+              runtimePolish:m.runtimePolish,
+              noHorizontalOverflow:m.overflow<=2,
+              noVisibleRawPhone:!m.rawPhoneVisible,
+              noTelephoneCta:m.telCtas===0,
+              whatsappAvailable:m.whatsappCtas>=2,
+              formFitsViewport:m.formFits,
+              buttonsFit:m.buttonOverflow.length===0,
+              imagesLoadedAndSharp:imageQualityOK,
+              sectionRhythm:m.maxSectionGap<=8,
+              heroHeight:name==='mobile'?m.heroHeight<=780:m.heroHeight<=1100,
+              compactFacts:name!=='desktop'||!m.facts.length||factsMax<=125,
+              compactSignature:name!=='desktop'||!m.signature.length||signatureMax<=235,
+              compactProcess:name!=='desktop'||!m.process.length||processMax<=220,
+              alignedSpecialProjects:name!=='desktop'||projectTopSpread<=10,
+              lensPlacement:name!=='desktop'||lensPlacementOK,
+              mobileFactsCompact:name!=='mobile'||!m.facts.length||factMaxWidth<=200,
             };
-            const pass = Object.values(checks).every(Boolean);
-            failed ||= !pass;
-            console.log('LAYOUT|' + host + '|' + JSON.stringify({
-              pass, checks,
-              desktop: {
-                dir: desktop.dir,
-                overflow: round(desktop.overflow),
-                factsMax: round(factsMax),
-                signatureMax: round(signatureMax),
-                processMax: round(processMax),
-                projectTopSpread: round(projectTopSpread),
-                lensAsideX: desktop.lensAside ? round(desktop.lensAside.x) : null,
-                lensGridX: desktop.lensGrid ? round(desktop.lensGrid.x) : null,
-              },
-              mobile: {
-                overflow: round(mobile.overflow),
-                factMaxWidth: round(mobileFactMaxWidth),
+          }
+
+          for(const host of hosts){
+            const page=await browser.newPage();
+            await page.setCacheEnabled(false);
+            const results={};
+
+            for(const viewport of viewports){
+              await page.setViewport({width:viewport.width,height:viewport.height,deviceScaleFactor:1});
+              let m;
+              const attempts=viewport.name==='desktop'?5:1;
+              for(let attempt=0;attempt<attempts;attempt++){
+                await page.goto(`https://${host}/?layoutqa=${Date.now()}-${viewport.name}-${attempt}`,{waitUntil:'networkidle2',timeout:45000});
+                await settleImages(page);
+                m=await metrics(page);
+                if(m.runtimePolish) break;
+                await sleep(12000);
               }
-            }));
+              const checks=evaluate(host,viewport.name,m);
+              const pass=Object.values(checks).every(Boolean);
+              failed ||= !pass;
+              results[viewport.name]={
+                pass,checks,
+                overflow:round(m.overflow),
+                heroHeight:round(m.heroHeight),
+                maxSectionGap:round(m.maxSectionGap),
+                telCtas:m.telCtas,
+                whatsappCtas:m.whatsappCtas,
+                rawPhoneVisible:m.rawPhoneVisible,
+                projectImages:m.projectImages.map(img=>({src:img.src.split('/').pop(),naturalWidth:img.naturalWidth,displayWidth:round(img.displayWidth)})),
+                buttonOverflow:m.buttonOverflow,
+              };
+            }
+
+            const hostPass=Object.values(results).every(result=>result.pass);
+            console.log('LAYOUT|' + host + '|' + JSON.stringify({pass:hostPass,viewports:results}));
             await page.close();
           }
 
           await browser.close();
-          process.exit(failed ? 1 : 0);
+          process.exit(failed?1:0);
           JS
           node layout-qa.mjs
