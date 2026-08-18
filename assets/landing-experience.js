@@ -26,6 +26,32 @@
     }
   });
 
+  /* A few older investor-card visuals were only 430px wide and then cropped into
+     landscape cards. Replace only those known soft assets with larger existing,
+     context-matched James Realty imagery. Heroes and already-good project assets stay untouched. */
+  const imageUpgrades={
+    '/images/investors/uk-dubai-hills-apartment.webp':{src:'https://jamesrealty.uk/images/projects/emaar-golf-community-apartments.webp',width:724,height:543,alt:'Representative Emaar golf-community residences for Golf Vale comparison'},
+    '/images/investors/uk-downtown-dubai-apartment.webp':{src:'https://jamesrealty.uk/images/landing/emaar-dubai-waterfront-investment.webp',width:1600,height:900,alt:'Representative Emaar waterfront residences for Creek Bay comparison'},
+    '/images/investors/usa-dubai-marina-apartment.webp':{src:'https://jamesrealty.uk/images/landing/emaar-dubai-waterfront-investment.webp',width:1600,height:900,alt:'Representative Emaar waterfront residences for Creek Bay comparison'},
+    '/images/investors/usa-dubai-townhouse.webp':{src:'https://jamesrealty.uk/images/landing/damac-branded-waterfront-residences.webp',width:1600,height:900,alt:'Representative branded waterfront residences for Chelsea Residences comparison'},
+    '/images/investors/india-dubai-creek-apartment.webp':{src:'https://jamesrealty.uk/images/projects/binghatti-crystalline-apartments.webp',width:724,height:543,alt:'Representative geometric Binghatti-style Dubai apartments for Skyflame comparison'},
+    '/images/investors/india-waterfront-offplan.webp':{src:'https://jamesrealty.uk/images/projects/emaar-golf-community-apartments.webp',width:724,height:543,alt:'Representative Emaar golf-community residences for Golf Fields comparison'},
+    '/images/investors/arabic-dubai-villa-courtyard.webp':{src:'https://jamesrealty.uk/images/landing/nakheel-dubai-island-waterfront.webp',width:1600,height:900,alt:'مساكن على واجهة بحرية في دبي تمثل مقارنة مشروع بالم سنترال في نخلة جبل علي'},
+    '/images/investors/arabic-downtown-apartment.webp':{src:'https://jamesrealty.uk/images/landing/aldar-yas-waterfront-investment.webp',width:1600,height:900,alt:'مساكن على واجهة جزيرة ياس البحرية تمثل مقارنة مشروع ذا كانوبيز — ياس بوينت'}
+  };
+  qsa('.jr-project img').forEach(img=>{
+    const key=new URL(img.src,location.href).pathname;
+    const replacement=imageUpgrades[key];
+    if(replacement){
+      img.src=replacement.src;
+      img.width=replacement.width;
+      img.height=replacement.height;
+      img.alt=replacement.alt;
+    }
+    if(!img.loading) img.loading='lazy';
+    if(!img.decoding) img.decoding='async';
+  });
+
   if(!qs('style[data-landing-runtime-polish]')){
     const style=document.createElement('style');
     style.setAttribute('data-landing-runtime-polish','');
