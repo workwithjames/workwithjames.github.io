@@ -1,4 +1,5 @@
 name: Verify USA premium landing final
+# Clean rerun after USA deploy and concurrent landing automation
 on:
   push:
     paths:
@@ -32,7 +33,7 @@ jobs:
           const read=async(width,height)=>{
             await page.setViewport({width,height,deviceScaleFactor:1});
             let d;
-            for(let i=0;i<24;i++){
+            for(let i=0;i<18;i++){
               await page.goto(`https://dubairealestate.jamesrealty.uk/?usafinal=${Date.now()}-${i}`,{waitUntil:'networkidle2',timeout:45000});
               d=await page.evaluate(()=>{
                 const h=s=>[...document.querySelectorAll(s)].map(e=>Math.round(e.getBoundingClientRect().height));
@@ -47,7 +48,7 @@ jobs:
                 };
               });
               if(d.premium&&d.title.includes('underwritten in dollars')&&d.text.includes('Binghatti Skyflame')&&d.text.includes('Chelsea Residences')) return d;
-              await new Promise(r=>setTimeout(r,12000));
+              await new Promise(r=>setTimeout(r,10000));
             }
             return d;
           };
