@@ -1,10 +1,8 @@
 {
   "containerId": "GTM-M74SL57L",
   "htmlFilesChecked": 57,
-  "taggedFiles": 56,
-  "missingFiles": [
-    "privacy-policy/index.html"
-  ],
+  "taggedFiles": 57,
+  "missingFiles": [],
   "excludedTechnicalFiles": [
     "404.html",
     "_not-found.html",
