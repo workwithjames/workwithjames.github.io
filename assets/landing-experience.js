@@ -8,6 +8,27 @@
   const qsa=(selector,root=document)=>[...root.querySelectorAll(selector)];
   const whatsappBase='https://wa.me/971528420933';
 
+  /* Remove the em dash from all rendered landing-page copy. Use normal comma
+     punctuation instead so the copy reads naturally without the AI-writing cue. */
+  const normalizePunctuation=(root=document.body)=>{
+    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(node){
+      if(!node.nodeValue?.includes('—')) return NodeFilter.FILTER_REJECT;
+      const parent=node.parentElement?.tagName;
+      if(parent==='SCRIPT'||parent==='STYLE'||parent==='NOSCRIPT') return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }});
+    const nodes=[];
+    while(walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(node=>{node.nodeValue=node.nodeValue.replace(/\s*—\s*/g,', ');});
+    qsa('[alt],[title],[aria-label]',root).forEach(element=>{
+      for(const attr of ['alt','title','aria-label']){
+        const value=element.getAttribute(attr);
+        if(value?.includes('—')) element.setAttribute(attr,value.replace(/\s*—\s*/g,', '));
+      }
+    });
+  };
+  normalizePunctuation();
+
   /* Conversion polish is applied through the shared runtime so every current bespoke
      landing page keeps its developer/country-specific HTML and premium CSS intact. */
   qsa('a[href^="tel:+971528420933"]').forEach(link=>{
@@ -37,7 +58,7 @@
     '/images/investors/india-dubai-creek-apartment.webp':{src:'https://jamesrealty.uk/images/projects/binghatti-crystalline-apartments.webp',width:724,height:543,alt:'Representative geometric Binghatti-style Dubai apartments for Skyflame comparison'},
     '/images/investors/india-waterfront-offplan.webp':{src:'https://jamesrealty.uk/images/projects/emaar-golf-community-apartments.webp',width:724,height:543,alt:'Representative Emaar golf-community residences for Golf Fields comparison'},
     '/images/investors/arabic-dubai-villa-courtyard.webp':{src:'https://jamesrealty.uk/images/landing/nakheel-dubai-island-waterfront.webp',width:1600,height:900,alt:'مساكن على واجهة بحرية في دبي تمثل مقارنة مشروع بالم سنترال في نخلة جبل علي'},
-    '/images/investors/arabic-downtown-apartment.webp':{src:'https://jamesrealty.uk/images/landing/aldar-yas-waterfront-investment.webp',width:1600,height:900,alt:'مساكن على واجهة جزيرة ياس البحرية تمثل مقارنة مشروع ذا كانوبيز — ياس بوينت'}
+    '/images/investors/arabic-downtown-apartment.webp':{src:'https://jamesrealty.uk/images/landing/aldar-yas-waterfront-investment.webp',width:1600,height:900,alt:'مساكن على واجهة جزيرة ياس البحرية تمثل مقارنة مشروع ذا كانوبيز, ياس بوينت'}
   };
   qsa('.jr-project img').forEach(img=>{
     const key=new URL(img.src,location.href).pathname;
