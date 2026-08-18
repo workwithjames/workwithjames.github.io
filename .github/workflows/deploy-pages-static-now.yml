@@ -1,5 +1,5 @@
 name: Deploy static site to Pages
-# Deploy optimized landing contact forms and record deployment success: 2026-08-18
+# Deploy refreshed UK investor landing: 2026-08-18
 on:
   push:
     paths:
