@@ -1,5 +1,5 @@
 name: Deploy static site to Pages
-# Redeploy latest Binghatti landing: 2026-08-17
+# Deploy optimized landing contact forms: 2026-08-18
 on:
   push:
     paths:
