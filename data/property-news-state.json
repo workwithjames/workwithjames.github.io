@@ -1,5 +1,6 @@
 {
   "seen_urls": [
+    "https://gulfnews.com/business/property/abu-dhabi-to-add-71000-homes-by-2030-with-biggest-delivery-wave-in-2028-1.500645274",
     "https://gulfnews.com/business/property/adgm-launches-broker-rankings-for-property-buyers-and-tenants-1.500626469",
     "https://gulfnews.com/business/property/ajman-rental-contracts-reach-dh291-billion-in-first-half-of-2026-1.500644264",
     "https://gulfnews.com/business/property/arif-developments-honoured-at-9th-golden-excellence-awards-1.500622447",
@@ -108,6 +109,7 @@
     "https://www.thenationalnews.com/business/property/2026/08/17/nakheel-starts-handover-of-892-homes-at-redeveloped-jebel-ali-village"
   ],
   "seen_title_signatures": [
+    "000 2028 2030 abu add biggest delivery dhabi homes wave",
     "110m aed estates golf jumeirah read record records sale villa",
     "113 7bn aed developers month record sales six top",
     "164 6bn 9bn aed backlog emaar reaches sales",
@@ -224,7 +226,7 @@
       "read_time": "4 min read",
       "source_name": "Gulf News",
       "source_url": "https://gulfnews.com/business/property/where-sharjah-property-buyers-spent-most-as-july-deals-hit-dh7-billion-1.500632308",
-      "image": "/images/visuals/home-property-intelligence-1200.webp",
+      "image": "/images/james-realty-social-preview.webp",
       "auto": true
     },
     {
@@ -382,7 +384,19 @@
       "source_url": "https://gulfnews.com/business/property/two-day-uae-property-showcase-in-hyderabad-targets-indian-investors-1.500644618",
       "image": "/images/dubai-portfolio-optimized.webp",
       "auto": true
+    },
+    {
+      "slug": "property-news-2026-08-19-abu-dhabi-to-add-71-000-homes-by-2030-with-biggest-deliver-29357",
+      "title": "Abu Dhabi to add 71,000 homes by 2030, with biggest delivery wave in 2028",
+      "description": "A source-linked reading of new Gulf News reporting on housing supply, buyer choice and the checks that matter at community level.",
+      "category": "UAE housing supply",
+      "date": "2026-08-19",
+      "read_time": "4 min read",
+      "source_name": "Gulf News",
+      "source_url": "https://gulfnews.com/business/property/abu-dhabi-to-add-71000-homes-by-2030-with-biggest-delivery-wave-in-2028-1.500645274",
+      "image": "/images/visuals/home-property-intelligence-1200.webp",
+      "auto": true
     }
   ],
-  "updated_at": "2026-08-19T07:30:27+04:00"
+  "updated_at": "2026-08-19T09:06:12+04:00"
 }
