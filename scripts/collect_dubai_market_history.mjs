@@ -24,6 +24,7 @@ let requestId = 200;
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const cleanNumber = value => {
+  if (value === null || value === undefined || value === '') return null;
   const n = Number(value);
   return Number.isFinite(n) ? Math.round(n * 10000) / 10000 : null;
 };
