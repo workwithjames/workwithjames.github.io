@@ -1,0 +1,22 @@
+{
+  "areas": {
+    "Flat": {},
+    "Villa": {}
+  },
+  "generated_at": null,
+  "history_start": null,
+  "market": null,
+  "schema_version": 1,
+  "snapshots": 0,
+  "source": {
+    "authentication": "none",
+    "endpoint": "https://dxbdata.io/mcp",
+    "provider": "DXB Data",
+    "upstream": "Dubai Land Department open data and Ejari-derived records"
+  },
+  "windows": [
+    7,
+    30,
+    90
+  ]
+}
