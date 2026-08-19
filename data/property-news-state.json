@@ -18,6 +18,7 @@
     "https://gulfnews.com/business/property/emaar-homebuyers-can-secure-up-to-50-financing-before-handover-1.500623531",
     "https://gulfnews.com/business/property/former-dubai-zoo-site-gets-construction-contract-for-90-home-community-1.500636033",
     "https://gulfnews.com/business/property/global-partners-secures-300-million-for-next-growth-phase-1.500638576",
+    "https://gulfnews.com/business/property/golden-visa-first-time-buyer-support-flexi-rent-how-dubai-is-widening-property-access-for-buyers-and-renters-1.500644768",
     "https://gulfnews.com/business/property/imtiaz-records-another-launch-day-sell-out-with-dh15-billion-raw-district-2-1.500621203",
     "https://gulfnews.com/business/property/is-jeddah-tower-on-course-to-become-the-worlds-tallest-building-1.500623570",
     "https://gulfnews.com/business/property/modon-h1-net-profit-reaches-dh22-billion-after-property-sales-hit-dh26-billion-1.500625097",
@@ -77,6 +78,7 @@
     "https://www.khaleejtimes.com/business/trump-tower-dubai-construction-enters-next-phase-with-new-contractor-appointment",
     "https://www.khaleejtimes.com/business/uae-announces-fee-for-cafes-hotels-malls-for-playing-music-from-december",
     "https://www.khaleejtimes.com/business/uae-commercial-rents-jump-as-abu-dhabi-prime-office-availability-falls-to-01",
+    "https://www.khaleejtimes.com/business/uae-developers-shift-focus-to-funded-projects-nearing-completion-says-report",
     "https://www.khaleejtimes.com/business/why-dubai-residents-will-not-have-to-take-out-loans-to-pay-rents",
     "https://www.khaleejtimes.com/business/wynn-al-marjan-island-pushes-opening-to-september-2027-amid-regional-conflict-fallout",
     "https://www.thenationalnews.com/business/property/2026/06/05/french-riviera-hotel-provencal-john-caudwell-villas-for-sale",
@@ -122,6 +124,7 @@
     "7bn aed deals july reach sharjah",
     "892 ali begins handover homes jebel nakheel village",
     "abu benchmark completion delivery dhabi early housing sets",
+    "access buyer buyers dubai first flexi golden rent renters support time visa widening",
     "across apartments checks expands monthly rent tenants",
     "adgm broker buyers check rankings should tenants",
     "amid binghatti moody ratings regional reviews risk",
@@ -298,7 +301,7 @@
       "read_time": "4 min read",
       "source_name": "Gulf News",
       "source_url": "https://gulfnews.com/business/property/dubai-to-launch-rent-now-pay-later-service-with-zero-interest-instalments-1.500639254",
-      "image": "/images/uae-property-advisory-consultation-social-v5.jpg",
+      "image": "/images/james-realty-dubai-advisory-social-v2.jpg",
       "auto": true
     },
     {
@@ -310,7 +313,7 @@
       "read_time": "4 min read",
       "source_name": "The National",
       "source_url": "https://www.thenationalnews.com/business/property/2026/08/13/uae-property-monthly-rent-apartment",
-      "image": "/images/visuals/buyer-consultation-1200.webp",
+      "image": "/images/uae-property-advisory-consultation-social-v5.jpg",
       "auto": true
     },
     {
@@ -370,7 +373,7 @@
       "read_time": "4 min read",
       "source_name": "Gulf News",
       "source_url": "https://gulfnews.com/business/property/ajman-rental-contracts-reach-dh291-billion-in-first-half-of-2026-1.500644264",
-      "image": "/images/visuals/seller-preparation-1200.webp",
+      "image": "/images/visuals/buyer-consultation-1200.webp",
       "auto": true
     },
     {
@@ -396,7 +399,19 @@
       "source_url": "https://gulfnews.com/business/property/abu-dhabi-to-add-71000-homes-by-2030-with-biggest-delivery-wave-in-2028-1.500645274",
       "image": "/images/visuals/home-property-intelligence-1200.webp",
       "auto": true
+    },
+    {
+      "slug": "property-news-2026-08-19-golden-visa-first-time-buyer-support-flexi-rent-how-dubai-99a12",
+      "title": "Golden Visa, first-time buyer support, Flexi Rent: How Dubai is widening property access for buy",
+      "description": "A practical reading of a new Gulf News rental report for tenants and landlords, with registered evidence and costs kept in view.",
+      "category": "UAE rental market",
+      "date": "2026-08-19",
+      "read_time": "4 min read",
+      "source_name": "Gulf News",
+      "source_url": "https://gulfnews.com/business/property/golden-visa-first-time-buyer-support-flexi-rent-how-dubai-is-widening-property-access-for-buyers-and-renters-1.500644768",
+      "image": "/images/visuals/seller-preparation-1200.webp",
+      "auto": true
     }
   ],
-  "updated_at": "2026-08-19T09:06:12+04:00"
+  "updated_at": "2026-08-19T11:30:59+04:00"
 }
