@@ -1,0 +1,54 @@
+name: Collect Dubai market history
+
+on:
+  schedule:
+    - cron: '25 20 * * *'
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/collect_dubai_market_history.mjs'
+      - 'assets/dubai-market-history.js'
+      - '.github/workflows/collect-dubai-market-history.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site-content-writes
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Validate collector and history UI
+        run: |
+          node --check scripts/collect_dubai_market_history.mjs
+          node --check assets/dubai-market-history.js
+
+      - name: Collect DXB Data snapshot and rebuild trends
+        run: node scripts/collect_dubai_market_history.mjs
+
+      - name: Commit market history
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/dubai-market dubai-data/index.html
+          if git diff --cached --quiet; then
+            echo "No new Dubai market source snapshot."
+            exit 0
+          fi
+          git commit -m "Update Dubai market history"
+          git pull --rebase origin main
+          git push origin HEAD:main
