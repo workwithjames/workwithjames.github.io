@@ -119,7 +119,8 @@
     "https://www.thenationalnews.com/business/property/2026/08/13/uae-apartment-dubai-flexi-rent-monthly-rental-payments",
     "https://www.thenationalnews.com/business/property/2026/08/13/uae-property-monthly-rent-apartment",
     "https://www.thenationalnews.com/business/property/2026/08/17/nakheel-starts-handover-of-892-homes-at-redeveloped-jebel-ali-village",
-    "https://www.thenationalnews.com/business/property/2026/08/20/arada-to-develop-136bn-twin-tower-residential-project-in-australia"
+    "https://www.thenationalnews.com/business/property/2026/08/20/arada-to-develop-136bn-twin-tower-residential-project-in-australia",
+    "https://www.thenationalnews.com/business/property/2026/08/20/investments-in-completed-dubai-property-projects-top-30bn-in-first-half-of-2026"
   ],
   "seen_title_signatures": [
     "000 2028 2030 abu add biggest delivery dhabi homes wave",
@@ -128,6 +129,7 @@
     "113 7bn aed developers month record sales six top",
     "164 6bn 9bn aed backlog emaar reaches sales",
     "186 attracts developers dubai months seven",
+    "2026 30bn completed dubai first half investments projects top",
     "2026 800 added buyers choice dubai greater homes means",
     "2026 ajman billion contracts dh2 first half reach rental",
     "2026 cycle delivery dubai handovers led more signal",
@@ -280,7 +282,7 @@
       "read_time": "4 min read",
       "source_name": "Gulf News",
       "source_url": "https://gulfnews.com/business/property/emaar-books-dh266-billion-in-property-sales-backlog-climbs-to-dh1649-billion-1.500633439",
-      "image": "/images/real-estate-crm-review.webp",
+      "image": "/case-studies/tbwa-mena-marketing.webp",
       "auto": true
     },
     {
@@ -364,7 +366,7 @@
       "read_time": "4 min read",
       "source_name": "Gulf News",
       "source_url": "https://gulfnews.com/business/property/dubai-attracts-186-new-property-developers-in-first-seven-months-of-2026-1.500641994",
-      "image": "/images/dubai-residential-portfolio.webp",
+      "image": "/images/real-estate-crm-review.webp",
       "auto": true
     },
     {
@@ -400,7 +402,7 @@
       "read_time": "4 min read",
       "source_name": "Gulf News",
       "source_url": "https://gulfnews.com/business/property/two-day-uae-property-showcase-in-hyderabad-targets-indian-investors-1.500644618",
-      "image": "/images/dubai-portfolio-optimized.webp",
+      "image": "/images/dubai-residential-portfolio.webp",
       "auto": true
     },
     {
@@ -462,7 +464,19 @@
       "source_url": "https://gulfnews.com/business/property/dubai-adds-more-than-24000-property-units-in-six-months-1.500646931",
       "image": "/images/dubai-skyline-real-estate-social-v4.jpg",
       "auto": true
+    },
+    {
+      "slug": "property-news-2026-08-20-investments-in-completed-dubai-property-projects-top-30bn-6a4fc",
+      "title": "Investments in completed Dubai property projects top $30bn in first half of 2026",
+      "description": "A source-linked reading of a new The National property report, with the headline separated from the evidence needed for a decision.",
+      "category": "UAE property market",
+      "date": "2026-08-20",
+      "read_time": "4 min read",
+      "source_name": "The National",
+      "source_url": "https://www.thenationalnews.com/business/property/2026/08/20/investments-in-completed-dubai-property-projects-top-30bn-in-first-half-of-2026",
+      "image": "/images/dubai-portfolio-optimized.webp",
+      "auto": true
     }
   ],
-  "updated_at": "2026-08-20T21:58:40+04:00"
+  "updated_at": "2026-08-20T23:56:41+04:00"
 }
