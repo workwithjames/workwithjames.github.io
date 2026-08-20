@@ -12,6 +12,7 @@
     "https://gulfnews.com/business/property/dubai-to-launch-rent-now-pay-later-service-with-zero-interest-instalments-1.500639254",
     "https://gulfnews.com/business/property/dubai-villa-sells-for-dh110m-nearly-doubling-jumeirah-golf-estates-record-1.500628980",
     "https://gulfnews.com/business/property/dubais-350-metre-trump-tower-moves-into-next-construction-phase-1.500632456",
+    "https://gulfnews.com/business/property/dubais-iconic-toyota-building-to-be-demolished-in-2027-1.500646516",
     "https://gulfnews.com/business/property/early-completion-sets-new-pace-for-abu-dhabi-housing-1.500630309",
     "https://gulfnews.com/business/property/emaar-books-dh266-billion-in-property-sales-backlog-climbs-to-dh1649-billion-1.500633439",
     "https://gulfnews.com/business/property/emaar-development-sells-dh224bn-of-homes-profit-jumps-43-in-h1-1.500633520",
@@ -24,6 +25,7 @@
     "https://gulfnews.com/business/property/modon-h1-net-profit-reaches-dh22-billion-after-property-sales-hit-dh26-billion-1.500625097",
     "https://gulfnews.com/business/property/nakheel-begins-handover-of-892-homes-at-jebel-ali-village-1.500643237",
     "https://gulfnews.com/business/property/ofw-paid-608000-for-a-manila-condo-what-the-maceda-law-can-and-cannot-save-1.500635734",
+    "https://gulfnews.com/business/property/palm-jebel-ali-unveils-limited-collection-of-44-beachfront-villas-on-frond-f-1.500646564",
     "https://gulfnews.com/business/property/rockhill-bets-dh250-million-on-affordable-premium-living-with-its-first-ajman-tower-1.500617833",
     "https://gulfnews.com/business/property/top-10-tallest-under-construction-skyscrapers-in-the-uae-2026-1.500623030",
     "https://gulfnews.com/business/property/two-day-uae-property-showcase-in-hyderabad-targets-indian-investors-1.500644618",
@@ -39,6 +41,7 @@
     "https://www.khaleejtimes.com/business/dubai-population-growth-fuels-property-market-but-price-gains-may-take-time-to-emerge",
     "https://www.khaleejtimes.com/business/dubai-property-buyers-upgrade-to-bigger-units-move-to-high-end-communities-after-price-drop",
     "https://www.khaleejtimes.com/business/dubai-property-repricing-opens-door-to-premium-communities",
+    "https://www.khaleejtimes.com/business/dubai-set-for-highest-annual-home-deliveries-since-2008-as-new-launches-slow",
     "https://www.khaleejtimes.com/business/dubai-ultra-prime-home-sales-hit-6-billion-despite-regional-tensions",
     "https://www.khaleejtimes.com/business/energy",
     "https://www.khaleejtimes.com/business/energy/uae-fuel-prices-full-tank-cost-august-2026",
@@ -81,6 +84,7 @@
     "https://www.khaleejtimes.com/business/uae-commercial-rents-jump-as-abu-dhabi-prime-office-availability-falls-to-01",
     "https://www.khaleejtimes.com/business/uae-developers-shift-focus-to-funded-projects-nearing-completion-says-report",
     "https://www.khaleejtimes.com/business/why-dubai-residents-will-not-have-to-take-out-loans-to-pay-rents",
+    "https://www.khaleejtimes.com/business/why-some-dubai-tenants-will-move-to-bigger-homes-this-year",
     "https://www.khaleejtimes.com/business/wynn-al-marjan-island-pushes-opening-to-september-2027-amid-regional-conflict-fallout",
     "https://www.thenationalnews.com/business/property/2026/06/05/french-riviera-hotel-provencal-john-caudwell-villas-for-sale",
     "https://www.thenationalnews.com/business/property/2026/06/09/mystery-billionaire-flips-195m-london-mansion-for-56m-profit",
@@ -109,7 +113,8 @@
     "https://www.thenationalnews.com/business/property/2026/08/12/moodys-considers-ratings-downgrade-for-dubai-based-binghatti-amid-iran-war-fallout",
     "https://www.thenationalnews.com/business/property/2026/08/13/uae-apartment-dubai-flexi-rent-monthly-rental-payments",
     "https://www.thenationalnews.com/business/property/2026/08/13/uae-property-monthly-rent-apartment",
-    "https://www.thenationalnews.com/business/property/2026/08/17/nakheel-starts-handover-of-892-homes-at-redeveloped-jebel-ali-village"
+    "https://www.thenationalnews.com/business/property/2026/08/17/nakheel-starts-handover-of-892-homes-at-redeveloped-jebel-ali-village",
+    "https://www.thenationalnews.com/business/property/2026/08/20/arada-to-develop-136bn-twin-tower-residential-project-in-australia"
   ],
   "seen_title_signatures": [
     "000 2028 2030 abu add biggest delivery dhabi homes wave",
@@ -120,6 +125,7 @@
     "2026 800 added buyers choice dubai greater homes means",
     "2026 ajman billion contracts dh2 first half reach rental",
     "2026 cycle delivery dubai handovers led more signal",
+    "2027 building demolished dubai iconic toyota",
     "350 construction dubai enters its metre next phase tower trump",
     "4bn aed development emaar growth profit sales",
     "7bn aed deals july reach sharjah",
@@ -255,7 +261,7 @@
       "read_time": "4 min read",
       "source_name": "Gulf News",
       "source_url": "https://gulfnews.com/business/property/emaar-development-sells-dh224bn-of-homes-profit-jumps-43-in-h1-1.500633520",
-      "image": "/images/landing/emaar-dubai-waterfront-investment.webp",
+      "image": "/images/landing/nakheel-dubai-island-waterfront.webp",
       "auto": true
     },
     {
@@ -279,7 +285,7 @@
       "read_time": "4 min read",
       "source_name": "Gulf News",
       "source_url": "https://gulfnews.com/business/property/former-dubai-zoo-site-gets-construction-contract-for-90-home-community-1.500636033",
-      "image": "/images/landing/mudon-family-townhouses-dubai.webp",
+      "image": "/images/dubai-skyline-real-estate-social-v4.jpg",
       "auto": true
     },
     {
@@ -303,7 +309,7 @@
       "read_time": "4 min read",
       "source_name": "Gulf News",
       "source_url": "https://gulfnews.com/business/property/dubai-to-launch-rent-now-pay-later-service-with-zero-interest-instalments-1.500639254",
-      "image": "/images/james-realty-dubai-advisory-social-v2.jpg",
+      "image": "/images/landing/emaar-dubai-waterfront-investment.webp",
       "auto": true
     },
     {
@@ -315,7 +321,7 @@
       "read_time": "4 min read",
       "source_name": "The National",
       "source_url": "https://www.thenationalnews.com/business/property/2026/08/13/uae-property-monthly-rent-apartment",
-      "image": "/images/uae-property-advisory-consultation-social-v5.jpg",
+      "image": "/images/james-realty-dubai-advisory-social-v2.jpg",
       "auto": true
     },
     {
@@ -363,7 +369,7 @@
       "read_time": "4 min read",
       "source_name": "Gulf News",
       "source_url": "https://gulfnews.com/business/property/nakheel-begins-handover-of-892-homes-at-jebel-ali-village-1.500643237",
-      "image": "/images/landing/nakheel-dubai-island-waterfront.webp",
+      "image": "/images/landing/mudon-family-townhouses-dubai.webp",
       "auto": true
     },
     {
@@ -375,7 +381,7 @@
       "read_time": "4 min read",
       "source_name": "Gulf News",
       "source_url": "https://gulfnews.com/business/property/ajman-rental-contracts-reach-dh291-billion-in-first-half-of-2026-1.500644264",
-      "image": "/images/visuals/buyer-consultation-1200.webp",
+      "image": "/images/uae-property-advisory-consultation-social-v5.jpg",
       "auto": true
     },
     {
@@ -411,9 +417,21 @@
       "read_time": "4 min read",
       "source_name": "Gulf News",
       "source_url": "https://gulfnews.com/business/property/golden-visa-first-time-buyer-support-flexi-rent-how-dubai-is-widening-property-access-for-buyers-and-renters-1.500644768",
+      "image": "/images/visuals/buyer-consultation-1200.webp",
+      "auto": true
+    },
+    {
+      "slug": "property-news-2026-08-20-dubai-s-iconic-toyota-building-to-be-demolished-in-2027-0f424",
+      "title": "Dubai’s iconic Toyota building to be demolished in 2027",
+      "description": "A practical reading of a new Gulf News rental report for tenants and landlords, with registered evidence and costs kept in view.",
+      "category": "UAE rental market",
+      "date": "2026-08-20",
+      "read_time": "4 min read",
+      "source_name": "Gulf News",
+      "source_url": "https://gulfnews.com/business/property/dubais-iconic-toyota-building-to-be-demolished-in-2027-1.500646516",
       "image": "/images/visuals/seller-preparation-1200.webp",
       "auto": true
     }
   ],
-  "updated_at": "2026-08-20T09:08:00+04:00"
+  "updated_at": "2026-08-20T11:59:21+04:00"
 }
