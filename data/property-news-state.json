@@ -29,6 +29,7 @@
     "https://gulfnews.com/business/property/rockhill-bets-dh250-million-on-affordable-premium-living-with-its-first-ajman-tower-1.500617833",
     "https://gulfnews.com/business/property/top-10-tallest-under-construction-skyscrapers-in-the-uae-2026-1.500623030",
     "https://gulfnews.com/business/property/two-day-uae-property-showcase-in-hyderabad-targets-indian-investors-1.500644618",
+    "https://gulfnews.com/business/property/uae-developer-arada-unveils-dh5-billion-broadbeach-project-with-952-homes-in-australia-1.500646600",
     "https://gulfnews.com/business/property/uae-investors-account-for-half-of-sharjah-property-market-during-h1-2026-1.500621868",
     "https://gulfnews.com/business/property/uaes-top-10-developers-sell-dh1137-billion-of-property-in-six-months-1.500639749",
     "https://gulfnews.com/business/property/where-sharjah-property-buyers-spent-most-as-july-deals-hit-dh7-billion-1.500632308",
@@ -130,6 +131,7 @@
     "4bn aed development emaar growth profit sales",
     "7bn aed deals july reach sharjah",
     "892 ali begins handover homes jebel nakheel village",
+    "952 arada australia billion broadbeach developer dh5 homes project unveils",
     "abu benchmark completion delivery dhabi early housing sets",
     "access buy buyer dubai first flexi golden rent support time visa widening",
     "access buyer buyers dubai first flexi golden rent renters support time visa widening",
@@ -273,7 +275,7 @@
       "read_time": "4 min read",
       "source_name": "Gulf News",
       "source_url": "https://gulfnews.com/business/property/emaar-books-dh266-billion-in-property-sales-backlog-climbs-to-dh1649-billion-1.500633439",
-      "image": "/images/dubai-residential-portfolio.webp",
+      "image": "/images/real-estate-crm-review.webp",
       "auto": true
     },
     {
@@ -285,7 +287,7 @@
       "read_time": "4 min read",
       "source_name": "Gulf News",
       "source_url": "https://gulfnews.com/business/property/former-dubai-zoo-site-gets-construction-contract-for-90-home-community-1.500636033",
-      "image": "/images/dubai-skyline-real-estate-social-v4.jpg",
+      "image": "/images/real-estate-marketing-workshop.webp",
       "auto": true
     },
     {
@@ -357,7 +359,7 @@
       "read_time": "4 min read",
       "source_name": "Gulf News",
       "source_url": "https://gulfnews.com/business/property/dubai-attracts-186-new-property-developers-in-first-seven-months-of-2026-1.500641994",
-      "image": "/images/real-estate-marketing-workshop.webp",
+      "image": "/images/dubai-residential-portfolio.webp",
       "auto": true
     },
     {
@@ -369,7 +371,7 @@
       "read_time": "4 min read",
       "source_name": "Gulf News",
       "source_url": "https://gulfnews.com/business/property/nakheel-begins-handover-of-892-homes-at-jebel-ali-village-1.500643237",
-      "image": "/images/landing/mudon-family-townhouses-dubai.webp",
+      "image": "/images/dubai-skyline-real-estate-social-v4.jpg",
       "auto": true
     },
     {
@@ -431,7 +433,19 @@
       "source_url": "https://gulfnews.com/business/property/dubais-iconic-toyota-building-to-be-demolished-in-2027-1.500646516",
       "image": "/images/visuals/seller-preparation-1200.webp",
       "auto": true
+    },
+    {
+      "slug": "property-news-2026-08-20-uae-developer-arada-unveils-dh5-billion-broadbeach-project-6cad2",
+      "title": "UAE developer Arada unveils Dh5 billion Broadbeach project with 952 homes in Australia",
+      "description": "A source-linked reading of new Gulf News reporting on housing supply, buyer choice and the checks that matter at community level.",
+      "category": "UAE housing supply",
+      "date": "2026-08-20",
+      "read_time": "4 min read",
+      "source_name": "Gulf News",
+      "source_url": "https://gulfnews.com/business/property/uae-developer-arada-unveils-dh5-billion-broadbeach-project-with-952-homes-in-australia-1.500646600",
+      "image": "/images/landing/mudon-family-townhouses-dubai.webp",
+      "auto": true
     }
   ],
-  "updated_at": "2026-08-20T11:59:21+04:00"
+  "updated_at": "2026-08-20T14:05:15+04:00"
 }
