@@ -1,483 +1,405 @@
+import { auditTarget, AuditInputError } from "./crawler.js";
+
 const JSON_HEADERS = {
   "content-type": "application/json; charset=utf-8",
   "cache-control": "no-store",
   "x-content-type-options": "nosniff",
+  "referrer-policy": "same-origin",
 };
-
-const BOT_UA = "JamesSEOAuditBot/0.1 (+https://seo.jamesrealty.uk)";
-const MAX_PAGES = 25;
-const MAX_HTML_BYTES = 1_500_000;
-const FETCH_TIMEOUT_MS = 8_000;
+const SESSION_COOKIE = "jseo_session";
+const SESSION_DAYS = 30;
+const PBKDF2_ITERATIONS = 120_000;
 
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
     if (url.pathname === "/api/health") {
-      return json({ ok: true, service: env.APP_NAME || "James SEO", version: "0.1.0" });
+      return json({ ok: true, service: env.APP_NAME || "James SEO", version: "0.2.0", database: Boolean(env.DB) });
     }
 
-    if (url.pathname === "/api/audit" && request.method === "POST") {
-      return handleAudit(request);
-    }
+    if (!url.pathname.startsWith("/api/")) return env.ASSETS.fetch(request);
+    if (!env.DB) return json({ error: "Database binding is not configured" }, 503);
+    if (!sameOriginMutation(request)) return json({ error: "Cross-origin mutation blocked" }, 403);
 
-    if (url.pathname.startsWith("/api/")) {
+    try {
+      if (url.pathname === "/api/auth/me" && request.method === "GET") return handleMe(request, env);
+      if (url.pathname === "/api/auth/signup" && request.method === "POST") return handleSignup(request, env);
+      if (url.pathname === "/api/auth/login" && request.method === "POST") return handleLogin(request, env);
+      if (url.pathname === "/api/auth/logout" && request.method === "POST") return handleLogout(request, env);
+
+      const user = await requireUser(request, env);
+      if (user instanceof Response) return user;
+
+      if (url.pathname === "/api/workspaces" && request.method === "GET") return listWorkspaces(env, user);
+      if (url.pathname === "/api/workspaces" && request.method === "POST") return createWorkspace(request, env, user);
+      if (url.pathname === "/api/projects" && request.method === "GET") return listProjects(url, env, user);
+      if (url.pathname === "/api/projects" && request.method === "POST") return createProject(request, env, user);
+      if (url.pathname === "/api/audits" && request.method === "GET") return listAudits(url, env, user);
+      if (url.pathname === "/api/audits" && request.method === "POST") return runProjectAudit(request, env, user);
+
+      const auditMatch = url.pathname.match(/^\/api\/audits\/([^/]+)$/);
+      if (auditMatch && request.method === "GET") return getAudit(env, user, auditMatch[1]);
+
+      if (url.pathname === "/api/audit") return json({ error: "Audits now require a saved project. Use /api/audits." }, 410);
       return json({ error: "Not found" }, 404);
+    } catch (error) {
+      console.error("API error", error);
+      return json({ error: safeMessage(error) }, 500);
     }
-
-    return env.ASSETS.fetch(request);
   },
 };
 
-async function handleAudit(request) {
-  let input;
+async function handleMe(request, env) {
+  const user = await getSessionUser(request, env);
+  if (!user) return json({ authenticated: false, user: null });
+  return json({ authenticated: true, user: publicUser(user) });
+}
+
+async function handleSignup(request, env) {
+  const body = await readJson(request);
+  const email = normalizeEmail(body.email);
+  const password = String(body.password || "");
+  const displayName = cleanName(body.displayName || email.split("@")[0]);
+  const workspaceName = cleanName(body.workspaceName || `${displayName}'s Workspace`);
+
+  if (!validEmail(email)) return json({ error: "Enter a valid email address" }, 400);
+  if (password.length < 10) return json({ error: "Password must be at least 10 characters" }, 400);
+  if (!displayName || !workspaceName) return json({ error: "Name and workspace are required" }, 400);
+
+  const existing = await env.DB.prepare("SELECT id FROM users WHERE email = ?").bind(email).first();
+  if (existing) return json({ error: "An account with this email already exists" }, 409);
+
+  const userId = crypto.randomUUID();
+  const workspaceId = crypto.randomUUID();
+  const salt = randomToken(16);
+  const passwordHash = await derivePassword(password, salt);
+  const slug = `${slugify(workspaceName) || "workspace"}-${workspaceId.slice(0, 6)}`;
+
+  await env.DB.batch([
+    env.DB.prepare("INSERT INTO users (id,email,display_name,password_hash,password_salt) VALUES (?,?,?,?,?)").bind(userId, email, displayName, passwordHash, salt),
+    env.DB.prepare("INSERT INTO workspaces (id,name,slug,plan) VALUES (?,?,?,'free')").bind(workspaceId, workspaceName, slug),
+    env.DB.prepare("INSERT INTO workspace_members (workspace_id,user_id,role) VALUES (?,?,'owner')").bind(workspaceId, userId),
+  ]);
+
+  const user = { id: userId, email, display_name: displayName, is_super_admin: 0 };
+  const session = await createSession(env, request, userId);
+  return json({ authenticated: true, user: publicUser(user), workspaceId }, 201, { "set-cookie": session.cookie });
+}
+
+async function handleLogin(request, env) {
+  const body = await readJson(request);
+  const email = normalizeEmail(body.email);
+  const password = String(body.password || "");
+  if (!validEmail(email) || !password) return json({ error: "Email and password are required" }, 400);
+
+  const user = await env.DB.prepare("SELECT id,email,display_name,password_hash,password_salt,is_super_admin FROM users WHERE email = ?").bind(email).first();
+  if (!user?.password_hash || !user?.password_salt) return json({ error: "Invalid email or password" }, 401);
+  const candidate = await derivePassword(password, user.password_salt);
+  if (!timingSafeEqual(candidate, user.password_hash)) return json({ error: "Invalid email or password" }, 401);
+
+  await env.DB.prepare("UPDATE users SET last_login_at = CURRENT_TIMESTAMP, updated_at = CURRENT_TIMESTAMP WHERE id = ?").bind(user.id).run();
+  const session = await createSession(env, request, user.id);
+  return json({ authenticated: true, user: publicUser(user) }, 200, { "set-cookie": session.cookie });
+}
+
+async function handleLogout(request, env) {
+  const token = getCookie(request, SESSION_COOKIE);
+  if (token) {
+    const tokenHash = await sha256(token);
+    await env.DB.prepare("DELETE FROM sessions WHERE token_hash = ?").bind(tokenHash).run();
+  }
+  return json({ ok: true }, 200, { "set-cookie": `${SESSION_COOKIE}=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0` });
+}
+
+async function listWorkspaces(env, user) {
+  const result = await env.DB.prepare(`
+    SELECT w.id,w.name,w.slug,w.plan,w.created_at,w.updated_at,wm.role,
+      (SELECT COUNT(*) FROM projects p WHERE p.workspace_id = w.id) AS project_count
+    FROM workspaces w
+    JOIN workspace_members wm ON wm.workspace_id = w.id
+    WHERE wm.user_id = ?
+    ORDER BY w.updated_at DESC, w.created_at ASC
+  `).bind(user.id).all();
+  return json({ workspaces: result.results || [] });
+}
+
+async function createWorkspace(request, env, user) {
+  const body = await readJson(request);
+  const name = cleanName(body.name);
+  if (!name) return json({ error: "Workspace name is required" }, 400);
+  const id = crypto.randomUUID();
+  const slug = `${slugify(name) || "workspace"}-${id.slice(0, 6)}`;
+  await env.DB.batch([
+    env.DB.prepare("INSERT INTO workspaces (id,name,slug,plan) VALUES (?,?,?,'free')").bind(id, name, slug),
+    env.DB.prepare("INSERT INTO workspace_members (workspace_id,user_id,role) VALUES (?,?,'owner')").bind(id, user.id),
+  ]);
+  return json({ workspace: { id, name, slug, plan: "free", role: "owner", project_count: 0 } }, 201);
+}
+
+async function listProjects(url, env, user) {
+  const workspaceId = url.searchParams.get("workspace_id") || "";
+  if (!workspaceId) return json({ error: "workspace_id is required" }, 400);
+  if (!await hasWorkspaceAccess(env, user.id, workspaceId)) return json({ error: "Workspace not found" }, 404);
+
+  const result = await env.DB.prepare(`
+    SELECT p.id,p.workspace_id,p.name,p.domain,p.protocol,p.country_code,p.timezone,p.created_at,p.updated_at,
+      (SELECT score FROM audits a WHERE a.project_id = p.id AND a.status = 'complete' ORDER BY a.created_at DESC LIMIT 1) AS latest_score,
+      (SELECT created_at FROM audits a WHERE a.project_id = p.id AND a.status = 'complete' ORDER BY a.created_at DESC LIMIT 1) AS last_audit_at
+    FROM projects p WHERE p.workspace_id = ? ORDER BY p.updated_at DESC, p.created_at DESC
+  `).bind(workspaceId).all();
+  return json({ projects: result.results || [] });
+}
+
+async function createProject(request, env, user) {
+  const body = await readJson(request);
+  const workspaceId = String(body.workspaceId || "");
+  const access = await workspaceRole(env, user.id, workspaceId);
+  if (!access) return json({ error: "Workspace not found" }, 404);
+  if (!["owner", "admin"].includes(access.role)) return json({ error: "You do not have permission to add projects" }, 403);
+
+  const target = normalizeProjectDomain(body.domain);
+  if (!target) return json({ error: "Enter a valid public website domain" }, 400);
+  const name = cleanName(body.name || target.domain);
+  const id = crypto.randomUUID();
+
   try {
-    input = await request.json();
-  } catch {
-    return json({ error: "Invalid JSON body" }, 400);
+    await env.DB.prepare(`
+      INSERT INTO projects (id,workspace_id,name,domain,protocol,country_code,timezone)
+      VALUES (?,?,?,?,?,?,?)
+    `).bind(id, workspaceId, name, target.domain, target.protocol, cleanCode(body.countryCode), cleanText(body.timezone, 64)).run();
+  } catch (error) {
+    if (String(error).toLowerCase().includes("unique")) return json({ error: "That domain already exists in this workspace" }, 409);
+    throw error;
   }
 
-  const parsed = normalizeTarget(input?.url);
-  if (!parsed.ok) return json({ error: parsed.error }, 400);
+  return json({ project: { id, workspace_id: workspaceId, name, domain: target.domain, protocol: target.protocol, country_code: cleanCode(body.countryCode), timezone: cleanText(body.timezone, 64) } }, 201);
+}
 
-  const target = parsed.url;
-  const requestedPages = Number(input?.maxPages || 15);
-  const maxPages = Math.max(1, Math.min(MAX_PAGES, Number.isFinite(requestedPages) ? requestedPages : 15));
+async function runProjectAudit(request, env, user) {
+  const body = await readJson(request);
+  const projectId = String(body.projectId || "");
+  const project = await accessibleProject(env, user.id, projectId);
+  if (!project) return json({ error: "Project not found" }, 404);
 
-  const startedAt = Date.now();
-  const robots = await readRobots(target);
-  const result = await crawlSite(target, maxPages, robots);
+  const requestedPages = Math.max(1, Math.min(25, Number(body.maxPages || 15)));
+  const target = `${project.protocol || "https"}://${project.domain}/`;
+  const auditId = crypto.randomUUID();
+  await env.DB.prepare(`
+    INSERT INTO audits (id,project_id,status,requested_by_user_id,target_url,started_at)
+    VALUES (?,?,'running',?,?,CURRENT_TIMESTAMP)
+  `).bind(auditId, project.id, user.id, target).run();
 
-  const pages = result.pages;
-  const allIssues = pages.flatMap((page) => page.issues.map((issue) => ({ ...issue, url: page.url })));
-  const counts = allIssues.reduce(
-    (acc, issue) => {
-      acc[issue.severity] = (acc[issue.severity] || 0) + 1;
-      return acc;
-    },
-    { critical: 0, warning: 0, notice: 0 }
-  );
+  try {
+    const result = await auditTarget(target, requestedPages);
+    const statements = result.pages.map((page) => env.DB.prepare(`
+      INSERT INTO audit_pages (id,audit_id,url,status_code,score,title,meta_description,h1,canonical,word_count,response_ms,issue_json)
+      VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
+    `).bind(
+      crypto.randomUUID(), auditId, page.url, page.status, page.score, page.title || "", page.metaDescription || "",
+      page.h1 || "", page.canonical || "", page.wordCount || 0, page.responseMs || 0, JSON.stringify(page.issues || [])
+    ));
+    if (statements.length) await env.DB.batch(statements);
 
-  const score = pages.length
-    ? Math.round(pages.reduce((sum, page) => sum + page.score, 0) / pages.length)
-    : 0;
+    await env.DB.batch([
+      env.DB.prepare(`
+        UPDATE audits SET status='complete',score=?,pages_crawled=?,critical_issues=?,warning_issues=?,notice_issues=?,
+          duration_ms=?,queued_remaining=?,robots_json=?,status_counts_json=?,completed_at=CURRENT_TIMESTAMP
+        WHERE id=?
+      `).bind(result.score, result.pagesCrawled, result.issueCounts.critical || 0, result.issueCounts.warning || 0, result.issueCounts.notice || 0,
+        result.durationMs, result.queuedRemaining || 0, JSON.stringify(result.robots || {}), JSON.stringify(result.statusCounts || {}), auditId),
+      env.DB.prepare("UPDATE projects SET updated_at = CURRENT_TIMESTAMP WHERE id = ?").bind(project.id),
+      env.DB.prepare(`INSERT INTO usage_events (id,workspace_id,event_type,units,provider,metadata_json) VALUES (?,?, 'site_audit_pages',?, 'internal',?)`)
+        .bind(crypto.randomUUID(), project.workspace_id, result.pagesCrawled, JSON.stringify({ auditId, projectId: project.id })),
+    ]);
 
-  const statusCounts = pages.reduce((acc, page) => {
-    const key = page.status >= 200 && page.status < 300 ? "ok" : page.status >= 300 && page.status < 400 ? "redirect" : "error";
-    acc[key] = (acc[key] || 0) + 1;
-    return acc;
-  }, { ok: 0, redirect: 0, error: 0 });
+    return json({ ...result, auditId, projectId: project.id, projectName: project.name }, 201);
+  } catch (error) {
+    await env.DB.prepare("UPDATE audits SET status='failed',completed_at=CURRENT_TIMESTAMP WHERE id=?").bind(auditId).run();
+    if (error instanceof AuditInputError) return json({ error: error.message }, 400);
+    throw error;
+  }
+}
+
+async function listAudits(url, env, user) {
+  const projectId = url.searchParams.get("project_id") || "";
+  const project = await accessibleProject(env, user.id, projectId);
+  if (!project) return json({ error: "Project not found" }, 404);
+  const limit = Math.max(1, Math.min(50, Number(url.searchParams.get("limit") || 12)));
+  const result = await env.DB.prepare(`
+    SELECT id,project_id,status,score,pages_crawled,critical_issues,warning_issues,notice_issues,target_url,duration_ms,created_at,completed_at
+    FROM audits WHERE project_id=? ORDER BY created_at DESC LIMIT ?
+  `).bind(projectId, limit).all();
+  return json({ audits: result.results || [], project: { id: project.id, name: project.name, domain: project.domain } });
+}
+
+async function getAudit(env, user, auditId) {
+  const audit = await env.DB.prepare(`
+    SELECT a.*,p.name AS project_name,p.domain AS project_domain,p.workspace_id
+    FROM audits a
+    JOIN projects p ON p.id=a.project_id
+    JOIN workspace_members wm ON wm.workspace_id=p.workspace_id
+    WHERE a.id=? AND wm.user_id=?
+  `).bind(auditId, user.id).first();
+  if (!audit) return json({ error: "Audit not found" }, 404);
+
+  const pageResult = await env.DB.prepare(`
+    SELECT url,status_code,score,title,meta_description,h1,canonical,word_count,response_ms,issue_json
+    FROM audit_pages WHERE audit_id=? ORDER BY rowid ASC
+  `).bind(auditId).all();
+  const pages = (pageResult.results || []).map((page) => ({
+    url: page.url, status: page.status_code, score: page.score, title: page.title || "", metaDescription: page.meta_description || "",
+    h1: page.h1 || "", canonical: page.canonical || "", wordCount: page.word_count || 0, responseMs: page.response_ms || 0,
+    links: { internal: 0, external: 0 }, images: { total: 0, missingAlt: 0 }, issues: parseJson(page.issue_json, []),
+  }));
 
   return json({
-    target: target.href,
-    origin: target.origin,
-    auditedAt: new Date().toISOString(),
-    durationMs: Date.now() - startedAt,
-    maxPages,
-    pagesCrawled: pages.length,
-    queuedRemaining: result.queuedRemaining,
-    robots: {
-      reachable: robots.reachable,
-      status: robots.status,
-      disallowCount: robots.disallow.length,
-    },
-    score,
-    issueCounts: counts,
-    statusCounts,
-    pages,
+    auditId: audit.id, projectId: audit.project_id, projectName: audit.project_name,
+    target: audit.target_url, origin: originOf(audit.target_url), auditedAt: audit.completed_at || audit.created_at,
+    durationMs: audit.duration_ms || 0, pagesCrawled: audit.pages_crawled || pages.length, queuedRemaining: audit.queued_remaining || 0,
+    score: audit.score || 0,
+    issueCounts: { critical: audit.critical_issues || 0, warning: audit.warning_issues || 0, notice: audit.notice_issues || 0 },
+    robots: parseJson(audit.robots_json, {}), statusCounts: parseJson(audit.status_counts_json, {}), pages,
   });
 }
 
-async function crawlSite(startUrl, maxPages, robots) {
-  const queue = [canonicalize(startUrl)];
-  const queued = new Set(queue.map((u) => u.href));
-  const visited = new Set();
-  const pages = [];
-
-  while (queue.length && pages.length < maxPages) {
-    const current = queue.shift();
-    const key = current.href;
-    if (visited.has(key)) continue;
-    visited.add(key);
-
-    if (isRobotsDisallowed(current, robots)) {
-      pages.push({
-        url: key,
-        status: 0,
-        contentType: "blocked-by-robots",
-        responseMs: 0,
-        score: 100,
-        title: "",
-        metaDescription: "",
-        h1: "",
-        canonical: "",
-        wordCount: 0,
-        links: { internal: 0, external: 0 },
-        images: { total: 0, missingAlt: 0 },
-        issues: [{ severity: "notice", code: "robots-blocked", message: "Blocked by robots.txt and not crawled" }],
-      });
-      continue;
-    }
-
-    const page = await inspectPage(current);
-    pages.push(page.publicData);
-
-    for (const href of page.internalLinks) {
-      if (queue.length + pages.length >= maxPages * 4) break;
-      try {
-        const next = canonicalize(new URL(href, current));
-        if (next.origin !== startUrl.origin) continue;
-        if (!isHttpUrl(next) || shouldSkipPath(next)) continue;
-        if (!visited.has(next.href) && !queued.has(next.href)) {
-          queued.add(next.href);
-          queue.push(next);
-        }
-      } catch {
-        // Ignore malformed links.
-      }
-    }
-  }
-
-  return { pages, queuedRemaining: queue.length };
+async function requireUser(request, env) {
+  const user = await getSessionUser(request, env);
+  return user || json({ error: "Authentication required" }, 401);
 }
 
-async function inspectPage(url) {
-  const startedAt = Date.now();
-  let response;
-
-  try {
-    response = await fetchWithTimeout(url.href, {
-      headers: {
-        "user-agent": BOT_UA,
-        accept: "text/html,application/xhtml+xml;q=0.9,*/*;q=0.1",
-      },
-      redirect: "follow",
-    });
-  } catch (error) {
-    return {
-      internalLinks: [],
-      publicData: {
-        url: url.href,
-        status: 0,
-        contentType: "fetch-error",
-        responseMs: Date.now() - startedAt,
-        score: 0,
-        title: "",
-        metaDescription: "",
-        h1: "",
-        canonical: "",
-        wordCount: 0,
-        links: { internal: 0, external: 0 },
-        images: { total: 0, missingAlt: 0 },
-        issues: [{ severity: "critical", code: "fetch-error", message: `Could not fetch page: ${safeError(error)}` }],
-      },
-    };
-  }
-
-  const responseMs = Date.now() - startedAt;
-  const contentType = response.headers.get("content-type") || "";
-  const status = response.status;
-  const finalUrl = response.url || url.href;
-
-  if (!contentType.toLowerCase().includes("text/html")) {
-    const issues = [];
-    if (status < 200 || status >= 400) issues.push({ severity: "critical", code: "http-status", message: `HTTP status ${status}` });
-    return {
-      internalLinks: [],
-      publicData: {
-        url: finalUrl,
-        status,
-        contentType,
-        responseMs,
-        score: issues.length ? 40 : 100,
-        title: "",
-        metaDescription: "",
-        h1: "",
-        canonical: "",
-        wordCount: 0,
-        links: { internal: 0, external: 0 },
-        images: { total: 0, missingAlt: 0 },
-        issues,
-      },
-    };
-  }
-
-  const contentLength = Number(response.headers.get("content-length") || 0);
-  if (contentLength && contentLength > MAX_HTML_BYTES) {
-    return {
-      internalLinks: [],
-      publicData: {
-        url: finalUrl,
-        status,
-        contentType,
-        responseMs,
-        score: 60,
-        title: "",
-        metaDescription: "",
-        h1: "",
-        canonical: "",
-        wordCount: 0,
-        links: { internal: 0, external: 0 },
-        images: { total: 0, missingAlt: 0 },
-        issues: [{ severity: "warning", code: "html-too-large", message: "HTML document is too large to analyze safely" }],
-      },
-    };
-  }
-
-  let html = await response.text();
-  if (html.length > MAX_HTML_BYTES) html = html.slice(0, MAX_HTML_BYTES);
-
-  const data = parseHtml(html, new URL(finalUrl));
-  const issues = evaluatePage({ status, responseMs, ...data });
-  const score = calculatePageScore(issues);
-
-  return {
-    internalLinks: data.internalLinkHrefs,
-    publicData: {
-      url: finalUrl,
-      status,
-      contentType,
-      responseMs,
-      score,
-      title: data.title,
-      metaDescription: data.metaDescription,
-      h1: data.h1,
-      h1Count: data.h1Count,
-      h2Count: data.h2Count,
-      canonical: data.canonical,
-      robots: data.robots,
-      lang: data.lang,
-      wordCount: data.wordCount,
-      schemaCount: data.schemaCount,
-      links: { internal: data.internalCount, external: data.externalCount },
-      images: { total: data.imageCount, missingAlt: data.missingAlt },
-      issues,
-    },
-  };
+async function getSessionUser(request, env) {
+  const token = getCookie(request, SESSION_COOKIE);
+  if (!token) return null;
+  const tokenHash = await sha256(token);
+  const user = await env.DB.prepare(`
+    SELECT u.id,u.email,u.display_name,u.is_super_admin,s.id AS session_id,s.expires_at
+    FROM sessions s JOIN users u ON u.id=s.user_id
+    WHERE s.token_hash=? AND datetime(s.expires_at) > datetime('now')
+  `).bind(tokenHash).first();
+  if (!user) return null;
+  return user;
 }
 
-function parseHtml(html, pageUrl) {
-  const title = cleanText(matchFirst(html, /<title\b[^>]*>([\s\S]*?)<\/title>/i));
-  const metaDescription = cleanText(matchAttrTag(html, "meta", "name", "description", "content"));
-  const canonical = cleanText(matchAttrTag(html, "link", "rel", "canonical", "href"));
-  const robots = cleanText(matchAttrTag(html, "meta", "name", "robots", "content")).toLowerCase();
-  const lang = cleanText((html.match(/<html\b[^>]*\blang=["']?([^"'\s>]+)/i) || [])[1] || "");
-  const viewport = cleanText(matchAttrTag(html, "meta", "name", "viewport", "content"));
-  const h1s = [...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi)].map((m) => cleanText(stripTags(m[1]))).filter(Boolean);
-  const h2Count = [...html.matchAll(/<h2\b[^>]*>/gi)].length;
-  const imageTags = [...html.matchAll(/<img\b[^>]*>/gi)].map((m) => m[0]);
-  const missingAlt = imageTags.filter((tag) => !/\balt\s*=\s*["'][^"']*["']/i.test(tag) && !/\balt\s*=\s*[^\s>]+/i.test(tag)).length;
-  const schemaCount = [...html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>/gi)].length;
-  const hrefs = [...html.matchAll(/<a\b[^>]*\bhref\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1].trim()).filter(Boolean);
-  const internalLinkHrefs = [];
-  let internalCount = 0;
-  let externalCount = 0;
-
-  for (const href of hrefs) {
-    if (/^(mailto:|tel:|javascript:|data:)/i.test(href) || href.startsWith("#")) continue;
-    try {
-      const resolved = new URL(href, pageUrl);
-      if (!isHttpUrl(resolved)) continue;
-      if (resolved.origin === pageUrl.origin) {
-        internalCount += 1;
-        internalLinkHrefs.push(resolved.href);
-      } else {
-        externalCount += 1;
-      }
-    } catch {
-      // Ignore malformed href.
-    }
-  }
-
-  const stripped = html
-    .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
-    .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
-    .replace(/<noscript\b[\s\S]*?<\/noscript>/gi, " ")
-    .replace(/<svg\b[\s\S]*?<\/svg>/gi, " ")
-    .replace(/<[^>]+>/g, " ");
-  const text = decodeEntities(stripped).replace(/\s+/g, " ").trim();
-  const wordCount = text ? text.split(" ").filter((w) => w.length > 1).length : 0;
-
-  return {
-    title,
-    metaDescription,
-    canonical,
-    robots,
-    lang,
-    viewport,
-    h1: h1s[0] || "",
-    h1Count: h1s.length,
-    h2Count,
-    imageCount: imageTags.length,
-    missingAlt,
-    schemaCount,
-    wordCount,
-    internalCount,
-    externalCount,
-    internalLinkHrefs,
-  };
+async function createSession(env, request, userId) {
+  const token = randomToken(32);
+  const tokenHash = await sha256(token);
+  const id = crypto.randomUUID();
+  const expires = new Date(Date.now() + SESSION_DAYS * 86400_000).toISOString();
+  const userAgent = (request.headers.get("user-agent") || "").slice(0, 300);
+  const ip = request.headers.get("cf-connecting-ip") || "";
+  const ipHint = ip ? await sha256(ip) : "";
+  await env.DB.prepare(`INSERT INTO sessions (id,user_id,token_hash,expires_at,user_agent,ip_hint) VALUES (?,?,?,?,?,?)`)
+    .bind(id, userId, tokenHash, expires, userAgent, ipHint).run();
+  const cookie = `${SESSION_COOKIE}=${token}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${SESSION_DAYS * 86400}`;
+  return { cookie };
 }
 
-function evaluatePage(page) {
-  const issues = [];
-  if (page.status < 200 || page.status >= 400) issues.push({ severity: "critical", code: "http-status", message: `HTTP status ${page.status}` });
-  if (!page.title) issues.push({ severity: "critical", code: "missing-title", message: "Missing page title" });
-  else if (page.title.length < 15 || page.title.length > 65) issues.push({ severity: "warning", code: "title-length", message: `Title length is ${page.title.length} characters` });
-  if (!page.metaDescription) issues.push({ severity: "warning", code: "missing-description", message: "Missing meta description" });
-  else if (page.metaDescription.length < 50 || page.metaDescription.length > 170) issues.push({ severity: "notice", code: "description-length", message: `Meta description length is ${page.metaDescription.length} characters` });
-  if (page.h1Count === 0) issues.push({ severity: "critical", code: "missing-h1", message: "Missing H1 heading" });
-  else if (page.h1Count > 1) issues.push({ severity: "warning", code: "multiple-h1", message: `${page.h1Count} H1 headings detected` });
-  if (!page.canonical) issues.push({ severity: "warning", code: "missing-canonical", message: "Missing canonical URL" });
-  if (!page.lang) issues.push({ severity: "notice", code: "missing-lang", message: "Missing HTML language attribute" });
-  if (!page.viewport) issues.push({ severity: "warning", code: "missing-viewport", message: "Missing viewport meta tag" });
-  if (page.robots.includes("noindex")) issues.push({ severity: "warning", code: "noindex", message: "Page contains a noindex directive" });
-  if (page.imageCount && page.missingAlt) issues.push({ severity: "warning", code: "missing-alt", message: `${page.missingAlt} of ${page.imageCount} images are missing alt attributes` });
-  if (page.wordCount < 150) issues.push({ severity: "notice", code: "thin-content", message: `Low visible word count: ${page.wordCount}` });
-  if (page.responseMs > 2500) issues.push({ severity: "warning", code: "slow-response", message: `Origin response took ${page.responseMs} ms` });
-  if (page.internalCount === 0) issues.push({ severity: "notice", code: "no-internal-links", message: "No crawlable internal links detected" });
-  return issues;
+async function hasWorkspaceAccess(env, userId, workspaceId) {
+  return Boolean(await workspaceRole(env, userId, workspaceId));
 }
 
-function calculatePageScore(issues) {
-  let score = 100;
-  for (const issue of issues) {
-    score -= issue.severity === "critical" ? 18 : issue.severity === "warning" ? 8 : 3;
-  }
-  return Math.max(0, score);
+async function workspaceRole(env, userId, workspaceId) {
+  if (!workspaceId) return null;
+  return env.DB.prepare("SELECT role FROM workspace_members WHERE workspace_id=? AND user_id=?").bind(workspaceId, userId).first();
 }
 
-async function readRobots(target) {
-  const robotsUrl = new URL("/robots.txt", target.origin);
-  try {
-    const response = await fetchWithTimeout(robotsUrl.href, { headers: { "user-agent": BOT_UA } });
-    if (!response.ok) return { reachable: false, status: response.status, disallow: [] };
-    const text = (await response.text()).slice(0, 200_000);
-    return { reachable: true, status: response.status, disallow: parseRobotsDisallow(text) };
-  } catch {
-    return { reachable: false, status: 0, disallow: [] };
-  }
+async function accessibleProject(env, userId, projectId) {
+  if (!projectId) return null;
+  return env.DB.prepare(`
+    SELECT p.* FROM projects p
+    JOIN workspace_members wm ON wm.workspace_id=p.workspace_id
+    WHERE p.id=? AND wm.user_id=?
+  `).bind(projectId, userId).first();
 }
 
-function parseRobotsDisallow(text) {
-  const lines = text.split(/\r?\n/).map((line) => line.replace(/#.*/, "").trim()).filter(Boolean);
-  const disallow = [];
-  let applies = false;
-  for (const line of lines) {
-    const idx = line.indexOf(":");
-    if (idx < 0) continue;
-    const key = line.slice(0, idx).trim().toLowerCase();
-    const value = line.slice(idx + 1).trim();
-    if (key === "user-agent") applies = value === "*" || value.toLowerCase().includes("jamesseo");
-    if (key === "disallow" && applies && value) disallow.push(value);
-  }
-  return disallow.slice(0, 200);
+async function derivePassword(password, salt) {
+  const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveBits"]);
+  const bits = await crypto.subtle.deriveBits({ name: "PBKDF2", hash: "SHA-256", salt: fromBase64Url(salt), iterations: PBKDF2_ITERATIONS }, key, 256);
+  return toBase64Url(new Uint8Array(bits));
 }
 
-function isRobotsDisallowed(url, robots) {
-  if (!robots?.disallow?.length) return false;
-  const path = `${url.pathname}${url.search}`;
-  return robots.disallow.some((rule) => rule !== "/" ? path.startsWith(rule) : true);
+async function sha256(value) {
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
+  return toBase64Url(new Uint8Array(digest));
 }
 
-function normalizeTarget(value) {
-  if (typeof value !== "string" || !value.trim()) return { ok: false, error: "Enter a website URL" };
-  let raw = value.trim();
+function timingSafeEqual(a, b) {
+  if (typeof a !== "string" || typeof b !== "string" || a.length !== b.length) return false;
+  let result = 0;
+  for (let i = 0; i < a.length; i += 1) result |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return result === 0;
+}
+
+function randomToken(bytes) {
+  const data = new Uint8Array(bytes);
+  crypto.getRandomValues(data);
+  return toBase64Url(data);
+}
+
+function toBase64Url(bytes) {
+  let binary = "";
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+}
+
+function fromBase64Url(value) {
+  const padded = value.replace(/-/g, "+").replace(/_/g, "/") + "===".slice((value.length + 3) % 4);
+  const binary = atob(padded);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
+  return bytes;
+}
+
+function getCookie(request, name) {
+  const cookie = request.headers.get("cookie") || "";
+  const pair = cookie.split(/;\s*/).find((part) => part.startsWith(`${name}=`));
+  return pair ? pair.slice(name.length + 1) : "";
+}
+
+function sameOriginMutation(request) {
+  if (!["POST", "PUT", "PATCH", "DELETE"].includes(request.method)) return true;
+  const origin = request.headers.get("origin");
+  if (!origin) return true;
+  return origin === new URL(request.url).origin;
+}
+
+async function readJson(request) {
+  try { return await request.json(); }
+  catch { throw new Error("Invalid JSON body"); }
+}
+
+function normalizeEmail(value) { return String(value || "").trim().toLowerCase().slice(0, 254); }
+function validEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+function cleanName(value) { return cleanText(value, 90); }
+function cleanCode(value) { return String(value || "").trim().toUpperCase().replace(/[^A-Z0-9-]/g, "").slice(0, 8) || null; }
+function cleanText(value, max = 200) { return String(value || "").replace(/[\u0000-\u001f\u007f]/g, " ").replace(/\s+/g, " ").trim().slice(0, max); }
+function slugify(value) { return String(value || "").toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 48); }
+
+function normalizeProjectDomain(value) {
+  let raw = String(value || "").trim();
+  if (!raw) return null;
   if (!/^https?:\/\//i.test(raw)) raw = `https://${raw}`;
   try {
     const url = new URL(raw);
-    if (!isHttpUrl(url)) return { ok: false, error: "Only HTTP and HTTPS URLs are supported" };
-    if (!isPublicHostname(url.hostname)) return { ok: false, error: "Private or local network targets are not allowed" };
-    url.hash = "";
-    return { ok: true, url: canonicalize(url) };
-  } catch {
-    return { ok: false, error: "Enter a valid website URL" };
-  }
+    if (!["http:", "https:"].includes(url.protocol)) return null;
+    const domain = url.hostname.toLowerCase();
+    if (!domain || domain === "localhost" || domain.endsWith(".local") || domain.endsWith(".internal")) return null;
+    if (/^(127\.|10\.|192\.168\.|169\.254\.)/.test(domain)) return null;
+    const private172 = domain.match(/^172\.(\d{1,3})\./);
+    if (private172 && Number(private172[1]) >= 16 && Number(private172[1]) <= 31) return null;
+    return { domain, protocol: url.protocol.replace(":", "") };
+  } catch { return null; }
 }
 
-function isPublicHostname(hostname) {
-  const host = hostname.toLowerCase().replace(/^\[|\]$/g, "");
-  if (host === "localhost" || host.endsWith(".local") || host.endsWith(".internal")) return false;
-  if (host === "0.0.0.0" || host === "127.0.0.1" || host === "::1") return false;
-  if (/^10\./.test(host) || /^192\.168\./.test(host) || /^169\.254\./.test(host)) return false;
-  const private172 = host.match(/^172\.(\d{1,3})\./);
-  if (private172 && Number(private172[1]) >= 16 && Number(private172[1]) <= 31) return false;
-  if (host === "metadata.google.internal") return false;
-  return true;
+function publicUser(user) {
+  return { id: user.id, email: user.email, displayName: user.display_name || "", isSuperAdmin: Boolean(user.is_super_admin) };
 }
 
-function canonicalize(url) {
-  const next = new URL(url.href);
-  next.hash = "";
-  for (const key of [...next.searchParams.keys()]) {
-    if (/^(utm_|gclid$|fbclid$|msclkid$)/i.test(key)) next.searchParams.delete(key);
-  }
-  if (next.pathname !== "/" && next.pathname.endsWith("/")) next.pathname = next.pathname.replace(/\/+$/, "/");
-  return next;
-}
+function parseJson(value, fallback) { try { return value ? JSON.parse(value) : fallback; } catch { return fallback; } }
+function originOf(value) { try { return new URL(value).origin; } catch { return value || ""; } }
+function safeMessage(error) { return (error instanceof Error ? error.message : String(error || "Unexpected error")).slice(0, 240); }
 
-function shouldSkipPath(url) {
-  return /\.(?:jpg|jpeg|png|gif|webp|svg|avif|pdf|zip|rar|7z|mp4|mov|avi|mp3|css|js|xml|json|txt|woff2?|ttf|eot)(?:$|\?)/i.test(url.pathname + url.search);
-}
-
-function isHttpUrl(url) {
-  return url.protocol === "http:" || url.protocol === "https:";
-}
-
-async function fetchWithTimeout(url, init = {}) {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort("timeout"), FETCH_TIMEOUT_MS);
-  try {
-    return await fetch(url, { ...init, signal: controller.signal });
-  } finally {
-    clearTimeout(timeout);
-  }
-}
-
-function matchFirst(html, regex) {
-  return (html.match(regex) || [])[1] || "";
-}
-
-function matchAttrTag(html, tagName, matchAttr, matchValue, returnAttr) {
-  const tags = html.match(new RegExp(`<${tagName}\\b[^>]*>`, "gi")) || [];
-  for (const tag of tags) {
-    const attrs = parseAttrs(tag);
-    const compare = (attrs[matchAttr] || "").toLowerCase().split(/\s+/);
-    if (compare.includes(matchValue.toLowerCase()) && attrs[returnAttr] != null) return attrs[returnAttr];
-  }
-  return "";
-}
-
-function parseAttrs(tag) {
-  const attrs = {};
-  const regex = /([:\w-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+))/g;
-  let match;
-  while ((match = regex.exec(tag))) attrs[match[1].toLowerCase()] = match[2] ?? match[3] ?? match[4] ?? "";
-  return attrs;
-}
-
-function stripTags(value) {
-  return value.replace(/<[^>]+>/g, " ");
-}
-
-function cleanText(value) {
-  return decodeEntities(String(value || "")).replace(/\s+/g, " ").trim();
-}
-
-function decodeEntities(value) {
-  return value
-    .replace(/&nbsp;/gi, " ")
-    .replace(/&amp;/gi, "&")
-    .replace(/&quot;/gi, '"')
-    .replace(/&#39;|&apos;/gi, "'")
-    .replace(/&lt;/gi, "<")
-    .replace(/&gt;/gi, ">");
-}
-
-function safeError(error) {
-  const message = error instanceof Error ? error.message : String(error || "Unknown error");
-  return message.slice(0, 160);
-}
-
-function json(payload, status = 200) {
-  return new Response(JSON.stringify(payload), { status, headers: JSON_HEADERS });
+function json(payload, status = 200, extraHeaders = {}) {
+  return new Response(JSON.stringify(payload), { status, headers: { ...JSON_HEADERS, ...extraHeaders } });
 }
