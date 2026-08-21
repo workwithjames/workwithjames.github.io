@@ -1,13 +1,13 @@
 {
   "name": "james-seo-mvp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
     "deploy:dry": "wrangler deploy --dry-run",
-    "check": "node --check src/index.js && node --check public/app.js"
+    "check": "node --check src/index.js && node --check src/crawler.js && node --check public/app.js"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"
