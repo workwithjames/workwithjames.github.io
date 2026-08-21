@@ -1,0 +1,94 @@
+/* James Realty typography guardrails, 21 Aug 2026.
+   Final site-wide scale for desktop, tablet and mobile. */
+:root{
+  --jr-body-size:1rem;
+  --jr-small-size:max(.78rem,13px);
+  --jr-ui-size:clamp(.8rem,.14vw + .77rem,.9rem);
+}
+html{font-size:16px!important;-webkit-text-size-adjust:100%}
+body{font-size:var(--jr-body-size)!important;line-height:1.62!important}
+
+h1,h2,h3,h4,.display,.jr-display{font-family:var(--display,'JR Display','Arial Narrow',sans-serif)!important;text-wrap:balance}
+
+/* Hero/display scale: large enough to lead, capped so two-column layouts stay balanced. */
+h1,.hero h1,.home-hero h1,.conversion-hero h1,.journey-hero h1,.jr-hero h1,.display:not(.small){
+  font-size:clamp(2.55rem,4.4vw,4.5rem)!important;
+  line-height:.98!important;
+  letter-spacing:-.05em!important;
+  font-weight:520!important;
+}
+
+/* Major section headings. */
+h2,.section-heading h2,.home-section-heading h2,.conversion-paths-heading h2,.journey-section h2,.qualifier-copy h2,.home-final h2,.jr-heading h2,.jr-map__copy h2,.jr-lens header h2,.jr-form-copy h2,.jr-faq h2,.display.small{
+  font-size:clamp(1.85rem,3vw,3rem)!important;
+  line-height:1.04!important;
+  letter-spacing:-.04em!important;
+  font-weight:520!important;
+}
+
+/* Card and subsection titles. */
+h3,.service-card h3,.work-card h3,.home-journey h3,.home-data-card h3,.conversion-path-card h3,.journey-grid strong,.jr-project h3,.jr-signature h3,.jr-process h3,.finding h3,.card h3,.market-card h2,.market-tool-card h3,.blog-tile h2,.blog-card h2{
+  font-size:clamp(1.08rem,1.35vw,1.42rem)!important;
+  line-height:1.2!important;
+  letter-spacing:-.02em!important;
+}
+
+h4{font-size:clamp(1rem,1vw,1.2rem)!important;line-height:1.3!important}
+
+/* Paragraphs and list copy should never become micro-text. */
+p{font-size:clamp(.9rem,.18vw + .86rem,.98rem)!important;line-height:1.65!important}
+main li{font-size:clamp(.84rem,.16vw + .8rem,.92rem)!important;line-height:1.55!important}
+.hero-description,.home-hero-copy>p,.conversion-hero-copy>p,.journey-hero-copy>p,.jr-hero__lead,.lede,.market-hero>div>p{
+  font-size:clamp(1rem,.45vw + .9rem,1.12rem)!important;
+  line-height:1.62!important;
+}
+
+/* Eyebrows, metadata, labels and supporting text have a readable floor. */
+.section-kicker,.card-kicker,.panel-kicker,.eyebrow,.jr-kicker,.jr-project__meta,.jr-project__cta,.jr-text-link,.jr-hero__proof li,.filter-pill,.tool-directory-label,.kicker,.section-label,.article-meta,.news-source-badge,.market-table-label,.market-form-message,.market-smallprint,.market-source-date,.jr-form__eyebrow,.jr-form__duration,.jr-form__microcopy,.jr-form__status,.jr-form__privacy-note{
+  font-size:var(--jr-small-size)!important;
+  line-height:1.45!important;
+}
+small,figcaption,.metric span,.service-proof span,.work-stats span,.home-data-card dt,.home-data-card dd,.qualifier-form label,.qualifier-note,.journey-links span,.jr-brand small,.jr-project__bottom small,.jr-project__source,.jr-facts small,.jr-map figcaption{
+  font-size:var(--jr-small-size)!important;
+  line-height:1.45!important;
+}
+
+/* Navigation and controls. */
+.nav-links a,.mobile-page-tabs a,.jr-nav__links a,.goal-nav summary,.goal-nav-menu a,.button,.jr-button,.jr-menu-toggle,.text-link,.jr-project__cta{
+  font-size:var(--jr-ui-size)!important;
+  line-height:1.25!important;
+}
+label,.jr-form label,.qualifier-form label{font-size:max(.8rem,13px)!important;line-height:1.35!important}
+input,select,textarea,.jr-form input,.jr-form select,.jr-form textarea,.qualifier-form input,.qualifier-form select,.qualifier-form textarea{
+  font-size:max(.94rem,15px)!important;
+  line-height:1.4!important;
+}
+table,th,td{font-size:max(.8rem,13px)!important;line-height:1.45!important}
+
+/* Landing facts and compact callouts. */
+.jr-facts strong,.metric strong,.market-stats strong{font-size:clamp(1rem,1.3vw,1.3rem)!important;line-height:1.15!important}
+.jr-hero__independent{font-size:max(.78rem,13px)!important;line-height:1.45!important}
+
+@media(max-width:1180px){
+  h1,.hero h1,.home-hero h1,.conversion-hero h1,.journey-hero h1,.jr-hero h1,.display:not(.small){font-size:clamp(2.5rem,5vw,3.9rem)!important}
+  h2,.section-heading h2,.home-section-heading h2,.conversion-paths-heading h2,.journey-section h2,.qualifier-copy h2,.home-final h2,.jr-heading h2,.jr-map__copy h2,.jr-lens header h2,.jr-form-copy h2,.jr-faq h2,.display.small{font-size:clamp(1.8rem,3.7vw,2.75rem)!important}
+}
+
+@media(max-width:820px){
+  body{font-size:16px!important}
+  h1,.hero h1,.home-hero h1,.conversion-hero h1,.journey-hero h1,.jr-hero h1,.display:not(.small){font-size:clamp(2.25rem,8.8vw,3.1rem)!important;line-height:1!important;letter-spacing:-.045em!important}
+  h2,.section-heading h2,.home-section-heading h2,.conversion-paths-heading h2,.journey-section h2,.qualifier-copy h2,.home-final h2,.jr-heading h2,.jr-map__copy h2,.jr-lens header h2,.jr-form-copy h2,.jr-faq h2,.display.small{font-size:clamp(1.75rem,6.7vw,2.35rem)!important;line-height:1.06!important}
+  h3,.service-card h3,.work-card h3,.home-journey h3,.home-data-card h3,.conversion-path-card h3,.jr-project h3,.blog-tile h2,.blog-card h2{font-size:clamp(1.08rem,4.4vw,1.32rem)!important}
+  p{font-size:clamp(.94rem,1.8vw,.99rem)!important;line-height:1.62!important}
+  main li{font-size:clamp(.88rem,1.7vw,.94rem)!important}
+  input,select,textarea,.jr-form input,.jr-form select,.jr-form textarea,.qualifier-form input,.qualifier-form select,.qualifier-form textarea{font-size:16px!important}
+}
+
+@media(max-width:560px){
+  h1,.hero h1,.home-hero h1,.conversion-hero h1,.journey-hero h1,.jr-hero h1,.display:not(.small){font-size:clamp(2.05rem,10vw,2.7rem)!important;line-height:1.02!important}
+  h2,.section-heading h2,.home-section-heading h2,.conversion-paths-heading h2,.journey-section h2,.qualifier-copy h2,.home-final h2,.jr-heading h2,.jr-map__copy h2,.jr-lens header h2,.jr-form-copy h2,.jr-faq h2,.display.small{font-size:clamp(1.65rem,7.6vw,2.15rem)!important}
+  .section-kicker,.card-kicker,.panel-kicker,.eyebrow,.jr-kicker,.jr-project__meta,.jr-project__cta,.jr-text-link,.jr-hero__proof li,.filter-pill,.tool-directory-label,.kicker,.section-label,.article-meta,.news-source-badge{font-size:max(.76rem,12.5px)!important}
+  .button,.jr-button{font-size:max(.82rem,13px)!important;min-height:46px}
+}
+
+[dir="rtl"] h1,[dir="rtl"] h2,[dir="rtl"] h3,[dir="rtl"] h4,[dir="rtl"] .display,[dir="rtl"] .jr-display{letter-spacing:0!important;line-height:1.18!important}
