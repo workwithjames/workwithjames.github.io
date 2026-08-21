@@ -3,22 +3,21 @@
   const qs=(s,r=document)=>r.querySelector(s);
   const qsa=(s,r=document)=>[...r.querySelectorAll(s)];
 
-  /* Load the shared James Realty/Tasmeer design layer after every developer- or
-     country-specific stylesheet so the final typography, theme and glow stay consistent. */
-  if(!document.querySelector('link[data-site-system-final]')){
-    const system=document.createElement('link');
-    system.rel='stylesheet';
-    system.href='/assets/site-system.css?v=2';
-    system.setAttribute('data-site-system-final','');
-    document.head.appendChild(system);
-  }
-  if(!document.querySelector('link[data-glow-system-final]')){
-    const glow=document.createElement('link');
-    glow.rel='stylesheet';
-    glow.href='/assets/glow-system.css?v=1';
-    glow.setAttribute('data-glow-system-final','');
-    document.head.appendChild(glow);
-  }
+  /* Load the shared James Realty/Tasmeer design layers after every developer- or
+     country-specific stylesheet so theme, full-width glow and typography stay consistent. */
+  const finalStyles=[
+    {key:'site-system-final',href:'/assets/site-system.css?v=2'},
+    {key:'glow-system-final',href:'/assets/glow-system.css?v=2'},
+    {key:'typography-system-final',href:'/assets/typography-system.css?v=1'}
+  ];
+  finalStyles.forEach(item=>{
+    if(document.querySelector('link[data-'+item.key+']')) return;
+    const link=document.createElement('link');
+    link.rel='stylesheet';
+    link.href=item.href;
+    link.setAttribute('data-'+item.key,'');
+    document.head.appendChild(link);
+  });
 
   const isArabic=document.documentElement.dir==='rtl'||document.documentElement.lang.startsWith('ar');
   const copy=isArabic?{
