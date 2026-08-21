@@ -1,0 +1,52 @@
+name: Deploy James SEO Preview
+
+on:
+  push:
+    branches:
+      - feature/seo-saas-mvp
+    paths:
+      - "seo-saas/**"
+      - ".github/workflows/deploy-seo-saas-preview.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: james-seo-preview
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Validate and deploy isolated SEO Worker
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Deploy James SEO preview
+        id: deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: "seo-saas"
+          wranglerVersion: "4"
+          preCommands: npm run check
+          command: deploy --minify
+
+      - name: Publish deployment URL to summary
+        if: ${{ success() }}
+        env:
+          DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}
+        run: |
+          echo "## James SEO preview deployed" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Worker: \`james-seo-mvp\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          if [ -n "$DEPLOYMENT_URL" ]; then
+            echo "Preview: $DEPLOYMENT_URL" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Deployment succeeded. See the Cloudflare step output for the workers.dev URL." >> "$GITHUB_STEP_SUMMARY"
+          fi
