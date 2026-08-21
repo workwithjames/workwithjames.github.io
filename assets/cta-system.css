@@ -2,7 +2,8 @@
 @import url('/assets/glow-system.css?v=3');
 @import url('/assets/home-hero-fix.css?v=3');
 @import url('/assets/typography-system.css?v=2');
-@import url('/assets/footer-system.css?v=1');
+@import url('/assets/footer-system.css?v=2');
+@import url('/assets/navigation-system.css?v=1');
 :root{--cta-green:#52e99a;--cta-green-bright:#72f3b0;--cta-ink:#04140c;--cta-blue:#8aa8ff}
 .button,.mobile-conversion,.home-journey strong,.home-data-card strong,.journey-links a,.market-related a,.property-news-link-grid a,.related-card,.buyer-cluster-card{transition:transform .2s ease,border-color .2s ease,background-color .2s ease,box-shadow .2s ease,color .2s ease}
 .button-primary,.nav-cta,.nav-whatsapp,.mobile-conversion,.qualifier-submit .button-primary,.contact-goal-submit .button-primary{position:relative;isolation:isolate;border:1px solid rgba(151,255,203,.55)!important;background:linear-gradient(135deg,var(--cta-green-bright),var(--cta-green) 58%,#3ad589)!important;color:var(--cta-ink)!important;font-weight:850!important;box-shadow:0 10px 30px rgba(37,217,120,.2),inset 0 1px 0 rgba(255,255,255,.45)!important;overflow:hidden}
