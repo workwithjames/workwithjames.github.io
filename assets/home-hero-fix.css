@@ -1,8 +1,30 @@
 /* Homepage hero correction, revised 21 Aug 2026.
-   Keeps the full-width ambient glow while balancing the two-column hero. */
+   Content stays on the site grid, while the hero glow belongs to the full-width page layer. */
 
-.home-page .home-hero:after{display:none!important}
+.home-page{
+  position:relative!important;
+  isolation:isolate;
+  overflow:visible!important;
+  background:transparent!important;
+}
+.home-page::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  top:0;
+  left:0;
+  width:100%;
+  height:clamp(560px,62vw,760px);
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse 62% 72% at var(--jr-glow-x,80%) var(--jr-glow-y,10%),rgba(129,140,248,.16),rgba(129,140,248,.04) 42%,transparent 76%),
+    radial-gradient(ellipse 46% 52% at var(--jr-glow-x2,12%) var(--jr-glow-y2,66%),rgba(167,139,250,.07),transparent 78%);
+  animation:jr-glow-drift 26s ease-in-out infinite alternate;
+}
 
+/* Do not let the centered section container paint or shadow its own glow. */
+.home-page>.home-hero::before,
+.home-page>.home-hero::after{display:none!important}
 .home-page .home-hero{
   grid-template-columns:minmax(0,1.12fr) minmax(340px,.88fr);
   gap:clamp(38px,4.4vw,58px);
@@ -10,6 +32,8 @@
   padding-top:clamp(58px,6.2vw,80px);
   padding-bottom:clamp(58px,6vw,74px);
   background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
 }
 .home-page .home-hero-copy{min-width:0}
 .home-page .home-hero h1{
@@ -40,6 +64,13 @@
 }
 
 @media(max-width:820px){
+  .home-page::before{
+    height:clamp(720px,145vw,980px);
+    background:
+      radial-gradient(ellipse 105% 54% at var(--jr-glow-x,80%) var(--jr-glow-y,10%),rgba(129,140,248,.105),transparent 78%),
+      radial-gradient(ellipse 82% 42% at var(--jr-glow-x2,12%) var(--jr-glow-y2,66%),rgba(167,139,250,.045),transparent 80%);
+    animation-duration:38s;
+  }
   .home-page .home-hero{grid-template-columns:1fr;gap:30px;padding-top:50px;padding-bottom:58px}
   .home-page .home-hero h1{max-width:660px;font-size:clamp(2.25rem,8.8vw,3rem)!important;line-height:1!important}
   .home-page .home-hero-copy>p{max-width:640px;font-size:1rem!important}
@@ -47,10 +78,11 @@
 }
 
 @media(max-width:560px){
+  .home-page::before{height:760px}
   .home-page .home-hero{padding-top:40px;padding-bottom:52px;gap:26px}
   .home-page .home-hero h1{font-size:clamp(2.05rem,10vw,2.65rem)!important;letter-spacing:-.043em!important;line-height:1.02!important}
   .home-page .conversion-hero-actions{margin-top:21px;gap:9px}
   .home-page .conversion-hero-actions .button{min-height:46px}
 }
 
-@media(prefers-reduced-motion:reduce){.home-page .home-hero{animation:none!important}}
+@media(prefers-reduced-motion:reduce){.home-page::before{animation:none!important}}
