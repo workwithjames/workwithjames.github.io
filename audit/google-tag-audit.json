@@ -1,8 +1,10 @@
 {
   "containerId": "GTM-M74SL57L",
-  "htmlFilesChecked": 67,
+  "htmlFilesChecked": 68,
   "taggedFiles": 67,
-  "missingFiles": [],
+  "missingFiles": [
+    "essentials/index.html"
+  ],
   "excludedTechnicalFiles": [
     "404.html",
     "_not-found.html",
