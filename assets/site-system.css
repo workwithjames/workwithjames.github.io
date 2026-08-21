@@ -1,5 +1,6 @@
 @font-face{font-family:JR Manrope;src:url('/assets/fonts/manrope-latin.woff2') format('woff2');font-style:normal;font-weight:400 700;font-display:swap}
 @font-face{font-family:JR Display;src:url('/assets/fonts/roboto-flex-latin.woff2') format('woff2');font-style:normal;font-weight:300 800;font-stretch:75% 150%;font-display:swap}
+@font-face{font-family:JR Arabic;src:url('/assets/fonts/noto-sans-arabic.woff2') format('woff2');font-style:normal;font-weight:400 700;font-display:swap}
 
 :root{
   --ink:#0a0a1a;
@@ -74,7 +75,7 @@ footer,.jr-footer{background:var(--ink-2)!important;color:var(--muted)!important
 .jr-section{border-color:var(--line)!important;color:var(--text)}
 .jr-heading>p:last-child,.jr-project__body>p,.jr-project li,.jr-project__bottom small,.jr-map__copy>p,.jr-map__list p,.jr-lens header>p:last-child,.jr-form-copy>p,.jr-faq p,.jr-section p,.jr-section li,.jr-section small{color:var(--muted)}
 .jr-kicker,.jr-project__meta,.jr-facts article>span,.jr-project__source{color:var(--accent)!important}
-.jr-project,.jr-form,.service-card,.work-card,.home-journey,.home-data-card,.home-proof-grid article,.home-process article,.conversion-path-card,.conversion-proof article,.journey-grid article,.journey-process article,.journey-links a,.qualifier-form{
+.jr-project,.jr-form,.service-card,.work-card,.home-journey,.home-data-card,.home-proof-grid article,.home-process article,.conversion-path-card,.conversion-proof article,.journey-grid article,.journey-process article,.journey-links a,.qualifier-form,.blog-card,.blog-tile,.market-promo,.contact-card,.related-card,.buyer-cluster-card,.tool-directory-card{
   background:linear-gradient(145deg,rgba(129,140,248,.055),transparent 52%),var(--surface)!important;
   border-color:var(--line)!important;
   color:var(--text)!important;
@@ -147,8 +148,27 @@ small,.metric span,.service-proof span,.work-stats span,.home-data-card dt,.home
 .nav-links,.mobile-page-tabs,.jr-nav__links,.button,.jr-button,.jr-menu-toggle{font-size:clamp(.78rem,.18vw + .74rem,.9rem)!important}
 input,select,textarea{font-size:max(.88rem,14px)!important}
 
+/* Unify bespoke landing-page components without erasing their layout. */
+body[class*="theme-"] .jr-hero{color:var(--text)!important;background:var(--dark)!important}
+body[class*="theme-"] .jr-hero__wash{background:linear-gradient(90deg,rgba(10,10,26,.94) 0%,rgba(10,10,26,.7) 44%,rgba(10,10,26,.12) 78%),linear-gradient(0deg,rgba(10,10,26,.76),transparent 58%)!important}
+body[class*="theme-"] .jr-hero__lead{color:#c7c7d6!important}
+body[class*="theme-"] .jr-hero__proof li{color:#b7b7c9!important}
+body[class*="theme-"] .jr-hero__independent{color:#9292a8!important}
+body[class*="theme-"] .jr-section [class$="-card"],body[class*="theme-"] .jr-section [class*="-card "]{
+  background:linear-gradient(145deg,rgba(129,140,248,.055),transparent 52%),var(--surface)!important;
+  border-color:var(--line)!important;
+  color:var(--text)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.02),0 18px 48px rgba(0,0,0,.12);
+}
+body[class*="theme-"] .jr-section [class$="-card"] p,body[class*="theme-"] .jr-section [class*="-card "] p,body[class*="theme-"] .jr-section [class$="-card"] li,body[class*="theme-"] .jr-section [class*="-card "] li{color:var(--muted)!important}
+body[class*="theme-"] .jr-section [class$="-card"] h3,body[class*="theme-"] .jr-section [class*="-card "] h3,body[class*="theme-"] .jr-section [class$="-card"] strong,body[class*="theme-"] .jr-section [class*="-card "] strong{color:var(--text)!important}
+
+/* Keep the Arabic landing experience typographically correct. */
+[dir="rtl"] body,[dir="rtl"] button,[dir="rtl"] input,[dir="rtl"] select,[dir="rtl"] textarea{font-family:'JR Arabic',Arial,sans-serif!important;letter-spacing:0}
+[dir="rtl"] h1,[dir="rtl"] h2,[dir="rtl"] h3,[dir="rtl"] h4,[dir="rtl"] .jr-display,[dir="rtl"] .display,[dir="rtl"] .jr-brand strong,[dir="rtl"] .brand{font-family:'JR Arabic',Arial,sans-serif!important;font-stretch:normal!important;font-variation-settings:normal!important;letter-spacing:0!important}
+
 @media(hover:hover) and (pointer:fine){
-  .service-card:hover,.work-card:hover,.home-journey:hover,.home-data-card:hover,.home-proof-grid article:hover,.home-process article:hover,.conversion-path-card:hover,.journey-grid article:hover,.journey-links a:hover,.jr-project:hover{
+  .service-card:hover,.work-card:hover,.home-journey:hover,.home-data-card:hover,.home-proof-grid article:hover,.home-process article:hover,.conversion-path-card:hover,.journey-grid article:hover,.journey-links a:hover,.jr-project:hover,.blog-card:hover,.blog-tile:hover,.related-card:hover,.buyer-cluster-card:hover,.tool-directory-card:hover{
     border-color:rgba(129,140,248,.52)!important;
     box-shadow:0 24px 60px rgba(0,0,0,.28),0 0 34px rgba(129,140,248,.12)!important;
   }
