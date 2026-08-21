@@ -1,3 +1,4 @@
+@import url('/assets/site-system.css?v=1');
 /* James Realty landing form v2 — conversion-focused, brand-adaptive, accessible. */
 .jr-form-section{position:relative;overflow:hidden;background:#0d100f!important;color:#f7f3ec!important;isolation:isolate}
 .jr-form-section:before{content:'';position:absolute;z-index:-1;width:520px;height:520px;inset:-240px -170px auto auto;border:1px solid rgba(255,255,255,.08);transform:rotate(45deg);pointer-events:none}
@@ -82,3 +83,23 @@
 @media(max-width:760px){
  .jr-form-section{padding-block:58px!important}.jr-form-section:before{width:320px;height:320px;inset:-170px -170px auto auto}.jr-form-section:after{height:90px;top:58px}.jr-form-wrap{gap:28px!important}.jr-form-copy h2{margin-bottom:15px;font-size:clamp(2.55rem,12vw,3.7rem)!important}.jr-form-copy>p{font-size:.88rem}.jr-form-copy ul{grid-template-columns:1fr;gap:7px;margin:17px 0!important}.jr-form-copy li{padding-block:9px!important}.jr-phone{font-size:.74rem}.jr-form{grid-template-columns:1fr!important;gap:14px!important;padding:20px 17px 19px!important;border-radius:15px;box-shadow:0 22px 56px rgba(0,0,0,.22)}.jr-form .full,.jr-form__introbar,.jr-form__microcopy,.jr-form__interest,.jr-form__privacy-note,.jr-form__success{grid-column:auto!important}.jr-form__introbar{padding-bottom:13px}.jr-form__duration{font-size:.64rem}.jr-form__microcopy{font-size:.72rem}.jr-form input,.jr-form select{min-height:52px!important}.jr-form__optional{grid-column:auto}.jr-form__optional>div{grid-template-columns:1fr!important}.jr-consent{grid-column:auto!important}.jr-form>div.full:not(.jr-form__success){grid-column:auto!important}.theme-binghatti .jr-form{box-shadow:8px 8px 0 rgba(200,107,60,.16)!important}.theme-nakheel .jr-form{border-radius:20px}
 }
+
+/* Site-wide Tasmeer typography and James Realty theme overrides. */
+.jr-form-section{background:var(--ink-2)!important;color:var(--text)!important}
+.jr-form-copy h2{font-family:var(--display)!important;font-stretch:135%;font-weight:520!important;font-size:clamp(2rem,4.2vw,3.65rem)!important;line-height:1!important;letter-spacing:-.045em!important}
+.jr-form-copy>p{color:var(--muted)!important;font-size:clamp(.9rem,.28vw + .84rem,1rem)!important;line-height:1.65!important}
+.jr-form-copy li,.jr-phone{font-size:clamp(.78rem,.18vw + .74rem,.88rem)!important}
+.jr-form{background:linear-gradient(145deg,rgba(129,140,248,.055),transparent 52%),var(--surface)!important;color:var(--text)!important;border-color:var(--line)!important;box-shadow:0 28px 78px rgba(0,0,0,.3),0 0 38px rgba(129,140,248,.08)!important}
+.theme-damac .jr-form,.theme-binghatti .jr-form{background:linear-gradient(145deg,rgba(129,140,248,.055),transparent 52%),var(--surface)!important;box-shadow:0 28px 78px rgba(0,0,0,.3),0 0 38px rgba(129,140,248,.08)!important}
+.jr-form label,.jr-consent{color:#c5c5d4!important;font-size:max(.78rem,12px)!important}
+.jr-form label:has(>input[required]),.jr-form label:has(>select[required]){color:#d7d7e3!important}
+.jr-form input,.jr-form select,.jr-form textarea{background:#101024!important;color:var(--text)!important;border-color:#34345f!important;font-size:max(.88rem,14px)!important}
+.jr-form input::placeholder,.jr-form textarea::placeholder{color:#74748a!important}
+.jr-form input:hover,.jr-form select:hover,.jr-form textarea:hover{border-color:#55558a!important}
+.jr-form input:focus,.jr-form select:focus,.jr-form textarea:focus{background:#101024!important;border-color:var(--accent)!important;box-shadow:0 0 0 3px rgba(129,140,248,.14)!important}
+.jr-form__optional,.jr-form__interest{background:#15152f!important;border-color:#30305a!important;color:var(--text)!important}
+.jr-form__optional summary,.jr-form__interest strong{color:var(--text)!important}
+.jr-form__interest span,.jr-form__microcopy,.jr-form__duration,.jr-form__status,.jr-form__privacy-note{color:var(--muted)!important;font-size:max(.75rem,12px)!important}
+.jr-form button[type="submit"]{background:var(--accent)!important;color:var(--ink)!important;border-color:var(--accent)!important;font-size:max(.8rem,13px)!important;box-shadow:0 12px 34px rgba(129,140,248,.24),0 0 24px rgba(129,140,248,.1)!important}
+.jr-form__success{background:#151d1a!important;border-color:#315a47!important}.jr-form__success strong{color:#d9f6e8!important}.jr-form__success p,.jr-form__success small{color:#9fc2b0!important}
+@media(max-width:760px){.jr-form-copy h2{font-size:clamp(1.9rem,8.6vw,2.35rem)!important}.jr-form-copy>p{font-size:.94rem!important}.jr-form-copy li,.jr-phone{font-size:.8rem!important}}
