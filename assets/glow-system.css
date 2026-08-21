@@ -1,92 +1,94 @@
-/* James Realty ambient glow system, 21 Aug 2026.
-   Slow independent movement, full-width atmosphere and localized emphasis.
-   Motion is intentionally restrained and disabled for reduced-motion users. */
-@property --jr-glow-x{syntax:'<percentage>';inherits:false;initial-value:82%}
-@property --jr-glow-y{syntax:'<percentage>';inherits:false;initial-value:8%}
+/* James Realty ambient glow system, revised 21 Aug 2026.
+   Full-width atmosphere replaces boxed container glows. */
+@property --jr-glow-x{syntax:'<percentage>';inherits:false;initial-value:80%}
+@property --jr-glow-y{syntax:'<percentage>';inherits:false;initial-value:10%}
 @property --jr-glow-x2{syntax:'<percentage>';inherits:false;initial-value:12%}
-@property --jr-glow-y2{syntax:'<percentage>';inherits:false;initial-value:68%}
-@property --jr-glow-x3{syntax:'<percentage>';inherits:false;initial-value:70%}
-@property --jr-glow-y3{syntax:'<percentage>';inherits:false;initial-value:82%}
+@property --jr-glow-y2{syntax:'<percentage>';inherits:false;initial-value:66%}
 
 :root{
   --jr-glow-indigo:129,140,248;
   --jr-glow-violet:167,139,250;
   --jr-glow-green:37,217,120;
-  --jr-glow-soft:.13;
-  --jr-glow-medium:.18;
-  --jr-glow-strong:.24;
 }
 
 @keyframes jr-glow-drift{
-  0%{--jr-glow-x:84%;--jr-glow-y:7%;--jr-glow-x2:10%;--jr-glow-y2:70%;--jr-glow-x3:72%;--jr-glow-y3:84%}
-  45%{--jr-glow-x:67%;--jr-glow-y:17%;--jr-glow-x2:23%;--jr-glow-y2:59%;--jr-glow-x3:83%;--jr-glow-y3:69%}
-  100%{--jr-glow-x:76%;--jr-glow-y:29%;--jr-glow-x2:7%;--jr-glow-y2:45%;--jr-glow-x3:60%;--jr-glow-y3:91%}
+  0%{--jr-glow-x:82%;--jr-glow-y:8%;--jr-glow-x2:12%;--jr-glow-y2:70%}
+  48%{--jr-glow-x:66%;--jr-glow-y:22%;--jr-glow-x2:24%;--jr-glow-y2:54%}
+  100%{--jr-glow-x:76%;--jr-glow-y:34%;--jr-glow-x2:8%;--jr-glow-y2:42%}
 }
 @keyframes jr-glow-drift-reverse{
-  0%{--jr-glow-x:18%;--jr-glow-y:18%;--jr-glow-x2:88%;--jr-glow-y2:72%;--jr-glow-x3:54%;--jr-glow-y3:88%}
-  50%{--jr-glow-x:34%;--jr-glow-y:7%;--jr-glow-x2:73%;--jr-glow-y2:55%;--jr-glow-x3:69%;--jr-glow-y3:71%}
-  100%{--jr-glow-x:11%;--jr-glow-y:32%;--jr-glow-x2:92%;--jr-glow-y2:38%;--jr-glow-x3:46%;--jr-glow-y3:93%}
-}
-@keyframes jr-glow-breathe{
-  0%,100%{box-shadow:0 24px 70px rgba(0,0,0,.3),0 0 34px rgba(var(--jr-glow-indigo),.08)}
-  50%{box-shadow:0 26px 76px rgba(0,0,0,.33),0 0 54px rgba(var(--jr-glow-indigo),.15)}
+  0%{--jr-glow-x:18%;--jr-glow-y:22%;--jr-glow-x2:86%;--jr-glow-y2:72%}
+  50%{--jr-glow-x:34%;--jr-glow-y:10%;--jr-glow-x2:74%;--jr-glow-y2:54%}
+  100%{--jr-glow-x:12%;--jr-glow-y:36%;--jr-glow-x2:92%;--jr-glow-y2:40%}
 }
 
-/* Full-page ambient layer. It is intentionally wider than the content columns. */
+/* Continuous full-page atmosphere. */
 body{
   background:
-    radial-gradient(ellipse 62% 42% at var(--jr-glow-x) var(--jr-glow-y),rgba(var(--jr-glow-indigo),.17),rgba(var(--jr-glow-indigo),.055) 34%,transparent 72%),
-    radial-gradient(ellipse 46% 34% at var(--jr-glow-x2) var(--jr-glow-y2),rgba(var(--jr-glow-violet),.09),transparent 70%),
-    radial-gradient(ellipse 38% 26% at var(--jr-glow-x3) var(--jr-glow-y3),rgba(var(--jr-glow-green),.035),transparent 72%),
+    radial-gradient(ellipse 70% 32% at var(--jr-glow-x) var(--jr-glow-y),rgba(var(--jr-glow-indigo),.13),rgba(var(--jr-glow-indigo),.04) 40%,transparent 74%),
+    radial-gradient(ellipse 55% 28% at var(--jr-glow-x2) var(--jr-glow-y2),rgba(var(--jr-glow-violet),.065),transparent 76%),
     var(--ink,#0a0a1a)!important;
-  animation:jr-glow-drift 26s cubic-bezier(.45,0,.2,1) infinite alternate;
+  animation:jr-glow-drift 32s ease-in-out infinite alternate;
 }
 
-/* Primary heroes receive the strongest, full-width ambient treatment. */
-.home-page .home-hero,
-.conversion-home .conversion-hero,
-.journey-page .journey-hero,
-.market-page .market-hero,
-.blog-hero,
-.contact-goal-hero,
-.hero.section-shell{
-  background:
-    radial-gradient(ellipse 72% 76% at var(--jr-glow-x) var(--jr-glow-y),rgba(var(--jr-glow-indigo),.22),rgba(var(--jr-glow-indigo),.07) 38%,transparent 72%),
-    radial-gradient(ellipse 48% 52% at var(--jr-glow-x2) var(--jr-glow-y2),rgba(var(--jr-glow-violet),.105),transparent 72%),
-    transparent!important;
-  animation:jr-glow-drift 20s ease-in-out infinite alternate;
+/* Centered main-site sections use a 100vw layer behind the content.
+   This prevents the glow from ending at the .section-shell boundary. */
+main>.section-shell{
+  position:relative;
+  isolation:isolate;
+  background:transparent!important;
 }
-
-/* Developer and international landing heroes: glow is blended into the image wash,
-   so it remains full width without placing a bright layer over text. */
-body[class*="theme-"] .jr-hero__wash{
+main>.section-shell::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:0 auto 0 50%;
+  width:100vw;
+  transform:translateX(-50%);
+  pointer-events:none;
   background:
-    radial-gradient(ellipse 58% 64% at var(--jr-glow-x) var(--jr-glow-y),rgba(var(--jr-glow-indigo),.24),rgba(var(--jr-glow-indigo),.065) 36%,transparent 72%),
-    radial-gradient(ellipse 44% 50% at var(--jr-glow-x2) var(--jr-glow-y2),rgba(var(--jr-glow-violet),.13),transparent 74%),
-    linear-gradient(90deg,rgba(10,10,26,.94) 0%,rgba(10,10,26,.72) 44%,rgba(10,10,26,.16) 78%),
-    linear-gradient(0deg,rgba(10,10,26,.78),transparent 58%)!important;
-  animation:jr-glow-drift 22s ease-in-out infinite alternate;
-}
-
-/* Strategic section glows. These are deliberately lower intensity than heroes. */
-.home-data,.home-proof,.home-process,.work-section,
-.market-tools,.market-affordability,.market-method,
-.content-section,.qualifier-section,.article-faq,
-body[class*="theme-"] .jr-project-section,
-body[class*="theme-"] .jr-lens-section,
-body[class*="theme-"] .jr-form-section,
-body[class*="theme-"] .jr-faq-section,
-body[class*="theme-"] .jr-tool-section{
-  background:
-    radial-gradient(ellipse 54% 42% at var(--jr-glow-x) var(--jr-glow-y),rgba(var(--jr-glow-indigo),.095),transparent 70%),
-    radial-gradient(ellipse 42% 34% at var(--jr-glow-x2) var(--jr-glow-y2),rgba(var(--jr-glow-violet),.055),transparent 72%),
-    var(--ink-2,#0d0d21)!important;
+    radial-gradient(ellipse 72% 70% at var(--jr-glow-x) var(--jr-glow-y),rgba(var(--jr-glow-indigo),.105),rgba(var(--jr-glow-indigo),.028) 44%,transparent 76%),
+    radial-gradient(ellipse 50% 54% at var(--jr-glow-x2) var(--jr-glow-y2),rgba(var(--jr-glow-violet),.05),transparent 78%);
   animation:jr-glow-drift 30s ease-in-out infinite alternate;
 }
-main>section:nth-of-type(even),
+main>.section-shell:nth-of-type(even)::before{animation-name:jr-glow-drift-reverse}
+
+/* Hero atmosphere is stronger but still spans the viewport. */
+.home-page>.home-hero::before,
+.conversion-home>.conversion-hero::before,
+.journey-page>.journey-hero::before,
+.market-page>.market-hero::before,
+main>.blog-hero::before,
+main>.contact-goal-hero::before,
+main>.hero.section-shell::before{
+  background:
+    radial-gradient(ellipse 76% 82% at var(--jr-glow-x) var(--jr-glow-y),rgba(var(--jr-glow-indigo),.17),rgba(var(--jr-glow-indigo),.045) 42%,transparent 76%),
+    radial-gradient(ellipse 54% 58% at var(--jr-glow-x2) var(--jr-glow-y2),rgba(var(--jr-glow-violet),.075),transparent 78%);
+  animation-duration:24s;
+}
+
+/* Full-width sections that are not .section-shell containers. */
+.home-data,.market-tools,.qualifier-section,
+body[class*="theme-"] .jr-section{
+  background:
+    radial-gradient(ellipse 68% 48% at var(--jr-glow-x) var(--jr-glow-y),rgba(var(--jr-glow-indigo),.07),transparent 76%),
+    radial-gradient(ellipse 46% 36% at var(--jr-glow-x2) var(--jr-glow-y2),rgba(var(--jr-glow-violet),.035),transparent 78%),
+    var(--ink-2,#0d0d21)!important;
+  animation:jr-glow-drift 34s ease-in-out infinite alternate;
+}
 body[class*="theme-"] .jr-section:nth-of-type(even){animation-name:jr-glow-drift-reverse}
 
-/* Localized emphasis where depth improves hierarchy. */
+/* Landing heroes stay full width because the wash covers the whole hero image. */
+body[class*="theme-"] .jr-hero__wash{
+  background:
+    radial-gradient(ellipse 64% 70% at var(--jr-glow-x) var(--jr-glow-y),rgba(var(--jr-glow-indigo),.18),rgba(var(--jr-glow-indigo),.045) 42%,transparent 76%),
+    radial-gradient(ellipse 46% 52% at var(--jr-glow-x2) var(--jr-glow-y2),rgba(var(--jr-glow-violet),.08),transparent 78%),
+    linear-gradient(90deg,rgba(10,10,26,.94) 0%,rgba(10,10,26,.72) 44%,rgba(10,10,26,.16) 78%),
+    linear-gradient(0deg,rgba(10,10,26,.78),transparent 58%)!important;
+  animation:jr-glow-drift 26s ease-in-out infinite alternate;
+}
+
+/* Cards use depth, not individual neon boxes. */
 .editorial-hero-media,.portrait-card,.profile-panel,
 .jr-project,.work-card,.service-card,
 .home-journey,.home-data-card,.home-proof-grid article,.home-process article,
@@ -94,16 +96,16 @@ body[class*="theme-"] .jr-section:nth-of-type(even){animation-name:jr-glow-drift
 .blog-card,.blog-tile,.market-card,.market-tool-card,.market-budget-panel,
 .related-card,.buyer-cluster-card,.tool-directory-card,
 .jr-form,.home-final,.callout,.conversion-hero-note,.journey-hero-card{
-  box-shadow:0 24px 70px rgba(0,0,0,.28),0 0 34px rgba(var(--jr-glow-indigo),.075),inset 0 1px 0 rgba(255,255,255,.025)!important;
+  box-shadow:0 18px 48px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.025)!important;
 }
-.editorial-hero-media,.portrait-card,.jr-form,.home-final,.conversion-hero-note,.journey-hero-card{
-  animation:jr-glow-breathe 8s ease-in-out infinite;
+.editorial-hero-media,.portrait-card,.jr-project,.jr-form{
+  border-color:rgba(var(--jr-glow-indigo),.3)!important;
 }
 
-/* CTAs carry a smaller halo so the hierarchy stays clear. */
+/* CTAs can keep a compact halo because they are actions, not layout blocks. */
 .button-primary,.nav-cta,.nav-whatsapp,.mobile-conversion,
 .jr-button:not(.jr-button--ghost),.jr-project__cta{
-  box-shadow:0 12px 34px rgba(var(--jr-glow-indigo),.22),0 0 24px rgba(var(--jr-glow-indigo),.11)!important;
+  box-shadow:0 10px 28px rgba(var(--jr-glow-indigo),.16),0 0 18px rgba(var(--jr-glow-indigo),.07)!important;
 }
 
 @media(hover:hover) and (pointer:fine){
@@ -113,51 +115,40 @@ body[class*="theme-"] .jr-section:nth-of-type(even){animation-name:jr-glow-drift
   .conversion-path-card:hover,.journey-grid article:hover,.journey-links a:hover,
   .blog-card:hover,.blog-tile:hover,.market-card:hover,.market-tool-card:hover,
   .related-card:hover,.buyer-cluster-card:hover,.tool-directory-card:hover{
-    border-color:rgba(var(--jr-glow-indigo),.58)!important;
-    box-shadow:0 28px 72px rgba(0,0,0,.31),0 0 52px rgba(var(--jr-glow-indigo),.15),0 0 90px rgba(var(--jr-glow-violet),.055)!important;
-  }
-  .button-primary:hover,.nav-cta:hover,.nav-whatsapp:hover,.mobile-conversion:hover,.jr-button:hover{
-    box-shadow:0 16px 42px rgba(var(--jr-glow-indigo),.3),0 0 36px rgba(var(--jr-glow-indigo),.17)!important;
+    border-color:rgba(var(--jr-glow-indigo),.48)!important;
+    box-shadow:0 24px 58px rgba(0,0,0,.29),0 0 24px rgba(var(--jr-glow-indigo),.055)!important;
   }
 }
 
-/* Tablet/mobile: keep the glow present, wider and calmer, with less GPU work. */
 @media(max-width:820px){
-  body{
+  body{animation-duration:40s}
+  main>.section-shell::before{
     background:
-      radial-gradient(ellipse 92% 34% at var(--jr-glow-x) var(--jr-glow-y),rgba(var(--jr-glow-indigo),.12),transparent 72%),
-      radial-gradient(ellipse 76% 28% at var(--jr-glow-x2) var(--jr-glow-y2),rgba(var(--jr-glow-violet),.055),transparent 74%),
-      var(--ink,#0a0a1a)!important;
-    animation-duration:34s;
+      radial-gradient(ellipse 110% 52% at var(--jr-glow-x) var(--jr-glow-y),rgba(var(--jr-glow-indigo),.085),transparent 78%),
+      radial-gradient(ellipse 88% 42% at var(--jr-glow-x2) var(--jr-glow-y2),rgba(var(--jr-glow-violet),.04),transparent 80%);
+    animation-duration:38s;
   }
-  .home-page .home-hero,.conversion-home .conversion-hero,.journey-page .journey-hero,.market-page .market-hero,.blog-hero,.contact-goal-hero,.hero.section-shell{
+  .home-page>.home-hero::before,.conversion-home>.conversion-hero::before,.journey-page>.journey-hero::before,.market-page>.market-hero::before,main>.blog-hero::before,main>.contact-goal-hero::before,main>.hero.section-shell::before{
     background:
-      radial-gradient(ellipse 105% 58% at var(--jr-glow-x) var(--jr-glow-y),rgba(var(--jr-glow-indigo),.15),transparent 74%),
-      radial-gradient(ellipse 82% 46% at var(--jr-glow-x2) var(--jr-glow-y2),rgba(var(--jr-glow-violet),.07),transparent 76%),
-      transparent!important;
-    animation-duration:30s;
+      radial-gradient(ellipse 118% 68% at var(--jr-glow-x) var(--jr-glow-y),rgba(var(--jr-glow-indigo),.115),transparent 78%),
+      radial-gradient(ellipse 90% 50% at var(--jr-glow-x2) var(--jr-glow-y2),rgba(var(--jr-glow-violet),.05),transparent 80%);
   }
-  body[class*="theme-"] .jr-hero__wash{animation-duration:30s}
-  .editorial-hero-media,.portrait-card,.jr-form,.home-final,.conversion-hero-note,.journey-hero-card{animation-duration:12s}
+  body[class*="theme-"] .jr-hero__wash{animation-duration:36s}
 }
 
 @media(max-width:560px){
-  :root{--jr-glow-soft:.08;--jr-glow-medium:.12;--jr-glow-strong:.16}
-  .home-data,.home-proof,.home-process,.work-section,.market-tools,.market-affordability,.market-method,.content-section,.qualifier-section,.article-faq,
-  body[class*="theme-"] .jr-project-section,body[class*="theme-"] .jr-lens-section,body[class*="theme-"] .jr-form-section,body[class*="theme-"] .jr-faq-section,body[class*="theme-"] .jr-tool-section{
-    background:
-      radial-gradient(ellipse 100% 30% at var(--jr-glow-x) var(--jr-glow-y),rgba(var(--jr-glow-indigo),.065),transparent 74%),
-      var(--ink-2,#0d0d21)!important;
-    animation-duration:38s;
+  main>.section-shell::before{
+    background:radial-gradient(ellipse 125% 44% at var(--jr-glow-x) var(--jr-glow-y),rgba(var(--jr-glow-indigo),.065),transparent 80%);
+  }
+  .home-data,.market-tools,.qualifier-section,body[class*="theme-"] .jr-section{
+    background:radial-gradient(ellipse 110% 34% at var(--jr-glow-x) var(--jr-glow-y),rgba(var(--jr-glow-indigo),.05),transparent 80%),var(--ink-2,#0d0d21)!important;
+    animation-duration:44s;
   }
   .editorial-hero-media,.portrait-card,.profile-panel,.jr-project,.work-card,.service-card,.home-journey,.home-data-card,.home-proof-grid article,.home-process article,.conversion-path-card,.conversion-proof article,.journey-grid article,.journey-links a,.blog-card,.blog-tile,.market-card,.market-tool-card,.market-budget-panel,.related-card,.buyer-cluster-card,.tool-directory-card,.jr-form,.home-final,.callout,.conversion-hero-note,.journey-hero-card{
-    box-shadow:0 18px 48px rgba(0,0,0,.26),0 0 22px rgba(var(--jr-glow-indigo),.06),inset 0 1px 0 rgba(255,255,255,.02)!important;
+    box-shadow:0 15px 38px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.02)!important;
   }
 }
 
 @media(prefers-reduced-motion:reduce){
-  body,.home-page .home-hero,.conversion-home .conversion-hero,.journey-page .journey-hero,.market-page .market-hero,.blog-hero,.contact-goal-hero,.hero.section-shell,
-  body[class*="theme-"] .jr-hero__wash,.home-data,.home-proof,.home-process,.work-section,.market-tools,.market-affordability,.market-method,.content-section,.qualifier-section,.article-faq,
-  body[class*="theme-"] .jr-project-section,body[class*="theme-"] .jr-lens-section,body[class*="theme-"] .jr-form-section,body[class*="theme-"] .jr-faq-section,body[class*="theme-"] .jr-tool-section,
-  .editorial-hero-media,.portrait-card,.jr-form,.home-final,.conversion-hero-note,.journey-hero-card{animation:none!important}
+  body,main>.section-shell::before,.home-data,.market-tools,.qualifier-section,body[class*="theme-"] .jr-section,body[class*="theme-"] .jr-hero__wash{animation:none!important}
 }
