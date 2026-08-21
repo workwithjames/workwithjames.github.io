@@ -37,6 +37,7 @@ main>.section-shell{
   position:relative;
   isolation:isolate;
   background:transparent!important;
+  overflow:visible!important;
 }
 main>.section-shell::before{
   content:"";
@@ -65,6 +66,11 @@ main>.hero.section-shell::before{
     radial-gradient(ellipse 76% 82% at var(--jr-glow-x) var(--jr-glow-y),rgba(var(--jr-glow-indigo),.17),rgba(var(--jr-glow-indigo),.045) 42%,transparent 76%),
     radial-gradient(ellipse 54% 58% at var(--jr-glow-x2) var(--jr-glow-y2),rgba(var(--jr-glow-violet),.075),transparent 78%);
   animation-duration:24s;
+}
+
+/* Remove legacy element-bound inset glows that reveal rectangular section edges. */
+.home-hero,.conversion-hero,.journey-hero,.jr-hero,.market-hero,.blog-hero,.contact-goal-hero{
+  box-shadow:none!important;
 }
 
 /* Full-width sections that are not .section-shell containers. */
