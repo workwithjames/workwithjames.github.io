@@ -2,6 +2,17 @@
   'use strict';
   const qs=(s,r=document)=>r.querySelector(s);
   const qsa=(s,r=document)=>[...r.querySelectorAll(s)];
+
+  /* Load the shared James Realty/Tasmeer design layer after every developer- or
+     country-specific stylesheet so the final typography, theme and glow stay consistent. */
+  if(!document.querySelector('link[data-site-system-final]')){
+    const system=document.createElement('link');
+    system.rel='stylesheet';
+    system.href='/assets/site-system.css?v=2';
+    system.setAttribute('data-site-system-final','');
+    document.head.appendChild(system);
+  }
+
   const isArabic=document.documentElement.dir==='rtl'||document.documentElement.lang.startsWith('ar');
   const copy=isArabic?{
     eyebrow:'طلب خاص',duration:'حوالي دقيقة واحدة',micro:'أدخل المعلومات الأساسية أولاً. يمكنك إضافة التفاصيل الأخرى إذا رغبت.',interest:'الاهتمام الحالي',privacy:'يتم حفظ طلبك أولاً، ثم يمكنك المتابعة على واتساب.',name:'الاسم الكامل',phone:'+971 50 123 4567',email:'name@example.com',notes:'الهدف، المنطقة أو الجدول الزمني الذي تفضله'
