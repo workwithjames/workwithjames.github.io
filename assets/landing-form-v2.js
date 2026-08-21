@@ -9,7 +9,7 @@
     {key:'site-system-final',href:'/assets/site-system.css?v=2'},
     {key:'glow-system-final',href:'/assets/glow-system.css?v=3'},
     {key:'typography-system-final',href:'/assets/typography-system.css?v=2'},
-    {key:'footer-system-final',href:'/assets/footer-system.css?v=1'}
+    {key:'footer-system-final',href:'/assets/footer-system.css?v=2'}
   ];
   finalStyles.forEach(item=>{
     if(document.querySelector('link[data-'+item.key+']')) return;
