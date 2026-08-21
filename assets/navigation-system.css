@@ -1,0 +1,228 @@
+/* James Realty navigation refinement, 21 Aug 2026.
+   Removes oversized outer pills and reduces stacked navigation weight. */
+
+:root{
+  --fixed-header-height:64px;
+  --about-flow-height:44px;
+  --about-flow-gap:0px;
+}
+
+.site-header{
+  background:rgba(8,8,22,.92)!important;
+  border-bottom:1px solid rgba(129,140,248,.16)!important;
+  box-shadow:0 8px 24px rgba(0,0,0,.22)!important;
+}
+.site-header:after{opacity:.55}
+.site-header .nav-shell{
+  height:var(--fixed-header-height)!important;
+  min-height:var(--fixed-header-height)!important;
+  gap:18px!important;
+}
+.site-header .brand{
+  min-height:34px!important;
+  font-size:1.02rem!important;
+  text-shadow:none!important;
+}
+
+/* Main links sit directly in the header instead of inside a large capsule. */
+.site-header .nav-links,
+.site-header .global-links{
+  gap:2px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.site-header .nav-links>a,
+.site-header .goal-nav>summary{
+  min-height:34px!important;
+  padding:0 10px!important;
+  border:1px solid transparent!important;
+  border-radius:9px!important;
+  color:#aaaabd!important;
+  font-size:max(.78rem,12.5px)!important;
+  font-weight:560!important;
+  line-height:1!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.site-header .nav-links>a:hover,
+.site-header .goal-nav>summary:hover,
+.site-header .goal-nav[open]>summary{
+  color:#f1f1f7!important;
+  background:rgba(129,140,248,.075)!important;
+  border-color:rgba(129,140,248,.10)!important;
+}
+.site-header .nav-links>a[aria-current="page"],
+.site-header .goal-nav.is-current>summary{
+  color:#f6f6fb!important;
+  background:rgba(129,140,248,.15)!important;
+  border-color:rgba(129,140,248,.20)!important;
+  box-shadow:none!important;
+}
+.site-header .nav-cta{
+  min-height:40px!important;
+  padding-inline:18px!important;
+  font-size:max(.8rem,13px)!important;
+  box-shadow:0 8px 22px rgba(37,211,102,.16)!important;
+}
+.site-header .nav-cta:hover{box-shadow:0 10px 26px rgba(37,211,102,.22)!important}
+
+/* Keep menu popovers distinct even though the top-level nav is flatter. */
+.site-header .goal-nav-menu{
+  top:calc(100% + 10px)!important;
+  border-radius:12px!important;
+  border-color:rgba(129,140,248,.25)!important;
+  box-shadow:0 22px 58px rgba(0,0,0,.42)!important;
+}
+
+/* About section navigation becomes a slim secondary bar instead of a floating pill. */
+.about-flow{
+  position:fixed!important;
+  z-index:285!important;
+  top:var(--fixed-header-height)!important;
+  left:0!important;
+  right:0!important;
+  transform:none!important;
+  width:100%!important;
+  max-width:none!important;
+  height:var(--about-flow-height)!important;
+  min-height:var(--about-flow-height)!important;
+  margin:0!important;
+  padding:5px max(20px,calc((100vw - 1020px)/2))!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:5px!important;
+  overflow-x:auto!important;
+  border:0!important;
+  border-bottom:1px solid rgba(129,140,248,.16)!important;
+  border-radius:0!important;
+  background:rgba(10,10,27,.94)!important;
+  box-shadow:0 7px 18px rgba(0,0,0,.16)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(135%);
+  backdrop-filter:blur(18px) saturate(135%);
+}
+.about-flow:after{display:none!important}
+.about-flow strong,
+.about-flow a{
+  position:static!important;
+  flex:0 0 auto!important;
+  min-height:32px!important;
+  margin:0!important;
+  padding:0 12px!important;
+  border:1px solid transparent!important;
+  border-radius:8px!important;
+  font-family:var(--body,'JR Manrope',sans-serif)!important;
+  font-size:max(.75rem,12px)!important;
+  font-weight:620!important;
+  line-height:1!important;
+  letter-spacing:0!important;
+  white-space:nowrap!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.about-flow strong{
+  color:#f1f1f8!important;
+  border-color:rgba(129,140,248,.16)!important;
+  background:rgba(129,140,248,.10)!important;
+}
+.about-flow a{color:#aaaabd!important}
+.about-flow a:hover{
+  color:#f3f3f8!important;
+  border-color:rgba(129,140,248,.10)!important;
+  background:rgba(129,140,248,.07)!important;
+}
+.about-flow a[aria-current="location"]{
+  color:#fff!important;
+  border-color:rgba(129,140,248,.22)!important;
+  background:rgba(129,140,248,.14)!important;
+  box-shadow:none!important;
+}
+
+html.has-about-flow{
+  scroll-padding-top:calc(var(--fixed-header-height) + var(--about-flow-height) + 22px)!important;
+}
+body.has-about-flow{
+  padding-top:calc(var(--fixed-header-height) + var(--about-flow-height) + 8px)!important;
+}
+body.has-about-flow section[id],
+body.has-about-flow article[id],
+body.has-about-flow nav[id],
+body.has-about-flow div[id]{
+  scroll-margin-top:calc(var(--fixed-header-height) + var(--about-flow-height) + 22px)!important;
+}
+
+/* Reading progress should not look like an unrelated coloured stripe. */
+.reading-progress{
+  height:2px!important;
+  background:transparent!important;
+}
+.reading-progress span{
+  background:linear-gradient(90deg,#818cf8,#a78bfa,#25d978)!important;
+}
+
+@media(max-width:1040px) and (min-width:841px){
+  .site-header .nav-shell{gap:12px!important}
+  .site-header .nav-links>a,.site-header .goal-nav>summary{padding-inline:7px!important;font-size:max(.72rem,12px)!important}
+  .site-header .nav-cta{padding-inline:14px!important;font-size:max(.75rem,12px)!important}
+  .site-header .brand{font-size:.96rem!important}
+  .about-flow{padding-inline:18px!important}
+  .about-flow strong,.about-flow a{padding-inline:10px!important;font-size:max(.72rem,11.5px)!important}
+}
+
+@media(max-width:840px){
+  :root{
+    --fixed-header-height:62px;
+    --fixed-tabs-height:42px;
+    --fixed-header-offset:calc(var(--fixed-header-height) + var(--fixed-tabs-height));
+    --about-flow-height:42px;
+  }
+  .site-header .nav-shell{
+    height:var(--fixed-header-height)!important;
+    min-height:var(--fixed-header-height)!important;
+  }
+  .site-header .brand{font-size:1rem!important}
+  .site-header .nav-cta{min-height:38px!important;padding-inline:14px!important}
+  .mobile-page-tabs{
+    top:var(--fixed-header-height)!important;
+    height:var(--fixed-tabs-height)!important;
+    min-height:var(--fixed-tabs-height)!important;
+    padding:5px 10px!important;
+    gap:4px!important;
+    box-shadow:0 6px 16px rgba(0,0,0,.14)!important;
+  }
+  .mobile-page-tabs>a,.mobile-page-tabs .goal-nav>summary{
+    min-height:30px!important;
+    padding-inline:9px!important;
+    font-size:max(.7rem,11.5px)!important;
+  }
+  .about-flow{
+    top:var(--fixed-header-offset)!important;
+    height:var(--about-flow-height)!important;
+    min-height:var(--about-flow-height)!important;
+    padding:4px 10px!important;
+    justify-content:flex-start!important;
+    gap:4px!important;
+  }
+  .about-flow strong,.about-flow a{
+    min-height:30px!important;
+    padding-inline:9px!important;
+    font-size:max(.7rem,11.5px)!important;
+  }
+  html.has-about-flow{scroll-padding-top:calc(var(--fixed-header-offset) + var(--about-flow-height) + 18px)!important}
+  body.has-about-flow{padding-top:calc(var(--fixed-header-offset) + var(--about-flow-height) + 6px)!important}
+  body.has-about-flow section[id],body.has-about-flow article[id],body.has-about-flow nav[id],body.has-about-flow div[id]{scroll-margin-top:calc(var(--fixed-header-offset) + var(--about-flow-height) + 18px)!important}
+}
+
+@media(max-width:480px){
+  .site-header .nav-shell{width:calc(100% - 20px)!important;gap:8px!important}
+  .site-header .nav-cta{padding-inline:12px!important;font-size:max(.72rem,11.5px)!important}
+  .mobile-page-tabs{padding-inline:8px!important}
+  .about-flow{padding-inline:8px!important}
+}
+
+@media(prefers-reduced-transparency:reduce){
+  .site-header,.mobile-page-tabs,.about-flow{background:#090918!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+}
