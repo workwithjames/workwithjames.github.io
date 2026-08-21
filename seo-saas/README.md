@@ -23,6 +23,8 @@ Cloudflare Workers Static Assets + Worker API. Cloudflare currently recommends W
 4. `npm run deploy:dry`
 5. `npm run deploy`
 
+The feature branch also includes `.github/workflows/deploy-seo-saas-preview.yml`. On pushes that change `seo-saas/**`, GitHub Actions validates the JavaScript and deploys the isolated `james-seo-mvp` Worker using the repository-level Cloudflare account ID and API token secrets.
+
 For production persistence, create D1 and add the binding to `wrangler.jsonc`, then apply `migrations/0001_initial.sql`.
 
 A custom domain such as `seo.jamesrealty.uk` should be attached only after the Cloudflare account/zone is verified, so the existing James Realty routing is not disturbed.
