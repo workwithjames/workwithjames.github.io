@@ -1,72 +1,120 @@
-/* James Realty shared footer system, 21 Aug 2026.
-   One consistent footer treatment for the main site and all landing subdomains. */
+/* James Realty shared footer system, revised 21 Aug 2026.
+   Compact grouped footer for the main site and consistent landing footer treatment. */
 
 footer,.jr-footer{
   position:relative;
   overflow:hidden;
   background:#070714!important;
   color:var(--text,#e8e8f0)!important;
-  border-top:1px solid rgba(129,140,248,.2)!important;
+  border-top:1px solid rgba(129,140,248,.18)!important;
 }
 footer:before,.jr-footer:before{
   content:"";
   position:absolute;
   inset:0 0 auto;
   height:1px;
-  background:linear-gradient(90deg,transparent,rgba(129,140,248,.55),rgba(167,139,250,.35),transparent);
+  background:linear-gradient(90deg,transparent,rgba(129,140,248,.42),rgba(167,139,250,.24),transparent);
   pointer-events:none;
 }
 
-/* Main-site footer */
+/* Main site grouped footer. */
 .footer-shell.footer-shell-rich{
   min-height:0!important;
-  padding-top:38px!important;
+  padding-top:36px!important;
   padding-bottom:38px!important;
   display:grid!important;
-  grid-template-columns:minmax(180px,.72fr) minmax(0,1.7fr) auto!important;
+  grid-template-columns:minmax(190px,.78fr) minmax(0,2.25fr) auto!important;
   align-items:start!important;
-  gap:28px 34px!important;
+  gap:30px 42px!important;
 }
-.footer-identity{display:grid!important;gap:7px!important;align-content:start}
+.footer-identity{
+  display:grid!important;
+  gap:6px!important;
+  align-content:start;
+}
 .footer-identity .brand{
   margin:0!important;
   color:var(--text,#e8e8f0)!important;
   font-family:var(--display,'JR Display','Arial Narrow',sans-serif)!important;
-  font-size:1.05rem!important;
+  font-size:1rem!important;
   font-weight:650!important;
-  letter-spacing:-.03em!important;
+  letter-spacing:-.025em!important;
   line-height:1.15!important;
 }
 .footer-identity p,
 .footer-shell-rich .footer-identity p{
   margin:0!important;
   color:var(--muted,#9292a8)!important;
-  font-size:max(.76rem,12px)!important;
+  font-size:max(.75rem,12px)!important;
   line-height:1.5!important;
 }
+.footer-groups{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:28px!important;
+  min-width:0;
+}
+.footer-group{
+  display:grid!important;
+  align-content:start;
+  gap:10px!important;
+  min-width:0;
+}
+.footer-group h2{
+  margin:0 0 4px!important;
+  color:#a8adff!important;
+  font-family:var(--body,'JR Manrope',sans-serif)!important;
+  font-size:max(.76rem,12px)!important;
+  font-weight:800!important;
+  line-height:1.2!important;
+  letter-spacing:.075em!important;
+  text-transform:uppercase!important;
+  text-wrap:nowrap!important;
+}
+.footer-group a,.footer-linkedin{
+  color:#c5c5d4!important;
+  font-family:var(--body,'JR Manrope',sans-serif)!important;
+  font-size:max(.78rem,12.5px)!important;
+  font-weight:560!important;
+  line-height:1.4!important;
+  letter-spacing:0!important;
+  transition:color .18s ease,opacity .18s ease!important;
+}
+.footer-group a{
+  display:block!important;
+  width:fit-content;
+  max-width:100%;
+}
+.footer-group a:hover,.footer-linkedin:hover{color:var(--text,#e8e8f0)!important}
+.footer-group a[aria-current="page"]{color:#d9dcff!important}
+.footer-linkedin{
+  justify-self:end;
+  white-space:nowrap;
+  padding-top:1px;
+}
+
+/* Older simple-footer markup remains supported. */
 .footer-links{
   display:flex!important;
   flex-wrap:wrap!important;
   justify-content:center!important;
   align-content:flex-start!important;
-  gap:10px 18px!important;
+  gap:9px 18px!important;
   padding-top:2px;
 }
-.footer-links a,.footer-linkedin{
-  color:#bdbdce!important;
-  font-size:max(.8rem,13px)!important;
-  font-weight:650!important;
-  line-height:1.35!important;
-  transition:color .18s ease,opacity .18s ease!important;
+.footer-links a{
+  color:#c5c5d4!important;
+  font-size:max(.78rem,12.5px)!important;
+  font-weight:560!important;
+  line-height:1.4!important;
 }
-.footer-links a:hover,.footer-linkedin:hover{color:var(--text,#e8e8f0)!important}
-.footer-links a[aria-current="page"]{color:var(--accent,#818cf8)!important}
-.footer-linkedin{justify-self:end;white-space:nowrap;padding-top:2px}
+.footer-links a:hover{color:var(--text,#e8e8f0)!important}
+.footer-links a[aria-current="page"]{color:#d9dcff!important}
 
-/* Landing / developer / country footer */
+/* Landing / developer / country footer. */
 .jr-footer{padding-block:0!important}
 .jr-footer__inner{
-  padding-top:38px!important;
+  padding-top:36px!important;
   padding-bottom:38px!important;
   display:grid!important;
   grid-template-columns:minmax(190px,.72fr) minmax(0,1.55fr) auto!important;
@@ -74,10 +122,10 @@ footer:before,.jr-footer:before{
   align-items:start!important;
 }
 .jr-footer .jr-brand{align-items:center!important;gap:11px!important}
-.jr-footer .jr-brand__mark{width:36px!important;height:36px!important;flex:none}
+.jr-footer .jr-brand__mark{width:34px!important;height:34px!important;flex:none}
 .jr-footer .jr-brand strong{
   color:var(--text,#e8e8f0)!important;
-  font-size:max(.82rem,13px)!important;
+  font-size:max(.8rem,13px)!important;
   line-height:1.15!important;
 }
 .jr-footer .jr-brand small{
@@ -91,50 +139,68 @@ footer:before,.jr-footer:before{
   max-width:62ch;
   margin:0!important;
   color:var(--muted,#9292a8)!important;
-  font-size:max(.78rem,12.5px)!important;
-  line-height:1.6!important;
+  font-size:max(.77rem,12.5px)!important;
+  line-height:1.58!important;
 }
 .jr-footer__inner>div{
   display:flex!important;
   flex-wrap:wrap!important;
   justify-content:flex-end!important;
-  gap:10px 18px!important;
+  gap:9px 17px!important;
   font-size:inherit!important;
 }
 .jr-footer__inner>div a{
-  color:#bdbdce!important;
-  font-size:max(.8rem,13px)!important;
-  font-weight:650!important;
-  line-height:1.35!important;
+  color:#c5c5d4!important;
+  font-size:max(.78rem,12.5px)!important;
+  font-weight:560!important;
+  line-height:1.4!important;
 }
 .jr-footer__inner>div a:hover{color:var(--text,#e8e8f0)!important}
 
+@media(max-width:1050px){
+  .footer-shell.footer-shell-rich{
+    grid-template-columns:minmax(170px,.62fr) minmax(0,1.8fr) auto!important;
+    gap:28px 30px!important;
+  }
+  .footer-groups{gap:20px!important}
+}
+
 @media(max-width:900px){
   .footer-shell.footer-shell-rich{grid-template-columns:1fr auto!important}
-  .footer-links{grid-column:1/-1!important;justify-content:flex-start!important}
+  .footer-groups{
+    grid-column:1/-1!important;
+    grid-row:2;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    width:100%;
+  }
   .footer-linkedin{grid-column:2;grid-row:1}
   .jr-footer__inner{grid-template-columns:1fr auto!important}
   .jr-footer__inner>p{grid-column:1/-1;grid-row:2}
   .jr-footer__inner>div{grid-column:1/-1;grid-row:3;justify-content:flex-start!important}
 }
 
+@media(max-width:680px){
+  .footer-groups{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:26px 20px!important}
+}
+
 @media(max-width:560px){
-  footer,.jr-footer{border-top-color:rgba(129,140,248,.16)!important}
+  footer,.jr-footer{border-top-color:rgba(129,140,248,.14)!important}
   .footer-shell.footer-shell-rich{
     grid-template-columns:1fr!important;
-    gap:20px!important;
+    gap:22px!important;
     padding-top:30px!important;
     padding-bottom:calc(96px + env(safe-area-inset-bottom))!important;
   }
   .footer-linkedin{grid-column:auto!important;grid-row:auto!important;justify-self:start!important}
-  .footer-links{
+  .footer-groups{
     grid-column:auto!important;
-    display:grid!important;
+    grid-row:auto!important;
     grid-template-columns:repeat(2,minmax(0,1fr))!important;
-    width:100%;
-    gap:7px 16px!important;
+    gap:24px 18px!important;
   }
-  .footer-links a,.footer-linkedin{min-height:34px;display:flex;align-items:center}
+  .footer-group{gap:9px!important}
+  .footer-group h2{font-size:max(.74rem,12px)!important}
+  .footer-group a,.footer-linkedin{min-height:30px;display:flex!important;align-items:center}
 
   .jr-footer__inner{
     grid-template-columns:1fr!important;
@@ -150,5 +216,5 @@ footer:before,.jr-footer:before{
     justify-content:stretch!important;
     gap:7px 16px!important;
   }
-  .jr-footer__inner>div a{min-height:34px;display:flex;align-items:center}
+  .jr-footer__inner>div a{min-height:32px;display:flex;align-items:center}
 }
