@@ -12,6 +12,13 @@
     system.setAttribute('data-site-system-final','');
     document.head.appendChild(system);
   }
+  if(!document.querySelector('link[data-glow-system-final]')){
+    const glow=document.createElement('link');
+    glow.rel='stylesheet';
+    glow.href='/assets/glow-system.css?v=1';
+    glow.setAttribute('data-glow-system-final','');
+    document.head.appendChild(glow);
+  }
 
   const isArabic=document.documentElement.dir==='rtl'||document.documentElement.lang.startsWith('ar');
   const copy=isArabic?{
