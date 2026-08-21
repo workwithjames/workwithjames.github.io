@@ -7,7 +7,7 @@
      country-specific stylesheet so theme, full-width glow and typography stay consistent. */
   const finalStyles=[
     {key:'site-system-final',href:'/assets/site-system.css?v=2'},
-    {key:'glow-system-final',href:'/assets/glow-system.css?v=2'},
+    {key:'glow-system-final',href:'/assets/glow-system.css?v=3'},
     {key:'typography-system-final',href:'/assets/typography-system.css?v=1'}
   ];
   finalStyles.forEach(item=>{
