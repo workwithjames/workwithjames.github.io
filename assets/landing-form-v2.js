@@ -4,11 +4,12 @@
   const qsa=(s,r=document)=>[...r.querySelectorAll(s)];
 
   /* Load the shared James Realty/Tasmeer design layers after every developer- or
-     country-specific stylesheet so theme, full-width glow and typography stay consistent. */
+     country-specific stylesheet so theme, full-width glow, typography and footer stay consistent. */
   const finalStyles=[
     {key:'site-system-final',href:'/assets/site-system.css?v=2'},
     {key:'glow-system-final',href:'/assets/glow-system.css?v=3'},
-    {key:'typography-system-final',href:'/assets/typography-system.css?v=1'}
+    {key:'typography-system-final',href:'/assets/typography-system.css?v=2'},
+    {key:'footer-system-final',href:'/assets/footer-system.css?v=1'}
   ];
   finalStyles.forEach(item=>{
     if(document.querySelector('link[data-'+item.key+']')) return;
