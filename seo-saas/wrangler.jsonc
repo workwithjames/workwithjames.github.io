@@ -3,6 +3,13 @@
   "name": "james-seo-mvp",
   "main": "./src/index.js",
   "compatibility_date": "2026-08-21",
+  "workers_dev": true,
+  "routes": [
+    {
+      "pattern": "seo.jamesrealty.uk",
+      "custom_domain": true
+    }
+  ],
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
@@ -11,6 +18,6 @@
   },
   "vars": {
     "APP_NAME": "James SEO",
-    "APP_ENV": "preview"
+    "APP_ENV": "beta"
   }
 }
