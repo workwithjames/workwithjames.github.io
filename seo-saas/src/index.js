@@ -8,14 +8,14 @@ const JSON_HEADERS = {
 };
 const SESSION_COOKIE = "jseo_session";
 const SESSION_DAYS = 30;
-const PBKDF2_ITERATIONS = 120_000;
+const PASSWORD_KDF_ITERATIONS = 20_000;
 
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
     if (url.pathname === "/api/health") {
-      return json({ ok: true, service: env.APP_NAME || "James SEO", version: "0.2.0", database: Boolean(env.DB) });
+      return json({ ok: true, service: env.APP_NAME || "James SEO", version: "0.2.1", database: Boolean(env.DB), authKdf: "pbkdf2-sha256" });
     }
 
     if (!url.pathname.startsWith("/api/")) return env.ASSETS.fetch(request);
@@ -73,11 +73,12 @@ async function handleSignup(request, env) {
   const userId = crypto.randomUUID();
   const workspaceId = crypto.randomUUID();
   const salt = randomToken(16);
-  const passwordHash = await derivePassword(password, salt);
+  const passwordHash = await derivePassword(password, salt, PASSWORD_KDF_ITERATIONS);
   const slug = `${slugify(workspaceName) || "workspace"}-${workspaceId.slice(0, 6)}`;
 
   await env.DB.batch([
-    env.DB.prepare("INSERT INTO users (id,email,display_name,password_hash,password_salt) VALUES (?,?,?,?,?)").bind(userId, email, displayName, passwordHash, salt),
+    env.DB.prepare("INSERT INTO users (id,email,display_name,password_hash,password_salt,password_iterations) VALUES (?,?,?,?,?,?)")
+      .bind(userId, email, displayName, passwordHash, salt, PASSWORD_KDF_ITERATIONS),
     env.DB.prepare("INSERT INTO workspaces (id,name,slug,plan) VALUES (?,?,?,'free')").bind(workspaceId, workspaceName, slug),
     env.DB.prepare("INSERT INTO workspace_members (workspace_id,user_id,role) VALUES (?,?,'owner')").bind(workspaceId, userId),
   ]);
@@ -93,9 +94,10 @@ async function handleLogin(request, env) {
   const password = String(body.password || "");
   if (!validEmail(email) || !password) return json({ error: "Email and password are required" }, 400);
 
-  const user = await env.DB.prepare("SELECT id,email,display_name,password_hash,password_salt,is_super_admin FROM users WHERE email = ?").bind(email).first();
+  const user = await env.DB.prepare("SELECT id,email,display_name,password_hash,password_salt,password_iterations,is_super_admin FROM users WHERE email = ?").bind(email).first();
   if (!user?.password_hash || !user?.password_salt) return json({ error: "Invalid email or password" }, 401);
-  const candidate = await derivePassword(password, user.password_salt);
+  const iterations = Math.max(1, Math.min(200_000, Number(user.password_iterations || PASSWORD_KDF_ITERATIONS)));
+  const candidate = await derivePassword(password, user.password_salt, iterations);
   if (!timingSafeEqual(candidate, user.password_hash)) return json({ error: "Invalid email or password" }, 401);
 
   await env.DB.prepare("UPDATE users SET last_login_at = CURRENT_TIMESTAMP, updated_at = CURRENT_TIMESTAMP WHERE id = ?").bind(user.id).run();
@@ -313,9 +315,9 @@ async function accessibleProject(env, userId, projectId) {
   `).bind(projectId, userId).first();
 }
 
-async function derivePassword(password, salt) {
+async function derivePassword(password, salt, iterations = PASSWORD_KDF_ITERATIONS) {
   const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveBits"]);
-  const bits = await crypto.subtle.deriveBits({ name: "PBKDF2", hash: "SHA-256", salt: fromBase64Url(salt), iterations: PBKDF2_ITERATIONS }, key, 256);
+  const bits = await crypto.subtle.deriveBits({ name: "PBKDF2", hash: "SHA-256", salt: fromBase64Url(salt), iterations }, key, 256);
   return toBase64Url(new Uint8Array(bits));
 }
 
