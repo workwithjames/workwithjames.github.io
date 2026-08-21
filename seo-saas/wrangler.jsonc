@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "james-seo",
+  "name": "james-seo-mvp",
   "main": "./src/index.js",
   "compatibility_date": "2026-08-21",
   "assets": {
@@ -11,6 +11,6 @@
   },
   "vars": {
     "APP_NAME": "James SEO",
-    "APP_ENV": "production"
+    "APP_ENV": "preview"
   }
 }
