@@ -1,2 +1,7 @@
 __pycache__/
 *.py[cod]
+
+# Backend secrets and generated data
+backend-infrastructure/.env
+backend-infrastructure/backups/
+backend-infrastructure/*.log
