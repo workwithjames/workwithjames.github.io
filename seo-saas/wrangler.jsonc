@@ -1,0 +1,23 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "james-seo-mvp",
+  "main": "./src/index.js",
+  "compatibility_date": "2026-08-21",
+  "workers_dev": true,
+  "routes": [
+    {
+      "pattern": "seo.jamesrealty.uk",
+      "custom_domain": true
+    }
+  ],
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
+  "vars": {
+    "APP_NAME": "James SEO",
+    "APP_ENV": "beta"
+  }
+}
