@@ -3,8 +3,17 @@ import path from 'node:path';
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
-const { chromium } = require('playwright');
-const axeSource = fs.readFileSync(require.resolve('axe-core/axe.min.js'), 'utf8');
+const staticOnly = process.env.AUDIT_STATIC_ONLY === '1';
+let chromium = null;
+let axeSource = '';
+if (!staticOnly) {
+  ({ chromium } = require('playwright'));
+  try {
+    axeSource = fs.readFileSync(require.resolve('axe-core/axe.min.js'), 'utf8');
+  } catch {
+    console.warn('axe-core is unavailable; continuing with HTML and runtime accessibility checks.');
+  }
+}
 const root = process.cwd();
 const baseUrl = process.env.AUDIT_BASE_URL || 'http://127.0.0.1:8788';
 const reportPath = path.join(root, 'audit', 'site-audit-report.json');
@@ -274,10 +283,12 @@ async function runtimeAudit() {
 
         await runFunctionalChecks(page, route, location, issues);
 
-        await page.addScriptTag({ content: axeSource });
-        const axe = await page.evaluate(async () => window.axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa'] } }));
-        for (const violation of axe.violations.filter((item) => ['serious', 'critical'].includes(item.impact))) {
-          pushIssue(issues, violation.impact === 'critical' ? 'error' : 'warning', 'axe', location, violation.help, { id: violation.id, nodes: violation.nodes.slice(0, 5).map((node) => node.target) });
+        if (axeSource) {
+          await page.addScriptTag({ content: axeSource });
+          const axe = await page.evaluate(async () => window.axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa'] } }));
+          for (const violation of axe.violations.filter((item) => ['serious', 'critical'].includes(item.impact))) {
+            pushIssue(issues, violation.impact === 'critical' ? 'error' : 'warning', 'axe', location, violation.help, { id: violation.id, nodes: violation.nodes.slice(0, 5).map((node) => node.target) });
+          }
         }
 
         for (const message of pageErrors) pushIssue(issues, 'error', 'javascript', location, message);
@@ -296,7 +307,6 @@ async function runtimeAudit() {
 }
 
 const staticResult = staticAudit();
-const staticOnly = process.env.AUDIT_STATIC_ONLY === '1';
 const runtimeResult = staticOnly
   ? { issues: [], routeCount: 0, viewportCount: 0 }
   : await runtimeAudit();

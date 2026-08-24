@@ -51,9 +51,10 @@
   function boot(){
     var workspace=document.getElementById('yield-calculator');
     if(!workspace){return;}
-    workspace.querySelectorAll('input').forEach(function(input){input.addEventListener('input',render);});
+    var started=false;
+    workspace.querySelectorAll('input').forEach(function(input){input.addEventListener('input',function(){if(!started){started=true;window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'calculator_start',calculator_name:'Dubai rental yield',page_path:location.pathname});}render();});});
     var button=document.getElementById('recalculate-yields');
-    if(button){button.addEventListener('click',function(){render();track();});}
+    if(button){button.addEventListener('click',function(){render();track();window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'calculator_complete',calculator_name:'Dubai rental yield',page_path:location.pathname});});}
     render();
   }
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',boot);}else{boot();}

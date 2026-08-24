@@ -63,7 +63,7 @@
     }
     form.addEventListener('input',function(){if(!touched){touched=true;track('calculator_start',{calculator_name:'Dubai property buying cost'});}calculate('input');});
     form.addEventListener('change',function(){calculate('change');});
-    document.getElementById('recalculate-buying-costs').addEventListener('click',function(){touched=true;calculate('button');status.textContent='Estimate refreshed using the current assumptions.';});
+    document.getElementById('recalculate-buying-costs').addEventListener('click',function(){touched=true;calculate('button');track('calculator_complete',{calculator_name:'Dubai property buying cost',property_status:form.elements.property_status.value,finance_route:mortgageEnabled()?'mortgage':'cash'});status.textContent='Estimate refreshed using the current assumptions.';});
     document.getElementById('copy-buying-costs').addEventListener('click',async function(){
       var summary='Dubai property buying-cost estimate\nProperty price: '+money(value('price'))+'\nEstimated acquisition costs: '+totalCosts.textContent+'\nEstimated cash needed at purchase: '+upfront.textContent+'\nSource: jamesrealty.uk/dubai-property-buying-cost-calculator/';
       try{await navigator.clipboard.writeText(summary);status.textContent='Estimate copied.';track('calculator_action',{calculator_name:'Dubai property buying cost',action:'copy_estimate'});}catch(error){status.textContent='Copy was not available. You can take a screenshot of the result.';}

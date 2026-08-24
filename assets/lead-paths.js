@@ -59,6 +59,11 @@
         service:clean(form.dataset.journey||'Property enquiry'),
         page_path:location.pathname
       });
+      analytics('qualified_lead_submit',{
+        service:clean(form.dataset.journey||'Property enquiry'),
+        field_count:form.querySelectorAll('[name]').length,
+        page_path:location.pathname
+      });
       window.open(url,'_blank','noopener,noreferrer');
     });
   }

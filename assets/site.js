@@ -613,7 +613,11 @@
       });
     }
     if(href.indexOf('wa.me/')>-1){event('generate_lead',{method:'whatsapp',link_url:href,page_path:location.pathname});}
+    if(href.indexOf('tel:')===0){event('phone_click',{link_url:href,page_path:location.pathname});event('generate_lead',{method:'phone',page_path:location.pathname});}
     if(href==='/contact/'||href.indexOf('/contact/')===0){event('contact_intent',{link_text:(link.textContent||'').trim(),page_path:location.pathname});}
+    if(/(?:brochure|\.pdf(?:$|[?#]))/i.test(href)){event('brochure_click',{link_text:(link.textContent||'').trim(),link_url:href,page_path:location.pathname});}
+    var projectCard=link.closest('[data-project-card],.jr-project');
+    if(projectCard){event('project_interest',{project_name:projectCard.getAttribute('data-project-card')||projectCard.getAttribute('data-project')||(projectCard.querySelector('h2,h3')||{}).textContent||'',link_url:href,page_path:location.pathname});}
     if(href==='/cite/'||href.indexOf('/cite/')===0){event('citation_intent',{link_text:(link.textContent||'').trim(),page_path:location.pathname});}
     if(link.closest('.article-sources')){event('source_click',{link_url:href,page_path:location.pathname});}
     if(href.indexOf('dari.ae')>-1||href.indexOf('adrec.gov.ae')>-1){event('data_source_click',{data_source:'ADREC_DARI',link_url:href,page_path:location.pathname});}

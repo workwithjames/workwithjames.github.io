@@ -139,6 +139,64 @@ SEED_IMAGE_ALTS = {
 }
 
 
+# Automated briefs may only publish when an editor has assigned a unique,
+# topic-specific photograph. This deliberately trades publishing volume for
+# relevance and prevents the old generic SVG/stock-image fallback returning.
+CURATED_AUTO_IMAGES = {
+    "property-news-2026-08-17-reading-the-latest-dubai-luxury-property-signal-9428c": "/images/property-news/jebel-ali-village-892-home-handover.webp",
+    "property-news-2026-08-15-how-to-read-the-latest-dubai-property-market-signal-3e09d": "/images/property-news/dubai-186-new-property-developers-2026.webp",
+    "property-news-2026-08-14-how-to-read-the-latest-dubai-property-market-signal-96e5c": "/images/property-news/zoya-elinor-dubai-project-launch-sellout.webp",
+    "property-news-2026-08-13-how-to-read-the-latest-abu-dhabi-property-market-signal-abda4": "/images/property-news/uae-top-developers-six-month-sales.webp",
+    "property-news-2026-08-13-uae-rental-update-what-tenants-and-landlords-should-verify-cbf17": "/images/property-news/uae-monthly-apartment-rent-options.webp",
+    "property-news-2026-08-13-dubai-housing-supply-what-buyers-and-owners-should-check-n-8ca93": "/images/property-news/dubai-rent-now-pay-later-service.webp",
+    "property-news-2026-08-12-how-to-read-the-latest-dubai-property-market-signal-21f76": "/images/property-news/binghatti-credit-rating-review.webp",
+    "property-news-2026-08-10-dubai-housing-supply-what-buyers-and-owners-should-check-n-5f565": "/images/property-news/former-dubai-zoo-residential-construction.webp",
+    "property-news-2026-08-07-dubai-housing-supply-what-buyers-and-owners-should-check-n-76b75": "/images/property-news/emaar-development-sales-profit-2026.webp",
+    "property-news-2026-08-07-how-to-read-the-latest-dubai-property-market-signal-ff568": "/images/property-news/emaar-sales-backlog-delivery-pipeline.webp",
+    "property-news-2026-08-07-uae-housing-supply-what-buyers-and-owners-should-check-nex-6f2f1": "/images/property-news/damac-mortgage-event-uae-banks.webp",
+    "property-news-2026-08-06-sharjah-homebuyer-update-a-practical-decision-checklist-d84dc": "/images/property-news/sharjah-property-deals-july-2026.webp",
+    "property-news-2026-08-06-how-to-read-the-latest-dubai-property-market-signal-5cfed": "/images/property-news/dubai-supertall-tower-construction-phase.webp",
+    "property-news-2026-08-04-abu-dhabi-housing-supply-what-buyers-and-owners-should-che-1ddff": "/images/property-news/abu-dhabi-early-home-handover.webp",
+    "property-news-2026-08-18-ajman-rental-contracts-reach-dh2-91-billion-in-first-half-06d3d": "/images/property-news/ajman-rental-contracts-2026.webp",
+    "property-news-2026-08-18-two-day-uae-property-showcase-in-hyderabad-targets-indian-b21c8": "/images/property-news/hyderabad-uae-property-showcase.webp",
+    "property-news-2026-08-19-abu-dhabi-to-add-71-000-homes-by-2030-with-biggest-deliver-29357": "/images/property-news/abu-dhabi-71000-home-pipeline.webp",
+    "property-news-2026-08-19-golden-visa-first-time-buyer-support-flexi-rent-how-dubai-99a12": "/images/property-news/dubai-property-access-first-time-buyers.webp",
+    "property-news-2026-08-20-dubai-adds-more-than-24-000-property-units-in-six-months-5fb5c": "/images/property-news/dubai-24000-new-property-units.webp",
+    "property-news-2026-08-20-dubai-s-iconic-toyota-building-to-be-demolished-in-2027-0f424": "/images/property-news/dubai-older-building-demolition-planning.webp",
+    "property-news-2026-08-20-investments-in-completed-dubai-property-projects-top-30bn-6a4fc": "/images/property-news/completed-dubai-property-investment.webp",
+    "property-news-2026-08-20-uae-developer-arada-unveils-dh5-billion-broadbeach-project-6cad2": "/images/property-news/arada-broadbeach-australia-development.webp",
+    "property-news-2026-08-21-70-of-dubai-s-toyota-building-tenants-have-left-after-powe-f5a2e": "/images/property-news/dubai-building-tenants-power-disruption.webp",
+    "property-news-2026-08-21-dubai-has-96-585-homes-entering-the-market-in-2026-83-are-9eab9": "/images/property-news/dubai-96585-home-supply-pipeline.webp",
+}
+
+CURATED_AUTO_IMAGE_ALTS = {
+    "property-news-2026-08-17-reading-the-latest-dubai-luxury-property-signal-9428c": "Completed villas on a landscaped street at Jebel Ali Village during handover",
+    "property-news-2026-08-15-how-to-read-the-latest-dubai-property-market-signal-3e09d": "Dubai development team comparing several residential masterplans",
+    "property-news-2026-08-14-how-to-read-the-latest-dubai-property-market-signal-96e5c": "Buyers viewing an apartment model during a Dubai project sales launch",
+    "property-news-2026-08-13-how-to-read-the-latest-abu-dhabi-property-market-signal-abda4": "UAE developer executives reviewing a portfolio of residential projects",
+    "property-news-2026-08-13-uae-rental-update-what-tenants-and-landlords-should-verify-cbf17": "UAE tenants comparing monthly apartment rent terms at home",
+    "property-news-2026-08-13-dubai-housing-supply-what-buyers-and-owners-should-check-n-8ca93": "Dubai tenant using a mobile rent-instalment service in an apartment",
+    "property-news-2026-08-12-how-to-read-the-latest-dubai-property-market-signal-21f76": "Credit analyst reviewing developer financial information beside Dubai towers",
+    "property-news-2026-08-10-dubai-housing-supply-what-buyers-and-owners-should-check-n-5f565": "Residential construction progressing at the former Dubai Zoo site",
+    "property-news-2026-08-07-dubai-housing-supply-what-buyers-and-owners-should-check-n-76b75": "Emaar project analysts reviewing sales and construction progress in Dubai",
+    "property-news-2026-08-07-how-to-read-the-latest-dubai-property-market-signal-ff568": "Large Dubai residential delivery pipeline with active construction sites",
+    "property-news-2026-08-07-uae-housing-supply-what-buyers-and-owners-should-check-nex-6f2f1": "UAE buyers comparing mortgage options with a property adviser",
+    "property-news-2026-08-06-sharjah-homebuyer-update-a-practical-decision-checklist-d84dc": "Property analysts reviewing Sharjah waterfront transaction evidence",
+    "property-news-2026-08-06-how-to-read-the-latest-dubai-property-market-signal-5cfed": "Workers on the active structure of a Dubai supertall tower",
+    "property-news-2026-08-04-abu-dhabi-housing-supply-what-buyers-and-owners-should-che-1ddff": "Abu Dhabi homebuyer receiving keys in a newly completed community",
+    "property-news-2026-08-18-ajman-rental-contracts-reach-dh2-91-billion-in-first-half-06d3d": "Tenant and adviser reviewing an Ajman apartment rental contract",
+    "property-news-2026-08-18-two-day-uae-property-showcase-in-hyderabad-targets-indian-b21c8": "Indian buyers viewing UAE property models at a Hyderabad showcase",
+    "property-news-2026-08-19-abu-dhabi-to-add-71-000-homes-by-2030-with-biggest-deliver-29357": "Analysts surveying Abu Dhabi residential districts and future housing sites",
+    "property-news-2026-08-19-golden-visa-first-time-buyer-support-flexi-rent-how-dubai-99a12": "Family discussing Dubai homebuying access with a property adviser",
+    "property-news-2026-08-20-dubai-adds-more-than-24-000-property-units-in-six-months-5fb5c": "Recently completed apartment buildings in a growing Dubai district",
+    "property-news-2026-08-20-dubai-s-iconic-toyota-building-to-be-demolished-in-2027-0f424": "Surveyors assessing an older Dubai building ahead of redevelopment",
+    "property-news-2026-08-20-investments-in-completed-dubai-property-projects-top-30bn-6a4fc": "Investors inspecting completed waterfront homes in Dubai",
+    "property-news-2026-08-20-uae-developer-arada-unveils-dh5-billion-broadbeach-project-6cad2": "UAE and Australian team reviewing a Broadbeach waterfront development model",
+    "property-news-2026-08-21-70-of-dubai-s-toyota-building-tenants-have-left-after-powe-f5a2e": "Tenants moving from an older Dubai building while technicians inspect utilities",
+    "property-news-2026-08-21-dubai-has-96-585-homes-entering-the-market-in-2026-83-are-9eab9": "Analysts reviewing Dubai's residential construction and completion pipeline",
+}
+
+
 SEEDS: list[dict] = [
     {
         "slug": "adgm-broker-rankings-buyers-tenants-guide",
@@ -375,7 +433,11 @@ def esc(value: str) -> str:
 
 
 def image_alt(post: Post) -> str:
-    return SEED_IMAGE_ALTS.get(post.slug, f"{post.category} analysis illustration for UAE property readers")
+    return (
+        SEED_IMAGE_ALTS.get(post.slug)
+        or CURATED_AUTO_IMAGE_ALTS.get(post.slug)
+        or f"{post.category} analysis for UAE property readers"
+    )
 
 
 def slugify(value: str, max_len: int = 76) -> str:
@@ -777,11 +839,13 @@ def theme_for(title: str, description: str) -> str:
         return "regulation"
     if any(k in text for k in ["record sale", "luxury", "ultra-prime", "mansion", "penthouse"]):
         return "luxury"
+    if any(k in text for k in ["mortgage", "finance", "first-time buyer", "first time buyer", "homebuyer", "golden visa"]):
+        return "buyer"
     if any(k in text for k in ["unit", "home", "handover", "supply", "launch", "completion"]):
         return "supply"
     if any(k in text for k in ["rent", "tenant", "rental", "lease"]):
         return "rental"
-    if any(k in text for k in ["mortgage", "finance", "buyer", "homeowner"]):
+    if any(k in text for k in ["buyer", "homeowner"]):
         return "buyer"
     return "market"
 
@@ -830,52 +894,74 @@ def extract_facts(paragraphs: list[str]) -> list[list[str]]:
 
 
 def auto_analysis(theme: str) -> list[tuple[str, list[str]]]:
-    common = [
-        ("Verify the property-level evidence", [
-            "A news headline is a market signal, not a valuation. Compare registered transactions or leases for the same property type, micro-location, size and condition.",
-            "Check whether the reported figure describes completed property, off-plan contracts, asking prices, registered sales, rents or a single exceptional transaction.",
-        ]),
-        ("Questions to ask before acting", [
-            "What time period and sample does the source cover?",
-            "Is the figure citywide or limited to one segment or community?",
-            "What costs, supply and property-specific risks are excluded?",
-            "Can the conclusion be confirmed using official or registered data?",
-        ]),
-    ]
-    theme_sections = {
-        "regulation": ("Why the regulatory change matters", [
-            "A clearer framework can improve transparency and service standards, but consumers should still verify licensing, representation, fees and the basis of any advice.",
-            "Regulatory announcements should be read with the implementation date, scope and official guidance, especially when different free zones or emirates use different systems.",
-        ]),
-        "luxury": ("How to interpret a high-value property headline", [
-            "Trophy properties are influenced by scarcity, privacy, plot position, bespoke construction and a narrow buyer pool. One record does not reprice every nearby home.",
-            "For another asset, use comparable plot and built-up area, condition, view, fit-out cost and registered transactions rather than the record price alone.",
-        ]),
-        "supply": ("How new supply changes market behaviour", [
-            "More completions can improve choice and increase competition, particularly where several similar units reach the market together.",
-            "The effect varies by community, property type, quality and absorption. Scheduled supply should be separated from homes that actually complete.",
-        ]),
-        "rental": ("How to read a rental-market change", [
-            "New leases, renewals and asking rents can move differently. Tenants and owners should compare registered contracts and the exact building or community.",
-            "Net rental performance also depends on vacancy, maintenance, service charges, management and furnishing costs.",
-        ]),
-        "buyer": ("What the change may mean for homebuyers", [
-            "Buyer demand can remain strong while preferences shift toward value, completed quality or communities that support long-term living.",
-            "Affordability should include mortgage cost, service charges, maintenance, insurance and likely holding period, not only the purchase price.",
-        ]),
-        "market": ("How to use the update", [
-            "Treat the report as a prompt for deeper research rather than a buy or sell signal.",
-            "Market direction can differ across price bands, communities and ready versus off-plan property.",
-        ]),
+    """Return a differentiated decision framework for the detected intent."""
+    sections = {
+        "regulation": [
+            ("Read the rule at source", ["Confirm the regulator, effective date, geography and people or transactions covered.", "Treat summaries as orientation; use the official notice for obligations and exceptions."]),
+            ("Check the adviser and transaction", ["Verify licensing, representation, fees and conflicts for the person handling the property.", "Keep the property, contract, payment and title checks separate from the regulatory headline."]),
+            ("Plan for implementation", ["Ask what changes immediately, what needs guidance and what remains unchanged.", "Retain dated records of advice, disclosures and signed documents."]),
+        ],
+        "luxury": [
+            ("Separate the exceptional asset", ["Trophy properties are influenced by plot position, privacy, specification and a narrow buyer pool.", "One record or branded launch does not reprice ordinary homes in the same district."]),
+            ("Build a defensible comparable set", ["Match plot and built-up area, condition, outlook, fit-out and transaction date.", "Use registered transactions where available and explain every material adjustment."]),
+            ("Test liquidity and ownership cost", ["Include service charges, maintenance, staffing, finance and future capital work.", "Model a longer sale period because the qualified buyer universe may be small."]),
+        ],
+        "supply": [
+            ("Distinguish planned, launched and completed homes", ["A scheduled pipeline is not the same as keys handed to owners.", "Check construction progress, completion evidence and the number of directly competing units."]),
+            ("Map the pressure locally", ["Supply affects apartments, villas, districts and price bands differently.", "Compare the exact community, unit type, handover window and finished quality."]),
+            ("Model absorption, not only delivery", ["Test vacancy, leasing time and resale competition when several similar homes complete together.", "Keep a conservative case for rent, service charges and initial maintenance."]),
+        ],
+        "rental": [
+            ("Compare the full tenancy cost", ["Convert rent, payment-plan fees, deposit and recurring charges into one annual figure.", "A smaller instalment is not automatically a lower total rent."]),
+            ("Keep the contract and payment route aligned", ["Confirm the landlord, registered tenancy amount, recipient and late-payment terms.", "Do not rely on an offer until eligibility and complete conditions are documented."]),
+            ("Test landlord and tenant outcomes", ["Tenants should model affordability across the full term.", "Landlords should assess settlement timing, vacancy, maintenance and counterparty risk."]),
+        ],
+        "buyer": [
+            ("Define the usable acquisition budget", ["Include transfer, trustee, agency, mortgage and initial ownership costs.", "Keep a liquidity reserve instead of using the headline purchase budget alone."]),
+            ("Compare ready and off-plan consistently", ["Use the same purpose, time horizon, area, payment route and downside case.", "Check inspection evidence for ready homes and escrow, SPA and progress for off-plan property."]),
+            ("Verify the exact unit", ["Compare layout, usable area, view, floor, service costs and nearby competition.", "Do not convert a citywide demand headline into an assumed property return."]),
+        ],
+        "market": [
+            ("Identify what the headline measures", ["Separate transaction value, volume, asking prices, registrations and corporate sales.", "Check the period, geography and property types included."]),
+            ("Move from aggregate to micro-market", ["Compare the relevant district, building or community using like-for-like evidence.", "Ready, off-plan, apartment and villa markets can move differently."]),
+            ("Use a downside case", ["Allow for slower resale, lower rent, higher costs or later completion.", "A decision remains property-specific even when the wider market is active."]),
+        ],
     }
-    return [theme_sections[theme], *common]
+    return sections[theme]
+
+
+def commercial_destination(post: Post) -> dict[str, object]:
+    text = f"{post.title} {post.description} {post.category}".lower()
+    if "jebel ali village" in text:
+        return {"label": "Community guide", "title": "Assess Jebel Ali Village after handover", "description": "Move from the 892-home delivery signal to inspection, community readiness, rent, net yield and resale checks.", "href": "/jebel-ali-village-property-investment/", "links": [("Rental-yield calculator", "/dubai-rental-yield-calculator/"), ("Dubai buyer hub", "/dubai-property-buyer-hub/")]}
+    if any(word in text for word in ("india", "indian", "hyderabad")):
+        return {"label": "India buyer guide", "title": "Plan a Dubai purchase from India", "description": "Connect the event headline to ownership, payment, remittance and acquisition-cost checks.", "href": "/dubai-property-investment-indian-buyers/", "links": [("Buying-cost calculator", "/dubai-property-buying-cost-calculator/"), ("Build a buyer brief", "/buy-invest-dubai/#buyer-enquiry")]}
+    if any(word in text for word in ("rent", "tenant", "rental", "lease")):
+        return {"label": "Investor tool", "title": "Test the rental numbers", "description": "Move from a rent headline to a property-level gross and net yield comparison.", "href": "/dubai-rental-yield-calculator/", "links": [("Dubai area data", "/dubai-data/"), ("Seller preparation brief", "/sell-dubai-property/#seller-enquiry")]}
+    if any(word in text for word in ("mortgage", "finance", "bank", "credit")):
+        return {"label": "Financing guide", "title": "Compare mortgage and cash routes", "description": "Put rates, liquidity, valuation and total acquisition cash on the same decision sheet.", "href": "/mortgage-vs-cash-dubai-property/", "links": [("Buying-cost calculator", "/dubai-property-buying-cost-calculator/"), ("Build a buyer brief", "/buy-invest-dubai/#buyer-enquiry")]}
+    if any(word in text for word in ("supply", "homes", "units", "handover", "completion", "construction", "developer", "launch")):
+        return {"label": "Buyer hub", "title": "Turn supply news into a shortlist", "description": "Compare communities, costs, property status and current area evidence before choosing a project.", "href": "/dubai-property-buyer-hub/", "links": [("Communities by budget", "/best-dubai-communities-by-budget/"), ("Dubai area data", "/dubai-data/")]}
+    return {"label": "Market data", "title": "Check the headline against Dubai evidence", "description": "Use area data and a structured buyer brief before applying a market-wide figure to one property.", "href": "/dubai-data/", "links": [("Dubai buyer hub", "/dubai-property-buyer-hub/"), ("Build a buyer brief", "/buy-invest-dubai/#buyer-enquiry")]}
+
+
+def commercial_resources_html(post: Post) -> str:
+    route = commercial_destination(post)
+    links = [(str(route["title"]), str(route["href"])), *route["links"], ("All property news briefs", "/blog/property-news/")]
+    cards = "".join(f'<a href="{esc(href)}">{esc(label)}</a>' for label, href in links)
+    return f'<section class="news-commercial-route"><p class="section-kicker">{esc(str(route["label"]))}</p><h2>{esc(str(route["title"]))}</h2><p>{esc(str(route["description"]))}</p><div class="news-related">{cards}</div></section>'
+
+
+def commercial_cta_html(post: Post) -> str:
+    route = commercial_destination(post)
+    return f'<section class="section-shell contact-card"><div><p class="section-kicker">Structured next step</p><h2>{esc(str(route["title"]))}</h2><p>{esc(str(route["description"]))}</p></div><a class="button nav-whatsapp" href="{esc(str(route["href"]))}">Open {esc(str(route["label"]).lower())} <span aria-hidden="true">→</span></a></section>'
 
 
 def render_auto(article: dict, post: Post, all_posts: list[Post], facts: list[list[str]], theme: str) -> str:
     published_iso = (article["published"] or NOW).date().isoformat()
     quick = (
-        f"{post.source_name} has published a new property report. This independent brief identifies the reported figures "
-        "and separates them from the checks needed before using the update in a purchase, rental, sale or valuation decision."
+        f"{post.source_name}'s report on {post.title.rstrip('.')} is a {theme.replace('-', ' ')} signal, not a property-level conclusion. "
+        "Use the reported facts as a starting point, then test the exact community, contract, costs and comparable evidence."
     )
     if not facts:
         facts = [
@@ -910,7 +996,7 @@ def render_auto(article: dict, post: Post, all_posts: list[Post], facts: list[li
         "inLanguage": "en-AE",
         "citation": [post.source_url, SITE + "/", SITE + "/blog/property-news/"],
     }
-    return build_head(post, structured) + f'''<body>{GTM_BODY}<a class="skip-link" href="#main-content">Skip to main content</a><div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>{NAV_HEADER}<main id="main-content"><article class="article-page"><header class="article-header section-shell"><nav class="breadcrumbs"><a href="/">Home</a><span>›</span><a href="/blog/">Blog</a><span>›</span><a href="/blog/property-news/">Property News</a></nav><p class="section-kicker">Automated source brief</p><h1>{esc(post.title)}</h1><p class="article-deck">{esc(post.description)}</p><div class="article-byline"><span>Analysis by <a href="/about-me/">James</a></span><time datetime="{post.date}">Published {datetime.fromisoformat(post.date).strftime('%-d %B %Y')}</time><span>{esc(post.read_time)}</span></div><figure class="article-hero-image news-brief-visual"><img src="{post.image}" alt="{esc(image_alt(post))}" width="1600" height="900"/></figure></header><div class="article-layout section-shell"><aside class="article-toc"><strong>In this brief</strong>{toc}</aside><div class="article-body"><p class="news-automation-note"><strong>Automated monitoring:</strong> This original brief was generated after a new property article appeared on a monitored publisher page. It uses the title, summary and factual figures as signals, then adds an independent due-diligence framework.</p>{body}<section><h2>Useful internal resources</h2><div class="news-related"><a href="/">Dubai property data and yields</a><a href="/abu-dhabi-data/">Abu Dhabi property data</a><a href="/blog/dubai-community-vs-property-long-term-value/">Dubai community buying framework</a><a href="/blog/property-news/">All property news briefs</a></div></section>{source_card(post)}{related_links(post.slug, all_posts)}</div></div></article><section class="section-shell contact-card"><div><p class="section-kicker">Need a property-market narrative?</p><h2>Turn source reporting into a clear buyer or investor journey.</h2><p>For launch strategy, performance acquisition, content or CRM conversion, share the project and target market.</p></div><a class="button nav-whatsapp" href="/contact/">Contact James <span aria-hidden="true">→</span></a></section></main>{FOOTER}</body></html>'''
+    return build_head(post, structured) + f'''<body>{GTM_BODY}<a class="skip-link" href="#main-content">Skip to main content</a><div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>{NAV_HEADER}<main id="main-content"><article class="article-page"><header class="article-header section-shell"><nav class="breadcrumbs"><a href="/">Home</a><span>›</span><a href="/blog/">Blog</a><span>›</span><a href="/blog/property-news/">Property News</a></nav><p class="section-kicker">Source-linked property brief</p><h1>{esc(post.title)}</h1><p class="article-deck">{esc(post.description)}</p><div class="article-byline"><span>Analysis by <a href="/about-me/">James</a></span><time datetime="{post.date}">Published {datetime.fromisoformat(post.date).strftime('%-d %B %Y')}</time><span>{esc(post.read_time)}</span></div><figure class="article-hero-image news-brief-visual"><img src="{post.image}" alt="{esc(image_alt(post))}" width="1600" height="900"/></figure></header><div class="article-layout section-shell"><aside class="article-toc"><strong>In this brief</strong>{toc}</aside><div class="article-body"><p class="news-automation-note"><strong>Source monitoring:</strong> This original brief was triggered by a new report on a monitored publisher page. It uses the source's named subject and factual signals, then adds an independent decision framework.</p>{body}{commercial_resources_html(post)}{source_card(post)}{related_links(post.slug, all_posts)}</div></div></article>{commercial_cta_html(post)}</main>{FOOTER}</body></html>'''
 
 
 def post_from_seed(seed: dict) -> Post:
@@ -1196,6 +1282,13 @@ def create_auto_posts(state: dict, current_posts: list[Post]) -> list[Post]:
         theme = theme_for(article["title"], article["description"])
         title, suffix = auto_title(article, theme)
         slug = f"property-news-{(published or NOW).date().isoformat()}-{slugify(title, 58)}-{suffix}"
+        curated_image = CURATED_AUTO_IMAGES.get(slug)
+        if not curated_image:
+            # No generic fallback: every published brief must first receive a
+            # unique, subject-relevant editorial image and ALT description.
+            seen.update({url, final_url})
+            print(f"Held source report for editorial image review: {title}")
+            continue
         category_label = {
             "regulation": "UAE property regulation",
             "luxury": "UAE luxury property",
@@ -1220,12 +1313,11 @@ def create_auto_posts(state: dict, current_posts: list[Post]) -> list[Post]:
             read_time="4 min read",
             source_name=source_name,
             source_url=final_url,
-            image=f"/images/property-news/{slug}.svg",
+            image=curated_image,
             auto=True,
         )
         all_for_links = [post] + current_posts + new_posts
         facts = extract_facts(article["paragraphs"])
-        write_if_changed(ROOT / post.image.lstrip("/"), make_svg(post))
         write_if_changed(ROOT / "blog" / post.slug / "index.html", render_auto(article, post, all_for_links, facts, theme))
         new_posts.append(post)
         seen.update({url, final_url})

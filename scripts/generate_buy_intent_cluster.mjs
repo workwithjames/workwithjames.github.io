@@ -12,7 +12,9 @@ const cluster = [
   {slug:'mortgage-vs-cash-dubai-property',label:'Payment route',title:'Mortgage vs Cash for Dubai Property: Cost and Risk Guide',description:'Compare a Dubai property mortgage with a cash purchase, including LTV limits, upfront cash, financing costs, liquidity and decision scenarios.',short:'Compare financing cost with liquidity, leverage, speed and holding-period risk.'},
   {slug:'dubai-property-investment-indian-buyers',label:'Indian buyers',title:'Dubai Property Investment for Indian Buyers: 2026 Guide',description:'A practical Dubai property investment guide for Indian buyers covering ownership, LRS remittance, TCS, tax reporting, costs and due diligence.',short:'Plan ownership, FEMA/LRS remittance, TCS, tax disclosure and Dubai checks.'},
   {slug:'dubai-property-investment-uk-buyers',label:'UK buyers',title:'Dubai Property Investment for UK Buyers: 2026 Guide',description:'A practical guide for UK buyers investing in Dubai property, covering ownership, GBP funding, UK tax reporting, costs, finance and due diligence.',short:'Plan ownership, GBP funding, UK foreign-income reporting and Dubai due diligence.'},
-  {slug:'dubai-property-buying-cost-calculator',label:'Free calculator',title:'Dubai Property Buying Cost Calculator | James Realty',description:'Estimate DLD fees, trustee charges, agency costs, mortgage fees and the upfront cash needed to buy a Dubai property. Assumptions are editable.',short:'Estimate acquisition costs and total upfront cash with editable assumptions.'}
+  {slug:'dubai-property-buying-cost-calculator',label:'Free calculator',title:'Dubai Property Buying Cost Calculator | James Realty',description:'Estimate DLD fees, trustee charges, agency costs, mortgage fees and the upfront cash needed to buy a Dubai property. Assumptions are editable.',short:'Estimate acquisition costs and total upfront cash with editable assumptions.'},
+  {slug:'dubai-property-buyer-hub',label:'Buyer hub',title:'Dubai Property Buyer Hub: Guides, Data and Calculators',description:'Use one Dubai property buyer hub to compare communities, buying costs, ready versus off-plan, mortgage versus cash, rental yield and buyer routes.',short:'Start with the purpose, then connect every major Dubai buying decision.'},
+  {slug:'jebel-ali-village-property-investment',label:'Jebel Ali Village',title:'Jebel Ali Village Property Investment and Handover Guide',description:'Assess Jebel Ali Village property after the 892-home handover signal, including inspections, community readiness, rental yield inputs and resale competition.',short:'Turn the 892-home handover into property-level leasing, resale and inspection checks.'}
 ];
 
 const sharedSources = {
@@ -26,7 +28,8 @@ const sharedSources = {
   indiaTax:['Income Tax Department of India, foreign assets and income disclosure guide','https://www.incometax.gov.in/iec/foportal/sites/default/files/2024-11/Enhancing%20Tax%20Transparency%20on%20Foreign%20Assets%20and%20Income.pdf'],
   indiaTcs:['Income Tax Department of India, TCS rates','https://www.incometaxindia.gov.in/w/tcs-rates'],
   ukIncome:['GOV.UK, Tax on foreign income','https://www.gov.uk/tax-foreign-income'],
-  ukCgt:['GOV.UK, Selling overseas property','https://www.gov.uk/tax-sell-property/selling-overseas-property']
+  ukCgt:['GOV.UK, Selling overseas property','https://www.gov.uk/tax-sell-property/selling-overseas-property'],
+  jebelAli:['Gulf News, Nakheel begins Jebel Ali Village handover','https://gulfnews.com/business/property/nakheel-begins-handover-of-892-homes-at-jebel-ali-village-1.500643237']
 };
 
 const pages = [
@@ -307,6 +310,82 @@ const pages = [
       ['Does the website store my figures?','No. The calculator runs locally in the browser and does not submit the entered figures.']
     ],
     sources:[sharedSources.dldSale,sharedSources.dldMortgage,sharedSources.cbuae]
+  },
+  {
+    ...cluster[7],
+    eyebrow:'Dubai property buyer hub',
+    answerTitle:'Where should a Dubai property buyer start?',
+    summary:'Start with the purpose of the purchase, a usable all-in budget and the time horizon. Then compare communities, ready and off-plan status, payment route, acquisition costs and rental evidence in that order. This hub connects each decision to one focused guide, calculator or data page before a buyer brief is submitted.',
+    points:['Define home, relocation, income or long-term investment first.','Use total cash and ownership cost, not only the advertised price.','Move from area data to project, building and unit evidence.'],
+    snapshotTitle:'One path from broad search to a defensible shortlist.',
+    snapshotText:'Use the hub to answer each decision once, then carry the result into the structured buyer brief.',
+    snapshot:[['Step 1','Purpose and usable budget'],['Step 2','Area, status and payment'],['Step 3','Property evidence and brief']],
+    heroImage:'/images/visuals/buyer-consultation-1200.webp',
+    heroAlt:'Property adviser and buyers comparing a Dubai apartment and investment brief',
+    sections:[
+      {id:'decision-path',title:'The Dubai property buyer decision path',html:`
+        <div class="guide-card-grid"><article class="guide-card"><span>1 · Purpose</span><h3>Home, relocation or investment?</h3><p>Define how the property will be used, when it is needed and how long it may be held.</p></article><article class="guide-card"><span>2 · Budget</span><h3>What is the usable total?</h3><p>Keep acquisition costs, finance, furnishing and a liquidity reserve outside the headline price.</p></article><article class="guide-card"><span>3 · Market</span><h3>Which communities fit?</h3><p>Screen area activity, budget, property type, supply and resident demand before shortlisting projects.</p></article><article class="guide-card"><span>4 · Evidence</span><h3>Which exact property holds up?</h3><p>Compare title or project status, contract, condition, costs, rent and directly competing stock.</p></article></div>`},
+      {id:'budget-tools',title:'Build a usable acquisition budget',html:`
+        <p>Read the <a href="/dubai-property-buying-costs/">Dubai buying-cost guide</a>, then enter the actual price and payment assumptions into the <a href="/dubai-property-buying-cost-calculator/">buying-cost calculator</a>. Keep estimates editable until the contract, DLD statement, lender offer and written quotations are available.</p>
+        <div class="guide-callout"><strong>Budget rule</strong><p>The property price is one line in the cash plan. Preserve a reserve for valuation shortfall, repairs, vacancy and changing personal circumstances.</p></div>`},
+      {id:'community-property',title:'Move from community to property',html:`
+        <p>Use <a href="/best-dubai-communities-by-budget/">Dubai communities by budget</a> for the first research shortlist and <a href="/dubai-data/">Dubai Data</a> for area-level evidence. Then narrow the comparison to the same property type, size, status and micro-location.</p>
+        <p>A popular community does not make every building, project or unit suitable. Access, layout, view, condition, management, service charges and future supply remain property-specific.</p>`},
+      {id:'status-finance',title:'Compare property status and payment route',html:`
+        <p>The <a href="/off-plan-vs-ready-property-dubai/">off-plan versus ready guide</a> compares inspection, payment timing, income and delivery risk. The <a href="/mortgage-vs-cash-dubai-property/">mortgage versus cash guide</a> tests finance cost, liquidity, valuation and downside scenarios.</p>
+        <p>Use the same purpose, holding period and usable cash assumptions across both comparisons so a payment plan or mortgage offer does not conceal a higher total commitment.</p>`},
+      {id:'income-evidence',title:'Test rental income and local evidence',html:`
+        <p>For an investment purchase, use the <a href="/dubai-rental-yield-calculator/">rental-yield calculator</a> to compare gross and net performance. Enter achievable rent, vacancy, service charges, maintenance and management rather than a marketing yield.</p>
+        <p>Area data is a screen. Building-level leases, unit condition and competing listings are needed before setting a property-level expectation.</p>`},
+      {id:'international-buyers',title:'Use the right international-buyer route',html:`
+        <p>Buyers funding from India can use the <a href="/dubai-property-investment-indian-buyers/">Indian buyer guide</a> for ownership, remittance and reporting questions. UK buyers can use the <a href="/dubai-property-investment-uk-buyers/">UK buyer guide</a> for ownership, GBP funding and foreign-income or gain considerations.</p>
+        <p>These pages are planning frameworks, not personal legal, tax or investment advice. Confirm the current position for the buyer and transaction before signing or remitting funds.</p>`},
+      {id:'buyer-brief',title:'Turn the research into a buyer brief',html:`
+        <ol><li>State the purchase purpose and likely holding period.</li><li>Use the all-in budget and payment route.</li><li>List property type, ready or off-plan preference and non-negotiable requirements.</li><li>Name the researched areas and explain why they fit.</li><li>Record the required rent, move-in or completion timeline.</li><li>Send the <a href="/buy-invest-dubai/#buyer-enquiry">structured buyer brief</a> before requesting current property options.</li></ol>`}
+    ],
+    faqs:[
+      ['What is the first step when buying property in Dubai?','Define the purpose, usable all-in budget, payment route and timeline before comparing communities or projects.'],
+      ['Which Dubai property calculator should an investor use?','Use the buying-cost calculator for upfront acquisition cash and the rental-yield calculator for gross and net income scenarios.'],
+      ['Should I choose a community before a project?','Start with communities that fit the budget and use case, then compare the projects, buildings and individual units within those areas.'],
+      ['Does the buyer hub show live property availability?','No. It prepares the decision and buyer brief before current availability and property-level evidence are reviewed.']
+    ],
+    sources:[sharedSources.dldSale,sharedSources.ownership,sharedSources.escrow,sharedSources.cbuae]
+  },
+  {
+    ...cluster[8],
+    eyebrow:'Jebel Ali Village property guide',
+    answerTitle:'How should buyers assess Jebel Ali Village after handover begins?',
+    summary:'The reported start of handover for 892 homes moves Jebel Ali Village from a construction-led story toward observable property and community evidence. Buyers and investors can now place more weight on snagging, finished quality, access, amenity readiness, service costs, actual listings and leasing or resale competition. The handover total itself is not a yield or price forecast.',
+    points:['Separate handed-over homes from occupied homes and operating amenities.','Inspect the exact property and community before using launch material.','Calculate net yield with achievable rent, vacancy and ownership costs.'],
+    snapshotTitle:'Handover creates evidence—and simultaneous competition.',
+    snapshotText:'The strongest decision compares the exact home with completed alternatives and allows for multiple owners listing at the same time.',
+    snapshot:[['Reported milestone','892 homes entering handover'],['Primary check','Unit and community inspection'],['Investor tool','Net yield on total cost']],
+    heroImage:'/images/jebel-ali-village-property-investment-guide.webp',
+    heroAlt:'Property analyst reviewing a community plan above landscaped homes in Jebel Ali Village',
+    sections:[
+      {id:'handover-signal',title:'What the 892-home handover signal means',html:`
+        <p>The source report says Nakheel has begun handover of 892 homes at Jebel Ali Village. That is a project-specific delivery milestone. It does not mean every home is occupied, every amenity is operating or every resale and rental listing has the same evidence.</p>
+        <p>A concentrated handover can improve transparency because buyers can inspect completed homes and owners can observe management, access, service processes and early leasing demand. It can also bring several similar units to market together.</p>`},
+      {id:'property-inspection',title:'Jebel Ali Village handover and inspection checklist',html:`
+        <ol><li>Match the handover notice and property identifiers to the purchase documents.</li><li>Inspect finishes, building systems, external areas, boundaries and any included fixtures.</li><li>Record defects, response deadlines, warranty and rectification procedures.</li><li>Confirm access roads, utilities, waste, security and the amenities operating now.</li><li>Obtain the current service or community charge basis and initial payment dates.</li><li>Check occupancy, title, mortgage and developer requirements for the intended transfer or lease.</li></ol>`},
+      {id:'rental-yield',title:'How to estimate Jebel Ali Village rental yield',html:`
+        <p>Do not apply a citywide or marketing yield to a newly handed-over home. Start with achievable rent for the closest matching property type and position, then allow for vacancy while the community and listing market settle.</p>
+        <p>Enter purchase price, buying costs, service charges, maintenance, management and vacancy in the <a href="/dubai-rental-yield-calculator/">Dubai rental-yield calculator</a>. Compare gross yield, net yield and net yield on total acquisition cost.</p>
+        <div class="guide-callout"><strong>Avoid the highest-listing bias</strong><p>Asking rent is evidence of owner expectation, not a completed lease. Use verified or registered evidence where available and run a conservative case.</p></div>`},
+      {id:'resale',title:'How to assess resale competition',html:`
+        <p>Map homes that are handed over, advertised, tenanted and owner-occupied separately. Several owners may list similar properties after receiving keys, so condition, plot or position, landscaping, view, upgrades and asking strategy can affect the sale period.</p>
+        <p>Compare the exact property with completed nearby alternatives on usable space, access, finished quality, recurring cost and resident demand. The <a href="/dubai-property-buyer-hub/">Dubai Property Buyer Hub</a> connects this community work to costs, payment and ready-versus-off-plan decisions.</p>`},
+      {id:'buyer-checklist',title:'Buyer questions before reserving or offering',html:`
+        <ul><li>Is the home complete, handed over, vacant, occupied or tenanted?</li><li>Which roads, facilities and community services are operating today?</li><li>What defects, warranties, service costs and initial capital work are documented?</li><li>How many closely comparable homes are for rent or resale?</li><li>What rent or transaction evidence matches the property type and condition?</li><li>Does the all-in budget preserve a reserve after transfer and preparation?</li></ul>
+        <p>Use the <a href="/dubai-property-buying-cost-calculator/">buying-cost calculator</a>, then submit the <a href="/buy-invest-dubai/#buyer-enquiry">buyer brief</a> with the exact property status and objective.</p>`}
+    ],
+    faqs:[
+      ['Is Jebel Ali Village completed?','The cited report says handover has begun for 892 homes. Completion, owner handover, occupancy and amenity operation should be confirmed for the exact property and date.'],
+      ['What rental yield can Jebel Ali Village produce?','There is no defensible universal yield. Calculate it from the specific price, achievable rent, vacancy, service charges, maintenance, management and buying costs.'],
+      ['What should I inspect at Jebel Ali Village handover?','Inspect the home, external areas, systems, boundaries and included fixtures, then document defects and confirm warranties, access, utilities, amenities and service costs.'],
+      ['Can several handovers affect resale or rent?','Yes. Multiple similar owner listings can increase short-term competition, although the effect varies by property position, condition, asking strategy and tenant or buyer demand.']
+    ],
+    sources:[sharedSources.jebelAli,sharedSources.dldSale,sharedSources.ownership]
   }
 ];
 
@@ -324,12 +403,16 @@ function schema(page){
     {'@type':'FAQPage','@id':`${url}#faq`,mainEntity:page.faqs.map(([name,text])=>({'@type':'Question',name,acceptedAnswer:{'@type':'Answer',text}}))}
   ];
   if(page.isCalculator){graph.push({'@type':'WebApplication','@id':`${url}#calculator`,name:'Dubai Property Buying Cost Calculator',url,applicationCategory:'FinanceApplication',operatingSystem:'Any',browserRequirements:'JavaScript enabled',offers:{'@type':'Offer',price:'0',priceCurrency:'AED'},description:page.description,featureList:['DLD registration estimate','Trustee fee logic','Agency and VAT estimate','Mortgage registration estimate','Upfront cash estimate']});}
-  else{graph.push({'@type':'Article','@id':`${url}#article`,headline:page.title,description:page.description,datePublished:'2026-08-03',dateModified:'2026-08-03',mainEntityOfPage:url,author:{'@type':'Person',name:'James Ravi',url:`${domain}/about-me/`},publisher:{'@type':'Organization',name:'James Realty',url:`${domain}/`},image:socialImage,citation:page.sources.map(source=>source[1])});}
+  else{graph.push({'@type':'Article','@id':`${url}#article`,headline:page.title,description:page.description,datePublished:'2026-08-03',dateModified:'2026-08-24',mainEntityOfPage:url,author:{'@type':'Person',name:'James Ravi',url:`${domain}/about-me/`},publisher:{'@type':'Organization',name:'James Realty',url:`${domain}/`},image:page.heroImage?domain+page.heroImage:socialImage,citation:page.sources.map(source=>source[1])});}
   return {'@context':'https://schema.org','@graph':graph};
 }
 
 function related(page){
-  const items=cluster.filter(item=>item.slug!==page.slug).slice(0,6);
+  const hub=cluster.find(item=>item.slug==='dubai-property-buyer-hub');
+  const other=cluster.filter(item=>item.slug!==page.slug&&item.slug!=='dubai-property-buyer-hub');
+  const jebel=cluster.find(item=>item.slug==='jebel-ali-village-property-investment');
+  const hubItems=[jebel,...other.filter(item=>item.slug!=='jebel-ali-village-property-investment')].filter(Boolean).slice(0,6);
+  const items=page.slug==='dubai-property-buyer-hub'?hubItems:[hub,...other].filter(Boolean).slice(0,6);
   return `<section class="cluster-related-section"><div class="section-shell"><div class="cluster-related-heading"><div><p class="section-kicker">Buy / Invest cluster</p><h2>Continue the Dubai buying decision.</h2></div><p>Use the related guide that answers the next financial, property or due-diligence question.</p></div><div class="cluster-related">${items.map(item=>`<a class="buyer-cluster-card" href="/${item.slug}/"><span>${item.label}</span><h3>${item.title.replace(' | James Realty','')}</h3><p>${item.short}</p><strong>Open guide →</strong></a>`).join('')}</div></div></section>`;
 }
 
@@ -342,13 +425,39 @@ function render(page){
   return `<!DOCTYPE html>
 <html lang="en-AE"><head><!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-M74SL57L');</script>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>${page.title}</title><meta name="description" content="${page.description}"/><meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"/><link rel="canonical" href="${url}"/><link rel="alternate" hreflang="en-AE" href="${url}"/><link rel="alternate" hreflang="x-default" href="${url}"/><link rel="icon" href="/favicon.svg"/><link rel="apple-touch-icon" href="/favicon-192.png"/><link rel="manifest" href="/site.webmanifest"/><meta name="author" content="James Ravi"/><meta name="theme-color" content="#0a0a1a"/><meta property="og:type" content="${page.isCalculator?'website':'article'}"/><meta property="og:locale" content="en_AE"/><meta property="og:site_name" content="James Realty"/><meta property="og:title" content="${page.title}"/><meta property="og:description" content="${page.description}"/><meta property="og:url" content="${url}"/><meta property="og:image" content="${socialImage}"/><meta property="og:image:secure_url" content="${socialImage}"/><meta property="og:image:type" content="image/jpeg"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image:alt" content="Property adviser presenting a UAE residential development to two buyers in a naturally lit sales gallery"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="${page.title}"/><meta name="twitter:description" content="${page.description}"/><meta name="twitter:image" content="${socialImage}"/><meta name="twitter:image:alt" content="UAE property consultation with a residential development model and skyline view"/><link rel="stylesheet" href="/_next/static/css/5576f66c8ff02a6a.css?v=12"/><link rel="stylesheet" href="/assets/conversion.css?v=2"/><link rel="stylesheet" href="/assets/seo-answer.css?v=1"/><link rel="stylesheet" href="/assets/header-goal-nav.css?v=2"/><link rel="stylesheet" href="/assets/buyer-cluster.css?v=1"/><script type="application/ld+json">${escapeJson(schema(page))}</script><script defer src="/assets/site.js?v=10"></script>${page.isCalculator?'<script defer src="/assets/buying-cost-calculator.js?v=1"></script>':''}</head>
-<body><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M74SL57L" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><a class="skip-link" href="#main-content">Skip to main content</a>${header()}<main id="main-content" class="buyer-guide-page"><nav class="section-shell guide-breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/buy-invest-dubai/">Buy / Invest</a><span aria-hidden="true">/</span><span aria-current="page">${page.label}</span></nav><section class="section-shell guide-hero" aria-labelledby="guide-title"><div class="guide-hero-copy"><span class="eyebrow">${page.eyebrow}</span><h1 id="guide-title">${page.title.replace(' | James Realty','')}</h1><p>${page.description}</p><div class="guide-hero-actions"><a class="button button-primary" href="/contact/?goal=buy">Start a buyer enquiry <span aria-hidden="true">→</span></a><a class="button button-outline" href="/dubai-data/">Open Dubai Data</a></div></div><aside class="guide-snapshot"><span>Decision snapshot</span><strong>${page.snapshotTitle}</strong><p>${page.snapshotText}</p><dl>${page.snapshot.map(([term,value])=>`<div><dt>${term}</dt><dd>${value}</dd></div>`).join('')}</dl></aside></section><section class="section-shell guide-answer" aria-labelledby="direct-answer"><div class="guide-answer-card"><p class="section-kicker">Direct answer</p><h2 id="direct-answer">${page.answerTitle}</h2><p>${page.summary}</p><ul class="guide-answer-points">${page.points.map(point=>`<li>${point}</li>`).join('')}</ul></div></section><div class="section-shell guide-layout"><aside class="guide-toc" aria-label="On this page"><strong>On this page</strong>${toc}<a href="#guide-sources">Official sources</a><a href="#guide-faq-title">FAQs</a></aside><article class="guide-content">${sections}<section id="guide-sources" class="guide-section guide-sources"><h2>Official sources and review basis</h2><ol>${sources}</ol><p class="guide-updated">Reviewed 3 August 2026. Government fees, finance rules and tax treatment can change; confirm the transaction-specific position before signing or remitting funds.</p></section></article></div>${related(page)}<section class="section-shell cluster-cta" aria-labelledby="cluster-cta-title"><div><p class="section-kicker">From research to a buyer brief</p><h2 id="cluster-cta-title">Apply the guide to your budget and timeline.</h2><p>Share the purpose, budget, payment route, property type and timing so the first conversation can start with a focused brief.</p></div><div class="cluster-cta-actions"><a class="button button-primary" href="/buy-invest-dubai/#buyer-enquiry">Build a buyer brief</a><a class="button button-outline" href="/contact/?goal=buy">Contact Me</a></div></section><section class="section-shell guide-faq article-faq" aria-labelledby="guide-faq-title"><p class="section-kicker">Buyer questions</p><h2 id="guide-faq-title">Frequently asked questions</h2>${faqs}</section></main><a class="mobile-conversion nav-whatsapp" href="/contact/?goal=buy">Start buyer enquiry</a>${footer()}</body></html>`;
+<body><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M74SL57L" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><a class="skip-link" href="#main-content">Skip to main content</a>${header()}<main id="main-content" class="buyer-guide-page"><nav class="section-shell guide-breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/buy-invest-dubai/">Buy / Invest</a><span aria-hidden="true">/</span><span aria-current="page">${page.label}</span></nav><section class="section-shell guide-hero" aria-labelledby="guide-title"><div class="guide-hero-copy"><span class="eyebrow">${page.eyebrow}</span><h1 id="guide-title">${page.title.replace(' | James Realty','')}</h1><p>${page.description}</p><div class="guide-hero-actions"><a class="button button-primary" href="/contact/?goal=buy">Start a buyer enquiry <span aria-hidden="true">→</span></a><a class="button button-outline" href="/dubai-data/">Open Dubai Data</a></div></div><aside class="guide-snapshot">${page.heroImage?`<img class="guide-snapshot-image" src="${page.heroImage}" alt="${page.heroAlt||page.title}" width="1200" height="750" loading="eager" decoding="async"/>`:''}<span>Decision snapshot</span><strong>${page.snapshotTitle}</strong><p>${page.snapshotText}</p><dl>${page.snapshot.map(([term,value])=>`<div><dt>${term}</dt><dd>${value}</dd></div>`).join('')}</dl></aside></section><section class="section-shell guide-answer" aria-labelledby="direct-answer"><div class="guide-answer-card"><p class="section-kicker">Direct answer</p><h2 id="direct-answer">${page.answerTitle}</h2><p>${page.summary}</p><ul class="guide-answer-points">${page.points.map(point=>`<li>${point}</li>`).join('')}</ul></div></section><div class="section-shell guide-layout"><aside class="guide-toc" aria-label="On this page"><strong>On this page</strong>${toc}<a href="#guide-sources">Official sources</a><a href="#guide-faq-title">FAQs</a></aside><article class="guide-content">${sections}<section id="guide-sources" class="guide-section guide-sources"><h2>Official sources and review basis</h2><ol>${sources}</ol><p class="guide-updated">Reviewed 3 August 2026. Government fees, finance rules and tax treatment can change; confirm the transaction-specific position before signing or remitting funds.</p></section></article></div>${related(page)}<section class="section-shell cluster-cta" aria-labelledby="cluster-cta-title"><div><p class="section-kicker">From research to a buyer brief</p><h2 id="cluster-cta-title">Apply the guide to your budget and timeline.</h2><p>Share the purpose, budget, payment route, property type and timing so the first conversation can start with a focused brief.</p></div><div class="cluster-cta-actions"><a class="button button-primary" href="/buy-invest-dubai/#buyer-enquiry">Build a buyer brief</a><a class="button button-outline" href="/contact/?goal=buy">Contact Me</a></div></section><section class="section-shell guide-faq article-faq" aria-labelledby="guide-faq-title"><p class="section-kicker">Buyer questions</p><h2 id="guide-faq-title">Frequently asked questions</h2>${faqs}</section></main><a class="mobile-conversion nav-whatsapp" href="/contact/?goal=buy">Start buyer enquiry</a>${footer()}</body></html>`;
 }
 
 for(const page of pages){
   const dir=path.join(root,page.slug);
   fs.mkdirSync(dir,{recursive:true});
   fs.writeFileSync(path.join(dir,'index.html'),render(page));
+}
+
+const buyInvestPath=path.join(root,'buy-invest-dubai','index.html');
+if(fs.existsSync(buyInvestPath)){
+  let html=fs.readFileSync(buyInvestPath,'utf8');
+  if(!html.includes('href="/dubai-property-buyer-hub/"')){
+    const hubCard='<a class="buyer-cluster-card" href="/dubai-property-buyer-hub/"><span>Buyer hub</span><h3>Dubai property buyer hub</h3><p>Connect purpose, budget, community, status, finance, yield and due diligence.</p><strong>Start with the hub →</strong></a>';
+    html=html.replace('<div class="cluster-related">','<div class="cluster-related">'+hubCard);
+  }
+  if(!html.includes('href="/jebel-ali-village-property-investment/"')){
+    const jebelCard='<a class="buyer-cluster-card" href="/jebel-ali-village-property-investment/"><span>Jebel Ali Village</span><h3>Investment and handover guide</h3><p>Inspect the community, model net yield and assess simultaneous resale supply.</p><strong>Open Jebel Ali guide →</strong></a>';
+    html=html.replace('<div class="cluster-related">','<div class="cluster-related">'+jebelCard);
+  }
+  fs.writeFileSync(buyInvestPath,html);
+}
+
+const sitemapPath=path.join(root,'sitemap.xml');
+if(fs.existsSync(sitemapPath)){
+  let xml=fs.readFileSync(sitemapPath,'utf8');
+  const growthUrls=[`${domain}/dubai-property-buyer-hub/`,`${domain}/jebel-ali-village-property-investment/`];
+  for(const growthUrl of growthUrls){
+    if(!xml.includes(`<loc>${growthUrl}</loc>`)){
+      xml=xml.replace('</urlset>',`  <url>\n    <loc>${growthUrl}</loc>\n    <lastmod>2026-08-24</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.9</priority>\n  </url>\n</urlset>`);
+    }
+  }
+  fs.writeFileSync(sitemapPath,xml);
 }
 
 console.log(`Generated ${pages.length} Buy / Invest cluster pages.`);
