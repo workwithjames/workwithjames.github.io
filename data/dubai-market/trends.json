@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-22T21:05:48.098Z",
+  "generated_at": "2026-08-24T21:54:23.006Z",
   "history_start": "2026-08-17",
   "latest_date": "2026-08-20",
   "snapshots": 3,
@@ -12,9 +12,9 @@
   "market": {
     "date": "2026-08-20",
     "current": {
-      "total_transactions": 32772,
+      "total_transactions": 32910,
       "areas": 158,
-      "median_sale_price_aed": 1157816
+      "median_sale_price_aed": 1159000
     },
     "changes": {
       "7d": {
@@ -45,9 +45,9 @@
       },
       {
         "date": "2026-08-20",
-        "total_transactions": 32772,
+        "total_transactions": 32910,
         "areas": 158,
-        "median_sale_price_aed": 1157816
+        "median_sale_price_aed": 1159000
       }
     ]
   },
@@ -119,12 +119,12 @@
       },
       "Al Barsha South Fifth": {
         "current": {
-          "median_price_aed": 1078222,
-          "median_price_per_sqm_aed": 17555,
+          "median_price_aed": 1072008,
+          "median_price_per_sqm_aed": 17553,
           "gross_rental_yield_pct": 6.22,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 259,
-          "sale_sample": 259,
+          "sample_size": 260,
+          "sale_sample": 260,
           "rent_sample": 15
         },
         "confidence": "Medium",
@@ -171,24 +171,24 @@
           },
           {
             "date": "2026-08-20",
-            "median_price_aed": 1078222,
-            "median_price_per_sqm_aed": 17555,
+            "median_price_aed": 1072008,
+            "median_price_per_sqm_aed": 17553,
             "gross_rental_yield_pct": 6.22,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 259,
-            "sale_sample": 259,
+            "sample_size": 260,
+            "sale_sample": 260,
             "rent_sample": 15
           }
         ]
       },
       "Al Barsha South Fourth": {
         "current": {
-          "median_price_aed": 950000,
+          "median_price_aed": 952200,
           "median_price_per_sqm_aed": 15232,
           "gross_rental_yield_pct": 6.26,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 1434,
-          "sale_sample": 1434,
+          "sample_size": 1443,
+          "sale_sample": 1443,
           "rent_sample": 120
         },
         "confidence": "High",
@@ -235,12 +235,12 @@
           },
           {
             "date": "2026-08-20",
-            "median_price_aed": 950000,
+            "median_price_aed": 952200,
             "median_price_per_sqm_aed": 15232,
             "gross_rental_yield_pct": 6.26,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 1434,
-            "sale_sample": 1434,
+            "sample_size": 1443,
+            "sale_sample": 1443,
             "rent_sample": 120
           }
         ]
@@ -504,11 +504,11 @@
       "Al Hebiah First": {
         "current": {
           "median_price_aed": 1050000,
-          "median_price_per_sqm_aed": 18420,
+          "median_price_per_sqm_aed": 18413,
           "gross_rental_yield_pct": 4.31,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 343,
-          "sale_sample": 343,
+          "sample_size": 344,
+          "sale_sample": 344,
           "rent_sample": 13
         },
         "confidence": "Medium",
@@ -556,11 +556,11 @@
           {
             "date": "2026-08-20",
             "median_price_aed": 1050000,
-            "median_price_per_sqm_aed": 18420,
+            "median_price_per_sqm_aed": 18413,
             "gross_rental_yield_pct": 4.31,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 343,
-            "sale_sample": 343,
+            "sample_size": 344,
+            "sale_sample": 344,
             "rent_sample": 13
           }
         ]
@@ -695,12 +695,12 @@
       },
       "Al Hebiah Sixth": {
         "current": {
-          "median_price_aed": 930000,
-          "median_price_per_sqm_aed": 14565,
-          "gross_rental_yield_pct": 7.95,
+          "median_price_aed": 960000,
+          "median_price_per_sqm_aed": 15006,
+          "gross_rental_yield_pct": 7.72,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 3,
-          "sale_sample": 3,
+          "sample_size": 4,
+          "sale_sample": 4,
           "rent_sample": 2
         },
         "confidence": "Insufficient",
@@ -747,24 +747,24 @@
           },
           {
             "date": "2026-08-20",
-            "median_price_aed": 930000,
-            "median_price_per_sqm_aed": 14565,
-            "gross_rental_yield_pct": 7.95,
+            "median_price_aed": 960000,
+            "median_price_per_sqm_aed": 15006,
+            "gross_rental_yield_pct": 7.72,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 3,
-            "sale_sample": 3,
+            "sample_size": 4,
+            "sale_sample": 4,
             "rent_sample": 2
           }
         ]
       },
       "Al Hebiah Third": {
         "current": {
-          "median_price_aed": 1158000,
-          "median_price_per_sqm_aed": 19429,
-          "gross_rental_yield_pct": 5.39,
+          "median_price_aed": 1159060,
+          "median_price_per_sqm_aed": 19420,
+          "gross_rental_yield_pct": 5.4,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 281,
-          "sale_sample": 281,
+          "sample_size": 282,
+          "sale_sample": 282,
           "rent_sample": 20
         },
         "confidence": "Medium",
@@ -811,24 +811,24 @@
           },
           {
             "date": "2026-08-20",
-            "median_price_aed": 1158000,
-            "median_price_per_sqm_aed": 19429,
-            "gross_rental_yield_pct": 5.39,
+            "median_price_aed": 1159060,
+            "median_price_per_sqm_aed": 19420,
+            "gross_rental_yield_pct": 5.4,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 281,
-            "sale_sample": 281,
+            "sample_size": 282,
+            "sale_sample": 282,
             "rent_sample": 20
           }
         ]
       },
       "Al Jadaf": {
         "current": {
-          "median_price_aed": 1303621,
-          "median_price_per_sqm_aed": 21508,
+          "median_price_aed": 1307242,
+          "median_price_per_sqm_aed": 21505,
           "gross_rental_yield_pct": 3.49,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 280,
-          "sale_sample": 280,
+          "sample_size": 281,
+          "sale_sample": 281,
           "rent_sample": 52
         },
         "confidence": "High",
@@ -875,12 +875,12 @@
           },
           {
             "date": "2026-08-20",
-            "median_price_aed": 1303621,
-            "median_price_per_sqm_aed": 21508,
+            "median_price_aed": 1307242,
+            "median_price_per_sqm_aed": 21505,
             "gross_rental_yield_pct": 3.49,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 280,
-            "sale_sample": 280,
+            "sample_size": 281,
+            "sale_sample": 281,
             "rent_sample": 52
           }
         ]
@@ -888,11 +888,11 @@
       "Al Khairan First": {
         "current": {
           "median_price_aed": 2400000,
-          "median_price_per_sqm_aed": 25204,
+          "median_price_per_sqm_aed": 25202,
           "gross_rental_yield_pct": 5.28,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 306,
-          "sale_sample": 306,
+          "sample_size": 307,
+          "sale_sample": 307,
           "rent_sample": 22
         },
         "confidence": "Medium",
@@ -940,23 +940,23 @@
           {
             "date": "2026-08-20",
             "median_price_aed": 2400000,
-            "median_price_per_sqm_aed": 25204,
+            "median_price_per_sqm_aed": 25202,
             "gross_rental_yield_pct": 5.28,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 306,
-            "sale_sample": 306,
+            "sample_size": 307,
+            "sale_sample": 307,
             "rent_sample": 22
           }
         ]
       },
       "Al Merkadh": {
         "current": {
-          "median_price_aed": 1395000,
-          "median_price_per_sqm_aed": 21551,
+          "median_price_aed": 1397500,
+          "median_price_per_sqm_aed": 21556,
           "gross_rental_yield_pct": 6.77,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 413,
-          "sale_sample": 413,
+          "sample_size": 414,
+          "sale_sample": 414,
           "rent_sample": 30
         },
         "confidence": "High",
@@ -1003,24 +1003,24 @@
           },
           {
             "date": "2026-08-20",
-            "median_price_aed": 1395000,
-            "median_price_per_sqm_aed": 21551,
+            "median_price_aed": 1397500,
+            "median_price_per_sqm_aed": 21556,
             "gross_rental_yield_pct": 6.77,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 413,
-            "sale_sample": 413,
+            "sample_size": 414,
+            "sale_sample": 414,
             "rent_sample": 30
           }
         ]
       },
       "Al Satwa": {
         "current": {
-          "median_price_aed": 1400288,
-          "median_price_per_sqm_aed": 23843,
-          "gross_rental_yield_pct": 4.49,
+          "median_price_aed": 1392788,
+          "median_price_per_sqm_aed": 23819,
+          "gross_rental_yield_pct": 4.5,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 117,
-          "sale_sample": 117,
+          "sample_size": 118,
+          "sale_sample": 118,
           "rent_sample": 83
         },
         "confidence": "High",
@@ -1067,12 +1067,12 @@
           },
           {
             "date": "2026-08-20",
-            "median_price_aed": 1400288,
-            "median_price_per_sqm_aed": 23843,
-            "gross_rental_yield_pct": 4.49,
+            "median_price_aed": 1392788,
+            "median_price_per_sqm_aed": 23819,
+            "gross_rental_yield_pct": 4.5,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 117,
-            "sale_sample": 117,
+            "sample_size": 118,
+            "sale_sample": 118,
             "rent_sample": 83
           }
         ]
@@ -1143,12 +1143,12 @@
       },
       "Al Thanyah Fifth": {
         "current": {
-          "median_price_aed": 1984828,
-          "median_price_per_sqm_aed": 24085,
+          "median_price_aed": 1988328,
+          "median_price_per_sqm_aed": 24088,
           "gross_rental_yield_pct": 4.25,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 522,
-          "sale_sample": 522,
+          "sample_size": 524,
+          "sale_sample": 524,
           "rent_sample": 37
         },
         "confidence": "High",
@@ -1195,12 +1195,12 @@
           },
           {
             "date": "2026-08-20",
-            "median_price_aed": 1984828,
-            "median_price_per_sqm_aed": 24085,
+            "median_price_aed": 1988328,
+            "median_price_per_sqm_aed": 24088,
             "gross_rental_yield_pct": 4.25,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 522,
-            "sale_sample": 522,
+            "sample_size": 524,
+            "sale_sample": 524,
             "rent_sample": 37
           }
         ]
@@ -1592,11 +1592,11 @@
       "Burj Khalifa": {
         "current": {
           "median_price_aed": 2850000,
-          "median_price_per_sqm_aed": 27377,
+          "median_price_per_sqm_aed": 27397,
           "gross_rental_yield_pct": 5.07,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 290,
-          "sale_sample": 290,
+          "sample_size": 293,
+          "sale_sample": 293,
           "rent_sample": 37
         },
         "confidence": "High",
@@ -1644,23 +1644,23 @@
           {
             "date": "2026-08-20",
             "median_price_aed": 2850000,
-            "median_price_per_sqm_aed": 27377,
+            "median_price_per_sqm_aed": 27397,
             "gross_rental_yield_pct": 5.07,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 290,
-            "sale_sample": 290,
+            "sample_size": 293,
+            "sale_sample": 293,
             "rent_sample": 37
           }
         ]
       },
       "Business Bay": {
         "current": {
-          "median_price_aed": 1691813,
-          "median_price_per_sqm_aed": 22617,
-          "gross_rental_yield_pct": 5.2,
+          "median_price_aed": 1696888,
+          "median_price_per_sqm_aed": 22678,
+          "gross_rental_yield_pct": 5.19,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 584,
-          "sale_sample": 584,
+          "sample_size": 587,
+          "sale_sample": 587,
           "rent_sample": 67
         },
         "confidence": "High",
@@ -1707,12 +1707,12 @@
           },
           {
             "date": "2026-08-20",
-            "median_price_aed": 1691813,
-            "median_price_per_sqm_aed": 22617,
-            "gross_rental_yield_pct": 5.2,
+            "median_price_aed": 1696888,
+            "median_price_per_sqm_aed": 22678,
+            "gross_rental_yield_pct": 5.19,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 584,
-            "sale_sample": 584,
+            "sample_size": 587,
+            "sale_sample": 587,
             "rent_sample": 67
           }
         ]
@@ -1912,12 +1912,12 @@
       "Jabal Ali First": {
         "current": {
           "median_price_aed": 1500000,
-          "median_price_per_sqm_aed": 16996,
+          "median_price_per_sqm_aed": 16994,
           "gross_rental_yield_pct": 4.62,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 812,
-          "sale_sample": 812,
-          "rent_sample": 181
+          "sample_size": 815,
+          "sale_sample": 815,
+          "rent_sample": 182
         },
         "confidence": "High",
         "changes": {
@@ -1964,23 +1964,23 @@
           {
             "date": "2026-08-20",
             "median_price_aed": 1500000,
-            "median_price_per_sqm_aed": 16996,
+            "median_price_per_sqm_aed": 16994,
             "gross_rental_yield_pct": 4.62,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 812,
-            "sale_sample": 812,
-            "rent_sample": 181
+            "sample_size": 815,
+            "sale_sample": 815,
+            "rent_sample": 182
           }
         ]
       },
       "Jabal Ali Industrial Second": {
         "current": {
           "median_price_aed": 715515,
-          "median_price_per_sqm_aed": 18627,
+          "median_price_per_sqm_aed": 18633,
           "gross_rental_yield_pct": 7.15,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 1423,
-          "sale_sample": 1423,
+          "sample_size": 1429,
+          "sale_sample": 1429,
           "rent_sample": null
         },
         "confidence": "Medium",
@@ -2028,11 +2028,11 @@
           {
             "date": "2026-08-20",
             "median_price_aed": 715515,
-            "median_price_per_sqm_aed": 18627,
+            "median_price_per_sqm_aed": 18633,
             "gross_rental_yield_pct": 7.15,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 1423,
-            "sale_sample": 1423,
+            "sample_size": 1429,
+            "sale_sample": 1429,
             "rent_sample": null
           }
         ]
@@ -2107,8 +2107,8 @@
           "median_price_per_sqm_aed": 18519,
           "gross_rental_yield_pct": 4.98,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 3646,
-          "sale_sample": 3646,
+          "sample_size": 3665,
+          "sale_sample": 3665,
           "rent_sample": 45
         },
         "confidence": "High",
@@ -2159,20 +2159,20 @@
             "median_price_per_sqm_aed": 18519,
             "gross_rental_yield_pct": 4.98,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 3646,
-            "sale_sample": 3646,
+            "sample_size": 3665,
+            "sale_sample": 3665,
             "rent_sample": 45
           }
         ]
       },
       "Marsa Dubai": {
         "current": {
-          "median_price_aed": 2529548,
-          "median_price_per_sqm_aed": 24834,
-          "gross_rental_yield_pct": 4.42,
+          "median_price_aed": 2534548,
+          "median_price_per_sqm_aed": 24920,
+          "gross_rental_yield_pct": 4.41,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 489,
-          "sale_sample": 489,
+          "sample_size": 490,
+          "sale_sample": 490,
           "rent_sample": 111
         },
         "confidence": "High",
@@ -2219,12 +2219,12 @@
           },
           {
             "date": "2026-08-20",
-            "median_price_aed": 2529548,
-            "median_price_per_sqm_aed": 24834,
-            "gross_rental_yield_pct": 4.42,
+            "median_price_aed": 2534548,
+            "median_price_per_sqm_aed": 24920,
+            "gross_rental_yield_pct": 4.41,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 489,
-            "sale_sample": 489,
+            "sample_size": 490,
+            "sale_sample": 490,
             "rent_sample": 111
           }
         ]
@@ -2555,8 +2555,8 @@
           "median_price_per_sqm_aed": 35560,
           "gross_rental_yield_pct": 3.79,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 104,
-          "sale_sample": 104,
+          "sample_size": 106,
+          "sale_sample": 106,
           "rent_sample": 29
         },
         "confidence": "Medium",
@@ -2607,8 +2607,8 @@
             "median_price_per_sqm_aed": 35560,
             "gross_rental_yield_pct": 3.79,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 104,
-            "sale_sample": 104,
+            "sample_size": 106,
+            "sale_sample": 106,
             "rent_sample": 29
           }
         ]
@@ -2871,12 +2871,12 @@
       },
       "Wadi Al Safa 4": {
         "current": {
-          "median_price_aed": 609000,
-          "median_price_per_sqm_aed": 18446,
+          "median_price_aed": 608850,
+          "median_price_per_sqm_aed": 18439,
           "gross_rental_yield_pct": null,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 1558,
-          "sale_sample": 1558,
+          "sample_size": 1572,
+          "sale_sample": 1572,
           "rent_sample": 0
         },
         "confidence": "Insufficient",
@@ -2923,24 +2923,24 @@
           },
           {
             "date": "2026-08-20",
-            "median_price_aed": 609000,
-            "median_price_per_sqm_aed": 18446,
+            "median_price_aed": 608850,
+            "median_price_per_sqm_aed": 18439,
             "gross_rental_yield_pct": null,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 1558,
-            "sale_sample": 1558,
+            "sample_size": 1572,
+            "sale_sample": 1572,
             "rent_sample": 0
           }
         ]
       },
       "Wadi Al Safa 5": {
         "current": {
-          "median_price_aed": 940900,
-          "median_price_per_sqm_aed": 15088,
+          "median_price_aed": 944023,
+          "median_price_per_sqm_aed": 15090,
           "gross_rental_yield_pct": 3.61,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 801,
-          "sale_sample": 801,
+          "sample_size": 807,
+          "sale_sample": 807,
           "rent_sample": 28
         },
         "confidence": "Medium",
@@ -2987,12 +2987,12 @@
           },
           {
             "date": "2026-08-20",
-            "median_price_aed": 940900,
-            "median_price_per_sqm_aed": 15088,
+            "median_price_aed": 944023,
+            "median_price_per_sqm_aed": 15090,
             "gross_rental_yield_pct": 3.61,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 801,
-            "sale_sample": 801,
+            "sample_size": 807,
+            "sale_sample": 807,
             "rent_sample": 28
           }
         ]
@@ -3127,12 +3127,12 @@
       },
       "Warsan Fourth": {
         "current": {
-          "median_price_aed": 829000,
-          "median_price_per_sqm_aed": 13298,
-          "gross_rental_yield_pct": 4.79,
+          "median_price_aed": 826224,
+          "median_price_per_sqm_aed": 13296,
+          "gross_rental_yield_pct": 4.8,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 199,
-          "sale_sample": 199,
+          "sample_size": 200,
+          "sale_sample": 200,
           "rent_sample": 22
         },
         "confidence": "Medium",
@@ -3179,12 +3179,12 @@
           },
           {
             "date": "2026-08-20",
-            "median_price_aed": 829000,
-            "median_price_per_sqm_aed": 13298,
-            "gross_rental_yield_pct": 4.79,
+            "median_price_aed": 826224,
+            "median_price_per_sqm_aed": 13296,
+            "gross_rental_yield_pct": 4.8,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 199,
-            "sale_sample": 199,
+            "sample_size": 200,
+            "sale_sample": 200,
             "rent_sample": 22
           }
         ]
@@ -4217,12 +4217,12 @@
       },
       "Al Thanayah Fourth": {
         "current": {
-          "median_price_aed": 4450000,
-          "median_price_per_sqm_aed": 17115,
-          "gross_rental_yield_pct": 3.8,
+          "median_price_aed": 4437500,
+          "median_price_per_sqm_aed": 16966,
+          "gross_rental_yield_pct": 3.84,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 63,
-          "sale_sample": 63,
+          "sample_size": 64,
+          "sale_sample": 64,
           "rent_sample": 14
         },
         "confidence": "Medium",
@@ -4269,12 +4269,12 @@
           },
           {
             "date": "2026-08-20",
-            "median_price_aed": 4450000,
-            "median_price_per_sqm_aed": 17115,
-            "gross_rental_yield_pct": 3.8,
+            "median_price_aed": 4437500,
+            "median_price_per_sqm_aed": 16966,
+            "gross_rental_yield_pct": 3.84,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 63,
-            "sale_sample": 63,
+            "sample_size": 64,
+            "sale_sample": 64,
             "rent_sample": 14
           }
         ]
@@ -4602,11 +4602,11 @@
       "Al Yelayiss 1": {
         "current": {
           "median_price_aed": 3195840,
-          "median_price_per_sqm_aed": 19106,
+          "median_price_per_sqm_aed": 19099,
           "gross_rental_yield_pct": 3.76,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 202,
-          "sale_sample": 202,
+          "sample_size": 203,
+          "sale_sample": 203,
           "rent_sample": 11
         },
         "confidence": "Medium",
@@ -4654,11 +4654,11 @@
           {
             "date": "2026-08-20",
             "median_price_aed": 3195840,
-            "median_price_per_sqm_aed": 19106,
+            "median_price_per_sqm_aed": 19099,
             "gross_rental_yield_pct": 3.76,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 202,
-            "sale_sample": 202,
+            "sample_size": 203,
+            "sale_sample": 203,
             "rent_sample": 11
           }
         ]
@@ -5241,12 +5241,12 @@
       },
       "Madinat Al Mataar": {
         "current": {
-          "median_price_aed": 4805000,
+          "median_price_aed": 4802500,
           "median_price_per_sqm_aed": 15077,
           "gross_rental_yield_pct": 4.25,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 229,
-          "sale_sample": 229,
+          "sample_size": 230,
+          "sale_sample": 230,
           "rent_sample": 5
         },
         "confidence": "Low",
@@ -5293,12 +5293,12 @@
           },
           {
             "date": "2026-08-20",
-            "median_price_aed": 4805000,
+            "median_price_aed": 4802500,
             "median_price_per_sqm_aed": 15077,
             "gross_rental_yield_pct": 4.25,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 229,
-            "sale_sample": 229,
+            "sample_size": 230,
+            "sale_sample": 230,
             "rent_sample": 5
           }
         ]
@@ -6074,11 +6074,11 @@
       "Wadi Al Safa 5": {
         "current": {
           "median_price_aed": 3200000,
-          "median_price_per_sqm_aed": 15786,
-          "gross_rental_yield_pct": 5.72,
+          "median_price_per_sqm_aed": 15912,
+          "gross_rental_yield_pct": 5.67,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 113,
-          "sale_sample": 113,
+          "sample_size": 114,
+          "sale_sample": 114,
           "rent_sample": 16
         },
         "confidence": "Medium",
@@ -6126,11 +6126,11 @@
           {
             "date": "2026-08-20",
             "median_price_aed": 3200000,
-            "median_price_per_sqm_aed": 15786,
-            "gross_rental_yield_pct": 5.72,
+            "median_price_per_sqm_aed": 15912,
+            "gross_rental_yield_pct": 5.67,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 113,
-            "sale_sample": 113,
+            "sample_size": 114,
+            "sale_sample": 114,
             "rent_sample": 16
           }
         ]
