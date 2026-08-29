@@ -1,0 +1,42 @@
+{
+  "checked_at_utc": "2026-08-29T22:13:18.528915+00:00",
+  "url": "https://digital.jamesrealty.uk/",
+  "home": {
+    "status": 200,
+    "has_new_cache_key": true,
+    "has_latest_hero": true,
+    "has_old_hero": false,
+    "headers": {
+      "server": "cloudflare",
+      "cache-control": "no-cache, no-store, must-revalidate",
+      "cf-cache-status": "DYNAMIC"
+    }
+  },
+  "styles": {
+    "status": 200,
+    "imports_structural_base": true,
+    "imports_single_gold": true,
+    "imports_final_responsive": true,
+    "imports_legacy_purple": false,
+    "imports_old_gold_theme": false,
+    "imports_standalone_mobile_patch": false,
+    "headers": {
+      "server": "cloudflare",
+      "cache-control": "no-cache, no-store, must-revalidate, no-cache, no-store, must-revalidate",
+      "cf-cache-status": "BYPASS",
+      "etag": "\"402c150ea12831c8efd4c8bb07268462\""
+    }
+  },
+  "responsive": {
+    "status": 200,
+    "contains_import": false,
+    "contains_mobile_hardening": true,
+    "headers": {
+      "server": "cloudflare",
+      "cache-control": "no-cache, no-store, must-revalidate",
+      "cf-cache-status": "BYPASS",
+      "etag": "\"55dfbb87aad503faeba57249ffd2f9c4\""
+    }
+  },
+  "passed": true
+}
