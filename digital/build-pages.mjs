@@ -381,7 +381,7 @@ function browserPreview(project, eager = false) {
 function projectCard(project, index, featured = false) {
   return `<article class="work-card ${featured ? "featured-work" : ""}" data-project-card data-service="${project.services.join("|")}" data-industry="${project.industry}" data-classification="${project.classification}">
     <a class="work-visual" href="/case-studies/${project.slug}.html" aria-label="Read the ${project.name} case study" data-event="case_study_click" data-case-study="${project.slug}">
-      ${browserPreview(project, index === 0)}
+      ${browserPreview(project)}
     </a>
     <div class="work-card-body">
       <div class="work-meta"><span>${String(index + 1).padStart(2, "0")}</span><span>${project.classification}</span><span>${project.industry}</span></div>
