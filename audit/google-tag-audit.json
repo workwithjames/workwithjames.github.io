@@ -1,10 +1,23 @@
 {
   "containerId": "GTM-M74SL57L",
-  "htmlFilesChecked": 92,
+  "htmlFilesChecked": 105,
   "taggedFiles": 90,
   "missingFiles": [
-    "essentials/index.html",
-    "igital/404.html"
+    "digital/book-call.html",
+    "digital/industries/b2b.html",
+    "digital/industries/retail.html",
+    "digital/industries.html",
+    "digital/privacy.html",
+    "digital/results.html",
+    "digital/solutions/fragmented-marketing.html",
+    "digital/solutions/international-growth.html",
+    "digital/solutions/lead-follow-up.html",
+    "digital/solutions/more-qualified-leads.html",
+    "digital/solutions/new-website.html",
+    "digital/solutions/website-not-converting.html",
+    "digital/solutions.html",
+    "digital/terms.html",
+    "essentials/index.html"
   ],
   "excludedTechnicalFiles": [
     "404.html",
