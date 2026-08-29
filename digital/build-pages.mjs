@@ -328,7 +328,7 @@ function footer() {
   </footer>`;
 }
 
-function page({ title, description, canonical, bodyClass = "", pageType = "", content, schema = null }) {
+function page({ title, description, canonical, bodyClass = "", pageType = "", content, schema = null, robots = "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" }) {
   const schemaTag = schema ? '<script type="application/ld+json">' + JSON.stringify(schema) + '</script>' : "";
   return `<!doctype html>
 <html lang="en">
@@ -339,7 +339,7 @@ function page({ title, description, canonical, bodyClass = "", pageType = "", co
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${title}</title>
   <meta name="description" content="${description}">
-  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="robots" content="${robots}">
   <link rel="canonical" href="${canonical}">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="James Digital">
@@ -349,7 +349,7 @@ function page({ title, description, canonical, bodyClass = "", pageType = "", co
   <meta name="twitter:card" content="summary">
   <meta name="theme-color" content="#090a0c">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/styles.css?v=20260829-global-redesign-1">
   ${schemaTag}
 </head>
 <body class="${bodyClass}" data-page-type="${pageType}">
@@ -357,7 +357,7 @@ function page({ title, description, canonical, bodyClass = "", pageType = "", co
   ${header()}
   <main id="main">${content}</main>
   ${footer()}
-  <script src="/script.js" defer></script>
+  <script src="/script.js?v=20260829-global-redesign-1" defer></script>
 </body>
 </html>`;
 }
@@ -828,6 +828,7 @@ write("404.html", page({
   title: "Page not found | James Digital",
   description: "The requested James Digital page could not be found.",
   canonical: base + "/404.html",
+  robots: "noindex,follow",
   pageType: "404",
   bodyClass: "error-page",
   content: '<section class="page-hero section-shell error-hero"><div><p class="eyebrow"><span></span> 404</p><h1>That page does not exist.</h1><p>Return to the portfolio, explore capabilities or start a project.</p><div class="hero-actions"><a class="button button-primary" href="/">Back to home</a><a class="button button-ghost" href="/portfolio.html">View Work</a></div></div></section>'
