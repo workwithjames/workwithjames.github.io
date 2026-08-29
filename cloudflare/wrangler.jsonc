@@ -16,10 +16,10 @@
     { "pattern": "dubairealestate.jamesrealty.uk", "custom_domain": true },
     { "pattern": "dubaiproperties.jamesrealty.uk", "custom_domain": true },
     { "pattern": "dubaiproperty.jamesrealty.uk", "custom_domain": true },
-    { "pattern": "digital.jamesrealty.uk", "custom_domain": true }
+    { "pattern": "digital.jamesrealty.uk/*", "zone_name": "jamesrealty.uk" }
   ],
   "d1_databases": [
-    { "binding": "LEADS" }
+    { "binding": "LEADS", "database_id": "97a36bb3-d5e1-4ed1-99b3-a50989392444" }
   ],
   "observability": {
     "enabled": true,
