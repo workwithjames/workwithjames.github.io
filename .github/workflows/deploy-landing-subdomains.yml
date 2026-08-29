@@ -1,3 +1,4 @@
+# Re-deploy when Digital routing or shared landing edge behavior changes.
 name: Deploy landing subdomains
 
 on:
