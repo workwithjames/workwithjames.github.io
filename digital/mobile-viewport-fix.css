@@ -1,0 +1,48 @@
+/* Physical-device typography normalization — 2026-08-30 */
+html{
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+  font-size:16px;
+}
+body{
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
+
+@media (max-width:620px){
+  html,body{font-size:16px!important}
+  .hero h1{font-size:clamp(2.8rem,12vw,3.75rem)!important;line-height:.96!important}
+  .page-hero h1{font-size:clamp(2.65rem,11vw,3.45rem)!important;line-height:.98!important}
+  .case-hero h1{font-size:clamp(2.55rem,10.5vw,3.3rem)!important;line-height:.98!important}
+  .hero-lead,.page-hero>div>p:not(.eyebrow),.case-hero>div>div>p:not(.eyebrow){font-size:.98rem!important;line-height:1.62!important}
+  .section-heading h2,.split-heading h2,.about-copy h2,.final-cta h2,.case-sections h2,.service-detail-grid h2,.next-project h2,.project-form-intro h2{font-size:clamp(2.05rem,9.5vw,3rem)!important;line-height:1!important}
+  .section-heading>div+div>p,.section-heading>p,.split-heading>p,.body-copy p{font-size:.96rem!important;line-height:1.62!important}
+  .kicker,.eyebrow{font-size:.74rem!important}
+  .button{font-size:.88rem!important}
+  .mobile-nav>a:not(.button){font-size:.94rem!important}
+  .hero-signals span{font-size:.72rem!important}
+  .hero-signals strong{font-size:.82rem!important}
+  .orbit-label{font-size:.64rem!important}
+  .system-flow{font-size:.64rem!important}
+  .proof-rail p{font-size:.72rem!important}
+  .proof-rail span{font-size:.78rem!important}
+  .work-card h3{font-size:1.35rem!important;line-height:1.16!important}
+  .work-card-body>p{font-size:.92rem!important;line-height:1.58!important}
+  .work-meta{font-size:.7rem!important}
+  .tag-row span{font-size:.7rem!important}
+  .problem-grid h3,.capability-grid h3,.trust-grid h3{font-size:1.08rem!important;line-height:1.2!important}
+  .problem-grid p,.capability-grid p,.trust-grid p{font-size:.875rem!important;line-height:1.55!important}
+  .about-monogram span{font-size:4.5rem!important}
+  .about-copy>p{font-size:.94rem!important;line-height:1.62!important}
+  .engagement-grid p,.service-outcome p,.price-grid>article>p,.engagement-model-grid p{font-size:.9rem!important;line-height:1.6!important}
+  .case-sections>section>p:not(.kicker),.case-copy p{font-size:.94rem!important;line-height:1.62!important}
+  .project-form input,.project-form select,.project-form textarea{font-size:1rem!important}
+}
+
+@media (max-width:390px){
+  .problem-grid p,.capability-grid p,.trust-grid p{font-size:.84rem!important}
+}
+
+@media (max-width:330px){
+  .problem-grid p,.capability-grid p,.trust-grid p{font-size:.9rem!important}
+}
