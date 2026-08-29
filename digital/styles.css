@@ -1,5 +1,26 @@
-@import url('styles-feasibility-purple-backup.css');
-@import url('gold-theme-digital.css?v=20260830-premium-gold-3');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Roboto+Flex:opsz,wdth,wght@8..144,75..150,300..800&display=swap');
+@import url('styles-base-feasibility-20260829.css');
+@import url('gold-theme-digital.css?v=20260830-premium-gold-4');
+
+/* Neutral typography layer retained from the previous visual system, without its indigo colours. */
+:root{
+  --display:'Roboto Flex','Arial Narrow',sans-serif;
+  --body:'Manrope',Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+body{font-family:var(--body)!important;letter-spacing:-.01em}
+h1,h2,.about-monogram span,.engagement-grid h3,.price-grid h3,.project-form-intro h2{
+  font-family:var(--display)!important;
+  font-stretch:135%;
+  font-weight:520;
+  letter-spacing:-.055em;
+}
+h3,strong{font-weight:600}
+.hero h1,.page-hero h1,.case-hero h1{line-height:.94}
+
+/* Sanitize legacy hard-coded colour remnants from the structural base. */
+.problems-section .kicker,.about-copy .kicker,.next-project .kicker{color:var(--accent)!important}
+.brand-mark{background:linear-gradient(145deg,rgba(213,170,82,.12),rgba(213,170,82,.025))!important}
+.system-map,.orbit-core,.image-fallback,.final-cta{background-color:var(--bg-soft)!important}
 
 /* Final conversion hierarchy: Start a Project is the hero's dominant CTA. */
 .hero-actions .button-primary:first-child{
