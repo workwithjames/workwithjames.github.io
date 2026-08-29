@@ -1,0 +1,163 @@
+name: Digital gold theme cleanup
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/digital-gold-theme-cleanup.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: digital-gold-theme-cleanup
+  cancel-in-progress: false
+
+jobs:
+  consolidate-digital-css:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Consolidate Digital theme and cache keys
+        shell: bash
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          import re
+
+          root = Path('digital')
+          cache_key = '20260830-gold-final-1'
+
+          responsive_path = root / 'styles-responsive-20260830.css'
+          mobile_path = root / 'mobile-viewport-fix.css'
+          final_responsive_path = root / 'styles-responsive-final-20260830.css'
+
+          responsive = responsive_path.read_text(encoding='utf-8')
+          responsive = re.sub(
+              r"^@import\s+url\(['\"]styles-feasibility-purple-backup\.css['\"]\);\s*\n?",
+              '',
+              responsive,
+              flags=re.MULTILINE,
+          )
+          responsive = re.sub(
+              r"^@import\s+url\(['\"]gold-theme-digital\.css(?:\?[^'\"]*)?['\"]\);\s*\n?",
+              '',
+              responsive,
+              flags=re.MULTILINE,
+          )
+
+          mobile = mobile_path.read_text(encoding='utf-8')
+          final_responsive = (
+              '/* James Digital final responsive layer — 2026-08-30.\n'
+              '   Theme imports intentionally prohibited here. The load order is controlled by styles.css. */\n\n'
+              + responsive.strip()
+              + '\n\n/* Physical mobile viewport hardening, consolidated from mobile-viewport-fix.css. */\n'
+              + mobile.strip()
+              + '\n'
+          )
+          final_responsive_path.write_text(final_responsive, encoding='utf-8')
+
+          styles = f"""/* James Digital production CSS entry point — 2026-08-30.
+             Deliberate order: structural base -> one gold theme -> one responsive/mobile layer.
+             Legacy purple, alternate gold, and standalone mobile patch files are not imported. */
+          @import url('styles-base-feasibility-20260829.css?v={cache_key}');
+          @import url('gold-production-20260830.css?v={cache_key}');
+          @import url('styles-responsive-final-20260830.css?v={cache_key}');
+          """
+          (root / 'styles.css').write_text(styles, encoding='utf-8')
+
+          viewport = 'width=device-width, initial-scale=1, viewport-fit=cover'
+          theme_color = '#0b0906'
+          html_files = sorted(root.rglob('*.html'))
+          updated_html = 0
+          for path in html_files:
+              text = path.read_text(encoding='utf-8')
+              original = text
+              text = re.sub(
+                  r'(<link\s+rel=["\']stylesheet["\']\s+href=["\']/styles\.css\?v=)[^"\']+(["\'])',
+                  rf'\g<1>{cache_key}\g<2>',
+                  text,
+              )
+              text = re.sub(
+                  r'<meta\s+name=["\']viewport["\']\s+content=["\'][^"\']*["\']\s*/?>',
+                  f'<meta name="viewport" content="{viewport}">',
+                  text,
+                  count=1,
+              )
+              text = re.sub(
+                  r'<meta\s+name=["\']theme-color["\']\s+content=["\'][^"\']*["\']\s*/?>',
+                  f'<meta name="theme-color" content="{theme_color}">',
+                  text,
+                  count=1,
+              )
+              if text != original:
+                  path.write_text(text, encoding='utf-8')
+                  updated_html += 1
+
+          builder = root / 'build-pages.mjs'
+          builder_text = builder.read_text(encoding='utf-8')
+          builder_text = re.sub(
+              r'/styles\.css\?v=[^"\'`<>\\$\s]+',
+              f'/styles.css?v={cache_key}',
+              builder_text,
+          )
+          builder_text = builder_text.replace(
+              '<meta name="viewport" content="width=device-width, initial-scale=1">',
+              f'<meta name="viewport" content="{viewport}">',
+          )
+          builder_text = re.sub(
+              r'<meta name="theme-color" content="#[0-9A-Fa-f]{6}">',
+              f'<meta name="theme-color" content="{theme_color}">',
+              builder_text,
+          )
+          builder.write_text(builder_text, encoding='utf-8')
+
+          accidental = Path('igital')
+          if accidental.exists():
+              for p in sorted(accidental.rglob('*'), reverse=True):
+                  if p.is_file() or p.is_symlink():
+                      p.unlink()
+                  elif p.is_dir():
+                      p.rmdir()
+              accidental.rmdir()
+
+          print(f'Updated {updated_html} Digital HTML files')
+          print(f'Production cache key: {cache_key}')
+          PY
+
+      - name: Validate consolidated production cascade
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f digital/styles-responsive-final-20260830.css
+          ! grep -q 'styles-feasibility-purple-backup' digital/styles.css
+          ! grep -q 'gold-theme-digital' digital/styles.css
+          ! grep -q 'mobile-viewport-fix' digital/styles.css
+          ! grep -q '^@import' digital/styles-responsive-final-20260830.css
+          grep -q '20260830-gold-final-1' digital/styles.css
+          grep -q '20260830-gold-final-1' digital/build-pages.mjs
+          if grep -R --include='*.html' -n '/styles.css?v=20260829-global-redesign-2' digital; then
+            echo 'Old Digital CSS cache key still exists in generated HTML.' >&2
+            exit 1
+          fi
+          test ! -d igital
+
+      - name: Commit cleanup
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet && git diff --cached --quiet; then
+            echo 'No cleanup changes were required.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A digital igital 2>/dev/null || git add -A digital
+          git add -u
+          git commit -m 'fix(digital): consolidate gold theme and bust mobile cache'
+          git push origin HEAD:main
