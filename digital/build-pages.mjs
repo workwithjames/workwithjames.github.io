@@ -1,3 +1,4 @@
+// Conversion guard: .github/workflows/apply-digital-conversion-rebuild.yml reapplies buyer-flow enhancements after digital changes.
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
