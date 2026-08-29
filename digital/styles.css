@@ -1,6 +1,8 @@
 /* James Digital production CSS entry point — 2026-08-30.
-   Deliberate order: structural base -> one gold theme -> one responsive/mobile layer.
+   Deliberate order: web fonts -> structural base -> one gold theme -> one responsive/mobile layer -> typography match.
    Legacy purple, alternate gold, and standalone mobile patch files are not imported. */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Roboto+Flex:opsz,wdth,wght@8..144,75..150,300..800&display=swap');
 @import url('styles-base-feasibility-20260829.css?v=20260830-gold-final-1');
 @import url('gold-production-20260830.css?v=20260830-gold-final-1');
 @import url('styles-responsive-final-20260830.css?v=20260830-gold-final-1');
+@import url('typography-feasibility-20260830.css?v=20260830-font-match-1');
