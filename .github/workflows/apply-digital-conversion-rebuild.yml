@@ -1,0 +1,348 @@
+name: Apply Digital conversion rebuild
+
+on:
+  push:
+    paths:
+      - 'digital/**'
+      - '.github/workflows/apply-digital-conversion-rebuild.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    if: ${{ !contains(github.event.head_commit.message || '', '[conversion-sync]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply conversion rebuild
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          from urllib.parse import quote
+
+          root = Path('digital')
+          VERSION = '20260830-conversion-1'
+
+          css = r'''
+          /* James Digital conversion system — 2026-08-30 */
+          .conversion-section{padding:100px 0;border-top:1px solid var(--line)}
+          .conversion-section .section-heading{margin-bottom:34px}
+          .proof-metrics,.why-grid,.process-grid,.result-grid,.solution-grid,.reference-grid,.buying-grid,.legal-grid{display:grid;gap:14px}
+          .proof-metrics{grid-template-columns:repeat(4,minmax(0,1fr));padding:28px 0}
+          .proof-metrics article,.why-grid article,.result-grid article,.solution-grid a,.reference-grid article,.buying-grid article,.legal-card{border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,rgba(255,200,87,.055),transparent 58%),var(--surface);padding:22px}
+          .proof-metrics strong,.result-grid strong{display:block;font-family:var(--font-display);font-stretch:135%;font-size:clamp(2rem,4vw,3.2rem);font-weight:520;line-height:1;color:var(--accent)}
+          .proof-metrics span,.result-grid span{display:block;margin-top:8px;color:var(--muted);font-size:.78rem;line-height:1.45}
+          .proof-note,.evidence-note,.reference-note,.relationship-note{margin:18px 0 0;padding:16px 18px;border:1px solid rgba(255,255,255,.1);border-radius:14px;background:rgba(255,255,255,.025);color:var(--muted);font-size:.8rem;line-height:1.65}
+          .why-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+          .why-grid h3,.solution-grid h3,.buying-grid h3{margin:8px 0;font-size:1rem}
+          .why-grid p,.solution-grid p,.buying-grid p,.reference-grid p{margin:0;color:var(--muted);font-size:.8rem;line-height:1.65}
+          .why-grid span,.process-grid span,.solution-grid small,.buying-grid span{color:var(--accent);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em}
+          .process-grid{grid-template-columns:repeat(5,minmax(0,1fr));counter-reset:step}
+          .process-grid article{position:relative;padding:22px 18px;border-top:1px solid var(--line)}
+          .process-grid h3{margin:10px 0 8px;font-size:.95rem}
+          .process-grid p{margin:0;color:var(--muted);font-size:.76rem;line-height:1.6}
+          .result-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+          .solution-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+          .solution-grid a{display:block;transition:transform .2s,border-color .2s}
+          .solution-grid a:hover{transform:translateY(-3px);border-color:rgba(255,200,87,.38)}
+          .reference-grid{grid-template-columns:1.1fr .9fr}
+          .reference-grid article:first-child{border-color:rgba(255,200,87,.26)}
+          .reference-grid strong{display:block;margin-bottom:10px;font-size:1.05rem}
+          .premium-paths{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+          .premium-paths article{padding:26px;border:1px solid var(--line);border-radius:20px;background:var(--surface)}
+          .premium-paths .featured{border-color:rgba(255,200,87,.42);box-shadow:0 20px 60px rgba(0,0,0,.18)}
+          .premium-paths .price{display:block;margin:16px 0 6px;font-family:var(--font-display);font-stretch:135%;font-size:2.3rem;color:var(--accent)}
+          .premium-paths ul{margin:18px 0 0;padding-left:18px;color:var(--muted);font-size:.8rem;line-height:1.75}
+          .premium-paths .button{margin-top:20px}
+          .engagement-note{max-width:850px;margin-top:22px;color:var(--muted);font-size:.82rem;line-height:1.7}
+          .case-contribution{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-block:1px solid var(--line);margin-top:6px}
+          .case-contribution div{padding:18px;border-right:1px solid var(--line)}
+          .case-contribution div:last-child{border-right:0}
+          .case-contribution span{display:block;color:#777c83;font-size:.63rem;text-transform:uppercase;letter-spacing:.08em}
+          .case-contribution strong{display:block;margin-top:6px;font-size:.78rem;line-height:1.45}
+          .contribution-note{margin:8px 0 0!important;color:#888d95!important;font-size:.7rem!important;line-height:1.5!important}
+          .service-buying-guide{padding:70px 0;border-block:1px solid var(--line);background:rgba(255,255,255,.015)}
+          .buying-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+          .lead-shell,.call-shell{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:46px;align-items:start}
+          .lead-card{border:1px solid var(--line);border-radius:22px;background:var(--surface);padding:26px}
+          .lead-card fieldset{border:0;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+          .lead-card fieldset+fieldset{margin-top:22px;padding-top:22px;border-top:1px solid var(--line)}
+          .lead-card legend{grid-column:1/-1;margin-bottom:12px;color:var(--accent);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em}
+          .lead-card label{display:grid;gap:7px;color:#c8c9cc;font-size:.72rem}
+          .lead-card .full{grid-column:1/-1}
+          .lead-card input,.lead-card select,.lead-card textarea{width:100%;border:1px solid var(--line);border-radius:12px;background:#0d0f12;color:#fff;padding:12px 13px;min-height:46px}
+          .lead-card textarea{min-height:120px;resize:vertical}
+          .lead-card .form-actions{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:8px}
+          .lead-card .form-actions small{color:var(--muted);line-height:1.5}
+          .lead-card [data-step='2'][hidden]{display:none}
+          .prepared-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+          .prepared-actions[hidden]{display:none}
+          .call-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:18px 0}
+          .call-options button{min-height:48px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.03);color:#fff;cursor:pointer}
+          .call-options button.is-active{border-color:rgba(255,200,87,.48);background:rgba(255,200,87,.09);color:var(--accent)}
+          .trust-inline{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
+          .trust-inline span{padding:7px 10px;border:1px solid var(--line);border-radius:999px;color:#aeb1b6;font-size:.67rem}
+          .legal-grid{grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr)}
+          .legal-card h2{margin-top:0;font-size:1.4rem}
+          .legal-card h3{margin:22px 0 7px;font-size:.95rem}
+          .legal-card p,.legal-card li{color:var(--muted);font-size:.8rem;line-height:1.7}
+          .mobile-conversion-bar{display:none}
+          .faq-list{display:grid;gap:10px}
+          .faq-list details{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:16px 18px}
+          .faq-list summary{cursor:pointer;font-weight:700}
+          .faq-list p{margin:10px 0 0;color:var(--muted);font-size:.8rem;line-height:1.65}
+          @media(max-width:980px){.proof-metrics,.why-grid,.result-grid,.buying-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.process-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.solution-grid,.premium-paths{grid-template-columns:1fr}.lead-shell,.call-shell,.legal-grid,.reference-grid{grid-template-columns:1fr}.case-contribution{grid-template-columns:repeat(2,minmax(0,1fr))}.case-contribution div{border-bottom:1px solid var(--line)}}
+          @media(max-width:640px){.conversion-section{padding:72px 0}.proof-metrics,.why-grid,.result-grid,.buying-grid,.process-grid,.case-contribution{grid-template-columns:1fr}.lead-card{padding:18px}.lead-card fieldset{grid-template-columns:1fr}.lead-card .full{grid-column:auto}.mobile-conversion-bar{position:fixed;z-index:120;left:10px;right:10px;bottom:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px;border:1px solid rgba(255,255,255,.14);border-radius:16px;background:rgba(9,8,6,.92);backdrop-filter:blur(14px);box-shadow:0 18px 50px rgba(0,0,0,.35)}.mobile-conversion-bar a{display:grid;place-items:center;min-height:44px;border-radius:11px;font-size:.72rem;font-weight:800}.mobile-conversion-bar a:first-child{background:var(--accent);color:#0b0906}.mobile-conversion-bar a:last-child{border:1px solid var(--line)}body{padding-bottom:74px}}
+          '''
+          (root/'conversion-20260830.css').write_text(css.strip()+"\n", encoding='utf-8')
+
+          js = r'''
+          (function(){
+            'use strict';
+            function qs(s,r){return (r||document).querySelector(s)}
+            function qsa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+            function encode(v){return encodeURIComponent(v||'')}
+            function details(form){var fd=new FormData(form), out=[]; fd.forEach(function(v,k){if(v && !String(k).startsWith('_')) out.push(k+': '+v)}); return out.join('\n')}
+
+            var lead=qs('#lead-form');
+            if(lead){
+              var next=qs('[data-lead-next]',lead), step2=qs('[data-step="2"]',lead), prepared=qs('[data-prepared-actions]',lead);
+              if(next){next.addEventListener('click',function(){var req=qsa('[data-step="1"] [required]',lead);var bad=req.find(function(el){return !el.checkValidity()});if(bad){bad.reportValidity();return}step2.hidden=false;next.hidden=true;step2.scrollIntoView({behavior:'smooth',block:'start'})})}
+              lead.addEventListener('submit',function(e){e.preventDefault();if(!lead.checkValidity()){lead.reportValidity();return}var text='Hi James, I would like to discuss a digital project.\n\n'+details(lead);var wa=qs('[data-send-whatsapp]',lead), em=qs('[data-send-email]',lead);wa.href='https://wa.me/971528420933?text='+encode(text);em.href='mailto:james@jamesrealty.uk?subject='+encode('Digital project enquiry')+'&body='+encode(text);prepared.hidden=false;prepared.scrollIntoView({behavior:'smooth',block:'center'});window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'project_brief_prepared',page_path:location.pathname})})
+            }
+
+            var call=qs('#call-form');
+            if(call){
+              var date=qs('#call-date',call), zone=qs('#call-timezone',call), preparedCall=qs('[data-call-actions]',call);
+              if(zone) zone.value=Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC';
+              if(date){var now=new Date();now.setHours(now.getHours()+2);date.min=now.toISOString().slice(0,16)}
+              call.addEventListener('submit',function(e){e.preventDefault();if(!call.checkValidity()){call.reportValidity();return}var fd=new FormData(call), chosen=fd.get('preferred_time'), tz=fd.get('timezone')||'UTC', text='Hi James, I would like to request a project call.\n\n'+details(call)+'\n\nPlease confirm the selected time before the meeting.';var wa=qs('[data-call-whatsapp]',call), em=qs('[data-call-email]',call), cal=qs('[data-call-calendar]',call);wa.href='https://wa.me/971528420933?text='+encode(text);em.href='mailto:james@jamesrealty.uk?subject='+encode('Call request')+'&body='+encode(text);var start=new Date(chosen), end=new Date(start.getTime()+30*60000);function stamp(d){return d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'')}cal.href='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encode('Provisional call with James Digital')+'&dates='+stamp(start)+'/'+stamp(end)+'&details='+encode('Provisional hold. The time is confirmed only after James replies.')+'&ctz='+encode(tz);preparedCall.hidden=false;preparedCall.scrollIntoView({behavior:'smooth',block:'center'});window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'call_request_prepared',page_path:location.pathname})})
+            }
+
+            if(!qs('.mobile-conversion-bar') && !document.body.classList.contains('start-project-page') && !document.body.classList.contains('book-call-page')){
+              var bar=document.createElement('div');bar.className='mobile-conversion-bar';bar.innerHTML='<a href="/start-project.html">Start a Project</a><a href="/book-call.html">Book a Call</a>';document.body.appendChild(bar)
+            }
+          })();
+          '''
+          (root/'conversion-20260830.js').write_text(js.strip()+"\n", encoding='utf-8')
+
+          styles = root/'styles.css'
+          st = styles.read_text(encoding='utf-8')
+          line = "@import url('conversion-20260830.css?v=%s');" % VERSION
+          if 'conversion-20260830.css' not in st:
+              st = st.rstrip()+"\n"+line+"\n"
+          styles.write_text(st, encoding='utf-8')
+
+          nav = '''<nav class="nav-links" aria-label="Primary navigation">
+        <a href="/portfolio.html">Work</a>
+        <a href="/results.html">Results</a>
+        <a href="/#capabilities">Services</a>
+        <a href="/about.html">About</a>
+      </nav>'''
+          mobile_nav = '''<nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" hidden>
+      <a href="/portfolio.html">Work</a><a href="/results.html">Results</a><a href="/#capabilities">Services</a><a href="/about.html">About</a><a href="/pricing.html">Pricing</a>
+      <a href="/book-call.html" data-event="book_call_click">Book a Call</a>
+      <a class="button button-primary" href="/start-project.html" data-event="start_project_click">Start a Project</a>
+    </nav>'''
+          company_nav = '''<nav aria-label="Company">
+        <strong>Explore</strong>
+        <a href="/portfolio.html">Work</a>
+        <a href="/results.html">Results</a>
+        <a href="/solutions.html">Solutions</a>
+        <a href="/industries.html">Industries</a>
+        <a href="/about.html">Meet James</a>
+        <a href="/pricing.html">Pricing</a>
+        <a href="/book-call.html">Book a Call</a>
+        <a href="/start-project.html">Start a Project</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+      </nav>'''
+
+          def common(html):
+              html = html.replace('/start-project.html?route=call','/book-call.html')
+              html = re.sub(r'<nav class="nav-links" aria-label="Primary navigation">.*?</nav>', nav, html, flags=re.S)
+              html = re.sub(r'<nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" hidden>.*?</nav>', mobile_nav, html, flags=re.S)
+              html = re.sub(r'<nav aria-label="Company">.*?</nav>', company_nav, html, flags=re.S)
+              if '/conversion-20260830.js' not in html:
+                  html = html.replace('</body>', '<script src="/conversion-20260830.js?v=%s" defer></script>\n</body>' % VERSION)
+              return html
+
+          # Homepage: rebuild flow while preserving the existing public work section.
+          p = root/'index.html'; h = p.read_text(encoding='utf-8')
+          m = re.search(r'<section class="section section-shell" id="work".*?</section>', h, flags=re.S)
+          work = m.group(0) if m else ''
+          hero = '''<section class="hero section-shell">
+  <div class="hero-copy">
+    <p class="eyebrow"><span></span> Dubai-based. Working globally.</p>
+    <h1>Senior digital strategy and execution for businesses that need <em>commercial progress.</em></h1>
+    <p class="hero-lead">Work directly with James on qualified demand, stronger websites, cleaner measurement and better lead follow-up. No junior account layer, no channel-first diagnosis, and no need to hire separate suppliers before the business problem is clear.</p>
+    <div class="hero-actions"><a class="button button-primary" href="/portfolio.html">See Relevant Work</a><a class="button button-ghost" href="/start-project.html">Discuss Your Project</a></div>
+    <div class="hero-signals"><span><strong>10+ years</strong> marketing career</span><span><strong>50+ markets</strong> acquisition scope</span><span><strong>7 public projects</strong> inspectable proof</span><span><strong>Direct senior access</strong> strategy to delivery</span></div>
+  </div>
+  <div class="system-map" aria-label="James Digital delivery model"><div class="system-map-top"><span>Commercial delivery model</span><span class="live-dot">Direct</span></div><div class="system-orbit"><span class="orbit-label orbit-dubai">Dubai<br><small>Base</small></span><span class="orbit-label orbit-europe">Strategy<br><small>Direction</small></span><span class="orbit-label orbit-asia">Execution<br><small>Delivery</small></span><span class="orbit-label orbit-americas">Measurement<br><small>Improve</small></span><div class="orbit-core"><strong>Business<br>outcome</strong><span>One accountable owner</span></div></div><div class="system-flow"><span>Diagnose</span><i></i><span>Build</span><i></i><span>Measure</span><i></i><span>Improve</span></div></div>
+</section>'''
+          proof = '''<section class="proof-rail"><div class="section-shell proof-rail-inner"><p>Verified context</p><div><div><span>Dubai operating base</span><span>10+ years marketing career</span><span>50+ market acquisition scope</span><span>Public case studies with evidence notes</span></div></div></div></section>'''
+          after_work = '''
+<section class="conversion-section section-shell" id="results"><div class="section-heading"><div><p class="kicker">Evidence before promises</p><h2>Proof is separated from marketing language.</h2></div><p>Project-specific numbers are published only when they can be attributed. Where commercial figures cannot be isolated, the case study says so instead of manufacturing an ROI claim.</p></div><div class="result-grid"><article><strong>10+ years</strong><span>Verified career context presented on the About page.</span></article><article><strong>50+ markets</strong><span>International acquisition scope from documented career experience.</span></article><article><strong>7 projects</strong><span>Public portfolio projects with live links and evidence notes.</span></article><article><strong>1 owner</strong><span>Direct senior communication from strategy through delivery.</span></article></div><p class="evidence-note">Client testimonials and commercial metrics are not fabricated. Public proof, exact contribution and attributable outcomes are prioritised. Verified references can be added as they are supplied.</p><a class="arrow-link" href="/results.html">Review the evidence standard →</a></section>
+<section class="conversion-section problems-section" id="problems"><div class="section-shell"><div class="section-heading"><div><p class="kicker">Start with the problem</p><h2>Choose the issue closest to what is happening now.</h2></div><p>Each route starts with diagnosis, then recommends the smallest sensible scope.</p></div><div class="solution-grid"><a href="/solutions/more-qualified-leads.html"><small>01</small><h3>I need more qualified leads</h3><p>Acquisition, landing journey, measurement and sales feedback.</p></a><a href="/solutions/website-not-converting.html"><small>02</small><h3>My website is not converting</h3><p>Messaging, UX, proof, CTA architecture and tracking.</p></a><a href="/solutions/fragmented-marketing.html"><small>03</small><h3>My marketing is fragmented</h3><p>One commercial plan across channels, suppliers and reporting.</p></a><a href="/solutions/lead-follow-up.html"><small>04</small><h3>My team is losing leads</h3><p>CRM stages, routing, response visibility and automation.</p></a><a href="/solutions/new-website.html"><small>05</small><h3>I need a new website</h3><p>Commercial structure, responsive build and launch measurement.</p></a><a href="/solutions/international-growth.html"><small>06</small><h3>I need international growth</h3><p>Market prioritisation, localised acquisition and remote delivery.</p></a></div></div></section>
+<section class="conversion-section section-shell" id="why-james"><div class="section-heading"><div><p class="kicker">Why work with James</p><h2>Senior judgment without the agency hand-offs.</h2></div><p>The positioning is intentionally not “we do everything”. James remains accountable for diagnosis, priorities and client communication. Specialist support is defined when a scope genuinely requires it.</p></div><div class="why-grid"><article><span>01</span><h3>Direct senior access</h3><p>The person shaping the direction stays in the conversation.</p></article><article><span>02</span><h3>Commercial first</h3><p>Channels are selected after the business problem and buying journey are understood.</p></article><article><span>03</span><h3>Cross-channel view</h3><p>Website, acquisition, SEO, tracking, CRM and automation are connected instead of managed as isolated activities.</p></article><article><span>04</span><h3>Transparent scope</h3><p>My contribution, team context and evidence standard are stated on case studies.</p></article></div></section>
+<section class="conversion-section section-shell" id="capabilities"><div class="section-heading"><div><p class="kicker">Services</p><h2>Use one capability or connect several around the outcome.</h2></div><p>Every service page now explains who it is for, what is delivered, how the work is governed and where relevant proof sits.</p></div><div class="capability-grid"><article><span>01</span><h3><a href="/services/digital-strategy.html">Digital Strategy</a></h3><p>Positioning, audience, priorities, journey and measurement.</p></article><article><span>02</span><h3><a href="/services/web-development.html">Web Development</a></h3><p>Commercial websites and landing journeys designed to convert.</p></article><article><span>03</span><h3><a href="/services/performance-marketing.html">Performance Marketing</a></h3><p>Paid acquisition around qualified demand and downstream feedback.</p></article><article><span>04</span><h3><a href="/services/seo.html">SEO</a></h3><p>Technical and content architecture built for commercial discovery.</p></article><article><span>05</span><h3><a href="/services/crm-automation.html">CRM & Automation</a></h3><p>Lead stages, routing, follow-up and operational visibility.</p></article><article><span>06</span><h3><a href="/results.html">Measurement</a></h3><p>GA4, GTM and evidence standards that distinguish activity from outcomes.</p></article></div></section>
+<section class="conversion-section fit-section" id="process"><div class="section-shell"><div class="section-heading"><div><p class="kicker">How working together works</p><h2>Clear ownership from first diagnosis to handover.</h2></div><p>Milestones and communication are defined before delivery begins.</p></div><div class="process-grid"><article><span>01 / Diagnose</span><h3>Business context</h3><p>Problem, audience, current system, evidence and constraints.</p></article><article><span>02 / Scope</span><h3>Recommendation</h3><p>Smallest useful scope, dependencies, investment and success criteria.</p></article><article><span>03 / Build</span><h3>Delivery</h3><p>Written decisions, agreed owners, review points and visible progress.</p></article><article><span>04 / Measure</span><h3>Evidence</h3><p>Tracking, QA, reporting and downstream sales feedback where available.</p></article><article><span>05 / Improve</span><h3>Next priority</h3><p>Handover, optimisation plan or ongoing partnership based on evidence.</p></article></div><p class="proof-note">Remote delivery uses scheduled reviews, written decisions and clear milestones. Time-zone expectations are agreed at kickoff rather than assumed.</p></div></section>
+<section class="conversion-section section-shell" id="references"><div class="section-heading"><div><p class="kicker">Trust</p><h2>Public proof first. References where available.</h2></div><p>No testimonial quote is published without a verifiable source.</p></div><div class="reference-grid"><article><strong>Inspectable work</strong><p>Open the live project, review the case study, and see the evidence note explaining what can and cannot be attributed.</p><a class="arrow-link" href="/portfolio.html">Open portfolio →</a></article><article><strong>Client references</strong><p>For larger engagements, relevant professional references can be shared when permission and context allow.</p><a class="arrow-link" href="/start-project.html">Request a relevant reference →</a></article></div></section>
+<section class="conversion-section section-shell" id="pricing-approach"><div class="section-heading"><div><p class="kicker">Investment</p><h2>Premium starting points without pretending every problem is a package.</h2></div><p>Small diagnostics can stay focused. Growth partnerships and multi-market work are scoped around the operating problem.</p></div><div class="premium-paths"><article><span>Focused sprint</span><strong class="price">$750–$1.5K</strong><p>Audit, diagnosis, strategy sprint or a tightly defined conversion problem.</p></article><article class="featured"><span>Growth project</span><strong class="price">from $1.5K</strong><p>Website, acquisition, CRM or a connected delivery scope with milestones.</p></article><article><span>Ongoing partnership</span><strong class="price">from $2.5K/mo</strong><p>Continuous senior ownership across acquisition, conversion and follow-up.</p></article></div><a class="arrow-link" href="/pricing.html">See pricing approach →</a></section>
+<section class="conversion-section section-shell" id="faq"><div class="section-heading"><div><p class="kicker">FAQ</p><h2>Questions serious buyers usually ask before starting.</h2></div></div><div class="faq-list"><details><summary>Do I work directly with James?</summary><p>Yes. James owns the client relationship and strategic direction. If specialist production is required, that role is made explicit.</p></details><details><summary>Can you work outside the UAE?</summary><p>Yes. The operating base is Dubai and the service model supports remote international delivery with agreed review cadence and milestones.</p></details><details><summary>Can we start small?</summary><p>Yes. A focused diagnostic or sprint can be used to reduce uncertainty before committing to a larger engagement.</p></details><details><summary>Do you guarantee marketing results?</summary><p>No responsible supplier can guarantee commercial outcomes. The work instead defines measurable inputs, leading indicators and attributable outcomes where the data supports them.</p></details><details><summary>How do I start?</summary><p>Send a short project brief or request a call. The first response focuses on fit, scope and the next useful step rather than an automatic generic proposal.</p></details></div></section>
+<section class="section final-cta"><div class="section-shell final-cta-inner"><p class="kicker">Next step</p><h2>Share the problem. I’ll tell you what I would fix first.</h2><div><a class="button button-light" href="/start-project.html">Discuss Your Project</a><a class="button button-outline-light" href="/book-call.html">Book a Call</a></div></div></section>'''
+          main = '<main id="main">'+hero+proof+work+after_work+'</main>'
+          h = re.sub(r'<main id="main">.*?</main>', main, h, flags=re.S)
+          p.write_text(common(h), encoding='utf-8')
+
+          # About page: make credibility, delivery model and brand relationship explicit.
+          p=root/'about.html'; h=p.read_text(encoding='utf-8')
+          about_main='''<main id="main"><section class="page-hero section-shell about-hero"><div><p class="eyebrow"><span></span> Meet James</p><h1>One senior digital partner, based in Dubai and built for direct collaboration.</h1><p>I work with businesses on digital strategy, websites, acquisition, SEO, measurement, CRM and automation. The responsibility is not to “sell every channel”; it is to diagnose the commercial problem, define the useful scope and stay accountable for the direction.</p><div class="hero-actions"><a class="button button-primary" href="/portfolio.html">Review Work</a><a class="button button-ghost" href="/book-call.html">Book a Call</a></div></div><aside class="about-portrait-card"><div class="about-monogram"><span>J</span><small>Dubai</small></div><strong>Direct communication</strong><p>No junior account layer between the business problem and the person shaping the digital direction.</p></aside></section><section class="conversion-section section-shell"><div class="proof-metrics"><article><strong>10+ years</strong><span>Marketing career</span></article><article><strong>50+ markets</strong><span>International acquisition scope</span></article><article><strong>Dubai</strong><span>Operating base</span></article><article><strong>Direct</strong><span>Strategy-to-delivery ownership</span></article></div><p class="evidence-note">These are career-context statements already used across the James portfolio. Project-specific results remain separated from broader career scope.</p></section><section class="conversion-section fit-section"><div class="section-shell"><div class="section-heading"><div><p class="kicker">Delivery model</p><h2>What I own, and what happens when a project needs more hands.</h2></div><p>Large scopes should not pretend one person performs every specialist task. The model keeps senior accountability clear while defining specialist roles when required.</p></div><div class="why-grid"><article><span>James owns</span><h3>Diagnosis & strategy</h3><p>Commercial problem, priorities, journey, measurement and decision framework.</p></article><article><span>James owns</span><h3>Client communication</h3><p>Key reviews, decisions, scope control and commercial accountability.</p></article><article><span>As required</span><h3>Specialist production</h3><p>Design, development, media production or other specialist capacity is identified rather than hidden behind an agency layer.</p></article><article><span>Shared</span><h3>Business inputs</h3><p>Access, approvals, sales feedback and internal knowledge remain collaborative responsibilities.</p></article></div></div></section><section class="conversion-section section-shell"><div class="section-heading"><div><p class="kicker">How I work</p><h2>Visible ownership, written decisions and measurable handoffs.</h2></div></div><div class="process-grid"><article><span>01</span><h3>Diagnose</h3><p>Understand current performance, constraints and buying journey.</p></article><article><span>02</span><h3>Prioritise</h3><p>Define what should happen now, later or not at all.</p></article><article><span>03</span><h3>Deliver</h3><p>Work through milestones with scheduled reviews and clear owners.</p></article><article><span>04</span><h3>Measure</h3><p>Connect activity to the best available commercial evidence.</p></article><article><span>05</span><h3>Handover</h3><p>Leave the business with documented decisions and next priorities.</p></article></div></section><section class="conversion-section fit-section"><div class="section-shell"><div class="section-heading"><div><p class="kicker">James Digital and James Realty</p><h2>Same domain infrastructure. Different service proposition.</h2></div><p>James Digital is the digital-services practice presented on the jamesrealty.uk domain infrastructure. The service is available to businesses across sectors and is not limited to real estate.</p></div><p class="relationship-note">The existing james@jamesrealty.uk address remains the contact identity for now. A dedicated Digital mailbox can replace it later without changing the commercial structure of this site.</p></div></section><section class="section final-cta"><div class="section-shell final-cta-inner"><p class="kicker">Work together</p><h2>Start with the business problem, not a channel list.</h2><div><a class="button button-light" href="/start-project.html">Discuss Your Project</a><a class="button button-outline-light" href="/book-call.html">Book a Call</a></div></div></section></main>'''
+          h=re.sub(r'<main id="main">.*?</main>',about_main,h,flags=re.S);p.write_text(common(h),encoding='utf-8')
+
+          # Premium pricing page.
+          p=root/'pricing.html'; h=p.read_text(encoding='utf-8')
+          pricing_main='''<main id="main"><section class="page-hero section-shell pricing-hero"><div><p class="eyebrow"><span></span> Pricing</p><h1>Start at the level of certainty the business actually needs.</h1><p>Focused work has clear starting points. Larger engagements are scoped around the problem, evidence, team and level of ongoing ownership required.</p><div class="hero-actions"><a class="button button-primary" href="/start-project.html">Discuss Your Project</a><a class="button button-ghost" href="/book-call.html">Book a Call</a></div></div><aside class="service-outcome"><span>Pricing principle</span><p>Media spend, specialist production, paid software and third-party subscriptions are quoted separately when relevant.</p></aside></section><section class="conversion-section section-shell"><div class="section-heading"><div><p class="kicker">Focused projects</p><h2>Reduce uncertainty before buying a larger scope.</h2></div><p>Useful when the first problem is diagnosis, prioritisation or a tightly defined conversion issue.</p></div><div class="premium-paths"><article><span>Diagnostic / audit</span><strong class="price">from $750</strong><p>Evidence review, commercial diagnosis and prioritised recommendations.</p><ul><li>Current-state review</li><li>Priority issues</li><li>Measurement gaps</li><li>Action roadmap</li></ul><a class="button button-ghost" href="/start-project.html?engagement=diagnostic">Start with diagnosis</a></article><article class="featured"><span>Strategy sprint</span><strong class="price">$1K–$1.5K</strong><p>A focused decision sprint around positioning, acquisition, conversion or CRM.</p><ul><li>Business context</li><li>Customer journey</li><li>Channel priorities</li><li>Delivery roadmap</li></ul><a class="button button-primary" href="/start-project.html?engagement=strategy-sprint">Discuss a sprint</a></article><article><span>Website / conversion project</span><strong class="price">from $1.5K</strong><p>Commercial website, landing system or conversion-focused rebuild.</p><ul><li>Messaging structure</li><li>Responsive implementation</li><li>Measurement setup</li><li>Launch handover</li></ul><a class="button button-ghost" href="/start-project.html?engagement=website">Discuss a website</a></article></div></section><section class="conversion-section fit-section"><div class="section-shell"><div class="section-heading"><div><p class="kicker">Ongoing partnerships</p><h2>For businesses that need continuous senior ownership.</h2></div><p>These are not “number of posts” retainers. The scope is organised around acquisition, conversion, follow-up and measurement.</p></div><div class="premium-paths"><article class="featured"><span>Growth partnership</span><strong class="price">from $2.5K/mo</strong><p>Ongoing direction and optimisation across the highest-priority growth workstreams.</p></article><article><span>Fractional digital leadership</span><strong class="price">custom</strong><p>Senior direction across internal teams, agencies, suppliers, priorities and measurement.</p></article><article><span>Multi-market / transformation</span><strong class="price">proposal</strong><p>Larger website, acquisition, CRM, automation or international scopes with phased milestones.</p></article></div><p class="engagement-note">The previous low-cost menu of $199–$499 offers has been removed because it conflicted with the senior, international positioning of the site. Final investment depends on scope, production requirements, integrations and ownership.</p></div></section><section class="conversion-section section-shell"><div class="section-heading"><div><p class="kicker">Risk reduction</p><h2>You do not need to buy the largest engagement first.</h2></div></div><div class="buying-grid"><article><span>01</span><h3>Start with diagnosis</h3><p>Use a paid audit or sprint when the right scope is not yet clear.</p></article><article><span>02</span><h3>Milestone delivery</h3><p>Large projects are broken into defined decision and delivery points.</p></article><article><span>03</span><h3>Evidence gates</h3><p>Ongoing spend can be reviewed against agreed leading indicators and attributable outcomes.</p></article><article><span>04</span><h3>Clear handover</h3><p>Documentation and ownership are defined so the business is not trapped by the engagement.</p></article></div></section><section class="section final-cta"><div class="section-shell final-cta-inner"><p class="kicker">Next step</p><h2>Not sure which level fits? Start with the problem.</h2><div><a class="button button-light" href="/start-project.html">Discuss Your Project</a><a class="button button-outline-light" href="/book-call.html">Book a Call</a></div></div></section></main>'''
+          h=re.sub(r'<main id="main">.*?</main>',pricing_main,h,flags=re.S);p.write_text(common(h),encoding='utf-8')
+
+          # Shorter, progressive project enquiry.
+          p=root/'start-project.html'; h=p.read_text(encoding='utf-8')
+          start_main='''<main id="main"><section class="page-hero section-shell start-hero"><div><p class="eyebrow"><span></span> Start a Project</p><h1>Give me the business problem in under two minutes.</h1><p>The first step is intentionally short. More detail is optional until there is enough context to recommend a useful next step.</p><div class="trust-inline"><span>Direct reply from James</span><span>Worldwide enquiries</span><span>No automatic generic proposal</span></div></div><aside class="service-outcome"><span>Prefer a conversation?</span><p>Use the separate call-booking route instead of completing a long project brief.</p><a class="arrow-link" href="/book-call.html">Book a Call →</a></aside></section><section class="conversion-section"><div class="section-shell lead-shell"><div><p class="kicker">Project enquiry</p><h2>Start with fit.</h2><p class="hero-lead">Required: who you are, how to reach you and what needs to change. Budget and detailed scope are optional at this stage.</p><p class="proof-note">This static GitHub Pages site cannot securely store submissions server-side yet. The form prepares the enquiry for WhatsApp or email so you remain in control of sending it. A backend capture endpoint can replace this handoff without redesigning the form.</p></div><form class="lead-card" id="lead-form"><fieldset data-step="1"><legend>Step 1 / essentials</legend><label><span>Name *</span><input name="Name" autocomplete="name" required></label><label><span>Company *</span><input name="Company" autocomplete="organization" required></label><label class="full"><span>Email or contact number *</span><input name="Contact" required></label><label class="full"><span>What needs to change? *</span><textarea name="Need" required placeholder="Example: We generate leads, but the website and follow-up are not converting enough of them."></textarea></label><div class="form-actions"><button class="button button-primary" type="button" data-lead-next>Continue to optional details</button><small>You can send after the next step.</small></div></fieldset><fieldset data-step="2" hidden><legend>Step 2 / optional qualification</legend><label><span>Website</span><input name="Website" type="url" placeholder="https://"></label><label><span>Country</span><input name="Country" autocomplete="country-name"></label><label><span>Expected investment</span><select name="Budget"><option value="">Not defined yet</option><option>Below $1,000</option><option>$1,000–$3,000</option><option>$3,000–$10,000</option><option>$10,000–$25,000</option><option>$25,000+</option></select></label><label><span>Timeline</span><select name="Timeline"><option value="">Exploring options</option><option>As soon as practical</option><option>Within 30 days</option><option>1–3 months</option><option>3–6 months</option></select></label><label class="full"><span>Anything else I should know?</span><textarea name="Context" placeholder="Current channels, team, constraints, previous attempts or what success should look like."></textarea></label><div class="form-actions"><button class="button button-primary" type="submit">Prepare enquiry</button><small>Nothing is sent until you choose WhatsApp or email below.</small></div><div class="prepared-actions full" data-prepared-actions hidden><a class="button button-primary" data-send-whatsapp target="_blank" rel="noopener noreferrer">Send on WhatsApp</a><a class="button button-ghost" data-send-email>Send by email</a></div></fieldset></form></div></section></main>'''
+          h=re.sub(r'<main id="main">.*?</main>',start_main,h,flags=re.S);p.write_text(common(h),encoding='utf-8')
+
+          # Portfolio: simplify filters and clarify contribution.
+          p=root/'portfolio.html'; h=p.read_text(encoding='utf-8')
+          h=re.sub(r'<div class="filter-group" data-filter-group="classification">.*?</div>', '', h, flags=re.S)
+          h=h.replace('Selected digital work with live public proof.','Selected work with clearer role context and public proof.')
+          h=h.replace('Filter by service, industry and classification. Open a case study for the context and delivery approach, or inspect the public project directly.','Filter by service or industry. Each case study separates my contribution, the public business asset and the evidence that can be stated responsibly.')
+          h=re.sub(r'(</h3>\s*<p>)', r'</h3><p class="contribution-note">Open the case study for my contribution and evidence context. A live business link is not presented as an automatic claim of full-site authorship.</p>\1', h)
+          p.write_text(common(h),encoding='utf-8')
+
+          # Case studies: explicit role / evidence strip based on the existing declared tags.
+          for p in (root/'case-studies').glob('*.html'):
+              h=p.read_text(encoding='utf-8')
+              if 'case-contribution' not in h:
+                  tm=re.search(r'<div class="tag-row">(.*?)</div>',h,flags=re.S)
+                  tags=re.findall(r'<span>(.*?)</span>',tm.group(1),flags=re.S) if tm else []
+                  scope=', '.join(re.sub('<.*?>','',x).strip() for x in tags) or 'See documented workstreams below'
+                  em=re.search(r'<p class="eyebrow"><span></span>\s*(.*?)</p>',h,flags=re.S)
+                  context=re.sub('<.*?>','',em.group(1)).strip() if em else 'Client / project work'
+                  panel=f'''<section class="section-shell case-contribution" aria-label="Contribution context"><div><span>My contribution</span><strong>{scope}</strong></div><div><span>Engagement context</span><strong>{context}</strong></div><div><span>Public proof</span><strong>Live project + documented workstreams</strong></div><div><span>Results standard</span><strong>Only project-specific metrics when attributable</strong></div></section>'''
+                  h=re.sub(r'(</section>\s*<section class="section section-shell case-body">)', panel+r'\1', h, count=1)
+              p.write_text(common(h),encoding='utf-8')
+
+          # Service pages: add buyer-facing decision context.
+          for p in (root/'services').glob('*.html'):
+              h=p.read_text(encoding='utf-8')
+              title_m=re.search(r'<h1>(.*?)</h1>',h,flags=re.S); service=re.sub('<.*?>','',title_m.group(1)).strip() if title_m else 'this service'
+              if 'service-buying-guide' not in h:
+                  guide=f'''<section class="service-buying-guide"><div class="section-shell"><div class="section-heading"><div><p class="kicker">Before you buy</p><h2>What to expect from {service}.</h2></div><p>The scope is defined around the business problem, not a fixed list of activity for activity's sake.</p></div><div class="buying-grid"><article><span>Who it is for</span><h3>Businesses with a clear commercial problem</h3><p>Useful when the current system has a measurable gap or a defined launch requirement.</p></article><article><span>Deliverables</span><h3>Defined before kickoff</h3><p>Scope, milestones, owners, review points and handover are agreed in writing.</p></article><article><span>Timeline</span><h3>Set after discovery</h3><p>Timing reflects complexity, dependencies, approvals and production rather than an arbitrary promise.</p></article><article><span>Investment</span><h3>Matched to scope</h3><p>Use the pricing page for starting points, then confirm the final scope after diagnosis.</p><a class="arrow-link" href="/pricing.html">See pricing →</a></article></div></div></section>'''
+                  h=h.replace('<section class="section final-cta">',guide+'<section class="section final-cta">',1)
+              p.write_text(common(h),encoding='utf-8')
+
+          # Existing industry pages receive common navigation/booking improvements.
+          for p in (root/'industries').glob('*.html'):
+              p.write_text(common(p.read_text(encoding='utf-8')),encoding='utf-8')
+          p=root/'custom-engagements.html'; p.write_text(common(p.read_text(encoding='utf-8')),encoding='utf-8')
+
+          def shell(title, description, body, body_class='content-page'):
+              return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>{title} | James Digital</title><meta name="description" content="{description}"><meta name="robots" content="index,follow"><meta name="theme-color" content="#0b0906"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/styles.css?v=20260830-gold-final-1"></head><body class="{body_class}"><a class="skip-link" href="#main">Skip to content</a><header class="site-header"><div class="nav-shell"><a class="brand" href="/"><span class="brand-mark">JD</span><span>James Digital</span></a>{nav}<div class="nav-actions"><a class="text-link nav-call" href="/book-call.html">Book a Call</a><a class="button button-small button-primary" href="/start-project.html">Start a Project</a></div><button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-nav"><span>Menu</span></button></div>{mobile_nav}</header><main id="main">{body}</main><section class="contact-dock"><div><span>Have a project in mind?</span><strong>Start with the outcome you need.</strong></div><div class="contact-dock-actions"><a href="/start-project.html">Start a Project</a><a href="/book-call.html">Book a Call</a><a href="https://wa.me/971528420933?text=Hi%20James%2C%20I%20would%20like%20to%20discuss%20a%20digital%20project." target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="mailto:james@jamesrealty.uk?subject=Digital%20project%20enquiry">Email James</a></div></section><footer class="site-footer"><div class="section-shell footer-grid"><div><a class="brand footer-brand" href="/"><span class="brand-mark">JD</span><span>James Digital</span></a><p>Dubai-based senior digital strategy and delivery. Working globally.</p></div><nav aria-label="Services"><strong>Capabilities</strong><a href="/services/digital-strategy.html">Digital Strategy</a><a href="/services/web-development.html">Web Development</a><a href="/services/performance-marketing.html">Performance Marketing</a><a href="/services/seo.html">SEO</a><a href="/services/crm-automation.html">CRM & Automation</a></nav>{company_nav}<div class="footer-meta"><span>Dubai, United Arab Emirates</span><a href="mailto:james@jamesrealty.uk">james@jamesrealty.uk</a><span>© <span data-year></span> James Digital</span></div></div></footer><script src="/script.js?v=20260829-global-redesign-2" defer></script><script src="/conversion-20260830.js?v={VERSION}" defer></script></body></html>'''
+
+          # Results page.
+          results_body='''<section class="page-hero section-shell"><div><p class="eyebrow"><span></span> Results & Evidence</p><h1>Commercial proof without invented attribution.</h1><p>The results standard separates verified career context, public project evidence and project-specific metrics. If a number cannot be tied responsibly to a project, it is not presented as that project's result.</p><div class="hero-actions"><a class="button button-primary" href="/portfolio.html">Review Case Studies</a><a class="button button-ghost" href="/start-project.html">Discuss a Similar Problem</a></div></div><aside class="service-outcome"><span>Evidence rule</span><p>Public links prove the work exists. They do not automatically prove that one person designed, built or generated every company-wide outcome.</p></aside></section><section class="conversion-section section-shell"><div class="result-grid"><article><strong>10+ years</strong><span>Verified career context</span></article><article><strong>50+ markets</strong><span>International acquisition scope</span></article><article><strong>7 public projects</strong><span>Inspectable portfolio evidence</span></article><article><strong>0 fabricated metrics</strong><span>Project-specific numbers only when attributable</span></article></div></section><section class="conversion-section fit-section"><div class="section-shell"><div class="section-heading"><div><p class="kicker">What gets measured</p><h2>Evidence is organised around the buying journey.</h2></div></div><div class="buying-grid"><article><span>Acquisition</span><h3>Demand quality</h3><p>Qualified leads, cost per qualified opportunity, channel contribution and downstream feedback when available.</p></article><article><span>Website</span><h3>Conversion behaviour</h3><p>CTA engagement, form completion, landing performance and friction points.</p></article><article><span>SEO</span><h3>Commercial discovery</h3><p>Indexation, relevant query visibility, qualified organic traffic and conversion paths.</p></article><article><span>CRM</span><h3>Lead handling</h3><p>Response visibility, stage movement, routing, follow-up coverage and sales feedback.</p></article></div></div></section><section class="section final-cta"><div class="section-shell final-cta-inner"><p class="kicker">See the context</p><h2>Open the case studies for role, workstreams and evidence notes.</h2><div><a class="button button-light" href="/portfolio.html">View Work</a><a class="button button-outline-light" href="/book-call.html">Book a Call</a></div></div></section>'''
+          (root/'results.html').write_text(shell('Results & Evidence','Review James Digital evidence standards, public work and measurable outcome categories.',results_body),encoding='utf-8')
+
+          # Call request / scheduling front end.
+          call_body='''<section class="page-hero section-shell"><div><p class="eyebrow"><span></span> Book a Call</p><h1>Choose a preferred time for a focused project conversation.</h1><p>Select a time in your timezone and send the request by WhatsApp or email. The slot is provisional until James confirms it, so the site does not pretend static GitHub Pages can reserve live calendar availability.</p></div><aside class="service-outcome"><span>30-minute project call</span><p>Best for fit, scope, priorities and the next useful step. Detailed discovery happens after there is a reason to proceed.</p></aside></section><section class="conversion-section"><div class="section-shell call-shell"><div><p class="kicker">Call request</p><h2>Pick the time that works for you.</h2><p class="hero-lead">Your browser timezone is added automatically. You can also add a provisional hold to your own Google Calendar after preparing the request.</p><p class="proof-note">A true instant-confirmation scheduler requires a connected calendar booking service or backend. This flow removes the old misleading “Book a Call” link to the project form and makes confirmation status explicit.</p></div><form class="lead-card" id="call-form"><fieldset><legend>Preferred call</legend><label><span>Name *</span><input name="Name" required autocomplete="name"></label><label><span>Company *</span><input name="Company" required autocomplete="organization"></label><label class="full"><span>Email or contact number *</span><input name="Contact" required></label><label><span>Preferred date & time *</span><input id="call-date" name="preferred_time" type="datetime-local" required></label><label><span>Timezone *</span><input id="call-timezone" name="timezone" required></label><label class="full"><span>What should we discuss?</span><textarea name="Topic" placeholder="The problem, project or decision you want to cover."></textarea></label><div class="form-actions"><button class="button button-primary" type="submit">Prepare call request</button></div><div class="prepared-actions full" data-call-actions hidden><a class="button button-primary" data-call-whatsapp target="_blank" rel="noopener noreferrer">Send on WhatsApp</a><a class="button button-ghost" data-call-email>Send by email</a><a class="button button-ghost" data-call-calendar target="_blank" rel="noopener noreferrer">Add provisional hold</a></div></fieldset></form></div></section>'''
+          (root/'book-call.html').write_text(shell('Book a Call','Request a focused project call with James Digital in your timezone.',call_body,'book-call-page'),encoding='utf-8')
+
+          # Solutions hub and dedicated problem routes.
+          solutions={
+            'more-qualified-leads':('More Qualified Leads','Build qualified demand instead of optimising for cheap form fills.','Acquisition, landing-page clarity, measurement and downstream sales feedback are treated as one system.'),
+            'website-not-converting':('Website Not Converting','Turn a visually acceptable website into a clearer buying journey.','Message hierarchy, proof, friction, CTA architecture, mobile usability and tracking are reviewed together.'),
+            'fragmented-marketing':('Fragmented Marketing','Replace disconnected channel activity with one commercial operating plan.','Priorities, suppliers, campaigns, content, measurement and CRM are organised around the same customer journey.'),
+            'lead-follow-up':('Lead Follow-up','Stop losing demand after the form is submitted.','Lead stages, routing, ownership, response visibility, automation and sales feedback are mapped end to end.'),
+            'new-website':('New Website','Build a commercial website around what the customer needs to decide.','Positioning, information architecture, responsive delivery, conversion paths and measurement are defined before decoration.'),
+            'international-growth':('International Growth','Prioritise markets and acquisition paths before scaling spend.','Market logic, localised messaging, channel selection, landing journeys and remote delivery are structured by evidence.')
+          }
+          hub_cards=''.join(f'<a href="/solutions/{slug}.html"><small>{i:02d}</small><h3>{t}</h3><p>{d}</p></a>' for i,(slug,(t,_,d)) in enumerate(solutions.items(),1))
+          hub='''<section class="page-hero section-shell"><div><p class="eyebrow"><span></span> Solutions</p><h1>Start with the business problem, not the service menu.</h1><p>Choose the situation closest to what is happening now. Each route explains the diagnosis, likely workstreams and the evidence needed before a larger commitment.</p></div></section><section class="conversion-section section-shell"><div class="solution-grid">'''+hub_cards+'''</div></section>'''
+          (root/'solutions.html').write_text(shell('Solutions','Problem-based digital growth routes for leads, conversion, websites, CRM and international growth.',hub),encoding='utf-8')
+          sol_dir=root/'solutions';sol_dir.mkdir(exist_ok=True)
+          for slug,(title,headline,desc) in solutions.items():
+              body=f'''<section class="page-hero section-shell"><div><p class="eyebrow"><span></span> Solution / {title}</p><h1>{headline}</h1><p>{desc}</p><div class="hero-actions"><a class="button button-primary" href="/start-project.html?objective={quote(title)}">Discuss this problem</a><a class="button button-ghost" href="/portfolio.html">See Relevant Work</a></div></div><aside class="service-outcome"><span>Working rule</span><p>Diagnosis comes before the channel list. The smallest sensible scope is recommended first.</p></aside></section><section class="conversion-section section-shell"><div class="buying-grid"><article><span>01</span><h3>Diagnose</h3><p>Map current performance, friction, evidence and constraints.</p></article><article><span>02</span><h3>Prioritise</h3><p>Identify the highest-value fixes and dependencies.</p></article><article><span>03</span><h3>Deliver</h3><p>Implement the defined workstreams with clear ownership.</p></article><article><span>04</span><h3>Measure</h3><p>Track the best available leading and commercial indicators.</p></article></div></section><section class="section final-cta"><div class="section-shell final-cta-inner"><p class="kicker">Next step</p><h2>Share what is happening now and what needs to change.</h2><div><a class="button button-light" href="/start-project.html?objective={quote(title)}">Discuss this problem</a><a class="button button-outline-light" href="/book-call.html">Book a Call</a></div></div></section>'''
+              (sol_dir/(slug+'.html')).write_text(shell(title,desc,body),encoding='utf-8')
+
+          # Industries hub and added B2B / retail routes.
+          industries=[('real-estate','Real Estate','High-consideration demand, project launches, investor journeys and sales feedback.'),('hospitality','Hospitality','Discovery, reservation intent, local search, offers and repeat demand.'),('beauty-lifestyle','Beauty & Lifestyle','Local discovery, appointments, offers, retention and brand consistency.'),('professional-services','Professional Services','Trust, expertise, qualified enquiries and longer buying cycles.'),('b2b','B2B','Complex offers, longer sales cycles, lead quality and CRM visibility.'),('retail','Retail','Product discovery, campaign conversion, store or ecommerce journeys and retention.')]
+          cards=''.join(f'<a href="/industries/{s}.html"><small>{i:02d}</small><h3>{t}</h3><p>{d}</p></a>' for i,(s,t,d) in enumerate(industries,1))
+          ibody='''<section class="page-hero section-shell"><div><p class="eyebrow"><span></span> Industries</p><h1>Sector context changes the buying journey, not the evidence standard.</h1><p>Industry routes help prospects find relevant problems and work faster without turning the site into six unrelated agencies.</p></div></section><section class="conversion-section section-shell"><div class="solution-grid">'''+cards+'''</div></section>'''
+          (root/'industries.html').write_text(shell('Industries','Digital strategy and delivery by sector, including real estate, hospitality, beauty, professional services, B2B and retail.',ibody),encoding='utf-8')
+          for slug,title,desc in industries[-2:]:
+              body=f'''<section class="page-hero section-shell"><div><p class="eyebrow"><span></span> Industry / {title}</p><h1>Digital growth for {title} businesses that need clearer commercial systems.</h1><p>{desc}</p><div class="hero-actions"><a class="button button-primary" href="/start-project.html?industry={quote(title)}">Discuss your {title} project</a><a class="button button-ghost" href="/portfolio.html">View Work</a></div></div></section><section class="conversion-section section-shell"><div class="buying-grid"><article><span>Demand</span><h3>Find the right audience</h3><p>Prioritise qualified demand rather than vanity reach.</p></article><article><span>Conversion</span><h3>Make the buying path clear</h3><p>Message, proof and CTA structure reflect the decision customers need to make.</p></article><article><span>Follow-up</span><h3>Protect generated demand</h3><p>Lead or customer handoffs are visible instead of disappearing between tools.</p></article><article><span>Evidence</span><h3>Measure what matters</h3><p>Use commercial indicators that match the business model and available data.</p></article></div></section>'''
+              (root/'industries'/(slug+'.html')).write_text(shell(title+' Digital Growth',desc,body),encoding='utf-8')
+
+          # Legal pages.
+          privacy='''<section class="page-hero section-shell"><div><p class="eyebrow"><span></span> Privacy</p><h1>Clear handling of enquiry and website data.</h1><p>This page explains the current static-site setup and the data used for analytics and direct contact.</p></div></section><section class="conversion-section section-shell"><div class="legal-grid"><aside class="legal-card"><h2>Summary</h2><p>The current project and call forms prepare messages in your browser. They do not store the submitted form content on this static website.</p></aside><article class="legal-card"><h2>Privacy notice</h2><h3>Analytics</h3><p>The site uses Google Tag Manager and may load analytics or marketing measurement configured through that container. Those tools may set cookies or collect device and interaction information subject to their configuration.</p><h3>Project enquiries</h3><p>When you choose WhatsApp or email, the information you entered is transferred through that service after you explicitly continue. The website itself does not currently retain the form content.</p><h3>Future backend capture</h3><p>If a server-side lead endpoint is connected later, this notice should be updated to identify the storage provider, retention period and lawful basis before that endpoint is enabled.</p><h3>Contact</h3><p>Privacy questions can be sent to james@jamesrealty.uk.</p></article></div></section>'''
+          terms='''<section class="page-hero section-shell"><div><p class="eyebrow"><span></span> Terms</p><h1>Website and engagement terms at a practical level.</h1><p>These website terms are informational. Project-specific scope, fees, milestones, rights and responsibilities are defined in the written proposal or agreement for that engagement.</p></div></section><section class="conversion-section section-shell"><div class="legal-grid"><aside class="legal-card"><h2>Commercial rule</h2><p>No website page, case study or pricing starting point replaces a project-specific written scope.</p></aside><article class="legal-card"><h2>Website terms</h2><h3>Portfolio and results</h3><p>Public project links and case studies are presented with evidence notes. Company-wide outcomes are not automatically attributed to James Digital unless the page states the evidence basis.</p><h3>Pricing</h3><p>Published prices are starting points or typical ranges, not binding quotations. Third-party costs, media spend, software and specialist production may be separate.</p><h3>Availability</h3><p>Call times submitted through the website are requests until confirmed. Project timelines begin only after scope, access and commercial terms are agreed.</p><h3>Intellectual property</h3><p>Ownership, licences and handover terms are defined per engagement. Third-party trademarks and project assets remain the property of their respective owners.</p></article></div></section>'''
+          (root/'privacy.html').write_text(shell('Privacy Policy','James Digital privacy and enquiry data handling information.',privacy),encoding='utf-8')
+          (root/'terms.html').write_text(shell('Terms','James Digital website and engagement terms.',terms),encoding='utf-8')
+
+          # Apply common changes to all HTML after generation.
+          for p in root.rglob('*.html'):
+              p.write_text(common(p.read_text(encoding='utf-8')),encoding='utf-8')
+
+          # Sitemap: include every public HTML page except 404.
+          urls=[]
+          for p in sorted(root.rglob('*.html')):
+              if p.name=='404.html': continue
+              rel=p.relative_to(root).as_posix()
+              loc='https://digital.jamesrealty.uk/' if rel=='index.html' else 'https://digital.jamesrealty.uk/'+rel
+              pr='1.0' if rel=='index.html' else ('0.9' if rel in {'portfolio.html','start-project.html','book-call.html','results.html'} else '0.7')
+              urls.append(f'<url><loc>{loc}</loc><changefreq>weekly</changefreq><priority>{pr}</priority></url>')
+          (root/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+''.join(urls)+'</urlset>\n',encoding='utf-8')
+
+          # Guard note for future generator runs.
+          bp=root/'build-pages.mjs'
+          if bp.exists():
+              txt=bp.read_text(encoding='utf-8')
+              marker='// Conversion guard: .github/workflows/apply-digital-conversion-rebuild.yml reapplies buyer-flow enhancements after digital changes.'
+              if marker not in txt: txt=marker+'\n'+txt
+              bp.write_text(txt,encoding='utf-8')
+          PY
+      - name: Validate rebuilt site
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, sys
+          root=Path('digital')
+          required=['index.html','portfolio.html','results.html','about.html','pricing.html','start-project.html','book-call.html','solutions.html','industries.html','privacy.html','terms.html','conversion-20260830.css','conversion-20260830.js']
+          missing=[x for x in required if not (root/x).exists()]
+          if missing: raise SystemExit('Missing: '+', '.join(missing))
+          for p in root.rglob('*.html'):
+              t=p.read_text(encoding='utf-8')
+              if p.name!='404.html' and '/conversion-20260830.js' not in t: raise SystemExit('Missing conversion JS: '+str(p))
+              if '/start-project.html?route=call' in t: raise SystemExit('Old fake call route remains: '+str(p))
+          if '$199' in (root/'pricing.html').read_text() or '$499' in (root/'pricing.html').read_text(): raise SystemExit('Old low-cost pricing remains')
+          print('Digital conversion rebuild validation passed')
+          PY
+      - name: Commit rebuilt Digital site
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add digital
+          if git diff --cached --quiet; then
+            echo 'No changes to commit'
+          else
+            git commit -m 'feat(digital): rebuild conversion journey [conversion-sync]'
+            git push
+          fi
