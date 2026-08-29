@@ -8,5 +8,8 @@
 /styles.css
   Cache-Control: public, max-age=604800
 
-/script.js
+/portfolio.css
   Cache-Control: public, max-age=604800
+
+/script.js
+  Cache-Control: public, max-age=0, must-revalidate
