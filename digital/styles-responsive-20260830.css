@@ -1,0 +1,233 @@
+@import url('styles-feasibility-purple-backup.css');
+@import url('gold-theme-digital.css?v=20260830-premium-gold-3');
+
+/* Final conversion hierarchy: Start a Project is the hero's dominant CTA. */
+.hero-actions .button-primary:first-child{
+  border-color:rgba(240,208,131,.16)!important;
+  background:rgba(255,255,255,.018)!important;
+  color:#f4eee3!important;
+  box-shadow:none!important;
+}
+.hero-actions .button-primary:first-child:hover{
+  border-color:rgba(240,208,131,.48)!important;
+  background:rgba(213,170,82,.065)!important;
+  color:#f0d083!important;
+}
+.hero-actions .button-ghost:nth-child(2){
+  border-color:#e6bd64!important;
+  background:linear-gradient(135deg,#f0d083 0%,#d5aa52 54%,#bd8739 100%)!important;
+  color:#130e06!important;
+  box-shadow:0 14px 36px rgba(160,110,34,.20),inset 0 1px 0 rgba(255,255,255,.38)!important;
+}
+.hero-actions .button-ghost:nth-child(2):hover{
+  border-color:#f5daa0!important;
+  background:linear-gradient(135deg,#f5daa0 0%,#e0b65c 58%,#c88f3e 100%)!important;
+  color:#0d0904!important;
+  box-shadow:0 18px 44px rgba(173,120,38,.28)!important;
+}
+
+/*
+  Responsive typography correction — 2026-08-30
+  The inherited feasibility scale allowed display text to become too large while
+  card/supporting copy was pushed below comfortable reading size. This layer
+  keeps the gold visual direction while restoring a consistent hierarchy.
+*/
+body{font-size:16px!important}
+p{font-size:1rem;line-height:1.68}
+
+/* Navigation, labels and actions */
+.kicker,.eyebrow{font-size:.78rem!important;line-height:1.4!important}
+.button{font-size:.88rem!important;line-height:1.25!important}
+.button-small{font-size:.82rem!important}
+.arrow-link,.muted-link,.text-link{font-size:.84rem!important}
+.brand{font-size:.96rem!important}
+.brand-mark{font-size:.72rem!important}
+.nav-links a,.nav-call,.menu-button{font-size:.82rem!important}
+.mobile-nav>a:not(.button){font-size:.94rem!important}
+
+/* Primary display hierarchy */
+.hero h1{
+  font-size:clamp(3.75rem,6vw,5.75rem)!important;
+  line-height:.94!important;
+  letter-spacing:-.055em!important;
+}
+.page-hero h1{
+  font-size:clamp(3.25rem,5.2vw,5rem)!important;
+  line-height:.96!important;
+  letter-spacing:-.052em!important;
+}
+.case-hero h1{
+  font-size:clamp(3.1rem,5vw,4.8rem)!important;
+  line-height:.96!important;
+  letter-spacing:-.052em!important;
+}
+.hero-lead{font-size:1.08rem!important;line-height:1.68!important}
+.page-hero>div>p:not(.eyebrow),.case-hero>div>div>p:not(.eyebrow){font-size:1.02rem!important;line-height:1.68!important}
+.section-heading h2,.split-heading h2,.about-copy h2,.final-cta h2,.case-sections h2,.service-detail-grid h2,.next-project h2,.project-form-intro h2{
+  font-size:clamp(2.35rem,4vw,3.8rem)!important;
+  line-height:.98!important;
+  letter-spacing:-.05em!important;
+}
+.section-heading>div+div>p,.section-heading>p,.split-heading>p,.body-copy p{font-size:1rem!important;line-height:1.68!important}
+
+/* Hero supporting information */
+.hero-signals span{font-size:.74rem!important;line-height:1.45!important}
+.hero-signals strong{font-size:.84rem!important}
+.system-map-top{font-size:.74rem!important}
+.orbit-core strong{font-size:1.25rem!important}
+.orbit-core span{font-size:.68rem!important}
+.orbit-label{font-size:.7rem!important}
+.system-flow{font-size:.68rem!important}
+.proof-rail p{font-size:.72rem!important;line-height:1.45!important}
+.proof-rail span{font-size:.8rem!important;line-height:1.45!important}
+
+/* Work / portfolio cards */
+.work-meta{font-size:.74rem!important;line-height:1.45!important}
+.work-card h3{font-size:1.5rem!important;line-height:1.16!important}
+.work-card-body>p{font-size:.95rem!important;line-height:1.62!important}
+.tag-row span{font-size:.72rem!important;line-height:1.3!important}
+.device-bar span{font-size:.66rem!important}
+.portfolio-section-label p{font-size:.84rem!important}
+.filter-group>span{font-size:.74rem!important}
+.filter-group button,.filter-button{font-size:.78rem!important}
+.filter-status{font-size:.8rem!important}
+.evidence-note strong{font-size:.82rem!important}
+.evidence-note p{font-size:.86rem!important;line-height:1.6!important}
+
+/* Problem, capability and trust cards */
+.problem-grid article>span,.capability-grid article>span,.trust-grid article>span{font-size:.72rem!important}
+.problem-grid h3,.capability-grid h3,.trust-grid h3{font-size:1.2rem!important;line-height:1.2!important}
+.problem-grid p,.capability-grid p,.trust-grid p{font-size:.94rem!important;line-height:1.58!important}
+
+/* About and process */
+.about-monogram span{font-size:5.6rem!important;line-height:.92!important}
+.about-monogram small{font-size:.74rem!important}
+.about-copy>p{font-size:.98rem!important;line-height:1.68!important}
+.about-facts strong{font-size:1.08rem!important}
+.about-facts span{font-size:.8rem!important;line-height:1.45!important}
+.process-rail li>span{font-size:.72rem!important}
+.process-rail strong{font-size:1rem!important}
+.process-rail small{font-size:.78rem!important;line-height:1.5!important}
+.about-portrait-card>p{font-size:.84rem!important;line-height:1.55!important}
+.about-stat-grid span{font-size:.78rem!important}
+
+/* Engagements, pricing and service detail */
+.engagement-grid article>span,.price-grid>article>span{font-size:.74rem!important}
+.engagement-grid h3{font-size:clamp(2.1rem,3.3vw,3.35rem)!important;line-height:.98!important}
+.engagement-grid p,.service-outcome p,.price-grid>article>p,.engagement-model-grid p{font-size:.92rem!important;line-height:1.62!important}
+.engagement-grid ul,.price-grid ul{font-size:.86rem!important;line-height:1.55!important}
+.price-snapshot strong{font-size:.9rem!important}
+.price-grid h3{font-size:2.7rem!important;line-height:.95!important}
+.price-grid h3 small{font-size:.76rem!important;line-height:1.4!important}
+.mini-price-grid span{font-size:.74rem!important}
+.mini-price-grid strong{font-size:1.08rem!important}
+.engagement-model-grid h3{font-size:1.28rem!important}
+.service-outcome>span,.industry-problems>span,.fit-grid span,.engagement-model-grid span{font-size:.72rem!important}
+.industry-problems strong{font-size:.86rem!important;line-height:1.45!important}
+.fit-grid h3{font-size:1.2rem!important;line-height:1.25!important}
+.link-list a{font-size:.88rem!important}
+
+/* Case studies */
+.breadcrumbs{font-size:.76rem!important}
+.case-summary span{font-size:.7rem!important}
+.case-summary strong,.case-summary a{font-size:.86rem!important}
+.case-nav strong{font-size:.72rem!important}
+.case-nav a{font-size:.82rem!important}
+.case-sections>section>p:not(.kicker),.case-copy p{font-size:.98rem!important;line-height:1.68!important}
+.check-list li{font-size:.88rem!important;line-height:1.5!important}
+.tool-grid span{font-size:.82rem!important}
+.evidence-grid span{font-size:.72rem!important}
+.evidence-grid p{font-size:.86rem!important;line-height:1.58!important}
+.public-links a{font-size:.8rem!important}
+
+/* Forms */
+.project-form-intro>p{font-size:.94rem!important;line-height:1.65!important}
+.project-form-intro ul{font-size:.84rem!important;line-height:1.55!important}
+.project-form label>span,.project-form legend{font-size:.8rem!important}
+.project-form input,.project-form select,.project-form textarea{font-size:.94rem!important}
+.service-checkboxes label span{font-size:.78rem!important;line-height:1.35!important}
+.consent span{font-size:.78rem!important;line-height:1.55!important}
+.form-submit p{font-size:.76rem!important}
+.form-status{font-size:.82rem!important}
+.form-success p{font-size:.84rem!important}
+.copy-brief{font-size:.8rem!important}
+.contact-route-row a{font-size:.8rem!important}
+
+/* Footer and persistent contact */
+.contact-dock span{font-size:.74rem!important}
+.contact-dock strong{font-size:1.08rem!important}
+.contact-dock-actions a{font-size:.8rem!important}
+.footer-grid>div:first-child p{font-size:.82rem!important;line-height:1.6!important}
+.footer-grid nav strong{font-size:.74rem!important}
+.footer-grid nav a,.footer-meta{font-size:.8rem!important;line-height:1.5!important}
+
+/* Tablet: large enough to remain premium without dominating the viewport. */
+@media(max-width:900px){
+  .hero h1{font-size:clamp(3.35rem,9vw,4.8rem)!important}
+  .page-hero h1{font-size:clamp(3rem,8vw,4.25rem)!important}
+  .case-hero h1{font-size:clamp(2.9rem,7.5vw,4.1rem)!important}
+}
+
+/* Mobile: minimum readable copy, controlled display sizes, compact two-column cards. */
+@media(max-width:620px){
+  .hero h1{font-size:clamp(2.8rem,12vw,3.75rem)!important;line-height:.96!important}
+  .page-hero h1{font-size:clamp(2.65rem,11vw,3.45rem)!important;line-height:.98!important}
+  .case-hero h1{font-size:clamp(2.55rem,10.5vw,3.3rem)!important;line-height:.98!important}
+  .hero-lead,.page-hero>div>p:not(.eyebrow),.case-hero>div>div>p:not(.eyebrow){font-size:.98rem!important;line-height:1.62!important}
+  .section-heading h2,.split-heading h2,.about-copy h2,.final-cta h2,.case-sections h2,.service-detail-grid h2,.next-project h2,.project-form-intro h2{
+    font-size:clamp(2.05rem,9.5vw,3rem)!important;
+    line-height:1!important;
+  }
+  .section-heading>div+div>p,.section-heading>p,.split-heading>p,.body-copy p{font-size:.96rem!important;line-height:1.62!important}
+
+  .kicker,.eyebrow{font-size:.74rem!important}
+  .button{font-size:.88rem!important}
+  .hero-signals span{font-size:.72rem!important}
+  .hero-signals strong{font-size:.82rem!important}
+  .orbit-label{font-size:.64rem!important}
+  .system-flow{font-size:.64rem!important}
+  .proof-rail p{font-size:.72rem!important}
+  .proof-rail span{font-size:.78rem!important}
+
+  .work-card h3{font-size:1.35rem!important}
+  .work-card-body>p{font-size:.92rem!important;line-height:1.58!important}
+  .work-meta{font-size:.7rem!important}
+  .tag-row span{font-size:.7rem!important}
+
+  .problem-grid article{min-height:218px!important}
+  .capability-grid article{min-height:210px!important}
+  .trust-grid article{min-height:205px!important}
+  .problem-grid h3,.capability-grid h3,.trust-grid h3{font-size:1.08rem!important;line-height:1.2!important}
+  .problem-grid p,.capability-grid p,.trust-grid p{font-size:.875rem!important;line-height:1.55!important}
+
+  .about-monogram span{font-size:4.5rem!important}
+  .about-monogram small{font-size:.72rem!important}
+  .about-copy>p{font-size:.94rem!important}
+  .about-facts span{font-size:.78rem!important}
+
+  .engagement-grid h3{font-size:clamp(2rem,9vw,2.8rem)!important}
+  .engagement-grid p,.service-outcome p,.price-grid>article>p,.engagement-model-grid p{font-size:.9rem!important}
+  .engagement-grid ul,.price-grid ul{font-size:.84rem!important}
+  .price-grid h3{font-size:2.35rem!important}
+
+  .case-sections>section>p:not(.kicker),.case-copy p{font-size:.94rem!important}
+  .case-nav a{font-size:.82rem!important}
+  .check-list li{font-size:.86rem!important}
+  .evidence-grid p{font-size:.84rem!important}
+
+  .project-form label>span,.project-form legend{font-size:.8rem!important}
+  .project-form input,.project-form select,.project-form textarea{font-size:1rem!important}
+  .service-checkboxes label span{font-size:.78rem!important}
+  .consent span{font-size:.78rem!important}
+}
+
+@media(max-width:390px){
+  .problem-grid,.capability-grid,.trust-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .about-facts{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .problem-grid p,.capability-grid p,.trust-grid p{font-size:.84rem!important}
+}
+
+@media(max-width:330px){
+  .problem-grid,.capability-grid,.trust-grid,.about-facts{grid-template-columns:1fr!important}
+  .problem-grid p,.capability-grid p,.trust-grid p{font-size:.9rem!important}
+}
