@@ -17,7 +17,7 @@
   <meta name="twitter:card" content="summary">
   <meta name="theme-color" content="#090a0c">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css?v=20260829-global-redesign-1">
+  <link rel="stylesheet" href="/styles.css?v=20260829-global-redesign-2">
 
 </head>
 <body class="start-project-page" data-page-type="start-project">
@@ -47,7 +47,7 @@
   </header>
   <main id="main">
 <section class="page-hero section-shell start-hero">
-  <div><p class="eyebrow"><span></span> Start a Project</p><h1>Tell me what the business needs to achieve.</h1><p>Share enough context to qualify the project. Your answers stay in your browser and are converted into a structured WhatsApp brief for you to review before sending.</p><div class="contact-route-row"><a href="/start-project.html" class="is-active" data-route-link="project" data-event="start_project_click">Start a Project</a><a href="/start-project.html?route=call" data-route-link="call" data-event="book_call_click">Book a Call</a><a href="https://wa.me/971528420933?text=Hi%20James%2C%20I%20would%20like%20to%20discuss%20a%20digital%20project." target="_blank" rel="noopener noreferrer" data-event="whatsapp_click">WhatsApp</a><a href="/start-project.html?route=email" data-route-link="email" data-event="email_click">Email reply</a></div></div>
+  <div><p class="eyebrow"><span></span> Start a Project</p><h1>Tell me what the business needs to achieve.</h1><p>Share enough context to qualify the project. Your answers stay in your browser and are converted into a structured brief for you to review before sending by WhatsApp or email.</p><div class="contact-route-row"><a href="/start-project.html" class="is-active" data-route-link="project" data-event="start_project_click">Start a Project</a><a href="/start-project.html?route=call" data-route-link="call" data-event="book_call_click">Book a Call</a><a href="https://wa.me/971528420933?text=Hi%20James%2C%20I%20would%20like%20to%20discuss%20a%20digital%20project." target="_blank" rel="noopener noreferrer" data-event="whatsapp_click">WhatsApp</a><a href="mailto:james@jamesrealty.uk?subject=Digital%20project%20enquiry" data-event="email_click">Email James</a></div></div>
   <aside class="service-outcome"><span>What happens next</span><p>You receive a focused response on fit, recommended scope and the next useful conversation. No generic proposal is sent automatically.</p></aside>
 </section>
 <section class="section project-form-section"><div class="section-shell project-form-grid">
@@ -66,9 +66,9 @@
     <label><span>Preferred reply *</span><select name="reply" id="reply" required><option value="">Select</option><option>WhatsApp</option><option>Email</option><option>Phone / video call</option></select></label>
     <label class="full-field"><span>Project description *</span><textarea name="description" id="description" required maxlength="1500" placeholder="What is happening now, what needs to change, and what would success look like?"></textarea></label>
     <label class="consent full-field"><input type="checkbox" name="consent" required><span>I agree that James may contact me about this project brief.</span></label>
-    <div class="form-submit full-field"><button class="button button-primary" type="submit">Prepare my project brief <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg></button><p>Submitting prepares a WhatsApp message locally. You review and send it yourself.</p></div>
+    <div class="form-submit full-field"><button class="button button-primary" type="submit">Prepare my project brief <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg></button><p>Submitting prepares WhatsApp and email messages locally. You review and send the brief yourself.</p></div>
     <div class="form-status full-field" id="form-status" role="status" aria-live="polite"></div>
-    <div class="form-success full-field" id="form-success" hidden><strong>Your brief is ready.</strong><p>Review the message before sending it on WhatsApp.</p><a class="button button-primary" id="continue-whatsapp" href="#" target="_blank" rel="noopener noreferrer" data-event="whatsapp_click">Continue on WhatsApp ↗</a><button class="copy-brief" id="copy-brief" type="button">Copy project brief</button></div>
+    <div class="form-success full-field" id="form-success" hidden><strong>Your brief is ready.</strong><p>Review it before sending by WhatsApp or email.</p><div class="form-success-actions"><a class="button button-primary" id="continue-whatsapp" href="#" target="_blank" rel="noopener noreferrer" data-event="whatsapp_click">Continue on WhatsApp ↗</a><a class="button button-ghost" id="continue-email" href="#" data-event="email_click">Send by email</a><button class="copy-brief" id="copy-brief" type="button">Copy project brief</button></div></div>
   </form>
 </div></section></main>
 
@@ -78,7 +78,7 @@
       <a href="/start-project.html" data-event="start_project_click">Start a Project</a>
       <a href="/start-project.html?route=call" data-event="book_call_click">Book a Call</a>
       <a href="https://wa.me/971528420933?text=Hi%20James%2C%20I%20would%20like%20to%20discuss%20a%20digital%20project." target="_blank" rel="noopener noreferrer" data-event="whatsapp_click">WhatsApp</a>
-      <a href="/start-project.html?route=email" data-event="email_click">Email reply</a>
+      <a href="mailto:james@jamesrealty.uk?subject=Digital%20project%20enquiry" data-event="email_click">Email James</a>
     </div>
   </section>
   <footer class="site-footer">
@@ -100,9 +100,9 @@
         <a href="/custom-engagements.html">Custom Engagements</a>
         <a href="/start-project.html">Start a Project</a>
       </nav>
-      <div class="footer-meta"><span>Dubai, United Arab Emirates</span><a href="https://jamesrealty.uk/" target="_blank" rel="noopener noreferrer">James Realty</a><span>© <span data-year></span> James Digital</span></div>
+      <div class="footer-meta"><span>Dubai, United Arab Emirates</span><a href="mailto:james@jamesrealty.uk?subject=Digital%20project%20enquiry" data-event="email_click">james@jamesrealty.uk</a><a href="https://jamesrealty.uk/" target="_blank" rel="noopener noreferrer">James Realty</a><span>© <span data-year></span> James Digital</span></div>
     </div>
   </footer>
-  <script src="/script.js?v=20260829-global-redesign-1" defer></script>
+  <script src="/script.js?v=20260829-global-redesign-2" defer></script>
 </body>
 </html>

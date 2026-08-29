@@ -354,7 +354,8 @@ h1,h2,h3,p{overflow-wrap:anywhere}
 .form-success{padding:20px;border:1px solid rgba(168,255,62,.35);border-radius:14px;background:rgba(168,255,62,.07)}
 .form-success strong{font-size:1.05rem}
 .form-success p{margin:6px 0 15px;color:#9ba0a7;font-size:.72rem}
-.form-success .button{margin-right:8px}
+.form-success-actions{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.form-success .button{margin:0}
 .copy-brief{min-height:48px;padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:transparent;font-size:.72rem;font-weight:750;cursor:pointer}
 .error-hero{min-height:70vh;align-items:center}
 html.js-motion [data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .65s var(--ease),transform .65s var(--ease)}

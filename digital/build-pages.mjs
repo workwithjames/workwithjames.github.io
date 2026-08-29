@@ -5,6 +5,8 @@ import { fileURLToPath } from "node:url";
 const root = path.dirname(fileURLToPath(import.meta.url));
 const base = "https://digital.jamesrealty.uk";
 const whatsapp = "971528420933";
+const email = "james@jamesrealty.uk";
+const emailHref = "mailto:" + email + "?subject=Digital%20project%20enquiry";
 
 const projects = [
   {
@@ -19,7 +21,7 @@ const projects = [
     displayUrl: "nwmea.com",
     social: "https://www.instagram.com/nwmea/",
     socialLabel: "@nwmea",
-    image: "https://image.thum.io/get/width/1200/crop/760/noanimate/https://www.nwmea.com/",
+    image: "/assets/work/nationwide-middle-east-properties.jpg",
     context: "A UAE brokerage operating in a crowded, high-consideration property market where brand visibility, qualified demand and sales follow-up need to work as one system.",
     challenge: "Connect property marketing, performance acquisition, search visibility and CRM follow-up without treating each channel as a separate activity.",
     strategy: "Build an acquisition-to-conversion approach around clear property narratives, high-intent audiences, measurable landing journeys and downstream sales feedback.",
@@ -41,7 +43,7 @@ const projects = [
     displayUrl: "thoe.com",
     social: "https://www.instagram.com/theheartofeurope_official/",
     socialLabel: "@theheartofeurope_official",
-    image: "https://image.thum.io/get/width/1200/crop/760/noanimate/https://thoe.com/",
+    image: "/assets/work/the-heart-of-europe.jpg",
     context: "A luxury destination and property proposition requiring a consistent digital expression across web, campaign and social touchpoints.",
     challenge: "Present a complex destination story with enough clarity and visual authority to support international discovery.",
     strategy: "Use a premium, destination-led narrative with disciplined content hierarchy and visual consistency across public-facing channels.",
@@ -63,7 +65,7 @@ const projects = [
     displayUrl: "bnw.ae",
     social: "https://www.instagram.com/bnw.developments/",
     socialLabel: "@bnw.developments",
-    image: "https://image.thum.io/get/width/1200/crop/760/noanimate/https://bnw.ae/en",
+    image: "/assets/work/bnw-developments.jpg",
     context: "A developer brand communicating premium residential projects to investor and end-user audiences.",
     challenge: "Create a coherent public-facing presence across project, campaign and social communication.",
     strategy: "Prioritise luxury positioning, project clarity and repeatable visual structure for digital use.",
@@ -85,7 +87,7 @@ const projects = [
     displayUrl: "reefandbeef.ae",
     social: "https://www.instagram.com/reefandbeef_dubai/",
     socialLabel: "@reefandbeef_dubai",
-    image: "https://image.thum.io/get/width/1200/crop/760/noanimate/https://reefandbeef.ae/",
+    image: "/assets/work/reef-and-beef-dubai.jpg",
     context: "A Dubai restaurant brand competing for attention in a visually demanding dining and lifestyle market.",
     challenge: "Translate the in-venue experience into a digital presence that makes the concept easy to understand and desirable to visit.",
     strategy: "Lead with the food, atmosphere and occasion while keeping the path to discovery and action direct.",
@@ -129,7 +131,7 @@ const projects = [
     displayUrl: "glamgirlz.store",
     social: "https://www.instagram.com/glam_girlz_dubai/",
     socialLabel: "@glam_girlz_dubai",
-    image: "https://image.thum.io/get/width/1200/crop/760/noanimate/https://glamgirlz.store/",
+    image: "/assets/work/glam-girlz.jpg",
     context: "A colourful beauty and retail concept requiring a clear, accessible expression for customers and families.",
     challenge: "Balance personality, service clarity and retail discovery across digital touchpoints.",
     strategy: "Use a recognisable colour-led system with concise service and product communication.",
@@ -151,7 +153,7 @@ const projects = [
     displayUrl: "ivydubai.ae",
     social: "https://www.instagram.com/ivybeautyandbubbles_dubai/",
     socialLabel: "@ivybeautyandbubbles_dubai",
-    image: "https://image.thum.io/get/width/1200/crop/760/noanimate/https://ivydubai.ae/locations/marquise-square-business-bay/",
+    image: "/assets/work/ivy-beauty-bubbles.jpg",
     context: "A premium salon and lifestyle location requiring a polished local digital presence.",
     challenge: "Make the location, experience and visual character clear across website and social discovery.",
     strategy: "Use a refined beauty-led content system focused on transformations, experience and place.",
@@ -301,7 +303,7 @@ function footer() {
       <a href="/start-project.html" data-event="start_project_click">Start a Project</a>
       <a href="/start-project.html?route=call" data-event="book_call_click">Book a Call</a>
       <a href="https://wa.me/${whatsapp}?text=Hi%20James%2C%20I%20would%20like%20to%20discuss%20a%20digital%20project." target="_blank" rel="noopener noreferrer" data-event="whatsapp_click">WhatsApp</a>
-      <a href="/start-project.html?route=email" data-event="email_click">Email reply</a>
+      <a href="${emailHref}" data-event="email_click">Email James</a>
     </div>
   </section>
   <footer class="site-footer">
@@ -323,7 +325,7 @@ function footer() {
         <a href="/custom-engagements.html">Custom Engagements</a>
         <a href="/start-project.html">Start a Project</a>
       </nav>
-      <div class="footer-meta"><span>Dubai, United Arab Emirates</span><a href="https://jamesrealty.uk/" target="_blank" rel="noopener noreferrer">James Realty</a><span>© <span data-year></span> James Digital</span></div>
+      <div class="footer-meta"><span>Dubai, United Arab Emirates</span><a href="${emailHref}" data-event="email_click">${email}</a><a href="https://jamesrealty.uk/" target="_blank" rel="noopener noreferrer">James Realty</a><span>© <span data-year></span> James Digital</span></div>
     </div>
   </footer>`;
 }
@@ -349,7 +351,7 @@ function page({ title, description, canonical, bodyClass = "", pageType = "", co
   <meta name="twitter:card" content="summary">
   <meta name="theme-color" content="#090a0c">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css?v=20260829-global-redesign-1">
+  <link rel="stylesheet" href="/styles.css?v=20260829-global-redesign-2">
   ${schemaTag}
 </head>
 <body class="${bodyClass}" data-page-type="${pageType}">
@@ -357,7 +359,7 @@ function page({ title, description, canonical, bodyClass = "", pageType = "", co
   ${header()}
   <main id="main">${content}</main>
   ${footer()}
-  <script src="/script.js?v=20260829-global-redesign-1" defer></script>
+  <script src="/script.js?v=20260829-global-redesign-2" defer></script>
 </body>
 </html>`;
 }
@@ -774,7 +776,7 @@ write("custom-engagements.html", page({
 const serviceOptions = ["Digital Strategy", "Web Development", "Performance Marketing", "SEO", "Analytics & Tracking", "CRM", "Automation", "Creative"];
 const startContent = `
 <section class="page-hero section-shell start-hero">
-  <div><p class="eyebrow"><span></span> Start a Project</p><h1>Tell me what the business needs to achieve.</h1><p>Share enough context to qualify the project. Your answers stay in your browser and are converted into a structured WhatsApp brief for you to review before sending.</p><div class="contact-route-row"><a href="/start-project.html" class="is-active" data-route-link="project" data-event="start_project_click">Start a Project</a><a href="/start-project.html?route=call" data-route-link="call" data-event="book_call_click">Book a Call</a><a href="https://wa.me/${whatsapp}?text=Hi%20James%2C%20I%20would%20like%20to%20discuss%20a%20digital%20project." target="_blank" rel="noopener noreferrer" data-event="whatsapp_click">WhatsApp</a><a href="/start-project.html?route=email" data-route-link="email" data-event="email_click">Email reply</a></div></div>
+  <div><p class="eyebrow"><span></span> Start a Project</p><h1>Tell me what the business needs to achieve.</h1><p>Share enough context to qualify the project. Your answers stay in your browser and are converted into a structured brief for you to review before sending by WhatsApp or email.</p><div class="contact-route-row"><a href="/start-project.html" class="is-active" data-route-link="project" data-event="start_project_click">Start a Project</a><a href="/start-project.html?route=call" data-route-link="call" data-event="book_call_click">Book a Call</a><a href="https://wa.me/${whatsapp}?text=Hi%20James%2C%20I%20would%20like%20to%20discuss%20a%20digital%20project." target="_blank" rel="noopener noreferrer" data-event="whatsapp_click">WhatsApp</a><a href="${emailHref}" data-event="email_click">Email James</a></div></div>
   <aside class="service-outcome"><span>What happens next</span><p>You receive a focused response on fit, recommended scope and the next useful conversation. No generic proposal is sent automatically.</p></aside>
 </section>
 <section class="section project-form-section"><div class="section-shell project-form-grid">
@@ -793,9 +795,9 @@ const startContent = `
     <label><span>Preferred reply *</span><select name="reply" id="reply" required><option value="">Select</option><option>WhatsApp</option><option>Email</option><option>Phone / video call</option></select></label>
     <label class="full-field"><span>Project description *</span><textarea name="description" id="description" required maxlength="1500" placeholder="What is happening now, what needs to change, and what would success look like?"></textarea></label>
     <label class="consent full-field"><input type="checkbox" name="consent" required><span>I agree that James may contact me about this project brief.</span></label>
-    <div class="form-submit full-field"><button class="button button-primary" type="submit">Prepare my project brief ${icon("arrow")}</button><p>Submitting prepares a WhatsApp message locally. You review and send it yourself.</p></div>
+    <div class="form-submit full-field"><button class="button button-primary" type="submit">Prepare my project brief ${icon("arrow")}</button><p>Submitting prepares WhatsApp and email messages locally. You review and send the brief yourself.</p></div>
     <div class="form-status full-field" id="form-status" role="status" aria-live="polite"></div>
-    <div class="form-success full-field" id="form-success" hidden><strong>Your brief is ready.</strong><p>Review the message before sending it on WhatsApp.</p><a class="button button-primary" id="continue-whatsapp" href="#" target="_blank" rel="noopener noreferrer" data-event="whatsapp_click">Continue on WhatsApp ↗</a><button class="copy-brief" id="copy-brief" type="button">Copy project brief</button></div>
+    <div class="form-success full-field" id="form-success" hidden><strong>Your brief is ready.</strong><p>Review it before sending by WhatsApp or email.</p><div class="form-success-actions"><a class="button button-primary" id="continue-whatsapp" href="#" target="_blank" rel="noopener noreferrer" data-event="whatsapp_click">Continue on WhatsApp ↗</a><a class="button button-ghost" id="continue-email" href="#" data-event="email_click">Send by email</a><button class="copy-brief" id="copy-brief" type="button">Copy project brief</button></div></div>
   </form>
 </div></section>`;
 

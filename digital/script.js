@@ -202,6 +202,7 @@
       var status = document.getElementById("form-status");
       var success = document.getElementById("form-success");
       var continueLink = document.getElementById("continue-whatsapp");
+      var continueEmail = document.getElementById("continue-email");
       var selectedServices = Array.prototype.map.call(form.querySelectorAll('input[name="services"]:checked'), function (checkbox) {
         return checkbox.value;
       });
@@ -244,6 +245,9 @@
       var whatsappUrl = "https://wa.me/971528420933?text=" + encodeURIComponent(brief);
       continueLink.href = whatsappUrl;
       continueLink.dataset.brief = brief;
+      if (continueEmail) {
+        continueEmail.href = "mailto:james@jamesrealty.uk?subject=" + encodeURIComponent("Digital project enquiry from " + formData.get("company")) + "&body=" + encodeURIComponent(brief);
+      }
       if (status) status.textContent = "";
       success.hidden = false;
       success.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "center" });
