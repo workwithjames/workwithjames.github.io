@@ -1,5 +1,5 @@
 @import url('styles-feasibility-purple-backup.css');
-@import url('gold-theme-digital.css');
+@import url('gold-theme-digital.css?v=20260830-premium-gold-3');
 
 /* Final conversion hierarchy: Start a Project is the hero's dominant CTA. */
 .hero-actions .button-primary:first-child{
