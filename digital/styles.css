@@ -1,2 +1,36 @@
 @import url('styles-feasibility-purple-backup.css');
 @import url('gold-theme-digital.css');
+
+/* Final conversion hierarchy: Start a Project is the hero's dominant CTA. */
+.hero-actions .button-primary:first-child{
+  border-color:rgba(240,208,131,.16)!important;
+  background:rgba(255,255,255,.018)!important;
+  color:#f4eee3!important;
+  box-shadow:none!important;
+}
+.hero-actions .button-primary:first-child:hover{
+  border-color:rgba(240,208,131,.48)!important;
+  background:rgba(213,170,82,.065)!important;
+  color:#f0d083!important;
+}
+.hero-actions .button-ghost:nth-child(2){
+  border-color:#e6bd64!important;
+  background:linear-gradient(135deg,#f0d083 0%,#d5aa52 54%,#bd8739 100%)!important;
+  color:#130e06!important;
+  box-shadow:0 14px 36px rgba(160,110,34,.20),inset 0 1px 0 rgba(255,255,255,.38)!important;
+}
+.hero-actions .button-ghost:nth-child(2):hover{
+  border-color:#f5daa0!important;
+  background:linear-gradient(135deg,#f5daa0 0%,#e0b65c 58%,#c88f3e 100%)!important;
+  color:#0d0904!important;
+  box-shadow:0 18px 44px rgba(173,120,38,.28)!important;
+}
+
+/* Normal phone widths keep compact 2-column grids to avoid a long 14-card stack. */
+@media(max-width:390px){
+  .problem-grid,.capability-grid,.trust-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .about-facts{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:330px){
+  .problem-grid,.capability-grid,.trust-grid,.about-facts{grid-template-columns:1fr!important}
+}
