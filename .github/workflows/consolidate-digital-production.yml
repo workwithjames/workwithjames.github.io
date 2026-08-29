@@ -1,0 +1,274 @@
+name: Consolidate Digital production
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/consolidate-digital-production.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  consolidate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Consolidate James Digital
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 <<'PY'
+          from pathlib import Path
+          import re, json, html
+
+          root = Path('digital')
+          VERSION = '20260830-consolidated-1'
+          BASE = 'https://digital.jamesrealty.uk'
+
+          def read(p): return Path(p).read_text(encoding='utf-8')
+          def write(p, s):
+              p = Path(p); p.parent.mkdir(parents=True, exist_ok=True); p.write_text(s, encoding='utf-8')
+
+          # ---- One production CSS source ----
+          css_files = [
+              root/'styles-base-feasibility-20260829.css',
+              root/'gold-production-20260830.css',
+              root/'styles-responsive-final-20260830.css',
+              root/'typography-feasibility-20260830.css',
+              root/'conversion-20260830.css',
+          ]
+          css = "@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Roboto+Flex:opsz,wdth,wght@8..144,75..150,300..800&display=swap');\n/* James Digital consolidated production CSS, 2026-08-30 */\n"
+          for f in css_files:
+              if f.exists():
+                  part = read(f)
+                  part = re.sub(r'^@import[^;]+;\s*', '', part, flags=re.M)
+                  css += f"\n/* SOURCE: {f.name} */\n{part.strip()}\n"
+          css += r'''
+          /* Consolidated commercial-proof and form refinements */
+          .brand-proof{padding:26px 0;border-block:1px solid var(--line);background:#0c0a08}
+          .brand-proof .section-shell{display:grid;grid-template-columns:180px 1fr;gap:28px;align-items:center}
+          .brand-proof p{margin:0;color:var(--muted);font-size:.75rem}
+          .brand-list{display:flex;flex-wrap:wrap;gap:10px}
+          .brand-list span{padding:9px 12px;border:1px solid var(--line);border-radius:999px;color:#e5d9c9;font-size:.76rem;font-weight:700}
+          .metric-grid,.career-grid,.evidence-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+          .metric-card,.career-card,.evidence-card{padding:22px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,rgba(213,170,82,.05),transparent 55%),var(--surface)}
+          .metric-card strong{display:block;color:var(--accent-2);font-family:var(--font-display);font-stretch:135%;font-size:clamp(2rem,4vw,3.15rem);font-weight:520;line-height:1}
+          .metric-card span,.career-card p,.evidence-card p{display:block;margin:9px 0 0;color:var(--muted);font-size:.82rem;line-height:1.6}
+          .metric-card small{display:block;margin-top:8px;color:#817565;font-size:.68rem;line-height:1.5}
+          .career-card h3,.evidence-card h3{margin:8px 0 0;font-size:1.08rem}
+          .career-card>span,.evidence-card>span{color:var(--accent);font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em}
+          .timeline-clean{display:grid;gap:0;border-top:1px solid var(--line)}
+          .timeline-clean article{display:grid;grid-template-columns:190px 1fr;gap:28px;padding:28px 0;border-bottom:1px solid var(--line)}
+          .timeline-clean time{color:var(--accent);font-size:.75rem;font-weight:800}
+          .timeline-clean h3{margin:0 0 7px;font-size:1.25rem}.timeline-clean p{margin:0;color:var(--muted);font-size:.9rem}
+          .form-status-box{grid-column:1/-1;padding:13px 14px;border:1px solid var(--line);border-radius:12px;color:var(--muted);font-size:.8rem;line-height:1.55}
+          .form-status-box[data-state='success']{border-color:rgba(213,170,82,.45);color:#f0d083;background:rgba(213,170,82,.06)}
+          .form-status-box[data-state='error']{border-color:rgba(255,120,120,.35);color:#ffc1c1;background:rgba(255,80,80,.05)}
+          .honeypot{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important}
+          .proof-boundary{padding:20px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.018);color:var(--muted);font-size:.82rem;line-height:1.7}
+          .role-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-block:1px solid var(--line);margin:22px 0}
+          .role-strip div{padding:18px;border-right:1px solid var(--line)}.role-strip div:last-child{border-right:0}
+          .role-strip span{display:block;color:#867a6b;font-size:.66rem;text-transform:uppercase;letter-spacing:.08em}.role-strip strong{display:block;margin-top:6px;font-size:.82rem;line-height:1.45}
+          .single-cta{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+          .response-note{margin-top:12px;color:#8d8172;font-size:.74rem;line-height:1.5}
+          .profile-shot{width:min(100%,390px);aspect-ratio:4/5;object-fit:cover;object-position:top;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}
+          @media(max-width:900px){.metric-grid,.career-grid,.evidence-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.brand-proof .section-shell{grid-template-columns:1fr}.timeline-clean article{grid-template-columns:1fr}.role-strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
+          @media(max-width:620px){.metric-grid,.career-grid,.evidence-cards,.role-strip{grid-template-columns:1fr}.brand-proof{padding:22px 0}.brand-list span{font-size:.72rem}}
+          '''
+          write(root/'styles.css', css.strip()+"\n")
+
+          legacy_css = [
+              'styles-base-feasibility-20260829.css','gold-production-20260830.css','styles-responsive-final-20260830.css',
+              'typography-feasibility-20260830.css','conversion-20260830.css','gold-theme-digital.css','mobile-viewport-fix.css',
+              'styles-feasibility-purple-backup.css','styles-responsive-20260830.css'
+          ]
+          for name in legacy_css:
+              p=root/name
+              if p.exists(): p.unlink()
+
+          # ---- One production JS source ----
+          js = read(root/'script.js')
+          marker = '  var form = document.getElementById("project-form");'
+          if marker in js:
+              js = js.split(marker)[0].rstrip() + '\n'
+              if js.endswith('})();'):
+                  js = js[:-5]
+          else:
+              js = js.rsplit('})();',1)[0]
+          js += r'''
+            function formObject(form){var out={};new FormData(form).forEach(function(v,k){if(!k.startsWith('_'))out[k]=String(v)});return out}
+            function contextMeta(obj){var p=new URLSearchParams(location.search);obj.landing_page=location.pathname;obj.referrer=document.referrer||'';obj.utm_source=p.get('utm_source')||'';obj.utm_medium=p.get('utm_medium')||'';obj.utm_campaign=p.get('utm_campaign')||'';obj.consent=true;return obj}
+            function setStatus(node,message,state){if(!node)return;node.textContent=message;node.dataset.state=state||''}
+            async function submitJson(url,payload){var r=await fetch(url,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});var data={};try{data=await r.json()}catch(e){}if(!r.ok)throw new Error(data.error||'Request could not be saved');return data}
+
+            var lead=document.getElementById('lead-form');
+            if(lead){
+              var next=lead.querySelector('[data-lead-next]'), step2=lead.querySelector('[data-step="2"]'), status=lead.querySelector('[data-form-status]');
+              if(next)next.addEventListener('click',function(){var bad=Array.from(lead.querySelectorAll('[data-step="1"] [required]')).find(function(el){return !el.checkValidity()});if(bad){bad.reportValidity();return}step2.hidden=false;next.hidden=true;step2.scrollIntoView({behavior:reducedMotion?'auto':'smooth',block:'start'})});
+              lead.addEventListener('submit',async function(e){e.preventDefault();if(!lead.checkValidity()){lead.reportValidity();return}var btn=lead.querySelector('[type="submit"]');btn.disabled=true;setStatus(status,'Saving your project enquiry securely…','');try{var data=await submitJson('/api/digital-lead',contextMeta(formObject(lead)));setStatus(status,'Enquiry received. Reference '+data.lead_id+'. Response target: within one business day.','success');track('digital_lead_captured',{lead_priority:data.priority||'',lead_score:data.lead_score||0});lead.reset();if(step2)step2.hidden=false}catch(err){setStatus(status,'The secure form could not save your enquiry. Please email james@jamesrealty.uk.','error');track('digital_lead_error',{error:String(err.message||err)})}finally{btn.disabled=false}});
+            }
+            var call=document.getElementById('call-form');
+            if(call){
+              var date=call.querySelector('#call-date'),zone=call.querySelector('#call-timezone'),statusCall=call.querySelector('[data-form-status]');
+              if(zone)zone.value=Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC';if(date){var n=new Date();n.setHours(n.getHours()+2);date.min=n.toISOString().slice(0,16)}
+              call.addEventListener('submit',async function(e){e.preventDefault();if(!call.checkValidity()){call.reportValidity();return}var btn=call.querySelector('[type="submit"]');btn.disabled=true;setStatus(statusCall,'Saving your call request…','');try{var payload=contextMeta(formObject(call)),data=await submitJson('/api/digital-call',payload);setStatus(statusCall,'Call request received. Reference '+data.lead_id+'. Your preferred time is provisional until confirmed.','success');var cal=call.querySelector('[data-call-calendar]');if(cal&&payload.preferred_time){var s=new Date(payload.preferred_time),en=new Date(s.getTime()+30*60000),stamp=function(d){return d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'')};cal.href='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('Provisional call with James Digital')+'&dates='+stamp(s)+'/'+stamp(en)+'&details='+encodeURIComponent('Provisional hold. James will confirm the call separately.')+'&ctz='+encodeURIComponent(payload.timezone||'UTC');cal.hidden=false}track('digital_call_requested')}catch(err){setStatus(statusCall,'The secure call request could not be saved. Please email james@jamesrealty.uk.','error')}finally{btn.disabled=false}});
+            }
+            if(!document.querySelector('.mobile-conversion-bar')&&!document.body.classList.contains('start-project-page')&&!document.body.classList.contains('request-call-page')){var bar=document.createElement('div');bar.className='mobile-conversion-bar';bar.innerHTML='<a href="/start-project">Start a Project</a><a href="/request-call">Request a Call</a>';document.body.appendChild(bar)}
+          })();
+          '''
+          write(root/'script.js', js.strip()+"\n")
+          p=root/'conversion-20260830.js'
+          if p.exists(): p.unlink()
+
+          # Stale generator was a second source of truth and could regenerate old pricing/copy.
+          gen=root/'build-pages.mjs'
+          if gen.exists(): gen.unlink()
+
+          if Path('james-ravi-profile.jpg').exists():
+              (root/'assets').mkdir(exist_ok=True)
+              (root/'assets'/'james-ravi-profile.jpg').write_bytes(Path('james-ravi-profile.jpg').read_bytes())
+
+          HEADER = '''<header class="site-header" id="top"><div class="nav-shell"><a class="brand" href="/" aria-label="James Digital home"><span class="brand-mark">JD</span><span>James Digital</span></a><nav class="nav-links" aria-label="Primary navigation"><a href="/portfolio">Work</a><a href="/solutions">Solutions</a><a href="/industries">Industries</a><a href="/results">Results</a><a href="/about">About</a></nav><div class="nav-actions"><a class="button button-small button-primary" href="/start-project" data-event="start_project_click">Start a Project</a></div><button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-nav"><span>Menu</span></button></div><nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" hidden><a href="/portfolio">Work</a><a href="/solutions">Solutions</a><a href="/industries">Industries</a><a href="/results">Results</a><a href="/about">About</a><a href="/pricing">Pricing</a><a href="/request-call">Request a Call</a><a class="button button-primary" href="/start-project">Start a Project</a></nav></header>'''
+          FOOTER = '''<footer class="site-footer"><div class="section-shell footer-grid"><div><a class="brand footer-brand" href="/"><span class="brand-mark">JD</span><span>James Digital</span></a><p>Dubai-based senior digital growth partner for high-consideration businesses, available globally.</p></div><nav aria-label="Explore"><strong>Explore</strong><a href="/portfolio">Work</a><a href="/solutions">Solutions</a><a href="/industries">Industries</a><a href="/results">Results</a><a href="/about">Meet James</a><a href="/pricing">Pricing</a></nav><nav aria-label="Contact"><strong>Contact</strong><a href="/start-project">Start a Project</a><a href="/request-call">Request a Call</a><a href="mailto:james@jamesrealty.uk?subject=Digital%20project%20enquiry">Email James</a><a href="https://wa.me/971528420933?text=Hi%20James%2C%20I%20would%20like%20to%20discuss%20a%20digital%20project." target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav><div class="footer-meta"><span>Dubai, United Arab Emirates</span><span>James Digital is the digital-services practice within the jamesrealty.uk domain infrastructure.</span><span>© <span data-year></span> James Digital</span></div></div></footer>'''
+
+          def page(title, desc, path, body, body_class='content-page', schema=None):
+              url = BASE + (path if path != '/' else '/')
+              schema_html = '' if not schema else '<script type="application/ld+json">'+json.dumps(schema,separators=(',',':'))+'</script>'
+              return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>{html.escape(title)}</title><meta name="description" content="{html.escape(desc,quote=True)}"><meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"><link rel="canonical" href="{url}"><meta property="og:type" content="website"><meta property="og:site_name" content="James Digital"><meta property="og:title" content="{html.escape(title,quote=True)}"><meta property="og:description" content="{html.escape(desc,quote=True)}"><meta property="og:url" content="{url}"><meta name="twitter:card" content="summary"><meta name="theme-color" content="#0b0906"><meta name="last-modified" content="2026-08-30"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/styles.css?v={VERSION}">{schema_html}</head><body class="{body_class}"><a class="skip-link" href="#main">Skip to content</a>{HEADER}<main id="main">{body}</main>{FOOTER}<script src="/script.js?v={VERSION}" defer></script></body></html>'''
+
+          home_body = '''<section class="hero section-shell"><div class="hero-copy"><p class="eyebrow"><span></span> Dubai-based. Available globally.</p><h1>Senior digital growth systems for <em>high-consideration businesses.</em></h1><p class="hero-lead">Work directly with James when the challenge spans qualified demand, conversion, CRM follow-up and measurement. Best suited to real estate, hospitality, premium consumer, B2B and professional-service businesses where every lead or sale matters.</p><div class="hero-actions"><a class="button button-primary" href="/start-project">Discuss Your Project</a><a class="button button-ghost" href="/portfolio">See Relevant Work</a></div><div class="hero-signals"><span><strong>10+ years</strong> marketing career</span><span><strong>AED 700K</strong> avg. monthly media budget handled</span><span><strong>50+ markets</strong> acquisition scope</span><span><strong>Direct senior access</strong> strategy to delivery</span></div></div><div class="system-map" aria-label="Digital growth operating model"><div class="system-map-top"><span>Growth operating model</span><span class="live-dot">Direct</span></div><div class="system-orbit"><span class="orbit-label orbit-dubai">Positioning<br><small>Demand</small></span><span class="orbit-label orbit-europe">Website<br><small>Conversion</small></span><span class="orbit-label orbit-asia">CRM<br><small>Follow-up</small></span><span class="orbit-label orbit-americas">Measurement<br><small>Improve</small></span><div class="orbit-core"><strong>Commercial<br>outcome</strong><span>One accountable owner</span></div></div><div class="system-flow"><span>Diagnose</span><i></i><span>Build</span><i></i><span>Measure</span><i></i><span>Improve</span></div></div></section><section class="brand-proof"><div class="section-shell"><p>Selected career, employer, co-brand and client-side experience. Relationship varies by brand.</p><div class="brand-list"><span>Nationwide</span><span>Binghatti</span><span>TBWA\\RAAD</span><span>Bugatti</span><span>Mercedes-Benz</span><span>Jacob &amp; Co</span><span>Nissan</span><span>Emirates</span></div></div></section><section class="conversion-section section-shell"><div class="section-heading"><div><p class="kicker">Measured career evidence</p><h2>Commercial proof, not just capability claims.</h2></div><p>Results are labelled by scope so company-wide outcomes, career evidence and individual project work are not blurred together.</p></div><div class="metric-grid"><article class="metric-card"><strong>750+</strong><span>Closed deals in documented property-business career scope</span><small>Not claimed as individually closed by James.</small></article><article class="metric-card"><strong>74.21%</strong><span>Open rate on strongest documented investor nurture send</span><small>45.85% click-through rate.</small></article><article class="metric-card"><strong>+11.5%</strong><span>Documented search-visibility growth</span><small>37.67% visibility, 36 Top-3 keywords.</small></article><article class="metric-card"><strong>+343%</strong><span>Documented organic video-view growth</span><small>102K+ organic views from a 23K baseline.</small></article></div><div class="hero-actions"><a class="button button-ghost" href="/results">Review Results & Evidence</a></div></section><section class="conversion-section fit-section" id="capabilities"><div class="section-shell"><div class="section-heading"><div><p class="kicker">Four connected systems</p><h2>Less channel sprawl. More commercial connection.</h2></div><p>The service model is intentionally grouped around business systems rather than pretending every channel is a separate product.</p></div><div class="why-grid"><article><span>01</span><h3>Strategy & positioning</h3><p>Offer, audience, journey, prioritisation and go-to-market direction.</p></article><article><span>02</span><h3>Demand generation</h3><p>Paid acquisition, SEO and content built around qualified demand.</p></article><article><span>03</span><h3>Conversion experience</h3><p>Websites and landing journeys designed to turn attention into action.</p></article><article><span>04</span><h3>CRM & measurement</h3><p>Lead routing, follow-up visibility, analytics and feedback loops.</p></article></div></div></section><section class="conversion-section section-shell"><div class="section-heading"><div><p class="kicker">Why work directly</p><h2>Senior ownership without a junior account layer.</h2></div></div><div class="reference-grid"><article><strong>References available for serious engagements</strong><p>Client quotations are not invented or published without permission. Public work, named career context and references during a qualified commercial conversation provide the validation layer.</p></article><article><strong>Clear delivery model</strong><p>James owns diagnosis, direction and client communication. Specialist production is identified when a scope needs additional hands.</p></article></div></section><section class="section final-cta"><div class="section-shell final-cta-inner"><p class="kicker">Next step</p><h2>Start with the business problem.</h2><div class="single-cta"><a class="button button-light" href="/start-project">Start a Project</a><a class="button button-outline-light" href="/request-call">Request a Call</a></div></div></section>'''
+          schema={"@context":"https://schema.org","@type":"ProfessionalService","name":"James Digital","url":BASE+"/","description":"Dubai-based senior digital growth partner for high-consideration businesses.","areaServed":"Worldwide","founder":{"@type":"Person","name":"James Ravi","url":BASE+"/about"},"dateModified":"2026-08-30"}
+          write(root/'index.html', page('James Digital | Senior Digital Growth Partner in Dubai','Senior digital strategy, acquisition, conversion, CRM and measurement for high-consideration businesses in Dubai and worldwide.','/',home_body,'home-page',schema))
+
+          results_body='''<section class="page-hero section-shell"><div><p class="eyebrow"><span></span> Results & Evidence</p><h1>Measured outcomes with the scope made explicit.</h1><p>Career evidence, public project evidence and company-wide results are separated so the numbers remain useful without overstating individual attribution.</p><div class="hero-actions"><a class="button button-primary" href="/portfolio">Review Work</a><a class="button button-ghost" href="/start-project">Discuss a Similar Problem</a></div></div><aside class="service-outcome"><span>Evidence standard</span><p>Named results below come from the existing documented James Ravi career portfolio. Individual case studies identify their own contribution boundary.</p></aside></section><section class="conversion-section section-shell"><div class="metric-grid"><article class="metric-card"><strong>AED 700K</strong><span>Average monthly media budget handled</span><small>Career scope across documented property-business roles.</small></article><article class="metric-card"><strong>750+</strong><span>Closed deals in documented career scope</span><small>Commercial outcome across two property businesses, not individual sales authorship.</small></article><article class="metric-card"><strong>74.21%</strong><span>Investor nurture open rate</span><small>Strongest documented send, with 45.85% CTR.</small></article><article class="metric-card"><strong>102K+</strong><span>Organic video views</span><small>+343% growth from a 23K baseline.</small></article></div></section><section class="conversion-section fit-section"><div class="section-shell"><div class="section-heading"><div><p class="kicker">Search & acquisition evidence</p><h2>Performance is judged beyond the form fill.</h2></div></div><div class="evidence-cards"><article class="evidence-card"><span>SEO / 2026</span><h3>37.67% search visibility</h3><p>Documented improvement from 31.61%, with 36 Top-3 keywords and 83 Top-100 keywords.</p></article><article class="evidence-card"><span>CRM / 2025</span><h3>74.21% open, 45.85% CTR</h3><p>Segmented investor nurture using custom HTML, CRM logic, personalised copy and automated delivery.</p></article><article class="evidence-card"><span>Organic / 2025</span><h3>+343% view growth</h3><p>102K+ organic video views across a six-platform content and social-search system.</p></article><article class="evidence-card"><span>Career scope</span><h3>50+ international markets</h3><p>International investor and acquisition remit documented across senior real-estate marketing roles.</p></article></div><p class="proof-boundary">References can be requested during a qualified commercial conversation. Testimonials are not manufactured, and company-wide outcomes are not automatically assigned to a single project.</p></div></section><section class="section final-cta"><div class="section-shell final-cta-inner"><p class="kicker">Apply the evidence</p><h2>Need a cleaner route from demand to sale?</h2><div><a class="button button-light" href="/start-project">Start a Project</a></div></div></section>'''
+          write(root/'results.html',page('Digital Marketing Results & Evidence | James Digital','Measured career evidence across acquisition, CRM, SEO and organic growth, with clear attribution boundaries.','/results',results_body))
+
+          about_body='''<section class="page-hero section-shell"><div><p class="eyebrow"><span></span> Meet James</p><h1>Senior marketing leadership, brought directly into digital delivery.</h1><p>James Ravi is a Dubai-based marketing leader with more than a decade across real estate, luxury launches, agency growth, performance acquisition and CRM-led conversion. James Digital brings that experience into direct project and growth-partnership work.</p><div class="hero-actions"><a class="button button-primary" href="/start-project">Discuss Your Project</a><a class="button button-ghost" href="/results">See Results</a></div></div><img class="profile-shot" src="/assets/james-ravi-profile.jpg" alt="James Ravi in Dubai" width="1024" height="1536"></section><section class="conversion-section section-shell"><div class="metric-grid"><article class="metric-card"><strong>10+</strong><span>Years in marketing</span></article><article class="metric-card"><strong>AED 80B+</strong><span>Property portfolio supported in career scope</span></article><article class="metric-card"><strong>50+</strong><span>International markets</span></article><article class="metric-card"><strong>3</strong><span>Iconic branded launches in documented career scope</span></article></div></section><section class="conversion-section fit-section"><div class="section-shell"><div class="section-heading"><div><p class="kicker">Career timeline</p><h2>The experience now lives here, not on another website.</h2></div></div><div class="timeline-clean"><article><time>Aug 2024, Present</time><div><h3>Senior Marketing Consultant, Nationwide Middle East Properties</h3><p>Company-wide strategy spanning SEO, paid acquisition, property launches, CRM and lead nurture, investor collateral and team/vendor leadership.</p></div></article><article><time>May 2021, Aug 2024</time><div><h3>Marketing Director, Binghatti</h3><p>Global brand growth across an AED 80B+ property portfolio, including Bugatti Residences, Burj Binghatti Jacob & Co and Mercedes-Benz Places, with acquisition across 50+ markets.</p></div></article><article><time>Sep 2016, Apr 2021</time><div><h3>Marketing Manager, TBWA\\RAAD</h3><p>Regional agency marketing, new-business communications, PR, events and executive visibility across MENA, supporting wins including Nissan, KFC and Emirates.</p></div></article></div></div></section><section class="conversion-section section-shell"><div class="section-heading"><div><p class="kicker">Delivery model</p><h2>One accountable senior owner, specialist capacity when needed.</h2></div></div><div class="why-grid"><article><span>James owns</span><h3>Diagnosis & strategy</h3><p>Commercial problem, priorities, audience, journey and measurement.</p></article><article><span>James owns</span><h3>Client communication</h3><p>Key decisions, reviews, scope control and commercial accountability.</p></article><article><span>As required</span><h3>Specialist production</h3><p>Design, development, media or technical capacity is identified openly.</p></article><article><span>Business input</span><h3>Access & feedback</h3><p>Approvals, sales feedback, internal expertise and operating constraints stay collaborative.</p></article></div></section><section class="conversion-section fit-section"><div class="section-shell"><div class="section-heading"><div><p class="kicker">James Digital and James Realty</p><h2>Shared domain infrastructure, distinct commercial service.</h2></div><p>James Digital is the digital-services practice on the jamesrealty.uk infrastructure. It serves high-consideration businesses across sectors and is not limited to real estate.</p></div></div></section>'''
+          write(root/'about.html',page('About James Ravi | James Digital','Meet James Ravi, Dubai-based senior marketing and digital growth partner with 10+ years across acquisition, brand, CRM and conversion.','/about',about_body,'about-page',{"@context":"https://schema.org","@type":"Person","name":"James Ravi","jobTitle":"Senior Digital Growth Partner","homeLocation":{"@type":"Place","name":"Dubai, United Arab Emirates"},"url":BASE+"/about","sameAs":["https://jamesrealty.uk/about-me/","https://ae.linkedin.com/in/james-ravi-dubai"]}))
+
+          pricing_body='''<section class="page-hero section-shell"><div><p class="eyebrow"><span></span> Investment</p><h1>Senior digital work priced for business impact, not commodity output.</h1><p>Starting points help qualify fit. Larger work is scoped around commercial risk, production, integrations, markets and the level of ongoing ownership.</p><div class="hero-actions"><a class="button button-primary" href="/start-project">Discuss Your Project</a></div></div><aside class="service-outcome"><span>Commercial principle</span><p>Media spend, specialist production, software and third-party subscriptions are quoted separately when relevant.</p></aside></section><section class="conversion-section section-shell"><div class="premium-paths"><article><span>Digital diagnostic</span><strong class="price">from $1.5K</strong><p>Evidence review, journey diagnosis, measurement gaps and a prioritised action roadmap.</p></article><article class="featured"><span>Strategy sprint</span><strong class="price">from $2.5K</strong><p>Focused decisions around positioning, acquisition, conversion, CRM or international growth.</p></article><article><span>Website / conversion system</span><strong class="price">from $5K</strong><p>Commercial website or landing system with messaging, responsive implementation and measurement.</p></article></div></section><section class="conversion-section fit-section"><div class="section-shell"><div class="premium-paths"><article class="featured"><span>Growth partnership</span><strong class="price">from $5K/mo</strong><p>Ongoing senior direction and optimisation across priority demand, conversion and CRM workstreams.</p></article><article><span>Fractional digital leadership</span><strong class="price">custom</strong><p>Senior direction across internal teams, agencies, suppliers and measurement.</p></article><article><span>Multi-market transformation</span><strong class="price">proposal</strong><p>Phased acquisition, website, CRM, automation or international programmes.</p></article></div><p class="engagement-note">A smaller diagnostic can be used before a larger commitment when the right scope is not yet clear.</p></div></section>'''
+          write(root/'pricing.html',page('Digital Strategy & Growth Investment | James Digital','Starting investment for senior digital diagnostics, strategy, websites and ongoing growth partnerships.','/pricing',pricing_body,'pricing-page'))
+
+          start_body='''<section class="page-hero section-shell"><div><p class="eyebrow"><span></span> Start a Project</p><h1>Share the business problem in under two minutes.</h1><p>The enquiry is stored securely as soon as you submit it. Budget and detailed scope stay optional until there is enough context to recommend the right next step.</p><div class="trust-inline"><span>Direct reply from James</span><span>Worldwide enquiries</span><span>Response target: one business day</span></div></div><aside class="service-outcome"><span>Prefer a conversation?</span><p>Request a focused call and suggest a preferred time.</p><a class="arrow-link" href="/request-call">Request a Call →</a></aside></section><section class="conversion-section"><div class="section-shell lead-shell"><div><p class="kicker">Project enquiry</p><h2>Start with fit, then add detail.</h2><p class="hero-lead">Required: name, company, email and the problem that needs to change.</p><p class="proof-note">Your enquiry is saved to the James Digital lead database. WhatsApp or email are optional follow-up channels, not required to complete submission.</p></div><form class="lead-card" id="lead-form"><input class="honeypot" name="honeypot" tabindex="-1" autocomplete="off"><fieldset data-step="1"><legend>Step 1 / essentials</legend><label><span>Name *</span><input name="name" autocomplete="name" required></label><label><span>Company *</span><input name="company" autocomplete="organization" required></label><label><span>Email *</span><input name="email" type="email" autocomplete="email" required></label><label><span>Phone / WhatsApp</span><input name="phone" type="tel" autocomplete="tel"></label><label class="full"><span>What needs to change? *</span><textarea name="need" required placeholder="Example: We generate leads, but the website and follow-up are not converting enough of them."></textarea></label><div class="form-actions"><button class="button button-primary" type="button" data-lead-next>Continue to optional details</button></div></fieldset><fieldset data-step="2" hidden><legend>Step 2 / optional qualification</legend><label><span>Website</span><input name="website" type="url" placeholder="https://"></label><label><span>Country</span><input name="country" autocomplete="country-name"></label><label><span>Expected investment</span><select name="budget"><option value="">Not defined yet</option><option>$5K–$15K</option><option>$15K–$30K</option><option>$30K–$50K</option><option>$50K+</option></select></label><label><span>Timeline</span><select name="timeline"><option value="">Exploring options</option><option>As soon as practical</option><option>Within 30 days</option><option>1–3 months</option><option>3–6 months</option></select></label><label class="full"><span>Additional context</span><textarea name="context" placeholder="Current channels, team, constraints, previous attempts or what success should look like."></textarea></label><div class="form-actions"><button class="button button-primary" type="submit">Send secure enquiry</button></div><div class="form-status-box full" data-form-status aria-live="polite">Nothing has been sent yet.</div></fieldset></form></div></section>'''
+          write(root/'start-project.html',page('Start a Digital Project | James Digital','Send a secure project enquiry to James Digital for senior strategy, acquisition, conversion, CRM or growth work.','/start-project',start_body,'start-project-page'))
+
+          call_body='''<section class="page-hero section-shell"><div><p class="eyebrow"><span></span> Request a Call</p><h1>Suggest a time for a focused project conversation.</h1><p>Your request is stored immediately. The selected time is a preference, not a live calendar reservation, and is confirmed personally before the meeting.</p></div><aside class="service-outcome"><span>30-minute project conversation</span><p>Best for fit, priorities and the next useful step. Detailed discovery can follow when there is a reason to proceed.</p></aside></section><section class="conversion-section"><div class="section-shell call-shell"><div><p class="kicker">Call request</p><h2>Choose your preferred time.</h2><p class="hero-lead">Your browser timezone is detected automatically. You can add a provisional hold to your own calendar after submitting.</p></div><form class="lead-card" id="call-form"><input class="honeypot" name="honeypot" tabindex="-1" autocomplete="off"><fieldset><legend>Call details</legend><label><span>Name *</span><input name="name" required autocomplete="name"></label><label><span>Company *</span><input name="company" required autocomplete="organization"></label><label><span>Email *</span><input name="email" type="email" required autocomplete="email"></label><label><span>Phone / WhatsApp</span><input name="phone" type="tel" autocomplete="tel"></label><label><span>Preferred date & time *</span><input id="call-date" name="preferred_time" type="datetime-local" required></label><label><span>Timezone *</span><input id="call-timezone" name="timezone" required></label><label class="full"><span>What should we discuss?</span><textarea name="topic" placeholder="The problem, project or decision you want to cover."></textarea></label><div class="form-actions"><button class="button button-primary" type="submit">Send call request</button><a class="button button-ghost" data-call-calendar hidden target="_blank" rel="noopener noreferrer">Add provisional hold</a></div><div class="form-status-box full" data-form-status aria-live="polite">Nothing has been sent yet.</div></fieldset></form></div></section>'''
+          write(root/'request-call.html',page('Request a Project Call | James Digital','Request a focused project call with James Digital and suggest a preferred time in your timezone.','/request-call',call_body,'request-call-page'))
+          old=root/'book-call.html'
+          if old.exists(): old.unlink()
+
+          privacy_body='''<section class="page-hero section-shell"><div><p class="eyebrow"><span></span> Privacy</p><h1>Clear handling of enquiry and website data.</h1><p>This notice covers analytics and the secure project/call forms on James Digital.</p></div></section><section class="conversion-section section-shell"><div class="legal-grid"><aside class="legal-card"><h2>Summary</h2><p>Project and call requests are stored in a Cloudflare D1 database so James can follow up. The forms collect only the information shown on the page plus basic source/referrer metadata.</p></aside><article class="legal-card"><h2>Privacy notice</h2><h3>Analytics</h3><p>Google Tag Manager may load analytics or marketing measurement configured through that container. Those tools may collect device and interaction data according to their configuration.</p><h3>Enquiries</h3><p>When you submit a project or call request, the supplied name, company, email, optional phone, project context, budget/timeline where supplied, source URL and campaign attribution may be stored for business follow-up.</p><h3>Purpose and retention</h3><p>Enquiry information is used to assess fit, respond, prepare a proposal or manage a potential business relationship. It should be retained only as long as reasonably needed for those purposes and legitimate record-keeping.</p><h3>Contact</h3><p>Privacy questions or data requests can be sent to james@jamesrealty.uk.</p></article></div></section>'''
+          write(root/'privacy.html',page('Privacy Policy | James Digital','Privacy information for James Digital analytics, project enquiries and call requests.','/privacy',privacy_body))
+
+          # ---- Global cleanup across retained pages ----
+          def clean_html(text, path):
+              text = re.sub(r'<section class="contact-dock".*?</section>', '', text, flags=re.S)
+              text = re.sub(r'<header class="site-header".*?</header>', HEADER, text, count=1, flags=re.S)
+              text = re.sub(r'<footer class="site-footer".*?</footer>', FOOTER, text, count=1, flags=re.S)
+              text = re.sub(r'<script src="/conversion-20260830\.js[^>]*></script>', '', text)
+              text = re.sub(r'<script src="/script\.js[^>]*></script>', f'<script src="/script.js?v={VERSION}" defer></script>', text)
+              text = re.sub(r'<link rel="stylesheet" href="/styles\.css[^>]*>', f'<link rel="stylesheet" href="/styles.css?v={VERSION}">', text)
+              text = re.sub(r'<link rel="stylesheet" href="/assets/property-news\.css[^>]*?/?>', '', text)
+              text = text.replace('/book-call.html','/request-call').replace('/book-call','/request-call').replace('Book a Call','Request a Call').replace('book_call_click','request_call_click')
+              text = re.sub(r'href="/([^"?#]+)\.html([?#][^"]*)?"', lambda m:'href="/'+m.group(1)+(m.group(2) or '')+'"', text)
+              text = re.sub(r'https://digital\.jamesrealty\.uk/([^"< ]+)\.html', r'https://digital.jamesrealty.uk/\1', text)
+              text = text.replace('—', ',')
+              if 'name="last-modified"' not in text and '</head>' in text:
+                  text=text.replace('</head>','<meta name="last-modified" content="2026-08-30"></head>',1)
+              return text
+
+          # Portfolio: remove small-count framing and add career-range proof.
+          pp=root/'portfolio.html'
+          if pp.exists():
+              t=read(pp)
+              t=t.replace('<aside><strong>7 public projects</strong><span>Desktop + mobile previews</span><span>Live project links</span><span>Transparent evidence notes</span></aside>','<aside><strong>Public project + career work</strong><span>Live links where available</span><span>Role context</span><span>Evidence boundaries</span></aside>')
+              t=t.replace('<p class="filter-status" aria-live="polite"><strong data-visible-count>7</strong> projects shown</p>','<p class="filter-status" aria-live="polite"><strong data-visible-count>7</strong> public project examples shown</p>')
+              career='''<section class="conversion-section fit-section"><div class="section-shell"><div class="section-heading"><div><p class="kicker">Career work beyond this project grid</p><h2>Global brands, agency growth and senior client-side leadership.</h2></div><p>The public project cards are only one proof layer. Career scope adds luxury co-branding, automotive, aviation, F&B and regional agency experience.</p></div><div class="career-grid"><article class="career-card"><span>Marketing Director</span><h3>Binghatti</h3><p>AED 80B+ portfolio scope, 50+ markets and branded-residence launches with Bugatti, Mercedes-Benz and Jacob & Co.</p></article><article class="career-card"><span>Regional agency marketing</span><h3>TBWA\\RAAD</h3><p>MENA remit spanning new business, PR, events and executive visibility, with documented support for Nissan, KFC and Emirates wins.</p></article><article class="career-card"><span>Current senior role</span><h3>Nationwide Middle East Properties</h3><p>Connected strategy across acquisition, SEO, property launches, CRM, nurture and sales feedback.</p></article><article class="career-card"><span>References</span><h3>Available on request</h3><p>For appropriate commercial conversations, references can complement the public work and documented role context.</p></article></div></div></section>'''
+              t=t.replace('</main>',career+'</main>',1)
+              write(pp,clean_html(t,pp))
+
+          # Case studies: time/scope context and before/after boundary without invented claims.
+          case_period={'nationwide-middle-east-properties.html':'Aug 2024, Present / current career role'}
+          for p in (root/'case-studies').glob('*.html'):
+              t=read(p)
+              period=case_period.get(p.name,'Historical client work / exact public period not disclosed')
+              if 'case-proof-boundary' not in t:
+                  panel=f'''<section class="section-shell case-proof-boundary"><div class="role-strip"><div><span>Period</span><strong>{period}</strong></div><div><span>Team context</span><strong>Contribution is stated without assuming sole authorship of the client business or website.</strong></div><div><span>Before / after</span><strong>Challenge-to-delivery narrative is shown; visual before/after is only claimed when a verified baseline exists.</strong></div><div><span>Reference standard</span><strong>Live assets, documented career evidence and references where appropriate.</strong></div></div></section>'''
+                  t=t.replace('<section class="section section-shell case-body">',panel+'<section class="section section-shell case-body">',1)
+              if p.name=='nationwide-middle-east-properties.html':
+                  t=t.replace('Commercial figures are not attributed to this project alone.','Career evidence relevant to this role includes an average AED 700K monthly media budget and 750+ closed deals across two documented property-business roles. Those figures are career scope and are not attributed to Nationwide alone.')
+              write(p,clean_html(t,p))
+
+          # All other retained HTML gets canonical/internal-link/header/footer cleanup.
+          protected={'index.html','results.html','about.html','pricing.html','start-project.html','request-call.html','privacy.html','portfolio.html'}
+          for p in root.rglob('*.html'):
+              rel=p.relative_to(root).as_posix()
+              if rel in protected or rel.startswith('case-studies/') or rel=='404.html': continue
+              write(p,clean_html(read(p),p))
+
+          # Update 404 separately, no indexing.
+          p=root/'404.html'
+          if p.exists(): write(p,clean_html(read(p),p))
+
+          # Remove overlapping custom-engagements page if it is only a second pricing route.
+          p=root/'custom-engagements.html'
+          if p.exists(): p.unlink()
+
+          # Sitemap uses clean extensionless URLs only.
+          urls=[]
+          for p in sorted(root.rglob('*.html')):
+              rel=p.relative_to(root).as_posix()
+              if rel=='404.html': continue
+              if rel=='index.html': path='/'
+              else: path='/'+rel[:-5]
+              urls.append(path)
+          xml=['<?xml version="1.0" encoding="UTF-8"?>','<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+          for path in urls:
+              pri='1.0' if path=='/' else ('0.9' if path in ['/portfolio','/results','/start-project','/request-call'] else '0.7')
+              xml.append(f'<url><loc>{BASE}{path}</loc><lastmod>2026-08-30</lastmod><changefreq>weekly</changefreq><priority>{pri}</priority></url>')
+          xml.append('</urlset>')
+          write(root/'sitemap.xml','\n'.join(xml)+'\n')
+          write(root/'robots.txt',f'User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n')
+
+          # ---- Digital edge proxy + secure D1 capture, reusing existing Worker/D1 instead of another backend ----
+          worker=Path('cloudflare/landing-subdomains-worker.js')
+          wt=read(worker)
+          DIGITAL_FUNCS=r'''
+          function digitalClean(value,maxLength){return typeof value==='string'?value.trim().slice(0,maxLength):''}
+          function digitalScore(data,type){let s=0;const b=digitalClean(data.budget,80);if(b.includes('$50K+'))s+=5;else if(b.includes('$30K'))s+=4;else if(b.includes('$15K'))s+=3;else if(b.includes('$5K'))s+=2;if(digitalClean(data.website,300))s+=1;if(digitalClean(data.phone,40))s+=1;if(digitalClean(data.need||data.topic,1200).length>80)s+=2;if(type==='call')s+=1;return s}
+          async function captureDigital(request,env,type){if(!env.LEADS)return json({ok:false,error:'Lead storage is not configured'},503);let data;try{data=await readLimitedJson(request)}catch(e){return json({ok:false,error:'Invalid request'},400)}if(digitalClean(data.honeypot,200))return json({ok:true,lead_id:'accepted'},202);const name=digitalClean(data.name,120),company=digitalClean(data.company,160),email=digitalClean(data.email,180);if(name.length<2||company.length<2||!/^\S+@\S+\.\S+$/.test(email)||data.consent!==true)return json({ok:false,error:'Required fields are incomplete'},422);const id=crypto.randomUUID(),created=new Date().toISOString(),score=digitalScore(data,type),priority=score>=7?'high':score>=4?'medium':'standard';try{await env.LEADS.batch([env.LEADS.prepare(`CREATE TABLE IF NOT EXISTS digital_leads (submission_id TEXT PRIMARY KEY,created_at TEXT NOT NULL,type TEXT NOT NULL,name TEXT NOT NULL,company TEXT NOT NULL,email TEXT NOT NULL,phone TEXT,website TEXT,country TEXT,need TEXT,context TEXT,budget TEXT,timeline TEXT,preferred_time TEXT,timezone TEXT,topic TEXT,lead_score INTEGER NOT NULL,priority TEXT NOT NULL,landing_page TEXT,referrer TEXT,utm_source TEXT,utm_medium TEXT,utm_campaign TEXT,country_code TEXT,status TEXT NOT NULL DEFAULT 'new')`),env.LEADS.prepare('CREATE INDEX IF NOT EXISTS idx_digital_leads_created ON digital_leads(created_at)'),env.LEADS.prepare(`INSERT INTO digital_leads (submission_id,created_at,type,name,company,email,phone,website,country,need,context,budget,timeline,preferred_time,timezone,topic,lead_score,priority,landing_page,referrer,utm_source,utm_medium,utm_campaign,country_code) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`).bind(id,created,type,name,company,email,digitalClean(data.phone,40),digitalClean(data.website,300),digitalClean(data.country,100),digitalClean(data.need,1600),digitalClean(data.context,2400),digitalClean(data.budget,80),digitalClean(data.timeline,80),digitalClean(data.preferred_time,80),digitalClean(data.timezone,120),digitalClean(data.topic,1600),score,priority,digitalClean(data.landing_page,300),digitalClean(data.referrer,500),digitalClean(data.utm_source,120),digitalClean(data.utm_medium,120),digitalClean(data.utm_campaign,180),digitalClean(request.cf?.country,8))]);return json({ok:true,lead_id:id.slice(0,8).toUpperCase(),lead_score:score,priority},201)}catch(e){console.error(JSON.stringify({event:'digital_lead_capture_failed',error:String(e)}));return json({ok:false,error:'Lead storage is temporarily unavailable'},503,{'retry-after':'15'})}}
+          function digitalOriginPath(path){if(path==='/')return '/digital/index.html';if(path.endsWith('.html'))return '/digital'+path;if(/\.[a-z0-9]+$/i.test(path))return '/digital'+path;if(path.endsWith('/'))return '/digital'+path+'index.html';return '/digital'+path+'.html'}
+          async function handleDigital(request,env,incoming){if(incoming.pathname==='/api/digital-lead'||incoming.pathname==='/api/digital-call'){if(request.method!=='POST')return json({ok:false,error:'Method not allowed'},405,{Allow:'POST'});return captureDigital(request,env,incoming.pathname.endsWith('call')?'call':'project')}if(!['GET','HEAD'].includes(request.method))return plain('Method not allowed',405,{Allow:'GET, HEAD'});if(incoming.pathname==='/book-call'||incoming.pathname==='/book-call.html')return Response.redirect('https://digital.jamesrealty.uk/request-call',301);if(incoming.pathname==='/custom-engagements'||incoming.pathname==='/custom-engagements.html')return Response.redirect('https://digital.jamesrealty.uk/pricing',301);if(incoming.pathname.endsWith('.html'))return Response.redirect(`https://digital.jamesrealty.uk${incoming.pathname.slice(0,-5)}${incoming.search}`,301);const target=`${ORIGIN}${digitalOriginPath(incoming.pathname)}${incoming.search}`;const up=await fetch(target,{redirect:'follow',headers:{'user-agent':request.headers.get('user-agent')||'James-Digital-Worker'}});const h=new Headers(up.headers);Object.entries(SECURITY_HEADERS).forEach(([k,v])=>h.set(k,v));h.delete('content-security-policy');h.delete('content-length');h.set('cache-control',incoming.pathname.match(/\.(css|js|jpg|jpeg|png|webp|svg)$/i)?'public, max-age=300, s-maxage=300':'no-cache, no-store, must-revalidate');if((h.get('content-type')||'').includes('text/html')){h.set('x-robots-tag','index, follow');const canonical=incoming.pathname==='/'?'https://digital.jamesrealty.uk/':`https://digital.jamesrealty.uk${incoming.pathname.replace(/\/$/,'')}`;h.set('link',`<${canonical}>; rel="canonical"`)}return new Response(request.method==='HEAD'?null:up.body,{status:up.status,headers:h})}
+          '''
+          if 'async function captureDigital' not in wt:
+              wt=wt.replace('\nexport default {', '\n'+DIGITAL_FUNCS+'\nexport default {',1)
+          wt=wt.replace("    const incoming = new URL(request.url);\n    const sourcePath = HOSTS[incoming.hostname];", "    const incoming = new URL(request.url);\n    if (incoming.hostname === 'digital.jamesrealty.uk') return handleDigital(request, env, incoming);\n    const sourcePath = HOSTS[incoming.hostname];",1)
+          write(worker,wt)
+
+          wr=Path('cloudflare/wrangler.jsonc'); w=read(wr)
+          if 'digital.jamesrealty.uk' not in w:
+              w=w.replace('{ "pattern": "dubaiproperty.jamesrealty.uk", "custom_domain": true }','{ "pattern": "dubaiproperty.jamesrealty.uk", "custom_domain": true },\n    { "pattern": "digital.jamesrealty.uk", "custom_domain": true }')
+          write(wr,w)
+
+          # Final source validations.
+          allhtml='\n'.join(read(p) for p in root.rglob('*.html'))
+          forbidden=['$499','$350/month','$299','Book a Call','/book-call.html','conversion-20260830.js','property-news.css','—']
+          bad=[x for x in forbidden if x in allhtml]
+          if bad: raise SystemExit('Forbidden legacy content remains: '+repr(bad))
+          for name in legacy_css+['conversion-20260830.js','build-pages.mjs','book-call.html']:
+              if (root/name).exists(): raise SystemExit('Legacy source remains: '+name)
+          if '@import url(\'styles-' in read(root/'styles.css') or '@import url(\'gold-' in read(root/'styles.css'): raise SystemExit('Internal CSS imports remain')
+          if 'api/digital-lead' not in read(root/'script.js') or 'digital_leads' not in read(worker): raise SystemExit('Secure Digital capture wiring missing')
+          if 'https://digital.jamesrealty.uk/pricing.html' in read(root/'sitemap.xml'): raise SystemExit('Old .html sitemap URLs remain')
+          print('Digital consolidation validation passed')
+          PY
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm -f .github/workflows/consolidate-digital-production.yml
+          git add -A
+          git commit -m 'refactor(digital): consolidate conversion system and secure lead capture'
+          git push origin HEAD:main
