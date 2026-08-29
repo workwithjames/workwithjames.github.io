@@ -1,9 +1,8 @@
 {
   "containerId": "GTM-M74SL57L",
-  "htmlFilesChecked": 92,
+  "htmlFilesChecked": 91,
   "taggedFiles": 90,
   "missingFiles": [
-    "digital/mobile-qa-554ecf1.html",
     "essentials/index.html"
   ],
   "excludedTechnicalFiles": [
