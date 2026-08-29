@@ -1,0 +1,43 @@
+name: Run Digital conversion rebuild
+
+on:
+  push:
+    paths:
+      - '.github/workflows/run-digital-conversion-rebuild.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Execute conversion script from staged workflow
+        run: |
+          python - <<'RUN'
+          from pathlib import Path
+          import textwrap
+          src = Path('.github/workflows/apply-digital-conversion-rebuild.yml').read_text(encoding='utf-8')
+          marker = "python - <<'PY'\n"
+          parts = src.split(marker)
+          if len(parts) < 3:
+              raise SystemExit('Expected two embedded Python blocks')
+          apply_block = parts[1].split('\n          PY',1)[0]
+          validate_block = parts[2].split('\n          PY',1)[0]
+          exec(compile(textwrap.dedent(apply_block), '<conversion-apply>', 'exec'), {})
+          exec(compile(textwrap.dedent(validate_block), '<conversion-validate>', 'exec'), {})
+          RUN
+      - name: Commit conversion rebuild
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add digital
+          git commit -m 'feat(digital): implement full conversion rebuild' || exit 0
+          git push
