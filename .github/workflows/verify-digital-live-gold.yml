@@ -1,3 +1,4 @@
+# Live verification refreshed after the 2026-08-30 conversion rebuild.
 name: Verify Digital live gold deployment
 
 on:
@@ -45,7 +46,6 @@ jobs:
           def headers(name):
               text = read(name)
               out = {}
-              # Last response block after redirects.
               blocks = re.split(r'\r?\n\r?\n', text.strip()) if text.strip() else []
               block = blocks[-1] if blocks else ''
               for line in block.splitlines()[1:]:
@@ -65,6 +65,9 @@ jobs:
                   'has_new_cache_key': '20260830-gold-final-1' in home,
                   'has_latest_hero': 'Dubai-based. Working globally.' in home,
                   'has_old_hero': 'Digital growth, without the agency clutter' in home,
+                  'has_conversion_positioning': 'Senior digital strategy and execution' in home,
+                  'has_results_link': '/results.html' in home,
+                  'has_book_call_link': '/book-call.html' in home,
                   'headers': headers('home.headers'),
               },
               'styles': {
@@ -72,6 +75,7 @@ jobs:
                   'imports_structural_base': 'styles-base-feasibility-20260829.css?v=20260830-gold-final-1' in styles,
                   'imports_single_gold': 'gold-production-20260830.css?v=20260830-gold-final-1' in styles,
                   'imports_final_responsive': 'styles-responsive-final-20260830.css?v=20260830-gold-final-1' in styles,
+                  'imports_conversion': 'conversion-20260830.css?v=20260830-conversion-1' in styles,
                   'imports_legacy_purple': 'styles-feasibility-purple-backup' in styles,
                   'imports_old_gold_theme': 'gold-theme-digital' in styles,
                   'imports_standalone_mobile_patch': 'mobile-viewport-fix' in styles,
@@ -88,11 +92,15 @@ jobs:
               report['home']['status'] == 200,
               report['home']['has_new_cache_key'],
               report['home']['has_latest_hero'],
+              report['home']['has_conversion_positioning'],
+              report['home']['has_results_link'],
+              report['home']['has_book_call_link'],
               not report['home']['has_old_hero'],
               report['styles']['status'] == 200,
               report['styles']['imports_structural_base'],
               report['styles']['imports_single_gold'],
               report['styles']['imports_final_responsive'],
+              report['styles']['imports_conversion'],
               not report['styles']['imports_legacy_purple'],
               not report['styles']['imports_old_gold_theme'],
               not report['styles']['imports_standalone_mobile_patch'],
