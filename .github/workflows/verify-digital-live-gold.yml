@@ -1,5 +1,5 @@
-# Live verification refreshed after the 2026-08-30 conversion rebuild.
-name: Verify Digital live gold deployment
+# Consolidated live verification for digital.jamesrealty.uk.
+name: Verify Digital live production
 
 on:
   push:
@@ -9,132 +9,71 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   verify-live:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Probe live Digital domain
-        shell: bash
-        run: |
-          set -u
-          mkdir -p /tmp/digital-live
-          curl -sS -L -D /tmp/digital-live/home.headers -o /tmp/digital-live/home.html -w '%{http_code}' https://digital.jamesrealty.uk/ > /tmp/digital-live/home.status || true
-          curl -sS -L -D /tmp/digital-live/styles.headers -o /tmp/digital-live/styles.css -w '%{http_code}' 'https://digital.jamesrealty.uk/styles.css?v=20260830-gold-final-1' > /tmp/digital-live/styles.status || true
-          curl -sS -L -D /tmp/digital-live/responsive.headers -o /tmp/digital-live/responsive.css -w '%{http_code}' 'https://digital.jamesrealty.uk/styles-responsive-final-20260830.css?v=20260830-gold-final-1' > /tmp/digital-live/responsive.status || true
-
-      - name: Write verification report
-        shell: bash
-        run: |
-          python3 <<'PY'
-          from pathlib import Path
-          from datetime import datetime, timezone
-          import json, re
-
-          base = Path('/tmp/digital-live')
-          def read(name):
-              p = base / name
-              return p.read_text(encoding='utf-8', errors='replace') if p.exists() else ''
-          def status(name):
-              s = read(name).strip()
-              return int(s) if s.isdigit() else 0
-          def headers(name):
-              text = read(name)
-              out = {}
-              blocks = re.split(r'\r?\n\r?\n', text.strip()) if text.strip() else []
-              block = blocks[-1] if blocks else ''
-              for line in block.splitlines()[1:]:
-                  if ':' in line:
-                      k, v = line.split(':', 1)
-                      out[k.strip().lower()] = v.strip()
-              return {k: out.get(k) for k in ['server','cache-control','cf-cache-status','age','etag','last-modified'] if out.get(k)}
-
-          home = read('home.html')
-          styles = read('styles.css')
-          responsive = read('responsive.css')
-          report = {
-              'checked_at_utc': datetime.now(timezone.utc).isoformat(),
-              'url': 'https://digital.jamesrealty.uk/',
-              'home': {
-                  'status': status('home.status'),
-                  'has_new_cache_key': '20260830-gold-final-1' in home,
-                  'has_latest_hero': 'Dubai-based. Working globally.' in home,
-                  'has_old_hero': 'Digital growth, without the agency clutter' in home,
-                  'has_conversion_positioning': 'Senior digital strategy and execution' in home,
-                  'has_results_link': '/results.html' in home,
-                  'has_book_call_link': '/book-call.html' in home,
-                  'headers': headers('home.headers'),
-              },
-              'styles': {
-                  'status': status('styles.status'),
-                  'imports_structural_base': 'styles-base-feasibility-20260829.css?v=20260830-gold-final-1' in styles,
-                  'imports_single_gold': 'gold-production-20260830.css?v=20260830-gold-final-1' in styles,
-                  'imports_final_responsive': 'styles-responsive-final-20260830.css?v=20260830-gold-final-1' in styles,
-                  'imports_conversion': 'conversion-20260830.css?v=20260830-conversion-1' in styles,
-                  'imports_legacy_purple': 'styles-feasibility-purple-backup' in styles,
-                  'imports_old_gold_theme': 'gold-theme-digital' in styles,
-                  'imports_standalone_mobile_patch': 'mobile-viewport-fix' in styles,
-                  'headers': headers('styles.headers'),
-              },
-              'responsive': {
-                  'status': status('responsive.status'),
-                  'contains_import': '@import' in responsive,
-                  'contains_mobile_hardening': 'Physical mobile viewport hardening' in responsive,
-                  'headers': headers('responsive.headers'),
-              },
-          }
-          report['passed'] = all([
-              report['home']['status'] == 200,
-              report['home']['has_new_cache_key'],
-              report['home']['has_latest_hero'],
-              report['home']['has_conversion_positioning'],
-              report['home']['has_results_link'],
-              report['home']['has_book_call_link'],
-              not report['home']['has_old_hero'],
-              report['styles']['status'] == 200,
-              report['styles']['imports_structural_base'],
-              report['styles']['imports_single_gold'],
-              report['styles']['imports_final_responsive'],
-              report['styles']['imports_conversion'],
-              not report['styles']['imports_legacy_purple'],
-              not report['styles']['imports_old_gold_theme'],
-              not report['styles']['imports_standalone_mobile_patch'],
-              report['responsive']['status'] == 200,
-              not report['responsive']['contains_import'],
-              report['responsive']['contains_mobile_hardening'],
-          ])
-          out = Path('.github/qa/digital-live-gold-verification.json')
-          out.parent.mkdir(parents=True, exist_ok=True)
-          out.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
-          print(json.dumps(report, indent=2))
-          PY
-
-      - name: Commit verification report
+      - name: Verify custom-domain production flow
         shell: bash
         run: |
           set -euo pipefail
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add .github/qa/digital-live-gold-verification.json
-          if git diff --cached --quiet; then
-            exit 0
-          fi
-          git commit -m 'test(digital): record live gold verification'
-          git push origin HEAD:main
+          base='https://digital.jamesrealty.uk'
+          work="${RUNNER_TEMP}/digital-live"
+          mkdir -p "$work"
 
-      - name: Require live verification success
-        shell: bash
-        run: |
-          python3 - <<'PY'
-          import json
-          with open('.github/qa/digital-live-gold-verification.json', encoding='utf-8') as f:
-              report = json.load(f)
-          if not report.get('passed'):
-              raise SystemExit('Live Digital verification failed; inspect the committed QA report.')
-          print('Live Digital gold deployment verified successfully.')
-          PY
+          fetch_until() {
+            local url="$1" out="$2" expected="$3" code=''
+            for attempt in {1..12}; do
+              code="$(curl -sS -L --connect-timeout 10 --max-time 30 -o "$out" -w '%{http_code}' "$url" || true)"
+              if [[ "$code" == "$expected" ]]; then return 0; fi
+              sleep 5
+            done
+            echo "Expected $expected from $url, got $code" >&2
+            return 1
+          }
+
+          fetch_until "$base/" "$work/home.html" 200
+          fetch_until "$base/pricing" "$work/pricing.html" 200
+          fetch_until "$base/request-call" "$work/request-call.html" 200
+          fetch_until "$base/styles.css?v=20260830-consolidated-1" "$work/styles.css" 200
+          fetch_until "$base/script.js?v=20260830-consolidated-1" "$work/script.js" 200
+          fetch_until "$base/sitemap.xml" "$work/sitemap.xml" 200
+
+          grep -q 'high-consideration businesses' "$work/home.html"
+          grep -q 'AED 700K' "$work/home.html"
+          grep -q 'from \$5K' "$work/pricing.html"
+          grep -q 'Request a Call' "$work/request-call.html"
+          grep -q '/api/digital-lead' "$work/script.js"
+          ! grep -q "@import url('styles-\|@import url('gold-" "$work/styles.css"
+          ! grep -q '\.html</loc>' "$work/sitemap.xml"
+          ! grep -q 'book-call' "$work/sitemap.xml"
+
+          old_pricing_headers="$(curl -sS -I --connect-timeout 10 --max-time 30 "$base/pricing.html")"
+          echo "$old_pricing_headers" | head -n1 | grep -Eq ' 301 | 302 | 307 | 308 '
+          echo "$old_pricing_headers" | tr -d '\r' | grep -qi '^location: https://digital.jamesrealty.uk/pricing$'
+
+          old_call_headers="$(curl -sS -I --connect-timeout 10 --max-time 30 "$base/book-call")"
+          echo "$old_call_headers" | head -n1 | grep -Eq ' 301 | 302 | 307 | 308 '
+          echo "$old_call_headers" | tr -d '\r' | grep -qi '^location: https://digital.jamesrealty.uk/request-call$'
+
+          api_get="$(curl -sS --connect-timeout 10 --max-time 30 -o "$work/api-get.json" -w '%{http_code}' "$base/api/digital-lead")"
+          [[ "$api_get" == '405' ]]
+          grep -q 'Method not allowed' "$work/api-get.json"
+
+          api_post="$(curl -sS --connect-timeout 10 --max-time 30 -o "$work/api-post.json" -w '%{http_code}' -X POST -H 'content-type: application/json' --data '{"honeypot":"qa-verification"}' "$base/api/digital-lead")"
+          [[ "$api_post" == '202' ]]
+          grep -q '"lead_id":"accepted"' "$work/api-post.json"
+
+          {
+            echo '## James Digital production verification'
+            echo '- Homepage: 200, new positioning and evidence present'
+            echo '- Pricing: clean URL 200, premium pricing present'
+            echo '- Legacy .html pricing: redirects to clean URL'
+            echo '- Request a Call: 200; legacy Book a Call redirects'
+            echo '- CSS: single consolidated production source'
+            echo '- JS: secure lead endpoint wired'
+            echo '- API: GET protected; safe honeypot POST accepted without storage'
+            echo '- Sitemap: extensionless URLs only'
+          } >> "$GITHUB_STEP_SUMMARY"
