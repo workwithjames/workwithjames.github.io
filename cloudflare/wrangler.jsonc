@@ -15,7 +15,8 @@
     { "pattern": "dubai.jamesrealty.uk", "custom_domain": true },
     { "pattern": "dubairealestate.jamesrealty.uk", "custom_domain": true },
     { "pattern": "dubaiproperties.jamesrealty.uk", "custom_domain": true },
-    { "pattern": "dubaiproperty.jamesrealty.uk", "custom_domain": true }
+    { "pattern": "dubaiproperty.jamesrealty.uk", "custom_domain": true },
+    { "pattern": "digital.jamesrealty.uk", "custom_domain": true }
   ],
   "d1_databases": [
     { "binding": "LEADS" }

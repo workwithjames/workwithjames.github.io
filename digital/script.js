@@ -141,137 +141,22 @@
     });
   }
 
-  var form = document.getElementById("project-form");
-  if (form) {
-    var params = new URLSearchParams(window.location.search);
-    var route = params.get("route") || "project";
-    var routeInput = document.getElementById("route");
-    var reply = document.getElementById("reply");
-    var heading = document.querySelector("[data-form-heading]");
-    var intro = document.querySelector("[data-form-intro]");
-    var objective = document.getElementById("objective");
-    var description = document.getElementById("description");
-    var routeLinks = document.querySelectorAll("[data-route-link]");
+  function formObject(form){var out={};new FormData(form).forEach(function(v,k){if(!k.startsWith('_'))out[k]=String(v)});return out}
+  function contextMeta(obj){var p=new URLSearchParams(location.search);obj.landing_page=location.pathname;obj.referrer=document.referrer||'';obj.utm_source=p.get('utm_source')||'';obj.utm_medium=p.get('utm_medium')||'';obj.utm_campaign=p.get('utm_campaign')||'';obj.consent=true;return obj}
+  function setStatus(node,message,state){if(!node)return;node.textContent=message;node.dataset.state=state||''}
+  async function submitJson(url,payload){var r=await fetch(url,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});var data={};try{data=await r.json()}catch(e){}if(!r.ok)throw new Error(data.error||'Request could not be saved');return data}
 
-    routeInput.value = route;
-    routeLinks.forEach(function (link) {
-      link.classList.toggle("is-active", link.getAttribute("data-route-link") === route);
-    });
-
-    if (route === "call") {
-      if (heading) heading.textContent = "Request a focused project call.";
-      if (intro) intro.textContent = "Share the context first so the call can begin with the right questions.";
-      if (reply) reply.value = "Phone / video call";
-    }
-    if (route === "email") {
-      if (heading) heading.textContent = "Request a detailed email reply.";
-      if (intro) intro.textContent = "Share the project context and the email address you want James to use.";
-      if (reply) reply.value = "Email";
-    }
-
-    var serviceParam = params.get("service");
-    if (serviceParam) {
-      form.querySelectorAll('input[name="services"]').forEach(function (checkbox) {
-        checkbox.checked = checkbox.value === serviceParam;
-      });
-    }
-    var objectiveParam = params.get("objective");
-    if (objectiveParam && objective) {
-      var matchingOption = Array.prototype.find.call(objective.options, function (option) {
-        return option.text.toLowerCase().indexOf(objectiveParam.toLowerCase().replace("i need ", "").replace("my ", "")) !== -1;
-      });
-      if (matchingOption) objective.value = matchingOption.value;
-    }
-    var contextParts = [];
-    ["package", "project", "industry", "engagement"].forEach(function (key) {
-      var value = params.get(key);
-      if (value) contextParts.push(key.charAt(0).toUpperCase() + key.slice(1) + ": " + value);
-    });
-    if (contextParts.length && description) description.value = contextParts.join(String.fromCharCode(10)) + String.fromCharCode(10) + String.fromCharCode(10);
-
-    var started = false;
-    form.addEventListener("input", function () {
-      if (!started) {
-        started = true;
-        track("form_start", { form_name: "project_qualification", route: route });
-      }
-    }, { once: true });
-
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
-      var status = document.getElementById("form-status");
-      var success = document.getElementById("form-success");
-      var continueLink = document.getElementById("continue-whatsapp");
-      var continueEmail = document.getElementById("continue-email");
-      var selectedServices = Array.prototype.map.call(form.querySelectorAll('input[name="services"]:checked'), function (checkbox) {
-        return checkbox.value;
-      });
-
-      form.querySelectorAll("[aria-invalid]").forEach(function (node) { node.removeAttribute("aria-invalid"); });
-      if (!selectedServices.length) {
-        if (status) status.textContent = "Select at least one required service.";
-        form.querySelector(".service-checkboxes").scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "center" });
-        return;
-      }
-      if (!form.checkValidity()) {
-        var invalid = form.querySelector(":invalid");
-        if (invalid) {
-          invalid.setAttribute("aria-invalid", "true");
-          invalid.focus();
-        }
-        if (status) status.textContent = "Complete the required fields before preparing the brief.";
-        return;
-      }
-
-      var formData = new FormData(form);
-      var lines = [
-        "Hi James, I would like to discuss a digital project.",
-        "",
-        "Name: " + formData.get("name"),
-        "Company: " + formData.get("company"),
-        formData.get("website") ? "Website: " + formData.get("website") : "",
-        "Country: " + formData.get("country"),
-        "Contact: " + formData.get("contact"),
-        "Required services: " + selectedServices.join(", "),
-        "Main objective: " + formData.get("objective"),
-        "Budget range: " + formData.get("budget"),
-        "Timeline: " + formData.get("timeline"),
-        "Preferred reply: " + formData.get("reply"),
-        "",
-        "Project description:",
-        formData.get("description")
-      ].filter(Boolean);
-      var brief = lines.join(String.fromCharCode(10));
-      var whatsappUrl = "https://wa.me/971528420933?text=" + encodeURIComponent(brief);
-      continueLink.href = whatsappUrl;
-      continueLink.dataset.brief = brief;
-      if (continueEmail) {
-        continueEmail.href = "mailto:james@jamesrealty.uk?subject=" + encodeURIComponent("Digital project enquiry from " + formData.get("company")) + "&body=" + encodeURIComponent(brief);
-      }
-      if (status) status.textContent = "";
-      success.hidden = false;
-      success.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "center" });
-      track("form_submission", {
-        form_name: "project_qualification",
-        route: route,
-        service_count: selectedServices.length,
-        budget_range: formData.get("budget"),
-        timeline: formData.get("timeline")
-      });
-    });
-
-    var copyButton = document.getElementById("copy-brief");
-    if (copyButton) {
-      copyButton.addEventListener("click", function () {
-        var brief = document.getElementById("continue-whatsapp").dataset.brief || "";
-        if (!brief) return;
-        navigator.clipboard.writeText(brief).then(function () {
-          copyButton.textContent = "Brief copied";
-          track("project_brief_copy");
-        }).catch(function () {
-          copyButton.textContent = "Select and copy from WhatsApp";
-        });
-      });
-    }
+  var lead=document.getElementById('lead-form');
+  if(lead){
+    var next=lead.querySelector('[data-lead-next]'), step2=lead.querySelector('[data-step="2"]'), status=lead.querySelector('[data-form-status]');
+    if(next)next.addEventListener('click',function(){var bad=Array.from(lead.querySelectorAll('[data-step="1"] [required]')).find(function(el){return !el.checkValidity()});if(bad){bad.reportValidity();return}step2.hidden=false;next.hidden=true;step2.scrollIntoView({behavior:reducedMotion?'auto':'smooth',block:'start'})});
+    lead.addEventListener('submit',async function(e){e.preventDefault();if(!lead.checkValidity()){lead.reportValidity();return}var btn=lead.querySelector('[type="submit"]');btn.disabled=true;setStatus(status,'Saving your project enquiry securely…','');try{var data=await submitJson('/api/digital-lead',contextMeta(formObject(lead)));setStatus(status,'Enquiry received. Reference '+data.lead_id+'. Response target: within one business day.','success');track('digital_lead_captured',{lead_priority:data.priority||'',lead_score:data.lead_score||0});lead.reset();if(step2)step2.hidden=false}catch(err){setStatus(status,'The secure form could not save your enquiry. Please email james@jamesrealty.uk.','error');track('digital_lead_error',{error:String(err.message||err)})}finally{btn.disabled=false}});
   }
+  var call=document.getElementById('call-form');
+  if(call){
+    var date=call.querySelector('#call-date'),zone=call.querySelector('#call-timezone'),statusCall=call.querySelector('[data-form-status]');
+    if(zone)zone.value=Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC';if(date){var n=new Date();n.setHours(n.getHours()+2);date.min=n.toISOString().slice(0,16)}
+    call.addEventListener('submit',async function(e){e.preventDefault();if(!call.checkValidity()){call.reportValidity();return}var btn=call.querySelector('[type="submit"]');btn.disabled=true;setStatus(statusCall,'Saving your call request…','');try{var payload=contextMeta(formObject(call)),data=await submitJson('/api/digital-call',payload);setStatus(statusCall,'Call request received. Reference '+data.lead_id+'. Your preferred time is provisional until confirmed.','success');var cal=call.querySelector('[data-call-calendar]');if(cal&&payload.preferred_time){var s=new Date(payload.preferred_time),en=new Date(s.getTime()+30*60000),stamp=function(d){return d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'')};cal.href='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('Provisional call with James Digital')+'&dates='+stamp(s)+'/'+stamp(en)+'&details='+encodeURIComponent('Provisional hold. James will confirm the call separately.')+'&ctz='+encodeURIComponent(payload.timezone||'UTC');cal.hidden=false}track('digital_call_requested')}catch(err){setStatus(statusCall,'The secure call request could not be saved. Please email james@jamesrealty.uk.','error')}finally{btn.disabled=false}});
+  }
+  if(!document.querySelector('.mobile-conversion-bar')&&!document.body.classList.contains('start-project-page')&&!document.body.classList.contains('request-call-page')){var bar=document.createElement('div');bar.className='mobile-conversion-bar';bar.innerHTML='<a href="/start-project">Start a Project</a><a href="/request-call">Request a Call</a>';document.body.appendChild(bar)}
 })();
