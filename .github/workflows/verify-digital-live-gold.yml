@@ -1,0 +1,132 @@
+name: Verify Digital live gold deployment
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/verify-digital-live-gold.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  verify-live:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Probe live Digital domain
+        shell: bash
+        run: |
+          set -u
+          mkdir -p /tmp/digital-live
+          curl -sS -L -D /tmp/digital-live/home.headers -o /tmp/digital-live/home.html -w '%{http_code}' https://digital.jamesrealty.uk/ > /tmp/digital-live/home.status || true
+          curl -sS -L -D /tmp/digital-live/styles.headers -o /tmp/digital-live/styles.css -w '%{http_code}' 'https://digital.jamesrealty.uk/styles.css?v=20260830-gold-final-1' > /tmp/digital-live/styles.status || true
+          curl -sS -L -D /tmp/digital-live/responsive.headers -o /tmp/digital-live/responsive.css -w '%{http_code}' 'https://digital.jamesrealty.uk/styles-responsive-final-20260830.css?v=20260830-gold-final-1' > /tmp/digital-live/responsive.status || true
+
+      - name: Write verification report
+        shell: bash
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          from datetime import datetime, timezone
+          import json, re
+
+          base = Path('/tmp/digital-live')
+          def read(name):
+              p = base / name
+              return p.read_text(encoding='utf-8', errors='replace') if p.exists() else ''
+          def status(name):
+              s = read(name).strip()
+              return int(s) if s.isdigit() else 0
+          def headers(name):
+              text = read(name)
+              out = {}
+              # Last response block after redirects.
+              blocks = re.split(r'\r?\n\r?\n', text.strip()) if text.strip() else []
+              block = blocks[-1] if blocks else ''
+              for line in block.splitlines()[1:]:
+                  if ':' in line:
+                      k, v = line.split(':', 1)
+                      out[k.strip().lower()] = v.strip()
+              return {k: out.get(k) for k in ['server','cache-control','cf-cache-status','age','etag','last-modified'] if out.get(k)}
+
+          home = read('home.html')
+          styles = read('styles.css')
+          responsive = read('responsive.css')
+          report = {
+              'checked_at_utc': datetime.now(timezone.utc).isoformat(),
+              'url': 'https://digital.jamesrealty.uk/',
+              'home': {
+                  'status': status('home.status'),
+                  'has_new_cache_key': '20260830-gold-final-1' in home,
+                  'has_latest_hero': 'Dubai-based. Working globally.' in home,
+                  'has_old_hero': 'Digital growth, without the agency clutter' in home,
+                  'headers': headers('home.headers'),
+              },
+              'styles': {
+                  'status': status('styles.status'),
+                  'imports_structural_base': 'styles-base-feasibility-20260829.css?v=20260830-gold-final-1' in styles,
+                  'imports_single_gold': 'gold-production-20260830.css?v=20260830-gold-final-1' in styles,
+                  'imports_final_responsive': 'styles-responsive-final-20260830.css?v=20260830-gold-final-1' in styles,
+                  'imports_legacy_purple': 'styles-feasibility-purple-backup' in styles,
+                  'imports_old_gold_theme': 'gold-theme-digital' in styles,
+                  'imports_standalone_mobile_patch': 'mobile-viewport-fix' in styles,
+                  'headers': headers('styles.headers'),
+              },
+              'responsive': {
+                  'status': status('responsive.status'),
+                  'contains_import': '@import' in responsive,
+                  'contains_mobile_hardening': 'Physical mobile viewport hardening' in responsive,
+                  'headers': headers('responsive.headers'),
+              },
+          }
+          report['passed'] = all([
+              report['home']['status'] == 200,
+              report['home']['has_new_cache_key'],
+              report['home']['has_latest_hero'],
+              not report['home']['has_old_hero'],
+              report['styles']['status'] == 200,
+              report['styles']['imports_structural_base'],
+              report['styles']['imports_single_gold'],
+              report['styles']['imports_final_responsive'],
+              not report['styles']['imports_legacy_purple'],
+              not report['styles']['imports_old_gold_theme'],
+              not report['styles']['imports_standalone_mobile_patch'],
+              report['responsive']['status'] == 200,
+              not report['responsive']['contains_import'],
+              report['responsive']['contains_mobile_hardening'],
+          ])
+          out = Path('.github/qa/digital-live-gold-verification.json')
+          out.parent.mkdir(parents=True, exist_ok=True)
+          out.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
+          print(json.dumps(report, indent=2))
+          PY
+
+      - name: Commit verification report
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/qa/digital-live-gold-verification.json
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m 'test(digital): record live gold verification'
+          git push origin HEAD:main
+
+      - name: Require live verification success
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          with open('.github/qa/digital-live-gold-verification.json', encoding='utf-8') as f:
+              report = json.load(f)
+          if not report.get('passed'):
+              raise SystemExit('Live Digital verification failed; inspect the committed QA report.')
+          print('Live Digital gold deployment verified successfully.')
+          PY
