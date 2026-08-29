@@ -11,4 +11,5 @@ Static site for `digital.jamesrealty.uk`.
 - Build output directory: `.`
 - Custom domain: `digital.jamesrealty.uk`
 
-The site is intentionally location-neutral and uses USD pricing.
+The site is positioned as a premium Dubai-based digital partner working globally.
+Pricing is in USD. Run `node build-pages.mjs` after changing route content or data.
