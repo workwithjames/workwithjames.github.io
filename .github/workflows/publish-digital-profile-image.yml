@@ -32,7 +32,7 @@ jobs:
           echo "8df8967ca1bec6acf90eba5eba98052658253a6f5f03fb4cd3e8838ca1a3da26  .automation/profile-image/part-02.b64" | sha256sum -c -
           echo "408b402e81df034012c66f29b6fa7b464562bd802feba3a8af24c5b5d0857a6b  .automation/profile-image/part-03.b64" | sha256sum -c -
 
-      - name: Decode high-resolution profile image
+      - name: Decode and verify high-resolution portrait
         run: |
           cat \
             .automation/profile-image/part-00.b64 \
@@ -43,16 +43,30 @@ jobs:
             | base64 --decode > digital/assets/james-ravi-profile.webp
           test "$(stat -c%s digital/assets/james-ravi-profile.webp)" -eq 45932
           echo "e37049883f1b113d529021f3d69d800b88af3fde6ea13ab72a26cf686f0b16fd  digital/assets/james-ravi-profile.webp" | sha256sum -c -
-          file digital/assets/james-ravi-profile.webp
 
-      - name: Commit profile image
+      - name: Point About page to high-resolution portrait
         run: |
-          git add digital/assets/james-ravi-profile.webp
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('digital/about.html')
+          text = path.read_text()
+          old = '/assets/james-ravi-profile.jpg?v=20260830-photo2'
+          new = '/assets/james-ravi-profile.webp?v=20260830-hq1'
+          if old in text:
+              text = text.replace(old, new)
+          elif new not in text:
+              raise SystemExit('Expected About portrait source not found')
+          path.write_text(text)
+          PY
+
+      - name: Commit sharp portrait and About reference
+        run: |
+          git add digital/assets/james-ravi-profile.webp digital/about.html
           if git diff --cached --quiet; then
-            echo "No image changes"
+            echo "No changes"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "fix(digital): restore sharp About portrait"
+          git commit -m "fix(digital): serve sharp About portrait"
           git push
