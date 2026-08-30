@@ -29,3 +29,46 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: cloudflare
           command: deploy --config wrangler.jsonc
+
+      - name: Verify landing SEO and Digital edge behavior
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          fetch() {
+            local url="$1"
+            local output="$2"
+            for attempt in 1 2 3 4 5 6; do
+              if curl -fsS --max-time 20 "$url" -o "$output"; then
+                return 0
+              fi
+              sleep 5
+            done
+            echo "Failed to fetch $url after retries" >&2
+            return 1
+          }
+
+          fetch "https://emaar.jamesrealty.uk/" /tmp/emaar.html
+          grep -Fq 'index,follow' /tmp/emaar.html
+          if grep -Fiq 'noindex' /tmp/emaar.html; then
+            echo "Canonical Emaar host unexpectedly contains noindex" >&2
+            exit 1
+          fi
+          grep -Fq 'data-whatsapp-action' /tmp/emaar.html
+
+          fetch "https://emaar.jamesrealty.uk/robots.txt" /tmp/robots.txt
+          grep -Fq 'Sitemap: https://emaar.jamesrealty.uk/sitemap.xml' /tmp/robots.txt
+
+          fetch "https://emaar.jamesrealty.uk/sitemap.xml" /tmp/sitemap.xml
+          grep -Fq '<loc>https://emaar.jamesrealty.uk/</loc>' /tmp/sitemap.xml
+
+          curl -fsSI --max-time 20 "https://dubaiproperty.jamesrealty.uk/" > /tmp/ar-headers.txt
+          grep -Fiq 'content-language: ar-AE' /tmp/ar-headers.txt
+
+          fetch "https://digital.jamesrealty.uk/pricing" /tmp/digital-pricing.html
+          grep -Fq 'Senior digital work priced for business impact' /tmp/digital-pricing.html
+          grep -Fq 'from $5K' /tmp/digital-pricing.html
+
+          curl -fsSI --max-time 20 "https://digital.jamesrealty.uk/pricing" > /tmp/digital-headers.txt
+          grep -Fiq 'x-robots-tag: index, follow' /tmp/digital-headers.txt
+          grep -Fiq 'rel="canonical"' /tmp/digital-headers.txt
