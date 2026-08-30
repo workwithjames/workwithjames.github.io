@@ -1,0 +1,146 @@
+/* Homepage mobile refinement: Growth Operating Model, 2026-08-31 */
+
+@media (max-width: 900px){
+  .home-page .system-map{
+    min-height:0;
+    max-width:620px;
+    padding:20px;
+    border-radius:26px;
+  }
+
+  .home-page .system-orbit{
+    height:390px;
+    margin-top:18px;
+  }
+
+  .home-page .system-orbit:before{
+    width:300px;
+    height:300px;
+  }
+
+  .home-page .system-orbit:after{
+    width:220px;
+    height:220px;
+  }
+
+  .home-page .orbit-dubai{left:2%;top:45%}
+  .home-page .orbit-europe{left:50%;top:4%;transform:translateX(-50%)}
+  .home-page .orbit-asia{right:2%;top:45%}
+  .home-page .orbit-americas{right:auto;left:50%;bottom:2%;transform:translateX(-50%)}
+}
+
+@media (max-width: 620px){
+  .home-page .system-map{
+    padding:16px;
+    border-radius:22px;
+  }
+
+  .home-page .system-map-top{
+    align-items:center;
+    gap:12px;
+    font-size:.66rem;
+    line-height:1.25;
+  }
+
+  .home-page .system-orbit{
+    height:330px;
+    margin-top:14px;
+  }
+
+  .home-page .system-orbit:before{
+    width:min(66vw,250px);
+    height:min(66vw,250px);
+  }
+
+  .home-page .system-orbit:after{
+    width:min(49vw,184px);
+    height:min(49vw,184px);
+  }
+
+  .home-page .orbit-core{
+    width:132px;
+    height:132px;
+    padding:17px;
+  }
+
+  .home-page .orbit-core strong{
+    font-size:1.02rem;
+    line-height:1.04;
+  }
+
+  .home-page .orbit-core span{
+    max-width:86px;
+    font-size:.58rem;
+  }
+
+  .home-page .orbit-label{
+    min-width:86px;
+    max-width:112px;
+    padding:8px 10px;
+    border-radius:11px;
+    font-size:.59rem;
+  }
+
+  .home-page .orbit-label small{
+    display:block;
+    margin-top:2px;
+    font-size:.54rem;
+  }
+
+  .home-page .orbit-dubai{
+    left:0;
+    top:45%;
+    transform:translateY(-50%);
+  }
+
+  .home-page .orbit-europe{
+    left:50%;
+    top:1%;
+    transform:translateX(-50%);
+  }
+
+  .home-page .orbit-asia{
+    right:0;
+    top:45%;
+    transform:translateY(-50%);
+  }
+
+  .home-page .orbit-americas{
+    right:auto;
+    left:50%;
+    bottom:0;
+    transform:translateX(-50%);
+  }
+
+  .home-page .system-flow{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+    overflow:visible;
+    padding:10px;
+    border-radius:13px;
+  }
+
+  .home-page .system-flow span{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:38px;
+    padding:8px 6px;
+    border:1px solid rgba(240,208,131,.10);
+    border-radius:9px;
+    background:rgba(255,255,255,.012);
+    text-align:center;
+    font-size:.59rem;
+    white-space:nowrap;
+  }
+
+  .home-page .system-flow i{display:none}
+}
+
+@media (max-width: 390px){
+  .home-page .system-orbit{height:310px}
+  .home-page .orbit-label{min-width:80px;max-width:96px;padding:7px 8px;font-size:.55rem}
+  .home-page .orbit-core{width:124px;height:124px}
+  .home-page .orbit-core strong{font-size:.96rem}
+}
