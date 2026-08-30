@@ -19,22 +19,40 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Record staged chunk checksums
+      - name: Verify portrait chunks
         run: |
-          {
-            wc -c .automation/profile-image/part-*.b64
-            sha256sum .automation/profile-image/part-*.b64
-            echo "part-01-first16000"
-            head -c 16000 .automation/profile-image/part-01.b64 | sha256sum
-          } > .automation/profile-image-diagnostics.txt
+          test "$(wc -c < .automation/profile-image/part-00.b64)" -eq 16000
+          test "$(wc -c < .automation/profile-image/part-01a.b64)" -eq 8000
+          test "$(wc -c < .automation/profile-image/part-01b.b64)" -eq 8000
+          test "$(wc -c < .automation/profile-image/part-02.b64)" -eq 16000
+          test "$(wc -c < .automation/profile-image/part-03.b64)" -eq 13244
+          echo "a39952e124ff65856c8611c3eccf50dc7fca2132ec07c1d8eed59eb27a6b076a  .automation/profile-image/part-00.b64" | sha256sum -c -
+          echo "470cefc1169d08bb0832804b4a08afc86c356ad5fb91067009be10fa62ad84d0  .automation/profile-image/part-01a.b64" | sha256sum -c -
+          echo "b6c26272faf006c4e8f9fa96505b93ca73d3a58371607380150047b3d6105712  .automation/profile-image/part-01b.b64" | sha256sum -c -
+          echo "8df8967ca1bec6acf90eba5eba98052658253a6f5f03fb4cd3e8838ca1a3da26  .automation/profile-image/part-02.b64" | sha256sum -c -
+          echo "408b402e81df034012c66f29b6fa7b464562bd802feba3a8af24c5b5d0857a6b  .automation/profile-image/part-03.b64" | sha256sum -c -
 
-      - name: Commit diagnostics
+      - name: Decode high-resolution profile image
         run: |
-          git add .automation/profile-image-diagnostics.txt
+          cat \
+            .automation/profile-image/part-00.b64 \
+            .automation/profile-image/part-01a.b64 \
+            .automation/profile-image/part-01b.b64 \
+            .automation/profile-image/part-02.b64 \
+            .automation/profile-image/part-03.b64 \
+            | base64 --decode > digital/assets/james-ravi-profile.webp
+          test "$(stat -c%s digital/assets/james-ravi-profile.webp)" -eq 45932
+          echo "e37049883f1b113d529021f3d69d800b88af3fde6ea13ab72a26cf686f0b16fd  digital/assets/james-ravi-profile.webp" | sha256sum -c -
+          file digital/assets/james-ravi-profile.webp
+
+      - name: Commit profile image
+        run: |
+          git add digital/assets/james-ravi-profile.webp
           if git diff --cached --quiet; then
+            echo "No image changes"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore(digital): record portrait staging checksums"
+          git commit -m "fix(digital): restore sharp About portrait"
           git push
