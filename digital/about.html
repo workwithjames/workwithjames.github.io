@@ -21,70 +21,201 @@
   <link rel="stylesheet" href="/styles.css?v=20260830-consolidated-1">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"James Ravi","jobTitle":"Senior Digital Growth Partner","homeLocation":{"@type":"Place","name":"Dubai, United Arab Emirates"},"url":"https://digital.jamesrealty.uk/about","sameAs":["https://jamesrealty.uk/about-me/","https://ae.linkedin.com/in/james-ravi-dubai"]}</script>
   <style>
-    .about-page .about-hero{align-items:center}
-    .about-page .about-hero h1{max-width:900px}
-    .about-page .about-hero .profile-shot{justify-self:end}
-    .about-page .authority-note{margin:14px 0 0;color:#8e8171;font-size:.72rem;line-height:1.55}
-    .about-page .brand-exposure{padding:30px 0;border-block:1px solid var(--line);background:rgba(255,255,255,.012)}
-    .about-page .brand-exposure-inner{display:grid;grid-template-columns:220px 1fr;gap:40px;align-items:center}
-    .about-page .brand-exposure p{margin:0;color:#8e8171;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
-    .about-page .brand-exposure-list{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center}
-    .about-page .brand-exposure-list span{color:#ded4c6;font-size:.78rem;font-weight:750}
-    .about-page .about-story-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:70px;align-items:start}
-    .about-page .about-story-grid h2{margin:0;font-size:clamp(2.6rem,5vw,5rem);line-height:.95;letter-spacing:-.055em}
-    .about-page .about-story-copy{display:grid;gap:18px}
+    .about-page .site-header{position:fixed!important;left:0;right:0;top:0;width:100%;z-index:500;background:rgba(8,7,5,.92)!important;border-bottom:1px solid rgba(240,208,131,.12)!important;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+    .about-page main{padding-top:var(--header)}
+    .about-page .about-hero{grid-template-columns:minmax(0,1.1fr) minmax(360px,.56fr);grid-template-areas:"copy portrait" "actions portrait";column-gap:72px;row-gap:24px;align-items:center;padding-top:72px;padding-bottom:82px}
+    .about-page .about-hero-copy{grid-area:copy;max-width:820px}
+    .about-page .about-hero h1{max-width:820px;font-size:clamp(3.75rem,6.2vw,6.65rem);line-height:.9;letter-spacing:-.065em}
+    .about-page .about-hero h1 .hero-break{display:block;color:#f0d083}
+    .about-page .about-hero-copy>p:not(.eyebrow){max-width:690px;margin:26px 0 0;color:#b9ad9d;font-size:1rem;line-height:1.76}
+    .about-page .about-hero-actions{grid-area:actions;display:flex;flex-wrap:wrap;gap:10px;align-self:start;margin:0}
+    .about-page .profile-frame{grid-area:portrait;position:relative;justify-self:end;width:min(100%,440px);padding:12px 12px 0}
+    .about-page .profile-frame:before{content:"";position:absolute;inset:0 28px 46px 0;border:1px solid rgba(240,208,131,.24);border-radius:26px;transform:translate(12px,-12px);pointer-events:none}
+    .about-page .profile-frame:after{content:"";position:absolute;right:-16px;top:8%;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(213,170,82,.15),transparent 68%);filter:blur(8px);pointer-events:none}
+    .about-page .profile-shot{position:relative;z-index:2;width:100%;max-width:none;aspect-ratio:4/5;object-fit:cover;object-position:top;border:1px solid rgba(240,208,131,.2);border-radius:24px;box-shadow:0 32px 90px rgba(0,0,0,.44)}
+    .about-page .profile-caption{position:relative;z-index:3;display:flex;justify-content:space-between;gap:18px;padding:13px 4px 0;color:#8f8374;font-size:.68rem;line-height:1.4}
+    .about-page .profile-caption strong{color:#d8cbbb;font-size:.72rem}
+
+    .about-page .authority-section{padding-top:34px;padding-bottom:78px}
+    .about-page .authority-section .metric-grid{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .about-page .authority-section .metric-card{min-height:150px;border-radius:0;border:0;border-right:1px solid var(--line);background:transparent;padding:28px 24px}
+    .about-page .authority-section .metric-card:last-child{border-right:0}
+    .about-page .authority-note{margin:16px 0 0;max-width:900px;color:#8e8171;font-size:.72rem;line-height:1.55}
+
+    .about-page .brand-exposure{padding:26px 0;border-block:1px solid var(--line);background:rgba(255,255,255,.009);overflow:hidden}
+    .about-page .brand-exposure-inner{display:grid;grid-template-columns:210px minmax(0,1fr);gap:36px;align-items:center}
+    .about-page .brand-exposure p{margin:0;color:#8e8171;font-size:.68rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase}
+    .about-page .brand-exposure-list{display:flex;align-items:center;gap:0;min-width:0}
+    .about-page .brand-exposure-list span{position:relative;flex:0 0 auto;padding:0 19px;color:#ded4c6;font-size:.78rem;font-weight:750;white-space:nowrap}
+    .about-page .brand-exposure-list span:first-child{padding-left:0}
+    .about-page .brand-exposure-list span:not(:last-child):after{content:"";position:absolute;right:0;top:50%;width:3px;height:3px;border-radius:50%;background:#6f6252;transform:translateY(-50%)}
+
+    .about-page .about-story-grid{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:82px;align-items:start}
+    .about-page .about-story-grid h2{margin:0;font-size:clamp(2.7rem,4.8vw,4.9rem);line-height:.95;letter-spacing:-.055em}
+    .about-page .about-story-copy{display:grid;gap:18px;padding-top:4px}
     .about-page .about-story-copy p{margin:0;color:var(--muted);font-size:.95rem;line-height:1.78}
-    .about-page .about-principle{padding:18px 20px;border-left:1px solid #d5aa52;background:rgba(213,170,82,.035);color:#e7ddcf!important}
-    .about-page .model-compare{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-    .about-page .model-card{padding:28px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.018)}
-    .about-page .model-card.is-direct{border-color:rgba(213,170,82,.34);background:linear-gradient(145deg,rgba(213,170,82,.07),rgba(255,255,255,.012))}
-    .about-page .model-card>span{display:block;margin-bottom:14px;color:#8e8171;font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+    .about-page .about-principle{margin-top:10px;padding:19px 22px;border-left:1px solid #d5aa52;background:linear-gradient(90deg,rgba(213,170,82,.045),transparent);color:#e7ddcf!important}
+
+    .about-page .model-compare{display:grid;grid-template-columns:minmax(240px,.68fr) minmax(0,1.32fr);gap:24px;align-items:stretch}
+    .about-page .model-card{padding:26px 10px 20px 0;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent}
+    .about-page .model-card.is-direct{padding:30px 32px;border:1px solid rgba(213,170,82,.33);border-radius:20px;background:radial-gradient(circle at 100% 0,rgba(213,170,82,.09),transparent 34%),rgba(255,255,255,.012)}
+    .about-page .model-card>span{display:block;margin-bottom:14px;color:#8e8171;font-size:.66rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
     .about-page .model-card.is-direct>span{color:#d5aa52}
-    .about-page .model-card h3{margin:0 0 18px;font-size:1.35rem}
+    .about-page .model-card h3{margin:0 0 18px;font-size:1.32rem;line-height:1.25}
     .about-page .model-flow{display:grid;gap:0;margin:0;padding:0;list-style:none}
-    .about-page .model-flow li{position:relative;padding:12px 0 12px 26px;border-top:1px solid var(--line);color:#b9ad9d;font-size:.82rem;line-height:1.55}
-    .about-page .model-flow li:before{content:"";position:absolute;left:4px;top:20px;width:7px;height:7px;border-radius:50%;background:#6c6256}
+    .about-page .model-flow li{position:relative;padding:10px 0 10px 24px;border-top:1px solid var(--line);color:#b9ad9d;font-size:.8rem;line-height:1.52}
+    .about-page .model-flow li:before{content:"";position:absolute;left:3px;top:17px;width:6px;height:6px;border-radius:50%;background:#6c6256}
     .about-page .is-direct .model-flow li:before{background:#d5aa52;box-shadow:0 0 14px rgba(213,170,82,.24)}
+
     .about-page .proof-intro{max-width:700px;color:var(--muted);font-size:.9rem;line-height:1.7}
-    .about-page .about-proof-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .about-page .about-proof-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(300px,.65fr);grid-template-rows:1fr 1fr;gap:18px}
     .about-page .about-proof-card{overflow:hidden;border:1px solid var(--line);border-radius:20px;background:var(--surface)}
-    .about-page .about-proof-card>a:first-child{display:block;aspect-ratio:16/10;overflow:hidden;border-bottom:1px solid var(--line);background:#100e0b}
+    .about-page .about-proof-card.is-featured{grid-row:1/3;display:grid;grid-template-rows:minmax(320px,1fr) auto}
+    .about-page .about-proof-card.is-featured>a:first-child{display:block;min-height:340px;overflow:hidden;border-bottom:1px solid var(--line);background:#100e0b}
+    .about-page .about-proof-card.is-compact{display:grid;grid-template-columns:38% 1fr;min-height:0}
+    .about-page .about-proof-card.is-compact>a:first-child{display:block;min-height:100%;overflow:hidden;border-right:1px solid var(--line);background:#100e0b}
     .about-page .about-proof-card img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .35s var(--ease)}
     .about-page .about-proof-card:hover img{transform:scale(1.025)}
     .about-page .about-proof-body{padding:22px}
-    .about-page .about-proof-body>span{color:#d5aa52;font-size:.66rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
-    .about-page .about-proof-body h3{margin:9px 0 10px;font-size:1.2rem;line-height:1.2}
-    .about-page .about-proof-body p{margin:0 0 18px;color:var(--muted);font-size:.79rem;line-height:1.62}
-    .about-page .fit-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-    .about-page .fit-list article{padding:25px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.015)}
-    .about-page .fit-list article>span{color:#d5aa52;font-size:.65rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
-    .about-page .fit-list h3{margin:10px 0 8px;font-size:1.12rem}
-    .about-page .fit-list p{margin:0;color:var(--muted);font-size:.8rem;line-height:1.6}
-    .about-page .working-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line)}
-    .about-page .working-steps article{padding:24px 18px 0 0}
-    .about-page .working-steps span{display:block;color:#d5aa52;font-size:.67rem;font-weight:800}
-    .about-page .working-steps h3{margin:12px 0 7px;font-size:1rem}
+    .about-page .is-featured .about-proof-body{padding:27px}
+    .about-page .about-proof-body>span{color:#d5aa52;font-size:.64rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+    .about-page .about-proof-body h3{margin:9px 0 10px;font-size:1.14rem;line-height:1.2}
+    .about-page .is-featured .about-proof-body h3{font-size:1.45rem}
+    .about-page .about-proof-body p{margin:0 0 16px;color:var(--muted);font-size:.77rem;line-height:1.6}
+
+    .about-page .timeline-clean article{grid-template-columns:170px 1fr;gap:34px;padding:30px 0}
+    .about-page .timeline-clean h3{margin:0 0 7px;font-size:1.22rem}
+    .about-page .timeline-role{display:block;margin-bottom:8px;color:#d5aa52;font-size:.68rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+
+    .about-page .fit-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:54px;row-gap:0;border-top:1px solid var(--line)}
+    .about-page .fit-list article{padding:28px 0 30px;border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent}
+    .about-page .fit-list article>span{color:#d5aa52;font-size:.64rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+    .about-page .fit-list h3{margin:10px 0 8px;max-width:500px;font-size:1.18rem}
+    .about-page .fit-list p{margin:0;max-width:540px;color:var(--muted);font-size:.81rem;line-height:1.62}
+
+    .about-page .working-steps{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;margin-top:14px}
+    .about-page .working-steps:before{content:"";position:absolute;left:0;right:0;top:10px;height:1px;background:linear-gradient(90deg,#d5aa52,rgba(213,170,82,.12))}
+    .about-page .working-steps article{position:relative;padding:38px 22px 0 0}
+    .about-page .working-steps article:before{content:"";position:absolute;left:0;top:5px;width:11px;height:11px;border-radius:50%;border:2px solid #d5aa52;background:#080705;box-shadow:0 0 18px rgba(213,170,82,.16)}
+    .about-page .working-steps span{display:block;color:#d5aa52;font-size:.66rem;font-weight:800}
+    .about-page .working-steps h3{margin:11px 0 7px;font-size:1rem}
     .about-page .working-steps p{margin:0;color:var(--muted);font-size:.75rem;line-height:1.55}
-    .about-page .about-final{padding:94px 0}
-    .about-page .about-final-inner{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);gap:55px;align-items:end;padding:42px;border:1px solid rgba(213,170,82,.28);border-radius:24px;background:radial-gradient(circle at 90% 0,rgba(213,170,82,.1),transparent 34%),rgba(255,255,255,.018)}
-    .about-page .about-final h2{max-width:830px;margin:0;font-size:clamp(2.7rem,5vw,5rem);line-height:.94;letter-spacing:-.055em}
-    .about-page .about-final p{margin:20px 0 0;max-width:720px;color:var(--muted);font-size:.9rem}
-    .about-page .about-final-actions{display:grid;gap:10px}
+
+    .about-page .about-final{padding:104px 0}
+    .about-page .about-final-inner{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);gap:64px;align-items:end;padding:52px;border:1px solid rgba(213,170,82,.38);border-radius:28px;background:radial-gradient(circle at 88% 12%,rgba(240,208,131,.12),transparent 26%),linear-gradient(145deg,rgba(213,170,82,.075),rgba(255,255,255,.012) 54%,rgba(255,255,255,.006))}
+    .about-page .about-final-inner:after{content:"JD";position:absolute;right:-20px;bottom:-72px;color:rgba(240,208,131,.035);font-family:var(--font-display);font-size:18rem;font-weight:700;line-height:1;pointer-events:none}
+    .about-page .about-final h2{position:relative;z-index:2;max-width:850px;margin:0;font-size:clamp(2.9rem,5.2vw,5.2rem);line-height:.93;letter-spacing:-.06em}
+    .about-page .about-final p{position:relative;z-index:2;margin:20px 0 0;max-width:700px;color:#c0b4a4;font-size:.9rem}
+    .about-page .about-final-actions{position:relative;z-index:2;display:grid;gap:10px}
+
+    .about-page .site-footer{padding:54px 0 26px;background:#060503!important;border-top:1px solid rgba(240,208,131,.13)!important}
+    .about-page .about-footer-top{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(180px,.55fr) minmax(230px,.65fr);gap:60px;align-items:start}
+    .about-page .footer-intro p{max-width:390px;margin:15px 0 0;color:#8e8171;font-size:.78rem;line-height:1.65}
+    .about-page .footer-links{display:grid;gap:10px}
+    .about-page .footer-links strong,.about-page .footer-contact>span{margin-bottom:4px;color:#766b5f;font-size:.66rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+    .about-page .footer-links a{color:#b8ad9d;font-size:.78rem}
+    .about-page .footer-links a:hover{color:#f0d083}
+    .about-page .footer-contact{display:grid;gap:10px}
+    .about-page .footer-contact .button{width:100%}
+    .about-page .footer-direct{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:4px}
+    .about-page .footer-direct a{color:#a99d8d;font-size:.73rem}
+    .about-page .about-footer-bottom{display:flex;justify-content:space-between;gap:30px;align-items:center;margin-top:40px;padding-top:20px;border-top:1px solid rgba(240,208,131,.1);color:#766b5f;font-size:.68rem;line-height:1.5}
+    .about-page .about-footer-bottom>div{display:flex;flex-wrap:wrap;gap:10px 18px;justify-content:flex-end}
+    .about-page .about-footer-bottom a{color:#978a79}
+
     @media(max-width:900px){
+      .about-page .about-hero{grid-template-columns:minmax(0,1fr) minmax(260px,.46fr);column-gap:38px;padding-top:60px}
+      .about-page .about-hero h1{font-size:clamp(3.35rem,8vw,5.2rem)}
+      .about-page .profile-frame{width:min(100%,360px)}
       .about-page .brand-exposure-inner,.about-page .about-story-grid,.about-page .about-final-inner{grid-template-columns:1fr}
-      .about-page .brand-exposure-inner{gap:18px}
-      .about-page .about-proof-grid{grid-template-columns:1fr 1fr}
-      .about-page .about-proof-card:last-child{grid-column:1/-1}
-      .about-page .working-steps{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:28px}
-      .about-page .about-hero .profile-shot{justify-self:start}
+      .about-page .brand-exposure-inner{gap:16px}
+      .about-page .brand-exposure-list{overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+      .about-page .brand-exposure-list::-webkit-scrollbar{display:none}
+      .about-page .model-compare{grid-template-columns:.78fr 1.22fr}
+      .about-page .about-proof-grid{grid-template-columns:1.15fr .85fr}
+      .about-page .working-steps{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:34px}
+      .about-page .working-steps:before{display:none}
+      .about-page .working-steps article{padding-top:28px;border-top:1px solid var(--line)}
+      .about-page .working-steps article:before{top:-6px}
+      .about-page .about-footer-top{grid-template-columns:1.2fr .8fr;gap:42px}
+      .about-page .footer-contact{grid-column:1/-1;grid-template-columns:repeat(2,minmax(0,1fr));align-items:end}
+      .about-page .footer-contact>span,.about-page .footer-direct{grid-column:1/-1}
     }
+
     @media(max-width:620px){
-      .about-page .model-compare,.about-page .about-proof-grid,.about-page .fit-list,.about-page .working-steps{grid-template-columns:1fr}
-      .about-page .about-proof-card:last-child{grid-column:auto}
-      .about-page .brand-exposure-list{gap:9px 16px}
-      .about-page .about-final{padding:72px 0}
-      .about-page .about-final-inner{padding:26px 20px}
+      .about-page main{padding-top:var(--header)}
+      .about-page .about-hero{grid-template-columns:1fr;grid-template-areas:"copy" "portrait" "actions";gap:26px;padding-top:38px;padding-bottom:54px}
+      .about-page .about-hero h1{font-size:clamp(2.9rem,13.2vw,4.15rem);line-height:.92;letter-spacing:-.06em}
+      .about-page .about-hero-copy>p:not(.eyebrow){margin-top:20px;font-size:.9rem;line-height:1.7}
+      .about-page .profile-frame{justify-self:start;width:min(84vw,330px);padding:8px 8px 0}
+      .about-page .profile-frame:before{inset:0 20px 42px 0;transform:translate(9px,-9px)}
+      .about-page .profile-caption{font-size:.64rem}
+      .about-page .about-hero-actions{display:grid;width:100%}
+      .about-page .about-hero-actions .button{width:100%}
+
+      .about-page .authority-section{padding-top:18px;padding-bottom:58px}
+      .about-page .authority-section .metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+      .about-page .authority-section .metric-card{min-height:128px;padding:22px 16px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+      .about-page .authority-section .metric-card:nth-child(2n){border-right:0}
+      .about-page .authority-section .metric-card:nth-last-child(-n+2){border-bottom:0}
+      .about-page .authority-section .metric-card strong{font-size:clamp(1.8rem,9vw,2.6rem)}
+      .about-page .authority-section .metric-card span{font-size:.74rem}
+      .about-page .authority-note{font-size:.66rem}
+
+      .about-page .brand-exposure{padding:22px 0}
+      .about-page .brand-exposure-list{margin-right:-14px;padding-right:24px}
+      .about-page .brand-exposure-list span{padding:0 16px;font-size:.75rem}
+
+      .about-page .about-story-grid{gap:28px}
+      .about-page .about-story-grid h2{font-size:clamp(2.35rem,11vw,3.4rem)}
+      .about-page .about-story-copy p{font-size:.86rem}
+      .about-page .about-principle{padding:17px 18px}
+
+      .about-page .model-compare{grid-template-columns:1fr;gap:18px}
+      .about-page .model-card{padding:20px 0 4px}
+      .about-page .model-card h3{font-size:1.08rem}
+      .about-page .model-card .model-flow li{padding-top:8px;padding-bottom:8px;font-size:.75rem}
+      .about-page .model-card.is-direct{padding:23px 20px}
+
+      .about-page .about-proof-grid{grid-template-columns:1fr;grid-template-rows:auto;gap:14px}
+      .about-page .about-proof-card.is-featured{grid-row:auto;display:block}
+      .about-page .about-proof-card.is-featured>a:first-child{min-height:0;aspect-ratio:16/10}
+      .about-page .about-proof-card.is-compact{grid-template-columns:36% 1fr;min-height:158px}
+      .about-page .about-proof-card.is-compact>a:first-child{border-right:1px solid var(--line);border-bottom:0}
+      .about-page .about-proof-card.is-compact .about-proof-body{padding:16px}
+      .about-page .about-proof-card.is-compact .about-proof-body p{display:none}
+      .about-page .about-proof-card.is-compact .about-proof-body h3{font-size:.98rem}
+      .about-page .about-proof-card.is-compact .arrow-link{font-size:.72rem}
+
+      .about-page .timeline-clean article{grid-template-columns:1fr;gap:10px;padding:24px 0}
+      .about-page .timeline-clean h3{font-size:1.08rem}
+      .about-page .timeline-clean p{font-size:.82rem}
+
+      .about-page .fit-list{grid-template-columns:1fr;gap:0}
+      .about-page .fit-list article{padding:24px 0}
+      .about-page .fit-list h3{font-size:1.05rem}
+
+      .about-page .working-steps{display:grid;grid-template-columns:1fr;gap:0;margin-left:6px;padding-left:22px;border-left:1px solid rgba(213,170,82,.28)}
+      .about-page .working-steps article{padding:0 0 27px 8px;border-top:0}
+      .about-page .working-steps article:before{left:-29px;top:2px;width:10px;height:10px}
+      .about-page .working-steps article:last-child{padding-bottom:0}
+      .about-page .working-steps h3{margin-top:7px}
+
+      .about-page .about-final{padding:70px 0}
+      .about-page .about-final-inner{padding:30px 20px;gap:32px}
+      .about-page .about-final-inner:after{font-size:10rem;right:-24px;bottom:-34px}
+      .about-page .about-final h2{font-size:clamp(2.45rem,11.8vw,3.6rem)}
       .about-page .about-final-actions .button{width:100%}
+
+      .about-page .site-footer{padding:44px 0 22px}
+      .about-page .about-footer-top{grid-template-columns:1fr;gap:30px}
+      .about-page .footer-links{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 20px}
+      .about-page .footer-links strong{grid-column:1/-1}
+      .about-page .footer-contact{grid-column:auto;grid-template-columns:1fr;gap:9px}
+      .about-page .footer-contact>span,.about-page .footer-direct{grid-column:auto}
+      .about-page .footer-direct{gap:10px 18px}
+      .about-page .about-footer-bottom{align-items:flex-start;flex-direction:column;margin-top:30px;padding-top:18px}
+      .about-page .about-footer-bottom>div{justify-content:flex-start}
     }
   </style>
 </head>
@@ -104,21 +235,24 @@
 
   <main id="main">
     <section class="page-hero section-shell about-hero">
-      <div>
+      <div class="about-hero-copy">
         <p class="eyebrow"><span></span> Meet James</p>
-        <h1>Senior marketing judgment without the agency layers.</h1>
+        <h1>Senior marketing judgment <span class="hero-break">without the agency layers.</span></h1>
         <p>James Ravi brings senior strategy, acquisition, conversion and CRM leadership directly into the work. The objective is simple: fewer handoffs, clearer decisions and digital execution tied to the commercial problem.</p>
-        <div class="hero-actions"><a class="button button-primary" href="/start-project" data-event="start_project_click">Discuss Your Project</a><a class="button button-ghost" href="/portfolio">View Selected Work</a></div>
       </div>
-      <img class="profile-shot" src="/assets/james-ravi-profile.jpg" alt="James Ravi, senior digital growth partner in Dubai" width="1024" height="1536">
+      <figure class="profile-frame">
+        <img class="profile-shot" src="/assets/james-ravi-profile.jpg" alt="James Ravi, senior digital growth partner in Dubai" width="1024" height="1536">
+        <figcaption class="profile-caption"><strong>James Ravi</strong><span>Dubai, UAE · Working globally</span></figcaption>
+      </figure>
+      <div class="about-hero-actions"><a class="button button-primary" href="/start-project" data-event="start_project_click">Discuss Your Project</a><a class="button button-ghost" href="/portfolio">View Selected Work</a></div>
     </section>
 
-    <section class="conversion-section section-shell" aria-label="Career authority">
+    <section class="conversion-section section-shell authority-section" aria-label="Career authority">
       <div class="metric-grid">
         <article class="metric-card"><strong>2016</strong><span>Documented marketing timeline begins</span></article>
         <article class="metric-card"><strong>AED 80B+</strong><span>Portfolio value within documented employer scope</span></article>
         <article class="metric-card"><strong>50+</strong><span>International acquisition markets in career scope</span></article>
-        <article class="metric-card"><strong>Dubai</strong><span>Based locally, available globally</span></article>
+        <article class="metric-card"><strong>3</strong><span>Senior environments: agency, developer and brokerage</span></article>
       </div>
       <p class="authority-note">Career metrics describe documented employer and project scope. They are not presented as sole-authorship, personal revenue or James Digital client results unless a case study states that explicitly.</p>
     </section>
@@ -146,9 +280,9 @@
         <div class="section-heading"><div><p class="kicker">Direct senior access</p><h2>Less account management. More accountable decision-making.</h2></div><p>The delivery model is intentionally lean. Specialist support can expand, but senior ownership does not get delegated away.</p></div>
         <div class="model-compare">
           <article class="model-card">
-            <span>Traditional layered model</span>
+            <span>Typical layered model</span>
             <h3>More handoffs between the business problem and the work.</h3>
-            <ol class="model-flow"><li>Business brief</li><li>Sales or account layer</li><li>Strategy handoff</li><li>Production handoff</li><li>Client receives the output</li></ol>
+            <ol class="model-flow"><li>Business brief</li><li>Account layer</li><li>Strategy handoff</li><li>Production handoff</li><li>Client receives the output</li></ol>
           </article>
           <article class="model-card is-direct">
             <span>James Digital model</span>
@@ -161,29 +295,29 @@
 
     <section class="section section-shell">
       <div class="section-heading"><div><p class="kicker">Selected proof</p><h2>Look at the work, then look at the contribution boundaries.</h2></div><div><p class="proof-intro">These examples link to individual case studies that separate the public business asset, the work performed and the evidence that can be stated responsibly.</p><a class="arrow-link" href="/portfolio">View all work <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg></a></div></div>
-        <div class="about-proof-grid">
-          <article class="about-proof-card">
-            <a href="/case-studies/nationwide-middle-east-properties" aria-label="View Nationwide Middle East Properties case study"><img src="/assets/work/nationwide-middle-east-properties.jpg" alt="Nationwide Middle East Properties website preview" width="1200" height="760" loading="lazy" decoding="async"></a>
-            <div class="about-proof-body"><span>Real Estate</span><h3>Nationwide Middle East Properties</h3><p>Strategy, paid acquisition, SEO, CRM and creative within a current career role, with attribution boundaries stated in the case study.</p><a class="arrow-link" href="/case-studies/nationwide-middle-east-properties">View case study <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg></a></div>
-          </article>
-          <article class="about-proof-card">
-            <a href="/case-studies/the-heart-of-europe" aria-label="View The Heart of Europe case study"><img src="/assets/work/the-heart-of-europe.jpg" alt="The Heart of Europe website preview" width="1200" height="760" loading="lazy" decoding="async"></a>
-            <div class="about-proof-body"><span>Luxury Real Estate</span><h3>The Heart of Europe</h3><p>A luxury destination and property proposition requiring a consistent digital expression across campaign, web and social touchpoints.</p><a class="arrow-link" href="/case-studies/the-heart-of-europe">View case study <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg></a></div>
-          </article>
-          <article class="about-proof-card">
-            <a href="/case-studies/bnw-developments" aria-label="View BNW Developments case study"><img src="/assets/work/bnw-developments.jpg" alt="BNW Developments website preview" width="1200" height="760" loading="lazy" decoding="async"></a>
-            <div class="about-proof-body"><span>Real Estate Development</span><h3>BNW Developments</h3><p>A premium developer brand communicating residential projects to investor and end-user audiences across digital touchpoints.</p><a class="arrow-link" href="/case-studies/bnw-developments">View case study <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg></a></div>
-          </article>
-        </div>
+      <div class="about-proof-grid">
+        <article class="about-proof-card is-featured">
+          <a href="/case-studies/nationwide-middle-east-properties" aria-label="View Nationwide Middle East Properties case study"><img src="/assets/work/nationwide-middle-east-properties.jpg" alt="Nationwide Middle East Properties website preview" width="1200" height="760" loading="lazy" decoding="async"></a>
+          <div class="about-proof-body"><span>Featured · Real Estate</span><h3>Nationwide Middle East Properties</h3><p>Strategy, paid acquisition, SEO, CRM and creative within a current career role, with attribution boundaries stated in the case study.</p><a class="arrow-link" href="/case-studies/nationwide-middle-east-properties">View case study <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg></a></div>
+        </article>
+        <article class="about-proof-card is-compact">
+          <a href="/case-studies/the-heart-of-europe" aria-label="View The Heart of Europe case study"><img src="/assets/work/the-heart-of-europe.jpg" alt="The Heart of Europe website preview" width="1200" height="760" loading="lazy" decoding="async"></a>
+          <div class="about-proof-body"><span>Luxury Real Estate</span><h3>The Heart of Europe</h3><p>A luxury destination and property proposition requiring consistent digital expression across campaign, web and social touchpoints.</p><a class="arrow-link" href="/case-studies/the-heart-of-europe">View case study <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg></a></div>
+        </article>
+        <article class="about-proof-card is-compact">
+          <a href="/case-studies/bnw-developments" aria-label="View BNW Developments case study"><img src="/assets/work/bnw-developments.jpg" alt="BNW Developments website preview" width="1200" height="760" loading="lazy" decoding="async"></a>
+          <div class="about-proof-body"><span>Real Estate Development</span><h3>BNW Developments</h3><p>A premium developer brand communicating residential projects to investor and end-user audiences across digital touchpoints.</p><a class="arrow-link" href="/case-studies/bnw-developments">View case study <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg></a></div>
+        </article>
+      </div>
     </section>
 
     <section class="conversion-section fit-section">
       <div class="section-shell">
         <div class="section-heading"><div><p class="kicker">Career context</p><h2>The experience behind the operating model.</h2></div><p>The timeline is evidence, not the proposition. It explains the environments that shaped how James Digital approaches growth, conversion and accountability.</p></div>
         <div class="timeline-clean">
-          <article><time>Aug 2024 to Present</time><div><h3>Senior Marketing Consultant, Nationwide Middle East Properties</h3><p>Company-wide strategy spanning SEO, paid acquisition, property launches, CRM and lead nurture, investor collateral and team/vendor leadership.</p></div></article>
-          <article><time>May 2021 to Aug 2024</time><div><h3>Marketing Director, Binghatti</h3><p>Global brand growth across an AED 80B+ property portfolio, including Bugatti Residences, Burj Binghatti Jacob &amp; Co and Mercedes-Benz Places, with acquisition across 50+ markets.</p></div></article>
-          <article><time>Sep 2016 to Apr 2021</time><div><h3>Marketing Manager, TBWA\RAAD</h3><p>Regional agency marketing, new-business communications, PR, events and executive visibility across MENA, supporting wins including Nissan, KFC and Emirates.</p></div></article>
+          <article><time>Aug 2024 to Present</time><div><span class="timeline-role">Senior Marketing Consultant · Nationwide Middle East Properties</span><h3>Integrated acquisition, conversion and sales-support systems</h3><p>Company-wide strategy spanning SEO, paid acquisition, property launches, CRM and lead nurture, investor collateral and team/vendor leadership.</p></div></article>
+          <article><time>May 2021 to Aug 2024</time><div><span class="timeline-role">Marketing Director · Binghatti</span><h3>Global acquisition and branded luxury launches</h3><p>Global brand growth across an AED 80B+ property portfolio, including Bugatti Residences, Burj Binghatti Jacob &amp; Co and Mercedes-Benz Places, with acquisition across 50+ markets.</p></div></article>
+          <article><time>Sep 2016 to Apr 2021</time><div><span class="timeline-role">Marketing Manager · TBWA\RAAD</span><h3>Regional agency growth, new business and executive visibility</h3><p>Regional agency marketing, new-business communications, PR, events and executive visibility across MENA, supporting wins including Nissan, KFC and Emirates.</p></div></article>
         </div>
       </div>
     </section>
@@ -220,11 +354,13 @@
   </main>
 
   <footer class="site-footer">
-    <div class="section-shell footer-grid">
-      <div><a class="brand footer-brand" href="/"><span class="brand-mark">JD</span><span>James Digital</span></a><p>Dubai-based senior digital growth partner for high-consideration businesses, available globally.</p></div>
-      <nav aria-label="Explore"><strong>Explore</strong><a href="/portfolio">Work</a><a href="/solutions">Solutions</a><a href="/services">Services</a><a href="/industries">Industries</a><a href="/results">Results</a><a href="/about">Meet James</a><a href="/pricing">Pricing</a></nav>
-      <nav aria-label="Contact"><strong>Contact</strong><a href="/start-project">Start a Project</a><a href="/request-call">Request a Call</a><a href="mailto:james@jamesrealty.uk?subject=Digital%20project%20enquiry">Email James</a><a href="https://wa.me/971528420933?text=Hi%20James%2C%20I%20would%20like%20to%20discuss%20a%20digital%20project." target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav>
-      <div class="footer-meta"><span>Dubai, United Arab Emirates</span><span>James Digital is the digital-services practice within the jamesrealty.uk domain infrastructure.</span><span>© <span data-year></span> James Digital</span></div>
+    <div class="section-shell">
+      <div class="about-footer-top">
+        <div class="footer-intro"><a class="brand footer-brand" href="/"><span class="brand-mark">JD</span><span>James Digital</span></a><p>Dubai-based senior digital growth partner for high-consideration businesses, available globally.</p></div>
+        <nav class="footer-links" aria-label="Explore"><strong>Explore</strong><a href="/portfolio">Work</a><a href="/services">Services</a><a href="/results">Results</a><a href="/about">About</a><a href="/pricing">Pricing</a></nav>
+        <div class="footer-contact"><span>Start a conversation</span><a class="button button-primary button-small" href="/start-project">Start a Project</a><a class="button button-ghost button-small" href="/request-call">Request a Call</a><div class="footer-direct"><a href="mailto:james@jamesrealty.uk?subject=Digital%20project%20enquiry">Email James</a><a href="https://wa.me/971528420933?text=Hi%20James%2C%20I%20would%20like%20to%20discuss%20a%20digital%20project." target="_blank" rel="noopener noreferrer">WhatsApp</a></div></div>
+      </div>
+      <div class="about-footer-bottom"><span>Dubai, United Arab Emirates · Available globally</span><div><span>James Digital operates within the jamesrealty.uk domain infrastructure.</span><a href="/privacy">Privacy</a><a href="/terms">Terms</a><span>© <span data-year></span> James Digital</span></div></div>
     </div>
   </footer>
   <script src="/script.js?v=20260830-consolidated-1" defer></script>
