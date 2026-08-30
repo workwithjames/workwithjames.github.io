@@ -1,5 +1,6 @@
 /**
  * Cloudflare Worker for James Realty campaign subdomains.
+ * Digital edge deployment refresh: 2026-08-30.
  *
  * Each canonical hostname serves a versioned, noindex fallback file from the
  * GitHub Pages origin. Only the canonical host becomes indexable. This keeps
@@ -55,7 +56,7 @@ const IMAGE_UPGRADES = {
   },
   'https://jamesrealty.uk/images/investors/arabic-downtown-apartment.webp': {
     src: 'https://jamesrealty.uk/images/landing/aldar-yas-waterfront-investment.webp',
-    width: '1600', height: '900', alt: 'مساكن على واجهة جزيرة ياس البحرية تمثل مقارنة مشروع ذا كانوبيز — ياس بوينت',
+    width: '1600', height: '900', alt: 'مساكن على واجهة جزيرة ياس البحرية تمثل مقارنة مشروع ذا كانوبيز - ياس بوينت',
   },
 };
 
@@ -199,102 +200,101 @@ async function captureLead(request, env, hostname) {
   }
 }
 
-
 function digitalClean(value,maxLength){return typeof value==='string'?value.trim().slice(0,maxLength):''}
 function digitalScore(data,type){let s=0;const b=digitalClean(data.budget,80);if(b.includes('$50K+'))s+=5;else if(b.includes('$30K'))s+=4;else if(b.includes('$15K'))s+=3;else if(b.includes('$5K'))s+=2;if(digitalClean(data.website,300))s+=1;if(digitalClean(data.phone,40))s+=1;if(digitalClean(data.need||data.topic,1200).length>80)s+=2;if(type==='call')s+=1;return s}
 async function captureDigital(request,env,type){if(!env.LEADS)return json({ok:false,error:'Lead storage is not configured'},503);let data;try{data=await readLimitedJson(request)}catch(e){return json({ok:false,error:'Invalid request'},400)}if(digitalClean(data.honeypot,200))return json({ok:true,lead_id:'accepted'},202);const name=digitalClean(data.name,120),company=digitalClean(data.company,160),email=digitalClean(data.email,180);if(name.length<2||company.length<2||!/^\S+@\S+\.\S+$/.test(email)||data.consent!==true)return json({ok:false,error:'Required fields are incomplete'},422);const id=crypto.randomUUID(),created=new Date().toISOString(),score=digitalScore(data,type),priority=score>=7?'high':score>=4?'medium':'standard';try{await env.LEADS.batch([env.LEADS.prepare(`CREATE TABLE IF NOT EXISTS digital_leads (submission_id TEXT PRIMARY KEY,created_at TEXT NOT NULL,type TEXT NOT NULL,name TEXT NOT NULL,company TEXT NOT NULL,email TEXT NOT NULL,phone TEXT,website TEXT,country TEXT,need TEXT,context TEXT,budget TEXT,timeline TEXT,preferred_time TEXT,timezone TEXT,topic TEXT,lead_score INTEGER NOT NULL,priority TEXT NOT NULL,landing_page TEXT,referrer TEXT,utm_source TEXT,utm_medium TEXT,utm_campaign TEXT,country_code TEXT,status TEXT NOT NULL DEFAULT 'new')`),env.LEADS.prepare('CREATE INDEX IF NOT EXISTS idx_digital_leads_created ON digital_leads(created_at)'),env.LEADS.prepare(`INSERT INTO digital_leads (submission_id,created_at,type,name,company,email,phone,website,country,need,context,budget,timeline,preferred_time,timezone,topic,lead_score,priority,landing_page,referrer,utm_source,utm_medium,utm_campaign,country_code) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`).bind(id,created,type,name,company,email,digitalClean(data.phone,40),digitalClean(data.website,300),digitalClean(data.country,100),digitalClean(data.need,1600),digitalClean(data.context,2400),digitalClean(data.budget,80),digitalClean(data.timeline,80),digitalClean(data.preferred_time,80),digitalClean(data.timezone,120),digitalClean(data.topic,1600),score,priority,digitalClean(data.landing_page,300),digitalClean(data.referrer,500),digitalClean(data.utm_source,120),digitalClean(data.utm_medium,120),digitalClean(data.utm_campaign,180),digitalClean(request.cf?.country,8))]);return json({ok:true,lead_id:id.slice(0,8).toUpperCase(),lead_score:score,priority},201)}catch(e){console.error(JSON.stringify({event:'digital_lead_capture_failed',error:String(e)}));return json({ok:false,error:'Lead storage is temporarily unavailable'},503,{'retry-after':'15'})}}
 function digitalOriginPath(path){if(path==='/')return '/digital/index.html';if(path.endsWith('.html'))return '/digital'+path;if(/\.[a-z0-9]+$/i.test(path))return '/digital'+path;if(path.endsWith('/'))return '/digital'+path+'index.html';return '/digital'+path+'.html'}
-async function handleDigital(request,env,incoming){if(incoming.pathname==='/api/digital-lead'||incoming.pathname==='/api/digital-call'){if(request.method!=='POST')return json({ok:false,error:'Method not allowed'},405,{Allow:'POST'});return captureDigital(request,env,incoming.pathname.endsWith('call')?'call':'project')}if(!['GET','HEAD'].includes(request.method))return plain('Method not allowed',405,{Allow:'GET, HEAD'});if(incoming.pathname==='/book-call'||incoming.pathname==='/book-call.html')return Response.redirect('https://digital.jamesrealty.uk/request-call',301);if(incoming.pathname==='/custom-engagements'||incoming.pathname==='/custom-engagements.html')return Response.redirect('https://digital.jamesrealty.uk/pricing',301);if(incoming.pathname.endsWith('.html'))return Response.redirect(`https://digital.jamesrealty.uk${incoming.pathname.slice(0,-5)}${incoming.search}`,301);const target=`${ORIGIN}${digitalOriginPath(incoming.pathname)}${incoming.search}`;const up=await fetch(target,{redirect:'follow',headers:{'user-agent':request.headers.get('user-agent')||'James-Digital-Worker'}});const h=new Headers(up.headers);Object.entries(SECURITY_HEADERS).forEach(([k,v])=>h.set(k,v));h.delete('content-security-policy');h.delete('content-length');h.set('cache-control',incoming.pathname.match(/\.(css|js|jpg|jpeg|png|webp|svg)$/i)?'public, max-age=300, s-maxage=300':'no-cache, no-store, must-revalidate');if((h.get('content-type')||'').includes('text/html')){h.set('x-robots-tag','index, follow');const canonical=incoming.pathname==='/'?'https://digital.jamesrealty.uk/':`https://digital.jamesrealty.uk${incoming.pathname.replace(/\/$/,'')}`;h.set('link',`<${canonical}>; rel="canonical"`)}return new Response(request.method==='HEAD'?null:up.body,{status:up.status,headers:h})}
+async function handleDigital(request,env,incoming){if(incoming.pathname==='/api/digital-lead'||incoming.pathname==='/api/digital-call'){if(request.method!=='POST')return json({ok:false,error:'Method not allowed'},405,{Allow:'POST'});return captureDigital(request,env,incoming.pathname.endsWith('call')?'call':'project')}if(!['GET','HEAD'].includes(request.method))return plain('Method not allowed',405,{Allow:'GET, HEAD'});if(incoming.pathname==='/book-call'||incoming.pathname==='/book-call.html')return Response.redirect('https://digital.jamesrealty.uk/request-call',301);if(incoming.pathname==='/custom-engagements'||incoming.pathname==='/custom-engagements.html')return Response.redirect('https://digital.jamesrealty.uk/pricing',301);if(incoming.pathname.endsWith('.html'))return Response.redirect(`https://digital.jamesrealty.uk${incoming.pathname.slice(0,-5)}${incoming.search}`,301);const target=`${ORIGIN}${digitalOriginPath(incoming.pathname)}${incoming.search}`;const up=await fetch(target,{redirect:'follow',headers:{'user-agent':'JamesDigitalEdge/1.0'}});const h=new Headers(up.headers);Object.entries(SECURITY_HEADERS).forEach(([k,v])=>h.set(k,v));h.set('cache-control',incoming.pathname==='/'?'no-cache, no-store, must-revalidate':'public, max-age=300');h.set('x-james-digital-edge','1');h.delete('set-cookie');return new Response(up.body,{status:up.status,statusText:up.statusText,headers:h})}
+
+function withSecurityHeaders(response) {
+  const headers = new Headers(response.headers);
+  for (const [name, value] of Object.entries(SECURITY_HEADERS)) headers.set(name, value);
+  return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
+}
+
+function normaliseAssetUrl(value) {
+  try {
+    const url = new URL(value);
+    url.search = '';
+    url.hash = '';
+    return url.href;
+  } catch {
+    return value;
+  }
+}
+
+function rewriteHTML(html, hostname, requestUrl) {
+  const canonical = `https://${hostname}/`;
+  const base = HOSTS[hostname];
+  const current = new URL(requestUrl);
+  const campaign = current.searchParams.get('utm_campaign') || hostname.split('.')[0];
+
+  html = html
+    .replace(/<link rel="canonical" href="[^"]+">/i, `<link rel="canonical" href="${canonical}">`)
+    .replace(/<meta property="og:url" content="[^"]+">/i, `<meta property="og:url" content="${canonical}">`)
+    .replaceAll(`href="${base}`, 'href="https://jamesrealty.uk/')
+    .replaceAll(`src="${base}`, 'src="https://jamesrealty.uk/');
+
+  html = html.replace(/<img\b([^>]*?)\bsrc="([^"]+)"([^>]*)>/gi, (match, before, src, after) => {
+    const upgrade = IMAGE_UPGRADES[normaliseAssetUrl(src)];
+    if (!upgrade) return match;
+    let attrs = `${before}src="${upgrade.src}"${after}`;
+    attrs = attrs.replace(/\s(?:srcset|sizes)="[^"]*"/gi, '');
+    attrs = attrs.replace(/\swidth="[^"]*"/gi, '');
+    attrs = attrs.replace(/\sheight="[^"]*"/gi, '');
+    attrs = attrs.replace(/\salt="[^"]*"/gi, '');
+    return `<img${attrs} width="${upgrade.width}" height="${upgrade.height}" alt="${upgrade.alt}">`;
+  });
+
+  html = html.replace(/<a\s+([^>]*?data-whatsapp-action[^>]*?)href="[^"]*"([^>]*)>/gi, (match, before, after) => {
+    return `<a ${before}href="${WHATSAPP}?text=${encodeURIComponent(`Hello James, I am enquiring from ${hostname}.`)}"${after}>`;
+  });
+
+  html = html.replace('</head>', `<style>${LANDING_POLISH_CSS}</style></head>`);
+  html = html.replace('</body>', `<script>window.__JR_CANONICAL_HOST=${JSON.stringify(hostname)};window.__JR_CAMPAIGN=${JSON.stringify(campaign)};</script></body>`);
+  return html;
+}
+
+async function fetchLanding(request, hostname) {
+  const base = HOSTS[hostname];
+  if (!base) return plain('Unknown landing host', 404);
+
+  const incoming = new URL(request.url);
+  let path = incoming.pathname;
+  if (path === '/') path = `${base}index.html`;
+  else path = `${base}${path.replace(/^\//, '')}`;
+
+  const originUrl = new URL(path, ORIGIN);
+  originUrl.search = incoming.search;
+  const response = await fetch(originUrl.toString(), {
+    redirect: 'follow',
+    headers: { 'user-agent': 'JamesRealtyLandingWorker/1.0' },
+  });
+
+  const contentType = response.headers.get('content-type') || '';
+  if (!contentType.includes('text/html')) return withSecurityHeaders(response);
+
+  let html = await response.text();
+  html = rewriteHTML(html, hostname, request.url);
+  const headers = new Headers(response.headers);
+  headers.set('content-type', 'text/html; charset=utf-8');
+  headers.set('cache-control', 'public, max-age=300');
+  for (const [name, value] of Object.entries(SECURITY_HEADERS)) headers.set(name, value);
+  headers.delete('set-cookie');
+  return new Response(html, { status: response.status, headers });
+}
 
 export default {
   async fetch(request, env) {
     const incoming = new URL(request.url);
-    if (incoming.hostname === 'digital.jamesrealty.uk') return handleDigital(request, env, incoming);
-    const sourcePath = HOSTS[incoming.hostname];
-    if (!sourcePath) return plain('Unknown James Realty landing-page host', 404);
-
+    const hostname = incoming.hostname.toLowerCase();
+    if (hostname === 'digital.jamesrealty.uk') return handleDigital(request, env, incoming);
+    if (!HOSTS[hostname]) return plain('Unknown host', 404);
     if (incoming.pathname === '/api/lead') {
-      if (request.method === 'POST') return captureLead(request, env, incoming.hostname);
-      return json({ ok: false, error: 'Method not allowed' }, 405, { Allow: 'POST' });
+      if (request.method !== 'POST') return plain('Method not allowed', 405, { Allow: 'POST' });
+      return captureLead(request, env, hostname);
     }
-
     if (!['GET', 'HEAD'].includes(request.method)) return plain('Method not allowed', 405, { Allow: 'GET, HEAD' });
-
-    if (incoming.pathname === '/robots.txt') {
-      return plain(`User-agent: *\nAllow: /\nSitemap: https://${incoming.hostname}/sitemap.xml\n`);
-    }
-
-    if (incoming.pathname === '/sitemap.xml') {
-      const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://${incoming.hostname}/</loc><lastmod>${LAST_MODIFIED}</lastmod><changefreq>weekly</changefreq></url></urlset>\n`;
-      return new Response(xml, { headers: { 'content-type': 'application/xml; charset=utf-8', ...SECURITY_HEADERS } });
-    }
-
-    if (incoming.pathname !== '/') {
-      return Response.redirect(`https://${incoming.hostname}/`, 301);
-    }
-
-    const upstream = await fetch(`${ORIGIN}${sourcePath}`, {
-      cf: { cacheEverything: true, cacheTtl: 300 },
-      headers: { 'user-agent': request.headers.get('user-agent') || 'James-Realty-Landing-Worker' },
-    });
-    if (!upstream.ok) return plain('Landing page temporarily unavailable', 502);
-
-    const headers = new Headers(upstream.headers);
-    headers.set('content-type', 'text/html; charset=utf-8');
-    headers.set('cache-control', 'public, max-age=300, s-maxage=300, stale-while-revalidate=86400');
-    headers.set('x-robots-tag', 'index, follow');
-    headers.set('link', `<https://${incoming.hostname}/>; rel="canonical"`);
-    headers.set('content-language', incoming.hostname === 'dubaiproperty.jamesrealty.uk' ? 'ar-AE' : 'en');
-    Object.entries(SECURITY_HEADERS).forEach(([name, value]) => headers.set(name, value));
-    headers.delete('content-security-policy');
-    headers.delete('content-length');
-    const response = new Response(request.method === 'HEAD' ? null : upstream.body, { status: 200, headers });
-    if (request.method === 'HEAD') return response;
-
-    const isArabic = incoming.hostname === 'dubaiproperty.jamesrealty.uk';
-    return new HTMLRewriter()
-      .on('head', {
-        element(element) {
-          element.append(`<style data-edge-landing-polish>${LANDING_POLISH_CSS}</style>`, { html: true });
-        },
-      })
-      .on('a', {
-        element(element) {
-          if (element.getAttribute('href') !== 'tel:+971528420933') return;
-          const classes = element.getAttribute('class') || '';
-          const isFormContact = classes.split(/\s+/).includes('jr-phone');
-          element.setAttribute('href', WHATSAPP);
-          element.setAttribute('target', '_blank');
-          element.setAttribute('rel', 'noopener noreferrer');
-          element.removeAttribute('data-phone-action');
-          element.setAttribute('data-whatsapp-action', '');
-          element.setAttribute('data-cta', isFormContact ? 'whatsapp-form' : 'whatsapp-mobile');
-          element.setAttribute('data-location', isFormContact ? 'form' : 'mobile-sticky');
-          if (isFormContact) {
-            element.setAttribute('class', 'jr-button jr-button--ghost jr-whatsapp-contact');
-            element.setInnerContent(`${isArabic ? 'تواصل عبر واتساب' : 'Chat on WhatsApp'} <span aria-hidden="true">↗</span>`, { html: true });
-          } else {
-            element.setInnerContent(`${isArabic ? 'واتساب' : 'WhatsApp'} <span aria-hidden="true">↗</span>`, { html: true });
-          }
-        },
-      })
-      .on('img', {
-        element(element) {
-          const replacement = IMAGE_UPGRADES[element.getAttribute('src') || ''];
-          if (!replacement) return;
-          element.setAttribute('src', replacement.src);
-          element.setAttribute('width', replacement.width);
-          element.setAttribute('height', replacement.height);
-          element.setAttribute('alt', replacement.alt);
-          element.setAttribute('loading', 'lazy');
-          element.setAttribute('decoding', 'async');
-        },
-      })
-      .on('meta[name="robots"]', {
-        element(element) {
-          element.setAttribute('content', 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1');
-        },
-      })
-      .transform(response);
+    return fetchLanding(request, hostname);
   },
 };
