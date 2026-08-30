@@ -19,26 +19,22 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Decode high-resolution profile image
+      - name: Record staged chunk checksums
         run: |
           {
-            cat .automation/profile-image/part-00.b64
-            head -c 16000 .automation/profile-image/part-01.b64
-            cat .automation/profile-image/part-02.b64
-            cat .automation/profile-image/part-03.b64
-          } | base64 --decode > digital/assets/james-ravi-profile.webp
-          file digital/assets/james-ravi-profile.webp
-          test "$(stat -c%s digital/assets/james-ravi-profile.webp)" -eq 45932
-          echo "e37049883f1b113d529021f3d69d800b88af3fde6ea13ab72a26cf686f0b16fd  digital/assets/james-ravi-profile.webp" | sha256sum -c -
+            wc -c .automation/profile-image/part-*.b64
+            sha256sum .automation/profile-image/part-*.b64
+            echo "part-01-first16000"
+            head -c 16000 .automation/profile-image/part-01.b64 | sha256sum
+          } > .automation/profile-image-diagnostics.txt
 
-      - name: Commit profile image
+      - name: Commit diagnostics
         run: |
-          git add digital/assets/james-ravi-profile.webp
+          git add .automation/profile-image-diagnostics.txt
           if git diff --cached --quiet; then
-            echo "No image changes"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "fix(digital): restore sharp About portrait"
+          git commit -m "chore(digital): record portrait staging checksums"
           git push
