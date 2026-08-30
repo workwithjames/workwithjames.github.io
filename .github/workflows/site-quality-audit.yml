@@ -51,6 +51,7 @@ jobs:
               '404.html',
               '_not-found.html',
               'digital/404.html',
+              'essentials/index.html',
           }
           html_files = sorted(
               path for path in root.rglob('*.html')
