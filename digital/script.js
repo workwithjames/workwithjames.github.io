@@ -118,21 +118,43 @@
   if (filterGroups.length) {
     var activeFilters = { service: "All", industry: "All", classification: "All" };
     var cards = document.querySelectorAll("[data-project-card]");
+    var featuredCards = document.querySelectorAll(".portfolio-featured [data-project-card]");
     var allCards = document.querySelectorAll(".portfolio-all-grid [data-project-card]");
     var countNode = document.querySelector("[data-visible-count]");
+    var featuredIds = new Set(Array.prototype.map.call(featuredCards, function (card) {
+      var link = card.querySelector("[data-case-study]");
+      return link ? link.getAttribute("data-case-study") : "";
+    }).filter(Boolean));
+
+    allCards.forEach(function (card) {
+      var link = card.querySelector("[data-case-study]");
+      var id = link ? link.getAttribute("data-case-study") : "";
+      if (id && featuredIds.has(id)) card.setAttribute("data-portfolio-duplicate", "true");
+    });
+
+    var moreLabel = document.querySelector(".all-projects-label .kicker");
+    var moreCopy = document.querySelector(".all-projects-label .kicker + p");
+    if (moreLabel) moreLabel.textContent = "More projects";
+    if (moreCopy) moreCopy.textContent = "Additional public examples beyond the featured selection.";
+
+    function cardMatches(card) {
+      var service = card.getAttribute("data-service") || "";
+      var industry = card.getAttribute("data-industry") || "";
+      var classification = card.getAttribute("data-classification") || "";
+      var serviceMatch = activeFilters.service === "All" || service.indexOf(activeFilters.service) !== -1;
+      var industryMatch = activeFilters.industry === "All" || industry.indexOf(activeFilters.industry) !== -1;
+      var classificationMatch = activeFilters.classification === "All" || classification === activeFilters.classification;
+      return serviceMatch && industryMatch && classificationMatch;
+    }
 
     function applyFilters() {
       cards.forEach(function (card) {
-        var service = card.getAttribute("data-service") || "";
-        var industry = card.getAttribute("data-industry") || "";
-        var classification = card.getAttribute("data-classification") || "";
-        var serviceMatch = activeFilters.service === "All" || service.indexOf(activeFilters.service) !== -1;
-        var industryMatch = activeFilters.industry === "All" || industry.indexOf(activeFilters.industry) !== -1;
-        var classificationMatch = activeFilters.classification === "All" || classification === activeFilters.classification;
-        card.hidden = !(serviceMatch && industryMatch && classificationMatch);
+        var duplicate = card.getAttribute("data-portfolio-duplicate") === "true";
+        card.hidden = !cardMatches(card) || duplicate;
       });
-      var visible = Array.prototype.filter.call(allCards, function (card) { return !card.hidden; }).length;
-      if (countNode) countNode.textContent = String(visible);
+      var visibleFeatured = Array.prototype.filter.call(featuredCards, function (card) { return !card.hidden; }).length;
+      var visibleMore = Array.prototype.filter.call(allCards, function (card) { return !card.hidden; }).length;
+      if (countNode) countNode.textContent = String(visibleFeatured + visibleMore);
     }
 
     filterGroups.forEach(function (group) {
@@ -150,6 +172,7 @@
         });
       });
     });
+    applyFilters();
   }
 
   function formObject(form) {
