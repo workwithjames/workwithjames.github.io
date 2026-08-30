@@ -33,7 +33,7 @@
     .about-page .profile-frame{grid-area:portrait;position:relative;justify-self:end;width:min(100%,320px);padding:10px 10px 0}
     .about-page .profile-frame:before{content:"";position:absolute;inset:0 24px 42px 0;border:1px solid rgba(240,208,131,.24);border-radius:24px;transform:translate(10px,-10px);pointer-events:none}
     .about-page .profile-frame:after{content:"";position:absolute;right:-10px;top:8%;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,rgba(213,170,82,.13),transparent 68%);filter:blur(8px);pointer-events:none}
-    .about-page .profile-shot{position:relative;z-index:2;width:100%;max-width:none;aspect-ratio:4/5;object-fit:cover;object-position:top;border:1px solid rgba(240,208,131,.2);border-radius:22px;box-shadow:0 26px 70px rgba(0,0,0,.4)}
+    .about-page .profile-shot{position:relative;z-index:2;width:100%;max-width:none;aspect-ratio:4/5;object-fit:cover;object-position:center top;border:1px solid rgba(240,208,131,.2);border-radius:22px;box-shadow:0 26px 70px rgba(0,0,0,.4)}
     .about-page .profile-caption{position:relative;z-index:3;display:flex;justify-content:space-between;gap:18px;padding:12px 4px 0;color:#8f8374;font-size:.68rem;line-height:1.4}
     .about-page .profile-caption strong{color:#d8cbbb;font-size:.72rem}
 
@@ -125,7 +125,7 @@
     .about-page .about-footer-bottom a{color:#978a79}
 
     @media(max-width:900px){
-      .about-page .about-hero{grid-template-columns:minmax(0,1fr) minmax(220px,.38fr);column-gap:34px;padding-top:60px}
+      .about-page .about-hero{grid-template-columns:minmax(0,1fr) minmax(220px,.36fr);column-gap:34px;padding-top:60px}
       .about-page .about-hero h1{font-size:clamp(3.35rem,8vw,5.2rem)}
       .about-page .profile-frame{width:min(100%,275px)}
       .about-page .brand-exposure-inner,.about-page .about-story-grid,.about-page .about-final-inner{grid-template-columns:1fr}
@@ -148,10 +148,9 @@
       .about-page .about-hero{grid-template-columns:1fr;grid-template-areas:"copy" "portrait" "actions";gap:24px;padding-top:38px;padding-bottom:54px}
       .about-page .about-hero h1{font-size:clamp(2.9rem,13.2vw,4.15rem);line-height:.92;letter-spacing:-.06em}
       .about-page .about-hero-copy>p:not(.eyebrow){margin-top:20px;font-size:.9rem;line-height:1.7}
-      .about-page .profile-frame{justify-self:start;width:min(62vw,235px);padding:7px 7px 0}
+      .about-page .profile-frame{justify-self:start;width:min(66vw,235px);padding:8px 8px 0}
       .about-page .profile-frame:before{inset:0 18px 38px 0;transform:translate(8px,-8px)}
-      .about-page .profile-frame:after{width:72px;height:72px}
-      .about-page .profile-caption{font-size:.62rem;gap:10px}
+      .about-page .profile-caption{font-size:.64rem}
       .about-page .about-hero-actions{display:grid;width:100%}
       .about-page .about-hero-actions .button{width:100%}
 
@@ -243,7 +242,7 @@
         <p>James Ravi brings senior strategy, acquisition, conversion and CRM leadership directly into the work. The objective is simple: fewer handoffs, clearer decisions and digital execution tied to the commercial problem.</p>
       </div>
       <figure class="profile-frame">
-        <img class="profile-shot" src="/assets/james-ravi-profile.jpg" alt="James Ravi, senior digital growth partner in Dubai" width="1024" height="1536">
+        <img class="profile-shot" src="/assets/james-ravi-profile.jpg?v=20260830-photo2" alt="James Ravi, senior digital growth partner in Dubai" width="320" height="480">
         <figcaption class="profile-caption"><strong>James Ravi</strong><span>Dubai, UAE · Working globally</span></figcaption>
       </figure>
       <div class="about-hero-actions"><a class="button button-primary" href="/start-project" data-event="start_project_click">Discuss Your Project</a><a class="button button-ghost" href="/portfolio">View Selected Work</a></div>
