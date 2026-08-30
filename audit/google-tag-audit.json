@@ -1,7 +1,7 @@
 {
   "containerId": "GTM-M74SL57L",
   "htmlFilesChecked": 104,
-  "taggedFiles": 93,
+  "taggedFiles": 94,
   "missingFiles": [
     "digital/about.html",
     "digital/index.html",
@@ -10,7 +10,6 @@
     "digital/privacy.html",
     "digital/request-call.html",
     "digital/results.html",
-    "digital/solutions.html",
     "digital/start-project.html",
     "digital/terms.html",
     "essentials/index.html"
