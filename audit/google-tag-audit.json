@@ -1,13 +1,16 @@
 {
   "containerId": "GTM-M74SL57L",
-  "htmlFilesChecked": 105,
-  "taggedFiles": 90,
+  "htmlFilesChecked": 104,
+  "taggedFiles": 85,
   "missingFiles": [
-    "digital/book-call.html",
+    "digital/about.html",
+    "digital/index.html",
     "digital/industries/b2b.html",
     "digital/industries/retail.html",
     "digital/industries.html",
+    "digital/pricing.html",
     "digital/privacy.html",
+    "digital/request-call.html",
     "digital/results.html",
     "digital/solutions/fragmented-marketing.html",
     "digital/solutions/international-growth.html",
@@ -16,6 +19,7 @@
     "digital/solutions/new-website.html",
     "digital/solutions/website-not-converting.html",
     "digital/solutions.html",
+    "digital/start-project.html",
     "digital/terms.html",
     "essentials/index.html"
   ],
