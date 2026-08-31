@@ -12,3 +12,46 @@
 .blog-index-grid .blog-tile-copy>p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;font-size:.78rem;line-height:1.55;margin-bottom:14px}
 @media(max-width:840px){.blog-index-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}}
 @media(max-width:560px){.blog-index-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.blog-index-grid .blog-tile-copy{padding:12px 11px 13px}.blog-index-grid .blog-tile h2{font-size:.9rem;line-height:1.22;margin:8px 0}.blog-index-grid .blog-tile-copy>p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:.68rem;line-height:1.4;margin-bottom:10px}.blog-index-grid .news-source-badge{font-size:.5rem;padding:4px 6px}.blog-index-grid .text-link{font-size:.65rem}}
+
+/* About Me: premium editorial career timeline */
+#experience .career-timeline{display:grid;gap:0;position:relative;margin-top:10px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+#experience .career-timeline:before{content:"";position:absolute;top:36px;bottom:36px;left:200px;width:1px;background:linear-gradient(180deg,#a78bfa 0%,#818cf8 28%,#818cf866 72%,#818cf81a 100%);box-shadow:0 0 18px #818cf83d}
+#experience .career-timeline .timeline-item{display:grid;grid-template-columns:150px 52px minmax(0,1fr);grid-template-rows:auto auto auto auto;column-gap:24px;row-gap:0;position:relative;border:0;border-bottom:1px solid #24244bcc;border-radius:0;background:transparent;padding:34px 0;transition:background .2s ease}
+#experience .career-timeline .timeline-item:last-child{border-bottom:0}
+#experience .career-timeline .timeline-item:hover{background:linear-gradient(90deg,transparent 0%,#818cf809 23%,#818cf80d 100%)}
+#experience .career-timeline .timeline-copy{display:contents}
+#experience .career-timeline .timeline-marker{grid-column:2;grid-row:1/5;z-index:2;display:flex;justify-content:center;align-items:flex-start;position:relative}
+#experience .career-timeline .timeline-marker span{position:relative;width:44px;height:44px;display:grid;place-items:center;border:1px solid #818cf8aa;border-radius:50%;background:#0a0a1a;color:#b9bdff;font-family:var(--font-geist-mono),monospace;font-size:.69rem;font-weight:800;letter-spacing:.05em;box-shadow:0 0 0 7px #0a0a1a,0 0 24px #818cf82e}
+#experience .career-timeline .timeline-item:first-child .timeline-marker span{color:#0a0a1a;background:linear-gradient(145deg,var(--accent),var(--accent-2));border-color:#c3c6ff;box-shadow:0 0 0 7px #0a0a1a,0 0 30px #818cf866}
+#experience .career-timeline .timeline-item:first-child .timeline-marker span:after{content:"";position:absolute;right:-2px;top:-2px;width:9px;height:9px;border-radius:50%;background:#25d978;border:2px solid #0a0a1a;box-shadow:0 0 12px #25d97899}
+#experience .career-timeline .timeline-period{grid-column:1;grid-row:1;align-self:start;margin:0;padding-top:10px;text-align:right;color:#aeb3e7;font-family:var(--font-geist-mono),monospace;font-size:.69rem;font-weight:750;line-height:1.45;letter-spacing:.055em;text-transform:uppercase}
+#experience .career-timeline .timeline-copy h3{grid-column:3;grid-row:1;margin:0;padding-top:4px;color:var(--text);font-size:clamp(1.22rem,2vw,1.48rem);font-weight:760;line-height:1.16;letter-spacing:-.025em}
+#experience .career-timeline .timeline-location{grid-column:3;grid-row:2;margin:7px 0 15px!important;color:#c8c8d8!important;font-size:.82rem!important;font-weight:650;line-height:1.45}
+#experience .career-timeline .timeline-copy>p:not(.timeline-period):not(.timeline-location){grid-column:3;grid-row:3;max-width:760px;margin:0;color:var(--muted);font-size:.89rem;line-height:1.7}
+#experience .career-timeline .timeline-highlights{grid-column:3;grid-row:4;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 22px;margin:20px 0 0;padding:20px 0 0;border-top:1px solid #24244bd9;list-style:none}
+#experience .career-timeline .timeline-highlights li{position:relative;padding-left:17px;color:#b5b5c7;font-size:.8rem;line-height:1.55}
+#experience .career-timeline .timeline-highlights li:before{content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px #818cf86b}
+@media(max-width:760px){
+#experience .career-timeline{margin-top:6px}
+#experience .career-timeline:before{top:31px;bottom:31px;left:21px}
+#experience .career-timeline .timeline-item{grid-template-columns:44px minmax(0,1fr);grid-template-rows:auto auto auto auto auto;column-gap:16px;padding:28px 0}
+#experience .career-timeline .timeline-marker{grid-column:1;grid-row:1/6;justify-content:flex-start}
+#experience .career-timeline .timeline-marker span{width:42px;height:42px;box-shadow:0 0 0 6px #0a0a1a,0 0 20px #818cf82e}
+#experience .career-timeline .timeline-item:first-child .timeline-marker span{box-shadow:0 0 0 6px #0a0a1a,0 0 24px #818cf85a}
+#experience .career-timeline .timeline-period{grid-column:2;grid-row:1;text-align:left;padding-top:2px;margin-bottom:7px;font-size:.66rem}
+#experience .career-timeline .timeline-copy h3{grid-column:2;grid-row:2;padding-top:0;font-size:1.2rem}
+#experience .career-timeline .timeline-location{grid-column:2;grid-row:3;margin:6px 0 13px!important}
+#experience .career-timeline .timeline-copy>p:not(.timeline-period):not(.timeline-location){grid-column:2;grid-row:4;font-size:.86rem;line-height:1.67}
+#experience .career-timeline .timeline-highlights{grid-column:2;grid-row:5;grid-template-columns:1fr;gap:9px;margin-top:18px;padding-top:17px}
+#experience .career-timeline .timeline-highlights li{font-size:.79rem}
+}
+@media(max-width:420px){
+#experience .career-timeline:before{left:18px}
+#experience .career-timeline .timeline-item{grid-template-columns:38px minmax(0,1fr);column-gap:13px;padding:25px 0}
+#experience .career-timeline .timeline-marker span{width:36px;height:36px;font-size:.61rem;box-shadow:0 0 0 5px #0a0a1a,0 0 18px #818cf829}
+#experience .career-timeline .timeline-item:first-child .timeline-marker span{box-shadow:0 0 0 5px #0a0a1a,0 0 22px #818cf84d}
+#experience .career-timeline .timeline-copy h3{font-size:1.12rem}
+#experience .career-timeline .timeline-location{font-size:.77rem!important}
+#experience .career-timeline .timeline-copy>p:not(.timeline-period):not(.timeline-location){font-size:.83rem}
+#experience .career-timeline .timeline-highlights li{font-size:.76rem;line-height:1.5}
+}
