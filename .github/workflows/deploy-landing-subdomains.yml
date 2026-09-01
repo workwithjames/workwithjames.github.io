@@ -66,7 +66,7 @@ jobs:
           grep -Fiq 'content-language: ar-AE' /tmp/ar-headers.txt
 
           fetch "https://digital.jamesrealty.uk/pricing" /tmp/digital-pricing.html
-          grep -Fq 'Senior digital work priced for business impact' /tmp/digital-pricing.html
+          grep -Fq 'Know what you are buying before the proposal.' /tmp/digital-pricing.html
           grep -Fq 'from $5K' /tmp/digital-pricing.html
 
           curl -fsSI --max-time 20 "https://digital.jamesrealty.uk/pricing" > /tmp/digital-headers.txt
