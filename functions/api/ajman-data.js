@@ -194,14 +194,27 @@ export async function onRequestGet(context) {
     context.waitUntil(cache.put(cacheKey, response.clone()));
     return response;
   } catch (error) {
-    return createJson(
-      {
-        ok: false,
-        error: 'The Ajman government dataset could not be retrieved at this moment.',
-        detail: error instanceof Error ? error.message : String(error),
-        sourceUrl: 'https://data.ajman.ae/explore/dataset/real-estate-units-sales/?flg=en-gb'
-      },
-      502
-    );
+    try {
+      const fallbackUrl = new URL('/data/ajman-market/latest.json', context.request.url);
+      const fallbackResponse = context.env?.ASSETS
+        ? await context.env.ASSETS.fetch(new Request(fallbackUrl.toString()))
+        : await fetch(fallbackUrl.toString());
+      if (!fallbackResponse.ok) throw new Error(`Snapshot request failed: ${fallbackResponse.status}`);
+      const fallback = await fallbackResponse.json();
+      fallback.ok = true;
+      fallback.fallback = true;
+      fallback.fallbackReason = 'The live government export was unavailable, so the latest successful snapshot is shown.';
+      return createJson(fallback);
+    } catch (fallbackError) {
+      return createJson(
+        {
+          ok: false,
+          error: 'The Ajman government dataset and its latest successful snapshot could not be retrieved.',
+          detail: error instanceof Error ? error.message : String(error),
+          sourceUrl: 'https://data.ajman.ae/explore/dataset/real-estate-units-sales/?flg=en-gb'
+        },
+        502
+      );
+    }
   }
 }

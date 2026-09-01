@@ -10,6 +10,11 @@
 
   var els = {};
 
+  function track(action, detail) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'market_data_interaction', market: 'Ajman', action: action, item_name: detail || '', page_path: location.pathname });
+  }
+
   function byId(id) { return document.getElementById(id); }
   function number(value) { return Number(value) || 0; }
   function sum(rows, key) { return rows.reduce(function (total, row) { return total + number(row[key]); }, 0); }
@@ -194,6 +199,7 @@
       select.addEventListener('change', function () {
         state.filters[select.dataset.filter] = select.value;
         render();
+        track('filter', select.dataset.filter + ':' + (select.value || 'all'));
       });
     });
     var timer;
@@ -229,8 +235,9 @@
       render();
       var checked = new Date(data.fetchedAt);
       var checkedText = checked.toLocaleString('en-AE', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Asia/Dubai' });
-      els.checked.textContent = 'Government data checked ' + checkedText + ' UAE time';
-      setStatus('Connected to Ajman Data', 'ready');
+      els.checked.textContent = (data.fallback ? 'Latest successful government snapshot from ' : 'Government data checked ') + checkedText + ' UAE time';
+      setStatus(data.fallback ? 'Showing latest successful snapshot' : 'Connected to Ajman Data', data.fallback ? 'cached' : 'ready');
+      if (data.fallback) track('cached_fallback', data.fetchedAt || '');
       document.body.classList.add('ajman-data-ready');
     } catch (error) {
       setStatus('Official data temporarily unavailable', 'error');

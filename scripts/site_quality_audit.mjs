@@ -42,8 +42,10 @@ function localTargetExists(sourceFile, rawTarget) {
   const clean = rawTarget.split('#')[0].split('?')[0];
   if (!clean) return true;
   const decoded = decodeURIComponent(clean);
+  const digitalSource = rel(sourceFile).startsWith('digital/');
+  if (digitalSource && ['/custom-engagements', '/book-call'].includes(decoded)) return true;
   const candidate = decoded.startsWith('/')
-    ? path.join(root, decoded.replace(/^\/+/, ''))
+    ? path.join(root, digitalSource ? 'digital' : '', decoded.replace(/^\/+/, ''))
     : path.resolve(path.dirname(sourceFile), decoded);
   const options = [candidate];
   if (decoded.endsWith('/')) options.push(path.join(candidate, 'index.html'));

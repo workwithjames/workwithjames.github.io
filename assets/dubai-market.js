@@ -170,7 +170,7 @@
     document.getElementById('area-lookup-button').addEventListener('click',lookupArea);
     document.getElementById('compare-areas-button').addEventListener('click',compareAreas);
     document.getElementById('affordability-button').addEventListener('click',findAffordable);
-    var copyButton=document.getElementById('copy-market-link');if(copyButton){copyButton.addEventListener('click',async function(){var status=document.getElementById('copy-market-status');try{await navigator.clipboard.writeText('https://jamesrealty.uk/');status.textContent='Dashboard link copied.';track('share_dashboard','copy_link');}catch(error){status.textContent='Copy this address: https://jamesrealty.uk/';}});}
+    var copyButton=document.getElementById('copy-market-link');if(copyButton){copyButton.addEventListener('click',async function(){var status=document.getElementById('copy-market-status');try{await navigator.clipboard.writeText('https://jamesrealty.uk/dubai-data/');status.textContent='Dashboard link copied.';track('share_dashboard','copy_link');}catch(error){status.textContent='Copy this address: https://jamesrealty.uk/dubai-data/';}});}
     document.getElementById('market-area-input').addEventListener('keydown',function(e){if(e.key==='Enter'){lookupArea();}});
     document.querySelectorAll('[data-yield-type]').forEach(function(button){
       button.addEventListener('click',function(){

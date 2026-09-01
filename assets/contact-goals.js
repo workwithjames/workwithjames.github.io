@@ -1,6 +1,6 @@
 (function(){
   var PHONE='971528420933';
-  var GOAL_LABELS={buy:'Buy or invest in Dubai property',sell:'Sell a Dubai property',marketing:'Real estate marketing'};
+  var GOAL_LABELS={buy:'Buy or invest in Dubai property',sell:'Sell a Dubai property'};
 
   function clean(value){return String(value||'').replace(/\s+/g,' ').trim();}
   function track(name,data){
@@ -65,7 +65,7 @@
       track('form_start',{form_name:'Goal contact form',page_path:location.pathname});
     },{once:true});
 
-    form.addEventListener('submit',function(event){
+    form.addEventListener('submit',async function(event){
       event.preventDefault();
       if(!form.reportValidity()){return;}
 
@@ -74,6 +74,7 @@
       var lines=['Hello James, I would like to discuss '+GOAL_LABELS[goal].toLowerCase()+'.',''];
       var common=[
         ['Name',data.get('name')],
+        ['Phone / WhatsApp',data.get('phone')],
         ['Email',data.get('email')||'Not provided'],
         ['Current location',data.get('location')||'Not provided']
       ];
@@ -98,14 +99,21 @@
         if(attribution&&attribution!=='Direct'){lines.push('','Website source: '+attribution);}
       }
 
+      var submit=form.querySelector('button[type="submit"]');
+      if(!window.jrPropertyLeads){if(status){status.textContent='The secure enquiry service is still loading. Please try again.';}return;}
+      if(status){status.textContent='Saving your enquiry securely…';}
+      if(submit){submit.disabled=true;}
       try{
-        localStorage.setItem('jr_intent_popup_converted_at',String(Date.now()));
-        sessionStorage.setItem('jr_contact_goal',goal);
-      }catch(error){}
-
-      track('generate_lead',{method:'goal_contact_form_to_whatsapp',service:goal,page_path:location.pathname});
-      if(status){status.textContent='Opening WhatsApp with your enquiry details.';}
-      window.open('https://wa.me/'+PHONE+'?text='+encodeURIComponent(lines.join('\n')),'_blank','noopener,noreferrer');
+        var result=await window.jrPropertyLeads.send(window.jrPropertyLeads.buildPayload(form,{intent:GOAL_LABELS[goal]}));
+        var reference=String(result.lead_id).slice(0,8);
+        try{localStorage.setItem('jr_intent_popup_converted_at',String(Date.now()));sessionStorage.setItem('jr_contact_goal',goal);}catch(error){}
+        track('generate_lead',{method:'saved_before_whatsapp',service:goal,lead_id:reference,page_path:location.pathname});
+        if(status){status.textContent='Enquiry saved. Opening WhatsApp with reference '+reference+'.';}
+        window.open('https://wa.me/'+PHONE+'?text='+encodeURIComponent(lines.join('\n')+'\n\nRequest reference: '+reference),'_blank','noopener,noreferrer');
+      }catch(error){
+        if(status){status.textContent='Your enquiry could not be saved yet. A private safety copy remains on this device; please retry.';}
+        track('property_lead_capture_error',{service:goal,error_message:String(error.message||error).slice(0,120),page_path:location.pathname});
+      }finally{if(submit){submit.disabled=false;}}
     });
 
     selectGoal(inferredGoal(),'inferred');

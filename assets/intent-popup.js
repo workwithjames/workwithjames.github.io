@@ -10,7 +10,7 @@
   var previousFocus=null;
 
   function clean(value){return String(value||'').replace(/\s+/g,' ').trim();}
-  function track(name,data){if(typeof window.gtag==='function'){window.gtag('event',name,data||{});}}
+  function track(name,data){if(typeof window.gtag==='function'){window.gtag('event',name,data||{});return;}window.dataLayer=window.dataLayer||[];window.dataLayer.push(Object.assign({event:name},data||{}));}
   function readStorage(storage,key){try{return storage.getItem(key);}catch(error){return null;}}
   function writeStorage(storage,key,value){try{storage.setItem(key,value);}catch(error){}}
 
@@ -18,9 +18,8 @@
     if(path==='/contact/'||path.indexOf('/about-me/')===0||path.indexOf('/cite/')===0||path==='/blog/'||path==='/blog/property-news/'){return null;}
     if(path.indexOf('/buy-invest-dubai/')===0||path.indexOf('/dubai-rental-yield-calculator/')===0){return {type:'goal',goal:'buy',kicker:'Dubai property decision',title:'Still comparing property options?',copy:'Share your budget and timeline to start a more focused Dubai property conversation.',delay:38,scroll:42,exit:24};}
     if(path.indexOf('/sell-dubai-property/')===0){return {type:'goal',goal:'sell',kicker:'Dubai property sale',title:'Preparing to sell a property?',copy:'Share the location and preferred timeline to start with a clearer seller brief.',delay:38,scroll:42,exit:24};}
-    if(path.indexOf('/real-estate-marketing/')===0){return {type:'goal',goal:'marketing',kicker:'Real estate growth',title:'Need a stronger lead journey?',copy:'Outline the requirement and target market to discuss campaigns, CRM and conversion.',delay:40,scroll:44,exit:26};}
     if(path==='/dubai-data/'||path==='/abu-dhabi-data/'||path==='/ajman-data/'){return {type:'data',goal:'buy',kicker:'Turn data into a decision',title:'What are you researching?',copy:'Use the market data as context, then share the property goal you are working toward.',delay:50,scroll:55,exit:35};}
-    if(path==='/'){return {type:'home',goal:'buy',kicker:'Choose a focused next step',title:'What is your property goal?',copy:'Start a short brief for buying, selling or real estate marketing.',delay:45,scroll:50,exit:34};}
+    if(path==='/'){return {type:'home',goal:'buy',kicker:'Choose a focused next step',title:'What is your property goal?',copy:'Start a short brief for buying, investing in or selling Dubai property.',delay:45,scroll:50,exit:34};}
     if(path.indexOf('/blog/')===0){return {type:'article',goal:'buy',kicker:'Apply the market insight',title:'Need help applying this to your goal?',copy:'Share what you are considering and start a focused property conversation.',delay:68,scroll:70,exit:52};}
     return null;
   }
@@ -42,11 +41,6 @@
         '<label>Timeline<select name="timeline" data-label="Preferred timeline" required><option value="">Select</option><option>As soon as possible</option><option>Within 1 to 3 months</option><option>Within 3 to 6 months</option><option>Testing the market</option></select></label>'+
         '<label>Property type<select name="property_type" data-label="Property type"><option value="">Select</option><option>Apartment</option><option>Townhouse</option><option>Villa</option><option>Commercial property</option><option>Land or plot</option></select></label>';
     }
-    if(goal==='marketing'){
-      return '<label>Requirement<select name="requirement" data-label="Requirement" required><option value="">Select</option><option>Lead generation</option><option>Project launch strategy</option><option>International investor campaign</option><option>Landing page or funnel</option><option>CRM and automation</option><option>Full acquisition system</option></select></label>'+
-        '<label>Target market<input name="target_market" data-label="Target market" required placeholder="UAE, UK, GCC, India"/></label>'+
-        '<label class="full">Project or company<input name="project" data-label="Project or company" placeholder="Project, developer or brokerage"/></label>';
-    }
     return '<label>Budget<select name="budget" data-label="Budget" required><option value="">Select</option><option>Below AED 1 million</option><option>AED 1 million to 2 million</option><option>AED 2 million to 5 million</option><option>AED 5 million to 10 million</option><option>Above AED 10 million</option></select></label>'+
       '<label>Timeline<select name="timeline" data-label="Purchase timeline" required><option value="">Select</option><option>Within 30 days</option><option>1 to 3 months</option><option>3 to 6 months</option><option>6 to 12 months</option><option>Researching only</option></select></label>'+
       '<label class="full">Preferred areas or projects<input name="areas" data-label="Preferred areas or projects" placeholder="Example: Dubai Hills, Creek Harbour"/></label>';
@@ -65,11 +59,14 @@
       '<p id="intent-popup-copy" class="intent-popup-copy">'+config.copy+'</p>'+
       '<form class="intent-popup-form" id="intent-popup-form">'+
       '<label>First name<input name="name" autocomplete="given-name" required placeholder="Your name"/></label>'+
-      '<label>Your goal<select name="goal" required><option value="buy">Buy / Invest</option><option value="sell">Sell</option><option value="marketing">Marketing</option></select></label>'+
+      '<label>Phone / WhatsApp<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="+971 50 000 0000"/></label>'+
+      '<label class="full">Email<input name="email" type="email" autocomplete="email" placeholder="name@email.com"/></label>'+
+      '<label>Your goal<select name="goal" required><option value="buy">Buy / Invest</option><option value="sell">Sell</option></select></label>'+
       '<div class="intent-popup-fields"></div>'+
       '<label>Anything else?<textarea name="notes" data-label="Additional details" placeholder="Add the area, project or challenge that matters most"></textarea></label>'+
+      '<label class="intent-popup-consent full"><input name="consent" type="checkbox" required/><span>I agree that James Realty may securely store and use this enquiry to respond. See the <a href="/privacy-policy/">Privacy Policy</a>.</span></label>'+
       '<div class="intent-popup-actions"><button class="button nav-whatsapp" type="submit">Continue on WhatsApp <span aria-hidden="true">↗</span></button><a class="intent-popup-full-link" href="/contact/">Use full form</a></div>'+
-      '<p class="intent-popup-note">Your details are not stored. This prepares a WhatsApp message for you to review.</p>'+
+      '<p class="intent-popup-note">Your enquiry is securely captured before WhatsApp opens, so it is not lost if WhatsApp is interrupted.</p>'+
       '<p class="intent-popup-status" role="status" aria-live="polite"></p>'+
       '</form></section>';
     document.body.appendChild(root);
@@ -111,7 +108,7 @@
       else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
     });
 
-    form.addEventListener('submit',function(event){
+    form.addEventListener('submit',async function(event){
       event.preventDefault();
       if(!form.reportValidity()){return;}
       var data=new FormData(form);
@@ -130,10 +127,21 @@
         var attribution=window.jamesAttribution();
         if(attribution&&attribution!=='Direct'){lines.push('Website source: '+attribution);}
       }
-      writeStorage(localStorage,'jr_intent_popup_converted_at',String(Date.now()));
-      track('generate_lead',{method:'behavior_popup_to_whatsapp',service:goal,page_path:location.pathname});
-      root.querySelector('.intent-popup-status').textContent='Opening WhatsApp with your enquiry.';
-      window.open('https://wa.me/'+PHONE+'?text='+encodeURIComponent(lines.join('\n')),'_blank','noopener,noreferrer');
+      var status=root.querySelector('.intent-popup-status');
+      var submit=form.querySelector('button[type="submit"]');
+      if(!window.jrPropertyLeads){status.textContent='The secure enquiry service is still loading. Please try again.';return;}
+      status.textContent='Saving your enquiry securely…';submit.disabled=true;
+      try{
+        var result=await window.jrPropertyLeads.send(window.jrPropertyLeads.buildPayload(form,{intent:labels[goal]}));
+        var reference=String(result.lead_id).slice(0,8);
+        writeStorage(localStorage,'jr_intent_popup_converted_at',String(Date.now()));
+        track('generate_lead',{method:'saved_before_whatsapp',service:goal,lead_id:reference,page_path:location.pathname});
+        status.textContent='Enquiry saved. Opening WhatsApp with reference '+reference+'.';
+        window.open('https://wa.me/'+PHONE+'?text='+encodeURIComponent(lines.join('\n')+'\n\nRequest reference: '+reference),'_blank','noopener,noreferrer');
+      }catch(error){
+        status.textContent='Your enquiry could not be saved yet. A private safety copy remains on this device; please retry.';
+        track('property_lead_capture_error',{service:goal,error_message:String(error.message||error).slice(0,120),page_path:location.pathname});
+      }finally{submit.disabled=false;}
     });
 
     return {root:root,open:function(reason){

@@ -47,24 +47,26 @@
 
   function prepare(form){
     var status=form.querySelector('.qualifier-status');
-    form.addEventListener('submit',function(event){
+    form.addEventListener('submit',async function(event){
       event.preventDefault();
       if(!form.reportValidity()) return;
 
       var message=buildMessage(form);
-      var url='https://wa.me/'+PHONE+'?text='+encodeURIComponent(message);
-      if(status) status.textContent='Opening WhatsApp with your enquiry details.';
-      analytics('generate_lead',{
-        method:'qualified_whatsapp',
-        service:clean(form.dataset.journey||'Property enquiry'),
-        page_path:location.pathname
-      });
-      analytics('qualified_lead_submit',{
-        service:clean(form.dataset.journey||'Property enquiry'),
-        field_count:form.querySelectorAll('[name]').length,
-        page_path:location.pathname
-      });
-      window.open(url,'_blank','noopener,noreferrer');
+      var submit=form.querySelector('button[type="submit"]');
+      if(!window.jrPropertyLeads){if(status)status.textContent='The secure enquiry service is still loading. Please try again.';return;}
+      if(status) status.textContent='Saving your enquiry securely…';
+      if(submit) submit.disabled=true;
+      try{
+        var result=await window.jrPropertyLeads.send(window.jrPropertyLeads.buildPayload(form,{intent:form.dataset.journey}));
+        var reference=String(result.lead_id).slice(0,8);
+        analytics('generate_lead',{method:'saved_before_whatsapp',lead_id:reference,service:clean(form.dataset.journey||'Property enquiry'),page_path:location.pathname});
+        analytics('qualified_lead_submit',{service:clean(form.dataset.journey||'Property enquiry'),field_count:form.querySelectorAll('[name]').length,page_path:location.pathname});
+        if(status) status.textContent='Enquiry saved. Opening WhatsApp with reference '+reference+'.';
+        window.open('https://wa.me/'+PHONE+'?text='+encodeURIComponent(message+'\n\nRequest reference: '+reference),'_blank','noopener,noreferrer');
+      }catch(error){
+        if(status) status.textContent='Your enquiry could not be saved yet. A private safety copy remains on this device; please retry.';
+        analytics('property_lead_capture_error',{page_path:location.pathname,error_message:String(error.message||error).slice(0,120)});
+      }finally{if(submit)submit.disabled=false;}
     });
   }
 

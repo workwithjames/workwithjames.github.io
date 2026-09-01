@@ -27,8 +27,14 @@ from typing import Iterable
 from urllib.parse import urljoin, urlparse, urlunparse
 from zoneinfo import ZoneInfo
 
-import requests
-from bs4 import BeautifulSoup
+try:
+    import requests
+    from bs4 import BeautifulSoup
+except ModuleNotFoundError:
+    if "--render-only" not in sys.argv:
+        raise
+    requests = None
+    BeautifulSoup = None
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = "https://jamesrealty.uk"
@@ -41,6 +47,18 @@ SITEMAP_PATH = ROOT / "sitemap.xml"
 IMAGE_SITEMAP_PATH = ROOT / "image-sitemap.xml"
 CSS_PATH = ROOT / "assets" / "property-news.css"
 HUB_PATH = ROOT / "blog" / "property-news" / "index.html"
+MAX_NEW_POSTS_PER_RUN = 1
+MAX_ACTIVE_AUTO_POSTS = 18
+CONSOLIDATED_SLUGS = {
+    "property-news-2026-08-21-dubai-has-96-585-homes-entering-the-market-in-2026-83-are-9eab9",
+    "property-news-2026-08-20-dubai-adds-more-than-24-000-property-units-in-six-months-5fb5c",
+    "property-news-2026-08-15-how-to-read-the-latest-dubai-property-market-signal-3e09d",
+    "property-news-2026-08-14-how-to-read-the-latest-dubai-property-market-signal-96e5c",
+    "property-news-2026-08-07-how-to-read-the-latest-dubai-property-market-signal-ff568",
+    "property-news-2026-08-07-dubai-housing-supply-what-buyers-and-owners-should-check-n-76b75",
+    "property-news-2026-08-13-uae-rental-update-what-tenants-and-landlords-should-verify-cbf17",
+    "property-news-2026-08-13-dubai-housing-supply-what-buyers-and-owners-should-check-n-8ca93",
+}
 
 CATEGORY_PAGES = [
     {
@@ -107,9 +125,9 @@ CSS = r"""/* Property news hub, source briefs and internal-link modules */
 @media(max-width:560px){.blog-index-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.blog-index-grid .blog-tile-copy{padding:12px 11px 13px}.blog-index-grid .blog-tile h2{font-size:.9rem;line-height:1.22;margin:8px 0}.blog-index-grid .blog-tile-copy>p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:.68rem;line-height:1.4;margin-bottom:10px}.blog-index-grid .news-source-badge{font-size:.5rem;padding:4px 6px}.blog-index-grid .text-link{font-size:.65rem}}
 """
 
-NAV_HEADER = """<header class=\"site-header\"><nav class=\"nav-shell\" aria-label=\"Main navigation\"><a class=\"brand\" href=\"/\" aria-label=\"James Realty, Dubai Data\">James Realty</a><div class=\"nav-links global-links\"><a href=\"/\">Dubai Data</a><a href=\"/abu-dhabi-data/\">Abu Dhabi Data</a><a href=\"/about-me/\">About Me</a><a href=\"/blog/\" aria-current=\"page\">Blog</a><a href=\"/contact/\">Contact Me</a></div><a class=\"button nav-cta nav-whatsapp\" href=\"https://wa.me/971528420933\" target=\"_blank\" rel=\"noreferrer\">Work with James <span aria-hidden=\"true\">↗</span></a></nav></header><nav class=\"mobile-page-tabs section-shell\" aria-label=\"Page navigation\"><a href=\"/\">Dubai Data</a><a href=\"/abu-dhabi-data/\">Abu Dhabi Data</a><a href=\"/about-me/\">About Me</a><a href=\"/blog/\" aria-current=\"page\">Blog</a><a href=\"/contact/\">Contact Me</a></nav>"""
+NAV_HEADER = """<header class=\"site-header\"><nav class=\"nav-shell\" aria-label=\"Main navigation\"><a class=\"brand\" href=\"/\" aria-label=\"James Realty\">James Realty</a><div class=\"nav-links global-links\"><a href=\"/buy-invest-dubai/\">Buy</a><a href=\"/sell-dubai-property/\">Sell</a><a href=\"/properties/\">Projects</a><a href=\"/areas/\">Areas</a><a href=\"/dubai-data/\">Market Data</a><a href=\"/blog/\" aria-current=\"page\">Insights</a><a href=\"/about-me/\">About</a><a href=\"/contact/\">Contact</a></div><a class=\"button nav-cta\" href=\"/buy-invest-dubai/#buyer-enquiry\">Build my buyer brief <span aria-hidden=\"true\">→</span></a></nav></header>"""
 
-FOOTER = """<a class=\"mobile-conversion nav-whatsapp\" href=\"/contact/\">Contact James</a><footer><div class=\"section-shell footer-shell footer-shell-rich\"><div class=\"footer-identity\"><a class=\"brand\" href=\"/\">James</a><p>© 2026 James. Built in Dubai.</p></div><nav class=\"footer-links\" aria-label=\"Footer navigation\"><a href=\"/\">Home</a><a href=\"/buy-invest-dubai/\">Buy / Invest</a><a href=\"/dubai-data/\">Dubai Data</a><a href=\"/dubai-rental-yield-calculator/\">Yield Calculator</a><a href=\"/blog/\">News</a><a href=\"/blog/property-news/\">Property News</a><a href=\"/contact/\">Contact</a></nav><a class=\"footer-linkedin\" href=\"https://ae.linkedin.com/in/james-ravi-dubai\" target=\"_blank\" rel=\"me noreferrer\">LinkedIn <span aria-hidden=\"true\">↗</span></a></div></footer>"""
+FOOTER = """<a class=\"mobile-conversion\" href=\"/contact/?goal=buy\">Start a property brief</a><footer><div class=\"section-shell footer-shell footer-shell-rich\"><div class=\"footer-identity\"><a class=\"brand\" href=\"/\">James Realty</a><p>Evidence-led Dubai property advisory.<br>Dubai, UAE · © 2026 James.</p></div><nav class=\"footer-links\" aria-label=\"Footer navigation\"><a href=\"/buy-invest-dubai/\">Buy</a><a href=\"/sell-dubai-property/\">Sell</a><a href=\"/properties/\">Projects</a><a href=\"/areas/\">Areas</a><a href=\"/dubai-data/\">Market Data</a><a href=\"/blog/\">Insights</a><a href=\"/data-methodology/\">Data Methodology</a><a href=\"/privacy-policy/\">Privacy</a></nav><a class=\"footer-linkedin\" href=\"https://ae.linkedin.com/in/james-ravi-dubai\" target=\"_blank\" rel=\"me noreferrer\">LinkedIn <span aria-hidden=\"true\">↗</span></a></div></footer>"""
 
 
 @dataclass
@@ -809,6 +827,32 @@ def is_property_relevant(article: dict) -> bool:
     return any(signal in text for signal in signals) and any(signal in text for signal in uae_signals)
 
 
+def editorial_importance(article: dict) -> int:
+    """Score material decision value and demote promotional launch noise."""
+    text = " ".join([
+        article.get("title", ""), article.get("description", ""),
+        *article.get("paragraphs", [])[:8],
+    ]).lower()
+    score = 0
+    if re.search(r"(?:aed|dh)\s?\d|\d[\d,.]*\s?(?:%|per cent|units|homes|transactions|projects)", text):
+        score += 2
+    if any(term in text for term in (
+        "regulation", "regulator", "law", "rule", "mortgage", "escrow", "service charge",
+        "handover", "completion", "supply", "rent", "rental", "tenant", "landlord",
+    )):
+        score += 2
+    if any(term in text for term in ("department", "authority", "central bank", "court", "official data", "census")):
+        score += 2
+    if any(term in text for term in ("buyer", "seller", "owner", "investor", "homeowner")):
+        score += 1
+    if any(term in text for term in (
+        "unveils", "announces new", "luxury launch", "branded residence", "sold out",
+        "award-winning", "exclusive partnership", "celebrity",
+    )):
+        score -= 2
+    return score
+
+
 def title_signature(value: str) -> str:
     stop = {
         "the", "and", "for", "from", "with", "that", "this", "what", "why", "how",
@@ -1008,7 +1052,7 @@ def post_from_seed(seed: dict) -> Post:
 
 
 def tile(post: Post) -> str:
-    label = "Automated brief" if post.auto else "Source-led analysis"
+    label = "Market Monitoring Brief" if post.auto else "Source-led analysis"
     return f'''<article class="blog-tile"><a class="blog-tile-image" href="/blog/{post.slug}/"><img src="{post.image}" alt="{esc(image_alt(post))}" width="1600" height="900" loading="lazy"/></a><div class="blog-tile-copy"><div class="article-meta"><span>{esc(post.category)}</span><time datetime="{post.date}">{datetime.fromisoformat(post.date).strftime('%-d %B %Y')}</time><span>{esc(post.read_time)}</span></div><span class="news-source-badge">{label}, {esc(post.source_name)}</span><h2><a href="/blog/{post.slug}/">{esc(post.title)}</a></h2><p>{esc(post.description)}</p><a class="text-link" href="/blog/{post.slug}/">Read analysis <span aria-hidden="true">→</span></a></div></article>'''
 
 
@@ -1140,7 +1184,7 @@ def update_sitemap(posts: list[Post]) -> None:
             child.text = value
 
     upsert(SITE + "/blog/", NOW.date().isoformat(), "daily", "0.9")
-    upsert(SITE + "/blog/property-news/", NOW.date().isoformat(), "hourly", "0.9")
+    upsert(SITE + "/blog/property-news/", NOW.date().isoformat(), "weekly", "0.9")
     for post in posts:
         upsert(post.url, post.date, "weekly" if post.auto else "monthly", "0.8")
     ET.indent(root, space="  ")
@@ -1235,7 +1279,7 @@ def create_auto_posts(state: dict, current_posts: list[Post]) -> list[Post]:
     signatures.update(signature for signature in (title_signature(post.title) for post in current_posts) if signature)
     new_posts: list[Post] = []
     active_auto_count = sum(1 for post in current_posts if post.auto)
-    max_active_auto_posts = 24  # Must not exceed the unique curated image pool.
+    max_active_auto_posts = MAX_ACTIVE_AUTO_POSTS
     if active_auto_count >= max_active_auto_posts:
         print("Property-news image capacity reached; skipping new automated briefs until a unique image is added.")
         return new_posts
@@ -1245,6 +1289,9 @@ def create_auto_posts(state: dict, current_posts: list[Post]) -> list[Post]:
             discovered.append((url, category["name"]))
     cutoff = NOW - timedelta(hours=48)
     for url, source_name in discovered:
+        if len(new_posts) >= MAX_NEW_POSTS_PER_RUN:
+            print("Selective publishing cap reached; remaining reports were left for the next review.")
+            break
         if active_auto_count + len(new_posts) >= max_active_auto_posts:
             print("Property-news image capacity reached during this run; remaining links were left for a later check.")
             break
@@ -1264,6 +1311,13 @@ def create_auto_posts(state: dict, current_posts: list[Post]) -> list[Post]:
             continue
         if not article["title"] or not is_property_relevant(article):
             seen.update({url, final_url})
+            continue
+        if editorial_importance(article) < 4:
+            held = state.setdefault("held_for_editorial_review", [])
+            held.append({"url": final_url, "title": article["title"], "reviewed_at": NOW.isoformat()})
+            state["held_for_editorial_review"] = held[-100:]
+            seen.update({url, final_url})
+            print(f"Held low-materiality report for editorial review: {article['title']}")
             continue
         signature = title_signature(article["title"])
         if duplicate_signature(signature, signatures):
@@ -1337,6 +1391,8 @@ def create_auto_posts(state: dict, current_posts: list[Post]) -> list[Post]:
 def ordered_posts(state: dict) -> list[Post]:
     posts: list[Post] = []
     for item in state.get("posts", []):
+        if item.get("slug") in CONSOLIDATED_SLUGS:
+            continue
         try:
             posts.append(Post(**{k: item[k] for k in Post.__dataclass_fields__}))
         except Exception as exc:  # noqa: BLE001
@@ -1349,12 +1405,40 @@ def main() -> int:
     os.chdir(ROOT)
     write_if_changed(CSS_PATH, CSS)
     state = load_state()
-    seed_posts = initialize_seed_posts(state)
-    current_posts = ordered_posts(state)
-    create_auto_posts(state, current_posts or seed_posts)
+    render_only = "--render-only" in sys.argv
+    if not render_only:
+        seed_posts = initialize_seed_posts(state)
+        current_posts = ordered_posts(state)
+        create_auto_posts(state, current_posts or seed_posts)
     posts = ordered_posts(state)
     update_blog_index(posts)
-    write_if_changed(HUB_PATH, render_hub(posts))
+    blog_html = BLOG_INDEX.read_text()
+    blog_html = blog_html.replace(
+        '<a class="button button-primary" href="/">Open dashboard',
+        '<a class="button button-primary" href="/dubai-data/">Open dashboard',
+    ).replace(
+        'For marketing, launch, acquisition, CRM or property communication work, share the project and intended market.',
+        'Share the purpose, budget, preferred areas, property type and timeline behind the decision.',
+    ).replace(
+        'For property launch strategy, investor acquisition, content or CRM conversion, share the project and target market.',
+        'Share the purpose, budget, preferred areas, property type and timeline behind the decision.',
+    )
+    write_if_changed(BLOG_INDEX, blog_html)
+    hub_html = render_hub(posts)
+    hub_html = hub_html.replace(
+        '<a class="button button-outline" href="/">Dubai Data</a>',
+        '<a class="button button-outline" href="/dubai-data/">Dubai Data</a>',
+    ).replace(
+        '<strong>Publishing schedule:</strong> The monitor checks all four publisher pages hourly. A new article is normally converted into a source brief within the next successful GitHub Actions run.',
+        '<strong>Publishing standard:</strong> Sources are checked daily. Publication is selective, capped and held for review unless a report adds material buyer, seller or owner context.',
+    ).replace(
+        'Connect market reporting to a project, audience or acquisition plan.',
+        'Connect the headline to a property, community and buyer objective.',
+    ).replace(
+        'Share the property, target market and commercial objective.',
+        'Share the property, area and decision you are evaluating.',
+    )
+    write_if_changed(HUB_PATH, hub_html)
     update_feed(posts)
     update_sitemap(posts)
     update_image_sitemap(posts)

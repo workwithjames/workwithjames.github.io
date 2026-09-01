@@ -1,0 +1,41 @@
+name: Refresh Ajman fallback snapshot
+
+on:
+  schedule:
+    - cron: '41 2 1 * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/refresh_ajman_snapshot.mjs'
+      - '.github/workflows/refresh-ajman-snapshot.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site-content-writes
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Save latest successful government dataset
+        run: node scripts/refresh_ajman_snapshot.mjs
+      - name: Commit changed snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- data/ajman-market/latest.json; then
+            echo "Ajman snapshot is unchanged."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/ajman-market/latest.json
+          git commit -m "Refresh Ajman market data fallback"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

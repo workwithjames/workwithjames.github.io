@@ -412,7 +412,11 @@
       var link=document.createElement('a');
       link.href=item.href;
       link.textContent=item.label;
-      if(normalisePath(location.pathname)===normalisePath(item.matchPath||item.href)){link.setAttribute('aria-current','page');}
+      if(/^https?:\/\//i.test(item.href)){
+        link.target='_blank';
+        link.rel='noopener';
+      }
+      if(item.href.charAt(0)==='/'&&normalisePath(location.pathname)===normalisePath(item.matchPath||item.href)){link.setAttribute('aria-current','page');}
       nav.appendChild(link);
     });
     return nav;
@@ -421,37 +425,42 @@
   function organiseFooterNavigation(){
     var footerGroups=[
       {
-        title:'Your Goal',
+        title:'Property',
         items:[
-          {href:'/buy-invest-dubai/',label:'Buy / Invest'},
+          {href:'/buy-invest-dubai/',label:'Buy'},
           {href:'/sell-dubai-property/',label:'Sell'},
-          {href:'/real-estate-marketing/',label:'Real Estate Marketing'}
+          {href:'/properties/',label:'Projects'},
+          {href:'/areas/',label:'Areas'}
         ]
       },
       {
-        title:'Transactions',
+        title:'Research',
         items:[
           {href:'/dubai-data/',label:'Dubai Data'},
           {href:'/abu-dhabi-data/',label:'Abu Dhabi Data'},
-          {href:'/ajman-data/',label:'Ajman Data'}
-        ]
-      },
-      {
-        title:'Tools',
-        items:[
-          {href:'/dubai-rental-yield-calculator/',label:'Rental Yield Calculator'},
-          {href:'/dubai-property-buying-cost-calculator/',label:'Property Buying Cost Calculator'},
-          {href:'/buy-invest-dubai/#buyer-enquiry',matchPath:'/buy-invest-dubai/',label:'Buyer Requirements Brief'},
-          {href:'/sell-dubai-property/#seller-enquiry',matchPath:'/sell-dubai-property/',label:'Seller Preparation Brief'}
+          {href:'/ajman-data/',label:'Ajman Data'},
+          {href:'/dubai-rental-yield-calculator/',label:'Yield Calculator'},
+          {href:'/dubai-property-buying-cost-calculator/',label:'Buying Costs'},
+          {href:'/blog/',label:'Insights'}
         ]
       },
       {
         title:'Company',
         items:[
-          {href:'/about-me/',label:'About Me'},
-          {href:'/blog/',label:'News'},
-          {href:'/contact/',label:'Contact Me'},
-          {href:'/cite/',label:'Cite This Site'}
+          {href:'/about-me/',label:'About James'},
+          {href:'/contact/',label:'Contact'},
+          {href:'https://digital.jamesrealty.uk/',label:'Digital Services ↗'}
+        ]
+      },
+      {
+        title:'Legal',
+        items:[
+          {href:'/privacy-policy/',label:'Privacy'},
+          {href:'/terms/',label:'Terms'},
+          {href:'/disclaimer/',label:'Disclaimer'},
+          {href:'/sitemap.xml',label:'Sitemap'},
+          {href:'/data-methodology/',label:'Data Methodology'},
+          {href:'/editorial-methodology/',label:'Editorial Methodology'}
         ]
       }
     ];
@@ -467,7 +476,7 @@
 
       var identity=document.createElement('div');
       identity.className='footer-identity';
-      identity.innerHTML='<a class="brand" href="/" aria-label="James Realty home">James Realty</a><p>© 2026 James. Built in Dubai.</p>';
+      identity.innerHTML='<a class="brand" href="/" aria-label="James Realty home">James Realty</a><p>Evidence-led Dubai property advisory.<br>Dubai, UAE · © 2026 James.</p>';
 
       var groups=document.createElement('div');
       groups.className='footer-groups';
@@ -582,10 +591,8 @@
   }
 
   function ensureNavigation(){
-    removeVisibleBlogDates();
     updateHeaderBrand();
     renameBlogPageLabels();
-    injectToolsMenus();
     prepareDropdownMenus();
     organiseHomeToolsDirectory();
     organiseFooterNavigation();
@@ -603,7 +610,7 @@
     var link=e.target.closest('a');
     if(!link){return;}
     var href=link.getAttribute('href')||'';
-    var isCta=link.matches('.button,.mobile-conversion')||Boolean(link.closest('.home-journey,.home-data-card,.tools-directory,.journey-links,.market-related,.property-news-link-grid,.related-reading,.buyer-cluster-card,.cluster-cta'));
+    var isCta=link.matches('.button,.mobile-conversion,.advisory-card,.area-card')||Boolean(link.closest('.home-journey,.home-data-card,.tools-directory,.journey-links,.market-related,.property-news-link-grid,.related-reading,.buyer-cluster-card,.cluster-cta,.project-actions'));
     if(isCta){
       event('cta_click',{
         link_text:(link.textContent||'').replace(/\s+/g,' ').trim(),
@@ -613,6 +620,7 @@
       });
     }
     if(href.indexOf('wa.me/')>-1){event('generate_lead',{method:'whatsapp',link_url:href,page_path:location.pathname});}
+    if(href.indexOf('mailto:')===0){event('email_click',{link_url:href,page_path:location.pathname});if(/call(?:%20|\+|\s)/i.test(href)){event('book_call_click',{link_url:href,page_path:location.pathname});}}
     if(href.indexOf('tel:')===0){event('phone_click',{link_url:href,page_path:location.pathname});event('generate_lead',{method:'phone',page_path:location.pathname});}
     if(href==='/contact/'||href.indexOf('/contact/')===0){event('contact_intent',{link_text:(link.textContent||'').trim(),page_path:location.pathname});}
     if(/(?:brochure|\.pdf(?:$|[?#]))/i.test(href)){event('brochure_click',{link_text:(link.textContent||'').trim(),link_url:href,page_path:location.pathname});}

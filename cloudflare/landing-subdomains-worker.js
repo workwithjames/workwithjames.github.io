@@ -94,6 +94,23 @@ function json(body, status = 200, extra = {}) {
   });
 }
 
+function corsOrigin(request) {
+  const origin = request.headers.get('origin') || '';
+  if (origin === 'https://jamesrealty.uk' || origin === 'https://www.jamesrealty.uk' || /^https:\/\/[a-z0-9-]+\.jamesrealty\.uk$/i.test(origin)) return origin;
+  return '';
+}
+
+function withLeadCors(request, response) {
+  const origin = corsOrigin(request);
+  const headers = new Headers(response.headers);
+  if (origin) headers.set('Access-Control-Allow-Origin', origin);
+  headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  headers.set('Access-Control-Allow-Headers', 'content-type');
+  headers.set('Access-Control-Max-Age', '86400');
+  headers.append('Vary', 'Origin');
+  return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
+}
+
 async function readLimitedJson(request, maxBytes = 16_384) {
   if (!request.body) throw new Error('EMPTY_BODY');
   const reader = request.body.getReader();
@@ -148,6 +165,8 @@ async function captureLead(request, env, hostname) {
     utmSource: clean(payload.utm_source, 100),
     utmMedium: clean(payload.utm_medium, 100),
     utmCampaign: clean(payload.utm_campaign, 160),
+    utmContent: clean(payload.utm_content, 160),
+    utmTerm: clean(payload.utm_term, 160),
   };
   if (lead.name.length < 2 || lead.phone.length < 7 || !lead.budget || payload.consent !== true) {
     return json({ ok: false, error: 'Required lead fields are incomplete' }, 422);
@@ -157,8 +176,7 @@ async function captureLead(request, env, hostname) {
   const countryCode = clean(request.cf?.country, 8);
   const userAgent = clean(request.headers.get('user-agent'), 300);
   try {
-    await env.LEADS.batch([
-      env.LEADS.prepare(`CREATE TABLE IF NOT EXISTS leads (
+    await env.LEADS.prepare(`CREATE TABLE IF NOT EXISTS leads (
         submission_id TEXT PRIMARY KEY,
         created_at TEXT NOT NULL,
         source_host TEXT NOT NULL,
@@ -175,20 +193,30 @@ async function captureLead(request, env, hostname) {
         utm_source TEXT,
         utm_medium TEXT,
         utm_campaign TEXT,
+        utm_content TEXT,
+        utm_term TEXT,
         country_code TEXT,
         user_agent TEXT,
         status TEXT NOT NULL DEFAULT 'new'
-      )`),
+      )`).run();
+    for (const column of ['utm_content', 'utm_term']) {
+      try {
+        await env.LEADS.prepare(`ALTER TABLE leads ADD COLUMN ${column} TEXT`).run();
+      } catch (migrationError) {
+        if (!/duplicate column/i.test(String(migrationError))) throw migrationError;
+      }
+    }
+    await env.LEADS.batch([
       env.LEADS.prepare('CREATE INDEX IF NOT EXISTS idx_leads_created_at ON leads(created_at)'),
       env.LEADS.prepare(`INSERT OR IGNORE INTO leads (
         submission_id, created_at, source_host, landing_page, name, phone, budget,
         email, country, preference, notes, interest, referrer, utm_source, utm_medium,
-        utm_campaign, country_code, user_agent
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
+        utm_campaign, utm_content, utm_term, country_code, user_agent
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
         .bind(
           lead.id, createdAt, hostname, lead.landingPage, lead.name, lead.phone, lead.budget,
           lead.email, lead.country, lead.preference, lead.notes, lead.interest, lead.referrer,
-          lead.utmSource, lead.utmMedium, lead.utmCampaign, countryCode, userAgent,
+          lead.utmSource, lead.utmMedium, lead.utmCampaign, lead.utmContent, lead.utmTerm, countryCode, userAgent,
         ),
     ]);
     console.log(JSON.stringify({ event: 'lead_captured', submission_id: lead.id, source_host: hostname, created_at: createdAt }));
@@ -214,8 +242,9 @@ export default {
     if (!sourcePath) return plain('Unknown James Realty landing-page host', 404);
 
     if (incoming.pathname === '/api/lead') {
-      if (request.method === 'POST') return captureLead(request, env, incoming.hostname);
-      return json({ ok: false, error: 'Method not allowed' }, 405, { Allow: 'POST' });
+      if (request.method === 'OPTIONS') return withLeadCors(request, new Response(null, { status: 204 }));
+      if (request.method === 'POST') return withLeadCors(request, await captureLead(request, env, incoming.hostname));
+      return withLeadCors(request, json({ ok: false, error: 'Method not allowed' }, 405, { Allow: 'POST, OPTIONS' }));
     }
 
     if (!['GET', 'HEAD'].includes(request.method)) return plain('Method not allowed', 405, { Allow: 'GET, HEAD' });
