@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source_date": "2026-08-26",
-  "captured_at": "2026-08-30T20:27:18.230Z",
+  "captured_at": "2026-09-01T00:00:14.755Z",
   "source": {
     "provider": "DXB Data",
     "endpoint": "https://dxbdata.io/mcp",
@@ -9,7 +9,7 @@
     "authentication": "none"
   },
   "overview": {
-    "total_transactions": 35860,
+    "total_transactions": 35867,
     "areas": 159,
     "period": {
       "from": "2026-06-23",
@@ -19,7 +19,7 @@
     "top_areas_by_volume": [
       {
         "area": "Madinat Al Mataar",
-        "n": 4695
+        "n": 4696
       },
       {
         "area": "Al Barsha South Fourth",
@@ -146,11 +146,11 @@
         "area": "Al Hebiah Second",
         "property_type": "Flat",
         "median_price_aed": 571000,
-        "median_price_per_sqm_aed": 16387,
+        "median_price_per_sqm_aed": 16383,
         "gross_rental_yield_pct": 11.84,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 251,
-        "sale_sample": 251,
+        "sample_size": 252,
+        "sale_sample": 252,
         "rent_sample": 29
       },
       {
@@ -178,12 +178,12 @@
       {
         "area": "Al Jadaf",
         "property_type": "Flat",
-        "median_price_aed": 1303621,
-        "median_price_per_sqm_aed": 21179,
+        "median_price_aed": 1307242,
+        "median_price_per_sqm_aed": 21177,
         "gross_rental_yield_pct": 3.6,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 310,
-        "sale_sample": 310,
+        "sample_size": 311,
+        "sale_sample": 311,
         "rent_sample": 55
       },
       {
@@ -202,11 +202,11 @@
         "property_type": "Flat",
         "median_price_aed": 1400000,
         "median_price_per_sqm_aed": 21498,
-        "gross_rental_yield_pct": 6.73,
+        "gross_rental_yield_pct": 6.74,
         "annual_rent_per_sqm_aed": null,
         "sample_size": 439,
         "sale_sample": 439,
-        "rent_sample": 32
+        "rent_sample": 33
       },
       {
         "area": "Al Satwa",
@@ -277,12 +277,12 @@
       {
         "area": "Al Wasl",
         "property_type": "Flat",
-        "median_price_aed": 2807550,
-        "median_price_per_sqm_aed": 32741,
-        "gross_rental_yield_pct": 3.81,
+        "median_price_aed": 2834100,
+        "median_price_per_sqm_aed": 32778,
+        "gross_rental_yield_pct": 3.8,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 134,
-        "sale_sample": 134,
+        "sample_size": 135,
+        "sale_sample": 135,
         "rent_sample": 19
       },
       {
@@ -402,8 +402,8 @@
         "median_price_per_sqm_aed": 18519,
         "gross_rental_yield_pct": 4.81,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 4172,
-        "sale_sample": 4172,
+        "sample_size": 4173,
+        "sale_sample": 4173,
         "rent_sample": 49
       },
       {
