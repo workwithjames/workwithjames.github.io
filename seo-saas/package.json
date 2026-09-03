@@ -1,0 +1,16 @@
+{
+  "name": "james-seo-mvp",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prepare:integrations": "node scripts/prepare-integrations.mjs",
+    "dev": "npm run prepare:integrations && wrangler dev",
+    "deploy": "npm run prepare:integrations && wrangler deploy",
+    "deploy:dry": "npm run prepare:integrations && wrangler deploy --dry-run",
+    "check": "npm run prepare:integrations && node --check src/index.js && node --check src/crawler.js && node --check src/gsc.js && node --check public/app.js && node --check public/gsc-ui.js"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
