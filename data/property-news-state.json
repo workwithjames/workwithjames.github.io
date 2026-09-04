@@ -11,6 +11,7 @@
     "https://gulfnews.com/business/property/dubai-attracts-186-new-property-developers-in-first-seven-months-of-2026-1.500641994",
     "https://gulfnews.com/business/property/dubai-has-96585-homes-entering-the-market-in-2026-83-are-already-sold-1.500647675",
     "https://gulfnews.com/business/property/dubai-homebuyers-get-more-choice-as-24800-new-units-enter-the-market-1.500625443",
+    "https://gulfnews.com/business/property/dubai-land-department-launches-ai-powered-platform-to-speed-up-real-estate-registration-for-developers-1.500662918",
     "https://gulfnews.com/business/property/dubai-luxury-market-shifts-towards-trust-exclusive-property-access-1.500651804",
     "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
     "https://gulfnews.com/business/property/dubai-records-dh12-billion-in-villa-deals-in-burj-khalifa-area-1.500655244",
@@ -26,6 +27,7 @@
     "https://gulfnews.com/business/property/emaar-homebuyers-can-secure-up-to-50-financing-before-handover-1.500623531",
     "https://gulfnews.com/business/property/emirati-women-invest-dh27-billion-in-sharjah-property-market-1.500654164",
     "https://gulfnews.com/business/property/former-dubai-zoo-site-gets-construction-contract-for-90-home-community-1.500636033",
+    "https://gulfnews.com/business/property/gateway-2040-brings-us-residency-linked-infrastructure-investment-opportunity-to-dubai-1.500662280",
     "https://gulfnews.com/business/property/global-partners-secures-300-million-for-next-growth-phase-1.500638576",
     "https://gulfnews.com/business/property/golden-visa-first-time-buyer-support-flexi-rent-how-dubai-is-widening-property-access-for-buyers-and-renters-1.500644768",
     "https://gulfnews.com/business/property/hudayriyat-island-tops-abu-dhabi-property-market-with-dh19-billion-in-sales-1.500648019",
@@ -87,6 +89,7 @@
     "https://www.khaleejtimes.com/business/property/dh1-million-fine-abu-dhabi-gives-property-owners-until-september-16-to-secure-occupancy-certificates",
     "https://www.khaleejtimes.com/business/property/dubai-rental-index-shared-housing-units",
     "https://www.khaleejtimes.com/business/property/dubai-residential-real-estate-shows-resilience-amid-quieter-market",
+    "https://www.khaleejtimes.com/business/property/dubai-residents-search-for-new-homes-rental-neighbourhoods-rents",
     "https://www.khaleejtimes.com/business/property/dubai-short-term-rentals-show-resilience-as-longer-stays-support-market",
     "https://www.khaleejtimes.com/business/property/dubai-startup-datahabibi-launches-ai-platform-for-property-intelligence",
     "https://www.khaleejtimes.com/business/property/dubai-tenants-could-soon-pay-rent-monthly-with-zero-interest",
@@ -540,7 +543,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-09-03T12:06:53+04:00",
+  "updated_at": "2026-09-04T12:01:59+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -561,6 +564,11 @@
       "url": "https://www.thenationalnews.com/business/property/2026/09/01/uae-developer-arada-to-build-7-billion-mixed-use-project-in-syria",
       "title": "Dubai to Damascus: Arada to build $7bn 'UAE-style' mixed-use project in Syria",
       "reviewed_at": "2026-09-01T15:31:19.250384+04:00"
+    },
+    {
+      "url": "https://gulfnews.com/business/property/dubai-land-department-launches-ai-powered-platform-to-speed-up-real-estate-registration-for-developers-1.500662918",
+      "title": "Dubai Land Department launches AI-powered platform to speed up real estate registration for developers",
+      "reviewed_at": "2026-09-04T12:01:59.795380+04:00"
     }
   ]
 }
