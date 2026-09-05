@@ -36,6 +36,7 @@
     "https://gulfnews.com/business/property/is-jeddah-tower-on-course-to-become-the-worlds-tallest-building-1.500623570",
     "https://gulfnews.com/business/property/modon-h1-net-profit-reaches-dh22-billion-after-property-sales-hit-dh26-billion-1.500625097",
     "https://gulfnews.com/business/property/nakheel-begins-handover-of-892-homes-at-jebel-ali-village-1.500643237",
+    "https://gulfnews.com/business/property/new-mortgage-option-opens-for-abu-dhabi-off-plan-buyers-with-aldar-and-adcb-deal-1.500663048",
     "https://gulfnews.com/business/property/object-1-launches-sky-level-1-expanding-its-jvc-residential-portfolio-1.500650573",
     "https://gulfnews.com/business/property/ofw-paid-608000-for-a-manila-condo-what-the-maceda-law-can-and-cannot-save-1.500635734",
     "https://gulfnews.com/business/property/palm-jebel-ali-unveils-limited-collection-of-44-beachfront-villas-on-frond-f-1.500646564",
@@ -52,8 +53,10 @@
     "https://gulfnews.com/business/property/zoya-developments-sells-out-elinor-project-in-under-two-weeks-1.500640776",
     "https://www.khaleejtimes.com/business/abu-dhabi-property-deals-top-dh155-billion-beat-2025s-full-year-total-in-8-months",
     "https://www.khaleejtimes.com/business/abu-dhabi-to-see-surge-in-new-homes-easing-price-and-rental-growth",
+    "https://www.khaleejtimes.com/business/aldar-adcb-complete-abu-dhabis-first-off-plan-mortgage-under-new-adrec-framework",
     "https://www.khaleejtimes.com/business/aviation",
     "https://www.khaleejtimes.com/business/binghatti-dismisses-debt-fears-points-to-dh106-billion-in-escrow-accounts",
+    "https://www.khaleejtimes.com/business/business-bay-overtakes-palm-jumeirah-as-dubais-busiest-prime-property-market",
     "https://www.khaleejtimes.com/business/dubai-abu-dhabi-landlords-keep-upper-hand-as-tenants-compete-in-uae-office-market",
     "https://www.khaleejtimes.com/business/dubai-completes-104-property-projects-worth-over-dh111-billion-in-h1-2026",
     "https://www.khaleejtimes.com/business/dubai-delivers-record-24800-new-homes-in-h1-2026-as-market-matures",
@@ -543,7 +546,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-09-04T12:01:59+04:00",
+  "updated_at": "2026-09-05T11:43:05+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
