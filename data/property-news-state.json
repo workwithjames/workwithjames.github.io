@@ -39,6 +39,7 @@
     "https://gulfnews.com/business/property/new-mortgage-option-opens-for-abu-dhabi-off-plan-buyers-with-aldar-and-adcb-deal-1.500663048",
     "https://gulfnews.com/business/property/object-1-launches-sky-level-1-expanding-its-jvc-residential-portfolio-1.500650573",
     "https://gulfnews.com/business/property/ofw-paid-608000-for-a-manila-condo-what-the-maceda-law-can-and-cannot-save-1.500635734",
+    "https://gulfnews.com/business/property/omniyat-showcases-dubais-vision-for-future-of-waterfront-living-in-monaco-1.500662927",
     "https://gulfnews.com/business/property/palm-jebel-ali-unveils-limited-collection-of-44-beachfront-villas-on-frond-f-1.500646564",
     "https://gulfnews.com/business/property/palm-jumeirah-villa-sells-for-dh260-million-in-latest-dubai-luxury-deal-1.500659128",
     "https://gulfnews.com/business/property/ras-al-khaimah-property-prices-rise-in-h1-2026-13800-homes-due-by-2028-1.500660431",
@@ -69,6 +70,7 @@
     "https://www.khaleejtimes.com/business/dubai-property-repricing-opens-door-to-premium-communities",
     "https://www.khaleejtimes.com/business/dubai-set-for-highest-annual-home-deliveries-since-2008-as-new-launches-slow",
     "https://www.khaleejtimes.com/business/dubai-ultra-prime-home-sales-hit-6-billion-despite-regional-tensions",
+    "https://www.khaleejtimes.com/business/dubais-branded-residences-market-cools-on-volume-but-pricing-power-stays-strong",
     "https://www.khaleejtimes.com/business/dubais-nakheel-releases-44-new-beachfront-villas-on-palm-jebel-ali",
     "https://www.khaleejtimes.com/business/emirati-women-invest-dh27-billion-in-sharjahs-property-in-eight-months",
     "https://www.khaleejtimes.com/business/energy",
@@ -121,6 +123,7 @@
     "https://www.khaleejtimes.com/business/uae-developer-arada-makes-syria-debut-with-dh257-billion-city-project",
     "https://www.khaleejtimes.com/business/uae-developers-shift-focus-to-funded-projects-nearing-completion-says-report",
     "https://www.khaleejtimes.com/business/uae-property-market-cools-in-q2-as-dubai-abu-dhabi-home-prices-and-rents-ease",
+    "https://www.khaleejtimes.com/business/uae-travel-advisory-etihad-emirates-flydubai-air-arabia-flight-delays-and-cancellations",
     "https://www.khaleejtimes.com/business/why-dubai-residents-will-not-have-to-take-out-loans-to-pay-rents",
     "https://www.khaleejtimes.com/business/why-some-dubai-tenants-will-move-to-bigger-homes-this-year",
     "https://www.khaleejtimes.com/business/wynn-al-marjan-island-pushes-opening-to-september-2027-amid-regional-conflict-fallout",
@@ -546,7 +549,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-09-06T11:57:18+04:00",
+  "updated_at": "2026-09-07T12:23:50+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
