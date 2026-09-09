@@ -34,6 +34,7 @@
     "https://gulfnews.com/business/property/hudayriyat-island-tops-abu-dhabi-property-market-with-dh19-billion-in-sales-1.500648019",
     "https://gulfnews.com/business/property/imtiaz-records-another-launch-day-sell-out-with-dh15-billion-raw-district-2-1.500621203",
     "https://gulfnews.com/business/property/infinity-developments-strengthens-dubai-footprint-with-16m-business-bay-office-acquisition-1.500658981",
+    "https://gulfnews.com/business/property/ips-2026-dubai-developers-see-a-shift-from-peak-sales-to-a-more-selective-market-1.500667196",
     "https://gulfnews.com/business/property/ips-2026-opens-in-dubai-with-robotics-unveiling-and-a-rush-of-deal-making-1.500666254",
     "https://gulfnews.com/business/property/is-jeddah-tower-on-course-to-become-the-worlds-tallest-building-1.500623570",
     "https://gulfnews.com/business/property/modon-h1-net-profit-reaches-dh22-billion-after-property-sales-hit-dh26-billion-1.500625097",
@@ -58,6 +59,7 @@
     "https://www.khaleejtimes.com/business/abu-dhabi-to-see-surge-in-new-homes-easing-price-and-rental-growth",
     "https://www.khaleejtimes.com/business/aldar-adcb-complete-abu-dhabis-first-off-plan-mortgage-under-new-adrec-framework",
     "https://www.khaleejtimes.com/business/aviation",
+    "https://www.khaleejtimes.com/business/azizi-announces-dh30-billion-sharjah-project-townhouse-prices-start-from-dh189-million",
     "https://www.khaleejtimes.com/business/binghatti-dismisses-debt-fears-points-to-dh106-billion-in-escrow-accounts",
     "https://www.khaleejtimes.com/business/business-bay-overtakes-palm-jumeirah-as-dubais-busiest-prime-property-market",
     "https://www.khaleejtimes.com/business/dubai-abu-dhabi-landlords-keep-upper-hand-as-tenants-compete-in-uae-office-market",
@@ -557,7 +559,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-09-08T12:09:05+04:00",
+  "updated_at": "2026-09-09T12:12:38+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -588,6 +590,11 @@
       "url": "https://gulfnews.com/business/property/ips-2026-opens-in-dubai-with-robotics-unveiling-and-a-rush-of-deal-making-1.500666254",
       "title": "IPS 2026 opens in Dubai with robotics unveiling and a rush of deal-making",
       "reviewed_at": "2026-09-08T12:09:05.481421+04:00"
+    },
+    {
+      "url": "https://gulfnews.com/business/property/ips-2026-dubai-developers-see-a-shift-from-peak-sales-to-a-more-selective-market-1.500667196",
+      "title": "IPS 2026: Dubai developers see a shift from ‘peak sales’ to a more selective market",
+      "reviewed_at": "2026-09-09T12:12:38.774830+04:00"
     }
   ]
 }
