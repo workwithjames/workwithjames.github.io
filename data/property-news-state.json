@@ -10,6 +10,7 @@
     "https://gulfnews.com/business/property/dubai-adds-more-than-24000-property-units-in-six-months-1.500646931",
     "https://gulfnews.com/business/property/dubai-attracts-186-new-property-developers-in-first-seven-months-of-2026-1.500641994",
     "https://gulfnews.com/business/property/dubai-has-96585-homes-entering-the-market-in-2026-83-are-already-sold-1.500647675",
+    "https://gulfnews.com/business/property/dubai-holding-awards-dh5-billion-construction-contracts-for-new-hq-jumeirah-residences-emirates-towers-1.500668416",
     "https://gulfnews.com/business/property/dubai-homebuyers-get-more-choice-as-24800-new-units-enter-the-market-1.500625443",
     "https://gulfnews.com/business/property/dubai-land-department-launches-ai-powered-platform-to-speed-up-real-estate-registration-for-developers-1.500662918",
     "https://gulfnews.com/business/property/dubai-luxury-market-shifts-towards-trust-exclusive-property-access-1.500651804",
@@ -34,9 +35,11 @@
     "https://gulfnews.com/business/property/hudayriyat-island-tops-abu-dhabi-property-market-with-dh19-billion-in-sales-1.500648019",
     "https://gulfnews.com/business/property/imtiaz-records-another-launch-day-sell-out-with-dh15-billion-raw-district-2-1.500621203",
     "https://gulfnews.com/business/property/infinity-developments-strengthens-dubai-footprint-with-16m-business-bay-office-acquisition-1.500658981",
+    "https://gulfnews.com/business/property/international-property-show-2026-why-danube-is-offering-deals-not-new-projects-1.500668690",
     "https://gulfnews.com/business/property/ips-2026-dubai-developers-see-a-shift-from-peak-sales-to-a-more-selective-market-1.500667196",
     "https://gulfnews.com/business/property/ips-2026-opens-in-dubai-with-robotics-unveiling-and-a-rush-of-deal-making-1.500666254",
     "https://gulfnews.com/business/property/is-jeddah-tower-on-course-to-become-the-worlds-tallest-building-1.500623570",
+    "https://gulfnews.com/business/property/majid-al-futtaim-posts-record-h1-2026-results-as-dh100-billion-development-pipeline-advances-1.500668515",
     "https://gulfnews.com/business/property/modon-h1-net-profit-reaches-dh22-billion-after-property-sales-hit-dh26-billion-1.500625097",
     "https://gulfnews.com/business/property/nakheel-begins-handover-of-892-homes-at-jebel-ali-village-1.500643237",
     "https://gulfnews.com/business/property/new-mortgage-option-opens-for-abu-dhabi-off-plan-buyers-with-aldar-and-adcb-deal-1.500663048",
@@ -55,6 +58,7 @@
     "https://gulfnews.com/business/property/uaes-top-10-developers-sell-dh1137-billion-of-property-in-six-months-1.500639749",
     "https://gulfnews.com/business/property/where-sharjah-property-buyers-spent-most-as-july-deals-hit-dh7-billion-1.500632308",
     "https://gulfnews.com/business/property/zoya-developments-sells-out-elinor-project-in-under-two-weeks-1.500640776",
+    "https://www.khaleejtimes.com/business/6-in-10-dubai-homes-hold-their-value-as-market-cools-gently-in-august",
     "https://www.khaleejtimes.com/business/abu-dhabi-property-deals-top-dh155-billion-beat-2025s-full-year-total-in-8-months",
     "https://www.khaleejtimes.com/business/abu-dhabi-to-see-surge-in-new-homes-easing-price-and-rental-growth",
     "https://www.khaleejtimes.com/business/aldar-adcb-complete-abu-dhabis-first-off-plan-mortgage-under-new-adrec-framework",
@@ -86,6 +90,7 @@
     "https://www.khaleejtimes.com/business/galadari-brothers",
     "https://www.khaleejtimes.com/business/innovation-city",
     "https://www.khaleejtimes.com/business/markets",
+    "https://www.khaleejtimes.com/business/new-landmark-dubai-holding-signs-dh5-billion-deal-for-hq-jumeirah-residences",
     "https://www.khaleejtimes.com/business/new-uae-music-fees-businesses-to-pay-from-dh1500-to-dh50000-a-year",
     "https://www.khaleejtimes.com/business/over-530-emirati-youth-invest-dh43-billion-in-sharjah-property",
     "https://www.khaleejtimes.com/business/property/abu-dhabi-extends-housing-construction-maintenance-loans-activation-period",
@@ -170,7 +175,9 @@
     "https://www.thenationalnews.com/business/property/2026/09/01/former-wework-ceos-property-company-flow-hiring-as-it-launches-in-the-uae",
     "https://www.thenationalnews.com/business/property/2026/09/01/uae-developer-arada-to-build-7-billion-mixed-use-project-in-syria",
     "https://www.thenationalnews.com/business/property/2026/09/07/aldar-focuses-on-wellness-at-saadiyat-development-with-zen-garden-and-serenity-pool",
-    "https://www.thenationalnews.com/business/property/2026/09/07/emaar-mohamed-alabbar-dubai-property-market"
+    "https://www.thenationalnews.com/business/property/2026/09/07/emaar-mohamed-alabbar-dubai-property-market",
+    "https://www.thenationalnews.com/business/property/2026/09/09/dubai-holding-awards-its-largest-construction-contract-worth-dh5-billion",
+    "https://www.thenationalnews.com/business/property/2026/09/09/dubais-azizi-developments-makes-first-foray-into-sharjah-with-dh30-billion-project"
   ],
   "seen_title_signatures": [
     "000 2028 2030 abu delivery dhabi homes peak plans",
@@ -559,7 +566,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-09-09T12:12:38+04:00",
+  "updated_at": "2026-09-10T12:11:53+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
