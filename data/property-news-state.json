@@ -10,6 +10,8 @@
     "https://gulfnews.com/business/property/dubai-adds-more-than-24000-property-units-in-six-months-1.500646931",
     "https://gulfnews.com/business/property/dubai-attracts-186-new-property-developers-in-first-seven-months-of-2026-1.500641994",
     "https://gulfnews.com/business/property/dubai-has-96585-homes-entering-the-market-in-2026-83-are-already-sold-1.500647675",
+    "https://gulfnews.com/business/property/dubai-healthcare-city-begins-work-on-dh3b-dubai-creek-gardens-1.500670363",
+    "https://gulfnews.com/business/property/dubai-healthcare-city-launches-aed3-billion-dubai-creek-gardens-residential-development-1.500670799",
     "https://gulfnews.com/business/property/dubai-holding-awards-dh5-billion-construction-contracts-for-new-hq-jumeirah-residences-emirates-towers-1.500668416",
     "https://gulfnews.com/business/property/dubai-homebuyers-get-more-choice-as-24800-new-units-enter-the-market-1.500625443",
     "https://gulfnews.com/business/property/dubai-land-department-launches-ai-powered-platform-to-speed-up-real-estate-registration-for-developers-1.500662918",
@@ -47,6 +49,7 @@
     "https://gulfnews.com/business/property/ofw-paid-608000-for-a-manila-condo-what-the-maceda-law-can-and-cannot-save-1.500635734",
     "https://gulfnews.com/business/property/omniyat-showcases-dubais-vision-for-future-of-waterfront-living-in-monaco-1.500662927",
     "https://gulfnews.com/business/property/palm-jebel-ali-unveils-limited-collection-of-44-beachfront-villas-on-frond-f-1.500646564",
+    "https://gulfnews.com/business/property/palm-jebel-alis-first-retail-hub-revealed-with-26-new-concepts-1.500669544",
     "https://gulfnews.com/business/property/palm-jumeirah-villa-sells-for-dh260-million-in-latest-dubai-luxury-deal-1.500659128",
     "https://gulfnews.com/business/property/ras-al-khaimah-property-prices-rise-in-h1-2026-13800-homes-due-by-2028-1.500660431",
     "https://gulfnews.com/business/property/rockhill-bets-dh250-million-on-affordable-premium-living-with-its-first-ajman-tower-1.500617833",
@@ -126,6 +129,8 @@
     "https://www.khaleejtimes.com/business/sharjah-property-sales-more-than-double-in-h1-2026-as-prices-ease",
     "https://www.khaleejtimes.com/business/sharjah-real-estate-transactions-surge-618-to-dh7-billion-in-july",
     "https://www.khaleejtimes.com/business/tech",
+    "https://www.khaleejtimes.com/business/tech/apple-iphone-18-pro-pro-max-launch-uae-prices-pre-order-dates",
+    "https://www.khaleejtimes.com/business/tech/apple-launch-event-2026-live-updates-sep-9-2026",
     "https://www.khaleejtimes.com/business/time-to-buy-burj-khalifa-jbr-town-square-lead-dubai-apartment-price-declines-in-july",
     "https://www.khaleejtimes.com/business/trump-tower-dubai-construction-enters-next-phase-with-new-contractor-appointment",
     "https://www.khaleejtimes.com/business/uae-and-gcc-travel-update-airlines-suspend-flights-as-conflict-escalates",
@@ -566,7 +571,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-09-10T12:11:53+04:00",
+  "updated_at": "2026-09-11T12:07:13+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -602,6 +607,11 @@
       "url": "https://gulfnews.com/business/property/ips-2026-dubai-developers-see-a-shift-from-peak-sales-to-a-more-selective-market-1.500667196",
       "title": "IPS 2026: Dubai developers see a shift from ‘peak sales’ to a more selective market",
       "reviewed_at": "2026-09-09T12:12:38.774830+04:00"
+    },
+    {
+      "url": "https://gulfnews.com/business/property/dubai-healthcare-city-begins-work-on-dh3b-dubai-creek-gardens-1.500670363",
+      "title": "Dubai Healthcare City begins work on Dh3b Dubai Creek Gardens",
+      "reviewed_at": "2026-09-11T12:07:13.260909+04:00"
     }
   ]
 }
