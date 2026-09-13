@@ -180,6 +180,7 @@
     "https://www.thenationalnews.com/business/property/2026/08/27/union-properties-chief-executive-amer-khansaheb-resigns",
     "https://www.thenationalnews.com/business/property/2026/09/01/former-wework-ceos-property-company-flow-hiring-as-it-launches-in-the-uae",
     "https://www.thenationalnews.com/business/property/2026/09/01/uae-developer-arada-to-build-7-billion-mixed-use-project-in-syria",
+    "https://www.thenationalnews.com/business/property/2026/09/03/where-is-trumps-property-empire-expanding-in-the-gulf",
     "https://www.thenationalnews.com/business/property/2026/09/07/aldar-focuses-on-wellness-at-saadiyat-development-with-zen-garden-and-serenity-pool",
     "https://www.thenationalnews.com/business/property/2026/09/07/emaar-mohamed-alabbar-dubai-property-market",
     "https://www.thenationalnews.com/business/property/2026/09/09/dubai-holding-awards-its-largest-construction-contract-worth-dh5-billion",
@@ -572,7 +573,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-09-12T11:58:04+04:00",
+  "updated_at": "2026-09-13T12:22:30+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -613,6 +614,11 @@
       "url": "https://gulfnews.com/business/property/dubai-healthcare-city-begins-work-on-dh3b-dubai-creek-gardens-1.500670363",
       "title": "Dubai Healthcare City begins work on Dh3b Dubai Creek Gardens",
       "reviewed_at": "2026-09-11T12:07:13.260909+04:00"
+    },
+    {
+      "url": "https://www.thenationalnews.com/business/property/2026/09/03/where-is-trumps-property-empire-expanding-in-the-gulf",
+      "title": "Seven projects, four countries: Mapping Trump’s Gulf property empire",
+      "reviewed_at": "2026-09-13T12:22:30.979334+04:00"
     }
   ]
 }
