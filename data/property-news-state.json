@@ -1,6 +1,7 @@
 {
   "seen_urls": [
     "https://gulfnews.com/business/property/70-of-dubais-toyota-building-tenants-have-left-after-power-cuts-management-says-1.500647628",
+    "https://gulfnews.com/business/property/abu-dhabi-cuts-holiday-home-approval-times-with-upgraded-licensing-system-1.500675372",
     "https://gulfnews.com/business/property/abu-dhabi-to-add-71000-homes-by-2030-with-biggest-delivery-wave-in-2028-1.500645274",
     "https://gulfnews.com/business/property/adgm-launches-broker-rankings-for-property-buyers-and-tenants-1.500626469",
     "https://gulfnews.com/business/property/ajman-rental-contracts-reach-dh291-billion-in-first-half-of-2026-1.500644264",
@@ -54,6 +55,7 @@
     "https://gulfnews.com/business/property/palm-jumeirah-villa-sells-for-dh260-million-in-latest-dubai-luxury-deal-1.500659128",
     "https://gulfnews.com/business/property/ras-al-khaimah-property-prices-rise-in-h1-2026-13800-homes-due-by-2028-1.500660431",
     "https://gulfnews.com/business/property/rockhill-bets-dh250-million-on-affordable-premium-living-with-its-first-ajman-tower-1.500617833",
+    "https://gulfnews.com/business/property/sharjah-moves-to-tighten-property-rules-on-lost-and-abandoned-1.500675630",
     "https://gulfnews.com/business/property/top-10-tallest-under-construction-skyscrapers-in-the-uae-2026-1.500623030",
     "https://gulfnews.com/business/property/two-day-uae-property-showcase-in-hyderabad-targets-indian-investors-1.500644618",
     "https://gulfnews.com/business/property/uae-developer-arada-enters-syria-with-7-billion-new-damascus-mixed-use-project-1.500659060",
@@ -83,6 +85,8 @@
     "https://www.khaleejtimes.com/business/dubai-property-buyers-upgrade-to-bigger-units-move-to-high-end-communities-after-price-drop",
     "https://www.khaleejtimes.com/business/dubai-property-prices-could-adjust-5-10-as-new-supply-comes-by-2027-says-alabbar",
     "https://www.khaleejtimes.com/business/dubai-property-repricing-opens-door-to-premium-communities",
+    "https://www.khaleejtimes.com/business/dubai-property-transactions-grow-bigger-as-buyers-stretch-their-budgets",
+    "https://www.khaleejtimes.com/business/dubai-retail-property-sales-surge-177-to-dh38-billion-in-h1-2026",
     "https://www.khaleejtimes.com/business/dubai-set-for-highest-annual-home-deliveries-since-2008-as-new-launches-slow",
     "https://www.khaleejtimes.com/business/dubai-ultra-prime-home-sales-hit-6-billion-despite-regional-tensions",
     "https://www.khaleejtimes.com/business/dubais-branded-residences-market-cools-on-volume-but-pricing-power-stays-strong",
@@ -103,6 +107,7 @@
     "https://www.khaleejtimes.com/business/property/abu-dhabi-home-resales-jump-56-as-buyers-rush-for-projects-nearing-handover",
     "https://www.khaleejtimes.com/business/property/abu-dhabi-home-values-rise-178-as-apartments-gain-241",
     "https://www.khaleejtimes.com/business/property/abu-dhabi-rent-rules-could-help-tenants-stay-longer-as-landlords-face-limits-on-increases",
+    "https://www.khaleejtimes.com/business/property/abu-dhabi-streamlines-regulatory-process-holiday-homeowners-operators",
     "https://www.khaleejtimes.com/business/property/aldar-h1-profit-rises-to-dh49b-as-backlog-drives-earnings",
     "https://www.khaleejtimes.com/business/property/arif-developments-proudly-receives-award-from-hh-sheikh-nahayan-mabarak-al-nahayan-at-9th-golden-excellence-awards",
     "https://www.khaleejtimes.com/business/property/azizi-florence-a-homecoming-to-sharjah",
@@ -136,6 +141,7 @@
     "https://www.khaleejtimes.com/business/tech",
     "https://www.khaleejtimes.com/business/tech/apple-iphone-18-pro-pro-max-launch-uae-prices-pre-order-dates",
     "https://www.khaleejtimes.com/business/tech/apple-launch-event-2026-live-updates-sep-9-2026",
+    "https://www.khaleejtimes.com/business/tech/meta-launches-uae-subscription-whatsapp-instagram-facebook",
     "https://www.khaleejtimes.com/business/time-to-buy-burj-khalifa-jbr-town-square-lead-dubai-apartment-price-declines-in-july",
     "https://www.khaleejtimes.com/business/trump-tower-dubai-construction-enters-next-phase-with-new-contractor-appointment",
     "https://www.khaleejtimes.com/business/uae-and-gcc-travel-update-airlines-suspend-flights-as-conflict-escalates",
@@ -578,7 +584,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-09-15T12:45:00+04:00",
+  "updated_at": "2026-09-16T12:39:23+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -624,6 +630,11 @@
       "url": "https://www.thenationalnews.com/business/property/2026/09/03/where-is-trumps-property-empire-expanding-in-the-gulf",
       "title": "Seven projects, four countries: Mapping Trump’s Gulf property empire",
       "reviewed_at": "2026-09-13T12:22:30.979334+04:00"
+    },
+    {
+      "url": "https://gulfnews.com/business/property/sharjah-moves-to-tighten-property-rules-on-lost-and-abandoned-1.500675630",
+      "title": "Sharjah moves to tighten property rules on lost and abandoned",
+      "reviewed_at": "2026-09-16T12:39:23.098733+04:00"
     }
   ]
 }
