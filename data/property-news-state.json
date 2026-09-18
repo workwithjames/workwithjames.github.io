@@ -2,6 +2,7 @@
   "seen_urls": [
     "https://gulfnews.com/business/property/70-of-dubais-toyota-building-tenants-have-left-after-power-cuts-management-says-1.500647628",
     "https://gulfnews.com/business/property/abu-dhabi-cuts-holiday-home-approval-times-with-upgraded-licensing-system-1.500675372",
+    "https://gulfnews.com/business/property/abu-dhabi-holiday-homes-must-now-display-licence-numbers-on-online-listings-1.500675372",
     "https://gulfnews.com/business/property/abu-dhabi-to-add-71000-homes-by-2030-with-biggest-delivery-wave-in-2028-1.500645274",
     "https://gulfnews.com/business/property/adgm-launches-broker-rankings-for-property-buyers-and-tenants-1.500626469",
     "https://gulfnews.com/business/property/ajman-rental-contracts-reach-dh291-billion-in-first-half-of-2026-1.500644264",
@@ -39,6 +40,7 @@
     "https://gulfnews.com/business/property/golden-visa-first-time-buyer-support-flexi-rent-how-dubai-is-widening-property-access-for-buyers-and-renters-1.500644768",
     "https://gulfnews.com/business/property/gulf-news-and-aurex-privy-launch-sheowns-a-new-property-platform-putting-women-at-the-centre-of-ownership-decisions-1.500676671",
     "https://gulfnews.com/business/property/how-ai-powered-proptech-is-turning-property-search-into-decision-support-1.500670932",
+    "https://gulfnews.com/business/property/how-dubais-property-market-enters-a-new-phase-of-consolidation-1.500678195",
     "https://gulfnews.com/business/property/hudayriyat-island-tops-abu-dhabi-property-market-with-dh19-billion-in-sales-1.500648019",
     "https://gulfnews.com/business/property/imtiaz-records-another-launch-day-sell-out-with-dh15-billion-raw-district-2-1.500621203",
     "https://gulfnews.com/business/property/infinity-developments-strengthens-dubai-footprint-with-16m-business-bay-office-acquisition-1.500658981",
@@ -58,6 +60,7 @@
     "https://gulfnews.com/business/property/palm-jebel-alis-first-retail-hub-revealed-with-26-new-concepts-1.500669544",
     "https://gulfnews.com/business/property/palm-jumeirah-villa-sells-for-dh260-million-in-latest-dubai-luxury-deal-1.500659128",
     "https://gulfnews.com/business/property/ras-al-khaimah-property-prices-rise-in-h1-2026-13800-homes-due-by-2028-1.500660431",
+    "https://gulfnews.com/business/property/record-dh100-million-land-sale-cements-dubai-hills-estates-ultra-prime-status-1.500676935",
     "https://gulfnews.com/business/property/rockhill-bets-dh250-million-on-affordable-premium-living-with-its-first-ajman-tower-1.500617833",
     "https://gulfnews.com/business/property/sharjah-moves-to-tighten-property-rules-on-lost-and-abandoned-1.500675630",
     "https://gulfnews.com/business/property/top-10-tallest-under-construction-skyscrapers-in-the-uae-2026-1.500623030",
@@ -201,7 +204,8 @@
     "https://www.thenationalnews.com/business/property/2026/09/07/emaar-mohamed-alabbar-dubai-property-market",
     "https://www.thenationalnews.com/business/property/2026/09/09/dubai-holding-awards-its-largest-construction-contract-worth-dh5-billion",
     "https://www.thenationalnews.com/business/property/2026/09/09/dubais-azizi-developments-makes-first-foray-into-sharjah-with-dh30-billion-project",
-    "https://www.thenationalnews.com/business/property/2026/09/13/abu-dhabis-new-off-plan-mortgage-framework-to-support-property-market-with-financing-at-construction-phase"
+    "https://www.thenationalnews.com/business/property/2026/09/13/abu-dhabis-new-off-plan-mortgage-framework-to-support-property-market-with-financing-at-construction-phase",
+    "https://www.thenationalnews.com/business/property/2026/09/17/trump-organisation-to-build-62-storey-ultra-luxury-tower-in-georgia"
   ],
   "seen_title_signatures": [
     "000 2028 2030 abu delivery dhabi homes peak plans",
@@ -223,6 +227,7 @@
     "7bn aed deals july reach sharjah",
     "892 ali begins handover homes jebel nakheel village",
     "abu benchmark completion delivery dhabi early housing sets",
+    "abu dhabi display holiday homes licence listings must now numbers online",
     "access buyers dubai first initiatives renters time widen",
     "access dubai exclusive luxury market shifts towards trust",
     "across apartments checks expands monthly rent tenants",
@@ -590,7 +595,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-09-17T12:43:04+04:00",
+  "updated_at": "2026-09-18T12:18:54+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
