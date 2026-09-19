@@ -1,0 +1,201 @@
+/* Auth layout corrections: full-width fields, compact responsive spacing, safe mobile scrolling. */
+#authGate.auth-gate {
+  overflow-x: hidden;
+  overflow-y: auto;
+  align-items: center;
+  justify-items: center;
+  overscroll-behavior: contain;
+}
+
+#authGate .auth-card {
+  width: min(100%, 500px);
+  max-width: 500px;
+  margin: auto 0;
+}
+
+#authGate .auth-form,
+#authGate #signupFields,
+#authGate .auth-field,
+#authGate .auth-field label {
+  width: 100%;
+  min-width: 0;
+}
+
+#authGate .auth-field label {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+}
+
+#authGate .auth-field input {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#authGate #signupFields {
+  display: grid;
+  gap: 12px;
+}
+
+#authGate #signupFields[hidden] {
+  display: none !important;
+}
+
+#authGate #signupFields .auth-field[style] {
+  margin-top: 0 !important;
+}
+
+#authGate .auth-submit {
+  width: 100%;
+}
+
+@media (max-width: 700px) {
+  #authGate.auth-gate {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 14px;
+  }
+
+  #authGate .auth-card {
+    width: 100%;
+    max-width: 500px;
+    margin: auto 0;
+    padding: 22px 20px;
+    border-radius: 20px;
+  }
+
+  #authGate .auth-brand {
+    margin-bottom: 20px;
+  }
+
+  #authGate .auth-card h2 {
+    font-size: clamp(28px, 8vw, 34px);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+  }
+
+  #authGate .auth-card > p {
+    margin: 10px 0 18px;
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  #authGate .auth-tabs {
+    margin-bottom: 16px;
+  }
+
+  #authGate .auth-form {
+    gap: 11px;
+  }
+
+  #authGate #signupFields {
+    gap: 11px;
+  }
+
+  #authGate .auth-field label {
+    gap: 6px;
+    font-size: 8px;
+  }
+
+  #authGate .auth-field input {
+    height: 44px;
+    border-radius: 11px;
+    font-size: 14px;
+  }
+
+  #authGate .auth-submit {
+    height: 46px;
+    margin-top: 2px;
+  }
+
+  #authGate .auth-error {
+    min-height: 12px;
+  }
+
+  #authGate .auth-note {
+    margin-top: 12px !important;
+    font-size: 9px !important;
+    line-height: 1.45;
+  }
+}
+
+/* Short phones and landscape mobile: keep the entire interaction reachable. */
+@media (max-width: 700px) and (max-height: 720px) {
+  #authGate.auth-gate {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  #authGate .auth-card {
+    margin: 0;
+    padding: 18px;
+  }
+
+  #authGate .auth-brand {
+    margin-bottom: 14px;
+  }
+
+  #authGate .auth-brand-mark {
+    width: 40px;
+    height: 40px;
+  }
+
+  #authGate .auth-card h2 {
+    font-size: 28px;
+  }
+
+  #authGate .auth-card > p {
+    margin: 8px 0 13px;
+    line-height: 1.45;
+  }
+
+  #authGate .auth-tabs {
+    margin-bottom: 12px;
+  }
+
+  #authGate .auth-tab {
+    height: 36px;
+  }
+
+  #authGate .auth-form,
+  #authGate #signupFields {
+    gap: 9px;
+  }
+
+  #authGate .auth-field input {
+    height: 42px;
+  }
+
+  #authGate .auth-submit {
+    height: 44px;
+  }
+
+  #authGate .auth-note {
+    margin-top: 9px !important;
+  }
+}
+
+@media (max-width: 420px) {
+  #authGate.auth-gate {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  #authGate .auth-card {
+    padding-left: 17px;
+    padding-right: 17px;
+  }
+
+  #authGate .auth-brand strong {
+    font-size: 11px;
+  }
+
+  #authGate .auth-brand span {
+    font-size: 9px;
+  }
+}
