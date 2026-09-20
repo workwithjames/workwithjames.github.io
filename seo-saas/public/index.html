@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#11120f" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>James SEO | SEO Intelligence</title>
+  <meta name="description" content="Technical SEO auditing and search intelligence for websites, teams and agencies." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand-row">
+        <div class="brand-mark" aria-hidden="true">J</div>
+        <div>
+          <div class="brand-name">JAMES SEO</div>
+          <div class="brand-kicker">INTELLIGENCE</div>
+        </div>
+        <button class="icon-button mobile-close" id="closeSidebar" aria-label="Close navigation">×</button>
+      </div>
+
+      <div class="workspace-card">
+        <span class="workspace-dot"></span>
+        <div class="workspace-copy">
+          <small>WORKSPACE</small>
+          <strong>James Realty</strong>
+        </div>
+        <span class="chevron">⌄</span>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-item active" href="#overview" data-view="overview"><span class="nav-icon">⌂</span><span>Overview</span></a>
+        <a class="nav-item" href="#projects" data-view="projects"><span class="nav-icon">◇</span><span>Projects</span></a>
+        <a class="nav-item" href="#audit" data-view="audit"><span class="nav-icon">◎</span><span>Site Audit</span><span class="nav-badge live">LIVE</span></a>
+        <a class="nav-item" href="#keywords" data-view="keywords"><span class="nav-icon">⌕</span><span>Keywords</span></a>
+        <a class="nav-item" href="#rank" data-view="rank"><span class="nav-icon">↗</span><span>Rank Tracker</span></a>
+        <a class="nav-item" href="#competitors" data-view="competitors"><span class="nav-icon">◫</span><span>Competitors</span></a>
+        <a class="nav-item" href="#backlinks" data-view="backlinks"><span class="nav-icon">∞</span><span>Backlinks</span></a>
+        <a class="nav-item" href="#content" data-view="content"><span class="nav-icon">▤</span><span>Content</span></a>
+        <a class="nav-item" href="#ai-search" data-view="ai-search"><span class="nav-icon">✦</span><span>AI Search</span><span class="nav-badge">SOON</span></a>
+      </nav>
+
+      <div class="sidebar-spacer"></div>
+      <div class="sidebar-footer">
+        <div class="plan-line"><span>PRIVATE BETA</span><span>0.1</span></div>
+        <div class="usage-bar"><span></span></div>
+        <p>Core crawler active. Data-provider modules are being connected next.</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="openSidebar" aria-label="Open navigation">☰</button>
+        <div class="crumbs"><span>SEO</span><strong>/</strong><span id="currentCrumb">Overview</span></div>
+        <div class="top-actions">
+          <span class="status-pill"><span class="pulse"></span> SYSTEM READY</span>
+          <button class="ghost-button" id="newAuditTop">RUN AUDIT</button>
+          <button class="avatar-button" aria-label="Account">JR</button>
+        </div>
+      </header>
+
+      <div class="content">
+        <section class="view active" id="view-overview" data-view-panel="overview">
+          <div class="hero-grid">
+            <div>
+              <p class="eyebrow">SEO COMMAND CENTER</p>
+              <h1>Turn technical SEO into<br><span>clear action.</span></h1>
+              <p class="hero-copy">Audit websites, surface high-impact issues and build a search intelligence layer that can scale from James Realty to external customers.</p>
+            </div>
+            <div class="hero-actions">
+              <button class="primary-button" id="heroAudit">AUDIT A WEBSITE <span>→</span></button>
+              <p>No fabricated metrics. Live results appear after your first crawl.</p>
+            </div>
+          </div>
+
+          <div class="metric-grid" id="overviewMetrics">
+            <article class="metric-card"><span>HEALTH SCORE</span><strong id="metricScore">--</strong><small id="metricScoreCaption">Run an audit</small></article>
+            <article class="metric-card"><span>PAGES CRAWLED</span><strong id="metricPages">0</strong><small id="metricPagesCaption">Current session</small></article>
+            <article class="metric-card"><span>CRITICAL ISSUES</span><strong id="metricCritical">0</strong><small>Needs attention</small></article>
+            <article class="metric-card"><span>WARNINGS</span><strong id="metricWarnings">0</strong><small>Improvement opportunities</small></article>
+          </div>
+
+          <div class="section-grid">
+            <article class="panel opportunity-panel">
+              <div class="panel-head">
+                <div><p class="eyebrow">OPPORTUNITY FEED</p><h2>What should you do next?</h2></div>
+                <span class="panel-status">SESSION</span>
+              </div>
+              <div id="opportunityFeed" class="opportunity-feed empty-state compact">
+                <div class="empty-icon">↗</div>
+                <div><strong>Your recommendations will appear here.</strong><p>Run the first site audit to generate a prioritized action list from live crawl data.</p></div>
+              </div>
+            </article>
+
+            <article class="panel architecture-panel">
+              <div class="panel-head"><div><p class="eyebrow">PLATFORM</p><h2>Data layers</h2></div></div>
+              <div class="layer-list">
+                <div><span class="layer-number">01</span><div><strong>OWN CRAWLER</strong><p>Technical SEO, metadata, links, content and site structure.</p></div><span class="layer-state active">ACTIVE</span></div>
+                <div><span class="layer-number">02</span><div><strong>FIRST-PARTY DATA</strong><p>Search Console and Analytics connections.</p></div><span class="layer-state">NEXT</span></div>
+                <div><span class="layer-number">03</span><div><strong>MARKET DATA</strong><p>SERP, keyword and backlink provider abstraction.</p></div><span class="layer-state">PLANNED</span></div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" id="view-audit" data-view-panel="audit">
+          <div class="page-heading">
+            <div><p class="eyebrow">TECHNICAL SEO</p><h1>Site Audit</h1><p>Run a live crawl of a public website and turn technical problems into a prioritized action list.</p></div>
+            <div class="audit-limit">MVP LIMIT <strong>25 PAGES</strong> / CRAWL</div>
+          </div>
+
+          <article class="panel audit-form-panel">
+            <form id="auditForm" class="audit-form">
+              <div class="field grow"><label for="auditUrl">WEBSITE</label><input id="auditUrl" name="url" type="text" inputmode="url" autocomplete="url" placeholder="jamesrealty.uk" required /></div>
+              <div class="field pages-field"><label for="maxPages">PAGES</label><select id="maxPages" name="maxPages"><option>5</option><option selected>15</option><option>25</option></select></div>
+              <button class="primary-button audit-submit" type="submit" id="auditSubmit">RUN LIVE AUDIT <span>→</span></button>
+            </form>
+            <div class="audit-note">The crawler stays on the same origin, respects basic robots.txt rules, blocks local/private targets and stops at the selected page limit.</div>
+          </article>
+
+          <div id="auditLoading" class="loading-panel panel hidden" aria-live="polite">
+            <div class="spinner"></div>
+            <div><strong>CRAWLING WEBSITE</strong><p>Fetching pages and evaluating technical SEO signals.</p></div>
+          </div>
+
+          <div id="auditError" class="error-panel hidden" role="alert"></div>
+
+          <div id="auditResults" class="hidden">
+            <div class="result-summary">
+              <article class="score-card panel"><div class="score-ring" id="scoreRing"><span id="auditScore">0</span><small>/100</small></div><div><p class="eyebrow">SITE HEALTH</p><h2 id="scoreLabel">Audit complete</h2><p id="scoreSubtext">Based on the pages crawled in this session.</p></div></article>
+              <article class="result-card panel"><span>CRITICAL</span><strong id="resultCritical">0</strong><small>Errors</small></article>
+              <article class="result-card panel"><span>WARNING</span><strong id="resultWarning">0</strong><small>Issues</small></article>
+              <article class="result-card panel"><span>NOTICE</span><strong id="resultNotice">0</strong><small>Opportunities</small></article>
+            </div>
+
+            <div class="section-grid audit-grid">
+              <article class="panel">
+                <div class="panel-head"><div><p class="eyebrow">PRIORITY</p><h2>Issues found</h2></div><span id="issueCountLabel" class="panel-status">0 ISSUES</span></div>
+                <div id="issuesList" class="issues-list"></div>
+              </article>
+              <article class="panel crawl-facts-panel">
+                <div class="panel-head"><div><p class="eyebrow">CRAWL</p><h2>Run details</h2></div></div>
+                <dl class="facts-list">
+                  <div><dt>Target</dt><dd id="factTarget">-</dd></div>
+                  <div><dt>Pages crawled</dt><dd id="factPages">-</dd></div>
+                  <div><dt>Duration</dt><dd id="factDuration">-</dd></div>
+                  <div><dt>robots.txt</dt><dd id="factRobots">-</dd></div>
+                  <div><dt>Successful pages</dt><dd id="factOk">-</dd></div>
+                </dl>
+              </article>
+            </div>
+
+            <article class="panel pages-panel">
+              <div class="panel-head"><div><p class="eyebrow">PAGE LEVEL</p><h2>Crawled URLs</h2></div><input class="table-search" id="pageSearch" type="search" placeholder="Filter pages" /></div>
+              <div class="table-wrap"><table><thead><tr><th>URL</th><th>STATUS</th><th>SCORE</th><th>TITLE</th><th>H1</th><th>WORDS</th><th>ISSUES</th><th>RESPONSE</th></tr></thead><tbody id="pagesTableBody"></tbody></table></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" id="view-projects" data-view-panel="projects">
+          <div class="page-heading"><div><p class="eyebrow">WORKSPACES</p><h1>Projects</h1><p>One account can manage multiple sites without mixing their SEO data.</p></div></div>
+          <article class="panel placeholder-module"><div class="module-number">01</div><div><p class="eyebrow">MULTI-TENANT FOUNDATION</p><h2>Projects are schema-ready.</h2><p>The database model already separates users, workspaces and website projects. Production persistence will activate when the D1 binding and authentication layer are connected.</p></div><span class="module-chip">FOUNDATION READY</span></article>
+        </section>
+
+        <section class="view" id="view-keywords" data-view-panel="keywords">
+          <div class="page-heading"><div><p class="eyebrow">SEARCH DEMAND</p><h1>Keywords</h1><p>First-party query intelligence plus external market datasets, without locking the platform to one provider.</p></div></div>
+          <div class="module-cards"><article class="panel placeholder-module"><div class="module-number">02</div><div><h2>Search Console</h2><p>Actual queries, clicks, impressions, CTR, average position, pages, countries and devices.</p></div><span class="module-chip next">NEXT</span></article><article class="panel placeholder-module"><div class="module-number">03</div><div><h2>Keyword Explorer</h2><p>Search volume, intent, difficulty, SERP features and clustering through a provider abstraction layer.</p></div><span class="module-chip">PROVIDER READY</span></article></div>
+        </section>
+
+        <section class="view" id="view-rank" data-view-panel="rank">
+          <div class="page-heading"><div><p class="eyebrow">VISIBILITY</p><h1>Rank Tracker</h1><p>Daily and scheduled ranking checks by market, device and landing page.</p></div></div>
+          <article class="panel placeholder-module"><div class="module-number">04</div><div><h2>Historical rankings</h2><p>The schema already stores tracked keywords and dated ranking observations. A SERP provider will power production checks.</p></div><span class="module-chip">PROVIDER READY</span></article>
+        </section>
+
+        <section class="view" id="view-competitors" data-view-panel="competitors">
+          <div class="page-heading"><div><p class="eyebrow">MARKET INTELLIGENCE</p><h1>Competitors</h1><p>Compare domains, identify keyword gaps and turn competitor movement into actionable opportunities.</p></div></div>
+          <article class="panel placeholder-module"><div class="module-number">05</div><div><h2>Competitive gap engine</h2><p>Project-to-competitor relationships are already represented in the database model. Keyword and backlink datasets plug in without changing the UI architecture.</p></div><span class="module-chip">SCHEMA READY</span></article>
+        </section>
+
+        <section class="view" id="view-backlinks" data-view-panel="backlinks">
+          <div class="page-heading"><div><p class="eyebrow">AUTHORITY</p><h1>Backlinks</h1><p>External link intelligence belongs behind a swappable data-provider layer rather than an expensive attempt to recreate the whole web index.</p></div></div>
+          <article class="panel placeholder-module"><div class="module-number">06</div><div><h2>Backlink intelligence</h2><p>New and lost links, referring domains, anchors, competitor gaps and link opportunities will be metered as external-data usage.</p></div><span class="module-chip">PROVIDER READY</span></article>
+        </section>
+
+        <section class="view" id="view-content" data-view-panel="content">
+          <div class="page-heading"><div><p class="eyebrow">CONTENT INTELLIGENCE</p><h1>Content</h1><p>Connect crawl data with search performance to expose decay, cannibalization and internal-link opportunities.</p></div></div>
+          <article class="panel placeholder-module"><div class="module-number">07</div><div><h2>Opportunity engine</h2><p>Once Search Console is connected, the platform can prioritize striking-distance keywords, weak CTR, decaying pages and competing URLs.</p></div><span class="module-chip next">AFTER GSC</span></article>
+        </section>
+
+        <section class="view" id="view-ai-search" data-view-panel="ai-search">
+          <div class="page-heading"><div><p class="eyebrow">GEO / AEO</p><h1>AI Search</h1><p>Track brand visibility and source citations across supported AI-search monitoring providers.</p></div></div>
+          <article class="panel placeholder-module"><div class="module-number">08</div><div><h2>AI visibility</h2><p>Prompt sets, brand mentions, citation sources and competitor share-of-answer are planned as a separate metered data layer.</p></div><span class="module-chip">PLANNED</span></article>
+        </section>
+      </div>
+    </main>
+  </div>
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
