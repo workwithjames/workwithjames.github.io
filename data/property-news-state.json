@@ -2,6 +2,7 @@
   "seen_urls": [
     "https://gulfnews.com/business/property/70-of-dubais-toyota-building-tenants-have-left-after-power-cuts-management-says-1.500647628",
     "https://gulfnews.com/business/property/abu-dhabi-cuts-holiday-home-approval-times-with-upgraded-licensing-system-1.500675372",
+    "https://gulfnews.com/business/property/abu-dhabi-holiday-home-rules-what-guests-and-operators-need-to-know-1.500682123",
     "https://gulfnews.com/business/property/abu-dhabi-holiday-homes-must-now-display-licence-numbers-on-online-listings-1.500675372",
     "https://gulfnews.com/business/property/abu-dhabi-to-add-71000-homes-by-2030-with-biggest-delivery-wave-in-2028-1.500645274",
     "https://gulfnews.com/business/property/adgm-launches-broker-rankings-for-property-buyers-and-tenants-1.500626469",
@@ -29,6 +30,7 @@
     "https://gulfnews.com/business/property/dubais-350-metre-trump-tower-moves-into-next-construction-phase-1.500632456",
     "https://gulfnews.com/business/property/dubais-iconic-toyota-building-to-be-demolished-in-2027-1.500646516",
     "https://gulfnews.com/business/property/dubais-shared-housing-law-takes-effect-fines-of-up-to-dh1-million-for-repeat-violations-1.500653193",
+    "https://gulfnews.com/business/property/eagle-hills-signs-12-billion-maldives-waterfront-deal-1.500682175",
     "https://gulfnews.com/business/property/early-completion-sets-new-pace-for-abu-dhabi-housing-1.500630309",
     "https://gulfnews.com/business/property/ellington-properties-adcb-pioneer-new-off-plan-and-ready-pre-approved-home-buying-solutions-1.500670034",
     "https://gulfnews.com/business/property/emaar-books-dh266-billion-in-property-sales-backlog-climbs-to-dh1649-billion-1.500633439",
@@ -163,6 +165,7 @@
     "https://www.khaleejtimes.com/business/uae-commercial-rents-jump-as-abu-dhabi-prime-office-availability-falls-to-01",
     "https://www.khaleejtimes.com/business/uae-developer-arada-makes-syria-debut-with-dh257-billion-city-project",
     "https://www.khaleejtimes.com/business/uae-developers-shift-focus-to-funded-projects-nearing-completion-says-report",
+    "https://www.khaleejtimes.com/business/uae-flight-updates-delays-and-cancellations-at-dubai-abu-dhabi-airports",
     "https://www.khaleejtimes.com/business/uae-property-market-cools-in-q2-as-dubai-abu-dhabi-home-prices-and-rents-ease",
     "https://www.khaleejtimes.com/business/uae-travel-advisory-etihad-emirates-flydubai-air-arabia-flight-delays-and-cancellations",
     "https://www.khaleejtimes.com/business/why-dubai-residents-will-not-have-to-take-out-loans-to-pay-rents",
@@ -209,7 +212,8 @@
     "https://www.thenationalnews.com/business/property/2026/09/09/dubais-azizi-developments-makes-first-foray-into-sharjah-with-dh30-billion-project",
     "https://www.thenationalnews.com/business/property/2026/09/13/abu-dhabis-new-off-plan-mortgage-framework-to-support-property-market-with-financing-at-construction-phase",
     "https://www.thenationalnews.com/business/property/2026/09/17/trump-organisation-to-build-62-storey-ultra-luxury-tower-in-georgia",
-    "https://www.thenationalnews.com/business/property/2026/09/18/aldar-launches-new-luxury-retail-project-with-more-than-100-brands-in-saadiyat"
+    "https://www.thenationalnews.com/business/property/2026/09/18/aldar-launches-new-luxury-retail-project-with-more-than-100-brands-in-saadiyat",
+    "https://www.thenationalnews.com/business/property/2026/09/21/abu-dhabis-eagle-hills-signs-20bn-maldives-waterfront-and-marina-deal"
   ],
   "seen_title_signatures": [
     "000 2028 2030 abu delivery dhabi homes peak plans",
@@ -599,7 +603,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-09-20T12:39:09+04:00",
+  "updated_at": "2026-09-21T13:01:57+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -655,6 +659,11 @@
       "url": "https://gulfnews.com/business/property/gulf-news-and-aurex-privy-launch-sheowns-a-new-property-platform-putting-women-at-the-centre-of-ownership-decisions-1.500676671",
       "title": "Gulf News and Aurex Privy launch SheOwns, a new property platform putting women at the centre of ownership decisions",
       "reviewed_at": "2026-09-17T12:43:04.994914+04:00"
+    },
+    {
+      "url": "https://www.thenationalnews.com/business/property/2026/09/21/abu-dhabis-eagle-hills-signs-20bn-maldives-waterfront-and-marina-deal",
+      "title": "Abu Dhabi's Eagle Hills signs $20bn Maldives waterfront and marina deal",
+      "reviewed_at": "2026-09-21T13:01:57.887778+04:00"
     }
   ]
 }
