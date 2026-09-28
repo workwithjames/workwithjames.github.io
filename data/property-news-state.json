@@ -83,6 +83,7 @@
     "https://www.khaleejtimes.com/business/aldar-adcb-complete-abu-dhabis-first-off-plan-mortgage-under-new-adrec-framework",
     "https://www.khaleejtimes.com/business/aldar-mubadala-buy-masdar-city-square-in-dh918m-deal",
     "https://www.khaleejtimes.com/business/aviation",
+    "https://www.khaleejtimes.com/business/aviation/uae-flight-delays-cancellations-46-flights-delayed-across-airports",
     "https://www.khaleejtimes.com/business/azizi-announces-dh30-billion-sharjah-project-townhouse-prices-start-from-dh189-million",
     "https://www.khaleejtimes.com/business/binghatti-dismisses-debt-fears-points-to-dh106-billion-in-escrow-accounts",
     "https://www.khaleejtimes.com/business/business-bay-overtakes-palm-jumeirah-as-dubais-busiest-prime-property-market",
@@ -222,7 +223,8 @@
     "https://www.thenationalnews.com/business/property/2026/09/18/aldar-launches-new-luxury-retail-project-with-more-than-100-brands-in-saadiyat",
     "https://www.thenationalnews.com/business/property/2026/09/21/abu-dhabis-eagle-hills-signs-20bn-maldives-waterfront-and-marina-deal",
     "https://www.thenationalnews.com/business/property/2026/09/24/buy-dubai-property-bubble-strong-rents-demand-ubs-report",
-    "https://www.thenationalnews.com/business/property/2026/09/24/syria-to-build-two-million-homes-by-2035-to-plug-housing-shortage"
+    "https://www.thenationalnews.com/business/property/2026/09/24/syria-to-build-two-million-homes-by-2035-to-plug-housing-shortage",
+    "https://www.thenationalnews.com/business/property/2026/09/28/dubais-sobha-realty-eyes-600m-us-housing-push-and-targets-national-expansion"
   ],
   "seen_title_signatures": [
     "000 2028 2030 abu delivery dhabi homes peak plans",
@@ -612,7 +614,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-09-27T13:19:53+04:00",
+  "updated_at": "2026-09-28T13:52:59+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -673,6 +675,11 @@
       "url": "https://www.thenationalnews.com/business/property/2026/09/21/abu-dhabis-eagle-hills-signs-20bn-maldives-waterfront-and-marina-deal",
       "title": "Abu Dhabi's Eagle Hills signs $20bn Maldives waterfront and marina deal",
       "reviewed_at": "2026-09-21T13:01:57.887778+04:00"
+    },
+    {
+      "url": "https://www.thenationalnews.com/business/property/2026/09/28/dubais-sobha-realty-eyes-600m-us-housing-push-and-targets-national-expansion",
+      "title": "Dubai’s Sobha Realty eyes $600m US housing push and targets further expansion",
+      "reviewed_at": "2026-09-28T13:52:59.691977+04:00"
     }
   ]
 }
