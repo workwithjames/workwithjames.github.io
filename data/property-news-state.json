@@ -59,6 +59,7 @@
     "https://gulfnews.com/business/property/new-mortgage-option-opens-for-abu-dhabi-off-plan-buyers-with-aldar-and-adcb-deal-1.500663048",
     "https://gulfnews.com/business/property/object-1-launches-sky-level-1-expanding-its-jvc-residential-portfolio-1.500650573",
     "https://gulfnews.com/business/property/ofw-paid-608000-for-a-manila-condo-what-the-maceda-law-can-and-cannot-save-1.500635734",
+    "https://gulfnews.com/business/property/ohana-development-and-manchester-city-break-ground-at-manchester-city-yas-residences-by-ohana-1.500690828",
     "https://gulfnews.com/business/property/omniyat-showcases-dubais-vision-for-future-of-waterfront-living-in-monaco-1.500662927",
     "https://gulfnews.com/business/property/palm-jebel-ali-unveils-limited-collection-of-44-beachfront-villas-on-frond-f-1.500646564",
     "https://gulfnews.com/business/property/palm-jebel-alis-first-retail-hub-revealed-with-26-new-concepts-1.500669544",
@@ -78,6 +79,7 @@
     "https://gulfnews.com/business/property/yas-island-gets-dh12-billion-investment-for-new-rides-attractions-and-hotels-1.500673885",
     "https://gulfnews.com/business/property/zoya-developments-sells-out-elinor-project-in-under-two-weeks-1.500640776",
     "https://www.khaleejtimes.com/business/6-in-10-dubai-homes-hold-their-value-as-market-cools-gently-in-august",
+    "https://www.khaleejtimes.com/business/abu-dhabi-named-worlds-most-improved-real-estate-market-for-transparency",
     "https://www.khaleejtimes.com/business/abu-dhabi-property-deals-top-dh155-billion-beat-2025s-full-year-total-in-8-months",
     "https://www.khaleejtimes.com/business/abu-dhabi-to-see-surge-in-new-homes-easing-price-and-rental-growth",
     "https://www.khaleejtimes.com/business/aldar-adcb-complete-abu-dhabis-first-off-plan-mortgage-under-new-adrec-framework",
@@ -102,6 +104,7 @@
     "https://www.khaleejtimes.com/business/dubai-property-prices-could-adjust-5-10-as-new-supply-comes-by-2027-says-alabbar",
     "https://www.khaleejtimes.com/business/dubai-property-repricing-opens-door-to-premium-communities",
     "https://www.khaleejtimes.com/business/dubai-property-transactions-grow-bigger-as-buyers-stretch-their-budgets",
+    "https://www.khaleejtimes.com/business/dubai-remains-worlds-branded-residence-capital-as-uae-accounts-for-19-of-global-market",
     "https://www.khaleejtimes.com/business/dubai-retail-property-sales-surge-177-to-dh38-billion-in-h1-2026",
     "https://www.khaleejtimes.com/business/dubai-set-for-highest-annual-home-deliveries-since-2008-as-new-launches-slow",
     "https://www.khaleejtimes.com/business/dubai-ultra-prime-home-sales-hit-6-billion-despite-regional-tensions",
@@ -115,6 +118,7 @@
     "https://www.khaleejtimes.com/business/etihad-rail-to-boost-fujairah-property-market-as-investors-eye-price-growth",
     "https://www.khaleejtimes.com/business/expat-residents-foreign-investors-top-abu-dhabi-property-buyers-in-2026",
     "https://www.khaleejtimes.com/business/galadari-brothers",
+    "https://www.khaleejtimes.com/business/gcc-hotels-set-to-add-126000-new-rooms-by-2030-says-new-report",
     "https://www.khaleejtimes.com/business/innovation-city",
     "https://www.khaleejtimes.com/business/markets",
     "https://www.khaleejtimes.com/business/new-landmark-dubai-holding-signs-dh5-billion-deal-for-hq-jumeirah-residences",
@@ -153,6 +157,7 @@
     "https://www.khaleejtimes.com/business/property/record-transactions-and-global-brands-fuel-abu-dhabis-next-phase-of-real-estate-growth",
     "https://www.khaleejtimes.com/business/property/sheikh-mohammed-issues-new-law-to-regulate-shared-housing-in-dubai",
     "https://www.khaleejtimes.com/business/property/skyloov-partners-with-prypco-to-simplify-home-financing-and-enhance-the-property-buying-experience",
+    "https://www.khaleejtimes.com/business/property/uae-rising-rents-residency-options-drive-young-buyers-to-own-homes",
     "https://www.khaleejtimes.com/business/property/wadan-developments-introduces-weston-its-latest-residential-project-in-dubai",
     "https://www.khaleejtimes.com/business/property/zoya-developments-launches-the-laureates-to-support-a-culture-of-excellence-across-dubais-real-estate-sector",
     "https://www.khaleejtimes.com/business/ras-al-khaimah-rents-rise-in-h1-2026-but-apartment-rates-drop-in-q2",
@@ -224,7 +229,8 @@
     "https://www.thenationalnews.com/business/property/2026/09/21/abu-dhabis-eagle-hills-signs-20bn-maldives-waterfront-and-marina-deal",
     "https://www.thenationalnews.com/business/property/2026/09/24/buy-dubai-property-bubble-strong-rents-demand-ubs-report",
     "https://www.thenationalnews.com/business/property/2026/09/24/syria-to-build-two-million-homes-by-2035-to-plug-housing-shortage",
-    "https://www.thenationalnews.com/business/property/2026/09/28/dubais-sobha-realty-eyes-600m-us-housing-push-and-targets-national-expansion"
+    "https://www.thenationalnews.com/business/property/2026/09/28/dubais-sobha-realty-eyes-600m-us-housing-push-and-targets-national-expansion",
+    "https://www.thenationalnews.com/business/property/2026/09/28/jdcoms-new-logistics-hub-at-abu-dhabis-kezad-to-create-1000-jobs"
   ],
   "seen_title_signatures": [
     "000 2028 2030 abu delivery dhabi homes peak plans",
@@ -614,7 +620,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-09-28T13:52:59+04:00",
+  "updated_at": "2026-09-29T13:54:40+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -680,6 +686,11 @@
       "url": "https://www.thenationalnews.com/business/property/2026/09/28/dubais-sobha-realty-eyes-600m-us-housing-push-and-targets-national-expansion",
       "title": "Dubai’s Sobha Realty eyes $600m US housing push and targets further expansion",
       "reviewed_at": "2026-09-28T13:52:59.691977+04:00"
+    },
+    {
+      "url": "https://www.thenationalnews.com/business/property/2026/09/28/jdcoms-new-logistics-hub-at-abu-dhabis-kezad-to-create-1000-jobs",
+      "title": "JD.com's new logistics hub at Abu Dhabi’s Kezad to create 1,000 jobs",
+      "reviewed_at": "2026-09-29T13:54:40.387588+04:00"
     }
   ]
 }
