@@ -96,6 +96,7 @@
     "https://www.khaleejtimes.com/business/dubai-developer-damac-crosses-50000-home-handovers-targets-8800-more-in-2026",
     "https://www.khaleejtimes.com/business/dubai-developer-emaars-board-approves-dh44-billion-special-dividend-for-shareholders",
     "https://www.khaleejtimes.com/business/dubai-developer-mortgages-are-void-unless-funds-go-into-escrow-says-court",
+    "https://www.khaleejtimes.com/business/dubai-developers-hold-off-plan-pricing-as-only-6-projects-cut-prices-by-5-or-more-since-february",
     "https://www.khaleejtimes.com/business/dubai-home-prices-rents-decline-as-supply-rises-32000-more-units-due-this-year",
     "https://www.khaleejtimes.com/business/dubai-office-sales-nearly-triple-to-dh158-billion-in-h1-2026",
     "https://www.khaleejtimes.com/business/dubai-on-course-for-record-year-in-rental-contracts",
@@ -154,6 +155,7 @@
     "https://www.khaleejtimes.com/business/property/ora-land-launches-blubay-in-karjat-with-suryakumar-yadav-as-brand-ambassador",
     "https://www.khaleejtimes.com/business/property/rak-retail-property-prices-soar-up-to-348-as-commercial-market-expands",
     "https://www.khaleejtimes.com/business/property/ras-al-khaimah-rents-rise-villas-gain-popularity",
+    "https://www.khaleejtimes.com/business/property/real-estate-success-creating-life-communities-al-ain-alabbar",
     "https://www.khaleejtimes.com/business/property/record-transactions-and-global-brands-fuel-abu-dhabis-next-phase-of-real-estate-growth",
     "https://www.khaleejtimes.com/business/property/sheikh-mohammed-issues-new-law-to-regulate-shared-housing-in-dubai",
     "https://www.khaleejtimes.com/business/property/skyloov-partners-with-prypco-to-simplify-home-financing-and-enhance-the-property-buying-experience",
@@ -230,7 +232,9 @@
     "https://www.thenationalnews.com/business/property/2026/09/24/buy-dubai-property-bubble-strong-rents-demand-ubs-report",
     "https://www.thenationalnews.com/business/property/2026/09/24/syria-to-build-two-million-homes-by-2035-to-plug-housing-shortage",
     "https://www.thenationalnews.com/business/property/2026/09/28/dubais-sobha-realty-eyes-600m-us-housing-push-and-targets-national-expansion",
-    "https://www.thenationalnews.com/business/property/2026/09/28/jdcoms-new-logistics-hub-at-abu-dhabis-kezad-to-create-1000-jobs"
+    "https://www.thenationalnews.com/business/property/2026/09/28/jdcoms-new-logistics-hub-at-abu-dhabis-kezad-to-create-1000-jobs",
+    "https://www.thenationalnews.com/business/property/2026/09/29/aldar-generates-more-than-dh5bn-in-sales-from-new-housing-developments",
+    "https://www.thenationalnews.com/business/property/2026/09/30/aldar-and-arada-sign-dh15bn-partnership-for-new-developments-in-abu-dhabi"
   ],
   "seen_title_signatures": [
     "000 2028 2030 abu delivery dhabi homes peak plans",
@@ -620,7 +624,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-09-29T13:54:40+04:00",
+  "updated_at": "2026-09-30T13:46:55+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -691,6 +695,16 @@
       "url": "https://www.thenationalnews.com/business/property/2026/09/28/jdcoms-new-logistics-hub-at-abu-dhabis-kezad-to-create-1000-jobs",
       "title": "JD.com's new logistics hub at Abu Dhabi’s Kezad to create 1,000 jobs",
       "reviewed_at": "2026-09-29T13:54:40.387588+04:00"
+    },
+    {
+      "url": "https://www.thenationalnews.com/business/property/2026/09/30/aldar-and-arada-sign-dh15bn-partnership-for-new-developments-in-abu-dhabi",
+      "title": "Aldar and Arada sign Dh15bn partnership for new projects in Abu Dhabi",
+      "reviewed_at": "2026-09-30T13:46:55.192634+04:00"
+    },
+    {
+      "url": "https://www.thenationalnews.com/business/property/2026/09/29/aldar-generates-more-than-dh5bn-in-sales-from-new-housing-developments",
+      "title": "Aldar generates more than Dh5bn in sales from new housing developments",
+      "reviewed_at": "2026-09-30T13:46:55.192634+04:00"
     }
   ]
 }
