@@ -10,6 +10,7 @@
     "https://gulfnews.com/business/property/aldar-launches-yas-riva-reserve-a-waterfront-villa-community-on-yas-island-1.500679693",
     "https://gulfnews.com/business/property/aldar-mubadala-jv-buys-99-occupied-masdar-city-square-for-dh918-million-1.500677780",
     "https://gulfnews.com/business/property/arif-developments-honoured-at-9th-golden-excellence-awards-1.500622447",
+    "https://gulfnews.com/business/property/arif-developments-recognised-as-promising-developer-of-the-year-1.500693475",
     "https://gulfnews.com/business/property/beyond-supply-glut-manila-condo-market-faces-repricing-what-it-means-1.500630690",
     "https://gulfnews.com/business/property/damac-to-host-two-day-mortgage-event-with-uae-banks-this-weekend-1.500633497",
     "https://gulfnews.com/business/property/dubai-adds-more-than-24000-property-units-in-six-months-1.500646931",
@@ -49,6 +50,7 @@
     "https://gulfnews.com/business/property/imtiaz-records-another-launch-day-sell-out-with-dh15-billion-raw-district-2-1.500621203",
     "https://gulfnews.com/business/property/infinity-developments-strengthens-dubai-footprint-with-16m-business-bay-office-acquisition-1.500658981",
     "https://gulfnews.com/business/property/international-property-show-2026-why-danube-is-offering-deals-not-new-projects-1.500668690",
+    "https://gulfnews.com/business/property/invest-in-dubai-one-habba-at-a-time-with-prypco-blocks-1.500695844",
     "https://gulfnews.com/business/property/ips-2026-dubai-developers-see-a-shift-from-peak-sales-to-a-more-selective-market-1.500667196",
     "https://gulfnews.com/business/property/ips-2026-opens-in-dubai-with-robotics-unveiling-and-a-rush-of-deal-making-1.500666254",
     "https://gulfnews.com/business/property/is-jeddah-tower-on-course-to-become-the-worlds-tallest-building-1.500623570",
@@ -75,6 +77,7 @@
     "https://gulfnews.com/business/property/uae-developer-arada-unveils-dh5-billion-broadbeach-project-with-952-homes-in-australia-1.500646600",
     "https://gulfnews.com/business/property/uae-investors-account-for-half-of-sharjah-property-market-during-h1-2026-1.500621868",
     "https://gulfnews.com/business/property/uaes-top-10-developers-sell-dh1137-billion-of-property-in-six-months-1.500639749",
+    "https://gulfnews.com/business/property/wadan-marks-one-year-with-breaking-ground-ceremony-at-weston-1.500694594",
     "https://gulfnews.com/business/property/where-sharjah-property-buyers-spent-most-as-july-deals-hit-dh7-billion-1.500632308",
     "https://gulfnews.com/business/property/wynn-al-marjan-island-unveils-two-1460-sqm-apartments-at-top-of-70-storey-tower-1.500673675",
     "https://gulfnews.com/business/property/yas-island-gets-dh12-billion-investment-for-new-rides-attractions-and-hotels-1.500673885",
@@ -86,6 +89,7 @@
     "https://www.khaleejtimes.com/business/aldar-adcb-complete-abu-dhabis-first-off-plan-mortgage-under-new-adrec-framework",
     "https://www.khaleejtimes.com/business/aldar-mubadala-buy-masdar-city-square-in-dh918m-deal",
     "https://www.khaleejtimes.com/business/aviation",
+    "https://www.khaleejtimes.com/business/aviation/flydubai-dubai-tel-aviv-diverted-flight-from-altercation-to-probe",
     "https://www.khaleejtimes.com/business/aviation/uae-flight-delays-cancellations-46-flights-delayed-across-airports",
     "https://www.khaleejtimes.com/business/azizi-announces-dh30-billion-sharjah-project-townhouse-prices-start-from-dh189-million",
     "https://www.khaleejtimes.com/business/binghatti-dismisses-debt-fears-points-to-dh106-billion-in-escrow-accounts",
@@ -141,6 +145,7 @@
     "https://www.khaleejtimes.com/business/property/azizi-florence-a-homecoming-to-sharjah",
     "https://www.khaleejtimes.com/business/property/bamx-in-the-spotlight-at-ips-2026-the-middle-easts-biggest-real-estate-event",
     "https://www.khaleejtimes.com/business/property/buying-emaar-home-dubai-adcb-flexible-financing",
+    "https://www.khaleejtimes.com/business/property/citi-developers-appoints-nse-as-main-contractor-for-arya-residences",
     "https://www.khaleejtimes.com/business/property/cosmo-developments-launches-dh6-billion-the-wadi-project-in-abu-dhabi",
     "https://www.khaleejtimes.com/business/property/dh1-million-fine-abu-dhabi-gives-property-owners-until-september-16-to-secure-occupancy-certificates",
     "https://www.khaleejtimes.com/business/property/dubai-real-estate-home-house-prices-fall-first-time-in-over-5-years",
@@ -161,6 +166,7 @@
     "https://www.khaleejtimes.com/business/property/ras-al-khaimah-rents-rise-villas-gain-popularity",
     "https://www.khaleejtimes.com/business/property/real-estate-success-creating-life-communities-al-ain-alabbar",
     "https://www.khaleejtimes.com/business/property/record-transactions-and-global-brands-fuel-abu-dhabis-next-phase-of-real-estate-growth",
+    "https://www.khaleejtimes.com/business/property/saas-properties-launches-the-ritz-carlton-residences-al-maryah-island-at-livex-2026",
     "https://www.khaleejtimes.com/business/property/sheikh-mohammed-issues-new-law-to-regulate-shared-housing-in-dubai",
     "https://www.khaleejtimes.com/business/property/skyloov-partners-with-prypco-to-simplify-home-financing-and-enhance-the-property-buying-experience",
     "https://www.khaleejtimes.com/business/property/uae-rising-rents-residency-options-drive-young-buyers-to-own-homes",
@@ -630,7 +636,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-10-02T13:51:11+04:00",
+  "updated_at": "2026-10-03T13:13:45+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -711,6 +717,11 @@
       "url": "https://www.thenationalnews.com/business/property/2026/09/29/aldar-generates-more-than-dh5bn-in-sales-from-new-housing-developments",
       "title": "Aldar generates more than Dh5bn in sales from new housing developments",
       "reviewed_at": "2026-09-30T13:46:55.192634+04:00"
+    },
+    {
+      "url": "https://gulfnews.com/business/property/arif-developments-recognised-as-promising-developer-of-the-year-1.500693475",
+      "title": "Arif Developments recognised as Promising Developer of the Year",
+      "reviewed_at": "2026-10-03T13:13:45.413663+04:00"
     }
   ]
 }
