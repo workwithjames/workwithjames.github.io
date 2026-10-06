@@ -31,6 +31,7 @@
     "https://gulfnews.com/business/property/dubais-350-metre-trump-tower-moves-into-next-construction-phase-1.500632456",
     "https://gulfnews.com/business/property/dubais-iconic-toyota-building-to-be-demolished-in-2027-1.500646516",
     "https://gulfnews.com/business/property/dubais-shared-housing-law-takes-effect-fines-of-up-to-dh1-million-for-repeat-violations-1.500653193",
+    "https://gulfnews.com/business/property/eagle-hills-enters-syria-with-damascus-latakia-deals-1.500700060",
     "https://gulfnews.com/business/property/eagle-hills-signs-12-billion-maldives-waterfront-deal-1.500682175",
     "https://gulfnews.com/business/property/early-completion-sets-new-pace-for-abu-dhabi-housing-1.500630309",
     "https://gulfnews.com/business/property/ellington-properties-adcb-pioneer-new-off-plan-and-ready-pre-approved-home-buying-solutions-1.500670034",
@@ -54,6 +55,7 @@
     "https://gulfnews.com/business/property/ips-2026-dubai-developers-see-a-shift-from-peak-sales-to-a-more-selective-market-1.500667196",
     "https://gulfnews.com/business/property/ips-2026-opens-in-dubai-with-robotics-unveiling-and-a-rush-of-deal-making-1.500666254",
     "https://gulfnews.com/business/property/is-jeddah-tower-on-course-to-become-the-worlds-tallest-building-1.500623570",
+    "https://gulfnews.com/business/property/jeddah-tower-crosses-116-floors-completion-timeline-moves-1.500699924",
     "https://gulfnews.com/business/property/majid-al-futtaim-posts-record-h1-2026-results-as-dh100-billion-development-pipeline-advances-1.500668515",
     "https://gulfnews.com/business/property/modon-h1-net-profit-reaches-dh22-billion-after-property-sales-hit-dh26-billion-1.500625097",
     "https://gulfnews.com/business/property/nakheel-awards-dh800-million-deal-to-build-537-dubai-islands-homes-1.500677701",
@@ -180,6 +182,7 @@
     "https://www.khaleejtimes.com/business/rove-hotels-irth-group-to-launch-new-residential-projects-across-uae",
     "https://www.khaleejtimes.com/business/sharjah-property-sales-more-than-double-in-h1-2026-as-prices-ease",
     "https://www.khaleejtimes.com/business/sharjah-real-estate-transactions-surge-618-to-dh7-billion-in-july",
+    "https://www.khaleejtimes.com/business/sharjah-rents-rise-across-key-communities-al-mamzar-al-nabba-lead",
     "https://www.khaleejtimes.com/business/tech",
     "https://www.khaleejtimes.com/business/tech/apple-iphone-18-pro-pro-max-launch-uae-prices-pre-order-dates",
     "https://www.khaleejtimes.com/business/tech/apple-launch-event-2026-live-updates-sep-9-2026",
@@ -249,7 +252,8 @@
     "https://www.thenationalnews.com/business/property/2026/09/28/dubais-sobha-realty-eyes-600m-us-housing-push-and-targets-national-expansion",
     "https://www.thenationalnews.com/business/property/2026/09/28/jdcoms-new-logistics-hub-at-abu-dhabis-kezad-to-create-1000-jobs",
     "https://www.thenationalnews.com/business/property/2026/09/29/aldar-generates-more-than-dh5bn-in-sales-from-new-housing-developments",
-    "https://www.thenationalnews.com/business/property/2026/09/30/aldar-and-arada-sign-dh15bn-partnership-for-new-developments-in-abu-dhabi"
+    "https://www.thenationalnews.com/business/property/2026/09/30/aldar-and-arada-sign-dh15bn-partnership-for-new-developments-in-abu-dhabi",
+    "https://www.thenationalnews.com/business/property/2026/10/05/abu-dhabis-eagle-hills-to-develop-residential-and-tourism-projects-in-syria"
   ],
   "seen_title_signatures": [
     "000 2028 2030 abu delivery dhabi homes peak plans",
@@ -639,7 +643,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-10-05T14:33:21+04:00",
+  "updated_at": "2026-10-06T14:25:21+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -725,6 +729,11 @@
       "url": "https://gulfnews.com/business/property/arif-developments-recognised-as-promising-developer-of-the-year-1.500693475",
       "title": "Arif Developments recognised as Promising Developer of the Year",
       "reviewed_at": "2026-10-03T13:13:45.413663+04:00"
+    },
+    {
+      "url": "https://www.thenationalnews.com/business/property/2026/10/05/abu-dhabis-eagle-hills-to-develop-residential-and-tourism-projects-in-syria",
+      "title": "Abu Dhabi’s Eagle Hills to develop residential and tourism projects in Syria",
+      "reviewed_at": "2026-10-06T14:25:21.375937+04:00"
     }
   ]
 }
