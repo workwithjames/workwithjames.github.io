@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source_date": "2026-10-02",
-  "captured_at": "2026-10-04T23:23:04.050Z",
+  "captured_at": "2026-10-06T01:21:35.309Z",
   "source": {
     "provider": "DXB Data",
     "endpoint": "https://dxbdata.io/mcp",
@@ -9,29 +9,29 @@
     "authentication": "none"
   },
   "overview": {
-    "total_transactions": 55243,
+    "total_transactions": 55269,
     "areas": 165,
     "period": {
       "from": "2026-06-23",
       "to": "2026-10-02"
     },
-    "median_sale_price_aed": 1236360,
+    "median_sale_price_aed": 1236755,
     "top_areas_by_volume": [
       {
         "area": "Madinat Al Mataar",
-        "n": 5887
+        "n": 5890
       },
       {
         "area": "Al Barsha South Fourth",
-        "n": 3750
+        "n": 3751
       },
       {
         "area": "Jabal Ali First",
-        "n": 2853
+        "n": 2854
       },
       {
         "area": "Jabal Ali Industrial Second",
-        "n": 2658
+        "n": 2659
       },
       {
         "area": "Wadi Al Safa 4",
@@ -72,8 +72,8 @@
         "median_price_per_sqm_aed": 15159,
         "gross_rental_yield_pct": 6.27,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 2487,
-        "sale_sample": 2487,
+        "sample_size": 2488,
+        "sale_sample": 2488,
         "rent_sample": 147
       },
       {
@@ -182,8 +182,8 @@
         "median_price_per_sqm_aed": 27044,
         "gross_rental_yield_pct": 5.13,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 826,
-        "sale_sample": 826,
+        "sample_size": 827,
+        "sale_sample": 827,
         "rent_sample": 26
       },
       {
@@ -200,12 +200,12 @@
       {
         "area": "Al Merkadh",
         "property_type": "Flat",
-        "median_price_aed": 1400000,
+        "median_price_aed": 1397500,
         "median_price_per_sqm_aed": 21350,
         "gross_rental_yield_pct": 6.77,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 676,
-        "sale_sample": 676,
+        "sample_size": 678,
+        "sale_sample": 678,
         "rent_sample": 39
       },
       {
@@ -278,11 +278,11 @@
         "area": "Al Yelayiss 2",
         "property_type": "Flat",
         "median_price_aed": 1307888,
-        "median_price_per_sqm_aed": 14986,
-        "gross_rental_yield_pct": 6.45,
+        "median_price_per_sqm_aed": 14962,
+        "gross_rental_yield_pct": 6.46,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 295,
-        "sale_sample": 295,
+        "sample_size": 297,
+        "sale_sample": 297,
         "rent_sample": 22
       },
       {
@@ -343,12 +343,12 @@
       {
         "area": "Jabal Ali First",
         "property_type": "Flat",
-        "median_price_aed": 1556000,
-        "median_price_per_sqm_aed": 17210,
+        "median_price_aed": 1553518,
+        "median_price_per_sqm_aed": 17212,
         "gross_rental_yield_pct": 4.59,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 1381,
-        "sale_sample": 1381,
+        "sample_size": 1382,
+        "sale_sample": 1382,
         "rent_sample": 228
       },
       {
@@ -358,8 +358,8 @@
         "median_price_per_sqm_aed": 18594,
         "gross_rental_yield_pct": 6.43,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 1912,
-        "sale_sample": 1912,
+        "sample_size": 1913,
+        "sale_sample": 1913,
         "rent_sample": null
       },
       {
@@ -380,19 +380,19 @@
         "median_price_per_sqm_aed": 18427,
         "gross_rental_yield_pct": 4.97,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 5103,
-        "sale_sample": 5103,
+        "sample_size": 5105,
+        "sale_sample": 5105,
         "rent_sample": 64
       },
       {
         "area": "Madinat Dubai Almelaheyah",
         "property_type": "Flat",
         "median_price_aed": 2481600,
-        "median_price_per_sqm_aed": 33308,
+        "median_price_per_sqm_aed": 33312,
         "gross_rental_yield_pct": 2.11,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 287,
-        "sale_sample": 287,
+        "sample_size": 288,
+        "sale_sample": 288,
         "rent_sample": 6
       },
       {
@@ -530,12 +530,12 @@
       {
         "area": "Wadi Al Safa 3",
         "property_type": "Flat",
-        "median_price_aed": 751764,
+        "median_price_aed": 754239,
         "median_price_per_sqm_aed": 15314,
         "gross_rental_yield_pct": 5.04,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 1415,
-        "sale_sample": 1415,
+        "sample_size": 1418,
+        "sale_sample": 1418,
         "rent_sample": 16
       },
       {
