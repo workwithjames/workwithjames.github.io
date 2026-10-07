@@ -15,6 +15,7 @@
     "https://gulfnews.com/business/property/damac-to-host-two-day-mortgage-event-with-uae-banks-this-weekend-1.500633497",
     "https://gulfnews.com/business/property/dubai-adds-more-than-24000-property-units-in-six-months-1.500646931",
     "https://gulfnews.com/business/property/dubai-attracts-186-new-property-developers-in-first-seven-months-of-2026-1.500641994",
+    "https://gulfnews.com/business/property/dubai-bans-mixing-families-and-individuals-in-shared-housing-units-1.500701345",
     "https://gulfnews.com/business/property/dubai-has-96585-homes-entering-the-market-in-2026-83-are-already-sold-1.500647675",
     "https://gulfnews.com/business/property/dubai-healthcare-city-begins-work-on-dh3b-dubai-creek-gardens-1.500670363",
     "https://gulfnews.com/business/property/dubai-healthcare-city-launches-aed3-billion-dubai-creek-gardens-residential-development-1.500670799",
@@ -643,7 +644,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-10-06T14:25:21+04:00",
+  "updated_at": "2026-10-07T14:20:46+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -734,6 +735,11 @@
       "url": "https://www.thenationalnews.com/business/property/2026/10/05/abu-dhabis-eagle-hills-to-develop-residential-and-tourism-projects-in-syria",
       "title": "Abu Dhabi’s Eagle Hills to develop residential and tourism projects in Syria",
       "reviewed_at": "2026-10-06T14:25:21.375937+04:00"
+    },
+    {
+      "url": "https://gulfnews.com/business/property/dubai-bans-mixing-families-and-individuals-in-shared-housing-units-1.500701345",
+      "title": "Dubai bans mixing families and individuals in shared housing units",
+      "reviewed_at": "2026-10-07T14:20:46.796669+04:00"
     }
   ]
 }
