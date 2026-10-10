@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source_date": "2026-10-07",
-  "captured_at": "2026-10-10T00:06:34.353Z",
+  "captured_at": "2026-10-10T23:43:22.759Z",
   "source": {
     "provider": "DXB Data",
     "endpoint": "https://dxbdata.io/mcp",
@@ -9,7 +9,7 @@
     "authentication": "none"
   },
   "overview": {
-    "total_transactions": 58017,
+    "total_transactions": 58032,
     "areas": 165,
     "period": {
       "from": "2026-06-23",
@@ -19,15 +19,15 @@
     "top_areas_by_volume": [
       {
         "area": "Madinat Al Mataar",
-        "n": 5982
+        "n": 5983
       },
       {
         "area": "Al Barsha South Fourth",
-        "n": 3922
+        "n": 3923
       },
       {
         "area": "Jabal Ali First",
-        "n": 2970
+        "n": 2972
       },
       {
         "area": "Jabal Ali Industrial Second",
@@ -72,19 +72,19 @@
         "median_price_per_sqm_aed": 15159,
         "gross_rental_yield_pct": 6.27,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 2618,
-        "sale_sample": 2618,
+        "sample_size": 2619,
+        "sale_sample": 2619,
         "rent_sample": 149
       },
       {
         "area": "Al Barshaa South Second",
         "property_type": "Flat",
-        "median_price_aed": 835999,
-        "median_price_per_sqm_aed": 18780,
-        "gross_rental_yield_pct": 5.14,
+        "median_price_aed": 835499,
+        "median_price_per_sqm_aed": 18807,
+        "gross_rental_yield_pct": 5.13,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 280,
-        "sale_sample": 280,
+        "sample_size": 282,
+        "sale_sample": 282,
         "rent_sample": 9
       },
       {
@@ -124,11 +124,11 @@
         "area": "Al Hebiah First",
         "property_type": "Flat",
         "median_price_aed": 1025000,
-        "median_price_per_sqm_aed": 18441,
+        "median_price_per_sqm_aed": 18440,
         "gross_rental_yield_pct": 4.23,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 835,
-        "sale_sample": 835,
+        "sample_size": 836,
+        "sale_sample": 836,
         "rent_sample": 16
       },
       {
@@ -344,11 +344,11 @@
         "area": "Jabal Ali First",
         "property_type": "Flat",
         "median_price_aed": 1582000,
-        "median_price_per_sqm_aed": 17352,
+        "median_price_per_sqm_aed": 17345,
         "gross_rental_yield_pct": 4.55,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 1462,
-        "sale_sample": 1462,
+        "sample_size": 1463,
+        "sale_sample": 1463,
         "rent_sample": 237
       },
       {
@@ -377,11 +377,11 @@
         "area": "Madinat Al Mataar",
         "property_type": "Flat",
         "median_price_aed": 730000,
-        "median_price_per_sqm_aed": 18410,
+        "median_price_per_sqm_aed": 18409,
         "gross_rental_yield_pct": 5.01,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 5177,
-        "sale_sample": 5177,
+        "sample_size": 5178,
+        "sale_sample": 5178,
         "rent_sample": 67
       },
       {
@@ -442,12 +442,12 @@
       {
         "area": "Nad Al Shiba First",
         "property_type": "Flat",
-        "median_price_aed": 1387000,
+        "median_price_aed": 1385110,
         "median_price_per_sqm_aed": 36786,
         "gross_rental_yield_pct": 2.56,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 413,
-        "sale_sample": 413,
+        "sample_size": 414,
+        "sale_sample": 414,
         "rent_sample": 22
       },
       {
@@ -534,8 +534,8 @@
         "median_price_per_sqm_aed": 15294,
         "gross_rental_yield_pct": 4.86,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 1576,
-        "sale_sample": 1576,
+        "sample_size": 1578,
+        "sale_sample": 1578,
         "rent_sample": 18
       },
       {
