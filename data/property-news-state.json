@@ -10,6 +10,7 @@
     "https://gulfnews.com/business/property/aldar-launches-yas-riva-reserve-a-waterfront-villa-community-on-yas-island-1.500679693",
     "https://gulfnews.com/business/property/aldar-mubadala-jv-buys-99-occupied-masdar-city-square-for-dh918-million-1.500677780",
     "https://gulfnews.com/business/property/arif-developments-honoured-at-9th-golden-excellence-awards-1.500622447",
+    "https://gulfnews.com/business/property/arif-developments-honoured-with-excellence-in-csr-award-1.500707601",
     "https://gulfnews.com/business/property/arif-developments-recognised-as-promising-developer-of-the-year-1.500693475",
     "https://gulfnews.com/business/property/beyond-supply-glut-manila-condo-market-faces-repricing-what-it-means-1.500630690",
     "https://gulfnews.com/business/property/damac-to-host-two-day-mortgage-event-with-uae-banks-this-weekend-1.500633497",
@@ -77,6 +78,7 @@
     "https://gulfnews.com/business/property/record-dh100-million-land-sale-cements-dubai-hills-estates-ultra-prime-status-1.500676935",
     "https://gulfnews.com/business/property/rockhill-bets-dh250-million-on-affordable-premium-living-with-its-first-ajman-tower-1.500617833",
     "https://gulfnews.com/business/property/sharjah-moves-to-tighten-property-rules-on-lost-and-abandoned-1.500675630",
+    "https://gulfnews.com/business/property/tabeer-hands-over-dh250-million-48-parkside-in-24-months-eyes-major-expansion-1.500707506",
     "https://gulfnews.com/business/property/taraf-and-mubadala-to-explore-mixed-use-waterfront-development-on-al-reem-island-1.500694568",
     "https://gulfnews.com/business/property/top-10-tallest-under-construction-skyscrapers-in-the-uae-2026-1.500623030",
     "https://gulfnews.com/business/property/two-day-uae-property-showcase-in-hyderabad-targets-indian-investors-1.500644618",
@@ -182,6 +184,7 @@
     "https://www.khaleejtimes.com/business/property/record-transactions-and-global-brands-fuel-abu-dhabis-next-phase-of-real-estate-growth",
     "https://www.khaleejtimes.com/business/property/saas-properties-launches-the-ritz-carlton-residences-al-maryah-island-at-livex-2026",
     "https://www.khaleejtimes.com/business/property/sheikh-mohammed-issues-new-law-to-regulate-shared-housing-in-dubai",
+    "https://www.khaleejtimes.com/business/property/sheikha-aisha-humaid-al-mulla-presents-excellence-in-csr-award-to-arif-developments-at-museum-of-the-future",
     "https://www.khaleejtimes.com/business/property/skyloov-partners-with-prypco-to-simplify-home-financing-and-enhance-the-property-buying-experience",
     "https://www.khaleejtimes.com/business/property/sy-capital-closes-dh160-million-full-building-deal-at-emaar-south",
     "https://www.khaleejtimes.com/business/property/uae-property-developers-eye-fourth-corridor-highway-linking-sharjah-dubai-and-abu-dhabi",
@@ -190,10 +193,12 @@
     "https://www.khaleejtimes.com/business/property/zoya-developments-launches-the-laureates-to-support-a-culture-of-excellence-across-dubais-real-estate-sector",
     "https://www.khaleejtimes.com/business/ras-al-khaimah-rents-rise-in-h1-2026-but-apartment-rates-drop-in-q2",
     "https://www.khaleejtimes.com/business/record-dh130-million-sky-palace-sale-headlines-strong-h1-for-ras-al-khaimah-property",
+    "https://www.khaleejtimes.com/business/rents-in-dubai-fall-over-12-dubai-marina-business-bay-and-jvc-lead",
     "https://www.khaleejtimes.com/business/rove-hotels-irth-group-to-launch-new-residential-projects-across-uae",
     "https://www.khaleejtimes.com/business/sharjah-property-sales-more-than-double-in-h1-2026-as-prices-ease",
     "https://www.khaleejtimes.com/business/sharjah-real-estate-transactions-surge-618-to-dh7-billion-in-july",
     "https://www.khaleejtimes.com/business/sharjah-rents-rise-across-key-communities-al-mamzar-al-nabba-lead",
+    "https://www.khaleejtimes.com/business/smaller-investors-return-to-market-as-dubai-office-sales-jump-in-q3",
     "https://www.khaleejtimes.com/business/tech",
     "https://www.khaleejtimes.com/business/tech/apple-iphone-18-pro-pro-max-launch-uae-prices-pre-order-dates",
     "https://www.khaleejtimes.com/business/tech/apple-launch-event-2026-live-updates-sep-9-2026",
@@ -655,7 +660,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-10-12T14:57:57+04:00",
+  "updated_at": "2026-10-13T14:42:12+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
