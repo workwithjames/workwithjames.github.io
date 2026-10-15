@@ -5,6 +5,7 @@
     "https://gulfnews.com/business/property/abu-dhabi-holiday-home-rules-what-guests-and-operators-need-to-know-1.500682123",
     "https://gulfnews.com/business/property/abu-dhabi-holiday-homes-must-now-display-licence-numbers-on-online-listings-1.500675372",
     "https://gulfnews.com/business/property/abu-dhabi-to-add-71000-homes-by-2030-with-biggest-delivery-wave-in-2028-1.500645274",
+    "https://gulfnews.com/business/property/abu-dhabis-aldar-enters-sharjah-after-dh11-billion-acquisition-deal-with-arada-1.500711403",
     "https://gulfnews.com/business/property/adgm-launches-broker-rankings-for-property-buyers-and-tenants-1.500626469",
     "https://gulfnews.com/business/property/ajman-rental-contracts-reach-dh291-billion-in-first-half-of-2026-1.500644264",
     "https://gulfnews.com/business/property/aldar-launches-yas-riva-reserve-a-waterfront-villa-community-on-yas-island-1.500679693",
@@ -141,6 +142,7 @@
     "https://www.khaleejtimes.com/business/galadari-brothers",
     "https://www.khaleejtimes.com/business/gcc-hotels-set-to-add-126000-new-rooms-by-2030-says-new-report",
     "https://www.khaleejtimes.com/business/global-footballers-karim-benzema-and-medhi-amine-buy-properties-in-dubai",
+    "https://www.khaleejtimes.com/business/indian-syrian-and-pakistani-investors-top-property-buyers-in-sharjah-in-2026",
     "https://www.khaleejtimes.com/business/innovation-city",
     "https://www.khaleejtimes.com/business/markets",
     "https://www.khaleejtimes.com/business/middle-east-flex-office-market-reaches-tipping-point-as-demand-surges",
@@ -167,6 +169,7 @@
     "https://www.khaleejtimes.com/business/property/dh1-million-fine-abu-dhabi-gives-property-owners-until-september-16-to-secure-occupancy-certificates",
     "https://www.khaleejtimes.com/business/property/dubai-apartment-prices-could-fall-further-as-supply-set-to-rise-20-sp-global",
     "https://www.khaleejtimes.com/business/property/dubai-real-estate-home-house-prices-fall-first-time-in-over-5-years",
+    "https://www.khaleejtimes.com/business/property/dubai-real-estate-projects-dh100-billion-first-half-2026",
     "https://www.khaleejtimes.com/business/property/dubai-rental-index-shared-housing-units",
     "https://www.khaleejtimes.com/business/property/dubai-residential-real-estate-shows-resilience-amid-quieter-market",
     "https://www.khaleejtimes.com/business/property/dubai-residents-search-for-new-homes-rental-neighbourhoods-rents",
@@ -273,7 +276,9 @@
     "https://www.thenationalnews.com/business/property/2026/09/29/aldar-generates-more-than-dh5bn-in-sales-from-new-housing-developments",
     "https://www.thenationalnews.com/business/property/2026/09/30/aldar-and-arada-sign-dh15bn-partnership-for-new-developments-in-abu-dhabi",
     "https://www.thenationalnews.com/business/property/2026/10/05/abu-dhabis-eagle-hills-to-develop-residential-and-tourism-projects-in-syria",
-    "https://www.thenationalnews.com/business/property/2026/10/07/dubai-home-sale-transactions-fall-in-third-quarter-due-to-regional-uncertainty"
+    "https://www.thenationalnews.com/business/property/2026/10/07/dubai-home-sale-transactions-fall-in-third-quarter-due-to-regional-uncertainty",
+    "https://www.thenationalnews.com/business/property/2026/10/14/aldar-international-unit-plans-to-deliver-9000-homes-in-next-five-years",
+    "https://www.thenationalnews.com/business/property/2026/10/14/aldar-to-launch-major-dubai-villa-and-townhouse-project-by-end-of-year"
   ],
   "seen_title_signatures": [
     "000 2028 2030 abu delivery dhabi homes peak plans",
@@ -663,7 +668,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-10-14T12:47:48+04:00",
+  "updated_at": "2026-10-15T12:23:04+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -769,6 +774,11 @@
       "url": "https://www.thenationalnews.com/business/property/2026/10/07/dubai-home-sale-transactions-fall-in-third-quarter-due-to-regional-uncertainty",
       "title": "Dubai home sale transactions fall in third quarter amid regional uncertainty",
       "reviewed_at": "2026-10-08T14:40:42.543799+04:00"
+    },
+    {
+      "url": "https://www.thenationalnews.com/business/property/2026/10/14/aldar-to-launch-major-dubai-villa-and-townhouse-project-by-end-of-year",
+      "title": "Aldar to launch major Dubai villa and townhouse project by end of year",
+      "reviewed_at": "2026-10-15T12:23:04.384079+04:00"
     }
   ]
 }
