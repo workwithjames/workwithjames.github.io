@@ -1,6 +1,7 @@
 {
   "seen_urls": [
     "https://gulfnews.com/business/property/70-of-dubais-toyota-building-tenants-have-left-after-power-cuts-management-says-1.500647628",
+    "https://gulfnews.com/business/property/94-of-employees-adopted-digital-rewards-platform-in-first-year-damac-1.500711565",
     "https://gulfnews.com/business/property/abu-dhabi-cuts-holiday-home-approval-times-with-upgraded-licensing-system-1.500675372",
     "https://gulfnews.com/business/property/abu-dhabi-holiday-home-rules-what-guests-and-operators-need-to-know-1.500682123",
     "https://gulfnews.com/business/property/abu-dhabi-holiday-homes-must-now-display-licence-numbers-on-online-listings-1.500675372",
@@ -98,6 +99,7 @@
     "https://www.khaleejtimes.com/business/abu-dhabi-property-deals-top-dh155-billion-beat-2025s-full-year-total-in-8-months",
     "https://www.khaleejtimes.com/business/abu-dhabi-to-see-surge-in-new-homes-easing-price-and-rental-growth",
     "https://www.khaleejtimes.com/business/aldar-adcb-complete-abu-dhabis-first-off-plan-mortgage-under-new-adrec-framework",
+    "https://www.khaleejtimes.com/business/aldar-enters-sharjah-property-market-with-dh11-billion-deal",
     "https://www.khaleejtimes.com/business/aldar-mubadala-buy-masdar-city-square-in-dh918m-deal",
     "https://www.khaleejtimes.com/business/aviation",
     "https://www.khaleejtimes.com/business/aviation/flydubai-dubai-tel-aviv-diverted-flight-from-altercation-to-probe",
@@ -168,6 +170,7 @@
     "https://www.khaleejtimes.com/business/property/cosmo-developments-launches-dh6-billion-the-wadi-project-in-abu-dhabi",
     "https://www.khaleejtimes.com/business/property/dh1-million-fine-abu-dhabi-gives-property-owners-until-september-16-to-secure-occupancy-certificates",
     "https://www.khaleejtimes.com/business/property/dubai-apartment-prices-could-fall-further-as-supply-set-to-rise-20-sp-global",
+    "https://www.khaleejtimes.com/business/property/dubai-ready-home-sales-jump-16-as-buyers-shift-away-from-off-plan-properties",
     "https://www.khaleejtimes.com/business/property/dubai-real-estate-home-house-prices-fall-first-time-in-over-5-years",
     "https://www.khaleejtimes.com/business/property/dubai-real-estate-projects-dh100-billion-first-half-2026",
     "https://www.khaleejtimes.com/business/property/dubai-rental-index-shared-housing-units",
@@ -223,6 +226,7 @@
     "https://www.khaleejtimes.com/business/uae-fuel-prices-rise-above-dh4-per-litre-surpass-4-year-high-for-october-2026",
     "https://www.khaleejtimes.com/business/uae-property-market-cools-in-q2-as-dubai-abu-dhabi-home-prices-and-rents-ease",
     "https://www.khaleejtimes.com/business/uae-travel-advisory-etihad-emirates-flydubai-air-arabia-flight-delays-and-cancellations",
+    "https://www.khaleejtimes.com/business/we-are-still-collecting-exactly-like-before-emaar-cancellations-halve-now-says-alabbar",
     "https://www.khaleejtimes.com/business/why-dubai-residents-will-not-have-to-take-out-loans-to-pay-rents",
     "https://www.khaleejtimes.com/business/why-some-dubai-tenants-will-move-to-bigger-homes-this-year",
     "https://www.khaleejtimes.com/business/wynn-al-marjan-island-pushes-opening-to-september-2027-amid-regional-conflict-fallout",
@@ -278,7 +282,8 @@
     "https://www.thenationalnews.com/business/property/2026/10/05/abu-dhabis-eagle-hills-to-develop-residential-and-tourism-projects-in-syria",
     "https://www.thenationalnews.com/business/property/2026/10/07/dubai-home-sale-transactions-fall-in-third-quarter-due-to-regional-uncertainty",
     "https://www.thenationalnews.com/business/property/2026/10/14/aldar-international-unit-plans-to-deliver-9000-homes-in-next-five-years",
-    "https://www.thenationalnews.com/business/property/2026/10/14/aldar-to-launch-major-dubai-villa-and-townhouse-project-by-end-of-year"
+    "https://www.thenationalnews.com/business/property/2026/10/14/aldar-to-launch-major-dubai-villa-and-townhouse-project-by-end-of-year",
+    "https://www.thenationalnews.com/business/property/2026/10/15/aldar-enters-sharjah-with-dh11bn-residential-acquisition"
   ],
   "seen_title_signatures": [
     "000 2028 2030 abu delivery dhabi homes peak plans",
@@ -668,7 +673,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-10-15T12:23:04+04:00",
+  "updated_at": "2026-10-16T12:15:41+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
