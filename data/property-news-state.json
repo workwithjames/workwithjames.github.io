@@ -6,6 +6,7 @@
     "https://gulfnews.com/business/property/abu-dhabi-holiday-home-rules-what-guests-and-operators-need-to-know-1.500682123",
     "https://gulfnews.com/business/property/abu-dhabi-holiday-homes-must-now-display-licence-numbers-on-online-listings-1.500675372",
     "https://gulfnews.com/business/property/abu-dhabi-to-add-71000-homes-by-2030-with-biggest-delivery-wave-in-2028-1.500645274",
+    "https://gulfnews.com/business/property/abu-dhabis-al-raha-gardens-where-neighbours-go-the-extra-mile-for-each-other-1.500716318",
     "https://gulfnews.com/business/property/abu-dhabis-aldar-enters-sharjah-after-dh11-billion-acquisition-deal-with-arada-1.500711403",
     "https://gulfnews.com/business/property/adgm-launches-broker-rankings-for-property-buyers-and-tenants-1.500626469",
     "https://gulfnews.com/business/property/ajman-rental-contracts-reach-dh291-billion-in-first-half-of-2026-1.500644264",
@@ -81,6 +82,7 @@
     "https://gulfnews.com/business/property/ras-al-khaimah-property-prices-rise-in-h1-2026-13800-homes-due-by-2028-1.500660431",
     "https://gulfnews.com/business/property/record-dh100-million-land-sale-cements-dubai-hills-estates-ultra-prime-status-1.500676935",
     "https://gulfnews.com/business/property/rockhill-bets-dh250-million-on-affordable-premium-living-with-its-first-ajman-tower-1.500617833",
+    "https://gulfnews.com/business/property/samana-launches-samana-collecta-taking-its-next-growth-chapter-into-premium-real-estate-1.500715823",
     "https://gulfnews.com/business/property/sharjah-moves-to-tighten-property-rules-on-lost-and-abandoned-1.500675630",
     "https://gulfnews.com/business/property/sharjah-property-market-hits-dh468-billion-in-nine-months-up-56-1.500708940",
     "https://gulfnews.com/business/property/tabeer-hands-over-dh250-million-48-parkside-in-24-months-eyes-major-expansion-1.500707506",
@@ -98,6 +100,7 @@
     "https://gulfnews.com/business/property/zoya-developments-sells-out-elinor-project-in-under-two-weeks-1.500640776",
     "https://www.khaleejtimes.com/business/6-in-10-dubai-homes-hold-their-value-as-market-cools-gently-in-august",
     "https://www.khaleejtimes.com/business/abu-dhabi-named-worlds-most-improved-real-estate-market-for-transparency",
+    "https://www.khaleejtimes.com/business/abu-dhabi-property-buyers-shift-towards-luxury-off-plan-homes-as-sales-volumes-decline",
     "https://www.khaleejtimes.com/business/abu-dhabi-property-deals-top-dh155-billion-beat-2025s-full-year-total-in-8-months",
     "https://www.khaleejtimes.com/business/abu-dhabi-ranks-sixth-globally-for-branded-residences-as-26-new-projects-enter-pipeline",
     "https://www.khaleejtimes.com/business/abu-dhabi-to-see-surge-in-new-homes-easing-price-and-rental-growth",
@@ -197,6 +200,7 @@
     "https://www.khaleejtimes.com/business/property/record-transactions-and-global-brands-fuel-abu-dhabis-next-phase-of-real-estate-growth",
     "https://www.khaleejtimes.com/business/property/reportage-group-and-sabah-investment-group-showcase-their-sea-breeze-projects-and-highlight-investment-opportunities-in-azerbaijan",
     "https://www.khaleejtimes.com/business/property/saas-properties-launches-the-ritz-carlton-residences-al-maryah-island-at-livex-2026",
+    "https://www.khaleejtimes.com/business/property/samana-launches-collecta-taking-its-next-growth-chapter-into-premium-real-estate",
     "https://www.khaleejtimes.com/business/property/sheikh-mohammed-issues-new-law-to-regulate-shared-housing-in-dubai",
     "https://www.khaleejtimes.com/business/property/sheikha-aisha-humaid-al-mulla-presents-excellence-in-csr-award-to-arif-developments-at-museum-of-the-future",
     "https://www.khaleejtimes.com/business/property/skyloov-partners-with-prypco-to-simplify-home-financing-and-enhance-the-property-buying-experience",
@@ -214,6 +218,7 @@
     "https://www.khaleejtimes.com/business/sharjah-real-estate-transactions-surge-618-to-dh7-billion-in-july",
     "https://www.khaleejtimes.com/business/sharjah-rents-rise-across-key-communities-al-mamzar-al-nabba-lead",
     "https://www.khaleejtimes.com/business/smaller-investors-return-to-market-as-dubai-office-sales-jump-in-q3",
+    "https://www.khaleejtimes.com/business/some-holiday-home-owners-may-move-to-shared-housing-say-industry-executives",
     "https://www.khaleejtimes.com/business/tech",
     "https://www.khaleejtimes.com/business/tech/apple-iphone-18-pro-pro-max-launch-uae-prices-pre-order-dates",
     "https://www.khaleejtimes.com/business/tech/apple-launch-event-2026-live-updates-sep-9-2026",
@@ -679,7 +684,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-10-19T12:59:29+04:00",
+  "updated_at": "2026-10-20T12:37:57+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -790,6 +795,11 @@
       "url": "https://www.thenationalnews.com/business/property/2026/10/14/aldar-to-launch-major-dubai-villa-and-townhouse-project-by-end-of-year",
       "title": "Aldar to launch major Dubai villa and townhouse project by end of year",
       "reviewed_at": "2026-10-15T12:23:04.384079+04:00"
+    },
+    {
+      "url": "https://gulfnews.com/business/property/abu-dhabis-al-raha-gardens-where-neighbours-go-the-extra-mile-for-each-other-1.500716318",
+      "title": "Abu Dhabi’s Al Raha Gardens: Where neighbours go the extra mile for each other",
+      "reviewed_at": "2026-10-20T12:37:57.956828+04:00"
     }
   ]
 }
