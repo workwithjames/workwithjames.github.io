@@ -5,6 +5,7 @@
     "https://gulfnews.com/business/property/abu-dhabi-cuts-holiday-home-approval-times-with-upgraded-licensing-system-1.500675372",
     "https://gulfnews.com/business/property/abu-dhabi-holiday-home-rules-what-guests-and-operators-need-to-know-1.500682123",
     "https://gulfnews.com/business/property/abu-dhabi-holiday-homes-must-now-display-licence-numbers-on-online-listings-1.500675372",
+    "https://gulfnews.com/business/property/abu-dhabi-records-dh215-billion-in-residential-property-sales-in-q3-2026-across-6085-transactions-1.500717696",
     "https://gulfnews.com/business/property/abu-dhabi-to-add-71000-homes-by-2030-with-biggest-delivery-wave-in-2028-1.500645274",
     "https://gulfnews.com/business/property/abu-dhabis-al-raha-gardens-where-neighbours-go-the-extra-mile-for-each-other-1.500716318",
     "https://gulfnews.com/business/property/abu-dhabis-aldar-enters-sharjah-after-dh11-billion-acquisition-deal-with-arada-1.500711403",
@@ -85,6 +86,7 @@
     "https://gulfnews.com/business/property/samana-launches-samana-collecta-taking-its-next-growth-chapter-into-premium-real-estate-1.500715823",
     "https://gulfnews.com/business/property/sharjah-moves-to-tighten-property-rules-on-lost-and-abandoned-1.500675630",
     "https://gulfnews.com/business/property/sharjah-property-market-hits-dh468-billion-in-nine-months-up-56-1.500708940",
+    "https://gulfnews.com/business/property/sold-out-in-two-weeks-breaking-ground-in-two-months-zoya-advances-elinor-in-dubai-south-1.500718052",
     "https://gulfnews.com/business/property/tabeer-hands-over-dh250-million-48-parkside-in-24-months-eyes-major-expansion-1.500707506",
     "https://gulfnews.com/business/property/taraf-and-mubadala-to-explore-mixed-use-waterfront-development-on-al-reem-island-1.500694568",
     "https://gulfnews.com/business/property/top-10-tallest-under-construction-skyscrapers-in-the-uae-2026-1.500623030",
@@ -294,7 +296,8 @@
     "https://www.thenationalnews.com/business/property/2026/10/07/dubai-home-sale-transactions-fall-in-third-quarter-due-to-regional-uncertainty",
     "https://www.thenationalnews.com/business/property/2026/10/14/aldar-international-unit-plans-to-deliver-9000-homes-in-next-five-years",
     "https://www.thenationalnews.com/business/property/2026/10/14/aldar-to-launch-major-dubai-villa-and-townhouse-project-by-end-of-year",
-    "https://www.thenationalnews.com/business/property/2026/10/15/aldar-enters-sharjah-with-dh11bn-residential-acquisition"
+    "https://www.thenationalnews.com/business/property/2026/10/15/aldar-enters-sharjah-with-dh11bn-residential-acquisition",
+    "https://www.thenationalnews.com/business/property/2026/10/20/arada-enters-saudi-arabia-with-38bn-riyadh-project"
   ],
   "seen_title_signatures": [
     "000 2028 2030 abu delivery dhabi homes peak plans",
@@ -684,7 +687,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-10-20T12:37:57+04:00",
+  "updated_at": "2026-10-21T12:39:06+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -800,6 +803,11 @@
       "url": "https://gulfnews.com/business/property/abu-dhabis-al-raha-gardens-where-neighbours-go-the-extra-mile-for-each-other-1.500716318",
       "title": "Abu Dhabi’s Al Raha Gardens: Where neighbours go the extra mile for each other",
       "reviewed_at": "2026-10-20T12:37:57.956828+04:00"
+    },
+    {
+      "url": "https://gulfnews.com/business/property/sold-out-in-two-weeks-breaking-ground-in-two-months-zoya-advances-elinor-in-dubai-south-1.500718052",
+      "title": "Sold out in two weeks, breaking ground in two months: Zoya advances Elinor in Dubai South",
+      "reviewed_at": "2026-10-21T12:39:06.668797+04:00"
     }
   ]
 }
