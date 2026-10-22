@@ -1,5 +1,6 @@
 {
   "seen_urls": [
+    "https://gulfnews.com/business/property/10-projects-launched-in-just-two-years-zoya-developments-adds-elvora-to-its-growing-dubai-portfolio-1.500718601",
     "https://gulfnews.com/business/property/70-of-dubais-toyota-building-tenants-have-left-after-power-cuts-management-says-1.500647628",
     "https://gulfnews.com/business/property/94-of-employees-adopted-digital-rewards-platform-in-first-year-damac-1.500711565",
     "https://gulfnews.com/business/property/abu-dhabi-cuts-holiday-home-approval-times-with-upgraded-licensing-system-1.500675372",
@@ -94,7 +95,9 @@
     "https://gulfnews.com/business/property/uae-developer-arada-enters-syria-with-7-billion-new-damascus-mixed-use-project-1.500659060",
     "https://gulfnews.com/business/property/uae-developer-arada-unveils-dh5-billion-broadbeach-project-with-952-homes-in-australia-1.500646600",
     "https://gulfnews.com/business/property/uae-investors-account-for-half-of-sharjah-property-market-during-h1-2026-1.500621868",
+    "https://gulfnews.com/business/property/uae-property-investors-must-look-beyond-rental-yields-says-realtor-signature-properties-ceo-1.500719388",
     "https://gulfnews.com/business/property/uaes-top-10-developers-sell-dh1137-billion-of-property-in-six-months-1.500639749",
+    "https://gulfnews.com/business/property/vibe-by-arsenal-east-brings-a-fresh-take-on-urban-living-to-dubai-1.500716811",
     "https://gulfnews.com/business/property/wadan-marks-one-year-with-breaking-ground-ceremony-at-weston-1.500694594",
     "https://gulfnews.com/business/property/where-sharjah-property-buyers-spent-most-as-july-deals-hit-dh7-billion-1.500632308",
     "https://gulfnews.com/business/property/wynn-al-marjan-island-unveils-two-1460-sqm-apartments-at-top-of-70-storey-tower-1.500673675",
@@ -125,6 +128,7 @@
     "https://www.khaleejtimes.com/business/dubai-developer-mortgages-are-void-unless-funds-go-into-escrow-says-court",
     "https://www.khaleejtimes.com/business/dubai-developers-hold-off-plan-pricing-as-only-6-projects-cut-prices-by-5-or-more-since-february",
     "https://www.khaleejtimes.com/business/dubai-home-prices-rents-decline-as-supply-rises-32000-more-units-due-this-year",
+    "https://www.khaleejtimes.com/business/dubai-is-building-the-worlds-first-villa-using-robots",
     "https://www.khaleejtimes.com/business/dubai-islands-to-get-stunning-new-beach-as-3km-shoreline-undergoes-upgrade-by-2027",
     "https://www.khaleejtimes.com/business/dubai-office-sales-nearly-triple-to-dh158-billion-in-h1-2026",
     "https://www.khaleejtimes.com/business/dubai-on-course-for-record-year-in-rental-contracts",
@@ -137,6 +141,7 @@
     "https://www.khaleejtimes.com/business/dubai-retail-property-sales-surge-177-to-dh38-billion-in-h1-2026",
     "https://www.khaleejtimes.com/business/dubai-set-for-highest-annual-home-deliveries-since-2008-as-new-launches-slow",
     "https://www.khaleejtimes.com/business/dubai-ultra-prime-home-sales-hit-6-billion-despite-regional-tensions",
+    "https://www.khaleejtimes.com/business/dubais-10-million-plus-home-sales-reach-86-in-q3-2026",
     "https://www.khaleejtimes.com/business/dubais-branded-residences-market-cools-on-volume-but-pricing-power-stays-strong",
     "https://www.khaleejtimes.com/business/dubais-celebrity-branded-homes-trend-grows-with-new-srk-tower-launch",
     "https://www.khaleejtimes.com/business/dubais-nakheel-releases-44-new-beachfront-villas-on-palm-jebel-ali",
@@ -213,6 +218,7 @@
     "https://www.khaleejtimes.com/business/property/zoya-developments-launches-the-laureates-to-support-a-culture-of-excellence-across-dubais-real-estate-sector",
     "https://www.khaleejtimes.com/business/ras-al-khaimah-rents-rise-in-h1-2026-but-apartment-rates-drop-in-q2",
     "https://www.khaleejtimes.com/business/record-dh130-million-sky-palace-sale-headlines-strong-h1-for-ras-al-khaimah-property",
+    "https://www.khaleejtimes.com/business/regulated-shared-housing-could-cut-dubai-tenants-rent-by-half-say-experts",
     "https://www.khaleejtimes.com/business/rents-in-dubai-fall-over-12-dubai-marina-business-bay-and-jvc-lead",
     "https://www.khaleejtimes.com/business/rove-hotels-irth-group-to-launch-new-residential-projects-across-uae",
     "https://www.khaleejtimes.com/business/sharjah-property-market-grows-14-as-transactions-reach-dh468-billion-in-9-months",
@@ -687,7 +693,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-10-21T12:39:06+04:00",
+  "updated_at": "2026-10-22T12:41:31+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
