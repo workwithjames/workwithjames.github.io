@@ -120,6 +120,7 @@
     "https://www.khaleejtimes.com/business/binghatti-dismisses-debt-fears-points-to-dh106-billion-in-escrow-accounts",
     "https://www.khaleejtimes.com/business/business-bay-overtakes-palm-jumeirah-as-dubais-busiest-prime-property-market",
     "https://www.khaleejtimes.com/business/current-regional-situation-not-sustainable-says-dubai-billionaire-alabbar",
+    "https://www.khaleejtimes.com/business/deyaar-posts-27-profit-growth-to-dh5415-million-as-property-handovers-exceed-2100-units",
     "https://www.khaleejtimes.com/business/dubai-abu-dhabi-landlords-keep-upper-hand-as-tenants-compete-in-uae-office-market",
     "https://www.khaleejtimes.com/business/dubai-completes-104-property-projects-worth-over-dh111-billion-in-h1-2026",
     "https://www.khaleejtimes.com/business/dubai-delivers-record-24800-new-homes-in-h1-2026-as-market-matures",
@@ -303,7 +304,8 @@
     "https://www.thenationalnews.com/business/property/2026/10/14/aldar-international-unit-plans-to-deliver-9000-homes-in-next-five-years",
     "https://www.thenationalnews.com/business/property/2026/10/14/aldar-to-launch-major-dubai-villa-and-townhouse-project-by-end-of-year",
     "https://www.thenationalnews.com/business/property/2026/10/15/aldar-enters-sharjah-with-dh11bn-residential-acquisition",
-    "https://www.thenationalnews.com/business/property/2026/10/20/arada-enters-saudi-arabia-with-38bn-riyadh-project"
+    "https://www.thenationalnews.com/business/property/2026/10/20/arada-enters-saudi-arabia-with-38bn-riyadh-project",
+    "https://www.thenationalnews.com/business/property/2026/10/21/dubai-records-86-deals-for-10m-homes-in-q3-as-wealthy-flock-despite-iran-war"
   ],
   "seen_title_signatures": [
     "000 2028 2030 abu delivery dhabi homes peak plans",
@@ -693,7 +695,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-10-22T12:41:31+04:00",
+  "updated_at": "2026-10-23T12:37:06+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -814,6 +816,11 @@
       "url": "https://gulfnews.com/business/property/sold-out-in-two-weeks-breaking-ground-in-two-months-zoya-advances-elinor-in-dubai-south-1.500718052",
       "title": "Sold out in two weeks, breaking ground in two months: Zoya advances Elinor in Dubai South",
       "reviewed_at": "2026-10-21T12:39:06.668797+04:00"
+    },
+    {
+      "url": "https://www.thenationalnews.com/business/property/2026/10/21/dubai-records-86-deals-for-10m-homes-in-q3-as-wealthy-flock-despite-iran-war",
+      "title": "Dubai records strong sales for homes valued at over $10m as it attracts wealthy despite Iran war",
+      "reviewed_at": "2026-10-23T12:37:06.069080+04:00"
     }
   ]
 }
