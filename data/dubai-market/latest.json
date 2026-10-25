@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source_date": "2026-10-22",
-  "captured_at": "2026-10-24T22:35:43.415Z",
+  "captured_at": "2026-10-25T22:39:50.084Z",
   "source": {
     "provider": "DXB Data",
     "endpoint": "https://dxbdata.io/mcp",
@@ -9,7 +9,7 @@
     "authentication": "none"
   },
   "overview": {
-    "total_transactions": 66088,
+    "total_transactions": 66124,
     "areas": 167,
     "period": {
       "from": "2026-06-23",
@@ -19,19 +19,19 @@
     "top_areas_by_volume": [
       {
         "area": "Madinat Al Mataar",
-        "n": 6593
+        "n": 6596
       },
       {
         "area": "Al Barsha South Fourth",
-        "n": 4473
+        "n": 4478
       },
       {
         "area": "Jabal Ali First",
-        "n": 3310
+        "n": 3311
       },
       {
         "area": "Jabal Ali Industrial Second",
-        "n": 3002
+        "n": 3003
       },
       {
         "area": "Business Bay",
@@ -69,12 +69,12 @@
         "area": "Al Barsha South Fourth",
         "property_type": "Flat",
         "median_price_aed": 950000,
-        "median_price_per_sqm_aed": 15245,
+        "median_price_per_sqm_aed": 15249,
         "gross_rental_yield_pct": 6.24,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 2997,
-        "sale_sample": 2997,
-        "rent_sample": 151
+        "sample_size": 3002,
+        "sale_sample": 3002,
+        "rent_sample": 152
       },
       {
         "area": "Al Barshaa South Second",
@@ -138,8 +138,8 @@
         "median_price_per_sqm_aed": 13389,
         "gross_rental_yield_pct": 5.82,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 649,
-        "sale_sample": 649,
+        "sample_size": 651,
+        "sale_sample": 651,
         "rent_sample": 34
       },
       {
@@ -178,12 +178,12 @@
       {
         "area": "Al Khairan First",
         "property_type": "Flat",
-        "median_price_aed": 2448944,
-        "median_price_per_sqm_aed": 26912,
-        "gross_rental_yield_pct": 5.07,
+        "median_price_aed": 2433944,
+        "median_price_per_sqm_aed": 26902,
+        "gross_rental_yield_pct": 5.08,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 988,
-        "sale_sample": 988,
+        "sample_size": 990,
+        "sale_sample": 990,
         "rent_sample": 28
       },
       {
@@ -223,11 +223,11 @@
         "area": "Al Thanyah Fifth",
         "property_type": "Flat",
         "median_price_aed": 1984828,
-        "median_price_per_sqm_aed": 23816,
+        "median_price_per_sqm_aed": 23817,
         "gross_rental_yield_pct": 4.76,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 807,
-        "sale_sample": 807,
+        "sample_size": 808,
+        "sale_sample": 808,
         "rent_sample": 49
       },
       {
@@ -239,7 +239,7 @@
         "annual_rent_per_sqm_aed": null,
         "sample_size": 39,
         "sale_sample": 39,
-        "rent_sample": 48
+        "rent_sample": 50
       },
       {
         "area": "Al Thanyah Third",
@@ -266,12 +266,12 @@
       {
         "area": "Al Wasl",
         "property_type": "Flat",
-        "median_price_aed": 2790500,
-        "median_price_per_sqm_aed": 32994,
+        "median_price_aed": 2800000,
+        "median_price_per_sqm_aed": 32961,
         "gross_rental_yield_pct": 3.9,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 248,
-        "sale_sample": 248,
+        "sample_size": 249,
+        "sale_sample": 249,
         "rent_sample": 20
       },
       {
@@ -380,8 +380,8 @@
         "median_price_per_sqm_aed": 18378,
         "gross_rental_yield_pct": 5.03,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 5665,
-        "sale_sample": 5665,
+        "sample_size": 5668,
+        "sale_sample": 5668,
         "rent_sample": 68
       },
       {
@@ -399,22 +399,22 @@
         "area": "Marsa Dubai",
         "property_type": "Flat",
         "median_price_aed": 2549548,
-        "median_price_per_sqm_aed": 22949,
+        "median_price_per_sqm_aed": 22930,
         "gross_rental_yield_pct": 4.76,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 965,
-        "sale_sample": 965,
+        "sample_size": 967,
+        "sale_sample": 967,
         "rent_sample": 133
       },
       {
         "area": "Me'Aisem First",
         "property_type": "Flat",
-        "median_price_aed": 786908,
+        "median_price_aed": 787538,
         "median_price_per_sqm_aed": 14849,
         "gross_rental_yield_pct": 6.04,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 828,
-        "sale_sample": 828,
+        "sample_size": 829,
+        "sale_sample": 829,
         "rent_sample": 22
       },
       {
@@ -464,12 +464,12 @@
       {
         "area": "Palm Jumeirah",
         "property_type": "Flat",
-        "median_price_aed": 5304400,
-        "median_price_per_sqm_aed": 34333,
-        "gross_rental_yield_pct": 3.92,
+        "median_price_aed": 5308800,
+        "median_price_per_sqm_aed": 34480,
+        "gross_rental_yield_pct": 3.9,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 248,
-        "sale_sample": 248,
+        "sample_size": 249,
+        "sale_sample": 249,
         "rent_sample": 37
       },
       {
@@ -545,20 +545,20 @@
         "median_price_per_sqm_aed": 18441,
         "gross_rental_yield_pct": null,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 2214,
-        "sale_sample": 2214,
+        "sample_size": 2215,
+        "sale_sample": 2215,
         "rent_sample": 0
       },
       {
         "area": "Wadi Al Safa 5",
         "property_type": "Flat",
-        "median_price_aed": 889777,
-        "median_price_per_sqm_aed": 14990,
-        "gross_rental_yield_pct": 3.75,
+        "median_price_aed": 889313,
+        "median_price_per_sqm_aed": 14991,
+        "gross_rental_yield_pct": 3.77,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 1561,
-        "sale_sample": 1561,
-        "rent_sample": 38
+        "sample_size": 1563,
+        "sale_sample": 1563,
+        "rent_sample": 39
       },
       {
         "area": "Wadi Al Safa 7",
