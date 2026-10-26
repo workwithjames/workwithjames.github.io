@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source_date": "2026-10-22",
-  "captured_at": "2026-10-25T22:39:50.084Z",
+  "captured_at": "2026-10-26T23:58:01.858Z",
   "source": {
     "provider": "DXB Data",
     "endpoint": "https://dxbdata.io/mcp",
@@ -9,7 +9,7 @@
     "authentication": "none"
   },
   "overview": {
-    "total_transactions": 66124,
+    "total_transactions": 66125,
     "areas": 167,
     "period": {
       "from": "2026-06-23",
@@ -168,11 +168,11 @@
         "area": "Al Jadaf",
         "property_type": "Flat",
         "median_price_aed": 1350000,
-        "median_price_per_sqm_aed": 20888,
+        "median_price_per_sqm_aed": 20893,
         "gross_rental_yield_pct": 3.71,
         "annual_rent_per_sqm_aed": null,
-        "sample_size": 638,
-        "sale_sample": 638,
+        "sample_size": 639,
+        "sale_sample": 639,
         "rent_sample": 81
       },
       {

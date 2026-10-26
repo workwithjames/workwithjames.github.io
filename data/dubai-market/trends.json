@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-25T22:39:50.095Z",
+  "generated_at": "2026-10-26T23:58:01.869Z",
   "history_start": "2026-08-17",
   "latest_date": "2026-10-22",
   "snapshots": 34,
@@ -12,7 +12,7 @@
   "market": {
     "date": "2026-10-22",
     "current": {
-      "total_transactions": 66124,
+      "total_transactions": 66125,
       "areas": 167,
       "median_sale_price_aed": 1250000
     },
@@ -231,7 +231,7 @@
       },
       {
         "date": "2026-10-22",
-        "total_transactions": 66124,
+        "total_transactions": 66125,
         "areas": 167,
         "median_sale_price_aed": 1250000
       }
@@ -4356,26 +4356,26 @@
       "Al Jadaf": {
         "current": {
           "median_price_aed": 1350000,
-          "median_price_per_sqm_aed": 20888,
+          "median_price_per_sqm_aed": 20893,
           "gross_rental_yield_pct": 3.71,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 638,
-          "sale_sample": 638,
+          "sample_size": 639,
+          "sale_sample": 639,
           "rent_sample": 81
         },
         "confidence": "High",
         "changes": {
           "7d": {
             "median_price_aed_pct": 0,
-            "median_price_per_sqm_aed_pct": 0.04,
+            "median_price_per_sqm_aed_pct": 0.07,
             "gross_rental_yield_pp": 0.02,
-            "sample_size_pct": 7.41
+            "sample_size_pct": 7.58
           },
           "30d": {
             "median_price_aed_pct": -0.07,
-            "median_price_per_sqm_aed_pct": -1.32,
+            "median_price_per_sqm_aed_pct": -1.29,
             "gross_rental_yield_pp": 0.1,
-            "sample_size_pct": 34.03
+            "sample_size_pct": 34.24
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -4718,11 +4718,11 @@
           {
             "date": "2026-10-22",
             "median_price_aed": 1350000,
-            "median_price_per_sqm_aed": 20888,
+            "median_price_per_sqm_aed": 20893,
             "gross_rental_yield_pct": 3.71,
             "annual_rent_per_sqm_aed": null,
-            "sample_size": 638,
-            "sale_sample": 638,
+            "sample_size": 639,
+            "sale_sample": 639,
             "rent_sample": 81
           }
         ]
