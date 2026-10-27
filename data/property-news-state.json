@@ -142,6 +142,7 @@
     "https://www.khaleejtimes.com/business/dubai-remains-worlds-branded-residence-capital-as-uae-accounts-for-19-of-global-market",
     "https://www.khaleejtimes.com/business/dubai-retail-property-sales-surge-177-to-dh38-billion-in-h1-2026",
     "https://www.khaleejtimes.com/business/dubai-set-for-highest-annual-home-deliveries-since-2008-as-new-launches-slow",
+    "https://www.khaleejtimes.com/business/dubai-south-home-sales-surpass-full-year-2025-by-27-reaching-12428-transactions-in-just-eight-months",
     "https://www.khaleejtimes.com/business/dubai-ultra-prime-home-sales-hit-6-billion-despite-regional-tensions",
     "https://www.khaleejtimes.com/business/dubais-10-million-plus-home-sales-reach-86-in-q3-2026",
     "https://www.khaleejtimes.com/business/dubais-branded-residences-market-cools-on-volume-but-pricing-power-stays-strong",
@@ -182,6 +183,7 @@
     "https://www.khaleejtimes.com/business/property/bamx-in-the-spotlight-at-ips-2026-the-middle-easts-biggest-real-estate-event",
     "https://www.khaleejtimes.com/business/property/beyond-real-estate-adil-faridi-on-building-businesses-that-create-long-term-value",
     "https://www.khaleejtimes.com/business/property/buying-emaar-home-dubai-adcb-flexible-financing",
+    "https://www.khaleejtimes.com/business/property/casa-vista-development-strengthens-uae-presence-as-40-per-cent-of-aquora-residences-sell-ahead-of-unveiling",
     "https://www.khaleejtimes.com/business/property/citi-developers-appoints-nse-as-main-contractor-for-arya-residences",
     "https://www.khaleejtimes.com/business/property/cosmo-developments-launches-dh6-billion-the-wadi-project-in-abu-dhabi",
     "https://www.khaleejtimes.com/business/property/dh1-million-fine-abu-dhabi-gives-property-owners-until-september-16-to-secure-occupancy-certificates",
@@ -308,7 +310,8 @@
     "https://www.thenationalnews.com/business/property/2026/10/15/aldar-enters-sharjah-with-dh11bn-residential-acquisition",
     "https://www.thenationalnews.com/business/property/2026/10/20/arada-enters-saudi-arabia-with-38bn-riyadh-project",
     "https://www.thenationalnews.com/business/property/2026/10/21/dubai-records-86-deals-for-10m-homes-in-q3-as-wealthy-flock-despite-iran-war",
-    "https://www.thenationalnews.com/business/property/2026/10/24/uae-property-should-i-sell-my-off-plan-dubai-apartment-amid-uncertainty-or-wait"
+    "https://www.thenationalnews.com/business/property/2026/10/24/uae-property-should-i-sell-my-off-plan-dubai-apartment-amid-uncertainty-or-wait",
+    "https://www.thenationalnews.com/business/property/2026/10/27/aldar-reports-25-jump-in-q3-net-profit-amid-launch-of-new-projects"
   ],
   "seen_title_signatures": [
     "000 2028 2030 abu delivery dhabi homes peak plans",
@@ -698,7 +701,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-10-26T13:02:10+04:00",
+  "updated_at": "2026-10-27T13:05:18+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -824,6 +827,11 @@
       "url": "https://www.thenationalnews.com/business/property/2026/10/21/dubai-records-86-deals-for-10m-homes-in-q3-as-wealthy-flock-despite-iran-war",
       "title": "Dubai records strong sales for homes valued at over $10m as it attracts wealthy despite Iran war",
       "reviewed_at": "2026-10-23T12:37:06.069080+04:00"
+    },
+    {
+      "url": "https://www.thenationalnews.com/business/property/2026/10/27/aldar-reports-25-jump-in-q3-net-profit-amid-launch-of-new-projects",
+      "title": "Aldar reports 25% jump in Q3 net profit amid launch of new projects",
+      "reviewed_at": "2026-10-27T13:05:18.147203+04:00"
     }
   ]
 }
