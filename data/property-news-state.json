@@ -18,8 +18,11 @@
     "https://gulfnews.com/business/property/arif-developments-honoured-with-excellence-in-csr-award-1.500707601",
     "https://gulfnews.com/business/property/arif-developments-recognised-as-promising-developer-of-the-year-1.500693475",
     "https://gulfnews.com/business/property/beyond-supply-glut-manila-condo-market-faces-repricing-what-it-means-1.500630690",
+    "https://gulfnews.com/business/property/bought-property-in-uae-indias-tax-alert-raises-questions-for-expats-1.500726205",
+    "https://gulfnews.com/business/property/casa-vista-strengthens-uae-market-presence-as-aquora-records-40-sales-ahead-of-dubai-unveiling-1.500725443",
     "https://gulfnews.com/business/property/damac-to-host-two-day-mortgage-event-with-uae-banks-this-weekend-1.500633497",
     "https://gulfnews.com/business/property/dhg-properties-completes-first-dubai-project-starts-handover-of-200m-helvetia-residences-1.500703150",
+    "https://gulfnews.com/business/property/difc-adds-hotels-homes-and-offices-as-dh51-billion-project-takes-shape-1.500726646",
     "https://gulfnews.com/business/property/dubai-adds-more-than-24000-property-units-in-six-months-1.500646931",
     "https://gulfnews.com/business/property/dubai-attracts-186-new-property-developers-in-first-seven-months-of-2026-1.500641994",
     "https://gulfnews.com/business/property/dubai-bans-mixing-families-and-individuals-in-shared-housing-units-1.500701345",
@@ -102,6 +105,7 @@
     "https://gulfnews.com/business/property/where-sharjah-property-buyers-spent-most-as-july-deals-hit-dh7-billion-1.500632308",
     "https://gulfnews.com/business/property/wynn-al-marjan-island-unveils-two-1460-sqm-apartments-at-top-of-70-storey-tower-1.500673675",
     "https://gulfnews.com/business/property/yas-island-gets-dh12-billion-investment-for-new-rides-attractions-and-hotels-1.500673885",
+    "https://gulfnews.com/business/property/zimaya-advances-portfolio-with-dh185m-lawncrest-in-production-city-1.500725521",
     "https://gulfnews.com/business/property/zoya-developments-sells-out-elinor-project-in-under-two-weeks-1.500640776",
     "https://www.khaleejtimes.com/business/6-in-10-dubai-homes-hold-their-value-as-market-cools-gently-in-august",
     "https://www.khaleejtimes.com/business/abu-dhabi-named-worlds-most-improved-real-estate-market-for-transparency",
@@ -113,6 +117,7 @@
     "https://www.khaleejtimes.com/business/aldar-adcb-complete-abu-dhabis-first-off-plan-mortgage-under-new-adrec-framework",
     "https://www.khaleejtimes.com/business/aldar-enters-sharjah-property-market-with-dh11-billion-deal",
     "https://www.khaleejtimes.com/business/aldar-mubadala-buy-masdar-city-square-in-dh918m-deal",
+    "https://www.khaleejtimes.com/business/aldars-diversified-investments-drive-9-month-profit-to-dh71-billion",
     "https://www.khaleejtimes.com/business/aviation",
     "https://www.khaleejtimes.com/business/aviation/flydubai-dubai-tel-aviv-diverted-flight-from-altercation-to-probe",
     "https://www.khaleejtimes.com/business/aviation/uae-flight-delays-cancellations-46-flights-delayed-across-airports",
@@ -701,7 +706,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-10-27T13:05:18+04:00",
+  "updated_at": "2026-10-28T13:46:14+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -832,6 +837,16 @@
       "url": "https://www.thenationalnews.com/business/property/2026/10/27/aldar-reports-25-jump-in-q3-net-profit-amid-launch-of-new-projects",
       "title": "Aldar reports 25% jump in Q3 net profit amid launch of new projects",
       "reviewed_at": "2026-10-27T13:05:18.147203+04:00"
+    },
+    {
+      "url": "https://gulfnews.com/business/property/zimaya-advances-portfolio-with-dh185m-lawncrest-in-production-city-1.500725521",
+      "title": "Zimaya advances portfolio with Dh185m Lawncrest in Production City",
+      "reviewed_at": "2026-10-28T13:46:14.068802+04:00"
+    },
+    {
+      "url": "https://gulfnews.com/business/property/casa-vista-strengthens-uae-market-presence-as-aquora-records-40-sales-ahead-of-dubai-unveiling-1.500725443",
+      "title": "Casa Vista strengthens UAE market presence as AQUORA records 40% sales ahead of Dubai unveiling",
+      "reviewed_at": "2026-10-28T13:46:14.068802+04:00"
     }
   ]
 }
