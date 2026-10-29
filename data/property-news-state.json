@@ -84,6 +84,7 @@
     "https://gulfnews.com/business/property/palm-jebel-ali-unveils-limited-collection-of-44-beachfront-villas-on-frond-f-1.500646564",
     "https://gulfnews.com/business/property/palm-jebel-alis-first-retail-hub-revealed-with-26-new-concepts-1.500669544",
     "https://gulfnews.com/business/property/palm-jumeirah-villa-sells-for-dh260-million-in-latest-dubai-luxury-deal-1.500659128",
+    "https://gulfnews.com/business/property/philippines-tallest-twin-towers-shang-summit-aims-high-1.500727194",
     "https://gulfnews.com/business/property/ras-al-khaimah-property-prices-rise-in-h1-2026-13800-homes-due-by-2028-1.500660431",
     "https://gulfnews.com/business/property/record-dh100-million-land-sale-cements-dubai-hills-estates-ultra-prime-status-1.500676935",
     "https://gulfnews.com/business/property/rockhill-bets-dh250-million-on-affordable-premium-living-with-its-first-ajman-tower-1.500617833",
@@ -108,6 +109,7 @@
     "https://gulfnews.com/business/property/zimaya-advances-portfolio-with-dh185m-lawncrest-in-production-city-1.500725521",
     "https://gulfnews.com/business/property/zoya-developments-sells-out-elinor-project-in-under-two-weeks-1.500640776",
     "https://www.khaleejtimes.com/business/6-in-10-dubai-homes-hold-their-value-as-market-cools-gently-in-august",
+    "https://www.khaleejtimes.com/business/abu-dhabi-apartment-prices-climb-by-up-to-92-buyers-turn-to-affordable-areas",
     "https://www.khaleejtimes.com/business/abu-dhabi-named-worlds-most-improved-real-estate-market-for-transparency",
     "https://www.khaleejtimes.com/business/abu-dhabi-property-buyers-shift-towards-luxury-off-plan-homes-as-sales-volumes-decline",
     "https://www.khaleejtimes.com/business/abu-dhabi-property-deals-top-dh155-billion-beat-2025s-full-year-total-in-8-months",
@@ -142,6 +144,7 @@
     "https://www.khaleejtimes.com/business/dubai-population-growth-fuels-property-market-but-price-gains-may-take-time-to-emerge",
     "https://www.khaleejtimes.com/business/dubai-property-buyers-upgrade-to-bigger-units-move-to-high-end-communities-after-price-drop",
     "https://www.khaleejtimes.com/business/dubai-property-prices-could-adjust-5-10-as-new-supply-comes-by-2027-says-alabbar",
+    "https://www.khaleejtimes.com/business/dubai-property-prices-new-supply-impact-may-emerge-in-coming-months",
     "https://www.khaleejtimes.com/business/dubai-property-repricing-opens-door-to-premium-communities",
     "https://www.khaleejtimes.com/business/dubai-property-transactions-grow-bigger-as-buyers-stretch-their-budgets",
     "https://www.khaleejtimes.com/business/dubai-remains-worlds-branded-residence-capital-as-uae-accounts-for-19-of-global-market",
@@ -191,6 +194,7 @@
     "https://www.khaleejtimes.com/business/property/casa-vista-development-strengthens-uae-presence-as-40-per-cent-of-aquora-residences-sell-ahead-of-unveiling",
     "https://www.khaleejtimes.com/business/property/citi-developers-appoints-nse-as-main-contractor-for-arya-residences",
     "https://www.khaleejtimes.com/business/property/cosmo-developments-launches-dh6-billion-the-wadi-project-in-abu-dhabi",
+    "https://www.khaleejtimes.com/business/property/deception-in-your-lease-dubais-new-rule-could-annul-your-contract",
     "https://www.khaleejtimes.com/business/property/dh1-million-fine-abu-dhabi-gives-property-owners-until-september-16-to-secure-occupancy-certificates",
     "https://www.khaleejtimes.com/business/property/dubai-apartment-prices-could-fall-further-as-supply-set-to-rise-20-sp-global",
     "https://www.khaleejtimes.com/business/property/dubai-ready-home-sales-jump-16-as-buyers-shift-away-from-off-plan-properties",
@@ -706,7 +710,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-10-28T13:46:14+04:00",
+  "updated_at": "2026-10-29T14:04:24+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
