@@ -12,6 +12,7 @@
     "https://gulfnews.com/business/property/abu-dhabis-aldar-enters-sharjah-after-dh11-billion-acquisition-deal-with-arada-1.500711403",
     "https://gulfnews.com/business/property/adgm-launches-broker-rankings-for-property-buyers-and-tenants-1.500626469",
     "https://gulfnews.com/business/property/ajman-rental-contracts-reach-dh291-billion-in-first-half-of-2026-1.500644264",
+    "https://gulfnews.com/business/property/al-jalila-foundation-building-earns-leed-gold-certification-for-sustainability-efforts-1.500728252",
     "https://gulfnews.com/business/property/aldar-launches-yas-riva-reserve-a-waterfront-villa-community-on-yas-island-1.500679693",
     "https://gulfnews.com/business/property/aldar-mubadala-jv-buys-99-occupied-masdar-city-square-for-dh918-million-1.500677780",
     "https://gulfnews.com/business/property/arif-developments-honoured-at-9th-golden-excellence-awards-1.500622447",
@@ -41,6 +42,7 @@
     "https://gulfnews.com/business/property/dubai-rental-contracts-exceed-1-million-for-first-time-as-value-hits-dh1274b-1.500714905",
     "https://gulfnews.com/business/property/dubai-rents-ease-62-while-home-prices-stay-above-2025-levels-1.500623468",
     "https://gulfnews.com/business/property/dubai-shared-housing-law-who-can-rent-sublet-and-face-fines-of-up-to-dh1-million-1.500702961",
+    "https://gulfnews.com/business/property/dubai-tenants-landlords-can-cancel-signed-rental-contracts-if-deception-is-proven-1.500728486",
     "https://gulfnews.com/business/property/dubai-to-launch-rent-now-pay-later-service-with-zero-interest-instalments-1.500639254",
     "https://gulfnews.com/business/property/dubai-villa-sells-for-dh110m-nearly-doubling-jumeirah-golf-estates-record-1.500628980",
     "https://gulfnews.com/business/property/dubais-350-metre-trump-tower-moves-into-next-construction-phase-1.500632456",
@@ -235,6 +237,7 @@
     "https://www.khaleejtimes.com/business/regulated-shared-housing-could-cut-dubai-tenants-rent-by-half-say-experts",
     "https://www.khaleejtimes.com/business/rents-in-dubai-fall-over-12-dubai-marina-business-bay-and-jvc-lead",
     "https://www.khaleejtimes.com/business/rove-hotels-irth-group-to-launch-new-residential-projects-across-uae",
+    "https://www.khaleejtimes.com/business/sharjah-opens-new-real-estate-registration-branch-in-muwaileh-amid-property-investment",
     "https://www.khaleejtimes.com/business/sharjah-property-market-grows-14-as-transactions-reach-dh468-billion-in-9-months",
     "https://www.khaleejtimes.com/business/sharjah-property-sales-more-than-double-in-h1-2026-as-prices-ease",
     "https://www.khaleejtimes.com/business/sharjah-real-estate-transactions-surge-618-to-dh7-billion-in-july",
@@ -257,8 +260,10 @@
     "https://www.khaleejtimes.com/business/uae-developers-shift-focus-to-funded-projects-nearing-completion-says-report",
     "https://www.khaleejtimes.com/business/uae-flight-updates-delays-and-cancellations-at-dubai-abu-dhabi-airports",
     "https://www.khaleejtimes.com/business/uae-fuel-prices-rise-above-dh4-per-litre-surpass-4-year-high-for-october-2026",
+    "https://www.khaleejtimes.com/business/uae-petrol-prices-could-fuel-cross-previous-record-high-of-dh463-a-litre-in-november",
     "https://www.khaleejtimes.com/business/uae-property-market-cools-in-q2-as-dubai-abu-dhabi-home-prices-and-rents-ease",
     "https://www.khaleejtimes.com/business/uae-travel-advisory-etihad-emirates-flydubai-air-arabia-flight-delays-and-cancellations",
+    "https://www.khaleejtimes.com/business/want-a-real-estate-career-dubai-offers-over-400-new-emirati-job-openings",
     "https://www.khaleejtimes.com/business/we-are-still-collecting-exactly-like-before-emaar-cancellations-halve-now-says-alabbar",
     "https://www.khaleejtimes.com/business/why-dubai-residents-will-not-have-to-take-out-loans-to-pay-rents",
     "https://www.khaleejtimes.com/business/why-some-dubai-tenants-will-move-to-bigger-homes-this-year",
@@ -710,7 +715,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-10-29T14:04:24+04:00",
+  "updated_at": "2026-10-30T14:07:23+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -851,6 +856,11 @@
       "url": "https://gulfnews.com/business/property/casa-vista-strengthens-uae-market-presence-as-aquora-records-40-sales-ahead-of-dubai-unveiling-1.500725443",
       "title": "Casa Vista strengthens UAE market presence as AQUORA records 40% sales ahead of Dubai unveiling",
       "reviewed_at": "2026-10-28T13:46:14.068802+04:00"
+    },
+    {
+      "url": "https://gulfnews.com/business/property/al-jalila-foundation-building-earns-leed-gold-certification-for-sustainability-efforts-1.500728252",
+      "title": "Al Jalila Foundation building earns LEED Gold certification for sustainability efforts",
+      "reviewed_at": "2026-10-30T14:07:23.882870+04:00"
     }
   ]
 }
