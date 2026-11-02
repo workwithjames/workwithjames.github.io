@@ -27,6 +27,7 @@
     "https://gulfnews.com/business/property/dubai-adds-more-than-24000-property-units-in-six-months-1.500646931",
     "https://gulfnews.com/business/property/dubai-attracts-186-new-property-developers-in-first-seven-months-of-2026-1.500641994",
     "https://gulfnews.com/business/property/dubai-bans-mixing-families-and-individuals-in-shared-housing-units-1.500701345",
+    "https://gulfnews.com/business/property/dubai-changes-al-satwa-building-rules-allows-more-floors-for-residential-projects-1.500731691",
     "https://gulfnews.com/business/property/dubai-has-96585-homes-entering-the-market-in-2026-83-are-already-sold-1.500647675",
     "https://gulfnews.com/business/property/dubai-healthcare-city-begins-work-on-dh3b-dubai-creek-gardens-1.500670363",
     "https://gulfnews.com/business/property/dubai-healthcare-city-launches-aed3-billion-dubai-creek-gardens-residential-development-1.500670799",
@@ -42,6 +43,7 @@
     "https://gulfnews.com/business/property/dubai-rental-contracts-exceed-1-million-for-first-time-as-value-hits-dh1274b-1.500714905",
     "https://gulfnews.com/business/property/dubai-rents-ease-62-while-home-prices-stay-above-2025-levels-1.500623468",
     "https://gulfnews.com/business/property/dubai-shared-housing-law-who-can-rent-sublet-and-face-fines-of-up-to-dh1-million-1.500702961",
+    "https://gulfnews.com/business/property/dubai-tenants-can-now-register-renew-cancel-ejari-pay-dewa-on-dubainow-app-1.500732665",
     "https://gulfnews.com/business/property/dubai-tenants-landlords-can-cancel-signed-rental-contracts-if-deception-is-proven-1.500728486",
     "https://gulfnews.com/business/property/dubai-to-launch-rent-now-pay-later-service-with-zero-interest-instalments-1.500639254",
     "https://gulfnews.com/business/property/dubai-villa-sells-for-dh110m-nearly-doubling-jumeirah-golf-estates-record-1.500628980",
@@ -150,6 +152,7 @@
     "https://www.khaleejtimes.com/business/dubai-property-repricing-opens-door-to-premium-communities",
     "https://www.khaleejtimes.com/business/dubai-property-transactions-grow-bigger-as-buyers-stretch-their-budgets",
     "https://www.khaleejtimes.com/business/dubai-remains-worlds-branded-residence-capital-as-uae-accounts-for-19-of-global-market",
+    "https://www.khaleejtimes.com/business/dubai-rents-1-in-5-tenants-now-pays-less-than-before-as-rentals-ease-on-new-supply",
     "https://www.khaleejtimes.com/business/dubai-retail-property-sales-surge-177-to-dh38-billion-in-h1-2026",
     "https://www.khaleejtimes.com/business/dubai-set-for-highest-annual-home-deliveries-since-2008-as-new-launches-slow",
     "https://www.khaleejtimes.com/business/dubai-south-home-sales-surpass-full-year-2025-by-27-reaching-12428-transactions-in-just-eight-months",
@@ -177,6 +180,7 @@
     "https://www.khaleejtimes.com/business/innovation-city",
     "https://www.khaleejtimes.com/business/markets",
     "https://www.khaleejtimes.com/business/middle-east-flex-office-market-reaches-tipping-point-as-demand-surges",
+    "https://www.khaleejtimes.com/business/more-dubai-homebuyers-paying-cash-as-interest-rates-rise-but-mortgages-still-fund-most-deals",
     "https://www.khaleejtimes.com/business/new-landmark-dubai-holding-signs-dh5-billion-deal-for-hq-jumeirah-residences",
     "https://www.khaleejtimes.com/business/new-uae-music-fees-businesses-to-pay-from-dh1500-to-dh50000-a-year",
     "https://www.khaleejtimes.com/business/over-530-emirati-youth-invest-dh43-billion-in-sharjah-property",
@@ -718,7 +722,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-11-01T14:33:15+04:00",
+  "updated_at": "2026-11-02T15:18:08+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -869,6 +873,11 @@
       "url": "https://www.thenationalnews.com/business/property/2026/10/29/abu-dhabi-apartment-prices-rise-24-per-cent-in-third-quarter",
       "title": "Abu Dhabi apartment prices rise 24 per cent in third quarter",
       "reviewed_at": "2026-10-31T13:43:44.922812+04:00"
+    },
+    {
+      "url": "https://gulfnews.com/business/property/dubai-changes-al-satwa-building-rules-allows-more-floors-for-residential-projects-1.500731691",
+      "title": "Dubai changes Al Satwa building rules, allows more floors for residential projects",
+      "reviewed_at": "2026-11-02T15:18:08.530217+04:00"
     }
   ]
 }
