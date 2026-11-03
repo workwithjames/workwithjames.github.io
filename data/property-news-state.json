@@ -63,6 +63,7 @@
     "https://gulfnews.com/business/property/global-partners-secures-300-million-for-next-growth-phase-1.500638576",
     "https://gulfnews.com/business/property/golden-visa-first-time-buyer-support-flexi-rent-how-dubai-is-widening-property-access-for-buyers-and-renters-1.500644768",
     "https://gulfnews.com/business/property/gulf-news-and-aurex-privy-launch-sheowns-a-new-property-platform-putting-women-at-the-centre-of-ownership-decisions-1.500676671",
+    "https://gulfnews.com/business/property/hamdan-bin-mohammed-names-emaar-winner-of-dubai-it-real-estate-award-1.500732954",
     "https://gulfnews.com/business/property/how-ai-powered-proptech-is-turning-property-search-into-decision-support-1.500670932",
     "https://gulfnews.com/business/property/how-dubais-property-market-enters-a-new-phase-of-consolidation-1.500678195",
     "https://gulfnews.com/business/property/how-yas-island-is-drawing-a-dh30-billion-plus-development-wave-1.500683697",
@@ -105,6 +106,7 @@
     "https://gulfnews.com/business/property/uae-investors-account-for-half-of-sharjah-property-market-during-h1-2026-1.500621868",
     "https://gulfnews.com/business/property/uae-property-investors-must-look-beyond-rental-yields-says-realtor-signature-properties-ceo-1.500719388",
     "https://gulfnews.com/business/property/uaes-top-10-developers-sell-dh1137-billion-of-property-in-six-months-1.500639749",
+    "https://gulfnews.com/business/property/union-properties-nine-month-revenue-jumps-58-to-dh8095-million-1.500733942",
     "https://gulfnews.com/business/property/vibe-by-arsenal-east-brings-a-fresh-take-on-urban-living-to-dubai-1.500716811",
     "https://gulfnews.com/business/property/wadan-marks-one-year-with-breaking-ground-ceremony-at-weston-1.500694594",
     "https://gulfnews.com/business/property/where-sharjah-property-buyers-spent-most-as-july-deals-hit-dh7-billion-1.500632308",
@@ -201,6 +203,7 @@
     "https://www.khaleejtimes.com/business/property/buying-emaar-home-dubai-adcb-flexible-financing",
     "https://www.khaleejtimes.com/business/property/casa-vista-development-strengthens-uae-presence-as-40-per-cent-of-aquora-residences-sell-ahead-of-unveiling",
     "https://www.khaleejtimes.com/business/property/citi-developers-appoints-nse-as-main-contractor-for-arya-residences",
+    "https://www.khaleejtimes.com/business/property/citi-developers-celebrates-sales-excellence-with-maserati-giveaway",
     "https://www.khaleejtimes.com/business/property/cosmo-developments-launches-dh6-billion-the-wadi-project-in-abu-dhabi",
     "https://www.khaleejtimes.com/business/property/deception-in-your-lease-dubais-new-rule-could-annul-your-contract",
     "https://www.khaleejtimes.com/business/property/dh1-million-fine-abu-dhabi-gives-property-owners-until-september-16-to-secure-occupancy-certificates",
@@ -269,6 +272,7 @@
     "https://www.khaleejtimes.com/business/uae-petrol-prices-could-fuel-cross-previous-record-high-of-dh463-a-litre-in-november",
     "https://www.khaleejtimes.com/business/uae-property-market-cools-in-q2-as-dubai-abu-dhabi-home-prices-and-rents-ease",
     "https://www.khaleejtimes.com/business/uae-travel-advisory-etihad-emirates-flydubai-air-arabia-flight-delays-and-cancellations",
+    "https://www.khaleejtimes.com/business/union-properties-profit-falls-to-dh28m-as-last-years-one-off-gain-lifts-comparison",
     "https://www.khaleejtimes.com/business/want-a-real-estate-career-dubai-offers-over-400-new-emirati-job-openings",
     "https://www.khaleejtimes.com/business/we-are-still-collecting-exactly-like-before-emaar-cancellations-halve-now-says-alabbar",
     "https://www.khaleejtimes.com/business/why-dubai-residents-will-not-have-to-take-out-loans-to-pay-rents",
@@ -722,7 +726,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-11-02T15:18:08+04:00",
+  "updated_at": "2026-11-03T14:57:38+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -878,6 +882,11 @@
       "url": "https://gulfnews.com/business/property/dubai-changes-al-satwa-building-rules-allows-more-floors-for-residential-projects-1.500731691",
       "title": "Dubai changes Al Satwa building rules, allows more floors for residential projects",
       "reviewed_at": "2026-11-02T15:18:08.530217+04:00"
+    },
+    {
+      "url": "https://gulfnews.com/business/property/hamdan-bin-mohammed-names-emaar-winner-of-dubai-it-real-estate-award-1.500732954",
+      "title": "Hamdan bin Mohammed names Emaar winner of Dubai-it real estate award",
+      "reviewed_at": "2026-11-03T14:57:38.891299+04:00"
     }
   ]
 }
