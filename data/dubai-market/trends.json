@@ -1,29 +1,29 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-04T00:42:05.966Z",
+  "generated_at": "2026-11-05T00:57:32.722Z",
   "history_start": "2026-08-17",
-  "latest_date": "2026-10-30",
-  "snapshots": 40,
+  "latest_date": "2026-11-02",
+  "snapshots": 41,
   "windows": [
     7,
     30,
     90
   ],
   "market": {
-    "date": "2026-10-30",
+    "date": "2026-11-02",
     "current": {
-      "total_transactions": 70311,
+      "total_transactions": 71328,
       "areas": 167,
-      "median_sale_price_aed": 1254108
+      "median_sale_price_aed": 1255000
     },
     "changes": {
       "7d": {
-        "median_sale_price_aed_pct": 0.33,
-        "total_transactions_pct": 5.48
+        "median_sale_price_aed_pct": 0.4,
+        "total_transactions_pct": 5.53
       },
       "30d": {
-        "median_sale_price_aed_pct": 2.71,
-        "total_transactions_pct": 30.87
+        "median_sale_price_aed_pct": 1.46,
+        "total_transactions_pct": 29.04
       },
       "90d": {
         "median_sale_price_aed_pct": null,
@@ -270,6 +270,12 @@
         "total_transactions": 70311,
         "areas": 167,
         "median_sale_price_aed": 1254108
+      },
+      {
+        "date": "2026-11-02",
+        "total_transactions": 71328,
+        "areas": 167,
+        "median_sale_price_aed": 1255000
       }
     ]
   },
@@ -288,15 +294,15 @@
         "confidence": "Low",
         "changes": {
           "7d": {
-            "median_price_aed_pct": 3.69,
-            "median_price_per_sqm_aed_pct": 10.95,
-            "gross_rental_yield_pp": -0.49,
-            "sample_size_pct": 6.67
+            "median_price_aed_pct": 0,
+            "median_price_per_sqm_aed_pct": 0,
+            "gross_rental_yield_pp": 0,
+            "sample_size_pct": 0
           },
           "30d": {
             "median_price_aed_pct": 0,
             "median_price_per_sqm_aed_pct": 0,
-            "gross_rental_yield_pp": -0.02,
+            "gross_rental_yield_pp": -0.04,
             "sample_size_pct": 14.29
           },
           "90d": {
@@ -706,32 +712,42 @@
             "sample_size": 16,
             "sale_sample": 16,
             "rent_sample": 109
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 1648659,
+            "median_price_per_sqm_aed": 17634,
+            "gross_rental_yield_pct": 4.56,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 16,
+            "sale_sample": 16,
+            "rent_sample": 109
           }
         ]
       },
       "Al Barsha South Fifth": {
         "current": {
-          "median_price_aed": 1096300,
-          "median_price_per_sqm_aed": 17222,
-          "gross_rental_yield_pct": 6.41,
+          "median_price_aed": 1079111,
+          "median_price_per_sqm_aed": 17176,
+          "gross_rental_yield_pct": 6.43,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 633,
-          "sale_sample": 633,
+          "sample_size": 648,
+          "sale_sample": 648,
           "rent_sample": 18
         },
         "confidence": "Medium",
         "changes": {
           "7d": {
-            "median_price_aed_pct": 1.33,
-            "median_price_per_sqm_aed_pct": -0.38,
-            "gross_rental_yield_pp": 0.03,
-            "sample_size_pct": 6.57
+            "median_price_aed_pct": -0.72,
+            "median_price_per_sqm_aed_pct": -0.49,
+            "gross_rental_yield_pp": 0.04,
+            "sample_size_pct": 8
           },
           "30d": {
-            "median_price_aed_pct": 0.68,
-            "median_price_per_sqm_aed_pct": -0.34,
+            "median_price_aed_pct": -1.9,
+            "median_price_per_sqm_aed_pct": -0.3,
             "gross_rental_yield_pp": 0.02,
-            "sample_size_pct": 42.89
+            "sample_size_pct": 43.68
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -1140,32 +1156,42 @@
             "sample_size": 633,
             "sale_sample": 633,
             "rent_sample": 18
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 1079111,
+            "median_price_per_sqm_aed": 17176,
+            "gross_rental_yield_pct": 6.43,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 648,
+            "sale_sample": 648,
+            "rent_sample": 18
           }
         ]
       },
       "Al Barsha South Fourth": {
         "current": {
-          "median_price_aed": 960000,
-          "median_price_per_sqm_aed": 15262,
-          "gross_rental_yield_pct": 6.23,
+          "median_price_aed": 964040,
+          "median_price_per_sqm_aed": 15283,
+          "gross_rental_yield_pct": 6.22,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 3217,
-          "sale_sample": 3217,
+          "sample_size": 3266,
+          "sale_sample": 3266,
           "rent_sample": 152
         },
         "confidence": "High",
         "changes": {
           "7d": {
-            "median_price_aed_pct": 1.05,
-            "median_price_per_sqm_aed_pct": 0.12,
-            "gross_rental_yield_pp": -0.01,
-            "sample_size_pct": 6.77
+            "median_price_aed_pct": 0.42,
+            "median_price_per_sqm_aed_pct": 0.22,
+            "gross_rental_yield_pp": -0.02,
+            "sample_size_pct": 6.49
           },
           "30d": {
             "median_price_aed_pct": 0.47,
-            "median_price_per_sqm_aed_pct": 0.67,
-            "gross_rental_yield_pp": -0.04,
-            "sample_size_pct": 32.39
+            "median_price_per_sqm_aed_pct": 0.82,
+            "gross_rental_yield_pp": -0.05,
+            "sample_size_pct": 31.16
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -1574,6 +1600,16 @@
             "sample_size": 3217,
             "sale_sample": 3217,
             "rent_sample": 152
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 964040,
+            "median_price_per_sqm_aed": 15283,
+            "gross_rental_yield_pct": 6.22,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 3266,
+            "sale_sample": 3266,
+            "rent_sample": 152
           }
         ]
       },
@@ -1583,23 +1619,23 @@
           "median_price_per_sqm_aed": 18740,
           "gross_rental_yield_pct": 5.15,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 333,
-          "sale_sample": 333,
+          "sample_size": 339,
+          "sale_sample": 339,
           "rent_sample": 9
         },
         "confidence": "Low",
         "changes": {
           "7d": {
             "median_price_aed_pct": 0.6,
-            "median_price_per_sqm_aed_pct": -0.45,
+            "median_price_per_sqm_aed_pct": -0.48,
             "gross_rental_yield_pp": 0.03,
-            "sample_size_pct": 5.71
+            "sample_size_pct": 7.28
           },
           "30d": {
-            "median_price_aed_pct": -6.29,
-            "median_price_per_sqm_aed_pct": 2.74,
-            "gross_rental_yield_pp": -0.14,
-            "sample_size_pct": 42.92
+            "median_price_aed_pct": -4.41,
+            "median_price_per_sqm_aed_pct": 2.43,
+            "gross_rental_yield_pp": -0.12,
+            "sample_size_pct": 40.08
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -2008,32 +2044,42 @@
             "sample_size": 333,
             "sale_sample": 333,
             "rent_sample": 9
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 834999,
+            "median_price_per_sqm_aed": 18740,
+            "gross_rental_yield_pct": 5.15,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 339,
+            "sale_sample": 339,
+            "rent_sample": 9
           }
         ]
       },
       "Al Barshaa South Third": {
         "current": {
-          "median_price_aed": 861400,
-          "median_price_per_sqm_aed": 16901,
+          "median_price_aed": 861381,
+          "median_price_per_sqm_aed": 16889,
           "gross_rental_yield_pct": 4.45,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 1029,
-          "sale_sample": 1029,
+          "sample_size": 1040,
+          "sale_sample": 1040,
           "rent_sample": 163
         },
         "confidence": "High",
         "changes": {
           "7d": {
-            "median_price_aed_pct": -1.43,
-            "median_price_per_sqm_aed_pct": 0.29,
-            "gross_rental_yield_pp": -0.02,
-            "sample_size_pct": 5
+            "median_price_aed_pct": -0.94,
+            "median_price_per_sqm_aed_pct": 0.22,
+            "gross_rental_yield_pp": -0.01,
+            "sample_size_pct": 5.05
           },
           "30d": {
-            "median_price_aed_pct": 0,
-            "median_price_per_sqm_aed_pct": -0.45,
+            "median_price_aed_pct": -1.6,
+            "median_price_per_sqm_aed_pct": -0.52,
             "gross_rental_yield_pp": -0.01,
-            "sample_size_pct": 30.42
+            "sample_size_pct": 28.87
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -2442,6 +2488,16 @@
             "sample_size": 1029,
             "sale_sample": 1029,
             "rent_sample": 163
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 861381,
+            "median_price_per_sqm_aed": 16889,
+            "gross_rental_yield_pct": 4.45,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 1040,
+            "sale_sample": 1040,
+            "rent_sample": 163
           }
         ]
       },
@@ -2458,16 +2514,16 @@
         "confidence": "Low",
         "changes": {
           "7d": {
-            "median_price_aed_pct": 2.3,
-            "median_price_per_sqm_aed_pct": -0.65,
-            "gross_rental_yield_pp": 0.05,
-            "sample_size_pct": 8.33
+            "median_price_aed_pct": 1.91,
+            "median_price_per_sqm_aed_pct": -0.44,
+            "gross_rental_yield_pp": 0.03,
+            "sample_size_pct": 4
           },
           "30d": {
-            "median_price_aed_pct": 2.3,
-            "median_price_per_sqm_aed_pct": 0,
-            "gross_rental_yield_pp": -1.48,
-            "sample_size_pct": 18.18
+            "median_price_aed_pct": 2.69,
+            "median_price_per_sqm_aed_pct": -0.44,
+            "gross_rental_yield_pp": -1.44,
+            "sample_size_pct": 13.04
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -2876,32 +2932,42 @@
             "sample_size": 26,
             "sale_sample": 26,
             "rent_sample": 8
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 667500,
+            "median_price_per_sqm_aed": 10374,
+            "gross_rental_yield_pct": 7.29,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 26,
+            "sale_sample": 26,
+            "rent_sample": 8
           }
         ]
       },
       "Al Hebiah Fifth": {
         "current": {
-          "median_price_aed": 952500,
-          "median_price_per_sqm_aed": 18282,
+          "median_price_aed": 930000,
+          "median_price_per_sqm_aed": 18285,
           "gross_rental_yield_pct": 3.67,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 890,
-          "sale_sample": 890,
+          "sample_size": 899,
+          "sale_sample": 899,
           "rent_sample": 29
         },
         "confidence": "Medium",
         "changes": {
           "7d": {
-            "median_price_aed_pct": -13.83,
-            "median_price_per_sqm_aed_pct": 0.18,
+            "median_price_aed_pct": -11.43,
+            "median_price_per_sqm_aed_pct": 0.19,
             "gross_rental_yield_pp": -0.01,
-            "sample_size_pct": 4.95
+            "sample_size_pct": 4.66
           },
           "30d": {
-            "median_price_aed_pct": -18.01,
-            "median_price_per_sqm_aed_pct": 2.04,
+            "median_price_aed_pct": -19.81,
+            "median_price_per_sqm_aed_pct": 1.98,
             "gross_rental_yield_pp": -0.05,
-            "sample_size_pct": 41.72
+            "sample_size_pct": 40.69
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -3310,32 +3376,42 @@
             "sample_size": 890,
             "sale_sample": 890,
             "rent_sample": 29
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 930000,
+            "median_price_per_sqm_aed": 18285,
+            "gross_rental_yield_pct": 3.67,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 899,
+            "sale_sample": 899,
+            "rent_sample": 29
           }
         ]
       },
       "Al Hebiah First": {
         "current": {
           "median_price_aed": 1050000,
-          "median_price_per_sqm_aed": 18213,
-          "gross_rental_yield_pct": 4.28,
+          "median_price_per_sqm_aed": 18107,
+          "gross_rental_yield_pct": 4.31,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 986,
-          "sale_sample": 986,
+          "sample_size": 1011,
+          "sale_sample": 1011,
           "rent_sample": 16
         },
         "confidence": "Medium",
         "changes": {
           "7d": {
             "median_price_aed_pct": 0,
-            "median_price_per_sqm_aed_pct": -0.2,
-            "gross_rental_yield_pp": 0,
-            "sample_size_pct": 3.68
+            "median_price_per_sqm_aed_pct": -0.73,
+            "gross_rental_yield_pp": 0.03,
+            "sample_size_pct": 5.75
           },
           "30d": {
             "median_price_aed_pct": 5,
-            "median_price_per_sqm_aed_pct": -3.24,
-            "gross_rental_yield_pp": 0.13,
-            "sample_size_pct": 40.06
+            "median_price_per_sqm_aed_pct": -3.72,
+            "gross_rental_yield_pp": 0.16,
+            "sample_size_pct": 40.81
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -3744,32 +3820,42 @@
             "sample_size": 986,
             "sale_sample": 986,
             "rent_sample": 16
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 1050000,
+            "median_price_per_sqm_aed": 18107,
+            "gross_rental_yield_pct": 4.31,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 1011,
+            "sale_sample": 1011,
+            "rent_sample": 16
           }
         ]
       },
       "Al Hebiah Fourth": {
         "current": {
-          "median_price_aed": 802000,
-          "median_price_per_sqm_aed": 13303,
-          "gross_rental_yield_pct": 5.8,
+          "median_price_aed": 806500,
+          "median_price_per_sqm_aed": 13281,
+          "gross_rental_yield_pct": 5.81,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 702,
-          "sale_sample": 702,
+          "sample_size": 708,
+          "sale_sample": 708,
           "rent_sample": 36
         },
         "confidence": "High",
         "changes": {
           "7d": {
-            "median_price_aed_pct": 0.19,
-            "median_price_per_sqm_aed_pct": -0.5,
-            "gross_rental_yield_pp": -0.03,
-            "sample_size_pct": 6.69
+            "median_price_aed_pct": 0.81,
+            "median_price_per_sqm_aed_pct": -0.29,
+            "gross_rental_yield_pp": 0,
+            "sample_size_pct": 6.31
           },
           "30d": {
-            "median_price_aed_pct": -2.54,
-            "median_price_per_sqm_aed_pct": 0,
-            "gross_rental_yield_pp": 0.02,
-            "sample_size_pct": 29.52
+            "median_price_aed_pct": -1.11,
+            "median_price_per_sqm_aed_pct": -0.46,
+            "gross_rental_yield_pp": 0.03,
+            "sample_size_pct": 27.8
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -4178,32 +4264,42 @@
             "sample_size": 702,
             "sale_sample": 702,
             "rent_sample": 36
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 806500,
+            "median_price_per_sqm_aed": 13281,
+            "gross_rental_yield_pct": 5.81,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 708,
+            "sale_sample": 708,
+            "rent_sample": 36
           }
         ]
       },
       "Al Hebiah Second": {
         "current": {
-          "median_price_aed": 578865,
+          "median_price_aed": 580000,
           "median_price_per_sqm_aed": 16325,
           "gross_rental_yield_pct": 11.3,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 354,
-          "sale_sample": 354,
+          "sample_size": 357,
+          "sale_sample": 357,
           "rent_sample": 31
         },
         "confidence": "High",
         "changes": {
           "7d": {
-            "median_price_aed_pct": -0.13,
-            "median_price_per_sqm_aed_pct": -0.15,
+            "median_price_aed_pct": 0.07,
+            "median_price_per_sqm_aed_pct": -0.13,
             "gross_rental_yield_pp": 0.01,
-            "sample_size_pct": 3.51
+            "sample_size_pct": 3.78
           },
           "30d": {
-            "median_price_aed_pct": 0.76,
+            "median_price_aed_pct": 1.4,
             "median_price_per_sqm_aed_pct": -0.38,
             "gross_rental_yield_pp": -0.25,
-            "sample_size_pct": 10.63
+            "sample_size_pct": 11.21
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -4612,6 +4708,16 @@
             "sample_size": 354,
             "sale_sample": 354,
             "rent_sample": 31
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 580000,
+            "median_price_per_sqm_aed": 16325,
+            "gross_rental_yield_pct": 11.3,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 357,
+            "sale_sample": 357,
+            "rent_sample": 31
           }
         ]
       },
@@ -4621,23 +4727,23 @@
           "median_price_per_sqm_aed": 18983,
           "gross_rental_yield_pct": 5.57,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 555,
-          "sale_sample": 555,
+          "sample_size": 559,
+          "sale_sample": 559,
           "rent_sample": 25
         },
         "confidence": "Medium",
         "changes": {
           "7d": {
-            "median_price_aed_pct": -0.2,
-            "median_price_per_sqm_aed_pct": -0.28,
-            "gross_rental_yield_pp": 0.01,
-            "sample_size_pct": 5.51
+            "median_price_aed_pct": -0.04,
+            "median_price_per_sqm_aed_pct": -0.1,
+            "gross_rental_yield_pp": 0,
+            "sample_size_pct": 5.47
           },
           "30d": {
-            "median_price_aed_pct": 0.46,
-            "median_price_per_sqm_aed_pct": -1.43,
-            "gross_rental_yield_pp": 0.08,
-            "sample_size_pct": 27.29
+            "median_price_aed_pct": 0.63,
+            "median_price_per_sqm_aed_pct": -1.28,
+            "gross_rental_yield_pp": 0.07,
+            "sample_size_pct": 25.9
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -5046,32 +5152,42 @@
             "sample_size": 555,
             "sale_sample": 555,
             "rent_sample": 25
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 1178000,
+            "median_price_per_sqm_aed": 18983,
+            "gross_rental_yield_pct": 5.57,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 559,
+            "sale_sample": 559,
+            "rent_sample": 25
           }
         ]
       },
       "Al Jadaf": {
         "current": {
-          "median_price_aed": 1328999,
-          "median_price_per_sqm_aed": 20800,
-          "gross_rental_yield_pct": 3.73,
+          "median_price_aed": 1322000,
+          "median_price_per_sqm_aed": 20679,
+          "gross_rental_yield_pct": 3.75,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 681,
-          "sale_sample": 681,
+          "sample_size": 724,
+          "sale_sample": 724,
           "rent_sample": 87
         },
         "confidence": "High",
         "changes": {
           "7d": {
-            "median_price_aed_pct": -1.52,
-            "median_price_per_sqm_aed_pct": -0.78,
-            "gross_rental_yield_pp": 0.03,
-            "sample_size_pct": 5.42
+            "median_price_aed_pct": -2,
+            "median_price_per_sqm_aed_pct": -1.45,
+            "gross_rental_yield_pp": 0.06,
+            "sample_size_pct": 11.56
           },
           "30d": {
-            "median_price_aed_pct": -1.56,
-            "median_price_per_sqm_aed_pct": -1.24,
+            "median_price_aed_pct": -2.07,
+            "median_price_per_sqm_aed_pct": -1.81,
             "gross_rental_yield_pp": 0.09,
-            "sample_size_pct": 33.53
+            "sample_size_pct": 39.23
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -5480,32 +5596,42 @@
             "sample_size": 681,
             "sale_sample": 681,
             "rent_sample": 87
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 1322000,
+            "median_price_per_sqm_aed": 20679,
+            "gross_rental_yield_pct": 3.75,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 724,
+            "sale_sample": 724,
+            "rent_sample": 87
           }
         ]
       },
       "Al Khairan First": {
         "current": {
           "median_price_aed": 2500000,
-          "median_price_per_sqm_aed": 26895,
+          "median_price_per_sqm_aed": 26859,
           "gross_rental_yield_pct": 5.08,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 1039,
-          "sale_sample": 1039,
+          "sample_size": 1047,
+          "sale_sample": 1047,
           "rent_sample": 28
         },
         "confidence": "Medium",
         "changes": {
           "7d": {
             "median_price_aed_pct": 0,
-            "median_price_per_sqm_aed_pct": -0.01,
+            "median_price_per_sqm_aed_pct": -0.15,
             "gross_rental_yield_pp": 0,
-            "sample_size_pct": 3.08
+            "sample_size_pct": 2.95
           },
           "30d": {
             "median_price_aed_pct": 4.17,
-            "median_price_per_sqm_aed_pct": -0.55,
+            "median_price_per_sqm_aed_pct": -0.68,
             "gross_rental_yield_pp": -0.05,
-            "sample_size_pct": 29.23
+            "sample_size_pct": 26.6
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -5914,32 +6040,42 @@
             "sample_size": 1039,
             "sale_sample": 1039,
             "rent_sample": 28
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 2500000,
+            "median_price_per_sqm_aed": 26859,
+            "gross_rental_yield_pct": 5.08,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 1047,
+            "sale_sample": 1047,
+            "rent_sample": 28
           }
         ]
       },
       "Al Merkadh": {
         "current": {
-          "median_price_aed": 1368979,
-          "median_price_per_sqm_aed": 21379,
-          "gross_rental_yield_pct": 6.8,
+          "median_price_aed": 1373954,
+          "median_price_per_sqm_aed": 21385,
+          "gross_rental_yield_pct": 6.79,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 874,
-          "sale_sample": 874,
+          "sample_size": 893,
+          "sale_sample": 893,
           "rent_sample": 43
         },
         "confidence": "High",
         "changes": {
           "7d": {
-            "median_price_aed_pct": -2.22,
-            "median_price_per_sqm_aed_pct": -0.03,
-            "gross_rental_yield_pp": 0.01,
-            "sample_size_pct": 5.3
+            "median_price_aed_pct": -0.15,
+            "median_price_per_sqm_aed_pct": 0.21,
+            "gross_rental_yield_pp": -0.02,
+            "sample_size_pct": 4.32
           },
           "30d": {
-            "median_price_aed_pct": -2.76,
-            "median_price_per_sqm_aed_pct": 0.11,
-            "gross_rental_yield_pp": 0.03,
-            "sample_size_pct": 31.83
+            "median_price_aed_pct": -1.68,
+            "median_price_per_sqm_aed_pct": 0.16,
+            "gross_rental_yield_pp": 0.02,
+            "sample_size_pct": 31.71
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -6348,32 +6484,42 @@
             "sample_size": 874,
             "sale_sample": 874,
             "rent_sample": 43
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 1373954,
+            "median_price_per_sqm_aed": 21385,
+            "gross_rental_yield_pct": 6.79,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 893,
+            "sale_sample": 893,
+            "rent_sample": 43
           }
         ]
       },
       "Al Satwa": {
         "current": {
-          "median_price_aed": 1492634,
-          "median_price_per_sqm_aed": 23714,
-          "gross_rental_yield_pct": 4.52,
+          "median_price_aed": 1448863,
+          "median_price_per_sqm_aed": 23785,
+          "gross_rental_yield_pct": 4.51,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 199,
-          "sale_sample": 199,
+          "sample_size": 210,
+          "sale_sample": 210,
           "rent_sample": 87
         },
         "confidence": "High",
         "changes": {
           "7d": {
-            "median_price_aed_pct": -0.4,
-            "median_price_per_sqm_aed_pct": -0.04,
-            "gross_rental_yield_pp": 0,
-            "sample_size_pct": 0.51
+            "median_price_aed_pct": -3.32,
+            "median_price_per_sqm_aed_pct": 0.26,
+            "gross_rental_yield_pp": -0.01,
+            "sample_size_pct": 6.06
           },
           "30d": {
-            "median_price_aed_pct": -1,
-            "median_price_per_sqm_aed_pct": -0.04,
+            "median_price_aed_pct": -3.71,
+            "median_price_per_sqm_aed_pct": 0.18,
             "gross_rental_yield_pp": 0,
-            "sample_size_pct": 15.7
+            "sample_size_pct": 20.69
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -6782,32 +6928,42 @@
             "sample_size": 199,
             "sale_sample": 199,
             "rent_sample": 87
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 1448863,
+            "median_price_per_sqm_aed": 23785,
+            "gross_rental_yield_pct": 4.51,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 210,
+            "sale_sample": 210,
+            "rent_sample": 87
           }
         ]
       },
       "Al Thanyah Fifth": {
         "current": {
-          "median_price_aed": 1981328,
-          "median_price_per_sqm_aed": 23811,
+          "median_price_aed": 1984828,
+          "median_price_per_sqm_aed": 23810,
           "gross_rental_yield_pct": 4.76,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 856,
-          "sale_sample": 856,
+          "sample_size": 867,
+          "sale_sample": 867,
           "rent_sample": 49
         },
         "confidence": "High",
         "changes": {
           "7d": {
-            "median_price_aed_pct": 0.18,
+            "median_price_aed_pct": 0.71,
             "median_price_per_sqm_aed_pct": 0,
             "gross_rental_yield_pp": 0,
-            "sample_size_pct": 5.42
+            "sample_size_pct": 5.73
           },
           "30d": {
-            "median_price_aed_pct": 0.71,
-            "median_price_per_sqm_aed_pct": -0.2,
+            "median_price_aed_pct": 0.89,
+            "median_price_per_sqm_aed_pct": -0.03,
             "gross_rental_yield_pp": 0.09,
-            "sample_size_pct": 19.89
+            "sample_size_pct": 20.75
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -7215,6 +7371,16 @@
             "annual_rent_per_sqm_aed": null,
             "sample_size": 856,
             "sale_sample": 856,
+            "rent_sample": 49
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 1984828,
+            "median_price_per_sqm_aed": 23810,
+            "gross_rental_yield_pct": 4.76,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 867,
+            "sale_sample": 867,
             "rent_sample": 49
           }
         ]
@@ -7650,6 +7816,16 @@
             "sample_size": 41,
             "sale_sample": 41,
             "rent_sample": 53
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 1250000,
+            "median_price_per_sqm_aed": 14531,
+            "gross_rental_yield_pct": 6.12,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 41,
+            "sale_sample": 41,
+            "rent_sample": 53
           }
         ]
       },
@@ -7659,23 +7835,23 @@
           "median_price_per_sqm_aed": 19477,
           "gross_rental_yield_pct": 6.37,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 146,
-          "sale_sample": 146,
+          "sample_size": 148,
+          "sale_sample": 148,
           "rent_sample": 33
         },
         "confidence": "High",
         "changes": {
           "7d": {
             "median_price_aed_pct": 0.61,
-            "median_price_per_sqm_aed_pct": 1.5,
-            "gross_rental_yield_pp": -0.09,
-            "sample_size_pct": 4.29
+            "median_price_per_sqm_aed_pct": 0.09,
+            "gross_rental_yield_pp": 0,
+            "sample_size_pct": 3.5
           },
           "30d": {
             "median_price_aed_pct": 3.13,
-            "median_price_per_sqm_aed_pct": 2.74,
+            "median_price_per_sqm_aed_pct": 2.68,
             "gross_rental_yield_pp": -0.16,
-            "sample_size_pct": 37.74
+            "sample_size_pct": 37.04
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -8084,32 +8260,42 @@
             "sample_size": 146,
             "sale_sample": 146,
             "rent_sample": 33
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 2062500,
+            "median_price_per_sqm_aed": 19477,
+            "gross_rental_yield_pct": 6.37,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 148,
+            "sale_sample": 148,
+            "rent_sample": 33
           }
         ]
       },
       "Al Warsan First": {
         "current": {
-          "median_price_aed": 480250,
+          "median_price_aed": 484300,
           "median_price_per_sqm_aed": 8000,
           "gross_rental_yield_pct": 7.64,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 648,
-          "sale_sample": 648,
+          "sample_size": 657,
+          "sale_sample": 657,
           "rent_sample": 263
         },
         "confidence": "High",
         "changes": {
           "7d": {
-            "median_price_aed_pct": -0.84,
+            "median_price_aed_pct": 0,
             "median_price_per_sqm_aed_pct": 0,
             "gross_rental_yield_pp": 0,
-            "sample_size_pct": 5.71
+            "sample_size_pct": 5.46
           },
           "30d": {
-            "median_price_aed_pct": -4.9,
-            "median_price_per_sqm_aed_pct": -4.15,
-            "gross_rental_yield_pp": 0.38,
-            "sample_size_pct": 33.88
+            "median_price_aed_pct": -3.14,
+            "median_price_per_sqm_aed_pct": -3.58,
+            "gross_rental_yield_pp": 0.34,
+            "sample_size_pct": 34.08
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -8518,32 +8704,42 @@
             "sample_size": 648,
             "sale_sample": 648,
             "rent_sample": 263
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 484300,
+            "median_price_per_sqm_aed": 8000,
+            "gross_rental_yield_pct": 7.64,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 657,
+            "sale_sample": 657,
+            "rent_sample": 263
           }
         ]
       },
       "Al Wasl": {
         "current": {
-          "median_price_aed": 2814000,
-          "median_price_per_sqm_aed": 32921,
-          "gross_rental_yield_pct": 3.91,
+          "median_price_aed": 2828000,
+          "median_price_per_sqm_aed": 32961,
+          "gross_rental_yield_pct": 3.9,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 260,
-          "sale_sample": 260,
+          "sample_size": 261,
+          "sale_sample": 261,
           "rent_sample": 20
         },
         "confidence": "Medium",
         "changes": {
           "7d": {
-            "median_price_aed_pct": 0.5,
-            "median_price_per_sqm_aed_pct": -0.12,
-            "gross_rental_yield_pp": 0.01,
-            "sample_size_pct": 3.59
+            "median_price_aed_pct": 1.34,
+            "median_price_per_sqm_aed_pct": 0.12,
+            "gross_rental_yield_pp": -0.01,
+            "sample_size_pct": 1.95
           },
           "30d": {
-            "median_price_aed_pct": 1.19,
-            "median_price_per_sqm_aed_pct": 0.44,
+            "median_price_aed_pct": 0,
+            "median_price_per_sqm_aed_pct": 0.32,
             "gross_rental_yield_pp": 0.11,
-            "sample_size_pct": 29.35
+            "sample_size_pct": 23.7
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -8952,32 +9148,42 @@
             "sample_size": 260,
             "sale_sample": 260,
             "rent_sample": 20
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 2828000,
+            "median_price_per_sqm_aed": 32961,
+            "gross_rental_yield_pct": 3.9,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 261,
+            "sale_sample": 261,
+            "rent_sample": 20
           }
         ]
       },
       "Al Yelayiss 2": {
         "current": {
-          "median_price_aed": 1300000,
-          "median_price_per_sqm_aed": 14931,
+          "median_price_aed": 1303888,
+          "median_price_per_sqm_aed": 14923,
           "gross_rental_yield_pct": 6.45,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 396,
-          "sale_sample": 396,
+          "sample_size": 402,
+          "sale_sample": 402,
           "rent_sample": 23
         },
         "confidence": "Medium",
         "changes": {
           "7d": {
-            "median_price_aed_pct": -0.45,
-            "median_price_per_sqm_aed_pct": -0.13,
-            "gross_rental_yield_pp": 0.01,
-            "sample_size_pct": 5.6
+            "median_price_aed_pct": 0.3,
+            "median_price_per_sqm_aed_pct": 0.08,
+            "gross_rental_yield_pp": -0.01,
+            "sample_size_pct": 5.24
           },
           "30d": {
-            "median_price_aed_pct": -0.6,
-            "median_price_per_sqm_aed_pct": -0.43,
-            "gross_rental_yield_pp": 0,
-            "sample_size_pct": 36.08
+            "median_price_aed_pct": -0.31,
+            "median_price_per_sqm_aed_pct": -0.26,
+            "gross_rental_yield_pp": -0.01,
+            "sample_size_pct": 35.35
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -9386,32 +9592,42 @@
             "sample_size": 396,
             "sale_sample": 396,
             "rent_sample": 23
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 1303888,
+            "median_price_per_sqm_aed": 14923,
+            "gross_rental_yield_pct": 6.45,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 402,
+            "sale_sample": 402,
+            "rent_sample": 23
           }
         ]
       },
       "Burj Khalifa": {
         "current": {
-          "median_price_aed": 2915000,
-          "median_price_per_sqm_aed": 28092,
-          "gross_rental_yield_pct": 5.28,
+          "median_price_aed": 2916000,
+          "median_price_per_sqm_aed": 28124,
+          "gross_rental_yield_pct": 5.27,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 611,
-          "sale_sample": 611,
+          "sample_size": 622,
+          "sale_sample": 622,
           "rent_sample": 49
         },
         "confidence": "High",
         "changes": {
           "7d": {
-            "median_price_aed_pct": -0.34,
-            "median_price_per_sqm_aed_pct": 0.46,
-            "gross_rental_yield_pp": 0.06,
-            "sample_size_pct": 5.34
+            "median_price_aed_pct": 0,
+            "median_price_per_sqm_aed_pct": 0.08,
+            "gross_rental_yield_pp": 0.08,
+            "sample_size_pct": 6.14
           },
           "30d": {
-            "median_price_aed_pct": -0.63,
-            "median_price_per_sqm_aed_pct": 0.83,
-            "gross_rental_yield_pp": 0.15,
-            "sample_size_pct": 29.45
+            "median_price_aed_pct": 0.03,
+            "median_price_per_sqm_aed_pct": 1.22,
+            "gross_rental_yield_pp": 0.13,
+            "sample_size_pct": 28.25
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -9820,32 +10036,42 @@
             "sample_size": 611,
             "sale_sample": 611,
             "rent_sample": 49
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 2916000,
+            "median_price_per_sqm_aed": 28124,
+            "gross_rental_yield_pct": 5.27,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 622,
+            "sale_sample": 622,
+            "rent_sample": 49
           }
         ]
       },
       "Business Bay": {
         "current": {
-          "median_price_aed": 1825000,
-          "median_price_per_sqm_aed": 22557,
-          "gross_rental_yield_pct": 5.11,
+          "median_price_aed": 1824886,
+          "median_price_per_sqm_aed": 22584,
+          "gross_rental_yield_pct": 5.1,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 1311,
-          "sale_sample": 1311,
+          "sample_size": 1332,
+          "sale_sample": 1332,
           "rent_sample": 104
         },
         "confidence": "High",
         "changes": {
           "7d": {
-            "median_price_aed_pct": 1.39,
-            "median_price_per_sqm_aed_pct": -1.18,
-            "gross_rental_yield_pp": 0.06,
-            "sample_size_pct": 7.64
+            "median_price_aed_pct": -1.36,
+            "median_price_per_sqm_aed_pct": -0.2,
+            "gross_rental_yield_pp": 0.01,
+            "sample_size_pct": 6.47
           },
           "30d": {
-            "median_price_aed_pct": 4.29,
-            "median_price_per_sqm_aed_pct": -0.97,
-            "gross_rental_yield_pp": 0.08,
-            "sample_size_pct": 33.23
+            "median_price_aed_pct": 4.09,
+            "median_price_per_sqm_aed_pct": -0.41,
+            "gross_rental_yield_pp": 0.02,
+            "sample_size_pct": 32.54
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -10254,32 +10480,42 @@
             "sample_size": 1311,
             "sale_sample": 1311,
             "rent_sample": 104
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 1824886,
+            "median_price_per_sqm_aed": 22584,
+            "gross_rental_yield_pct": 5.1,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 1332,
+            "sale_sample": 1332,
+            "rent_sample": 104
           }
         ]
       },
       "Dubai Investment Park First": {
         "current": {
-          "median_price_aed": 625390,
-          "median_price_per_sqm_aed": 10096,
-          "gross_rental_yield_pct": 8.65,
+          "median_price_aed": 625960,
+          "median_price_per_sqm_aed": 10110,
+          "gross_rental_yield_pct": 8.64,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 574,
-          "sale_sample": 574,
+          "sample_size": 575,
+          "sale_sample": 575,
           "rent_sample": 17
         },
         "confidence": "Medium",
         "changes": {
           "7d": {
-            "median_price_aed_pct": -0.97,
-            "median_price_per_sqm_aed_pct": -0.27,
-            "gross_rental_yield_pp": 0.02,
-            "sample_size_pct": 5.51
+            "median_price_aed_pct": -0.94,
+            "median_price_per_sqm_aed_pct": -0.29,
+            "gross_rental_yield_pp": 0.03,
+            "sample_size_pct": 5.12
           },
           "30d": {
-            "median_price_aed_pct": -0.97,
-            "median_price_per_sqm_aed_pct": -0.72,
-            "gross_rental_yield_pp": 0.05,
-            "sample_size_pct": 21.61
+            "median_price_aed_pct": -0.88,
+            "median_price_per_sqm_aed_pct": -0.58,
+            "gross_rental_yield_pp": 0.04,
+            "sample_size_pct": 21.31
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -10688,6 +10924,16 @@
             "sample_size": 574,
             "sale_sample": 574,
             "rent_sample": 17
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 625960,
+            "median_price_per_sqm_aed": 10110,
+            "gross_rental_yield_pct": 8.64,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 575,
+            "sale_sample": 575,
+            "rent_sample": 17
           }
         ]
       },
@@ -10697,23 +10943,23 @@
           "median_price_per_sqm_aed": 15238,
           "gross_rental_yield_pct": 4.08,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 144,
-          "sale_sample": 144,
+          "sample_size": 146,
+          "sale_sample": 146,
           "rent_sample": 5
         },
         "confidence": "Low",
         "changes": {
           "7d": {
-            "median_price_aed_pct": 5.95,
-            "median_price_per_sqm_aed_pct": 0.07,
+            "median_price_aed_pct": 4.7,
+            "median_price_per_sqm_aed_pct": 0,
             "gross_rental_yield_pp": 0,
-            "sample_size_pct": 4.35
+            "sample_size_pct": 2.82
           },
           "30d": {
-            "median_price_aed_pct": 10.43,
+            "median_price_aed_pct": 9.66,
             "median_price_per_sqm_aed_pct": 0.07,
             "gross_rental_yield_pp": 0,
-            "sample_size_pct": 30.91
+            "sample_size_pct": 30.36
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -11122,6 +11368,16 @@
             "sample_size": 144,
             "sale_sample": 144,
             "rent_sample": 5
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 1128880,
+            "median_price_per_sqm_aed": 15238,
+            "gross_rental_yield_pct": 4.08,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 146,
+            "sale_sample": 146,
+            "rent_sample": 5
           }
         ]
       },
@@ -11131,23 +11387,23 @@
           "median_price_per_sqm_aed": 24490,
           "gross_rental_yield_pct": 5.73,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 591,
-          "sale_sample": 591,
+          "sample_size": 599,
+          "sale_sample": 599,
           "rent_sample": 30
         },
         "confidence": "High",
         "changes": {
           "7d": {
-            "median_price_aed_pct": 0.82,
-            "median_price_per_sqm_aed_pct": 0.07,
+            "median_price_aed_pct": 0.24,
+            "median_price_per_sqm_aed_pct": 0.04,
             "gross_rental_yield_pp": 0,
-            "sample_size_pct": 6.49
+            "sample_size_pct": 5.83
           },
           "30d": {
-            "median_price_aed_pct": 2.44,
+            "median_price_aed_pct": 0.82,
             "median_price_per_sqm_aed_pct": 0.68,
-            "gross_rental_yield_pp": -0.09,
-            "sample_size_pct": 34.62
+            "gross_rental_yield_pp": -0.07,
+            "sample_size_pct": 31.65
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -11556,32 +11812,42 @@
             "sample_size": 591,
             "sale_sample": 591,
             "rent_sample": 30
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 2100000,
+            "median_price_per_sqm_aed": 24490,
+            "gross_rental_yield_pct": 5.73,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 599,
+            "sale_sample": 599,
+            "rent_sample": 30
           }
         ]
       },
       "Jabal Ali First": {
         "current": {
-          "median_price_aed": 1600000,
-          "median_price_per_sqm_aed": 17430,
+          "median_price_aed": 1597000,
+          "median_price_per_sqm_aed": 17429,
           "gross_rental_yield_pct": 4.54,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 1737,
-          "sale_sample": 1737,
+          "sample_size": 1747,
+          "sale_sample": 1747,
           "rent_sample": 268
         },
         "confidence": "High",
         "changes": {
           "7d": {
-            "median_price_aed_pct": -0.22,
-            "median_price_per_sqm_aed_pct": -0.03,
-            "gross_rental_yield_pp": 0.01,
-            "sample_size_pct": 5.15
+            "median_price_aed_pct": -0.28,
+            "median_price_per_sqm_aed_pct": 0.07,
+            "gross_rental_yield_pp": 0,
+            "sample_size_pct": 4.61
           },
           "30d": {
-            "median_price_aed_pct": 2.56,
-            "median_price_per_sqm_aed_pct": 1,
-            "gross_rental_yield_pp": -0.04,
-            "sample_size_pct": 27.63
+            "median_price_aed_pct": 2.8,
+            "median_price_per_sqm_aed_pct": 1.26,
+            "gross_rental_yield_pp": -0.05,
+            "sample_size_pct": 26.41
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -11990,32 +12256,42 @@
             "sample_size": 1737,
             "sale_sample": 1737,
             "rent_sample": 268
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 1597000,
+            "median_price_per_sqm_aed": 17429,
+            "gross_rental_yield_pct": 4.54,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 1747,
+            "sale_sample": 1747,
+            "rent_sample": 268
           }
         ]
       },
       "Jabal Ali Industrial Second": {
         "current": {
-          "median_price_aed": 732238,
-          "median_price_per_sqm_aed": 18613,
+          "median_price_aed": 732086,
+          "median_price_per_sqm_aed": 18606,
           "gross_rental_yield_pct": 6.42,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 2216,
-          "sale_sample": 2216,
+          "sample_size": 2221,
+          "sale_sample": 2221,
           "rent_sample": null
         },
         "confidence": "Medium",
         "changes": {
           "7d": {
-            "median_price_aed_pct": 0.14,
-            "median_price_per_sqm_aed_pct": 0.05,
+            "median_price_aed_pct": 0.06,
+            "median_price_per_sqm_aed_pct": -0.08,
             "gross_rental_yield_pp": 0,
-            "sample_size_pct": 3.94
+            "sample_size_pct": 2.73
           },
           "30d": {
-            "median_price_aed_pct": 1.02,
-            "median_price_per_sqm_aed_pct": 0.12,
+            "median_price_aed_pct": 1,
+            "median_price_per_sqm_aed_pct": 0.06,
             "gross_rental_yield_pp": -0.01,
-            "sample_size_pct": 17
+            "sample_size_pct": 16.1
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -12423,6 +12699,16 @@
             "annual_rent_per_sqm_aed": null,
             "sample_size": 2216,
             "sale_sample": 2216,
+            "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 732086,
+            "median_price_per_sqm_aed": 18606,
+            "gross_rental_yield_pct": 6.42,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 2221,
+            "sale_sample": 2221,
             "rent_sample": null
           }
         ]
@@ -12858,6 +13144,16 @@
             "sample_size": 40,
             "sale_sample": 40,
             "rent_sample": 16
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 3612500,
+            "median_price_per_sqm_aed": 33756,
+            "gross_rental_yield_pct": 3.22,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 40,
+            "sale_sample": 40,
+            "rent_sample": 16
           }
         ]
       },
@@ -12867,8 +13163,8 @@
           "median_price_per_sqm_aed": 18378,
           "gross_rental_yield_pct": 5.03,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 5803,
-          "sale_sample": 5803,
+          "sample_size": 5834,
+          "sale_sample": 5834,
           "rent_sample": 68
         },
         "confidence": "High",
@@ -12877,13 +13173,13 @@
             "median_price_aed_pct": 0,
             "median_price_per_sqm_aed_pct": 0,
             "gross_rental_yield_pp": 0,
-            "sample_size_pct": 1.97
+            "sample_size_pct": 1.64
           },
           "30d": {
             "median_price_aed_pct": 0,
-            "median_price_per_sqm_aed_pct": -0.39,
-            "gross_rental_yield_pp": 0.07,
-            "sample_size_pct": 14.41
+            "median_price_per_sqm_aed_pct": -0.27,
+            "gross_rental_yield_pp": 0.09,
+            "sample_size_pct": 14.28
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -13292,32 +13588,42 @@
             "sample_size": 5803,
             "sale_sample": 5803,
             "rent_sample": 68
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 730000,
+            "median_price_per_sqm_aed": 18378,
+            "gross_rental_yield_pct": 5.03,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 5834,
+            "sale_sample": 5834,
+            "rent_sample": 68
           }
         ]
       },
       "Marsa Dubai": {
         "current": {
           "median_price_aed": 2549548,
-          "median_price_per_sqm_aed": 22944,
-          "gross_rental_yield_pct": 4.75,
+          "median_price_per_sqm_aed": 22799,
+          "gross_rental_yield_pct": 4.79,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 1010,
-          "sale_sample": 1010,
+          "sample_size": 1021,
+          "sale_sample": 1021,
           "rent_sample": 134
         },
         "confidence": "High",
         "changes": {
           "7d": {
-            "median_price_aed_pct": 0,
-            "median_price_per_sqm_aed_pct": 0.35,
-            "gross_rental_yield_pp": -0.02,
-            "sample_size_pct": 4.23
+            "median_price_aed_pct": 0.39,
+            "median_price_per_sqm_aed_pct": -0.06,
+            "gross_rental_yield_pp": 0.01,
+            "sample_size_pct": 4.93
           },
           "30d": {
-            "median_price_aed_pct": 0.39,
-            "median_price_per_sqm_aed_pct": -1.8,
-            "gross_rental_yield_pp": 0.08,
-            "sample_size_pct": 28.66
+            "median_price_aed_pct": 0,
+            "median_price_per_sqm_aed_pct": -2.04,
+            "gross_rental_yield_pp": 0.1,
+            "sample_size_pct": 26.52
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -13726,6 +14032,16 @@
             "sample_size": 1010,
             "sale_sample": 1010,
             "rent_sample": 134
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 2549548,
+            "median_price_per_sqm_aed": 22799,
+            "gross_rental_yield_pct": 4.79,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 1021,
+            "sale_sample": 1021,
+            "rent_sample": 134
           }
         ]
       },
@@ -13735,23 +14051,23 @@
           "median_price_per_sqm_aed": 14939,
           "gross_rental_yield_pct": 6,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 881,
-          "sale_sample": 881,
+          "sample_size": 885,
+          "sale_sample": 885,
           "rent_sample": 22
         },
         "confidence": "Medium",
         "changes": {
           "7d": {
-            "median_price_aed_pct": -0.39,
-            "median_price_per_sqm_aed_pct": 0.59,
+            "median_price_aed_pct": -0.57,
+            "median_price_per_sqm_aed_pct": 0.61,
             "gross_rental_yield_pp": -0.04,
-            "sample_size_pct": 6.02
+            "sample_size_pct": 4.86
           },
           "30d": {
-            "median_price_aed_pct": -4.26,
-            "median_price_per_sqm_aed_pct": -0.42,
-            "gross_rental_yield_pp": 0.03,
-            "sample_size_pct": 24.08
+            "median_price_aed_pct": -3.73,
+            "median_price_per_sqm_aed_pct": -0.39,
+            "gross_rental_yield_pp": 0.02,
+            "sample_size_pct": 22.07
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -14160,32 +14476,42 @@
             "sample_size": 881,
             "sale_sample": 881,
             "rent_sample": 22
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 784482,
+            "median_price_per_sqm_aed": 14939,
+            "gross_rental_yield_pct": 6,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 885,
+            "sale_sample": 885,
+            "rent_sample": 22
           }
         ]
       },
       "Mirdif": {
         "current": {
-          "median_price_aed": 1766282,
-          "median_price_per_sqm_aed": 12453,
-          "gross_rental_yield_pct": 4.61,
+          "median_price_aed": 1810000,
+          "median_price_per_sqm_aed": 12432,
+          "gross_rental_yield_pct": 4.62,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 45,
-          "sale_sample": 45,
+          "sample_size": 47,
+          "sale_sample": 47,
           "rent_sample": 405
         },
         "confidence": "Medium",
         "changes": {
           "7d": {
-            "median_price_aed_pct": -3.83,
-            "median_price_per_sqm_aed_pct": -2.79,
-            "gross_rental_yield_pp": 0.13,
-            "sample_size_pct": 7.14
+            "median_price_aed_pct": -1.45,
+            "median_price_per_sqm_aed_pct": -2.96,
+            "gross_rental_yield_pp": 0.14,
+            "sample_size_pct": 11.9
           },
           "30d": {
-            "median_price_aed_pct": -1.22,
-            "median_price_per_sqm_aed_pct": -2.79,
-            "gross_rental_yield_pp": 0.11,
-            "sample_size_pct": 25
+            "median_price_aed_pct": -1.45,
+            "median_price_per_sqm_aed_pct": -4.05,
+            "gross_rental_yield_pp": 0.19,
+            "sample_size_pct": 23.68
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -14593,6 +14919,16 @@
             "annual_rent_per_sqm_aed": null,
             "sample_size": 45,
             "sale_sample": 45,
+            "rent_sample": 405
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 1810000,
+            "median_price_per_sqm_aed": 12432,
+            "gross_rental_yield_pct": 4.62,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 47,
+            "sale_sample": 47,
             "rent_sample": 405
           }
         ]
@@ -15028,6 +15364,16 @@
             "sample_size": 24,
             "sale_sample": 24,
             "rent_sample": 10
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 1402000,
+            "median_price_per_sqm_aed": 11767,
+            "gross_rental_yield_pct": 5.77,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 24,
+            "sale_sample": 24,
+            "rent_sample": 10
           }
         ]
       },
@@ -15037,8 +15383,8 @@
           "median_price_per_sqm_aed": 36732,
           "gross_rental_yield_pct": 2.56,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 507,
-          "sale_sample": 507,
+          "sample_size": 511,
+          "sale_sample": 511,
           "rent_sample": 22
         },
         "confidence": "Medium",
@@ -15047,13 +15393,13 @@
             "median_price_aed_pct": 0.14,
             "median_price_per_sqm_aed_pct": 0.05,
             "gross_rental_yield_pp": 0,
-            "sample_size_pct": 2.84
+            "sample_size_pct": 3.23
           },
           "30d": {
             "median_price_aed_pct": 0.14,
             "median_price_per_sqm_aed_pct": -0.03,
             "gross_rental_yield_pp": 0,
-            "sample_size_pct": 43.22
+            "sample_size_pct": 43.54
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -15462,32 +15808,42 @@
             "sample_size": 507,
             "sale_sample": 507,
             "rent_sample": 22
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 1382000,
+            "median_price_per_sqm_aed": 36732,
+            "gross_rental_yield_pct": 2.56,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 511,
+            "sale_sample": 511,
+            "rent_sample": 22
           }
         ]
       },
       "Nadd Hessa": {
         "current": {
-          "median_price_aed": 935000,
-          "median_price_per_sqm_aed": 12165,
-          "gross_rental_yield_pct": 6.32,
+          "median_price_aed": 930000,
+          "median_price_per_sqm_aed": 12201,
+          "gross_rental_yield_pct": 6.3,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 482,
-          "sale_sample": 482,
+          "sample_size": 487,
+          "sale_sample": 487,
           "rent_sample": 105
         },
         "confidence": "High",
         "changes": {
           "7d": {
-            "median_price_aed_pct": -0.53,
-            "median_price_per_sqm_aed_pct": -0.4,
-            "gross_rental_yield_pp": 0.03,
-            "sample_size_pct": 5.47
+            "median_price_aed_pct": -1.06,
+            "median_price_per_sqm_aed_pct": 0.05,
+            "gross_rental_yield_pp": 0,
+            "sample_size_pct": 5.41
           },
           "30d": {
-            "median_price_aed_pct": -1.58,
-            "median_price_per_sqm_aed_pct": -0.69,
-            "gross_rental_yield_pp": 0.05,
-            "sample_size_pct": 27.18
+            "median_price_aed_pct": -1.98,
+            "median_price_per_sqm_aed_pct": -0.39,
+            "gross_rental_yield_pp": 0.03,
+            "sample_size_pct": 24.55
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -15896,6 +16252,16 @@
             "sample_size": 482,
             "sale_sample": 482,
             "rent_sample": 105
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 930000,
+            "median_price_per_sqm_aed": 12201,
+            "gross_rental_yield_pct": 6.3,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 487,
+            "sale_sample": 487,
+            "rent_sample": 105
           }
         ]
       },
@@ -15905,8 +16271,8 @@
           "median_price_per_sqm_aed": 34813,
           "gross_rental_yield_pct": 3.87,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 270,
-          "sale_sample": 270,
+          "sample_size": 272,
+          "sale_sample": 272,
           "rent_sample": 38
         },
         "confidence": "High",
@@ -15915,13 +16281,13 @@
             "median_price_aed_pct": -0.82,
             "median_price_per_sqm_aed_pct": 0.61,
             "gross_rental_yield_pp": -0.02,
-            "sample_size_pct": 7.57
+            "sample_size_pct": 5.02
           },
           "30d": {
-            "median_price_aed_pct": 2.28,
-            "median_price_per_sqm_aed_pct": 3.8,
-            "gross_rental_yield_pp": -0.06,
-            "sample_size_pct": 45.95
+            "median_price_aed_pct": 0.71,
+            "median_price_per_sqm_aed_pct": 2.81,
+            "gross_rental_yield_pp": -0.1,
+            "sample_size_pct": 46.24
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -16330,32 +16696,42 @@
             "sample_size": 270,
             "sale_sample": 270,
             "rent_sample": 38
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 5430000,
+            "median_price_per_sqm_aed": 34813,
+            "gross_rental_yield_pct": 3.87,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 272,
+            "sale_sample": 272,
+            "rent_sample": 38
           }
         ]
       },
       "Saih Shuaib 2": {
         "current": {
-          "median_price_aed": 619814,
-          "median_price_per_sqm_aed": 15368,
+          "median_price_aed": 621240,
+          "median_price_per_sqm_aed": 15372,
           "gross_rental_yield_pct": 6.14,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 329,
-          "sale_sample": 329,
+          "sample_size": 333,
+          "sale_sample": 333,
           "rent_sample": 5
         },
         "confidence": "Low",
         "changes": {
           "7d": {
-            "median_price_aed_pct": 0.21,
-            "median_price_per_sqm_aed_pct": 0,
+            "median_price_aed_pct": 0.09,
+            "median_price_per_sqm_aed_pct": -0.01,
             "gross_rental_yield_pp": 0,
-            "sample_size_pct": 5.45
+            "sample_size_pct": 4.39
           },
           "30d": {
-            "median_price_aed_pct": 2.29,
-            "median_price_per_sqm_aed_pct": -0.03,
+            "median_price_aed_pct": 2.38,
+            "median_price_per_sqm_aed_pct": 0.01,
             "gross_rental_yield_pp": 0,
-            "sample_size_pct": 22.76
+            "sample_size_pct": 20.65
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -16764,6 +17140,16 @@
             "sample_size": 329,
             "sale_sample": 329,
             "rent_sample": 5
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 621240,
+            "median_price_per_sqm_aed": 15372,
+            "gross_rental_yield_pct": 6.14,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 333,
+            "sale_sample": 333,
+            "rent_sample": 5
           }
         ]
       },
@@ -16780,10 +17166,10 @@
         "confidence": "Medium",
         "changes": {
           "7d": {
-            "median_price_aed_pct": 1.02,
-            "median_price_per_sqm_aed_pct": -0.61,
-            "gross_rental_yield_pp": 0.02,
-            "sample_size_pct": 2.63
+            "median_price_aed_pct": 0,
+            "median_price_per_sqm_aed_pct": 0,
+            "gross_rental_yield_pp": 0,
+            "sample_size_pct": 0
           },
           "30d": {
             "median_price_aed_pct": 11.66,
@@ -17198,32 +17584,42 @@
             "sample_size": 39,
             "sale_sample": 39,
             "rent_sample": 41
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 3320000,
+            "median_price_per_sqm_aed": 39105,
+            "gross_rental_yield_pct": 1.99,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 39,
+            "sale_sample": 39,
+            "rent_sample": 41
           }
         ]
       },
       "Wadi Al Safa 2": {
         "current": {
           "median_price_aed": 900400,
-          "median_price_per_sqm_aed": 11055,
-          "gross_rental_yield_pct": 6.61,
+          "median_price_per_sqm_aed": 10764,
+          "gross_rental_yield_pct": 6.79,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 415,
-          "sale_sample": 415,
+          "sample_size": 441,
+          "sale_sample": 441,
           "rent_sample": 14
         },
         "confidence": "Medium",
         "changes": {
           "7d": {
-            "median_price_aed_pct": -0.48,
-            "median_price_per_sqm_aed_pct": -21.09,
-            "gross_rental_yield_pp": 1.4,
-            "sample_size_pct": 53.14
+            "median_price_aed_pct": -0.22,
+            "median_price_per_sqm_aed_pct": -23.05,
+            "gross_rental_yield_pp": 1.57,
+            "sample_size_pct": 62.13
           },
           "30d": {
-            "median_price_aed_pct": -1.14,
-            "median_price_per_sqm_aed_pct": -23.62,
-            "gross_rental_yield_pp": 1.51,
-            "sample_size_pct": 75.85
+            "median_price_aed_pct": -1.6,
+            "median_price_per_sqm_aed_pct": -25.45,
+            "gross_rental_yield_pp": 1.68,
+            "sample_size_pct": 82.99
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -17632,32 +18028,42 @@
             "sample_size": 415,
             "sale_sample": 415,
             "rent_sample": 14
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 900400,
+            "median_price_per_sqm_aed": 10764,
+            "gross_rental_yield_pct": 6.79,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 441,
+            "sale_sample": 441,
+            "rent_sample": 14
           }
         ]
       },
       "Wadi Al Safa 3": {
         "current": {
-          "median_price_aed": 840853,
-          "median_price_per_sqm_aed": 15294,
+          "median_price_aed": 850000,
+          "median_price_per_sqm_aed": 15311,
           "gross_rental_yield_pct": 4.86,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 1836,
-          "sale_sample": 1836,
+          "sample_size": 1876,
+          "sale_sample": 1876,
           "rent_sample": 18
         },
         "confidence": "Medium",
         "changes": {
           "7d": {
-            "median_price_aed_pct": 1.06,
-            "median_price_per_sqm_aed_pct": 0,
+            "median_price_aed_pct": 1.96,
+            "median_price_per_sqm_aed_pct": 0.11,
             "gross_rental_yield_pp": 0,
-            "sample_size_pct": 2.4
+            "sample_size_pct": 3.93
           },
           "30d": {
-            "median_price_aed_pct": 12.26,
-            "median_price_per_sqm_aed_pct": 0,
-            "gross_rental_yield_pp": -0.19,
-            "sample_size_pct": 33.33
+            "median_price_aed_pct": 12.7,
+            "median_price_per_sqm_aed_pct": -0.02,
+            "gross_rental_yield_pp": 0,
+            "sample_size_pct": 32.3
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -18066,32 +18472,42 @@
             "sample_size": 1836,
             "sale_sample": 1836,
             "rent_sample": 18
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 850000,
+            "median_price_per_sqm_aed": 15311,
+            "gross_rental_yield_pct": 4.86,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 1876,
+            "sale_sample": 1876,
+            "rent_sample": 18
           }
         ]
       },
       "Wadi Al Safa 4": {
         "current": {
           "median_price_aed": 629000,
-          "median_price_per_sqm_aed": 18419,
+          "median_price_per_sqm_aed": 18424,
           "gross_rental_yield_pct": null,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 2247,
-          "sale_sample": 2247,
+          "sample_size": 2251,
+          "sale_sample": 2251,
           "rent_sample": 0
         },
         "confidence": "Insufficient",
         "changes": {
           "7d": {
             "median_price_aed_pct": 0,
-            "median_price_per_sqm_aed_pct": -0.12,
+            "median_price_per_sqm_aed_pct": -0.09,
             "gross_rental_yield_pp": null,
-            "sample_size_pct": 1.13
+            "sample_size_pct": 1.17
           },
           "30d": {
             "median_price_aed_pct": 0.96,
-            "median_price_per_sqm_aed_pct": -0.35,
+            "median_price_per_sqm_aed_pct": -0.31,
             "gross_rental_yield_pp": null,
-            "sample_size_pct": 10.31
+            "sample_size_pct": 10.07
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -18500,32 +18916,42 @@
             "sample_size": 2247,
             "sale_sample": 2247,
             "rent_sample": 0
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 629000,
+            "median_price_per_sqm_aed": 18424,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 2251,
+            "sale_sample": 2251,
+            "rent_sample": 0
           }
         ]
       },
       "Wadi Al Safa 5": {
         "current": {
           "median_price_aed": 869777,
-          "median_price_per_sqm_aed": 15069,
-          "gross_rental_yield_pct": 3.89,
+          "median_price_per_sqm_aed": 15080,
+          "gross_rental_yield_pct": 3.88,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 1662,
-          "sale_sample": 1662,
+          "sample_size": 1677,
+          "sale_sample": 1677,
           "rent_sample": 41
         },
         "confidence": "High",
         "changes": {
           "7d": {
-            "median_price_aed_pct": -1.72,
-            "median_price_per_sqm_aed_pct": 0.52,
-            "gross_rental_yield_pp": 0.05,
-            "sample_size_pct": 5.66
+            "median_price_aed_pct": -1.16,
+            "median_price_per_sqm_aed_pct": 0.12,
+            "gross_rental_yield_pp": 0.06,
+            "sample_size_pct": 3.84
           },
           "30d": {
-            "median_price_aed_pct": -3.84,
-            "median_price_per_sqm_aed_pct": 0.85,
-            "gross_rental_yield_pp": 0.11,
-            "sample_size_pct": 30.35
+            "median_price_aed_pct": -3.36,
+            "median_price_per_sqm_aed_pct": 1.13,
+            "gross_rental_yield_pp": 0.09,
+            "sample_size_pct": 30.51
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -18934,6 +19360,16 @@
             "sample_size": 1662,
             "sale_sample": 1662,
             "rent_sample": 41
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 869777,
+            "median_price_per_sqm_aed": 15080,
+            "gross_rental_yield_pct": 3.88,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 1677,
+            "sale_sample": 1677,
+            "rent_sample": 41
           }
         ]
       },
@@ -18950,16 +19386,16 @@
         "confidence": "Medium",
         "changes": {
           "7d": {
-            "median_price_aed_pct": 5.23,
-            "median_price_per_sqm_aed_pct": -0.06,
-            "gross_rental_yield_pp": -0.08,
-            "sample_size_pct": 8.57
+            "median_price_aed_pct": 7.58,
+            "median_price_per_sqm_aed_pct": 0,
+            "gross_rental_yield_pp": 0,
+            "sample_size_pct": 5.56
           },
           "30d": {
-            "median_price_aed_pct": 13.77,
-            "median_price_per_sqm_aed_pct": 0,
+            "median_price_aed_pct": 12.62,
+            "median_price_per_sqm_aed_pct": -0.06,
             "gross_rental_yield_pp": -0.16,
-            "sample_size_pct": 90
+            "sample_size_pct": 80.95
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -19368,32 +19804,42 @@
             "sample_size": 38,
             "sale_sample": 38,
             "rent_sample": 21
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 942556,
+            "median_price_per_sqm_aed": 12191,
+            "gross_rental_yield_pct": 5.38,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 38,
+            "sale_sample": 38,
+            "rent_sample": 21
           }
         ]
       },
       "Warsan Fourth": {
         "current": {
           "median_price_aed": 819730,
-          "median_price_per_sqm_aed": 13280,
+          "median_price_per_sqm_aed": 13282,
           "gross_rental_yield_pct": 5.08,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 468,
-          "sale_sample": 468,
+          "sample_size": 483,
+          "sale_sample": 483,
           "rent_sample": 28
         },
         "confidence": "Medium",
         "changes": {
           "7d": {
-            "median_price_aed_pct": 0.76,
-            "median_price_per_sqm_aed_pct": 0.43,
+            "median_price_aed_pct": 0.51,
+            "median_price_per_sqm_aed_pct": 0.45,
             "gross_rental_yield_pp": -0.02,
-            "sample_size_pct": 4.93
+            "sample_size_pct": 6.86
           },
           "30d": {
-            "median_price_aed_pct": 1.18,
-            "median_price_per_sqm_aed_pct": 0.89,
-            "gross_rental_yield_pp": 0.13,
-            "sample_size_pct": 35.26
+            "median_price_aed_pct": 1.16,
+            "median_price_per_sqm_aed_pct": 1.33,
+            "gross_rental_yield_pp": 0.11,
+            "sample_size_pct": 37.61
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -19802,6 +20248,16 @@
             "sample_size": 468,
             "sale_sample": 468,
             "rent_sample": 28
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 819730,
+            "median_price_per_sqm_aed": 13282,
+            "gross_rental_yield_pct": 5.08,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 483,
+            "sale_sample": 483,
+            "rent_sample": 28
           }
         ]
       },
@@ -19818,10 +20274,10 @@
         "confidence": "Low",
         "changes": {
           "7d": {
-            "median_price_aed_pct": -4.92,
-            "median_price_per_sqm_aed_pct": 0.57,
-            "gross_rental_yield_pp": -0.03,
-            "sample_size_pct": 10
+            "median_price_aed_pct": 0,
+            "median_price_per_sqm_aed_pct": 0,
+            "gross_rental_yield_pp": 0,
+            "sample_size_pct": 0
           },
           "30d": {
             "median_price_aed_pct": 0,
@@ -20196,32 +20652,42 @@
             "sample_size": 11,
             "sale_sample": 11,
             "rent_sample": 29
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 4078000,
+            "median_price_per_sqm_aed": 16911,
+            "gross_rental_yield_pct": 4.87,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 11,
+            "sale_sample": 11,
+            "rent_sample": 29
           }
         ]
       },
       "Madinat Dubai Almelaheyah": {
         "current": {
-          "median_price_aed": 2491200,
-          "median_price_per_sqm_aed": 33315,
+          "median_price_aed": 2493440,
+          "median_price_per_sqm_aed": 33305,
           "gross_rental_yield_pct": 2.11,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 501,
-          "sale_sample": 501,
+          "sample_size": 522,
+          "sale_sample": 522,
           "rent_sample": 6
         },
         "confidence": "Low",
         "changes": {
           "7d": {
-            "median_price_aed_pct": 0.39,
-            "median_price_per_sqm_aed_pct": -1.33,
-            "gross_rental_yield_pp": 0.03,
-            "sample_size_pct": 29.12
+            "median_price_aed_pct": 0.17,
+            "median_price_per_sqm_aed_pct": -0.91,
+            "gross_rental_yield_pp": 0.02,
+            "sample_size_pct": 22.54
           },
           "30d": {
-            "median_price_aed_pct": 0.39,
-            "median_price_per_sqm_aed_pct": 0,
+            "median_price_aed_pct": 0.48,
+            "median_price_per_sqm_aed_pct": -0.02,
             "gross_rental_yield_pp": 0,
-            "sample_size_pct": 77.03
+            "sample_size_pct": 81.25
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -20579,6 +21045,16 @@
             "annual_rent_per_sqm_aed": null,
             "sample_size": 501,
             "sale_sample": 501,
+            "rent_sample": 6
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 2493440,
+            "median_price_per_sqm_aed": 33305,
+            "gross_rental_yield_pct": 2.11,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 522,
+            "sale_sample": 522,
             "rent_sample": 6
           }
         ]
@@ -20954,32 +21430,42 @@
             "sample_size": 12,
             "sale_sample": 12,
             "rent_sample": 18
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 2500000,
+            "median_price_per_sqm_aed": 13926,
+            "gross_rental_yield_pct": 6.81,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 12,
+            "sale_sample": 12,
+            "rent_sample": 18
           }
         ]
       },
       "Zaabeel Second": {
         "current": {
-          "median_price_aed": 3724250,
-          "median_price_per_sqm_aed": 33872,
-          "gross_rental_yield_pct": 5.25,
+          "median_price_aed": 3550000,
+          "median_price_per_sqm_aed": 33677,
+          "gross_rental_yield_pct": 5.28,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 116,
-          "sale_sample": 116,
+          "sample_size": 121,
+          "sale_sample": 121,
           "rent_sample": 5
         },
         "confidence": "Low",
         "changes": {
           "7d": {
-            "median_price_aed_pct": 0,
-            "median_price_per_sqm_aed_pct": 0,
-            "gross_rental_yield_pp": 0,
-            "sample_size_pct": 1.75
+            "median_price_aed_pct": -4.68,
+            "median_price_per_sqm_aed_pct": -0.58,
+            "gross_rental_yield_pp": 0.03,
+            "sample_size_pct": 6.14
           },
           "30d": {
-            "median_price_aed_pct": 4.17,
-            "median_price_per_sqm_aed_pct": 0,
-            "gross_rental_yield_pp": 0,
-            "sample_size_pct": 26.09
+            "median_price_aed_pct": -5.3,
+            "median_price_per_sqm_aed_pct": -0.62,
+            "gross_rental_yield_pp": 0.04,
+            "sample_size_pct": 24.74
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -21238,6 +21724,16 @@
             "sample_size": 116,
             "sale_sample": 116,
             "rent_sample": 5
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 3550000,
+            "median_price_per_sqm_aed": 33677,
+            "gross_rental_yield_pct": 5.28,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 121,
+            "sale_sample": 121,
+            "rent_sample": 5
           }
         ]
       },
@@ -21485,6 +21981,16 @@
           },
           {
             "date": "2026-10-30",
+            "median_price_aed": 1200000,
+            "median_price_per_sqm_aed": 8845,
+            "gross_rental_yield_pct": 7.08,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 5,
+            "sale_sample": 5,
+            "rent_sample": 6
+          },
+          {
+            "date": "2026-11-02",
             "median_price_aed": 1200000,
             "median_price_per_sqm_aed": 8845,
             "gross_rental_yield_pct": 7.08,
@@ -21928,6 +22434,16 @@
             "sample_size": 0,
             "sale_sample": 0,
             "rent_sample": 18
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": 18
           }
         ]
       },
@@ -22362,6 +22878,16 @@
             "sample_size": 0,
             "sale_sample": 0,
             "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": null
           }
         ]
       },
@@ -22381,13 +22907,13 @@
             "median_price_aed_pct": -2.48,
             "median_price_per_sqm_aed_pct": -0.71,
             "gross_rental_yield_pp": 0.03,
-            "sample_size_pct": 6.25
+            "sample_size_pct": 2
           },
           "30d": {
-            "median_price_aed_pct": 4.24,
-            "median_price_per_sqm_aed_pct": 0.65,
-            "gross_rental_yield_pp": 0.06,
-            "sample_size_pct": 30.77
+            "median_price_aed_pct": -0.51,
+            "median_price_per_sqm_aed_pct": 0.84,
+            "gross_rental_yield_pp": 0.05,
+            "sample_size_pct": 27.5
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -22789,6 +23315,16 @@
           },
           {
             "date": "2026-10-30",
+            "median_price_aed": 2950000,
+            "median_price_per_sqm_aed": 17125,
+            "gross_rental_yield_pct": 4.17,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 51,
+            "sale_sample": 51,
+            "rent_sample": 11
+          },
+          {
+            "date": "2026-11-02",
             "median_price_aed": 2950000,
             "median_price_per_sqm_aed": 17125,
             "gross_rental_yield_pct": 4.17,
@@ -23230,6 +23766,16 @@
             "sample_size": 0,
             "sale_sample": 0,
             "rent_sample": 3
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": 3
           }
         ]
       },
@@ -23657,6 +24203,16 @@
           },
           {
             "date": "2026-10-30",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": 0
+          },
+          {
+            "date": "2026-11-02",
             "median_price_aed": null,
             "median_price_per_sqm_aed": null,
             "gross_rental_yield_pct": null,
@@ -24098,6 +24654,16 @@
             "sample_size": 2,
             "sale_sample": 2,
             "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 4084000,
+            "median_price_per_sqm_aed": 5747,
+            "gross_rental_yield_pct": 1.6,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 2,
+            "sale_sample": 2,
+            "rent_sample": null
           }
         ]
       },
@@ -24123,7 +24689,7 @@
             "median_price_aed_pct": -3.17,
             "median_price_per_sqm_aed_pct": -0.27,
             "gross_rental_yield_pp": null,
-            "sample_size_pct": 26.09
+            "sample_size_pct": 23.93
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -24525,6 +25091,16 @@
           },
           {
             "date": "2026-10-30",
+            "median_price_aed": 1740071,
+            "median_price_per_sqm_aed": 15812,
+            "gross_rental_yield_pct": 7.1,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 145,
+            "sale_sample": 145,
+            "rent_sample": 2
+          },
+          {
+            "date": "2026-11-02",
             "median_price_aed": 1740071,
             "median_price_per_sqm_aed": 15812,
             "gross_rental_yield_pct": 7.1,
@@ -24966,32 +25542,42 @@
             "sample_size": 17,
             "sale_sample": 17,
             "rent_sample": 2
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 6950000,
+            "median_price_per_sqm_aed": 17250,
+            "gross_rental_yield_pct": 3.68,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 17,
+            "sale_sample": 17,
+            "rent_sample": 2
           }
         ]
       },
       "Al Hebiah Fourth": {
         "current": {
-          "median_price_aed": 4300000,
+          "median_price_aed": 4325000,
           "median_price_per_sqm_aed": 24069,
           "gross_rental_yield_pct": 5.04,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 59,
-          "sale_sample": 59,
+          "sample_size": 60,
+          "sale_sample": 60,
           "rent_sample": 13
         },
         "confidence": "Medium",
         "changes": {
           "7d": {
-            "median_price_aed_pct": 0,
-            "median_price_per_sqm_aed_pct": 0,
+            "median_price_aed_pct": 0.58,
+            "median_price_per_sqm_aed_pct": 0.01,
             "gross_rental_yield_pp": 0,
-            "sample_size_pct": 3.51
+            "sample_size_pct": 3.45
           },
           "30d": {
-            "median_price_aed_pct": 0,
+            "median_price_aed_pct": 0.58,
             "median_price_per_sqm_aed_pct": 0.22,
             "gross_rental_yield_pp": -0.02,
-            "sample_size_pct": 28.26
+            "sample_size_pct": 25
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -25399,6 +25985,16 @@
             "annual_rent_per_sqm_aed": null,
             "sample_size": 59,
             "sale_sample": 59,
+            "rent_sample": 13
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 4325000,
+            "median_price_per_sqm_aed": 24069,
+            "gross_rental_yield_pct": 5.04,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 60,
+            "sale_sample": 60,
             "rent_sample": 13
           }
         ]
@@ -25827,6 +26423,16 @@
           },
           {
             "date": "2026-10-30",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": 0
+          },
+          {
+            "date": "2026-11-02",
             "median_price_aed": null,
             "median_price_per_sqm_aed": null,
             "gross_rental_yield_pct": null,
@@ -26268,6 +26874,16 @@
             "sample_size": 0,
             "sale_sample": 0,
             "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": null
           }
         ]
       },
@@ -26695,6 +27311,16 @@
           },
           {
             "date": "2026-10-30",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
             "median_price_aed": null,
             "median_price_per_sqm_aed": null,
             "gross_rental_yield_pct": null,
@@ -27136,6 +27762,16 @@
             "sample_size": 0,
             "sale_sample": 0,
             "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": null
           }
         ]
       },
@@ -27563,6 +28199,16 @@
           },
           {
             "date": "2026-10-30",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
             "median_price_aed": null,
             "median_price_per_sqm_aed": null,
             "gross_rental_yield_pct": null,
@@ -28004,6 +28650,16 @@
             "sample_size": 0,
             "sale_sample": 0,
             "rent_sample": 3
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": 3
           }
         ]
       },
@@ -28431,6 +29087,16 @@
           },
           {
             "date": "2026-10-30",
+            "median_price_aed": 5500000,
+            "median_price_per_sqm_aed": 29304,
+            "gross_rental_yield_pct": 2.01,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 1,
+            "sale_sample": 1,
+            "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
             "median_price_aed": 5500000,
             "median_price_per_sqm_aed": 29304,
             "gross_rental_yield_pct": 2.01,
@@ -28872,6 +29538,16 @@
             "sample_size": 0,
             "sale_sample": 0,
             "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": null
           }
         ]
       },
@@ -29299,6 +29975,16 @@
           },
           {
             "date": "2026-10-30",
+            "median_price_aed": 6800000,
+            "median_price_per_sqm_aed": 25282,
+            "gross_rental_yield_pct": 5.26,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 15,
+            "sale_sample": 15,
+            "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
             "median_price_aed": 6800000,
             "median_price_per_sqm_aed": 25282,
             "gross_rental_yield_pct": 5.26,
@@ -29740,6 +30426,16 @@
             "sample_size": 0,
             "sale_sample": 0,
             "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": null
           }
         ]
       },
@@ -30174,32 +30870,42 @@
             "sample_size": 0,
             "sale_sample": 0,
             "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": null
           }
         ]
       },
       "Al Yelayiss 2": {
         "current": {
           "median_price_aed": 2890000,
-          "median_price_per_sqm_aed": 14389,
-          "gross_rental_yield_pct": 5.05,
+          "median_price_per_sqm_aed": 14425,
+          "gross_rental_yield_pct": 5.03,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 78,
-          "sale_sample": 78,
+          "sample_size": 80,
+          "sale_sample": 80,
           "rent_sample": 16
         },
         "confidence": "Medium",
         "changes": {
           "7d": {
-            "median_price_aed_pct": 0.43,
-            "median_price_per_sqm_aed_pct": -0.25,
-            "gross_rental_yield_pp": 0.02,
-            "sample_size_pct": 5.41
+            "median_price_aed_pct": 0.35,
+            "median_price_per_sqm_aed_pct": 0.1,
+            "gross_rental_yield_pp": -0.01,
+            "sample_size_pct": 6.67
           },
           "30d": {
-            "median_price_aed_pct": 0,
-            "median_price_per_sqm_aed_pct": -0.25,
-            "gross_rental_yield_pp": -0.03,
-            "sample_size_pct": 25.81
+            "median_price_aed_pct": -0.34,
+            "median_price_per_sqm_aed_pct": 0.25,
+            "gross_rental_yield_pp": -0.07,
+            "sample_size_pct": 25
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -30607,6 +31313,16 @@
             "annual_rent_per_sqm_aed": null,
             "sample_size": 78,
             "sale_sample": 78,
+            "rent_sample": 16
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 2890000,
+            "median_price_per_sqm_aed": 14425,
+            "gross_rental_yield_pct": 5.03,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 80,
+            "sale_sample": 80,
             "rent_sample": 16
           }
         ]
@@ -31035,6 +31751,16 @@
           },
           {
             "date": "2026-10-30",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
             "median_price_aed": null,
             "median_price_per_sqm_aed": null,
             "gross_rental_yield_pct": null,
@@ -31476,6 +32202,16 @@
             "sample_size": 0,
             "sale_sample": 0,
             "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": null
           }
         ]
       },
@@ -31485,23 +32221,23 @@
           "median_price_per_sqm_aed": 12879,
           "gross_rental_yield_pct": 3.7,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 473,
-          "sale_sample": 473,
+          "sample_size": 475,
+          "sale_sample": 475,
           "rent_sample": null
         },
         "confidence": "Medium",
         "changes": {
           "7d": {
-            "median_price_aed_pct": -0.24,
-            "median_price_per_sqm_aed_pct": -0.56,
-            "gross_rental_yield_pp": 0.02,
-            "sample_size_pct": 7.74
+            "median_price_aed_pct": 0,
+            "median_price_per_sqm_aed_pct": 0.04,
+            "gross_rental_yield_pp": 0,
+            "sample_size_pct": 4.4
           },
           "30d": {
-            "median_price_aed_pct": -0.24,
+            "median_price_aed_pct": -0.12,
             "median_price_per_sqm_aed_pct": 0.05,
             "gross_rental_yield_pp": 0,
-            "sample_size_pct": 37.9
+            "sample_size_pct": 38.08
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -31910,6 +32646,16 @@
             "sample_size": 473,
             "sale_sample": 473,
             "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 1377088,
+            "median_price_per_sqm_aed": 12879,
+            "gross_rental_yield_pct": 3.7,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 475,
+            "sale_sample": 475,
+            "rent_sample": null
           }
         ]
       },
@@ -31926,16 +32672,16 @@
         "confidence": "Low",
         "changes": {
           "7d": {
-            "median_price_aed_pct": -0.75,
-            "median_price_per_sqm_aed_pct": 0,
+            "median_price_aed_pct": -0.69,
+            "median_price_per_sqm_aed_pct": -0.48,
             "gross_rental_yield_pp": null,
-            "sample_size_pct": 4.55
+            "sample_size_pct": 2.22
           },
           "30d": {
             "median_price_aed_pct": -2.39,
             "median_price_per_sqm_aed_pct": -0.48,
             "gross_rental_yield_pp": null,
-            "sample_size_pct": 35.29
+            "sample_size_pct": 27.78
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -32344,32 +33090,42 @@
             "sample_size": 46,
             "sale_sample": 46,
             "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 3616888,
+            "median_price_per_sqm_aed": 18342,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 46,
+            "sale_sample": 46,
+            "rent_sample": null
           }
         ]
       },
       "Hadaeq Sheikh Mohammed Bin Rashid": {
         "current": {
-          "median_price_aed": 5089500,
+          "median_price_aed": 5190000,
           "median_price_per_sqm_aed": 23271,
           "gross_rental_yield_pct": 5.57,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 40,
-          "sale_sample": 40,
+          "sample_size": 42,
+          "sale_sample": 42,
           "rent_sample": 25
         },
         "confidence": "Medium",
         "changes": {
           "7d": {
-            "median_price_aed_pct": 0,
+            "median_price_aed_pct": 1.97,
             "median_price_per_sqm_aed_pct": -4.1,
             "gross_rental_yield_pp": 0.23,
-            "sample_size_pct": 11.11
+            "sample_size_pct": 16.67
           },
           "30d": {
-            "median_price_aed_pct": -1.94,
-            "median_price_per_sqm_aed_pct": -5.19,
-            "gross_rental_yield_pp": 0.25,
-            "sample_size_pct": 25
+            "median_price_aed_pct": -0.19,
+            "median_price_per_sqm_aed_pct": -5.03,
+            "gross_rental_yield_pp": 0.28,
+            "sample_size_pct": 27.27
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -32777,6 +33533,16 @@
             "annual_rent_per_sqm_aed": null,
             "sample_size": 40,
             "sale_sample": 40,
+            "rent_sample": 25
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 5190000,
+            "median_price_per_sqm_aed": 23271,
+            "gross_rental_yield_pct": 5.57,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 42,
+            "sale_sample": 42,
             "rent_sample": 25
           }
         ]
@@ -33205,6 +33971,16 @@
           },
           {
             "date": "2026-10-30",
+            "median_price_aed": 3645000,
+            "median_price_per_sqm_aed": 18529,
+            "gross_rental_yield_pct": 0.73,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 28,
+            "sale_sample": 28,
+            "rent_sample": 33
+          },
+          {
+            "date": "2026-11-02",
             "median_price_aed": 3645000,
             "median_price_per_sqm_aed": 18529,
             "gross_rental_yield_pct": 0.73,
@@ -33646,6 +34422,16 @@
             "sample_size": 0,
             "sale_sample": 0,
             "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": null
           }
         ]
       },
@@ -34080,32 +34866,42 @@
             "sample_size": 3,
             "sale_sample": 3,
             "rent_sample": 11
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 30041250,
+            "median_price_per_sqm_aed": 38216,
+            "gross_rental_yield_pct": 1.71,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 3,
+            "sale_sample": 3,
+            "rent_sample": 11
           }
         ]
       },
       "Madinat Al Mataar": {
         "current": {
           "median_price_aed": 4785000,
-          "median_price_per_sqm_aed": 14826,
-          "gross_rental_yield_pct": 4.32,
+          "median_price_per_sqm_aed": 14780,
+          "gross_rental_yield_pct": 4.34,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 386,
-          "sale_sample": 386,
+          "sample_size": 390,
+          "sale_sample": 390,
           "rent_sample": 7
         },
         "confidence": "Low",
         "changes": {
           "7d": {
-            "median_price_aed_pct": -0.57,
-            "median_price_per_sqm_aed_pct": 0,
-            "gross_rental_yield_pp": 0,
-            "sample_size_pct": 4.32
+            "median_price_aed_pct": -0.31,
+            "median_price_per_sqm_aed_pct": -0.13,
+            "gross_rental_yield_pp": 0.01,
+            "sample_size_pct": 4
           },
           "30d": {
             "median_price_aed_pct": 0,
-            "median_price_per_sqm_aed_pct": 0.49,
-            "gross_rental_yield_pp": -0.02,
-            "sample_size_pct": 22.15
+            "median_price_per_sqm_aed_pct": 0.21,
+            "gross_rental_yield_pp": -0.01,
+            "sample_size_pct": 23.03
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -34513,6 +35309,16 @@
             "annual_rent_per_sqm_aed": null,
             "sample_size": 386,
             "sale_sample": 386,
+            "rent_sample": 7
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 4785000,
+            "median_price_per_sqm_aed": 14780,
+            "gross_rental_yield_pct": 4.34,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 390,
+            "sale_sample": 390,
             "rent_sample": 7
           }
         ]
@@ -34941,6 +35747,16 @@
           },
           {
             "date": "2026-10-30",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
             "median_price_aed": null,
             "median_price_per_sqm_aed": null,
             "gross_rental_yield_pct": null,
@@ -35382,6 +36198,16 @@
             "sample_size": 9,
             "sale_sample": 9,
             "rent_sample": 4
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 6600000,
+            "median_price_per_sqm_aed": 29012,
+            "gross_rental_yield_pct": 3.76,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 9,
+            "sale_sample": 9,
+            "rent_sample": 4
           }
         ]
       },
@@ -35400,7 +36226,7 @@
           "7d": {
             "median_price_aed_pct": 0,
             "median_price_per_sqm_aed_pct": 0,
-            "gross_rental_yield_pp": 0.02,
+            "gross_rental_yield_pp": 0.01,
             "sample_size_pct": 0
           },
           "30d": {
@@ -35809,6 +36635,16 @@
           },
           {
             "date": "2026-10-30",
+            "median_price_aed": 4585000,
+            "median_price_per_sqm_aed": 17928,
+            "gross_rental_yield_pct": 2.35,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 2,
+            "sale_sample": 2,
+            "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
             "median_price_aed": 4585000,
             "median_price_per_sqm_aed": 17928,
             "gross_rental_yield_pct": 2.35,
@@ -36250,6 +37086,16 @@
             "sample_size": 0,
             "sale_sample": 0,
             "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": null
           }
         ]
       },
@@ -36272,10 +37118,10 @@
             "sample_size_pct": 7.5
           },
           "30d": {
-            "median_price_aed_pct": -1.79,
-            "median_price_per_sqm_aed_pct": 0,
+            "median_price_aed_pct": 0.92,
+            "median_price_per_sqm_aed_pct": -0.07,
             "gross_rental_yield_pp": -0.72,
-            "sample_size_pct": 38.71
+            "sample_size_pct": 26.47
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -36677,6 +37523,16 @@
           },
           {
             "date": "2026-10-30",
+            "median_price_aed": 5500000,
+            "median_price_per_sqm_aed": 24310,
+            "gross_rental_yield_pct": 2.48,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 43,
+            "sale_sample": 43,
+            "rent_sample": 2
+          },
+          {
+            "date": "2026-11-02",
             "median_price_aed": 5500000,
             "median_price_per_sqm_aed": 24310,
             "gross_rental_yield_pct": 2.48,
@@ -37118,6 +37974,16 @@
             "sample_size": 0,
             "sale_sample": 0,
             "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": null
           }
         ]
       },
@@ -37134,15 +38000,15 @@
         "confidence": "Insufficient",
         "changes": {
           "7d": {
-            "median_price_aed_pct": -44.81,
-            "median_price_per_sqm_aed_pct": -18.97,
-            "gross_rental_yield_pp": 0.32,
-            "sample_size_pct": 100
+            "median_price_aed_pct": 0,
+            "median_price_per_sqm_aed_pct": 0,
+            "gross_rental_yield_pp": 0,
+            "sample_size_pct": 0
           },
           "30d": {
             "median_price_aed_pct": -44.81,
             "median_price_per_sqm_aed_pct": -18.97,
-            "gross_rental_yield_pp": 0.54,
+            "gross_rental_yield_pp": 0.43,
             "sample_size_pct": 100
           },
           "90d": {
@@ -37545,6 +38411,16 @@
           },
           {
             "date": "2026-10-30",
+            "median_price_aed": 143500000,
+            "median_price_per_sqm_aed": 85409,
+            "gross_rental_yield_pct": 1.69,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 2,
+            "sale_sample": 2,
+            "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
             "median_price_aed": 143500000,
             "median_price_per_sqm_aed": 85409,
             "gross_rental_yield_pct": 1.69,
@@ -37986,6 +38862,16 @@
             "sample_size": 9,
             "sale_sample": 9,
             "rent_sample": 0
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 1800000,
+            "median_price_per_sqm_aed": 10216,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 9,
+            "sale_sample": 9,
+            "rent_sample": 0
           }
         ]
       },
@@ -38420,6 +39306,16 @@
             "sample_size": 0,
             "sale_sample": 0,
             "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": null
           }
         ]
       },
@@ -38445,7 +39341,7 @@
             "median_price_aed_pct": 0,
             "median_price_per_sqm_aed_pct": 0,
             "gross_rental_yield_pp": 0,
-            "sample_size_pct": 50
+            "sample_size_pct": 23.53
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -38854,32 +39750,42 @@
             "sample_size": 21,
             "sale_sample": 21,
             "rent_sample": 2
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 1300000,
+            "median_price_per_sqm_aed": 14342,
+            "gross_rental_yield_pct": 2.92,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 21,
+            "sale_sample": 21,
+            "rent_sample": 2
           }
         ]
       },
       "Wadi Al Safa 3": {
         "current": {
           "median_price_aed": 3250000,
-          "median_price_per_sqm_aed": 25482,
-          "gross_rental_yield_pct": 2.59,
+          "median_price_per_sqm_aed": 25393,
+          "gross_rental_yield_pct": 2.6,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 167,
-          "sale_sample": 167,
+          "sample_size": 168,
+          "sale_sample": 168,
           "rent_sample": 9
         },
         "confidence": "Low",
         "changes": {
           "7d": {
             "median_price_aed_pct": -4.41,
-            "median_price_per_sqm_aed_pct": 5.61,
-            "gross_rental_yield_pp": -0.55,
-            "sample_size_pct": 16.78
+            "median_price_per_sqm_aed_pct": 4.66,
+            "gross_rental_yield_pp": -0.12,
+            "sample_size_pct": 16.67
           },
           "30d": {
-            "median_price_aed_pct": -5.74,
-            "median_price_per_sqm_aed_pct": 5.15,
-            "gross_rental_yield_pp": -0.19,
-            "sample_size_pct": 60.58
+            "median_price_aed_pct": -5.8,
+            "median_price_per_sqm_aed_pct": 4.09,
+            "gross_rental_yield_pp": -0.16,
+            "sample_size_pct": 60
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -39288,6 +40194,16 @@
             "sample_size": 167,
             "sale_sample": 167,
             "rent_sample": 9
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 3250000,
+            "median_price_per_sqm_aed": 25393,
+            "gross_rental_yield_pct": 2.6,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 168,
+            "sale_sample": 168,
+            "rent_sample": 9
           }
         ]
       },
@@ -39310,10 +40226,10 @@
             "sample_size_pct": 0
           },
           "30d": {
-            "median_price_aed_pct": 3.16,
-            "median_price_per_sqm_aed_pct": 0.57,
-            "gross_rental_yield_pp": -0.02,
-            "sample_size_pct": 18.75
+            "median_price_aed_pct": 2.41,
+            "median_price_per_sqm_aed_pct": 1.15,
+            "gross_rental_yield_pp": -0.05,
+            "sample_size_pct": 11.76
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -39722,6 +40638,16 @@
             "sample_size": 19,
             "sale_sample": 19,
             "rent_sample": 2
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 4250000,
+            "median_price_per_sqm_aed": 15446,
+            "gross_rental_yield_pct": 5.09,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 19,
+            "sale_sample": 19,
+            "rent_sample": 2
           }
         ]
       },
@@ -39731,23 +40657,23 @@
           "median_price_per_sqm_aed": 16291,
           "gross_rental_yield_pct": 5.6,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 290,
-          "sale_sample": 290,
+          "sample_size": 294,
+          "sale_sample": 294,
           "rent_sample": 21
         },
         "confidence": "Medium",
         "changes": {
           "7d": {
             "median_price_aed_pct": 0,
-            "median_price_per_sqm_aed_pct": 0.09,
-            "gross_rental_yield_pp": -0.01,
-            "sample_size_pct": 7.01
+            "median_price_per_sqm_aed_pct": 0.22,
+            "gross_rental_yield_pp": -0.02,
+            "sample_size_pct": 7.3
           },
           "30d": {
-            "median_price_aed_pct": -1.54,
-            "median_price_per_sqm_aed_pct": 0.82,
-            "gross_rental_yield_pp": -0.05,
-            "sample_size_pct": 33.03
+            "median_price_aed_pct": -0.47,
+            "median_price_per_sqm_aed_pct": -0.23,
+            "gross_rental_yield_pp": -0.29,
+            "sample_size_pct": 30.09
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -40156,32 +41082,42 @@
             "sample_size": 290,
             "sale_sample": 290,
             "rent_sample": 21
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 3200000,
+            "median_price_per_sqm_aed": 16291,
+            "gross_rental_yield_pct": 5.6,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 294,
+            "sale_sample": 294,
+            "rent_sample": 21
           }
         ]
       },
       "Wadi Al Safa 7": {
         "current": {
-          "median_price_aed": 1460000,
+          "median_price_aed": 1489488,
           "median_price_per_sqm_aed": 14058,
           "gross_rental_yield_pct": 4.52,
           "annual_rent_per_sqm_aed": null,
-          "sample_size": 153,
-          "sale_sample": 153,
+          "sample_size": 155,
+          "sale_sample": 155,
           "rent_sample": 78
         },
         "confidence": "High",
         "changes": {
           "7d": {
-            "median_price_aed_pct": -2.32,
+            "median_price_aed_pct": 0,
             "median_price_per_sqm_aed_pct": 0,
             "gross_rental_yield_pp": 0,
-            "sample_size_pct": 2
+            "sample_size_pct": 2.65
           },
           "30d": {
-            "median_price_aed_pct": 2.1,
-            "median_price_per_sqm_aed_pct": -0.89,
-            "gross_rental_yield_pp": 0.04,
-            "sample_size_pct": 24.39
+            "median_price_aed_pct": 2.75,
+            "median_price_per_sqm_aed_pct": 0,
+            "gross_rental_yield_pp": 0,
+            "sample_size_pct": 24
           },
           "90d": {
             "median_price_aed_pct": null,
@@ -40589,6 +41525,16 @@
             "annual_rent_per_sqm_aed": null,
             "sample_size": 153,
             "sale_sample": 153,
+            "rent_sample": 78
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 1489488,
+            "median_price_per_sqm_aed": 14058,
+            "gross_rental_yield_pct": 4.52,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 155,
+            "sale_sample": 155,
             "rent_sample": 78
           }
         ]
@@ -41024,6 +41970,16 @@
             "sample_size": 0,
             "sale_sample": 0,
             "rent_sample": 0
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": 0
           }
         ]
       },
@@ -41418,6 +42374,16 @@
             "sample_size": 0,
             "sale_sample": 0,
             "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": null
           }
         ]
       },
@@ -41802,6 +42768,16 @@
             "sample_size": 0,
             "sale_sample": 0,
             "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": null
           }
         ]
       },
@@ -41818,10 +42794,10 @@
         "confidence": "Insufficient",
         "changes": {
           "7d": {
-            "median_price_aed_pct": null,
-            "median_price_per_sqm_aed_pct": null,
-            "gross_rental_yield_pp": null,
-            "sample_size_pct": null
+            "median_price_aed_pct": 0,
+            "median_price_per_sqm_aed_pct": 0,
+            "gross_rental_yield_pp": 0,
+            "sample_size_pct": 0
           },
           "30d": {
             "median_price_aed_pct": null,
@@ -42176,6 +43152,16 @@
             "sample_size": 1,
             "sale_sample": 1,
             "rent_sample": 1
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": 6900000,
+            "median_price_per_sqm_aed": 20872,
+            "gross_rental_yield_pct": 3.08,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 1,
+            "sale_sample": 1,
+            "rent_sample": 1
           }
         ]
       },
@@ -42460,6 +43446,16 @@
             "sample_size": 0,
             "sale_sample": 0,
             "rent_sample": 0
+          },
+          {
+            "date": "2026-11-02",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": 0
           }
         ]
       },
@@ -42707,6 +43703,16 @@
           },
           {
             "date": "2026-10-30",
+            "median_price_aed": null,
+            "median_price_per_sqm_aed": null,
+            "gross_rental_yield_pct": null,
+            "annual_rent_per_sqm_aed": null,
+            "sample_size": 0,
+            "sale_sample": 0,
+            "rent_sample": null
+          },
+          {
+            "date": "2026-11-02",
             "median_price_aed": null,
             "median_price_per_sqm_aed": null,
             "gross_rental_yield_pct": null,
