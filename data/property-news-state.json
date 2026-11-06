@@ -57,6 +57,7 @@
     "https://gulfnews.com/business/property/emaar-books-dh266-billion-in-property-sales-backlog-climbs-to-dh1649-billion-1.500633439",
     "https://gulfnews.com/business/property/emaar-development-sells-dh224bn-of-homes-profit-jumps-43-in-h1-1.500633520",
     "https://gulfnews.com/business/property/emaar-homebuyers-can-secure-up-to-50-financing-before-handover-1.500623531",
+    "https://gulfnews.com/business/property/emaar-profit-jumps-17-as-developer-moves-to-buy-out-listed-subsidiary-1.500737248",
     "https://gulfnews.com/business/property/emaar-properties-weighs-32-billion-buyout-of-construction-development-arm-1.500734408",
     "https://gulfnews.com/business/property/emirati-women-invest-dh27-billion-in-sharjah-property-market-1.500654164",
     "https://gulfnews.com/business/property/former-dubai-zoo-site-gets-construction-contract-for-90-home-community-1.500636033",
@@ -111,6 +112,7 @@
     "https://gulfnews.com/business/property/vibe-by-arsenal-east-brings-a-fresh-take-on-urban-living-to-dubai-1.500716811",
     "https://gulfnews.com/business/property/wadan-marks-one-year-with-breaking-ground-ceremony-at-weston-1.500694594",
     "https://gulfnews.com/business/property/where-sharjah-property-buyers-spent-most-as-july-deals-hit-dh7-billion-1.500632308",
+    "https://gulfnews.com/business/property/why-more-dubai-tenants-are-buying-their-own-homes-1.500737124",
     "https://gulfnews.com/business/property/wynn-al-marjan-island-unveils-two-1460-sqm-apartments-at-top-of-70-storey-tower-1.500673675",
     "https://gulfnews.com/business/property/yas-island-gets-dh12-billion-investment-for-new-rides-attractions-and-hotels-1.500673885",
     "https://gulfnews.com/business/property/zimaya-advances-portfolio-with-dh185m-lawncrest-in-production-city-1.500725521",
@@ -167,6 +169,7 @@
     "https://www.khaleejtimes.com/business/dubais-new-shared-housing-law-why-your-rent-could-actually-go-up-in-2026",
     "https://www.khaleejtimes.com/business/dubia-records-335-homes-deals-of-10-million-in-8-months-palm-jumeirah-leads",
     "https://www.khaleejtimes.com/business/emaar-makes-dh15-a-share-cash-offer-to-take-full-control-of-emaar-development",
+    "https://www.khaleejtimes.com/business/emaars-9-month-profit-rises-18-to-dh198-billion-on-strong-property-sales",
     "https://www.khaleejtimes.com/business/emirati-women-invest-dh27-billion-in-sharjahs-property-in-eight-months",
     "https://www.khaleejtimes.com/business/energy",
     "https://www.khaleejtimes.com/business/energy/uae-fuel-prices-full-tank-cost-august-2026",
@@ -242,11 +245,13 @@
     "https://www.khaleejtimes.com/business/property/skyloov-partners-with-prypco-to-simplify-home-financing-and-enhance-the-property-buying-experience",
     "https://www.khaleejtimes.com/business/property/sy-capital-closes-dh160-million-full-building-deal-at-emaar-south",
     "https://www.khaleejtimes.com/business/property/tenant-who-never-paid-rent-ordered-to-vacate-property-despite-late-payment-attempt",
+    "https://www.khaleejtimes.com/business/property/their-30x30-starts-at-the-front-door-fitness-as-a-way-of-life",
     "https://www.khaleejtimes.com/business/property/uae-property-developers-eye-fourth-corridor-highway-linking-sharjah-dubai-and-abu-dhabi",
     "https://www.khaleejtimes.com/business/property/uae-rising-rents-residency-options-drive-young-buyers-to-own-homes",
     "https://www.khaleejtimes.com/business/property/wadan-developments-introduces-weston-its-latest-residential-project-in-dubai",
     "https://www.khaleejtimes.com/business/property/zimaya-properties-launches-fifth-residential-project-overlooking-golf-course-greens",
     "https://www.khaleejtimes.com/business/property/zoya-developments-launches-the-laureates-to-support-a-culture-of-excellence-across-dubais-real-estate-sector",
+    "https://www.khaleejtimes.com/business/rak-properties-targets-record-home-handovers-by-year-end-despite-sales-slowdown",
     "https://www.khaleejtimes.com/business/ras-al-khaimah-rents-rise-in-h1-2026-but-apartment-rates-drop-in-q2",
     "https://www.khaleejtimes.com/business/record-dh130-million-sky-palace-sale-headlines-strong-h1-for-ras-al-khaimah-property",
     "https://www.khaleejtimes.com/business/regulated-shared-housing-could-cut-dubai-tenants-rent-by-half-say-experts",
@@ -343,7 +348,8 @@
     "https://www.thenationalnews.com/business/property/2026/10/24/uae-property-should-i-sell-my-off-plan-dubai-apartment-amid-uncertainty-or-wait",
     "https://www.thenationalnews.com/business/property/2026/10/27/aldar-reports-25-jump-in-q3-net-profit-amid-launch-of-new-projects",
     "https://www.thenationalnews.com/business/property/2026/10/29/abu-dhabi-apartment-prices-rise-24-per-cent-in-third-quarter",
-    "https://www.thenationalnews.com/business/property/2026/11/04/emaar-offers-dh15-a-share-for-100-per-cent-control-of-emaar-development"
+    "https://www.thenationalnews.com/business/property/2026/11/04/emaar-offers-dh15-a-share-for-100-per-cent-control-of-emaar-development",
+    "https://www.thenationalnews.com/business/property/2026/11/05/emaar-properties-reports-56-increase-in-q3-profit-on-revenue-boost"
   ],
   "seen_title_signatures": [
     "000 2028 2030 abu delivery dhabi homes peak plans",
@@ -733,7 +739,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-11-05T15:01:43+04:00",
+  "updated_at": "2026-11-06T15:00:00+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
