@@ -36,6 +36,7 @@
     "https://gulfnews.com/business/property/dubai-land-department-launches-ai-powered-platform-to-speed-up-real-estate-registration-for-developers-1.500662918",
     "https://gulfnews.com/business/property/dubai-luxury-market-shifts-towards-trust-exclusive-property-access-1.500651804",
     "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
+    "https://gulfnews.com/business/property/dubai-property-buyers-find-more-choice-better-deals-1.500737222",
     "https://gulfnews.com/business/property/dubai-property-buyers-get-keys-months-ahead-of-time-1.500703324",
     "https://gulfnews.com/business/property/dubai-property-market-to-find-nice-balance-as-2027-supply-wave-hits-says-emaars-alabbar-1.500665777",
     "https://gulfnews.com/business/property/dubai-property-rental-prices-fall-where-they-were-once-the-highest-1.500714361",
@@ -282,6 +283,7 @@
     "https://www.khaleejtimes.com/business/uae-fuel-prices-rise-above-dh4-per-litre-surpass-4-year-high-for-october-2026",
     "https://www.khaleejtimes.com/business/uae-petrol-prices-could-fuel-cross-previous-record-high-of-dh463-a-litre-in-november",
     "https://www.khaleejtimes.com/business/uae-property-market-cools-in-q2-as-dubai-abu-dhabi-home-prices-and-rents-ease",
+    "https://www.khaleejtimes.com/business/uae-residents-will-soon-be-able-to-own-a-flying-car-they-can-drive",
     "https://www.khaleejtimes.com/business/uae-travel-advisory-etihad-emirates-flydubai-air-arabia-flight-delays-and-cancellations",
     "https://www.khaleejtimes.com/business/union-properties-profit-falls-to-dh28m-as-last-years-one-off-gain-lifts-comparison",
     "https://www.khaleejtimes.com/business/want-a-real-estate-career-dubai-offers-over-400-new-emirati-job-openings",
@@ -739,7 +741,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-11-06T15:00:00+04:00",
+  "updated_at": "2026-11-07T14:20:03+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -900,6 +902,11 @@
       "url": "https://gulfnews.com/business/property/hamdan-bin-mohammed-names-emaar-winner-of-dubai-it-real-estate-award-1.500732954",
       "title": "Hamdan bin Mohammed names Emaar winner of Dubai-it real estate award",
       "reviewed_at": "2026-11-03T14:57:38.891299+04:00"
+    },
+    {
+      "url": "https://gulfnews.com/business/property/dubai-property-buyers-find-more-choice-better-deals-1.500737222",
+      "title": "Dubai property buyers find more choice, better deals",
+      "reviewed_at": "2026-11-07T14:20:03.251483+04:00"
     }
   ]
 }
