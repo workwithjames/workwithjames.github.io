@@ -21,6 +21,7 @@
     "https://gulfnews.com/business/property/beyond-supply-glut-manila-condo-market-faces-repricing-what-it-means-1.500630690",
     "https://gulfnews.com/business/property/bought-property-in-uae-indias-tax-alert-raises-questions-for-expats-1.500726205",
     "https://gulfnews.com/business/property/casa-vista-strengthens-uae-market-presence-as-aquora-records-40-sales-ahead-of-dubai-unveiling-1.500725443",
+    "https://gulfnews.com/business/property/connectivity-boost-drives-demand-at-jumeirah-golf-estates-1.500740873",
     "https://gulfnews.com/business/property/damac-to-host-two-day-mortgage-event-with-uae-banks-this-weekend-1.500633497",
     "https://gulfnews.com/business/property/dhg-properties-completes-first-dubai-project-starts-handover-of-200m-helvetia-residences-1.500703150",
     "https://gulfnews.com/business/property/difc-adds-hotels-homes-and-offices-as-dh51-billion-project-takes-shape-1.500726646",
@@ -80,6 +81,7 @@
     "https://gulfnews.com/business/property/is-jeddah-tower-on-course-to-become-the-worlds-tallest-building-1.500623570",
     "https://gulfnews.com/business/property/jeddah-tower-crosses-116-floors-completion-timeline-moves-1.500699924",
     "https://gulfnews.com/business/property/majid-al-futtaim-posts-record-h1-2026-results-as-dh100-billion-development-pipeline-advances-1.500668515",
+    "https://gulfnews.com/business/property/maserati-and-samana-collecta-unveil-maserati-island-the-first-maserati-residential-living-destination-1.500741384",
     "https://gulfnews.com/business/property/modon-h1-net-profit-reaches-dh22-billion-after-property-sales-hit-dh26-billion-1.500625097",
     "https://gulfnews.com/business/property/nakheel-awards-dh800-million-deal-to-build-537-dubai-islands-homes-1.500677701",
     "https://gulfnews.com/business/property/nakheel-begins-handover-of-892-homes-at-jebel-ali-village-1.500643237",
@@ -120,6 +122,7 @@
     "https://gulfnews.com/business/property/zoya-developments-sells-out-elinor-project-in-under-two-weeks-1.500640776",
     "https://www.khaleejtimes.com/business/6-in-10-dubai-homes-hold-their-value-as-market-cools-gently-in-august",
     "https://www.khaleejtimes.com/business/abu-dhabi-apartment-prices-climb-by-up-to-92-buyers-turn-to-affordable-areas",
+    "https://www.khaleejtimes.com/business/abu-dhabi-court-rules-br-shetty-ex-ceo-liable-in-54-billion-nmc-health-case",
     "https://www.khaleejtimes.com/business/abu-dhabi-named-worlds-most-improved-real-estate-market-for-transparency",
     "https://www.khaleejtimes.com/business/abu-dhabi-property-buyers-shift-towards-luxury-off-plan-homes-as-sales-volumes-decline",
     "https://www.khaleejtimes.com/business/abu-dhabi-property-deals-top-dh155-billion-beat-2025s-full-year-total-in-8-months",
@@ -192,6 +195,7 @@
     "https://www.khaleejtimes.com/business/middle-east-flex-office-market-reaches-tipping-point-as-demand-surges",
     "https://www.khaleejtimes.com/business/more-dubai-buyers-are-taking-mortgages-but-they-are-borrowing-less",
     "https://www.khaleejtimes.com/business/more-dubai-homebuyers-paying-cash-as-interest-rates-rise-but-mortgages-still-fund-most-deals",
+    "https://www.khaleejtimes.com/business/nakheel-announces-38-million-sqm-palm-springs-to-house-50000-residents",
     "https://www.khaleejtimes.com/business/new-landmark-dubai-holding-signs-dh5-billion-deal-for-hq-jumeirah-residences",
     "https://www.khaleejtimes.com/business/new-uae-music-fees-businesses-to-pay-from-dh1500-to-dh50000-a-year",
     "https://www.khaleejtimes.com/business/over-530-emirati-youth-invest-dh43-billion-in-sharjah-property",
@@ -235,6 +239,7 @@
     "https://www.khaleejtimes.com/business/property/infinity-developments-completes-ultra-luxury-waterfront-villa-in-ras-al-khaimah",
     "https://www.khaleejtimes.com/business/property/janu-al-marjan-island-ras-al-khaimah-construction-starts",
     "https://www.khaleejtimes.com/business/property/jumeirah-golf-estates-villa-sale-hits-record-dh110m-amid-luxury-boom",
+    "https://www.khaleejtimes.com/business/property/maserati-and-samana-collecta-unveil-maserati-island-first-maserati-branded-residential-destination-in-dubai",
     "https://www.khaleejtimes.com/business/property/more-dubai-residents-buy-homes-to-live-in-for-long-term-developers-say",
     "https://www.khaleejtimes.com/business/property/new-dubai-metro-stations-to-lift-land-values-rta",
     "https://www.khaleejtimes.com/business/property/ora-land-launches-blubay-in-karjat-with-suryakumar-yadav-as-brand-ambassador",
@@ -746,7 +751,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-11-09T15:41:24+04:00",
+  "updated_at": "2026-11-10T15:18:54+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
