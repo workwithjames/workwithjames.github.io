@@ -41,11 +41,14 @@
     "https://gulfnews.com/business/property/dubai-property-buyers-get-keys-months-ahead-of-time-1.500703324",
     "https://gulfnews.com/business/property/dubai-property-market-to-find-nice-balance-as-2027-supply-wave-hits-says-emaars-alabbar-1.500665777",
     "https://gulfnews.com/business/property/dubai-property-rental-prices-fall-where-they-were-once-the-highest-1.500714361",
+    "https://gulfnews.com/business/property/dubai-property-sales-jump-18-to-dh348-billion-1.500742615",
     "https://gulfnews.com/business/property/dubai-records-dh12-billion-in-villa-deals-in-burj-khalifa-area-1.500655244",
     "https://gulfnews.com/business/property/dubai-rental-contracts-exceed-1-million-for-first-time-as-value-hits-dh1274b-1.500714905",
     "https://gulfnews.com/business/property/dubai-rents-ease-62-while-home-prices-stay-above-2025-levels-1.500623468",
     "https://gulfnews.com/business/property/dubai-shared-housing-law-who-can-rent-sublet-and-face-fines-of-up-to-dh1-million-1.500702961",
+    "https://gulfnews.com/business/property/dubai-south-homes-dwc-metro-link-adds-a-new-edge-for-buyers-tenants-1.500742881",
     "https://gulfnews.com/business/property/dubai-tenants-can-now-register-renew-cancel-ejari-pay-dewa-on-dubainow-app-1.500732665",
+    "https://gulfnews.com/business/property/dubai-tenants-can-now-split-rent-payments-into-smaller-instalments-under-new-scheme-1.500742452",
     "https://gulfnews.com/business/property/dubai-tenants-landlords-can-cancel-signed-rental-contracts-if-deception-is-proven-1.500728486",
     "https://gulfnews.com/business/property/dubai-to-launch-rent-now-pay-later-service-with-zero-interest-instalments-1.500639254",
     "https://gulfnews.com/business/property/dubai-villa-sells-for-dh110m-nearly-doubling-jumeirah-golf-estates-record-1.500628980",
@@ -361,7 +364,8 @@
     "https://www.thenationalnews.com/business/property/2026/10/29/abu-dhabi-apartment-prices-rise-24-per-cent-in-third-quarter",
     "https://www.thenationalnews.com/business/property/2026/11/04/emaar-offers-dh15-a-share-for-100-per-cent-control-of-emaar-development",
     "https://www.thenationalnews.com/business/property/2026/11/05/emaar-properties-reports-56-increase-in-q3-profit-on-revenue-boost",
-    "https://www.thenationalnews.com/business/property/2026/11/07/abu-dhabi-property-transactions-jump-76-to-dh171bn-in-first-nine-months-of-2026"
+    "https://www.thenationalnews.com/business/property/2026/11/07/abu-dhabi-property-transactions-jump-76-to-dh171bn-in-first-nine-months-of-2026",
+    "https://www.thenationalnews.com/business/property/2026/11/10/nakheel-unveils-mega-development-for-50000-residents-in-dubai"
   ],
   "seen_title_signatures": [
     "000 2028 2030 abu delivery dhabi homes peak plans",
@@ -751,7 +755,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-11-10T15:18:54+04:00",
+  "updated_at": "2026-11-11T15:05:27+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -917,6 +921,11 @@
       "url": "https://gulfnews.com/business/property/dubai-property-buyers-find-more-choice-better-deals-1.500737222",
       "title": "Dubai property buyers find more choice, better deals",
       "reviewed_at": "2026-11-07T14:20:03.251483+04:00"
+    },
+    {
+      "url": "https://www.thenationalnews.com/business/property/2026/11/10/nakheel-unveils-mega-development-for-50000-residents-in-dubai",
+      "title": "Nakheel unveils mega development for 50,000 residents in Dubai",
+      "reviewed_at": "2026-11-11T15:05:27.322862+04:00"
     }
   ]
 }
