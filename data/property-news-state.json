@@ -19,12 +19,14 @@
     "https://gulfnews.com/business/property/arif-developments-honoured-with-excellence-in-csr-award-1.500707601",
     "https://gulfnews.com/business/property/arif-developments-recognised-as-promising-developer-of-the-year-1.500693475",
     "https://gulfnews.com/business/property/beyond-supply-glut-manila-condo-market-faces-repricing-what-it-means-1.500630690",
+    "https://gulfnews.com/business/property/binghatti-profit-up-65-to-dh44b-tops-full-year-2025-1.500744929",
     "https://gulfnews.com/business/property/bought-property-in-uae-indias-tax-alert-raises-questions-for-expats-1.500726205",
     "https://gulfnews.com/business/property/casa-vista-strengthens-uae-market-presence-as-aquora-records-40-sales-ahead-of-dubai-unveiling-1.500725443",
     "https://gulfnews.com/business/property/connectivity-boost-drives-demand-at-jumeirah-golf-estates-1.500740873",
     "https://gulfnews.com/business/property/damac-to-host-two-day-mortgage-event-with-uae-banks-this-weekend-1.500633497",
     "https://gulfnews.com/business/property/dhg-properties-completes-first-dubai-project-starts-handover-of-200m-helvetia-residences-1.500703150",
     "https://gulfnews.com/business/property/difc-adds-hotels-homes-and-offices-as-dh51-billion-project-takes-shape-1.500726646",
+    "https://gulfnews.com/business/property/drake-scull-profit-rises-73-as-nine-month-revenue-doubles-1.500744116",
     "https://gulfnews.com/business/property/dubai-adds-more-than-24000-property-units-in-six-months-1.500646931",
     "https://gulfnews.com/business/property/dubai-attracts-186-new-property-developers-in-first-seven-months-of-2026-1.500641994",
     "https://gulfnews.com/business/property/dubai-bans-mixing-families-and-individuals-in-shared-housing-units-1.500701345",
@@ -164,6 +166,7 @@
     "https://www.khaleejtimes.com/business/dubai-property-prices-new-supply-impact-may-emerge-in-coming-months",
     "https://www.khaleejtimes.com/business/dubai-property-repricing-opens-door-to-premium-communities",
     "https://www.khaleejtimes.com/business/dubai-property-transactions-grow-bigger-as-buyers-stretch-their-budgets",
+    "https://www.khaleejtimes.com/business/dubai-ready-property-sales-hit-highest-level-at-dh101-billion",
     "https://www.khaleejtimes.com/business/dubai-remains-worlds-branded-residence-capital-as-uae-accounts-for-19-of-global-market",
     "https://www.khaleejtimes.com/business/dubai-rents-1-in-5-tenants-now-pays-less-than-before-as-rentals-ease-on-new-supply",
     "https://www.khaleejtimes.com/business/dubai-retail-property-sales-surge-177-to-dh38-billion-in-h1-2026",
@@ -190,6 +193,7 @@
     "https://www.khaleejtimes.com/business/expat-residents-foreign-investors-top-abu-dhabi-property-buyers-in-2026",
     "https://www.khaleejtimes.com/business/flydubai-tel-aviv-flight-diversion-why-airlines-deploy-additional-pilots-on-some-routes",
     "https://www.khaleejtimes.com/business/galadari-brothers",
+    "https://www.khaleejtimes.com/business/gauri-khan-designed-dh196-million-penthouses-in-shah-rukh-khans-project-sold-out",
     "https://www.khaleejtimes.com/business/gcc-hotels-set-to-add-126000-new-rooms-by-2030-says-new-report",
     "https://www.khaleejtimes.com/business/global-footballers-karim-benzema-and-medhi-amine-buy-properties-in-dubai",
     "https://www.khaleejtimes.com/business/indian-syrian-and-pakistani-investors-top-property-buyers-in-sharjah-in-2026",
@@ -365,7 +369,9 @@
     "https://www.thenationalnews.com/business/property/2026/11/04/emaar-offers-dh15-a-share-for-100-per-cent-control-of-emaar-development",
     "https://www.thenationalnews.com/business/property/2026/11/05/emaar-properties-reports-56-increase-in-q3-profit-on-revenue-boost",
     "https://www.thenationalnews.com/business/property/2026/11/07/abu-dhabi-property-transactions-jump-76-to-dh171bn-in-first-nine-months-of-2026",
-    "https://www.thenationalnews.com/business/property/2026/11/10/nakheel-unveils-mega-development-for-50000-residents-in-dubai"
+    "https://www.thenationalnews.com/business/property/2026/11/10/nakheel-unveils-mega-development-for-50000-residents-in-dubai",
+    "https://www.thenationalnews.com/business/property/2026/11/11/uks-cheval-collection-launches-new-dubai-project-in-expansion-push",
+    "https://www.thenationalnews.com/business/property/2026/11/12/arada-and-alya-target-163bn-property-pipeline-across-uae-and-saudi-arabia"
   ],
   "seen_title_signatures": [
     "000 2028 2030 abu delivery dhabi homes peak plans",
@@ -755,7 +761,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-11-11T15:05:27+04:00",
+  "updated_at": "2026-11-12T15:23:55+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -926,6 +932,11 @@
       "url": "https://www.thenationalnews.com/business/property/2026/11/10/nakheel-unveils-mega-development-for-50000-residents-in-dubai",
       "title": "Nakheel unveils mega development for 50,000 residents in Dubai",
       "reviewed_at": "2026-11-11T15:05:27.322862+04:00"
+    },
+    {
+      "url": "https://www.thenationalnews.com/business/property/2026/11/12/arada-and-alya-target-163bn-property-pipeline-across-uae-and-saudi-arabia",
+      "title": "Arada and Alya target $1.63bn property pipeline across UAE and Saudi Arabia",
+      "reviewed_at": "2026-11-12T15:23:55.723116+04:00"
     }
   ]
 }
