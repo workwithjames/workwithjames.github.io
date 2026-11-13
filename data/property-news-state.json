@@ -99,6 +99,7 @@
     "https://gulfnews.com/business/property/palm-jebel-ali-unveils-limited-collection-of-44-beachfront-villas-on-frond-f-1.500646564",
     "https://gulfnews.com/business/property/palm-jebel-alis-first-retail-hub-revealed-with-26-new-concepts-1.500669544",
     "https://gulfnews.com/business/property/palm-jumeirah-villa-sells-for-dh260-million-in-latest-dubai-luxury-deal-1.500659128",
+    "https://gulfnews.com/business/property/palma-development-unveils-the-second-phase-of-serenia-district-in-jumeirah-islands-1.500744873",
     "https://gulfnews.com/business/property/philippines-tallest-twin-towers-shang-summit-aims-high-1.500727194",
     "https://gulfnews.com/business/property/ras-al-khaimah-property-prices-rise-in-h1-2026-13800-homes-due-by-2028-1.500660431",
     "https://gulfnews.com/business/property/record-dh100-million-land-sale-cements-dubai-hills-estates-ultra-prime-status-1.500676935",
@@ -145,6 +146,7 @@
     "https://www.khaleejtimes.com/business/aviation/what-really-happened-flydubai-fz1073-terror-attack",
     "https://www.khaleejtimes.com/business/azizi-announces-dh30-billion-sharjah-project-townhouse-prices-start-from-dh189-million",
     "https://www.khaleejtimes.com/business/binghatti-dismisses-debt-fears-points-to-dh106-billion-in-escrow-accounts",
+    "https://www.khaleejtimes.com/business/binghatti-profit-jumps-65-as-dubai-property-demand-fuels-growth",
     "https://www.khaleejtimes.com/business/business-bay-overtakes-palm-jumeirah-as-dubais-busiest-prime-property-market",
     "https://www.khaleejtimes.com/business/current-regional-situation-not-sustainable-says-dubai-billionaire-alabbar",
     "https://www.khaleejtimes.com/business/deyaar-posts-27-profit-growth-to-dh5415-million-as-property-handovers-exceed-2100-units",
@@ -157,6 +159,7 @@
     "https://www.khaleejtimes.com/business/dubai-developers-hold-off-plan-pricing-as-only-6-projects-cut-prices-by-5-or-more-since-february",
     "https://www.khaleejtimes.com/business/dubai-home-prices-rents-decline-as-supply-rises-32000-more-units-due-this-year",
     "https://www.khaleejtimes.com/business/dubai-is-building-the-worlds-first-villa-using-robots",
+    "https://www.khaleejtimes.com/business/dubai-is-still-the-worlds-busiest-market-for-10m-plus-homes-despite-cooling",
     "https://www.khaleejtimes.com/business/dubai-islands-to-get-stunning-new-beach-as-3km-shoreline-undergoes-upgrade-by-2027",
     "https://www.khaleejtimes.com/business/dubai-office-sales-nearly-triple-to-dh158-billion-in-h1-2026",
     "https://www.khaleejtimes.com/business/dubai-on-course-for-record-year-in-rental-contracts",
@@ -266,6 +269,7 @@
     "https://www.khaleejtimes.com/business/property/uae-property-developers-eye-fourth-corridor-highway-linking-sharjah-dubai-and-abu-dhabi",
     "https://www.khaleejtimes.com/business/property/uae-rising-rents-residency-options-drive-young-buyers-to-own-homes",
     "https://www.khaleejtimes.com/business/property/wadan-developments-introduces-weston-its-latest-residential-project-in-dubai",
+    "https://www.khaleejtimes.com/business/property/we-didnt-follow-the-market-we-bet-on-what-it-could-become",
     "https://www.khaleejtimes.com/business/property/zimaya-properties-launches-fifth-residential-project-overlooking-golf-course-greens",
     "https://www.khaleejtimes.com/business/property/zoya-developments-launches-the-laureates-to-support-a-culture-of-excellence-across-dubais-real-estate-sector",
     "https://www.khaleejtimes.com/business/rak-properties-targets-record-home-handovers-by-year-end-despite-sales-slowdown",
@@ -371,7 +375,8 @@
     "https://www.thenationalnews.com/business/property/2026/11/07/abu-dhabi-property-transactions-jump-76-to-dh171bn-in-first-nine-months-of-2026",
     "https://www.thenationalnews.com/business/property/2026/11/10/nakheel-unveils-mega-development-for-50000-residents-in-dubai",
     "https://www.thenationalnews.com/business/property/2026/11/11/uks-cheval-collection-launches-new-dubai-project-in-expansion-push",
-    "https://www.thenationalnews.com/business/property/2026/11/12/arada-and-alya-target-163bn-property-pipeline-across-uae-and-saudi-arabia"
+    "https://www.thenationalnews.com/business/property/2026/11/12/arada-and-alya-target-163bn-property-pipeline-across-uae-and-saudi-arabia",
+    "https://www.thenationalnews.com/business/property/2026/11/12/emaars-mall-footfall-down-10-per-cent-due-to-iran-war-says-alabbar"
   ],
   "seen_title_signatures": [
     "000 2028 2030 abu delivery dhabi homes peak plans",
@@ -761,7 +766,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-11-12T15:23:55+04:00",
+  "updated_at": "2026-11-13T15:06:54+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -937,6 +942,11 @@
       "url": "https://www.thenationalnews.com/business/property/2026/11/12/arada-and-alya-target-163bn-property-pipeline-across-uae-and-saudi-arabia",
       "title": "Arada and Alya target $1.63bn property pipeline across UAE and Saudi Arabia",
       "reviewed_at": "2026-11-12T15:23:55.723116+04:00"
+    },
+    {
+      "url": "https://www.thenationalnews.com/business/property/2026/11/12/emaars-mall-footfall-down-10-per-cent-due-to-iran-war-says-alabbar",
+      "title": "Emaar’s mall footfall down 10 per cent due to Iran war, says Alabbar",
+      "reviewed_at": "2026-11-13T15:06:54.013199+04:00"
     }
   ]
 }
