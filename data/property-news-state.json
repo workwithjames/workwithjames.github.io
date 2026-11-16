@@ -203,6 +203,7 @@
     "https://www.khaleejtimes.com/business/indian-syrian-and-pakistani-investors-top-property-buyers-in-sharjah-in-2026",
     "https://www.khaleejtimes.com/business/innovation-city",
     "https://www.khaleejtimes.com/business/markets",
+    "https://www.khaleejtimes.com/business/mgm-dubai-on-track-for-early-2029-opening-as-structure-tops-out",
     "https://www.khaleejtimes.com/business/middle-east-flex-office-market-reaches-tipping-point-as-demand-surges",
     "https://www.khaleejtimes.com/business/more-dubai-buyers-are-taking-mortgages-but-they-are-borrowing-less",
     "https://www.khaleejtimes.com/business/more-dubai-homebuyers-paying-cash-as-interest-rates-rise-but-mortgages-still-fund-most-deals",
@@ -286,6 +287,7 @@
     "https://www.khaleejtimes.com/business/sharjah-rents-rise-across-key-communities-al-mamzar-al-nabba-lead",
     "https://www.khaleejtimes.com/business/smaller-investors-return-to-market-as-dubai-office-sales-jump-in-q3",
     "https://www.khaleejtimes.com/business/some-holiday-home-owners-may-move-to-shared-housing-say-industry-executives",
+    "https://www.khaleejtimes.com/business/talabat",
     "https://www.khaleejtimes.com/business/tech",
     "https://www.khaleejtimes.com/business/tech/apple-iphone-18-pro-pro-max-launch-uae-prices-pre-order-dates",
     "https://www.khaleejtimes.com/business/tech/apple-launch-event-2026-live-updates-sep-9-2026",
@@ -378,7 +380,8 @@
     "https://www.thenationalnews.com/business/property/2026/11/10/nakheel-unveils-mega-development-for-50000-residents-in-dubai",
     "https://www.thenationalnews.com/business/property/2026/11/11/uks-cheval-collection-launches-new-dubai-project-in-expansion-push",
     "https://www.thenationalnews.com/business/property/2026/11/12/arada-and-alya-target-163bn-property-pipeline-across-uae-and-saudi-arabia",
-    "https://www.thenationalnews.com/business/property/2026/11/12/emaars-mall-footfall-down-10-per-cent-due-to-iran-war-says-alabbar"
+    "https://www.thenationalnews.com/business/property/2026/11/12/emaars-mall-footfall-down-10-per-cent-due-to-iran-war-says-alabbar",
+    "https://www.thenationalnews.com/business/property/2026/11/16/abu-dhabis-al-ain-asset-management-and-emaar-team-up-for-dh8-billion-projects"
   ],
   "seen_title_signatures": [
     "000 2028 2030 abu delivery dhabi homes peak plans",
@@ -768,7 +771,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-11-15T15:03:16+04:00",
+  "updated_at": "2026-11-16T15:32:41+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -949,6 +952,11 @@
       "url": "https://www.thenationalnews.com/business/property/2026/11/12/emaars-mall-footfall-down-10-per-cent-due-to-iran-war-says-alabbar",
       "title": "Emaar’s mall footfall down 10 per cent due to Iran war, says Alabbar",
       "reviewed_at": "2026-11-13T15:06:54.013199+04:00"
+    },
+    {
+      "url": "https://www.thenationalnews.com/business/property/2026/11/16/abu-dhabis-al-ain-asset-management-and-emaar-team-up-for-dh8-billion-projects",
+      "title": "Abu Dhabi’s Al Ain Asset Management and Emaar team up for Dh8 billion projects",
+      "reviewed_at": "2026-11-16T15:32:41.499936+04:00"
     }
   ]
 }
