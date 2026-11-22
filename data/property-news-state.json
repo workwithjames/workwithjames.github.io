@@ -57,6 +57,7 @@
     "https://gulfnews.com/business/property/dubai-villa-sells-for-dh110m-nearly-doubling-jumeirah-golf-estates-record-1.500628980",
     "https://gulfnews.com/business/property/dubais-350-metre-trump-tower-moves-into-next-construction-phase-1.500632456",
     "https://gulfnews.com/business/property/dubais-iconic-toyota-building-to-be-demolished-in-2027-1.500646516",
+    "https://gulfnews.com/business/property/dubais-palm-springs-sells-out-977-homes-in-dh55-billion-launch-1.500756987",
     "https://gulfnews.com/business/property/dubais-shared-housing-law-takes-effect-fines-of-up-to-dh1-million-for-repeat-violations-1.500653193",
     "https://gulfnews.com/business/property/eagle-hills-enters-syria-with-damascus-latakia-deals-1.500700060",
     "https://gulfnews.com/business/property/eagle-hills-signs-12-billion-maldives-waterfront-deal-1.500682175",
@@ -789,7 +790,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-11-21T15:14:10+04:00",
+  "updated_at": "2026-11-22T15:33:03+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -975,6 +976,11 @@
       "url": "https://www.thenationalnews.com/business/property/2026/11/16/abu-dhabis-al-ain-asset-management-and-emaar-team-up-for-dh8-billion-projects",
       "title": "Abu Dhabi’s Al Ain Asset Management and Emaar team up for Dh8 billion projects",
       "reviewed_at": "2026-11-16T15:32:41.499936+04:00"
+    },
+    {
+      "url": "https://gulfnews.com/business/property/dubais-palm-springs-sells-out-977-homes-in-dh55-billion-launch-1.500756987",
+      "title": "Dubai's Palm Springs sells out 977 homes in Dh5.5 billion launch",
+      "reviewed_at": "2026-11-22T15:33:03.053312+04:00"
     }
   ]
 }
