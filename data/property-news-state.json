@@ -98,6 +98,7 @@
     "https://gulfnews.com/business/property/nakheel-begins-handover-of-892-homes-at-jebel-ali-village-1.500643237",
     "https://gulfnews.com/business/property/nakheel-breaks-ground-on-palm-jebel-ali-mosque-for-1000-1.500757700",
     "https://gulfnews.com/business/property/nakheel-hires-mar-marine-for-dubai-island-coastal-works-1.500702909",
+    "https://gulfnews.com/business/property/nakheel-launches-216-waterfront-homes-on-palm-jebel-ali-1.500759089",
     "https://gulfnews.com/business/property/new-mortgage-option-opens-for-abu-dhabi-off-plan-buyers-with-aldar-and-adcb-deal-1.500663048",
     "https://gulfnews.com/business/property/object-1-launches-sky-level-1-expanding-its-jvc-residential-portfolio-1.500650573",
     "https://gulfnews.com/business/property/ofw-paid-608000-for-a-manila-condo-what-the-maceda-law-can-and-cannot-save-1.500635734",
@@ -408,7 +409,8 @@
     "https://www.thenationalnews.com/business/property/2026/11/12/emaars-mall-footfall-down-10-per-cent-due-to-iran-war-says-alabbar",
     "https://www.thenationalnews.com/business/property/2026/11/16/abu-dhabis-al-ain-asset-management-and-emaar-team-up-for-dh8-billion-projects",
     "https://www.thenationalnews.com/business/property/2026/11/16/dar-global-launches-267m-project-in-jeddah-amid-saudi-expansion-push",
-    "https://www.thenationalnews.com/business/property/2026/11/22/dubais-nakheel-raises-dh55bn-after-selling-out-first-phase-of-new-palm-springs-project"
+    "https://www.thenationalnews.com/business/property/2026/11/22/dubais-nakheel-raises-dh55bn-after-selling-out-first-phase-of-new-palm-springs-project",
+    "https://www.thenationalnews.com/business/property/2026/11/23/yardlands-dubai-sheikh-mohamed-bin-zayed-road"
   ],
   "seen_title_signatures": [
     "000 2028 2030 abu delivery dhabi homes peak plans",
@@ -798,7 +800,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-11-23T16:57:40+04:00",
+  "updated_at": "2026-11-24T17:50:27+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -989,6 +991,11 @@
       "url": "https://gulfnews.com/business/property/dubais-palm-springs-sells-out-977-homes-in-dh55-billion-launch-1.500756987",
       "title": "Dubai's Palm Springs sells out 977 homes in Dh5.5 billion launch",
       "reviewed_at": "2026-11-22T15:33:03.053312+04:00"
+    },
+    {
+      "url": "https://www.thenationalnews.com/business/property/2026/11/23/yardlands-dubai-sheikh-mohamed-bin-zayed-road",
+      "title": "Dubai's new 'city within a city' to cost $20bn with 25,000 homes",
+      "reviewed_at": "2026-11-24T17:50:27.113093+04:00"
     }
   ]
 }
