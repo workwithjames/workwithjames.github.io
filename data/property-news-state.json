@@ -12,6 +12,7 @@
     "https://gulfnews.com/business/property/abu-dhabis-aldar-enters-sharjah-after-dh11-billion-acquisition-deal-with-arada-1.500711403",
     "https://gulfnews.com/business/property/adgm-launches-broker-rankings-for-property-buyers-and-tenants-1.500626469",
     "https://gulfnews.com/business/property/ajman-rental-contracts-reach-dh291-billion-in-first-half-of-2026-1.500644264",
+    "https://gulfnews.com/business/property/al-ghurair-good-developments-hold-rents-when-markets-soften-1.500760511",
     "https://gulfnews.com/business/property/al-jalila-foundation-building-earns-leed-gold-certification-for-sustainability-efforts-1.500728252",
     "https://gulfnews.com/business/property/aldar-launches-yas-riva-reserve-a-waterfront-villa-community-on-yas-island-1.500679693",
     "https://gulfnews.com/business/property/aldar-mubadala-jv-buys-99-occupied-masdar-city-square-for-dh918-million-1.500677780",
@@ -51,6 +52,7 @@
     "https://gulfnews.com/business/property/dubai-shared-housing-law-who-can-rent-sublet-and-face-fines-of-up-to-dh1-million-1.500702961",
     "https://gulfnews.com/business/property/dubai-south-homes-dwc-metro-link-adds-a-new-edge-for-buyers-tenants-1.500742881",
     "https://gulfnews.com/business/property/dubai-tallest-office-tower-crosses-dh1-billion-in-initial-sales-1.500757966",
+    "https://gulfnews.com/business/property/dubai-tenants-are-switching-homes-to-cut-rent-but-where-are-they-moving-1.500759285",
     "https://gulfnews.com/business/property/dubai-tenants-can-now-register-renew-cancel-ejari-pay-dewa-on-dubainow-app-1.500732665",
     "https://gulfnews.com/business/property/dubai-tenants-can-now-split-rent-payments-into-smaller-instalments-under-new-scheme-1.500742452",
     "https://gulfnews.com/business/property/dubai-tenants-landlords-can-cancel-signed-rental-contracts-if-deception-is-proven-1.500728486",
@@ -128,6 +130,7 @@
     "https://gulfnews.com/business/property/union-properties-nine-month-revenue-jumps-58-to-dh8095-million-1.500733942",
     "https://gulfnews.com/business/property/vibe-by-arsenal-east-brings-a-fresh-take-on-urban-living-to-dubai-1.500716811",
     "https://gulfnews.com/business/property/wadan-marks-one-year-with-breaking-ground-ceremony-at-weston-1.500694594",
+    "https://gulfnews.com/business/property/when-your-genz-child-wants-to-dubai-it-1.500760167",
     "https://gulfnews.com/business/property/where-sharjah-property-buyers-spent-most-as-july-deals-hit-dh7-billion-1.500632308",
     "https://gulfnews.com/business/property/why-more-dubai-tenants-are-buying-their-own-homes-1.500737124",
     "https://gulfnews.com/business/property/wynn-al-marjan-island-unveils-two-1460-sqm-apartments-at-top-of-70-storey-tower-1.500673675",
@@ -263,6 +266,7 @@
     "https://www.khaleejtimes.com/business/property/dubai-residents-search-for-new-homes-rental-neighbourhoods-rents",
     "https://www.khaleejtimes.com/business/property/dubai-short-term-rentals-show-resilience-as-longer-stays-support-market",
     "https://www.khaleejtimes.com/business/property/dubai-startup-datahabibi-launches-ai-platform-for-property-intelligence",
+    "https://www.khaleejtimes.com/business/property/dubai-tenants-are-on-the-move-as-falling-rents-give-renters-the-upper-hand",
     "https://www.khaleejtimes.com/business/property/dubai-tenants-could-soon-pay-rent-monthly-with-zero-interest",
     "https://www.khaleejtimes.com/business/property/ell-properties-receives-top-seller-award-from-sharjah-based-alef-group",
     "https://www.khaleejtimes.com/business/property/ellington-properties-and-al-hamra-unveil-dh28-billion-commercial-tower-in-business-bay",
@@ -800,7 +804,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-11-24T17:50:27+04:00",
+  "updated_at": "2026-11-25T17:03:30+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -996,6 +1000,16 @@
       "url": "https://www.thenationalnews.com/business/property/2026/11/23/yardlands-dubai-sheikh-mohamed-bin-zayed-road",
       "title": "Dubai's new 'city within a city' to cost $20bn with 25,000 homes",
       "reviewed_at": "2026-11-24T17:50:27.113093+04:00"
+    },
+    {
+      "url": "https://gulfnews.com/business/property/al-ghurair-good-developments-hold-rents-when-markets-soften-1.500760511",
+      "title": "Al Ghurair: Good developments hold rents when markets soften",
+      "reviewed_at": "2026-11-25T17:03:30.562698+04:00"
+    },
+    {
+      "url": "https://gulfnews.com/business/property/when-your-genz-child-wants-to-dubai-it-1.500760167",
+      "title": "When your GenZ child wants to Dubai-it",
+      "reviewed_at": "2026-11-25T17:03:30.562698+04:00"
     }
   ]
 }
