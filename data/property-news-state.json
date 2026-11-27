@@ -133,6 +133,7 @@
     "https://gulfnews.com/business/property/wadan-marks-one-year-with-breaking-ground-ceremony-at-weston-1.500694594",
     "https://gulfnews.com/business/property/when-your-genz-child-wants-to-dubai-it-1.500760167",
     "https://gulfnews.com/business/property/where-sharjah-property-buyers-spent-most-as-july-deals-hit-dh7-billion-1.500632308",
+    "https://gulfnews.com/business/property/why-dubai-families-are-buying-to-put-down-roots-1.500761600",
     "https://gulfnews.com/business/property/why-more-dubai-tenants-are-buying-their-own-homes-1.500737124",
     "https://gulfnews.com/business/property/wynn-al-marjan-island-unveils-two-1460-sqm-apartments-at-top-of-70-storey-tower-1.500673675",
     "https://gulfnews.com/business/property/yas-island-gets-dh12-billion-investment-for-new-rides-attractions-and-hotels-1.500673885",
@@ -417,7 +418,9 @@
     "https://www.thenationalnews.com/business/property/2026/11/16/abu-dhabis-al-ain-asset-management-and-emaar-team-up-for-dh8-billion-projects",
     "https://www.thenationalnews.com/business/property/2026/11/16/dar-global-launches-267m-project-in-jeddah-amid-saudi-expansion-push",
     "https://www.thenationalnews.com/business/property/2026/11/22/dubais-nakheel-raises-dh55bn-after-selling-out-first-phase-of-new-palm-springs-project",
-    "https://www.thenationalnews.com/business/property/2026/11/23/yardlands-dubai-sheikh-mohamed-bin-zayed-road"
+    "https://www.thenationalnews.com/business/property/2026/11/23/yardlands-dubai-sheikh-mohamed-bin-zayed-road",
+    "https://www.thenationalnews.com/business/property/2026/11/26/nakheel-awards-dh14bn-contract-to-build-176-villas-on-palm-jebel-ali",
+    "https://www.thenationalnews.com/business/property/2026/11/27/aldar-generates-more-than-dh900-million-in-home-sales-from-yas-island-project"
   ],
   "seen_title_signatures": [
     "000 2028 2030 abu delivery dhabi homes peak plans",
@@ -807,7 +810,7 @@
       "auto": true
     }
   ],
-  "updated_at": "2026-11-26T16:43:44+04:00",
+  "updated_at": "2026-11-27T16:33:57+04:00",
   "held_for_editorial_review": [
     {
       "url": "https://gulfnews.com/business/property/dubai-metro-and-etihad-rail-could-boost-demand-in-jvc-meydan-dso-and-dubai-south-1.500647945",
@@ -1018,6 +1021,11 @@
       "url": "https://gulfnews.com/business/property/nris-buying-property-in-india-new-court-ruling-offers-home-loan-safeguard-1.500759577",
       "title": "NRIs buying property in India? New court ruling offers home loan safeguard",
       "reviewed_at": "2026-11-26T16:43:44.517760+04:00"
+    },
+    {
+      "url": "https://www.thenationalnews.com/business/property/2026/11/27/aldar-generates-more-than-dh900-million-in-home-sales-from-yas-island-project",
+      "title": "Aldar generates more than Dh900 million in home sales from Yas Island project",
+      "reviewed_at": "2026-11-27T16:33:57.599031+04:00"
     }
   ]
 }
